@@ -32,7 +32,8 @@
     "restartTimer": "Empezar de nuevo",
     "timerDone": "¡Listo! Revisa tu toma.",
     "gearSectionTitle": "Equipo recomendado",
-    "gearSectionHint": "Los filtros ND recomendados aparecerán aquí una vez detectado el diámetro de tu objetivo.",
+    "gearSectionHint": "Aquí aparecerán filtros ND recomendados para tu selección.",
+    "gearDisclosure": "Como afiliados, podemos ganar una comisión por compras cualificadas realizadas a través de estos enlaces, sin costo adicional para ti.",
     "privacyNote": "100% en el navegador. Tus fotos nunca se suben a un servidor."
   },
   "Footer": {

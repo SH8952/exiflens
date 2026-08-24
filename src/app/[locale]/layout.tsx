@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { SITE_URL, languageAlternates, ogLocale, webApplicationJsonLd } from "@/lib/seo";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -13,14 +15,44 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = {
-  title: {
-    default: "ExifLens — EXIF Viewer & ND Filter Long Exposure Calculator",
-    template: "%s · ExifLens",
-  },
-  description:
-    "Drop a photo to instantly read its EXIF data and calculate the exact long exposure shutter speed for any ND filter. 100% client-side, no upload, no signup.",
-};
+const ADSENSE_PUBLISHER_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Home" });
+  const title = "ExifLens — EXIF Viewer & ND Filter Long Exposure Calculator";
+  const description = t("subtitle");
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: title,
+      template: "%s · ExifLens",
+    },
+    description,
+    alternates: {
+      canonical: `${SITE_URL}/${locale}`,
+      languages: languageAlternates(),
+    },
+    openGraph: {
+      type: "website",
+      locale: ogLocale(locale),
+      siteName: "ExifLens",
+      title,
+      description,
+      url: `${SITE_URL}/${locale}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,
@@ -39,6 +71,22 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning className="h-full antialiased">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(webApplicationJsonLd(locale)),
+          }}
+        />
+        {ADSENSE_PUBLISHER_ID ? (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        ) : null}
+      </head>
       <body className="flex min-h-full flex-col">
         <ThemeProvider
           attribute="class"

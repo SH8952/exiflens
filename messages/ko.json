@@ -32,7 +32,8 @@
     "restartTimer": "다시 시작",
     "timerDone": "완료! 촬영을 확인해 보세요.",
     "gearSectionTitle": "장비 추천",
-    "gearSectionHint": "렌즈 필터 구경이 감지되면 추천 ND 필터가 여기에 표시됩니다.",
+    "gearSectionHint": "선택하신 ND 필터에 맞는 추천 상품이 여기에 표시됩니다.",
+    "gearDisclosure": "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
     "privacyNote": "100% 브라우저에서 처리됩니다. 사진은 서버로 전송되지 않습니다."
   },
   "Footer": {

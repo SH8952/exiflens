@@ -3,6 +3,7 @@ import { AdZone } from "@/components/ad-zone";
 import { ExifUploader } from "@/components/exif-uploader";
 import { ExifPanel } from "@/components/exif-panel";
 import { NdCalculatorCard } from "@/components/nd-calculator-card";
+import { GearRecommendationSection } from "@/components/gear-recommendation-section";
 
 export default async function HomePage({
   params,
@@ -34,14 +35,7 @@ export default async function HomePage({
       </section>
 
       {/* Section 4: Gear recommendation */}
-      <section className="rounded-xl border border-border bg-card p-5">
-        <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-          {t("gearSectionTitle")}
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          {t("gearSectionHint")}
-        </p>
-      </section>
+      <GearRecommendationSection locale={locale} />
 
       <AdZone
         id="mid-content"

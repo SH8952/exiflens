@@ -32,7 +32,8 @@
     "restartTimer": "Start again",
     "timerDone": "Done! Remove the filter cap.",
     "gearSectionTitle": "Gear Recommendations",
-    "gearSectionHint": "Recommended ND filters will appear here once we detect your lens filter thread size.",
+    "gearSectionHint": "Recommended ND filters for your selection will appear here.",
+    "gearDisclosure": "As an affiliate, we may earn a commission from qualifying purchases made through these links, at no extra cost to you.",
     "privacyNote": "100% client-side. Your photos are never uploaded to a server."
   },
   "Footer": {

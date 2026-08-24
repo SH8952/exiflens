@@ -1,5 +1,19 @@
 # 개발 이력 (Development History)
 
+## 2026-08-24 — Phase 4: SEO, 실제 애드센스 & 쿠팡파트너스 API 연동
+
+- **SEO**: `src/lib/seo.ts` 추가 (사이트 URL, OG locale, hreflang alternates, WebApplication JSON-LD 생성). `src/app/[locale]/layout.tsx`를 `generateMetadata`로 전환해 4개 언어 canonical/hreflang(`x-default` 포함)/Open Graph/Twitter 카드 메타데이터와 JSON-LD 구조화 데이터를 실제로 출력하도록 구현
+- **구글 애드센스 실계정 연동**: 발급받은 퍼블리셔 ID(`pub-0042120343274941`)를 `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID` 환경변수로 등록, 레이아웃에 조건부 `next/script` 애드센스 로더 추가, `public/ads.txt` 생성
+- **쿠팡파트너스 Open API 실연동**:
+  - `src/lib/coupang.ts`: HMAC-SHA256 기반 "CEA" 서명 방식으로 인증하는 서버 전용 API 클라이언트 작성, 상품 검색 결과 캐싱(6시간) 적용
+  - `src/app/api/coupang/search/route.ts`: ND 필터별 검색 키워드 화이트리스트를 둔 Route Handler로 임의 키워드 남용 방지 및 시간당 10회 쿼터 보호
+  - 발급받으신 실제 Access Key/Secret Key는 `.env.local`에만 저장(git 추적 제외, `NEXT_PUBLIC_` 접두사 미사용으로 클라이언트에 노출되지 않음), 소스 코드에는 하드코딩하지 않음
+- **국가/언어 혼합 제휴사 분기**: `src/proxy.ts`가 Vercel의 `x-vercel-ip-country` 헤더를 `geo-country` 쿠키로 전달하도록 수정. 이 쿠키를 클라이언트 컴포넌트(`src/components/gear-recommendation.tsx`)에서 읽어 지역(한국→쿠팡) 우선, 신호가 없을 때는 UI 언어(ko→쿠팡)로 폴백하는 로직(`src/lib/affiliate.ts`) 구현. 아마존 제휴는 계정 미보유로 현재 `null`(섹션 숨김) 처리, 계정 준비 시 바로 확장 가능한 구조로 작성
+  - ⚠️ 설계 변경: 최초에는 이 분기 로직을 서버 컴포넌트에서 `cookies()`로 읽도록 구현했으나, 이 경우 Next.js가 페이지 전체를 정적 생성(SSG) 대상에서 제외하고 매 요청마다 서버 렌더링(동적)하게 되는 부작용을 발견 → SEO/성능 저하 방지를 위해 즉시 클라이언트 사이드 분기(쿠키를 브라우저에서 직접 읽음, `useSyncExternalStore` 사용)로 재작성하여 4개 언어 페이지 모두 정적 생성(●, SSG)이 유지되도록 수정함
+  - `src/components/coupang-gear-cards.tsx`: 상품 카드 UI(로딩 스켈레톤/상품 그리드/실패 시 안내 문구 폴백), 법적 고지 문구(`gearDisclosure`, 4개 언어) 표시, 링크에 `rel="nofollow sponsored noopener noreferrer"` 적용
+- 검증: `npm run build`(4개 언어 페이지 모두 `● SSG`로 정적 생성 확인), `npm run lint` 모두 통과. Playwright로 `/ko` 페이지의 하이드레이션 불일치 여부 및 API 실패 시 안내 문구 폴백 정상 동작 확인
+- ⚠️ **미검증 항목**: 클라우드 샌드박스와 석한님 macOS 데스크톱 브리지(격리된 VM) 양쪽 모두에서 `api-gateway.coupang.com`으로의 네트워크 접근이 차단되어(`CONNECT tunnel failed, 403`), 실제 쿠팡 API 호출 자체는 제가 직접 검증하지 못했습니다. 석한님의 실제 macOS 터미널에서 개발 서버 실행 후 직접 확인이 필요합니다 (시간당 10회 쿼터 유의)
+
 ## 2026-08-24 — Phase 3: ND 필터 계산기 실동작 & 카운트다운 타이머
 
 - `src/lib/nd-calculator.ts`: ND 필터 프리셋(ND4/2-stop, ND8/3-stop, ND64/6-stop, ND1000/10-stop, ND32000/15-stop, 커스텀), 기준 셔터스피드 프리셋(1/1000s~30s), 계산 공식(`T_new = T_base × 2^stops`), 결과 포맷팅(초/분초/시분/일시 단위 자동 전환) 구현
