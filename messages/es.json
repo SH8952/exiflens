@@ -24,8 +24,13 @@
     "baseShutter": "Velocidad base",
     "ndFilter": "Filtro ND",
     "customStops": "Pasos personalizados",
+    "customStopsLabel": "Pasos",
+    "detected": "detectado",
     "newShutter": "Nueva velocidad",
     "startTimer": "Iniciar temporizador",
+    "stopTimer": "Detener",
+    "restartTimer": "Empezar de nuevo",
+    "timerDone": "¡Listo! Revisa tu toma.",
     "gearSectionTitle": "Equipo recomendado",
     "gearSectionHint": "Los filtros ND recomendados aparecerán aquí una vez detectado el diámetro de tu objetivo.",
     "privacyNote": "100% en el navegador. Tus fotos nunca se suben a un servidor."

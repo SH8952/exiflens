@@ -24,8 +24,13 @@
     "baseShutter": "Base Shutter Speed",
     "ndFilter": "ND Filter",
     "customStops": "Custom stops",
+    "customStopsLabel": "Stops",
+    "detected": "detected",
     "newShutter": "New Shutter Speed",
     "startTimer": "Start Countdown Timer",
+    "stopTimer": "Stop",
+    "restartTimer": "Start again",
+    "timerDone": "Done! Remove the filter cap.",
     "gearSectionTitle": "Gear Recommendations",
     "gearSectionHint": "Recommended ND filters will appear here once we detect your lens filter thread size.",
     "privacyNote": "100% client-side. Your photos are never uploaded to a server."

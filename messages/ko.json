@@ -24,8 +24,13 @@
     "baseShutter": "기준 셔터스피드",
     "ndFilter": "ND 필터",
     "customStops": "직접 입력 (스탑)",
+    "customStopsLabel": "스탑 수",
+    "detected": "감지됨",
     "newShutter": "계산된 셔터스피드",
     "startTimer": "타이머 시작",
+    "stopTimer": "정지",
+    "restartTimer": "다시 시작",
+    "timerDone": "완료! 촬영을 확인해 보세요.",
     "gearSectionTitle": "장비 추천",
     "gearSectionHint": "렌즈 필터 구경이 감지되면 추천 ND 필터가 여기에 표시됩니다.",
     "privacyNote": "100% 브라우저에서 처리됩니다. 사진은 서버로 전송되지 않습니다."

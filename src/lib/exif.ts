@@ -41,7 +41,12 @@ function rationalToSeconds(value: [number, number] | undefined): number | null {
   return value[0] / value[1];
 }
 
-function formatShutterSpeed(seconds: number | null): string | null {
+/**
+ * Formats a shutter speed given in seconds the way photographers read it:
+ * a fraction below 1 second (e.g. "1/125s"), a decimal above (e.g. "8.2s").
+ * Shared by the EXIF panel and the ND filter calculator's base-speed picker.
+ */
+export function formatShutterSpeed(seconds: number | null): string | null {
   if (seconds === null || !Number.isFinite(seconds) || seconds <= 0) return null;
   if (seconds >= 1) {
     const rounded = Math.round(seconds * 10) / 10;
