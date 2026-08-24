@@ -1,5 +1,11 @@
 # 개발 이력 (Development History)
 
+## 2026-08-24 — 원클릭 실행 스크립트 추가
+
+- `ExifLens 실행.command` 추가: Finder에서 더블클릭하면 (1) 이 파일이 있는 프로젝트 폴더로 자동 이동(`cd`) → (2) `npm run dev` 실행 → (3) 개발 서버 준비되면 Chrome이 자동으로 `localhost:3000`을 여는 완전 원클릭 흐름
+- macOS에서 더블클릭으로 실행되려면 실행 권한(`chmod +x`)이 필요해 실행 권한을 부여해 둠
+- 석한님의 macOS 데스크톱 폴더 접근 권한을 받아 `~/Desktop/exiflens/`에 직접 반영 완료
+
 ## 2026-08-24 — 개발 편의: `npm run dev` 시 Chrome 자동 실행
 
 - `scripts/dev-open.mjs` 추가: `next dev`를 실행하고 개발 서버가 준비되면(stdout에서 실제 URL 감지) 자동으로 Google Chrome을 열도록 함
