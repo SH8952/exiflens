@@ -1,5 +1,18 @@
 # 개발 이력 (Development History)
 
+## 2026-08-24 — 신기능: EXIF 프레임 생성기 (exif-frame.yuru.cam 참고)
+
+- 제미나이와의 추가 대화를 통해 도출된 신규 프롬프트를 기반으로, 업로드한 사진 하단에 촬영정보(카메라·렌즈·초점거리·조리개·셔터스피드·ISO·촬영일)를 담은 깔끔한 프레임을 자동으로 붙여 다운로드하는 기능을 별도 페이지(`/[locale]/frame`)로 추가
+- 배치 방식은 석한님 요청에 따라 메인 페이지에 섹션을 더 쌓는 대신 완전히 독립된 페이지로 분리 — 메인 페이지의 광고 위치가 더 밀리지 않도록 함, 헤더 내비게이션에 "프레임 생성기" 링크 추가
+- `src/lib/frame-canvas.ts`: 외부 라이브러리(html-to-image 등) 없이 순수 HTML5 Canvas API만으로 사진 합성 로직 구현 — 화면비 크롭(원본/1:1/4:5/4:3/3:2/16:9/9:16), 여백(사진 폭 기준 % 슬라이더), 다크(검정+흰 글씨)/라이트(흰색+검정 글씨) 테마, 정보 바 렌더링. 미리보기와 다운로드가 동일한 원본 해상도 캔버스를 그대로 사용해 별도의 저해상도/고해상도 렌더링 경로가 없음
+- `src/lib/exif.ts`: EXIF `DateTimeOriginal` 필드를 "YYYY-MM-DD" 형식으로 추출하는 촬영일(`takenAt`) 파싱 추가
+- `src/store/exif-store.ts`: 업로드된 사진의 원본 바이트(objectURL)를 함께 보관하도록 확장 — 메인 페이지에서 이미 사진을 업로드했다면 프레임 생성기 페이지로 이동 시 재업로드 없이 바로 이어서 사용 가능 (교체/초기화 시 기존 objectURL 해제)
+- `src/components/exif-frame-generator.tsx`: 테마 토글, 화면비 선택, 여백 슬라이더, 메타데이터 수동 수정(입력값은 프레임에만 반영되며 상단 EXIF 패널 값은 변경되지 않음, "초기화" 버튼으로 감지값 복원), PNG/JPG 내보내기 형식 선택, "프레임 사진 다운로드" 버튼 구현
+- `src/components/ui/slider.tsx` 추가 (기존 shadcn 스타일 수동 구현 관례를 따라 네이티브 `<input type="range">` 기반)
+- 4개 언어(en/ko/es/ja) 메시지에 `Frame` 네임스페이스 및 헤더 내비게이션 문구 신규 번역 추가
+- 구현 중 발견한 이슈: 사진 전환 시 상태를 초기화하는 로직을 처음에는 `useEffect` 안에서 직접 `setState`를 호출하는 방식으로 작성했으나, 이는 "effect 안에서의 동기적 setState는 연쇄 렌더링을 유발할 수 있다"는 린트 규칙에 걸림 → React 공식 권장 패턴대로 편집 UI를 `imageUrl`로 키(key)를 건 하위 컴포넌트로 분리해, 사진이 바뀌면 자연스럽게 리마운트되며 상태가 초기화되도록 재설계 (effect 내 동기적 setState 완전히 제거)
+- 검증: `npm run build`(en/ko/es/ja 각각 메인 페이지 + `/frame` 페이지 총 8개 모두 `● SSG` 정적 생성 확인), `npm run lint` 모두 통과. Playwright로 실제 프로덕션 빌드에 대해 (1) `/frame` 페이지 직접 접속 후 업로드→프레임 렌더링→메타데이터 필드 값 확인(Canon EOS R7 등)→편집→초기화→PNG 다운로드까지 종단 테스트, (2) `DateTimeOriginal` 태그가 있는 별도 샘플로 촬영일 파싱("2026-08-20") 검증, (3) 메인 페이지에서 업로드 후 헤더 내비게이션으로 프레임 생성기로 이동 시 재업로드 없이 캔버스가 바로 렌더링되는 것까지 확인
+
 ## 2026-08-24 — Phase 4: SEO, 실제 애드센스 & 쿠팡파트너스 API 연동
 
 - **SEO**: `src/lib/seo.ts` 추가 (사이트 URL, OG locale, hreflang alternates, WebApplication JSON-LD 생성). `src/app/[locale]/layout.tsx`를 `generateMetadata`로 전환해 4개 언어 canonical/hreflang(`x-default` 포함)/Open Graph/Twitter 카드 메타데이터와 JSON-LD 구조화 데이터를 실제로 출력하도록 구현

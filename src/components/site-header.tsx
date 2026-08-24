@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { useTranslations } from "next-intl";
 import { Aperture } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function SiteHeader() {
@@ -21,7 +21,15 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <LanguageSwitcher />
+        <nav className="flex items-center gap-4">
+          <Link
+            href="/frame"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {t("frameNav")}
+          </Link>
+          <LanguageSwitcher />
+        </nav>
       </div>
     </header>
   );

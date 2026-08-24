@@ -1,6 +1,7 @@
 {
   "Header": {
-    "tagline": "EXIF解析 & NDフィルター計算機"
+    "tagline": "EXIF解析 & NDフィルター計算機",
+    "frameNav": "フレーム生成"
   },
   "Home": {
     "title": "ExifLens",
@@ -35,6 +36,30 @@
     "gearSectionHint": "選択したNDフィルターに合わせたおすすめ商品がここに表示されます。",
     "gearDisclosure": "本サイトはアフィリエイトプログラムにより、リンク経由の購入から一定の紹介料を受け取る場合があります。",
     "privacyNote": "完全にブラウザ内で処理されます。写真がサーバーにアップロードされることはありません。"
+  },
+  "Frame": {
+    "title": "EXIFフレーム生成",
+    "subtitle": "写真に撮影情報フレームを追加して、フル解像度でダウンロードできます。",
+    "uploadHint": "フレームを付ける写真をアップロードしてください。上ですでにアップロード済みの場合はそのまま使えます。",
+    "privacyNote": "完全にブラウザ内で処理されます。フレーム付き写真はどこにもアップロードされません。",
+    "downloadButton": "フレーム付き写真をダウンロード",
+    "themeLabel": "フレームテーマ",
+    "themeDark": "ダーク",
+    "themeLight": "ライト",
+    "aspectLabel": "アスペクト比",
+    "aspectOriginal": "オリジナル",
+    "paddingLabel": "余白",
+    "metadataLabel": "フレーム表示テキスト",
+    "metadataReset": "リセット",
+    "metadataHint": "値を編集するとフレームにのみ反映されます。上のEXIFパネルの値は変更されません。",
+    "camera": "カメラ",
+    "lens": "レンズ",
+    "focalLength": "焦点距離",
+    "aperture": "絞り",
+    "shutter": "シャッタースピード",
+    "iso": "ISO",
+    "takenAt": "撮影日",
+    "formatLabel": "エクスポート形式"
   },
   "Footer": {
     "rights": "All rights reserved.",

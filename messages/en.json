@@ -1,6 +1,7 @@
 {
   "Header": {
-    "tagline": "EXIF Analyzer & ND Filter Calculator"
+    "tagline": "EXIF Analyzer & ND Filter Calculator",
+    "frameNav": "Frame Generator"
   },
   "Home": {
     "title": "ExifLens",
@@ -35,6 +36,30 @@
     "gearSectionHint": "Recommended ND filters for your selection will appear here.",
     "gearDisclosure": "As an affiliate, we may earn a commission from qualifying purchases made through these links, at no extra cost to you.",
     "privacyNote": "100% client-side. Your photos are never uploaded to a server."
+  },
+  "Frame": {
+    "title": "EXIF Frame Generator",
+    "subtitle": "Add a clean camera-info frame to your photo and download it in full resolution.",
+    "uploadHint": "Drop a photo to start framing it. If you already uploaded one above, it's ready here too.",
+    "privacyNote": "100% client-side. The framed photo is rendered entirely in your browser and never uploaded anywhere.",
+    "downloadButton": "Download Framed Photo",
+    "themeLabel": "Frame Theme",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "aspectLabel": "Aspect Ratio",
+    "aspectOriginal": "Original",
+    "paddingLabel": "Padding",
+    "metadataLabel": "Frame Text",
+    "metadataReset": "Reset",
+    "metadataHint": "Edit any field to override what's shown on the frame. This only changes the frame — not the EXIF panel above.",
+    "camera": "Camera",
+    "lens": "Lens",
+    "focalLength": "Focal Length",
+    "aperture": "Aperture",
+    "shutter": "Shutter Speed",
+    "iso": "ISO",
+    "takenAt": "Date Taken",
+    "formatLabel": "Export Format"
   },
   "Footer": {
     "rights": "All rights reserved.",

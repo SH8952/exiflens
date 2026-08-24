@@ -38,7 +38,7 @@ export function ExifUploader() {
       startLoading(file.name);
       try {
         const parsed = await parseExifFile(file);
-        setSuccess(parsed);
+        setSuccess(parsed, URL.createObjectURL(file));
       } catch {
         setError(t("uploaderErrorParse"));
       }

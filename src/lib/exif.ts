@@ -10,6 +10,8 @@ export type ParsedExif = {
   aperture: string | null;
   iso: string | null;
   focalLength: string | null;
+  /** Date the photo was taken, formatted "YYYY-MM-DD" (used by the EXIF frame generator). */
+  takenAt: string | null;
 };
 
 const ACCEPTED_MIME_PREFIXES = ["image/"];
@@ -75,6 +77,18 @@ function firstString(value: string[] | string | undefined): string | null {
 }
 
 /**
+ * EXIF stores dates as "YYYY:MM:DD HH:MM:SS". Reformats to "YYYY-MM-DD" for
+ * display on the EXIF frame generator's photo caption.
+ */
+function formatTakenDate(value: string | undefined): string | null {
+  if (!value) return null;
+  const match = value.match(/^(\d{4}):(\d{2}):(\d{2})/);
+  if (!match) return null;
+  const [, year, month, day] = match;
+  return `${year}-${month}-${day}`;
+}
+
+/**
  * Combines the EXIF Make and Model fields into a single camera name,
  * avoiding duplication for brands (e.g. Canon, Panasonic) whose Model
  * field already includes the manufacturer name, e.g. "Canon EOS R7".
@@ -115,6 +129,11 @@ export async function parseExifFile(file: File): Promise<ParsedExif> {
       )
     : null;
 
+  const takenAt = formatTakenDate(
+    firstString(exif.DateTimeOriginal?.value as string[] | string | undefined) ??
+      undefined,
+  );
+
   return {
     fileName: file.name,
     camera,
@@ -124,6 +143,7 @@ export async function parseExifFile(file: File): Promise<ParsedExif> {
     aperture: formatAperture(exif.FNumber?.value as [number, number] | undefined),
     iso,
     focalLength: formatFocalLength(exif.FocalLength?.value as [number, number] | undefined),
+    takenAt,
   };
 }
 

@@ -1,6 +1,7 @@
 {
   "Header": {
-    "tagline": "Analizador EXIF y Calculadora de Filtro ND"
+    "tagline": "Analizador EXIF y Calculadora de Filtro ND",
+    "frameNav": "Generador de Marcos"
   },
   "Home": {
     "title": "ExifLens",
@@ -35,6 +36,30 @@
     "gearSectionHint": "Aquí aparecerán filtros ND recomendados para tu selección.",
     "gearDisclosure": "Como afiliados, podemos ganar una comisión por compras cualificadas realizadas a través de estos enlaces, sin costo adicional para ti.",
     "privacyNote": "100% en el navegador. Tus fotos nunca se suben a un servidor."
+  },
+  "Frame": {
+    "title": "Generador de Marcos EXIF",
+    "subtitle": "Añade un marco con los datos de tu cámara a la foto y descárgala en resolución completa.",
+    "uploadHint": "Sube una foto para empezar a enmarcarla. Si ya subiste una arriba, también está lista aquí.",
+    "privacyNote": "100% en el navegador. La foto enmarcada se genera por completo en tu navegador y nunca se sube a ningún sitio.",
+    "downloadButton": "Descargar Foto con Marco",
+    "themeLabel": "Tema del Marco",
+    "themeDark": "Oscuro",
+    "themeLight": "Claro",
+    "aspectLabel": "Relación de Aspecto",
+    "aspectOriginal": "Original",
+    "paddingLabel": "Margen",
+    "metadataLabel": "Texto del Marco",
+    "metadataReset": "Restablecer",
+    "metadataHint": "Edita cualquier campo para cambiar lo que se muestra en el marco. Esto solo afecta al marco, no al panel EXIF de arriba.",
+    "camera": "Cámara",
+    "lens": "Objetivo",
+    "focalLength": "Distancia focal",
+    "aperture": "Apertura",
+    "shutter": "Velocidad de obturación",
+    "iso": "ISO",
+    "takenAt": "Fecha de captura",
+    "formatLabel": "Formato de exportación"
   },
   "Footer": {
     "rights": "Todos los derechos reservados.",
