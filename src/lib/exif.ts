@@ -70,6 +70,21 @@ function firstString(value: string[] | string | undefined): string | null {
 }
 
 /**
+ * Combines the EXIF Make and Model fields into a single camera name,
+ * avoiding duplication for brands (e.g. Canon, Panasonic) whose Model
+ * field already includes the manufacturer name, e.g. "Canon EOS R7".
+ */
+function combineMakeAndModel(
+  make: string | null,
+  model: string | null,
+): string | null {
+  if (!make) return model;
+  if (!model) return make;
+  if (model.toLowerCase().startsWith(make.toLowerCase())) return model;
+  return `${make} ${model}`;
+}
+
+/**
  * Parses EXIF metadata from an image file entirely in the browser.
  * The file's bytes never leave the client — no network request is made.
  */
@@ -79,7 +94,7 @@ export async function parseExifFile(file: File): Promise<ParsedExif> {
 
   const cameraMake = firstString(exif.Make?.value as string[] | string | undefined);
   const cameraModel = firstString(exif.Model?.value as string[] | string | undefined);
-  const camera = [cameraMake, cameraModel].filter(Boolean).join(" ").trim() || null;
+  const camera = combineMakeAndModel(cameraMake, cameraModel);
 
   const lens = firstString(exif.LensModel?.value as string[] | string | undefined);
 

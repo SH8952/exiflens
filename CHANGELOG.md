@@ -1,5 +1,12 @@
 # 개발 이력 (Development History)
 
+## 2026-08-24 — 버그 수정: 캐논 카메라명 중복 표시
+
+- 석한님이 실제 Canon EOS R7으로 촬영한 원본 사진으로 테스트 중, "카메라" 항목이 "Canon Canon EOS R7"로 제조사명이 중복 표시되는 것을 발견
+- 원인: 캐논/파나소닉 등 일부 제조사는 EXIF Model 필드에 이미 제조사명이 포함되어 있는데(`Model: "Canon EOS R7"`), Make + Model을 단순히 이어붙이는 로직이라 중복 발생
+- `src/lib/exif.ts`에 `combineMakeAndModel()` 추가: Model이 이미 Make로 시작하면 Model만 사용하도록 수정
+- 검증: 동일한 Canon 샘플(`Canon`/`Canon EOS R7`)로 Playwright 재테스트 → "Canon EOS R7"로 정상 표시 확인, 기존 Sony 샘플(`Sony`/`ILCE-7M4`, 중복 아님)로 회귀 테스트 → "Sony ILCE-7M4" 그대로 정상 유지 확인
+
 ## 2026-08-24 — 원클릭 실행 스크립트 추가
 
 - `ExifLens 실행.command` 추가: Finder에서 더블클릭하면 (1) 이 파일이 있는 프로젝트 폴더로 자동 이동(`cd`) → (2) `npm run dev` 실행 → (3) 개발 서버 준비되면 Chrome이 자동으로 `localhost:3000`을 여는 완전 원클릭 흐름
