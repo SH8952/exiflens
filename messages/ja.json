@@ -1,0 +1,35 @@
+{
+  "Header": {
+    "tagline": "EXIF解析 & NDフィルター計算機"
+  },
+  "Home": {
+    "title": "ExifLens",
+    "subtitle": "写真をドロップするだけでEXIFを即座に表示。ワンクリックでNDフィルターの長時間露光を計算します。",
+    "uploaderTitle": "ここに写真をドラッグ＆ドロップするとEXIFが自動抽出されます",
+    "uploaderHint": "JPG、PNG、主要なRAWファイルに対応。写真はブラウザ外に送信されません。",
+    "uploaderButton": "またはクリックしてファイルを選択",
+    "exifSectionTitle": "抽出されたEXIF",
+    "exifEmpty": "写真をアップロードすると、カメラ、シャッタースピード、絞り、ISO、焦点距離が表示されます。",
+    "camera": "カメラ",
+    "lens": "レンズ",
+    "shutter": "シャッタースピード",
+    "aperture": "絞り",
+    "iso": "ISO",
+    "focalLength": "焦点距離",
+    "ndSectionTitle": "NDフィルター計算機",
+    "baseShutter": "基準シャッタースピード",
+    "ndFilter": "NDフィルター",
+    "customStops": "カスタムストップ数",
+    "newShutter": "計算後のシャッタースピード",
+    "startTimer": "カウントダウンタイマー開始",
+    "gearSectionTitle": "おすすめ機材",
+    "gearSectionHint": "レンズのフィルター径が検出されると、おすすめのNDフィルターがここに表示されます。",
+    "privacyNote": "完全にブラウザ内で処理されます。写真がサーバーにアップロードされることはありません。"
+  },
+  "Footer": {
+    "rights": "All rights reserved.",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "guides": "ガイド"
+  }
+}

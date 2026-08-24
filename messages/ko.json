@@ -1,0 +1,35 @@
+{
+  "Header": {
+    "tagline": "EXIF 분석 & ND 필터 계산기"
+  },
+  "Home": {
+    "title": "ExifLens",
+    "subtitle": "사진을 올리면 EXIF 정보를 즉시 확인하고, 클릭 한 번으로 ND 필터 장노출 시간을 계산하세요.",
+    "uploaderTitle": "사진을 여기로 드래그하면 EXIF가 자동 추출됩니다",
+    "uploaderHint": "JPG, PNG 및 대부분의 카메라 RAW 파일을 지원합니다. 브라우저 밖으로 전송되지 않습니다.",
+    "uploaderButton": "또는 클릭하여 파일 선택",
+    "exifSectionTitle": "추출된 EXIF",
+    "exifEmpty": "사진을 업로드하면 카메라, 셔터스피드, 조리개, ISO, 초점거리를 확인할 수 있습니다.",
+    "camera": "카메라",
+    "lens": "렌즈",
+    "shutter": "셔터스피드",
+    "aperture": "조리개",
+    "iso": "ISO",
+    "focalLength": "초점거리",
+    "ndSectionTitle": "ND 필터 계산기",
+    "baseShutter": "기준 셔터스피드",
+    "ndFilter": "ND 필터",
+    "customStops": "직접 입력 (스탑)",
+    "newShutter": "계산된 셔터스피드",
+    "startTimer": "타이머 시작",
+    "gearSectionTitle": "장비 추천",
+    "gearSectionHint": "렌즈 필터 구경이 감지되면 추천 ND 필터가 여기에 표시됩니다.",
+    "privacyNote": "100% 브라우저에서 처리됩니다. 사진은 서버로 전송되지 않습니다."
+  },
+  "Footer": {
+    "rights": "All rights reserved.",
+    "privacy": "개인정보처리방침",
+    "terms": "이용약관",
+    "guides": "가이드"
+  }
+}

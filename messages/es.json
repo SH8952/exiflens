@@ -1,0 +1,35 @@
+{
+  "Header": {
+    "tagline": "Analizador EXIF y Calculadora de Filtro ND"
+  },
+  "Home": {
+    "title": "ExifLens",
+    "subtitle": "Suelta una foto. Obtén su EXIF al instante. Calcula tu exposición larga con filtro ND en un clic.",
+    "uploaderTitle": "Arrastra y suelta tu foto aquí para extraer el EXIF",
+    "uploaderHint": "Compatible con JPG, PNG y la mayoría de archivos RAW. Nada sale de tu navegador.",
+    "uploaderButton": "O haz clic para seleccionar un archivo",
+    "exifSectionTitle": "EXIF extraído",
+    "exifEmpty": "Sube una foto para ver cámara, velocidad de obturación, apertura, ISO y distancia focal.",
+    "camera": "Cámara",
+    "lens": "Objetivo",
+    "shutter": "Velocidad de obturación",
+    "aperture": "Apertura",
+    "iso": "ISO",
+    "focalLength": "Distancia focal",
+    "ndSectionTitle": "Calculadora de filtro ND",
+    "baseShutter": "Velocidad base",
+    "ndFilter": "Filtro ND",
+    "customStops": "Pasos personalizados",
+    "newShutter": "Nueva velocidad",
+    "startTimer": "Iniciar temporizador",
+    "gearSectionTitle": "Equipo recomendado",
+    "gearSectionHint": "Los filtros ND recomendados aparecerán aquí una vez detectado el diámetro de tu objetivo.",
+    "privacyNote": "100% en el navegador. Tus fotos nunca se suben a un servidor."
+  },
+  "Footer": {
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Política de privacidad",
+    "terms": "Términos de servicio",
+    "guides": "Guías"
+  }
+}
