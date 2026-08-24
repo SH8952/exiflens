@@ -44,8 +44,14 @@
     "privacyNote": "100% client-side. The framed photo is rendered entirely in your browser and never uploaded anywhere.",
     "downloadButton": "Download Framed Photo",
     "themeLabel": "Frame Theme",
-    "themeDark": "Dark",
-    "themeLight": "Light",
+    "themes": {
+      "classic-dark": "Classic Dark",
+      "classic-light": "Classic Light",
+      "polaroid": "Polaroid",
+      "shot-on-brand": "Shot on Brand",
+      "minimal-overlay": "Minimal Overlay",
+      "full-border-square": "Full Border"
+    },
     "aspectLabel": "Aspect Ratio",
     "aspectOriginal": "Original",
     "paddingLabel": "Padding",

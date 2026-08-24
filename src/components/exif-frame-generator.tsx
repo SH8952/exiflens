@@ -20,12 +20,15 @@ import {
   ASPECT_RATIO_OPTIONS,
   canvasToBlob,
   downloadBlob,
-  renderFramedPhoto,
   type AspectRatioOption,
   type FrameMetadata,
-  type FrameTheme,
 } from "@/lib/frame-canvas";
-import { cn } from "@/lib/utils";
+import {
+  THEME_PRESETS,
+  getThemeById,
+  renderThemedFrame,
+  type ThemeId,
+} from "@/lib/theme-renderer";
 
 const DEFAULT_PADDING_PERCENT = 4;
 
@@ -86,7 +89,7 @@ function FrameEditor({
   const [paddingPercent, setPaddingPercent] = React.useState(
     DEFAULT_PADDING_PERCENT,
   );
-  const [theme, setTheme] = React.useState<FrameTheme>("dark");
+  const [themeId, setThemeId] = React.useState<ThemeId>("classic-dark");
   const [metadata, setMetadata] = React.useState<FrameMetadata>(() =>
     metadataFromExif(data),
   );
@@ -109,12 +112,19 @@ function FrameEditor({
 
   React.useEffect(() => {
     if (!image || !canvasRef.current) return;
-    renderFramedPhoto(
+    renderThemedFrame(
       image,
-      { aspect, paddingPercent, theme, metadata },
+      { themeId, aspect, paddingPercent, metadata },
       canvasRef.current,
     );
-  }, [image, aspect, paddingPercent, theme, metadata]);
+  }, [image, themeId, aspect, paddingPercent, metadata]);
+
+  // Switching theme applies that preset's recommended padding too (the
+  // slider still overrides it afterward, same as any preset).
+  const handleThemeChange = (nextId: ThemeId) => {
+    setThemeId(nextId);
+    setPaddingPercent(getThemeById(nextId).paddingPercent);
+  };
 
   const handleMetadataChange = (field: keyof FrameMetadata, value: string) => {
     setMetadata((prev) => ({ ...prev, [field]: value }));
@@ -142,26 +152,24 @@ function FrameEditor({
       </div>
 
       <div className="flex flex-col gap-5 rounded-xl border border-border bg-card p-5 text-sm">
-        <div className="flex flex-col gap-1.5">
+        <label className="flex flex-col gap-1.5">
           <span className="text-muted-foreground">{t("themeLabel")}</span>
-          <div className="flex gap-2">
-            {(["dark", "light"] as const).map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => setTheme(option)}
-                className={cn(
-                  "flex-1 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors",
-                  theme === option
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-border text-muted-foreground hover:text-foreground",
-                )}
-              >
-                {option === "dark" ? t("themeDark") : t("themeLight")}
-              </button>
-            ))}
-          </div>
-        </div>
+          <Select
+            value={themeId}
+            onValueChange={(value) => handleThemeChange(value as ThemeId)}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {THEME_PRESETS.map((preset) => (
+                <SelectItem key={preset.id} value={preset.id}>
+                  {t(`themes.${preset.id}`)}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </label>
 
         <label className="flex flex-col gap-1.5">
           <span className="text-muted-foreground">{t("aspectLabel")}</span>

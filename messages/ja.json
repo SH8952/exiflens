@@ -44,8 +44,14 @@
     "privacyNote": "完全にブラウザ内で処理されます。フレーム付き写真はどこにもアップロードされません。",
     "downloadButton": "フレーム付き写真をダウンロード",
     "themeLabel": "フレームテーマ",
-    "themeDark": "ダーク",
-    "themeLight": "ライト",
+    "themes": {
+      "classic-dark": "クラシックダーク",
+      "classic-light": "クラシックライト",
+      "polaroid": "ポラロイド",
+      "shot-on-brand": "ショットオンブランド",
+      "minimal-overlay": "ミニマルオーバーレイ",
+      "full-border-square": "フルボーダー"
+    },
     "aspectLabel": "アスペクト比",
     "aspectOriginal": "オリジナル",
     "paddingLabel": "余白",

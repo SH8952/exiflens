@@ -44,8 +44,14 @@
     "privacyNote": "100% 브라우저에서 처리됩니다. 프레임이 적용된 사진은 어디로도 전송되지 않습니다.",
     "downloadButton": "프레임 사진 다운로드",
     "themeLabel": "프레임 테마",
-    "themeDark": "다크",
-    "themeLight": "라이트",
+    "themes": {
+      "classic-dark": "클래식 다크",
+      "classic-light": "클래식 라이트",
+      "polaroid": "폴라로이드",
+      "shot-on-brand": "샷 온 브랜드",
+      "minimal-overlay": "미니멀 오버레이",
+      "full-border-square": "풀 보더"
+    },
     "aspectLabel": "화면비",
     "aspectOriginal": "원본",
     "paddingLabel": "여백",

@@ -44,8 +44,14 @@
     "privacyNote": "100% en el navegador. La foto enmarcada se genera por completo en tu navegador y nunca se sube a ningún sitio.",
     "downloadButton": "Descargar Foto con Marco",
     "themeLabel": "Tema del Marco",
-    "themeDark": "Oscuro",
-    "themeLight": "Claro",
+    "themes": {
+      "classic-dark": "Clásico Oscuro",
+      "classic-light": "Clásico Claro",
+      "polaroid": "Polaroid",
+      "shot-on-brand": "Shot on Brand",
+      "minimal-overlay": "Superposición Mínima",
+      "full-border-square": "Marco Completo"
+    },
     "aspectLabel": "Relación de Aspecto",
     "aspectOriginal": "Original",
     "paddingLabel": "Margen",
