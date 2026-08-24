@@ -15,7 +15,22 @@
 - git 저장소 초기화 및 커밋 2건으로 백업 완료
 
 ### 다음 단계 (Not started yet)
-- Phase 2: `exifreader` 기반 실제 EXIF 파싱 드래그앤드롭 컴포넌트
 - Phase 3: ND 필터 계산 로직 실연동 + 카운트다운 타이머 기능
+- Phase 4: SEO 메타데이터/구조화 데이터, 실제 애드센스 스크립트, 아마존 제휴 링크 연동
+- 실제 도메인 연결 및 Vercel 배포
+
+## 2026-08-24 — Phase 2: EXIF 파서 및 드래그앤드롭 컴포넌트
+
+- `exifreader`, `zustand` 패키지 설치
+- `src/lib/exif.ts`: 브라우저에서 이미지 파일을 직접 파싱하는 `parseExifFile()` 및 셔터스피드/조리개/초점거리 포맷팅 유틸 작성 (파일이 서버로 전송되지 않음)
+- `src/store/exif-store.ts`: 추출된 EXIF 데이터를 관리하는 Zustand 스토어 (idle/loading/success/error 상태)
+- `src/components/exif-uploader.tsx`: 실제 동작하는 드래그앤드롭 + 클릭 업로드 컴포넌트, 지원하지 않는 파일 형식/용량 초과/파싱 실패에 대한 에러 메시지 처리
+- `src/components/exif-panel.tsx`, `nd-calculator-card.tsx`: Section 2·3을 Zustand 스토어와 연동해 실제 카메라/렌즈/셔터스피드/조리개/ISO/초점거리 값을 표시하고, ND 계산기의 "기준 셔터스피드"에 추출값을 자동 반영 (요구사항 4번 충족)
+- 4개 언어(en/ko/es/ja) 메시지 파일에 업로더 관련 문구(리셋, 에러 3종) 추가
+- "타이머 시작" 버튼은 Phase 3에서 실제 로직이 붙기 전까지 비활성화 상태로 유지 (동작하지 않는 기능을 동작하는 것처럼 보이지 않도록)
+- 검증: `npm run build`/`npm run lint` 통과, `piexif`로 생성한 샘플 EXIF JPEG(Sony ILCE-7M4, 24-70mm GM, 1/125s, f/8.0, ISO100, 35mm)을 Node에서 직접 파싱해 포맷팅 로직 정확성 확인, Playwright로 실제 프로덕션 빌드에 대해 업로드 → 화면 반영까지 종단 테스트 통과
+
+### 다음 단계 (Not started yet)
+- Phase 3: ND 필터 스톱 선택 UI 실동작 + 계산 공식(`T_new = T_base × 2^N`) 연동, 카운트다운 타이머 기능
 - Phase 4: SEO 메타데이터/구조화 데이터, 실제 애드센스 스크립트, 아마존 제휴 링크 연동
 - 실제 도메인 연결 및 Vercel 배포
