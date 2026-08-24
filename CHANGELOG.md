@@ -1,6 +1,15 @@
 # 개발 이력 (Development History)
 
-## 2026-08-24 — Phase 1: 프로젝트 셋업 & 기본 레이아웃
+## 2026-08-24 — 개발 편의: `npm run dev` 시 Chrome 자동 실행
+
+- `scripts/dev-open.mjs` 추가: `next dev`를 실행하고 개발 서버가 준비되면(stdout에서 실제 URL 감지) 자동으로 Google Chrome을 열도록 함
+- `package.json`의 `dev` 스크립트를 `node scripts/dev-open.mjs`로 변경, 자동 실행을 원치 않을 경우를 위해 `dev:plain`(기존 `next dev`) 스크립트 유지
+- macOS는 `open -a "Google Chrome"`, Windows는 `start chrome`, Linux는 `google-chrome`/`xdg-open`으로 분기 처리
+- 포트가 3000이 아닌 다른 포트로 뜨는 경우에도 실제 감지된 URL로 열리며, URL 감지가 안 될 경우 8초 후 `localhost:3000`으로 폴백
+- Ctrl+C(SIGINT/SIGTERM) 시 `next dev` 하위 프로세스까지 함께 종료되도록 처리
+- 샌드박스 환경(GUI/Chrome 없음)에서 서버 기동 및 URL 감지, Chrome 실행 실패 시 경고 메시지 출력까지 정상 동작 확인. 실제 Chrome 자동 실행은 GUI가 있는 석한님 macOS 환경에서 최종 확인 필요
+
+## 2026-08-24 — Phase 1: 프로젝트 셋업 및 기본 레이아웃
 
 - Next.js 16 (App Router) + TypeScript + Tailwind CSS v4 프로젝트 스캐폴딩 (`create-next-app`)
 - shadcn/ui 수동 설정 (네트워크 제약으로 CLI 대신 수동 구성): `components.json`, `lib/utils.ts`, `Button`, `Select` 컴포넌트
