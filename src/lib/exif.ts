@@ -37,6 +37,9 @@ export function isSupportedImageFile(file: File): boolean {
   return ACCEPTED_RAW_EXTENSIONS.some((ext) => name.endsWith(ext));
 }
 
+/** `accept` attribute for file inputs — shared by every upload/replace entry point. */
+export const FILE_INPUT_ACCEPT = `image/*,${ACCEPTED_RAW_EXTENSIONS.join(",")}`;
+
 /** Formats a rational EXIF value (e.g. shutter speed [1, 125]) as seconds. */
 function rationalToSeconds(value: [number, number] | undefined): number | null {
   if (!value || value[1] === 0) return null;

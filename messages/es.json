@@ -43,6 +43,7 @@
     "uploadHint": "Sube una foto para empezar a enmarcarla. Si ya subiste una arriba, también está lista aquí.",
     "privacyNote": "100% en el navegador. La foto enmarcada se genera por completo en tu navegador y nunca se sube a ningún sitio.",
     "downloadButton": "Descargar Foto con Marco",
+    "dropToReplace": "Suelta una foto aquí para reemplazarla",
     "themeLabel": "Tema del Marco",
     "themes": {
       "classic-dark": "Clásico Oscuro",

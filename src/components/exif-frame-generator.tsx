@@ -4,11 +4,13 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { Download, RotateCcw } from "lucide-react";
 import { useExifStore } from "@/store/exif-store";
-import type { ParsedExif } from "@/lib/exif";
+import { FILE_INPUT_ACCEPT, type ParsedExif } from "@/lib/exif";
+import { usePhotoUpload } from "@/hooks/use-photo-upload";
 import { ExifUploader } from "@/components/exif-uploader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
+import { cn } from "@/lib/utils";
 import {
   Select,
   SelectContent,
@@ -97,6 +99,9 @@ function FrameEditor({
     "png",
   );
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
+  const replaceInputRef = React.useRef<HTMLInputElement>(null);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const { handleFile: handleReplacePhoto } = usePhotoUpload();
 
   React.useEffect(() => {
     let cancelled = false;
@@ -142,8 +147,48 @@ function FrameEditor({
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
       <div className="flex flex-col gap-3">
-        <div className="overflow-hidden rounded-xl border border-border bg-card">
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => replaceInputRef.current?.click()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") replaceInputRef.current?.click();
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            setIsDragging(false);
+            void handleReplacePhoto(e.dataTransfer.files?.[0]);
+          }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setIsDragging(true);
+          }}
+          onDragLeave={() => setIsDragging(false)}
+          className={cn(
+            "group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-card transition-colors",
+            isDragging && "border-primary bg-primary/5",
+          )}
+        >
+          <input
+            ref={replaceInputRef}
+            type="file"
+            accept={FILE_INPUT_ACCEPT}
+            className="sr-only"
+            onChange={(e) => {
+              void handleReplacePhoto(e.target.files?.[0]);
+              e.target.value = "";
+            }}
+          />
           <canvas ref={canvasRef} className="h-auto w-full" />
+          <div
+            className={cn(
+              "pointer-events-none absolute inset-0 flex items-center justify-center bg-black/55 text-sm font-medium text-white opacity-0 transition-opacity",
+              isDragging && "opacity-100",
+              "group-hover:opacity-100",
+            )}
+          >
+            {t("dropToReplace")}
+          </div>
         </div>
         <Button onClick={handleDownload} className="self-start" disabled={!image}>
           <Download className="size-4" />

@@ -43,6 +43,7 @@
     "uploadHint": "Drop a photo to start framing it. If you already uploaded one above, it's ready here too.",
     "privacyNote": "100% client-side. The framed photo is rendered entirely in your browser and never uploaded anywhere.",
     "downloadButton": "Download Framed Photo",
+    "dropToReplace": "Drop a photo here to replace it",
     "themeLabel": "Frame Theme",
     "themes": {
       "classic-dark": "Classic Dark",

@@ -1,10 +1,14 @@
+"use client";
+
 import { Aperture } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function SiteHeader() {
   const t = useTranslations("Header");
+  const pathname = usePathname();
+  const onFramePage = pathname === "/frame";
 
   return (
     <header className="border-b border-border">
@@ -22,11 +26,18 @@ export function SiteHeader() {
         </Link>
 
         <nav className="flex items-center gap-4">
+          {/*
+            Same nav slot toggles its destination based on the current page:
+            "Frame Generator" navigates there from the home page, and while
+            already on the frame page it becomes "ExifLens" to navigate back
+            — a single, obvious way back to the home page from where the
+            user clicked in, instead of relying only on the logo at far left.
+          */}
           <Link
-            href="/frame"
+            href={onFramePage ? "/" : "/frame"}
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {t("frameNav")}
+            {onFramePage ? "ExifLens" : t("frameNav")}
           </Link>
           <LanguageSwitcher />
         </nav>

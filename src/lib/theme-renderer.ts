@@ -20,10 +20,13 @@ import {
  * Background, Vintage Amber, Grid Spec Sheet, Dark Gradient, Custom) are
  * planned for a follow-up phase — see CHANGELOG.md.
  *
- * Camera brand names are shown as plain text (e.g. "Shot on Canon EOS
- * R5m2"), never as brand logo marks — real camera-brand logos (Leica,
- * Canon, Apple, ...) are trademarked assets and this is a public,
- * ad-monetized site, so no logo image files are bundled or drawn.
+ * Brand marks: rather than embedding scraped/official brand SVG files (an
+ * uncertain source to source authentically, and a separate legal question
+ * from showing a brand name at all), recognized camera brands get a
+ * drawn, brand-colored wordmark badge (BRAND_BADGES below) — e.g. a red
+ * "Canon" pill, similar in spirit to how the reference tool's own badges
+ * read as styled typography rather than scanned logo art. An unrecognized
+ * make falls back to plain "Shot on <camera>" text.
  */
 
 export type LayoutStyle =
@@ -139,6 +142,75 @@ function specLine(metadata: FrameMetadata): string {
   ]
     .filter(Boolean)
     .join("   ·   ");
+}
+
+type BrandBadge = { label: string; bg: string; text: string };
+
+const BRAND_BADGES: Record<string, BrandBadge> = {
+  canon: { label: "Canon", bg: "#c8102e", text: "#ffffff" },
+  sony: { label: "SONY", bg: "#000000", text: "#ffffff" },
+  nikon: { label: "Nikon", bg: "#111111", text: "#ffe100" },
+  leica: { label: "LEICA", bg: "#e2001a", text: "#ffffff" },
+  fujifilm: { label: "FUJIFILM", bg: "#00934a", text: "#ffffff" },
+  fuji: { label: "FUJIFILM", bg: "#00934a", text: "#ffffff" },
+  hasselblad: { label: "HASSELBLAD", bg: "#000000", text: "#ffffff" },
+  apple: { label: "Apple", bg: "#000000", text: "#ffffff" },
+  panasonic: { label: "Panasonic", bg: "#0b3c8a", text: "#ffffff" },
+  olympus: { label: "OM SYSTEM", bg: "#00164d", text: "#ffffff" },
+  om: { label: "OM SYSTEM", bg: "#00164d", text: "#ffffff" },
+  ricoh: { label: "RICOH", bg: "#c8102e", text: "#ffffff" },
+  pentax: { label: "PENTAX", bg: "#00296b", text: "#ffffff" },
+  dji: { label: "DJI", bg: "#000000", text: "#ffffff" },
+};
+
+/** Splits a combined "Make Model" camera string into a recognized brand badge (if any) and the remaining model text. */
+function detectBrand(camera: string): { badge: BrandBadge | null; rest: string } {
+  const trimmed = camera.trim();
+  if (!trimmed) return { badge: null, rest: "" };
+  const match = trimmed.match(/^(\S+)\s*(.*)$/);
+  if (!match) return { badge: null, rest: trimmed };
+  const [, firstWord, remainder] = match;
+  const badge = BRAND_BADGES[firstWord.toLowerCase()] ?? null;
+  return { badge, rest: badge ? remainder.trim() : trimmed };
+}
+
+function measureBadgeWidth(
+  ctx: CanvasRenderingContext2D,
+  label: string,
+  fontSize: number,
+  fontFamily: string,
+  paddingX: number,
+): number {
+  ctx.font = `700 ${fontSize}px ${fontFamily}`;
+  return ctx.measureText(label).width + paddingX * 2;
+}
+
+/** Draws a rounded, brand-colored wordmark badge; returns its width so callers can position what follows. */
+function drawBrandBadge(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  centerY: number,
+  height: number,
+  badge: BrandBadge,
+  fontSize: number,
+  fontFamily: string,
+): number {
+  const paddingX = fontSize * 0.55;
+  const width = measureBadgeWidth(ctx, badge.label, fontSize, fontFamily, paddingX);
+  const radius = height / 2;
+
+  ctx.fillStyle = badge.bg;
+  ctx.beginPath();
+  ctx.roundRect(x, centerY - height / 2, width, height, radius);
+  ctx.fill();
+
+  ctx.fillStyle = badge.text;
+  ctx.font = `700 ${fontSize}px ${fontFamily}`;
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillText(badge.label, x + paddingX, centerY);
+
+  return width;
 }
 
 /**
@@ -271,7 +343,11 @@ function drawPolaroidLayout(
   ctx.fillText(sub, canvas.width / 2, captionAreaY + bottomPadding * 0.7, canvas.width - sidePadding * 2);
 }
 
-/** Shot-on-brand: bottom bar split left ("Shot on <camera>") / right (specs). */
+/**
+ * Shot-on-brand: bottom bar split left (brand badge + model, or plain
+ * "Shot on <camera>" when the make isn't a recognized brand) / right
+ * (specs).
+ */
 function drawShotOnBrandLayout(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
@@ -290,44 +366,64 @@ function drawShotOnBrandLayout(
   ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
 
   const { metadata } = options;
+  const { badge, rest } = detectBrand(metadata.camera);
+  const modelText = badge
+    ? [rest, metadata.lens].filter(Boolean).join("  —  ")
+    : metadata.camera
+      ? `Shot on ${metadata.camera}`
+      : "";
+  const specs = specLine(metadata);
+
   const barY = padding * 2 + sh;
   const centerY = barY + barHeight / 2;
   const baseFontSize = Math.max(13, Math.round(barHeight * 0.26));
   const minFontSize = Math.max(10, Math.round(baseFontSize * 0.6));
   const availableWidth = canvas.width - paddingX * 2;
   const gap = Math.round(sw * 0.03);
+  const badgeGap = Math.round(sw * 0.018);
+  const badgeHeight = Math.round(barHeight * 0.46);
 
-  const shotOn = metadata.camera ? `Shot on ${metadata.camera}` : "";
-  const specs = specLine(metadata);
-
-  // The left ("Shot on <camera>") and right (specs) strings are variable
-  // length — a long camera name can otherwise overlap the specs. Shrink
-  // both together, in lockstep, until they fit side by side with a gap.
+  // The badge, the model text, and the specs on the right are all
+  // variable-width — a long camera name can otherwise overlap the specs.
+  // Shrink font size (and the badge along with it) until everything fits
+  // side by side with a gap.
   let fontSize = baseFontSize;
-  let shotOnWidth = 0;
+  let badgeWidth = 0;
+  let modelWidth = 0;
   let specsWidth = 0;
   while (fontSize >= minFontSize) {
+    badgeWidth = badge
+      ? measureBadgeWidth(ctx, badge.label, fontSize, fontFamily, fontSize * 0.55)
+      : 0;
     ctx.font = `700 ${fontSize}px ${fontFamily}`;
-    shotOnWidth = ctx.measureText(shotOn).width;
+    modelWidth = ctx.measureText(modelText).width;
     ctx.font = `400 ${fontSize}px ${fontFamily}`;
     specsWidth = ctx.measureText(specs).width;
-    if (shotOnWidth + gap + specsWidth <= availableWidth) break;
+    const leftWidth = (badge ? badgeWidth + badgeGap : 0) + modelWidth;
+    if (leftWidth + gap + specsWidth <= availableWidth) break;
     fontSize -= 1;
   }
-  // Still doesn't fit at the floor size: truncate the left title so the
-  // specs on the right (shutter/aperture/ISO — the more useful half) stay
-  // fully legible rather than letting the two halves overlap.
-  const maxShotOnWidth = availableWidth - gap - specsWidth;
-  const shotOnDisplay =
-    shotOnWidth > maxShotOnWidth && maxShotOnWidth > 0
-      ? truncateToWidth(ctx, shotOn, maxShotOnWidth, `700 ${fontSize}px ${fontFamily}`)
-      : shotOn;
+
+  // Still doesn't fit at the floor size: truncate the model text so the
+  // specs on the right (shutter/aperture/ISO — the more useful half) and
+  // the badge stay fully legible rather than letting things overlap.
+  const maxModelWidth =
+    availableWidth - gap - specsWidth - (badge ? badgeWidth + badgeGap : 0);
+  const modelDisplay =
+    modelWidth > maxModelWidth && maxModelWidth > 0
+      ? truncateToWidth(ctx, modelText, maxModelWidth, `700 ${fontSize}px ${fontFamily}`)
+      : modelText;
 
   ctx.textBaseline = "middle";
+  let cursorX = paddingX;
+  if (badge) {
+    cursorX += drawBrandBadge(ctx, cursorX, centerY, badgeHeight, badge, fontSize, fontFamily);
+    cursorX += badgeGap;
+  }
   ctx.font = `700 ${fontSize}px ${fontFamily}`;
   ctx.fillStyle = theme.textColor;
   ctx.textAlign = "left";
-  ctx.fillText(shotOnDisplay, paddingX, centerY);
+  ctx.fillText(modelDisplay, cursorX, centerY);
 
   ctx.font = `400 ${fontSize}px ${fontFamily}`;
   ctx.fillStyle = theme.subtextColor;

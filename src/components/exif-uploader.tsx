@@ -4,11 +4,10 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { Loader2, UploadCloud, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { isSupportedImageFile, parseExifFile } from "@/lib/exif";
+import { FILE_INPUT_ACCEPT } from "@/lib/exif";
 import { useExifStore } from "@/store/exif-store";
+import { usePhotoUpload } from "@/hooks/use-photo-upload";
 import { Button } from "@/components/ui/button";
-
-const MAX_FILE_SIZE_BYTES = 100 * 1024 * 1024; // 100MB, generous for RAW files
 
 export function ExifUploader() {
   const t = useTranslations("Home");
@@ -17,34 +16,8 @@ export function ExifUploader() {
   const status = useExifStore((s) => s.status);
   const fileName = useExifStore((s) => s.fileName);
   const errorMessage = useExifStore((s) => s.errorMessage);
-  const startLoading = useExifStore((s) => s.startLoading);
-  const setSuccess = useExifStore((s) => s.setSuccess);
-  const setError = useExifStore((s) => s.setError);
   const reset = useExifStore((s) => s.reset);
-
-  const handleFile = React.useCallback(
-    async (file: File | undefined) => {
-      if (!file) return;
-
-      if (!isSupportedImageFile(file)) {
-        setError(t("uploaderErrorUnsupported"));
-        return;
-      }
-      if (file.size > MAX_FILE_SIZE_BYTES) {
-        setError(t("uploaderErrorTooLarge"));
-        return;
-      }
-
-      startLoading(file.name);
-      try {
-        const parsed = await parseExifFile(file);
-        setSuccess(parsed, URL.createObjectURL(file));
-      } catch {
-        setError(t("uploaderErrorParse"));
-      }
-    },
-    [startLoading, setSuccess, setError, t],
-  );
+  const { handleFile } = usePhotoUpload();
 
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -85,7 +58,7 @@ export function ExifUploader() {
         <input
           ref={inputRef}
           type="file"
-          accept="image/*,.arw,.cr2,.cr3,.nef,.raf,.rw2,.orf,.dng,.pef,.srw"
+          accept={FILE_INPUT_ACCEPT}
           className="sr-only"
           onChange={onInputChange}
         />
