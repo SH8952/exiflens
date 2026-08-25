@@ -64,6 +64,10 @@
       "lightroom": "라이트룸",
       "film": "필름",
       "monitor": "모니터",
+      "shot-on": "샷 온",
+      "photo-card": "포토 카드",
+      "tip": "팁",
+      "poster": "포스터",
       "custom": "커스텀"
     },
     "customBackground": "배경 색상",
@@ -83,6 +87,15 @@
     "shutter": "셔터스피드",
     "iso": "ISO",
     "takenAt": "촬영일",
+    "tipLabel": "라벨",
+    "tipHeading": "제목",
+    "tipBody1": "본문 1",
+    "tipBody2": "본문 2",
+    "posterDate": "날짜",
+    "posterTitle1": "제목 1줄",
+    "posterTitle2": "제목 2줄",
+    "posterLocationName": "장소명",
+    "posterLocationAddress": "주소",
     "formatLabel": "내보내기 형식"
   },
   "Footer": {

@@ -57,7 +57,11 @@ export type LayoutStyle =
   | "cinema-scope"
   | "lightroom-mat"
   | "film-lcd"
-  | "monitor";
+  | "monitor"
+  | "shot-on"
+  | "photo-card"
+  | "tip-overlay"
+  | "poster-overlay";
 
 export type ThemeFont = "sans" | "serif" | "mono";
 
@@ -80,6 +84,10 @@ export type ThemeId =
   | "lightroom"
   | "film"
   | "monitor"
+  | "shot-on"
+  | "photo-card"
+  | "tip"
+  | "poster"
   | "custom";
 
 export type ThemeDefinition = {
@@ -264,6 +272,42 @@ export const THEME_PRESETS: ThemeDefinition[] = [
     layoutStyle: "monitor",
     paddingPercent: 0,
   },
+  {
+    id: "shot-on",
+    backgroundColor: "#ffffff",
+    textColor: "#111111",
+    subtextColor: "#8a8a8a",
+    fontFamily: "sans",
+    layoutStyle: "shot-on",
+    paddingPercent: 0,
+  },
+  {
+    id: "photo-card",
+    backgroundColor: "#ffffff",
+    textColor: "#171717",
+    subtextColor: "#171717",
+    fontFamily: "sans",
+    layoutStyle: "photo-card",
+    paddingPercent: 0,
+  },
+  {
+    id: "tip",
+    backgroundColor: "#000000",
+    textColor: "#ffffff",
+    subtextColor: "#ffffff",
+    fontFamily: "sans",
+    layoutStyle: "tip-overlay",
+    paddingPercent: 0,
+  },
+  {
+    id: "poster",
+    backgroundColor: "#000000",
+    textColor: "#ffffff",
+    subtextColor: "#ffffff",
+    fontFamily: "sans",
+    layoutStyle: "poster-overlay",
+    paddingPercent: 0,
+  },
 ];
 
 export function getThemeById(id: ThemeId): ThemeDefinition {
@@ -282,7 +326,14 @@ export type ThemeRenderOptions = {
   /** Padding around the photo, as a percentage of the cropped photo's width (0-10). */
   paddingPercent: number;
   metadata: FrameMetadata;
-  /** Only used when themeId === "custom" — the user-built theme definition. */
+  /**
+   * The resolved, user-editable theme definition currently in effect —
+   * every preset's colors/font/padding/logo-visibility can be tweaked from
+   * its defaults (석한's "모든 테마 커스터마이징" request), not just when
+   * themeId === "custom". The caller keeps this in sync with themeId
+   * (reset to that preset's defaults on switch); falls back to the raw
+   * preset lookup if omitted.
+   */
   customTheme?: ThemeDefinition;
 };
 
@@ -388,10 +439,7 @@ export function renderThemedFrame(
   options: ThemeRenderOptions,
   targetCanvas?: HTMLCanvasElement,
 ): HTMLCanvasElement {
-  const theme =
-    options.themeId === "custom"
-      ? (options.customTheme ?? getThemeById("classic-dark"))
-      : getThemeById(options.themeId);
+  const theme = options.customTheme ?? getThemeById(options.themeId);
   const crop = computeCropRect(
     image.naturalWidth,
     image.naturalHeight,
@@ -455,6 +503,18 @@ export function renderThemedFrame(
       break;
     case "monitor":
       drawMonitorLayout(ctx, canvas, params);
+      break;
+    case "shot-on":
+      drawShotOnLayout(ctx, canvas, params);
+      break;
+    case "photo-card":
+      drawPhotoCardLayout(ctx, canvas, params);
+      break;
+    case "tip-overlay":
+      drawTipOverlayLayout(ctx, canvas, params);
+      break;
+    case "poster-overlay":
+      drawPosterOverlayLayout(ctx, canvas, params);
       break;
   }
 
@@ -1366,4 +1426,276 @@ function drawMonitorLayout(
   ctx.fillStyle = theme.backgroundColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(image, sx, sy, sw, sh, margin, margin, sw, sh);
+}
+
+/**
+ * Shot On: full-bleed photo (no border on top/left/right) with a thin
+ * white bar under the photo holding one left-aligned line — "Shot on "
+ * (light) followed immediately by the camera model + lens in bold. Unlike
+ * the retired "샷 온 브랜드" theme, no brand name is separately prefixed —
+ * the camera field already carries the brand (e.g. "Canon EOS R5m2"), so
+ * repeating it would just duplicate the word (석한 피드백: 참고 사이트에서 보인
+ * "Canon Canon ..." 중복은 자연스럽게 제거). Matches a reference export
+ * 석한님 sent exactly: ~4.9%-of-width bar height, bold gear name, no lens
+ * ellipsis — shrinks (no floor) instead, per the standing gear-name rule.
+ */
+function drawShotOnLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw);
+  const barHeight = Math.round(sw * 0.049);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2 + barHeight;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const { metadata } = options;
+  const gear = [metadata.camera, metadata.lens].filter(Boolean).join(" ");
+  if (!gear) return;
+
+  const barY = padding * 2 + sh;
+  const centerY = barY + barHeight / 2;
+  const paddingX = Math.round(sw * 0.018);
+  const prefix = "Shot on ";
+  const baseSize = Math.max(10, Math.round(barHeight * 0.34));
+  const maxWidth = canvas.width - paddingX * 2;
+
+  let size = baseSize;
+  let prefixWidth = 0;
+  let gearWidth = 0;
+  ctx.font = `400 ${size}px ${fontFamily}`;
+  prefixWidth = ctx.measureText(prefix).width;
+  ctx.font = `700 ${size}px ${fontFamily}`;
+  gearWidth = ctx.measureText(gear).width;
+  while (size > 1 && prefixWidth + gearWidth > maxWidth) {
+    size -= 1;
+    ctx.font = `400 ${size}px ${fontFamily}`;
+    prefixWidth = ctx.measureText(prefix).width;
+    ctx.font = `700 ${size}px ${fontFamily}`;
+    gearWidth = ctx.measureText(gear).width;
+  }
+
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "left";
+  ctx.fillStyle = theme.subtextColor;
+  ctx.font = `400 ${size}px ${fontFamily}`;
+  ctx.fillText(prefix, paddingX, centerY);
+
+  ctx.fillStyle = theme.textColor;
+  ctx.font = `700 ${size}px ${fontFamily}`;
+  ctx.fillText(gear, paddingX + prefixWidth, centerY);
+}
+
+/**
+ * Photo Card: a white passe-partout border around the photo — thicker on
+ * top (~4.9% of width) than the sides (~1.2%), and a generous blank area
+ * below (~11.8%) holding one centered, regular-weight caption line
+ * ("shot on {camera}", no lens — deliberately simpler than Shot On).
+ * Matches a reference export exactly (measured via pixel row/column
+ * brightness scans of 석한님's sample photo).
+ */
+function drawPhotoCardLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const extra = Math.round((options.paddingPercent / 100) * sw);
+  const topBorder = Math.round(sw * 0.0488) + extra;
+  const sideBorder = Math.round(sw * 0.0122) + extra;
+  const bottomArea = Math.round(sw * 0.1175) + extra;
+
+  canvas.width = sw + sideBorder * 2;
+  canvas.height = topBorder + sh + bottomArea;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, sx, sy, sw, sh, sideBorder, topBorder, sw, sh);
+
+  const { metadata } = options;
+  const text = metadata.camera ? `shot on ${metadata.camera}` : "";
+  if (!text) return;
+
+  const captionCenterY = topBorder + sh + bottomArea * 0.42;
+  const baseSize = Math.max(10, Math.round(bottomArea * 0.22));
+  const maxWidth = canvas.width - sideBorder * 2 - Math.round(sw * 0.04);
+
+  let size = baseSize;
+  ctx.font = `400 ${size}px ${fontFamily}`;
+  while (size > 1 && ctx.measureText(text).width > maxWidth) {
+    size -= 1;
+    ctx.font = `400 ${size}px ${fontFamily}`;
+  }
+
+  ctx.fillStyle = theme.textColor;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, canvas.width / 2, captionCenterY);
+}
+
+/**
+ * Tip: a generic (non-EXIF) text-overlay template — bold uppercase label
+ * + heading centered near the top, two smaller body lines centered near
+ * the bottom, white text with a soft drop shadow directly on the
+ * full-bleed photo (no border, no scrim). Text comes from the dedicated
+ * tipLabel/tipHeading/tipBody1/tipBody2 metadata fields rather than camera
+ * EXIF (석한 확인: "EXIF 정보와 별개로 자유 입력 필드로 추가"). Every line
+ * shrinks (no floor) rather than truncates, matching this app's standing
+ * no-truncation rule.
+ */
+function drawTipOverlayLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  canvas.width = sw;
+  canvas.height = sh;
+  ctx.drawImage(image, sx, sy, sw, sh, 0, 0, sw, sh);
+
+  const { metadata } = options;
+  const label = metadata.tipLabel;
+  const heading = metadata.tipHeading;
+  const bodyLines = [metadata.tipBody1, metadata.tipBody2].filter(Boolean);
+  const maxWidth = sw * 0.86;
+
+  ctx.save();
+  ctx.shadowColor = "rgba(0,0,0,0.45)";
+  ctx.shadowBlur = Math.round(sw * 0.006);
+  ctx.shadowOffsetY = Math.round(sw * 0.002);
+  ctx.textAlign = "center";
+
+  if (label) {
+    let size = Math.max(14, Math.round(sw * 0.034));
+    const upper = label.toUpperCase();
+    ctx.font = `700 ${size}px ${fontFamily}`;
+    while (size > 1 && ctx.measureText(upper).width > maxWidth) {
+      size -= 1;
+      ctx.font = `700 ${size}px ${fontFamily}`;
+    }
+    ctx.fillStyle = theme.textColor;
+    ctx.textBaseline = "top";
+    ctx.fillText(upper, sw / 2, sh * 0.062);
+  }
+
+  if (heading) {
+    let size = Math.max(12, Math.round(sw * 0.026));
+    ctx.font = `400 ${size}px ${fontFamily}`;
+    while (size > 1 && ctx.measureText(heading).width > maxWidth) {
+      size -= 1;
+      ctx.font = `400 ${size}px ${fontFamily}`;
+    }
+    ctx.fillStyle = theme.textColor;
+    ctx.textBaseline = "top";
+    ctx.fillText(heading, sw / 2, sh * 0.14);
+  }
+
+  if (bodyLines.length > 0) {
+    let size = Math.max(11, Math.round(sw * 0.018));
+    ctx.font = `400 ${size}px ${fontFamily}`;
+    bodyLines.forEach((line) => {
+      while (size > 1 && ctx.measureText(line).width > maxWidth) {
+        size -= 1;
+        ctx.font = `400 ${size}px ${fontFamily}`;
+      }
+    });
+
+    const lineHeight = size * 1.7;
+    const bottomCenterY = sh * 0.85;
+    const startY = bottomCenterY - (lineHeight * (bodyLines.length - 1)) / 2;
+    ctx.fillStyle = theme.subtextColor;
+    ctx.textBaseline = "middle";
+    bodyLines.forEach((line, i) => {
+      ctx.fillText(line, sw / 2, startY + lineHeight * i);
+    });
+  }
+
+  ctx.restore();
+}
+
+/**
+ * Poster: a generic (non-EXIF) event/editorial template — top-left date +
+ * two-line bold title, bottom-left bold location name + address, white
+ * text with a soft drop shadow directly on the full-bleed photo. Text
+ * comes from posterDate/posterTitle1/posterTitle2/posterLocationName/
+ * posterLocationAddress rather than camera EXIF, same as Tip. Every line
+ * shrinks (no floor) rather than truncates.
+ */
+function drawPosterOverlayLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  canvas.width = sw;
+  canvas.height = sh;
+  ctx.drawImage(image, sx, sy, sw, sh, 0, 0, sw, sh);
+
+  const { metadata } = options;
+  const marginX = Math.round(sw * 0.037);
+  const maxWidth = sw - marginX * 2;
+
+  ctx.save();
+  ctx.shadowColor = "rgba(0,0,0,0.45)";
+  ctx.shadowBlur = Math.round(sw * 0.006);
+  ctx.shadowOffsetY = Math.round(sw * 0.002);
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+
+  let cursorY = sh * 0.115;
+  if (metadata.posterDate) {
+    const size = Math.max(11, Math.round(sw * 0.017));
+    ctx.font = `400 ${size}px ${fontFamily}`;
+    ctx.fillStyle = theme.subtextColor;
+    ctx.fillText(metadata.posterDate, marginX, cursorY);
+    cursorY += size * 1.9;
+  }
+
+  const titleLines = [metadata.posterTitle1, metadata.posterTitle2].filter(Boolean);
+  if (titleLines.length > 0) {
+    let size = Math.max(20, Math.round(sw * 0.052));
+    ctx.font = `700 ${size}px ${fontFamily}`;
+    titleLines.forEach((line) => {
+      while (size > 1 && ctx.measureText(line).width > maxWidth) {
+        size -= 1;
+        ctx.font = `700 ${size}px ${fontFamily}`;
+      }
+    });
+    const lineHeight = size * 1.5;
+    ctx.fillStyle = theme.textColor;
+    titleLines.forEach((line, i) => {
+      ctx.fillText(line, marginX, cursorY + lineHeight * i);
+    });
+  }
+
+  let bottomCursorY = sh * 0.79;
+  if (metadata.posterLocationName) {
+    let size = Math.max(16, Math.round(sw * 0.033));
+    ctx.font = `700 ${size}px ${fontFamily}`;
+    while (size > 1 && ctx.measureText(metadata.posterLocationName).width > maxWidth) {
+      size -= 1;
+      ctx.font = `700 ${size}px ${fontFamily}`;
+    }
+    ctx.fillStyle = theme.textColor;
+    ctx.fillText(metadata.posterLocationName, marginX, bottomCursorY);
+    bottomCursorY += size * 1.35;
+  }
+  if (metadata.posterLocationAddress) {
+    let size = Math.max(11, Math.round(sw * 0.016));
+    ctx.font = `400 ${size}px ${fontFamily}`;
+    while (size > 1 && ctx.measureText(metadata.posterLocationAddress).width > maxWidth) {
+      size -= 1;
+      ctx.font = `400 ${size}px ${fontFamily}`;
+    }
+    ctx.fillStyle = theme.subtextColor;
+    ctx.fillText(metadata.posterLocationAddress, marginX, bottomCursorY);
+  }
+
+  ctx.restore();
 }

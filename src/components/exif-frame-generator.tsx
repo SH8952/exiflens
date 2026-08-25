@@ -45,8 +45,32 @@ function metadataFromExif(data: ParsedExif | null): FrameMetadata {
     shutter: data?.shutterSpeedLabel ?? "",
     iso: data?.iso ?? "",
     takenAt: data?.takenAt ?? "",
+    // Tip/Poster fields are unrelated to camera EXIF, so they always start
+    // from the same placeholder defaults regardless of the uploaded photo.
+    tipLabel: "TIP",
+    tipHeading: "01. Lorem ipsum",
+    tipBody1: "Pellentesque a pharetra justo",
+    tipBody2: "Nam maximus risus et rhoncus eleifend",
+    posterDate: "2001.01.01",
+    posterTitle1: "Lorem Ipsum",
+    posterTitle2: "dolor sit amet, consectetur",
+    posterLocationName: "White House",
+    posterLocationAddress: "1600 Pennsylvania Avenue NW, Washington, DC 20500",
   };
 }
+
+/** Base definition for the fully free-form "Custom" theme — everything
+ * else copies its base preset's values when selected (see handleThemeChange). */
+const CUSTOM_THEME_BASE: ThemeDefinition = {
+  id: "custom",
+  backgroundColor: "#111111",
+  textColor: "#ffffff",
+  subtextColor: "#a3a3a3",
+  fontFamily: "sans",
+  layoutStyle: "strap",
+  paddingPercent: DEFAULT_PADDING_PERCENT,
+  showBrandBadge: true,
+};
 
 export function ExifFrameGenerator() {
   const t = useTranslations("Frame");
@@ -94,16 +118,14 @@ function FrameEditor({
     DEFAULT_PADDING_PERCENT,
   );
   const [themeId, setThemeId] = React.useState<ThemeId>("classic-dark");
-  const [customTheme, setCustomTheme] = React.useState<ThemeDefinition>({
-    id: "custom",
-    backgroundColor: "#111111",
-    textColor: "#ffffff",
-    subtextColor: "#a3a3a3",
-    fontFamily: "sans",
-    layoutStyle: "strap",
-    paddingPercent: DEFAULT_PADDING_PERCENT,
-    showBrandBadge: true,
-  });
+  // The currently active, user-editable theme definition — every preset's
+  // colors/font/padding/logo-visibility can be tweaked from its defaults,
+  // not just "Custom" (석한 요청: "모든 테마에 ... 커스텀 가능하도록"). Reset to
+  // the newly-selected preset's own defaults on every theme switch, kept in
+  // sync via handleThemeChange below.
+  const [customTheme, setCustomTheme] = React.useState<ThemeDefinition>(() => ({
+    ...getThemeById("classic-dark"),
+  }));
   const [metadata, setMetadata] = React.useState<FrameMetadata>(() =>
     metadataFromExif(data),
   );
@@ -136,14 +158,15 @@ function FrameEditor({
     );
   }, [image, themeId, aspect, paddingPercent, metadata, customTheme]);
 
-  // Switching theme applies that preset's recommended padding too (the
-  // slider still overrides it afterward, same as any preset). "Custom"
-  // isn't in THEME_PRESETS, so its remembered padding lives on customTheme.
+  // Switching theme resets the editable overrides (colors/font/padding/logo)
+  // to the newly-selected preset's own defaults — predictable behavior
+  // confirmed with 석한 (테마 전환 시 이전 수정값이 아니라 새 테마 기본값으로 초기화).
+  // "Custom" isn't in THEME_PRESETS, so it falls back to CUSTOM_THEME_BASE.
   const handleThemeChange = (nextId: ThemeId) => {
     setThemeId(nextId);
-    setPaddingPercent(
-      nextId === "custom" ? customTheme.paddingPercent : getThemeById(nextId).paddingPercent,
-    );
+    const base = nextId === "custom" ? CUSTOM_THEME_BASE : getThemeById(nextId);
+    setCustomTheme({ ...base });
+    setPaddingPercent(base.paddingPercent);
   };
 
   const handleMetadataChange = (field: keyof FrameMetadata, value: string) => {
@@ -232,8 +255,7 @@ function FrameEditor({
           </Select>
         </label>
 
-        {themeId === "custom" && (
-          <div className="flex flex-col gap-3 rounded-lg border border-dashed border-border p-3">
+        <div className="flex flex-col gap-3 rounded-lg border border-dashed border-border p-3">
             <div className="grid grid-cols-2 gap-3">
               <label className="flex flex-col gap-1.5">
                 <span className="text-xs text-muted-foreground">{t("customBackground")}</span>
@@ -303,8 +325,7 @@ function FrameEditor({
                 />
               </span>
             </button>
-          </div>
-        )}
+        </div>
 
         <label className="flex flex-col gap-1.5">
           <span className="text-muted-foreground">{t("aspectLabel")}</span>
@@ -338,9 +359,7 @@ function FrameEditor({
             onChange={(e) => {
               const value = Number(e.target.value);
               setPaddingPercent(value);
-              if (themeId === "custom") {
-                setCustomTheme((prev) => ({ ...prev, paddingPercent: value }));
-              }
+              setCustomTheme((prev) => ({ ...prev, paddingPercent: value }));
             }}
           />
         </label>
@@ -360,43 +379,98 @@ function FrameEditor({
           </div>
           <p className="text-xs text-muted-foreground">{t("metadataHint")}</p>
 
-          <MetadataField
-            label={t("camera")}
-            value={metadata.camera}
-            onChange={(v) => handleMetadataChange("camera", v)}
-          />
-          <MetadataField
-            label={t("lens")}
-            value={metadata.lens}
-            onChange={(v) => handleMetadataChange("lens", v)}
-          />
-          <div className="grid grid-cols-2 gap-2">
-            <MetadataField
-              label={t("focalLength")}
-              value={metadata.focalLength}
-              onChange={(v) => handleMetadataChange("focalLength", v)}
-            />
-            <MetadataField
-              label={t("aperture")}
-              value={metadata.aperture}
-              onChange={(v) => handleMetadataChange("aperture", v)}
-            />
-            <MetadataField
-              label={t("shutter")}
-              value={metadata.shutter}
-              onChange={(v) => handleMetadataChange("shutter", v)}
-            />
-            <MetadataField
-              label={t("iso")}
-              value={metadata.iso}
-              onChange={(v) => handleMetadataChange("iso", v)}
-            />
-          </div>
-          <MetadataField
-            label={t("takenAt")}
-            value={metadata.takenAt}
-            onChange={(v) => handleMetadataChange("takenAt", v)}
-          />
+          {themeId === "tip" ? (
+            <>
+              <MetadataField
+                label={t("tipLabel")}
+                value={metadata.tipLabel}
+                onChange={(v) => handleMetadataChange("tipLabel", v)}
+              />
+              <MetadataField
+                label={t("tipHeading")}
+                value={metadata.tipHeading}
+                onChange={(v) => handleMetadataChange("tipHeading", v)}
+              />
+              <MetadataField
+                label={t("tipBody1")}
+                value={metadata.tipBody1}
+                onChange={(v) => handleMetadataChange("tipBody1", v)}
+              />
+              <MetadataField
+                label={t("tipBody2")}
+                value={metadata.tipBody2}
+                onChange={(v) => handleMetadataChange("tipBody2", v)}
+              />
+            </>
+          ) : themeId === "poster" ? (
+            <>
+              <MetadataField
+                label={t("posterDate")}
+                value={metadata.posterDate}
+                onChange={(v) => handleMetadataChange("posterDate", v)}
+              />
+              <MetadataField
+                label={t("posterTitle1")}
+                value={metadata.posterTitle1}
+                onChange={(v) => handleMetadataChange("posterTitle1", v)}
+              />
+              <MetadataField
+                label={t("posterTitle2")}
+                value={metadata.posterTitle2}
+                onChange={(v) => handleMetadataChange("posterTitle2", v)}
+              />
+              <MetadataField
+                label={t("posterLocationName")}
+                value={metadata.posterLocationName}
+                onChange={(v) => handleMetadataChange("posterLocationName", v)}
+              />
+              <MetadataField
+                label={t("posterLocationAddress")}
+                value={metadata.posterLocationAddress}
+                onChange={(v) => handleMetadataChange("posterLocationAddress", v)}
+              />
+            </>
+          ) : (
+            <>
+              <MetadataField
+                label={t("camera")}
+                value={metadata.camera}
+                onChange={(v) => handleMetadataChange("camera", v)}
+              />
+              <MetadataField
+                label={t("lens")}
+                value={metadata.lens}
+                onChange={(v) => handleMetadataChange("lens", v)}
+              />
+              <div className="grid grid-cols-2 gap-2">
+                <MetadataField
+                  label={t("focalLength")}
+                  value={metadata.focalLength}
+                  onChange={(v) => handleMetadataChange("focalLength", v)}
+                />
+                <MetadataField
+                  label={t("aperture")}
+                  value={metadata.aperture}
+                  onChange={(v) => handleMetadataChange("aperture", v)}
+                />
+                <MetadataField
+                  label={t("shutter")}
+                  value={metadata.shutter}
+                  onChange={(v) => handleMetadataChange("shutter", v)}
+                />
+                <MetadataField
+                  label={t("iso")}
+                  value={metadata.iso}
+                  onChange={(v) => handleMetadataChange("iso", v)}
+                />
+              </div>
+              <MetadataField
+                label={t("takenAt")}
+                value={metadata.takenAt}
+                onChange={(v) => handleMetadataChange("takenAt", v)}
+              />
+            </>
+          )}
         </div>
 
         <label className="flex flex-col gap-1.5 border-t border-border pt-4">

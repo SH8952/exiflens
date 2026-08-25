@@ -64,6 +64,10 @@
       "lightroom": "Lightroom",
       "film": "フィルム",
       "monitor": "モニター",
+      "shot-on": "ショットオン",
+      "photo-card": "フォトカード",
+      "tip": "ヒント",
+      "poster": "ポスター",
       "custom": "カスタム"
     },
     "customBackground": "背景色",
@@ -83,6 +87,15 @@
     "shutter": "シャッタースピード",
     "iso": "ISO",
     "takenAt": "撮影日",
+    "tipLabel": "ラベル",
+    "tipHeading": "見出し",
+    "tipBody1": "本文1行目",
+    "tipBody2": "本文2行目",
+    "posterDate": "日付",
+    "posterTitle1": "タイトル1行目",
+    "posterTitle2": "タイトル2行目",
+    "posterLocationName": "場所名",
+    "posterLocationAddress": "住所",
     "formatLabel": "エクスポート形式"
   },
   "Footer": {

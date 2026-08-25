@@ -26,6 +26,17 @@ export type FrameMetadata = {
   shutter: string;
   iso: string;
   takenAt: string;
+  /** Free-text fields for the "Tip" theme — unrelated to camera EXIF. */
+  tipLabel: string;
+  tipHeading: string;
+  tipBody1: string;
+  tipBody2: string;
+  /** Free-text fields for the "Poster" theme — unrelated to camera EXIF. */
+  posterDate: string;
+  posterTitle1: string;
+  posterTitle2: string;
+  posterLocationName: string;
+  posterLocationAddress: string;
 };
 
 /** Center-crop rectangle (in source-image pixel coordinates) for the selected aspect ratio. */

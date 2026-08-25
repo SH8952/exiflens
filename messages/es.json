@@ -64,6 +64,10 @@
       "lightroom": "Lightroom",
       "film": "Película",
       "monitor": "Monitor",
+      "shot-on": "Tomado Con",
+      "photo-card": "Tarjeta Foto",
+      "tip": "Consejo",
+      "poster": "Póster",
       "custom": "Personalizado"
     },
     "customBackground": "Color de Fondo",
@@ -83,6 +87,15 @@
     "shutter": "Velocidad de obturación",
     "iso": "ISO",
     "takenAt": "Fecha de captura",
+    "tipLabel": "Etiqueta",
+    "tipHeading": "Encabezado",
+    "tipBody1": "Línea de Cuerpo 1",
+    "tipBody2": "Línea de Cuerpo 2",
+    "posterDate": "Fecha",
+    "posterTitle1": "Título Línea 1",
+    "posterTitle2": "Título Línea 2",
+    "posterLocationName": "Nombre del Lugar",
+    "posterLocationAddress": "Dirección",
     "formatLabel": "Formato de exportación"
   },
   "Footer": {

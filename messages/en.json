@@ -64,6 +64,10 @@
       "lightroom": "Lightroom",
       "film": "Film",
       "monitor": "Monitor",
+      "shot-on": "Shot On",
+      "photo-card": "Photo Card",
+      "tip": "Tip",
+      "poster": "Poster",
       "custom": "Custom"
     },
     "customBackground": "Background Color",
@@ -83,6 +87,15 @@
     "shutter": "Shutter Speed",
     "iso": "ISO",
     "takenAt": "Date Taken",
+    "tipLabel": "Label",
+    "tipHeading": "Heading",
+    "tipBody1": "Body Line 1",
+    "tipBody2": "Body Line 2",
+    "posterDate": "Date",
+    "posterTitle1": "Title Line 1",
+    "posterTitle2": "Title Line 2",
+    "posterLocationName": "Location Name",
+    "posterLocationAddress": "Address",
     "formatLabel": "Export Format"
   },
   "Footer": {
