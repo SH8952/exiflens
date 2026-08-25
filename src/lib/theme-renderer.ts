@@ -251,8 +251,9 @@ export const THEME_PRESETS: ThemeDefinition[] = [
     subtextColor: "#c9c9c9",
     fontFamily: "sans",
     layoutStyle: "lightroom-mat",
-    // 참고 이미지처럼 두꺼운 매트가 아닌 얇은 균일 테두리 (석한님 요청).
-    paddingPercent: 2,
+    // 상/좌/우는 얇고 하단만 넓은 비대칭 테두리 비율이 레이아웃 함수에 내장되어 있음
+    // (석한님이 보낸 참고 사진 기준). 슬라이더 여백은 이 위에 추가로 더해짐.
+    paddingPercent: 0,
   },
   {
     id: "film",
@@ -1279,13 +1280,13 @@ function drawCinemaScopeLayout(
 }
 
 /**
- * Lightroom: a thin, uniform dark mat around the photo (like Lightroom's
- * own export border) with a quiet caption tucked inside the bottom edge of
- * that mat — camera+lens on the left, date on the right, no exposure
- * specs, plain text with no accents or brand mark. Matches a reference
- * export 석한님 sent exactly: thin ~1.5% border on all sides (not a thick
- * mat), caption sized to fit inside that thin strip rather than adding
- * extra canvas height.
+ * Lightroom: a dark mat around the photo (like Lightroom's own export
+ * border) with a quiet caption tucked inside the bottom edge — camera+lens
+ * centered across the full width, date right-aligned near the border edge,
+ * no exposure specs, plain text with no accents or brand mark. Matches a
+ * reference export 석한님 sent exactly: thin ~1.2% border on top/left/right
+ * but a noticeably wider ~3.7% border on the bottom (roughly 3x thicker) to
+ * hold the caption, rather than a uniform border on all 4 sides.
  */
 function drawLightroomMatLayout(
   ctx: CanvasRenderingContext2D,
@@ -1293,33 +1294,38 @@ function drawLightroomMatLayout(
   { image, crop, theme, options, fontFamily }: DrawParams,
 ) {
   const { sx, sy, sw, sh } = crop;
-  const padding = Math.round((options.paddingPercent / 100) * sw) || Math.round(sw * 0.015);
+  const extra = Math.round((options.paddingPercent / 100) * sw);
+  const sideBorder = Math.round(sw * 0.0122) + extra;
+  const bottomBorder = Math.round(sw * 0.0366) + extra;
 
-  canvas.width = sw + padding * 2;
-  canvas.height = sh + padding * 2;
+  canvas.width = sw + sideBorder * 2;
+  canvas.height = sideBorder + sh + bottomBorder;
 
   ctx.fillStyle = theme.backgroundColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+  ctx.drawImage(image, sx, sy, sw, sh, sideBorder, sideBorder, sw, sh);
 
   const { metadata } = options;
   const left = [metadata.camera, metadata.lens].filter(Boolean).join("   ");
   const right = metadata.takenAt;
   if (!left && !right) return;
 
-  const captionY = padding + sh + padding / 2;
-  const baseSize = Math.max(8, Math.round(padding * 0.32));
+  const captionY = sideBorder + sh + bottomBorder / 2;
+  const baseSize = Math.max(8, Math.round(bottomBorder * 0.32));
   const gap = Math.round(sw * 0.02);
-  const maxTotalWidth = canvas.width - padding * 2 - gap;
+  // Camera/lens is centered across the full canvas width, date is
+  // right-aligned near the right border — reserve room on both sides of
+  // the centered text for a same-size mirror of the date block so the two
+  // never collide, however long the date string is.
+  const maxTotalWidth = canvas.width - sideBorder * 2;
 
   // Camera/lens are equipment-identifying text, so shrink (no floor)
-  // rather than truncate if the two sides together are too wide for the
-  // thin border strip.
+  // rather than truncate if the caption is too wide for the bottom strip.
   let size = baseSize;
   ctx.font = `400 ${size}px ${fontFamily}`;
   while (
     size > 1 &&
-    ctx.measureText(left).width + ctx.measureText(right).width > maxTotalWidth
+    ctx.measureText(left).width + ctx.measureText(right).width * 2 + gap * 2 > maxTotalWidth
   ) {
     size -= 1;
     ctx.font = `400 ${size}px ${fontFamily}`;
@@ -1328,12 +1334,12 @@ function drawLightroomMatLayout(
   ctx.fillStyle = theme.subtextColor;
   ctx.textBaseline = "middle";
   if (left) {
-    ctx.textAlign = "left";
-    ctx.fillText(left, padding, captionY);
+    ctx.textAlign = "center";
+    ctx.fillText(left, canvas.width / 2, captionY);
   }
   if (right) {
     ctx.textAlign = "right";
-    ctx.fillText(right, canvas.width - padding, captionY);
+    ctx.fillText(right, canvas.width - sideBorder, captionY);
   }
 }
 
