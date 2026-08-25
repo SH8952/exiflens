@@ -1,5 +1,16 @@
 # 개발 이력 (Development History)
 
+## 2026-08-29 — 구글 애드센스 심사 대비: 가이드 아티클 3개 추가, 목표(15~20개) 달성 (Phase 4 · 5차 배치)
+
+- 15~20개 아티클 목표를 향한 다섯 번째 배치. 3개 주제 × 4개 언어 = 12개 파일 신규 작성 (누적 16개 아티클, 총 64개 파일) — **목표 범위(15~20개) 달성**
+  - "Light Trail Photography: Camera Settings and Technique" — 차량 헤드라이트·테일라이트로 광궤적을 만드는 셔터스피드·조리개·ISO 설정, 구도, 블루아워 타이밍까지 다룸. 앞선 배치의 장노출·흔들림 방지 아티클과 자연스럽게 연결
+  - "Wide-Angle vs. Telephoto: How Focal Length Changes Your Photos" — 초점거리가 화각뿐 아니라 원근감·배경 압축에 미치는 영향, 심도 아티클과 연계한 상황별 초점거리 선택 기준을 다룸
+  - "GPS Data in Photos: What It Reveals and How to Protect Your Privacy" — EXIF에 내장되는 GPS 좌표가 실제로 무엇을 노출하는지, 확인·제거 방법, 언제 남겨둬도 괜찮은지까지 다룸. 사이트의 개인정보처리방침(Privacy) 페이지와 주제적으로 연결되는 콘텐츠
+- 슬러그: `light-trail-photography-camera-settings`, `wide-angle-vs-telephoto-focal-length`, `gps-data-in-photos-privacy` (4개 언어 모두 동일 슬러그, hreflang 자동 매칭)
+- 검증: `npm run build`에서 98개 페이지 전체 SSG 유지 확인(기존 86 + 신규 아티클 12페이지). 새 포트(4289)로 프로덕션 서버를 띄워 신규 12개 URL 전체 200 응답 확인, `/ko/guides` 목록에 아티클 16개 전체가 최신순으로 정상 표시되는 것과 `/en/guides/gps-data-in-photos-privacy` 본문 렌더링을 Playwright 스크린샷으로 확인, `sitemap.xml`이 80개 → 92개 URL로 정확히 증가함을 확인, `git status`로 의도한 12개 신규 파일 외에 다른 변경/임시 파일이 없음을 확인
+- 참고: 사용자가 Mac 로컬 프리뷰(`localhost:3000`)에서 `Can't resolve '@tailwindcss/typography'` 빌드 에러를 확인함 — Phase 3 때 보고된 Mac 샌드박스 디스크 공간 부족으로 `npm install`이 실패했던 문제가 원인. 이후 배치들은 콘텐츠 파일만 동기화했기 때문에 Mac 쪽에 해당 패키지가 여전히 미설치 상태. 클라우드 저장소는 매 배치 `npm run build`로 정상 확인되어 실제 배포 코드에는 영향 없음. 디스크 공간 확보 및 Mac 쪽 `npm install` 재실행은 다음 단계에서 별도로 다룰 예정
+- 다음 단계: 목표 아티클 수 달성. 애드센스 신청 전 사용자 최종 검토 대기. Mac 로컬 개발 환경 디스크 공간 문제 해결 논의, 승인 이후 지속 발행을 위한 확장 주제 목록 정리도 이어서 진행 예정
+
 ## 2026-08-28 — 구글 애드센스 심사 대비: 가이드 아티클 3개 추가 (Phase 4 · 4차 배치)
 
 - 15~20개 아티클 목표를 향한 네 번째 배치. 3개 주제 × 4개 언어 = 12개 파일 신규 작성 (누적 13개 아티클, 총 52개 파일)
