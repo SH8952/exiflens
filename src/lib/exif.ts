@@ -80,15 +80,19 @@ function firstString(value: string[] | string | undefined): string | null {
 }
 
 /**
- * EXIF stores dates as "YYYY:MM:DD HH:MM:SS". Reformats to "YYYY-MM-DD" for
- * display on the EXIF frame generator's photo caption.
+ * EXIF stores dates as "YYYY:MM:DD HH:MM:SS". Reformats to
+ * "YYYY-MM-DD HH:MM:SS" for display on the EXIF frame generator's photo
+ * caption (석한 요청: 초 단위까지 표시). Falls back to date-only if the EXIF
+ * value has no time portion.
  */
 function formatTakenDate(value: string | undefined): string | null {
   if (!value) return null;
-  const match = value.match(/^(\d{4}):(\d{2}):(\d{2})/);
+  const match = value.match(/^(\d{4}):(\d{2}):(\d{2})(?:\s+(\d{2}):(\d{2}):(\d{2}))?/);
   if (!match) return null;
-  const [, year, month, day] = match;
-  return `${year}-${month}-${day}`;
+  const [, year, month, day, hour, minute, second] = match;
+  const datePart = `${year}-${month}-${day}`;
+  if (hour === undefined) return datePart;
+  return `${datePart} ${hour}:${minute}:${second}`;
 }
 
 /**
