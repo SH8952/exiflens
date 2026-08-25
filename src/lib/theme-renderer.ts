@@ -930,43 +930,76 @@ function drawGridSpecLayout(
   // Short spec-sheet-style labels are kept in English regardless of UI
   // locale, matching the existing "ISO" convention used elsewhere in this
   // module — these read as universal gear-spec shorthand, not prose.
+  // Camera/lens values ("Canon EOS R5m2", "RF24-70mm F2.8 L IS USM") run
+  // much longer than the numeric specs, so their cells get a bigger share
+  // of the row width (weight) instead of splitting evenly.
   const fields = [
-    { label: "CAMERA", value: metadata.camera },
-    { label: "LENS", value: metadata.lens },
-    { label: "FOCAL", value: metadata.focalLength },
-    { label: "APERTURE", value: metadata.aperture },
-    { label: "SHUTTER", value: metadata.shutter },
-    { label: "ISO", value: metadata.iso ? `ISO${metadata.iso}` : "" },
+    { label: "CAMERA", value: metadata.camera, weight: 1.5 },
+    { label: "LENS", value: metadata.lens, weight: 1.5 },
+    { label: "FOCAL", value: metadata.focalLength, weight: 0.8 },
+    { label: "APERTURE", value: metadata.aperture, weight: 0.9 },
+    { label: "SHUTTER", value: metadata.shutter, weight: 0.9 },
+    { label: "ISO", value: metadata.iso ? `ISO${metadata.iso}` : "", weight: 0.8 },
   ].filter((field) => field.value);
 
   if (fields.length === 0) return;
 
-  const cellWidth = (canvas.width - padding * 2) / fields.length;
+  const totalWeight = fields.reduce((sum, field) => sum + field.weight, 0);
+  const availableWidth = canvas.width - padding * 2;
   const gridY = padding * 2 + sh;
-  const labelSize = Math.max(9, Math.round(gridHeight * 0.16));
-  const valueSize = Math.max(12, Math.round(gridHeight * 0.24));
+  const baseLabelSize = Math.max(9, Math.round(gridHeight * 0.16));
+  const baseValueSize = Math.max(12, Math.round(gridHeight * 0.24));
+  const minValueSize = Math.max(9, Math.round(baseValueSize * 0.6));
+  const cellPadding = Math.max(6, Math.round(sw * 0.012));
 
   ctx.textAlign = "center";
+  let cursorX = padding;
   fields.forEach((field, i) => {
-    const cx = padding + cellWidth * (i + 0.5);
+    const cellWidth = (field.weight / totalWeight) * availableWidth;
+    const cx = cursorX + cellWidth / 2;
+    const maxTextWidth = Math.max(1, cellWidth - cellPadding * 2);
+
     if (i > 0) {
       ctx.strokeStyle = theme.subtextColor;
       ctx.globalAlpha = 0.25;
       ctx.beginPath();
-      ctx.moveTo(padding + cellWidth * i, gridY + gridHeight * 0.2);
-      ctx.lineTo(padding + cellWidth * i, gridY + gridHeight * 0.8);
+      ctx.moveTo(cursorX, gridY + gridHeight * 0.2);
+      ctx.lineTo(cursorX, gridY + gridHeight * 0.8);
       ctx.stroke();
       ctx.globalAlpha = 1;
     }
 
     ctx.fillStyle = theme.subtextColor;
-    ctx.font = `500 ${labelSize}px ${fontFamily}`;
     ctx.textBaseline = "alphabetic";
-    ctx.fillText(field.label, cx, gridY + gridHeight * 0.42, cellWidth - 8);
+    const labelDisplay = truncateToWidth(
+      ctx,
+      field.label,
+      maxTextWidth,
+      `500 ${baseLabelSize}px ${fontFamily}`,
+    );
+    ctx.font = `500 ${baseLabelSize}px ${fontFamily}`;
+    ctx.fillText(labelDisplay, cx, gridY + gridHeight * 0.42);
 
+    // Shrink the value's font size until it fits this cell, then fall
+    // back to ellipsis truncation — long camera/lens names would
+    // otherwise overflow into the neighboring cell.
+    let valueSize = baseValueSize;
+    while (valueSize > minValueSize) {
+      ctx.font = `700 ${valueSize}px ${fontFamily}`;
+      if (ctx.measureText(field.value).width <= maxTextWidth) break;
+      valueSize -= 1;
+    }
+    const valueDisplay = truncateToWidth(
+      ctx,
+      field.value,
+      maxTextWidth,
+      `700 ${valueSize}px ${fontFamily}`,
+    );
     ctx.fillStyle = theme.textColor;
     ctx.font = `700 ${valueSize}px ${fontFamily}`;
-    ctx.fillText(field.value, cx, gridY + gridHeight * 0.72, cellWidth - 8);
+    ctx.fillText(valueDisplay, cx, gridY + gridHeight * 0.72);
+
+    cursorX += cellWidth;
   });
 }
 
