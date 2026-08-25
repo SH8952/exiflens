@@ -1,5 +1,12 @@
 # 개발 이력 (Development History)
 
+## 2026-08-26 — GitHub/Vercel 배포 및 애드센스 사이트 소유권 확인 실패 수정
+
+- 도메인 `exifnd.com` 구매(Namecheap) 완료. GitHub 저장소(`SH8952/exiflens`) 생성 및 전체 커밋 이력 푸시, Vercel 프로젝트(`Moneypick` 팀) 생성 및 GitHub 연동 배포, 커스텀 도메인 `exifnd.com` 연결(A 레코드 `216.198.79.1`), Google Search Console 도메인 속성 소유권 확인(TXT 레코드) 및 `sitemap.xml` 제출까지 완료
+- 애드센스 사이트 추가 시 "사이트를 확인할 수 없습니다" 오류 발생. 원인 분석 결과, `src/app/[locale]/layout.tsx`가 `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID`(`pub-0042120343274941`, `ca-` 접두사 없음) 값을 그대로 애드센스 스크립트 태그의 `client=` 쿼리에 사용하고 있어, 실제 배포된 페이지의 스크립트가 `client=pub-0042120343274941`로 렌더링됨 — 애드센스가 요구하는 정확한 형식(`client=ca-pub-0042120343274941`)과 불일치해 크롤러가 소유권을 확인하지 못함
+- 수정: `layout.tsx`에 `ca-` 접두사가 없으면 자동으로 붙여주는 정규화 로직(`ADSENSE_CLIENT_ID`)을 추가해 스크립트 태그에만 `ca-pub-...` 형식이 적용되도록 함. `ads.txt`(접두사 없는 `pub-...` 형식이 정상)와 환경변수 원본 값은 변경하지 않아 다른 용도와의 호환성 유지
+- 검증: `npm run build` 정상 통과, 프로덕션 서버 기동 후 `curl`로 실제 렌더링된 HTML의 `client=ca-pub-0042120343274941` 값 확인
+
 ## 2026-08-29 — Mac 로컬 개발 환경 빌드 에러 해결 (`Can't resolve '@tailwindcss/typography'`)
 
 - 증상: Mac 로컬 프리뷰(`localhost:3000`)에서 `CssSyntaxError: tailwindcss ... Can't resolve '@tailwindcss/typography'` 빌드 에러 발생. Phase 3에서 추가된 `@tailwindcss/typography` 등 신규 npm 의존성이 Mac 쪽 `node_modules`에 설치되지 않은 상태였음 (원인: Phase 3 진행 당시 Mac 측 세션 샌드박스 디스크 공간 부족으로 `npm install`이 실패했고, 이후 배치들은 콘텐츠 파일만 동기화해 재설치가 이뤄지지 않음)
