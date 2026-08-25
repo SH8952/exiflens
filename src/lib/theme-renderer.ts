@@ -949,15 +949,59 @@ function drawGridSpecLayout(
   const gridY = padding * 2 + sh;
   const baseLabelSize = Math.max(9, Math.round(gridHeight * 0.16));
   const baseValueSize = Math.max(12, Math.round(gridHeight * 0.24));
-  const minValueSize = Math.max(9, Math.round(baseValueSize * 0.6));
   const cellPadding = Math.max(6, Math.round(sw * 0.012));
 
+  const cellWidths = fields.map((field) => (field.weight / totalWeight) * availableWidth);
+
+  // The whole point of this frame is to record exactly which gear was
+  // used, so equipment names are never ellipsis-truncated (per 석한's
+  // explicit direction — cutting off the camera/lens name would defeat
+  // the purpose). Instead, find the single font size, shared across every
+  // cell, that lets the tightest-fitting value fit in full — sized
+  // precisely from the measured width so it's an exact fit, not a
+  // decrement loop with an early-exit floor.
+  let sharedValueSize = baseValueSize;
+  let sharedLabelSize = baseLabelSize;
+  fields.forEach((field, i) => {
+    const maxTextWidth = Math.max(1, cellWidths[i] - cellPadding * 2);
+
+    ctx.font = `700 ${baseValueSize}px ${fontFamily}`;
+    const valueWidthAtBase = ctx.measureText(field.value).width;
+    if (valueWidthAtBase > maxTextWidth) {
+      sharedValueSize = Math.min(
+        sharedValueSize,
+        Math.max(1, Math.floor(baseValueSize * (maxTextWidth / valueWidthAtBase))),
+      );
+    }
+
+    ctx.font = `500 ${baseLabelSize}px ${fontFamily}`;
+    const labelWidthAtBase = ctx.measureText(field.label).width;
+    if (labelWidthAtBase > maxTextWidth) {
+      sharedLabelSize = Math.min(
+        sharedLabelSize,
+        Math.max(1, Math.floor(baseLabelSize * (maxTextWidth / labelWidthAtBase))),
+      );
+    }
+  });
+
+  // Keep label and value visually balanced: if the values had to shrink
+  // a lot to fit, shrink the (usually short, rarely-constrained) labels
+  // by the same proportion too, rather than leaving oversized labels
+  // looming over tiny values.
+  const shrinkRatio = sharedValueSize / baseValueSize;
+  if (shrinkRatio < 0.85) {
+    sharedLabelSize = Math.min(
+      sharedLabelSize,
+      Math.max(1, Math.round(baseLabelSize * shrinkRatio)),
+    );
+  }
+
   ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
   let cursorX = padding;
   fields.forEach((field, i) => {
-    const cellWidth = (field.weight / totalWeight) * availableWidth;
+    const cellWidth = cellWidths[i];
     const cx = cursorX + cellWidth / 2;
-    const maxTextWidth = Math.max(1, cellWidth - cellPadding * 2);
 
     if (i > 0) {
       ctx.strokeStyle = theme.subtextColor;
@@ -970,34 +1014,12 @@ function drawGridSpecLayout(
     }
 
     ctx.fillStyle = theme.subtextColor;
-    ctx.textBaseline = "alphabetic";
-    const labelDisplay = truncateToWidth(
-      ctx,
-      field.label,
-      maxTextWidth,
-      `500 ${baseLabelSize}px ${fontFamily}`,
-    );
-    ctx.font = `500 ${baseLabelSize}px ${fontFamily}`;
-    ctx.fillText(labelDisplay, cx, gridY + gridHeight * 0.42);
+    ctx.font = `500 ${sharedLabelSize}px ${fontFamily}`;
+    ctx.fillText(field.label, cx, gridY + gridHeight * 0.42);
 
-    // Shrink the value's font size until it fits this cell, then fall
-    // back to ellipsis truncation — long camera/lens names would
-    // otherwise overflow into the neighboring cell.
-    let valueSize = baseValueSize;
-    while (valueSize > minValueSize) {
-      ctx.font = `700 ${valueSize}px ${fontFamily}`;
-      if (ctx.measureText(field.value).width <= maxTextWidth) break;
-      valueSize -= 1;
-    }
-    const valueDisplay = truncateToWidth(
-      ctx,
-      field.value,
-      maxTextWidth,
-      `700 ${valueSize}px ${fontFamily}`,
-    );
     ctx.fillStyle = theme.textColor;
-    ctx.font = `700 ${valueSize}px ${fontFamily}`;
-    ctx.fillText(valueDisplay, cx, gridY + gridHeight * 0.72);
+    ctx.font = `700 ${sharedValueSize}px ${fontFamily}`;
+    ctx.fillText(field.value, cx, gridY + gridHeight * 0.72);
 
     cursorX += cellWidth;
   });
