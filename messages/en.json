@@ -102,6 +102,182 @@
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "guides": "Guides"
+    "guides": "Guides",
+    "about": "About",
+    "disclosure": "Affiliate Disclosure"
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "updated": "Last updated: August 25, 2026",
+    "sections": [
+      {
+        "heading": "Overview",
+        "body": [
+          "ExifLens (\"we\", \"us\", \"our\") operates the website exiflens.com (the \"Service\"). This Privacy Policy explains what information is collected when you use the Service and how it is used."
+        ]
+      },
+      {
+        "heading": "Photos You Upload",
+        "body": [
+          "ExifLens processes your photos entirely in your browser. When you upload a photo to read its EXIF data, calculate ND filter exposure, or generate a framed export, the file is never transmitted to our servers or any third party. Once you close or refresh the page, the photo and any data extracted from it are gone."
+        ]
+      },
+      {
+        "heading": "Cookies and Advertising",
+        "body": [
+          "We use Google AdSense to display advertising on the Service. Google and its partners may use cookies, device identifiers, and similar technologies to serve ads based on your prior visits to this and other websites. You can learn more about how Google uses data on Google's Ads Privacy page, and you can opt out of personalized advertising through Google Ads Settings.",
+          "We may also use cookies or similar technologies through Google Analytics or similar analytics providers to understand, in aggregate and non-identifying form, how visitors use the Service."
+        ]
+      },
+      {
+        "heading": "Affiliate Links",
+        "body": [
+          "Some pages contain affiliate links, including links to Coupang Partners and Amazon Associates. If you click one of these links and make a qualifying purchase, we may earn a commission at no additional cost to you. See our Affiliate Disclosure for details."
+        ]
+      },
+      {
+        "heading": "Data We Do Not Collect",
+        "body": [
+          "We do not require account registration, and we do not collect names, email addresses, or payment information through the Service itself."
+        ]
+      },
+      {
+        "heading": "Children's Privacy",
+        "body": [
+          "The Service is not directed at children under 13, and we do not knowingly collect personal information from children."
+        ]
+      },
+      {
+        "heading": "Changes to This Policy",
+        "body": [
+          "We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated \"Last updated\" date."
+        ]
+      },
+      {
+        "heading": "Contact",
+        "body": [
+          "If you have questions about this Privacy Policy, contact us at skysmoga@gmail.com."
+        ]
+      }
+    ]
+  },
+  "Terms": {
+    "title": "Terms of Service",
+    "updated": "Last updated: August 25, 2026",
+    "sections": [
+      {
+        "heading": "Acceptance of Terms",
+        "body": [
+          "By accessing or using ExifLens (the \"Service\"), you agree to be bound by these Terms of Service. If you do not agree, please do not use the Service."
+        ]
+      },
+      {
+        "heading": "Description of Service",
+        "body": [
+          "ExifLens provides free, browser-based tools for viewing photo EXIF metadata, calculating neutral density (ND) filter long-exposure times, and generating photo frames with camera information overlays. All processing happens locally in your browser; we do not store or receive copies of your photos."
+        ]
+      },
+      {
+        "heading": "Your Content",
+        "body": [
+          "You retain full ownership of any photos or files you use with the Service. We do not claim any rights to your content, and because processing is client-side, we never receive or store it."
+        ]
+      },
+      {
+        "heading": "Acceptable Use",
+        "body": [
+          "You agree not to use the Service to violate any applicable law, to attempt to disrupt or interfere with the Service, or to reverse-engineer or scrape the Service in a way that harms its operation."
+        ]
+      },
+      {
+        "heading": "Third-Party Links and Advertising",
+        "body": [
+          "The Service displays advertising through Google AdSense and may include affiliate links to third-party retailers such as Coupang and Amazon. We are not responsible for the content, policies, or practices of any third-party site you visit through these links."
+        ]
+      },
+      {
+        "heading": "Disclaimer of Warranties",
+        "body": [
+          "The Service is provided \"as is\" and \"as available\", without warranties of any kind, express or implied. We do not guarantee that EXIF extraction, ND calculations, or generated frames will be error-free or suitable for any particular purpose."
+        ]
+      },
+      {
+        "heading": "Limitation of Liability",
+        "body": [
+          "To the fullest extent permitted by law, ExifLens and its operator shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service."
+        ]
+      },
+      {
+        "heading": "Changes to These Terms",
+        "body": [
+          "We may revise these Terms from time to time. Continued use of the Service after changes are posted constitutes acceptance of the revised Terms."
+        ]
+      },
+      {
+        "heading": "Contact",
+        "body": [
+          "Questions about these Terms can be sent to skysmoga@gmail.com."
+        ]
+      }
+    ]
+  },
+  "About": {
+    "title": "About ExifLens",
+    "sections": [
+      {
+        "heading": "What is ExifLens",
+        "body": [
+          "ExifLens is a free, browser-based toolkit for photographers. It reads the EXIF metadata embedded in your photos, helps you calculate long-exposure times for neutral density (ND) filters, and lets you generate clean, shareable frames that display your camera settings alongside the photo."
+        ]
+      },
+      {
+        "heading": "Why We Built It",
+        "body": [
+          "We wanted a fast, no-signup tool that respects your photos — everything runs locally in your browser, so your images are never uploaded anywhere. No accounts, no watermarks you didn't ask for, no waiting on a server."
+        ]
+      },
+      {
+        "heading": "Who It's For",
+        "body": [
+          "ExifLens is built for landscape and long-exposure photographers who need a quick ND filter calculator in the field, and for anyone who wants to check or showcase a photo's camera settings without digging through desktop software."
+        ]
+      },
+      {
+        "heading": "Get in Touch",
+        "body": [
+          "Have feedback, found a bug, or want to suggest a feature? Email us at skysmoga@gmail.com — we read every message."
+        ]
+      }
+    ]
+  },
+  "Disclosure": {
+    "title": "Affiliate Disclosure",
+    "updated": "Last updated: August 25, 2026",
+    "sections": [
+      {
+        "heading": "Our Participation in Affiliate Programs",
+        "body": [
+          "ExifLens is a participant in the Coupang Partners Program and the Amazon Associates Program, affiliate advertising programs designed to provide a means for sites to earn advertising fees by linking to Coupang.com and Amazon.com (and their affiliated sites)."
+        ]
+      },
+      {
+        "heading": "How This Works",
+        "body": [
+          "When you click a product link on ExifLens and go on to make a qualifying purchase, we may earn a small commission. This comes at no additional cost to you — the price you pay is the same whether or not you use our link."
+        ]
+      },
+      {
+        "heading": "Editorial Independence",
+        "body": [
+          "Product recommendations on ExifLens reflect what we believe is genuinely useful to photographers. Affiliate relationships do not influence which products we mention or how we describe them."
+        ]
+      },
+      {
+        "heading": "Questions",
+        "body": [
+          "If you have any questions about our affiliate relationships, contact us at skysmoga@gmail.com."
+        ]
+      }
+    ]
   }
 }

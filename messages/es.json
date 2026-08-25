@@ -102,6 +102,182 @@
     "rights": "Todos los derechos reservados.",
     "privacy": "Política de privacidad",
     "terms": "Términos de servicio",
-    "guides": "Guías"
+    "guides": "Guías",
+    "about": "Sobre nosotros",
+    "disclosure": "Divulgación de afiliados"
+  },
+  "Privacy": {
+    "title": "Política de Privacidad",
+    "updated": "Última actualización: 25 de agosto de 2026",
+    "sections": [
+      {
+        "heading": "Resumen",
+        "body": [
+          "ExifLens (\"nosotros\") opera el sitio web exiflens.com (el \"Servicio\"). Esta Política de Privacidad explica qué información se recopila cuando usas el Servicio y cómo se utiliza."
+        ]
+      },
+      {
+        "heading": "Las fotos que subes",
+        "body": [
+          "ExifLens procesa tus fotos por completo en tu navegador. Cuando subes una foto para leer sus datos EXIF, calcular la exposición larga con un filtro ND o generar una exportación enmarcada, el archivo nunca se transmite a nuestros servidores ni a terceros. Al cerrar o actualizar la página, la foto y cualquier dato extraído de ella desaparecen."
+        ]
+      },
+      {
+        "heading": "Cookies y publicidad",
+        "body": [
+          "Utilizamos Google AdSense para mostrar publicidad en el Servicio. Google y sus socios pueden usar cookies, identificadores de dispositivo y tecnologías similares para mostrar anuncios según tus visitas anteriores a este y otros sitios web. Puedes obtener más información sobre cómo usa Google los datos en la página de privacidad de anuncios de Google, y puedes inhabilitar la publicidad personalizada desde la configuración de anuncios de Google.",
+          "También podemos usar cookies o tecnologías similares mediante Google Analytics u otros proveedores de análisis para entender, de forma agregada y no identificable, cómo se usa el Servicio."
+        ]
+      },
+      {
+        "heading": "Enlaces de afiliados",
+        "body": [
+          "Algunas páginas contienen enlaces de afiliados, incluidos enlaces a Coupang Partners y Amazon Associates. Si haces clic en uno de estos enlaces y realizas una compra que califique, podemos ganar una comisión sin costo adicional para ti. Consulta nuestra Divulgación de Afiliados para más detalles."
+        ]
+      },
+      {
+        "heading": "Datos que no recopilamos",
+        "body": [
+          "No se requiere registro de cuenta, y no recopilamos nombres, direcciones de correo electrónico ni información de pago a través del propio Servicio."
+        ]
+      },
+      {
+        "heading": "Privacidad de menores",
+        "body": [
+          "El Servicio no está dirigido a menores de 13 años, y no recopilamos conscientemente información personal de menores."
+        ]
+      },
+      {
+        "heading": "Cambios a esta política",
+        "body": [
+          "Podemos actualizar esta Política de Privacidad periódicamente. Los cambios se publicarán en esta página con una fecha de \"Última actualización\" renovada."
+        ]
+      },
+      {
+        "heading": "Contacto",
+        "body": [
+          "Si tienes preguntas sobre esta Política de Privacidad, contáctanos en skysmoga@gmail.com."
+        ]
+      }
+    ]
+  },
+  "Terms": {
+    "title": "Términos de Servicio",
+    "updated": "Última actualización: 25 de agosto de 2026",
+    "sections": [
+      {
+        "heading": "Aceptación de los términos",
+        "body": [
+          "Al acceder o usar ExifLens (el \"Servicio\"), aceptas quedar vinculado por estos Términos de Servicio. Si no estás de acuerdo, por favor no uses el Servicio."
+        ]
+      },
+      {
+        "heading": "Descripción del servicio",
+        "body": [
+          "ExifLens ofrece herramientas gratuitas basadas en el navegador para ver los metadatos EXIF de fotos, calcular tiempos de exposición larga con filtros de densidad neutra (ND) y generar marcos fotográficos con información de la cámara. Todo el procesamiento ocurre localmente en tu navegador; no almacenamos ni recibimos copias de tus fotos."
+        ]
+      },
+      {
+        "heading": "Tu contenido",
+        "body": [
+          "Conservas la propiedad total de cualquier foto o archivo que uses con el Servicio. No reclamamos ningún derecho sobre tu contenido, y como el procesamiento es del lado del cliente, nunca lo recibimos ni lo almacenamos."
+        ]
+      },
+      {
+        "heading": "Uso aceptable",
+        "body": [
+          "Aceptas no usar el Servicio para infringir ninguna ley aplicable, intentar interrumpir o interferir con el Servicio, ni realizar ingeniería inversa o scraping de forma que perjudique su funcionamiento."
+        ]
+      },
+      {
+        "heading": "Enlaces de terceros y publicidad",
+        "body": [
+          "El Servicio muestra publicidad mediante Google AdSense y puede incluir enlaces de afiliados a comercios externos como Coupang y Amazon. No somos responsables del contenido, las políticas ni las prácticas de ningún sitio de terceros al que accedas a través de estos enlaces."
+        ]
+      },
+      {
+        "heading": "Renuncia de garantías",
+        "body": [
+          "El Servicio se proporciona \"tal cual\" y \"según disponibilidad\", sin garantías de ningún tipo, expresas o implícitas. No garantizamos que la extracción de EXIF, los cálculos de ND o los marcos generados estén libres de errores o sean adecuados para un propósito particular."
+        ]
+      },
+      {
+        "heading": "Limitación de responsabilidad",
+        "body": [
+          "En la máxima medida permitida por la ley, ExifLens y su operador no serán responsables de daños indirectos, incidentales o consecuentes derivados del uso del Servicio."
+        ]
+      },
+      {
+        "heading": "Cambios a estos términos",
+        "body": [
+          "Podemos revisar estos Términos periódicamente. El uso continuado del Servicio después de publicar los cambios constituye la aceptación de los Términos revisados."
+        ]
+      },
+      {
+        "heading": "Contacto",
+        "body": [
+          "Las preguntas sobre estos Términos pueden enviarse a skysmoga@gmail.com."
+        ]
+      }
+    ]
+  },
+  "About": {
+    "title": "Sobre ExifLens",
+    "sections": [
+      {
+        "heading": "Qué es ExifLens",
+        "body": [
+          "ExifLens es un conjunto de herramientas gratuitas basadas en el navegador para fotógrafos. Lee los metadatos EXIF incluidos en tus fotos, te ayuda a calcular tiempos de exposición larga para filtros de densidad neutra (ND) y te permite generar marcos limpios y compartibles que muestran la configuración de tu cámara junto a la foto."
+        ]
+      },
+      {
+        "heading": "Por qué lo creamos",
+        "body": [
+          "Queríamos una herramienta rápida, sin necesidad de registro, que respetara tus fotos: todo se ejecuta localmente en tu navegador, así que tus imágenes nunca se suben a ningún lado. Sin cuentas, sin marcas de agua no solicitadas, sin esperas de servidor."
+        ]
+      },
+      {
+        "heading": "Para quién es",
+        "body": [
+          "ExifLens está pensado para fotógrafos de paisajes y exposición larga que necesitan una calculadora rápida de filtros ND en el campo, y para cualquiera que quiera revisar o mostrar la configuración de cámara de una foto sin abrir software de escritorio."
+        ]
+      },
+      {
+        "heading": "Contáctanos",
+        "body": [
+          "¿Tienes comentarios, encontraste un error o quieres sugerir una función? Escríbenos a skysmoga@gmail.com; leemos todos los mensajes."
+        ]
+      }
+    ]
+  },
+  "Disclosure": {
+    "title": "Divulgación de Afiliados",
+    "updated": "Última actualización: 25 de agosto de 2026",
+    "sections": [
+      {
+        "heading": "Nuestra participación en programas de afiliados",
+        "body": [
+          "ExifLens participa en el Programa de Coupang Partners y en el Programa de Afiliados de Amazon (Amazon Associates), programas de publicidad de afiliados diseñados para que los sitios puedan ganar comisiones publicitarias enlazando a Coupang.com y Amazon.com (y sus sitios asociados)."
+        ]
+      },
+      {
+        "heading": "Cómo funciona",
+        "body": [
+          "Cuando haces clic en un enlace de producto en ExifLens y realizas una compra que califique, podemos ganar una pequeña comisión. Esto no supone ningún costo adicional para ti: el precio que pagas es el mismo, uses o no nuestro enlace."
+        ]
+      },
+      {
+        "heading": "Independencia editorial",
+        "body": [
+          "Las recomendaciones de productos en ExifLens reflejan lo que consideramos genuinamente útil para los fotógrafos. Las relaciones de afiliados no influyen en qué productos mencionamos ni en cómo los describimos."
+        ]
+      },
+      {
+        "heading": "Preguntas",
+        "body": [
+          "Si tienes alguna pregunta sobre nuestras relaciones de afiliados, contáctanos en skysmoga@gmail.com."
+        ]
+      }
+    ]
   }
 }

@@ -1,5 +1,16 @@
 # 개발 이력 (Development History)
 
+## 2026-08-25 — 구글 애드센스 심사 대비: 정책 페이지 4종 신규 추가 (Phase 1)
+
+- 석한님이 제미나이와 정리한 "구글 애드센스 승인 심사 통과율 극대화 전략" 기획 문서(AdSense_SEO_Optimization_Guide.md)를 첨부하며 순서대로 진행 요청. 기획서 검토 결과 4가지 확인: (1) 가이드 아티클 15~20개는 제가 초안 작성, (2) en/es/ja/ko 4개 언어 동시 작성, (3) 연락처는 skysmoga@gmail.com, (4) 제휴 마케팅 고지에 쿠팡 파트너스 + 아마존 어소시에이트 모두 포함
+- 점검 결과 기존 `site-footer.tsx`가 `/privacy`, `/terms`, `/guides`로 이미 링크를 걸고 있었지만 실제 라우트 페이지가 하나도 없어 전부 404였음 — 애드센스 심사에서 즉시 거절 사유가 되는 항목이라 1순위로 진행
+- `src/app/[locale]/{privacy,terms,about,disclosure}/page.tsx` 4개 라우트 신규 생성. 기존 `frame/page.tsx`의 `generateMetadata` 패턴(canonical, hreflang, OpenGraph)을 그대로 따름
+- `src/components/legal-page.tsx` 신규: 제목 + 최종 수정일(선택) + 섹션(제목·본문 단락) 목록을 렌더링하는 공용 컴포넌트. 4개 정책 페이지가 이를 공유
+- `messages/{en,es,ja,ko}.json`에 `Privacy`/`Terms`/`About`/`Disclosure` 네임스페이스 신규 추가 — 각 언어로 직접 작성한 개인정보처리방침(쿠키·구글 애드센스 데이터 활용·제휴 링크 고지 포함), 이용약관(서비스 설명·콘텐츠 소유권·면책조항), 사이트 소개, 제휴 마케팅 고지문(쿠팡 파트너스 + 아마존 어소시에이트) 전문. `Footer`에 `about`/`disclosure` 키 추가
+- `site-footer.tsx`: 푸터 네비게이션에 소개(About)·제휴 마케팅 고지(Disclosure) 링크 추가 (기존 가이드·개인정보처리방침·이용약관과 함께 5개 링크로 구성)
+- 검증: `npm run build`에서 신규 16개 페이지(4개 라우트 × 4개 언어) 모두 SSG로 정상 생성 확인(총 28페이지). 로컬 프로덕션 서버에서 `/{locale}/{privacy,terms,about,disclosure}` 16개 URL 전부 200 응답 확인, Playwright로 4개 페이지 스크린샷 렌더링 확인, 푸터 링크의 실제 href가 각 페이지로 정확히 연결됨을 확인. `/guides`는 이번 라운드 범위가 아니므로 여전히 404 — 3단계(가이드 콘텐츠 아키텍처) 진행 시 해결 예정
+- 다음 단계: 2단계(sitemap.ts/robots.ts, Schema.org Article/HowTo 보강) → 3단계(가이드 콘텐츠 아키텍처 + 홈페이지 FAQ) → 4단계(가이드 아티클 15~20개 × 4개 언어 작성, 배치로 진행)
+
 ## 2026-08-25 — 라이트룸 테마 여백 비대칭화 + 캡션 가운데 정렬 수정
 
 - 석한님이 타 사이트의 라이트룸 테마 원본 사진을 첨부하며 "현재 적용된 라이트 룸과 상,하, 좌,우 여백의 차이가 있어. 원본은 상,좌,우 여백은 얇게 되어있고, 하단의 여백이 좀더 넓게 되어있어. 원본 테마처럼 여백 수정과 텍스트가 중앙정렬 되어있는 부분도 동일하게 수정해줘"라고 요청
