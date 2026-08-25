@@ -29,6 +29,8 @@ import {
   THEME_PRESETS,
   getThemeById,
   renderThemedFrame,
+  type ThemeDefinition,
+  type ThemeFont,
   type ThemeId,
 } from "@/lib/theme-renderer";
 
@@ -92,6 +94,16 @@ function FrameEditor({
     DEFAULT_PADDING_PERCENT,
   );
   const [themeId, setThemeId] = React.useState<ThemeId>("classic-dark");
+  const [customTheme, setCustomTheme] = React.useState<ThemeDefinition>({
+    id: "custom",
+    backgroundColor: "#111111",
+    textColor: "#ffffff",
+    subtextColor: "#a3a3a3",
+    fontFamily: "sans",
+    layoutStyle: "shot-on-brand",
+    paddingPercent: DEFAULT_PADDING_PERCENT,
+    showBrandBadge: true,
+  });
   const [metadata, setMetadata] = React.useState<FrameMetadata>(() =>
     metadataFromExif(data),
   );
@@ -119,16 +131,19 @@ function FrameEditor({
     if (!image || !canvasRef.current) return;
     renderThemedFrame(
       image,
-      { themeId, aspect, paddingPercent, metadata },
+      { themeId, aspect, paddingPercent, metadata, customTheme },
       canvasRef.current,
     );
-  }, [image, themeId, aspect, paddingPercent, metadata]);
+  }, [image, themeId, aspect, paddingPercent, metadata, customTheme]);
 
   // Switching theme applies that preset's recommended padding too (the
-  // slider still overrides it afterward, same as any preset).
+  // slider still overrides it afterward, same as any preset). "Custom"
+  // isn't in THEME_PRESETS, so its remembered padding lives on customTheme.
   const handleThemeChange = (nextId: ThemeId) => {
     setThemeId(nextId);
-    setPaddingPercent(getThemeById(nextId).paddingPercent);
+    setPaddingPercent(
+      nextId === "custom" ? customTheme.paddingPercent : getThemeById(nextId).paddingPercent,
+    );
   };
 
   const handleMetadataChange = (field: keyof FrameMetadata, value: string) => {
@@ -212,9 +227,84 @@ function FrameEditor({
                   {t(`themes.${preset.id}`)}
                 </SelectItem>
               ))}
+              <SelectItem value="custom">{t("themes.custom")}</SelectItem>
             </SelectContent>
           </Select>
         </label>
+
+        {themeId === "custom" && (
+          <div className="flex flex-col gap-3 rounded-lg border border-dashed border-border p-3">
+            <div className="grid grid-cols-2 gap-3">
+              <label className="flex flex-col gap-1.5">
+                <span className="text-xs text-muted-foreground">{t("customBackground")}</span>
+                <input
+                  type="color"
+                  value={customTheme.backgroundColor}
+                  onChange={(e) =>
+                    setCustomTheme((prev) => ({ ...prev, backgroundColor: e.target.value }))
+                  }
+                  className="h-9 w-full cursor-pointer rounded-md border border-input bg-transparent p-1"
+                />
+              </label>
+              <label className="flex flex-col gap-1.5">
+                <span className="text-xs text-muted-foreground">{t("customText")}</span>
+                <input
+                  type="color"
+                  value={customTheme.textColor}
+                  onChange={(e) =>
+                    setCustomTheme((prev) => ({ ...prev, textColor: e.target.value }))
+                  }
+                  className="h-9 w-full cursor-pointer rounded-md border border-input bg-transparent p-1"
+                />
+              </label>
+            </div>
+
+            <label className="flex flex-col gap-1.5">
+              <span className="text-xs text-muted-foreground">{t("customFont")}</span>
+              <Select
+                value={customTheme.fontFamily}
+                onValueChange={(value) =>
+                  setCustomTheme((prev) => ({ ...prev, fontFamily: value as ThemeFont }))
+                }
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="sans">Sans</SelectItem>
+                  <SelectItem value="serif">Serif</SelectItem>
+                  <SelectItem value="mono">Mono</SelectItem>
+                </SelectContent>
+              </Select>
+            </label>
+
+            <button
+              type="button"
+              onClick={() =>
+                setCustomTheme((prev) => ({
+                  ...prev,
+                  showBrandBadge: !(prev.showBrandBadge !== false),
+                }))
+              }
+              className="flex items-center justify-between rounded-md border border-input px-3 py-2 text-xs"
+            >
+              <span className="text-muted-foreground">{t("customShowLogo")}</span>
+              <span
+                className={cn(
+                  "relative inline-flex h-5 w-9 items-center rounded-full transition-colors",
+                  customTheme.showBrandBadge !== false ? "bg-primary" : "bg-muted",
+                )}
+              >
+                <span
+                  className={cn(
+                    "inline-block size-4 translate-x-0.5 rounded-full bg-white transition-transform",
+                    customTheme.showBrandBadge !== false && "translate-x-4",
+                  )}
+                />
+              </span>
+            </button>
+          </div>
+        )}
 
         <label className="flex flex-col gap-1.5">
           <span className="text-muted-foreground">{t("aspectLabel")}</span>
@@ -245,7 +335,13 @@ function FrameEditor({
             max={10}
             step={1}
             value={paddingPercent}
-            onChange={(e) => setPaddingPercent(Number(e.target.value))}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              setPaddingPercent(value);
+              if (themeId === "custom") {
+                setCustomTheme((prev) => ({ ...prev, paddingPercent: value }));
+              }
+            }}
           />
         </label>
 

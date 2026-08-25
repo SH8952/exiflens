@@ -13,12 +13,14 @@ import {
  * preset entry; a genuinely new look adds one more `draw*Layout` function
  * and a `LayoutStyle` case.
  *
- * Phase 1 ships 6 themes covering the distinct layout families (bottom
- * bar, overlay-on-photo, uniform border, polaroid-style thick margin, and
- * the two-column "shot on" wordmark style). The remaining presets from the
- * original 15-theme request (Leica, Hasselblad, Film Strip, Blurred
- * Background, Vintage Amber, Grid Spec Sheet, Dark Gradient, Custom) are
- * planned for a follow-up phase — see CHANGELOG.md.
+ * Phase 1 shipped 6 themes covering the core layout families (bottom bar,
+ * overlay-on-photo, uniform border, polaroid-style thick margin, and the
+ * two-column "shot on" wordmark style). Phase 2 (this file) adds the
+ * remaining 7 presets from the original 15-theme request — Leica,
+ * Hasselblad, Film Strip, Blurred Background, Vintage Amber, Grid Spec
+ * Sheet, Dark Gradient — plus a fully user-customizable "Custom" theme
+ * (background/text color, font, brand-logo toggle; padding is shared with
+ * the existing padding slider). See CHANGELOG.md.
  *
  * Brand marks: rather than embedding scraped/official brand SVG files (an
  * uncertain source to source authentically, and a separate legal question
@@ -26,7 +28,9 @@ import {
  * drawn, brand-colored wordmark badge (BRAND_BADGES below) — e.g. a red
  * "Canon" pill, similar in spirit to how the reference tool's own badges
  * read as styled typography rather than scanned logo art. An unrecognized
- * make falls back to plain "Shot on <camera>" text.
+ * make falls back to plain "Shot on <camera>" text. The Leica theme uses
+ * a small red accent square instead of a wordmark, echoing Leica's own
+ * minimal red-square mark without reproducing it.
  */
 
 export type LayoutStyle =
@@ -34,7 +38,14 @@ export type LayoutStyle =
   | "polaroid"
   | "shot-on-brand"
   | "overlay"
-  | "square-border";
+  | "square-border"
+  | "leica-accent"
+  | "centered-minimal"
+  | "film-strip"
+  | "blurred-bg"
+  | "vintage-amber"
+  | "grid-spec"
+  | "dark-gradient";
 
 export type ThemeFont = "sans" | "serif" | "mono";
 
@@ -44,7 +55,15 @@ export type ThemeId =
   | "polaroid"
   | "shot-on-brand"
   | "minimal-overlay"
-  | "full-border-square";
+  | "full-border-square"
+  | "leica"
+  | "hasselblad"
+  | "film-strip"
+  | "blurred-background"
+  | "vintage-amber"
+  | "grid-spec"
+  | "dark-gradient"
+  | "custom";
 
 export type ThemeDefinition = {
   id: ThemeId;
@@ -56,6 +75,8 @@ export type ThemeDefinition = {
   layoutStyle: LayoutStyle;
   /** Default padding (% of cropped photo width) applied when this theme is selected; still user-adjustable via the padding slider. */
   paddingPercent: number;
+  /** Whether brand-badge/accent rendering is shown (shot-on-brand, leica-accent). Defaults to true when omitted. */
+  showBrandBadge?: boolean;
 };
 
 export const THEME_PRESETS: ThemeDefinition[] = [
@@ -113,6 +134,69 @@ export const THEME_PRESETS: ThemeDefinition[] = [
     layoutStyle: "square-border",
     paddingPercent: 5,
   },
+  {
+    id: "leica",
+    backgroundColor: "#ffffff",
+    textColor: "#111111",
+    subtextColor: "#6b6b6b",
+    fontFamily: "sans",
+    layoutStyle: "leica-accent",
+    paddingPercent: 4,
+  },
+  {
+    id: "hasselblad",
+    backgroundColor: "#f5f4f0",
+    textColor: "#181818",
+    subtextColor: "#8a8a85",
+    fontFamily: "sans",
+    layoutStyle: "centered-minimal",
+    paddingPercent: 9,
+  },
+  {
+    id: "film-strip",
+    backgroundColor: "#0a0a0a",
+    textColor: "#f5f5f5",
+    subtextColor: "#a3a3a3",
+    fontFamily: "mono",
+    layoutStyle: "film-strip",
+    paddingPercent: 2,
+  },
+  {
+    id: "blurred-background",
+    backgroundColor: "#000000",
+    textColor: "#ffffff",
+    subtextColor: "#d4d4d4",
+    fontFamily: "sans",
+    layoutStyle: "blurred-bg",
+    paddingPercent: 6,
+  },
+  {
+    id: "vintage-amber",
+    backgroundColor: "#f0ead6",
+    textColor: "#3a2f1d",
+    subtextColor: "#8a7654",
+    fontFamily: "mono",
+    layoutStyle: "vintage-amber",
+    paddingPercent: 3,
+  },
+  {
+    id: "grid-spec",
+    backgroundColor: "#ffffff",
+    textColor: "#111111",
+    subtextColor: "#8a8a8a",
+    fontFamily: "mono",
+    layoutStyle: "grid-spec",
+    paddingPercent: 4,
+  },
+  {
+    id: "dark-gradient",
+    backgroundColor: "#000000",
+    textColor: "#ffffff",
+    subtextColor: "#d4d4d4",
+    fontFamily: "sans",
+    layoutStyle: "dark-gradient",
+    paddingPercent: 0,
+  },
 ];
 
 export function getThemeById(id: ThemeId): ThemeDefinition {
@@ -131,6 +215,8 @@ export type ThemeRenderOptions = {
   /** Padding around the photo, as a percentage of the cropped photo's width (0-10). */
   paddingPercent: number;
   metadata: FrameMetadata;
+  /** Only used when themeId === "custom" — the user-built theme definition. */
+  customTheme?: ThemeDefinition;
 };
 
 function specLine(metadata: FrameMetadata): string {
@@ -213,6 +299,27 @@ function drawBrandBadge(
   return width;
 }
 
+/** Shortens text with an ellipsis so it fits within maxWidth at the given font. */
+function truncateToWidth(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  maxWidth: number,
+  font: string,
+): string {
+  ctx.font = font;
+  if (ctx.measureText(text).width <= maxWidth) return text;
+  let result = text;
+  while (result.length > 1 && ctx.measureText(`${result}…`).width > maxWidth) {
+    result = result.slice(0, -1);
+  }
+  return `${result}…`;
+}
+
+/** Inserts thin-space tracking between characters for a letter-spaced uppercase caption (no reliance on ctx.letterSpacing, which isn't universally supported). */
+function trackedUppercase(text: string): string {
+  return text.toUpperCase().split("").join(" ");
+}
+
 /**
  * Draws the themed, framed photo onto a canvas at the source image's full
  * resolution (scaled by the crop, never downscaled) — so "Download Framed
@@ -223,7 +330,10 @@ export function renderThemedFrame(
   options: ThemeRenderOptions,
   targetCanvas?: HTMLCanvasElement,
 ): HTMLCanvasElement {
-  const theme = getThemeById(options.themeId);
+  const theme =
+    options.themeId === "custom"
+      ? (options.customTheme ?? getThemeById("classic-dark"))
+      : getThemeById(options.themeId);
   const crop = computeCropRect(
     image.naturalWidth,
     image.naturalHeight,
@@ -251,6 +361,27 @@ export function renderThemedFrame(
       break;
     case "square-border":
       drawSquareBorderLayout(ctx, canvas, params);
+      break;
+    case "leica-accent":
+      drawLeicaAccentLayout(ctx, canvas, params);
+      break;
+    case "centered-minimal":
+      drawCenteredMinimalLayout(ctx, canvas, params);
+      break;
+    case "film-strip":
+      drawFilmStripLayout(ctx, canvas, params);
+      break;
+    case "blurred-bg":
+      drawBlurredBgLayout(ctx, canvas, params);
+      break;
+    case "vintage-amber":
+      drawVintageAmberLayout(ctx, canvas, params);
+      break;
+    case "grid-spec":
+      drawGridSpecLayout(ctx, canvas, params);
+      break;
+    case "dark-gradient":
+      drawDarkGradientLayout(ctx, canvas, params);
       break;
   }
 
@@ -345,8 +476,8 @@ function drawPolaroidLayout(
 
 /**
  * Shot-on-brand: bottom bar split left (brand badge + model, or plain
- * "Shot on <camera>" when the make isn't a recognized brand) / right
- * (specs).
+ * "Shot on <camera>" when the make isn't a recognized brand, or the badge
+ * is toggled off) / right (specs).
  */
 function drawShotOnBrandLayout(
   ctx: CanvasRenderingContext2D,
@@ -366,7 +497,10 @@ function drawShotOnBrandLayout(
   ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
 
   const { metadata } = options;
-  const { badge, rest } = detectBrand(metadata.camera);
+  const showBadge = theme.showBrandBadge !== false;
+  const { badge, rest } = showBadge
+    ? detectBrand(metadata.camera)
+    : { badge: null, rest: metadata.camera };
   const modelText = badge
     ? [rest, metadata.lens].filter(Boolean).join("  —  ")
     : metadata.camera
@@ -429,22 +563,6 @@ function drawShotOnBrandLayout(
   ctx.fillStyle = theme.subtextColor;
   ctx.textAlign = "right";
   ctx.fillText(specs, canvas.width - paddingX, centerY);
-}
-
-/** Shortens text with an ellipsis so it fits within maxWidth at the given font. */
-function truncateToWidth(
-  ctx: CanvasRenderingContext2D,
-  text: string,
-  maxWidth: number,
-  font: string,
-): string {
-  ctx.font = font;
-  if (ctx.measureText(text).width <= maxWidth) return text;
-  let result = text;
-  while (result.length > 1 && ctx.measureText(`${result}…`).width > maxWidth) {
-    result = result.slice(0, -1);
-  }
-  return `${result}…`;
 }
 
 /** Overlay: translucent gradient bar drawn directly on the photo's bottom edge — canvas is just the (optionally padded) photo. */
@@ -520,4 +638,390 @@ function drawSquareBorderLayout(
     .filter(Boolean)
     .join("   ·   ");
   ctx.fillText(line, canvas.width / 2, captionY, canvas.width - padding * 2);
+}
+
+/** Leica: minimal light bar with a small red accent square (echoing Leica's red-dot mark) beside the camera name. */
+function drawLeicaAccentLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw);
+  const barHeight = Math.round(sw * 0.1);
+  const paddingX = Math.round(sw * 0.035);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2 + barHeight;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const { metadata } = options;
+  const barY = padding * 2 + sh;
+  const centerY = barY + barHeight / 2;
+  const dotSize = Math.round(barHeight * 0.32);
+  const showBadge = theme.showBrandBadge !== false;
+
+  let cursorX = paddingX;
+  if (showBadge) {
+    ctx.fillStyle = "#e2001a";
+    ctx.fillRect(cursorX, centerY - dotSize / 2, dotSize, dotSize);
+    cursorX += dotSize + Math.round(sw * 0.02);
+  }
+
+  const baseTitleSize = Math.max(14, Math.round(barHeight * 0.3));
+  const minTitleSize = Math.max(10, Math.round(baseTitleSize * 0.6));
+  const subtitleSize = Math.max(11, Math.round(barHeight * 0.19));
+  const title = [metadata.camera, metadata.lens].filter(Boolean).join("  ·  ");
+  const specs = specLine(metadata);
+  const gap = Math.round(sw * 0.03);
+  const availableWidth = canvas.width - cursorX - paddingX;
+
+  // Same overlap risk as shot-on-brand: a long camera+lens title can run
+  // into the right-aligned specs. Shrink the title font until both sides
+  // fit with a gap, then fall back to ellipsis truncation.
+  let titleSize = baseTitleSize;
+  let titleWidth = 0;
+  ctx.font = `400 ${subtitleSize}px ${fontFamily}`;
+  const specsWidth = ctx.measureText(specs).width;
+  while (titleSize >= minTitleSize) {
+    ctx.font = `500 ${titleSize}px ${fontFamily}`;
+    titleWidth = ctx.measureText(title).width;
+    if (titleWidth + gap + specsWidth <= availableWidth) break;
+    titleSize -= 1;
+  }
+  const maxTitleWidth = availableWidth - gap - specsWidth;
+  const titleDisplay =
+    titleWidth > maxTitleWidth && maxTitleWidth > 0
+      ? truncateToWidth(ctx, title, maxTitleWidth, `500 ${titleSize}px ${fontFamily}`)
+      : title;
+
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "left";
+  ctx.fillStyle = theme.textColor;
+  ctx.font = `500 ${titleSize}px ${fontFamily}`;
+  ctx.fillText(titleDisplay, cursorX, centerY);
+
+  ctx.font = `400 ${subtitleSize}px ${fontFamily}`;
+  ctx.fillStyle = theme.subtextColor;
+  ctx.textAlign = "right";
+  ctx.fillText(specs, canvas.width - paddingX, centerY);
+}
+
+/** Hasselblad-inspired: generous uniform margin, small letter-spaced caption centered below — very little on the page besides the photo. */
+function drawCenteredMinimalLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw);
+  const captionHeight = Math.round(sw * 0.09);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2 + captionHeight;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const { metadata } = options;
+  const captionY = padding + sh + captionHeight / 2;
+  const titleSize = Math.max(12, Math.round(captionHeight * 0.26));
+  const subtitleSize = Math.max(10, Math.round(captionHeight * 0.16));
+
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "center";
+  ctx.fillStyle = theme.textColor;
+  ctx.font = `500 ${titleSize}px ${fontFamily}`;
+  const title = metadata.camera ? trackedUppercase(metadata.camera) : "";
+  ctx.fillText(title, canvas.width / 2, captionY - captionHeight * 0.18, canvas.width - padding * 2);
+
+  ctx.fillStyle = theme.subtextColor;
+  ctx.font = `400 ${subtitleSize}px ${fontFamily}`;
+  const sub = [metadata.lens, specLine(metadata)].filter(Boolean).join("   ·   ");
+  ctx.fillText(sub, canvas.width / 2, captionY + captionHeight * 0.22, canvas.width - padding * 2);
+}
+
+function drawRoundedHole(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  size: number,
+  radius: number,
+) {
+  ctx.beginPath();
+  ctx.roundRect(cx - size / 2, cy - size / 2, size, size, radius);
+  ctx.fill();
+}
+
+/** Film strip: dark sprocket-hole bars above and below the photo, caption strip beneath. Padding here reads as the side margin only. */
+function drawFilmStripLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw);
+  const stripHeight = Math.round(sw * 0.05);
+  const captionHeight = Math.round(sw * 0.08);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = stripHeight * 2 + sh + captionHeight;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Guard against a degenerate (near-zero) gap on very small/narrow crops,
+  // which would otherwise turn this into an infinite loop below.
+  const holeSize = Math.max(2, Math.round(stripHeight * 0.42));
+  const holeGap = Math.max(4, holeSize * 1.6);
+  const holeRadius = holeSize * 0.25;
+  ctx.fillStyle = "#2b2b2b";
+  for (let x = holeGap / 2; x < canvas.width; x += holeGap) {
+    drawRoundedHole(ctx, x, stripHeight / 2, holeSize, holeRadius);
+    drawRoundedHole(ctx, x, stripHeight + sh + stripHeight / 2, holeSize, holeRadius);
+  }
+
+  ctx.drawImage(image, sx, sy, sw, sh, padding, stripHeight, sw, sh);
+
+  const { metadata } = options;
+  const captionY = canvas.height - captionHeight / 2;
+  const fontSize = Math.max(11, Math.round(captionHeight * 0.3));
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "center";
+  ctx.fillStyle = theme.subtextColor;
+  ctx.font = `400 ${fontSize}px ${fontFamily}`;
+  const line = [metadata.camera, specLine(metadata), metadata.takenAt]
+    .filter(Boolean)
+    .join("   ·   ");
+  ctx.fillText(line, canvas.width / 2, captionY, canvas.width - padding * 2);
+}
+
+/** Blurred background: the photo itself, cover-scaled and blurred, fills the frame behind a sharp, padded copy — caption below. */
+function drawBlurredBgLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw) + Math.round(sw * 0.03);
+  const captionHeight = Math.round(sw * 0.09);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2 + captionHeight;
+
+  // Blurred, cover-scaled backdrop filling the whole canvas. ctx.filter
+  // degrades gracefully (no blur, still a valid image) on the rare
+  // browser without Canvas 2D filter support.
+  ctx.save();
+  ctx.filter = `blur(${Math.max(8, Math.round(sw * 0.02))}px)`;
+  const coverScale = Math.max(canvas.width / sw, canvas.height / sh) * 1.08;
+  const bw = sw * coverScale;
+  const bh = sh * coverScale;
+  ctx.drawImage(image, sx, sy, sw, sh, (canvas.width - bw) / 2, (canvas.height - bh) / 2, bw, bh);
+  ctx.restore();
+
+  // Dark scrim so the blurred backdrop doesn't fight the sharp photo/text.
+  ctx.fillStyle = "rgba(0,0,0,0.35)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const { metadata } = options;
+  const captionY = padding + sh + captionHeight / 2;
+  const titleSize = Math.max(13, Math.round(captionHeight * 0.3));
+  const subtitleSize = Math.max(11, Math.round(captionHeight * 0.2));
+
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "center";
+  ctx.fillStyle = theme.textColor;
+  ctx.font = `600 ${titleSize}px ${fontFamily}`;
+  const title = [metadata.camera, metadata.lens].filter(Boolean).join("  —  ");
+  ctx.fillText(title, canvas.width / 2, captionY - captionHeight * 0.2, canvas.width - padding * 2);
+
+  ctx.fillStyle = theme.subtextColor;
+  ctx.font = `400 ${subtitleSize}px ${fontFamily}`;
+  ctx.fillText(specLine(metadata), canvas.width / 2, captionY + captionHeight * 0.24, canvas.width - padding * 2);
+}
+
+/** Vintage amber: cream border, soft vignette, and an amber monospace date-stamp in the corner like an old point-and-shoot. */
+function drawVintageAmberLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw) + Math.round(sw * 0.015);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const vignette = ctx.createRadialGradient(
+    padding + sw / 2,
+    padding + sh / 2,
+    sh * 0.3,
+    padding + sw / 2,
+    padding + sh / 2,
+    sh * 0.72,
+  );
+  vignette.addColorStop(0, "rgba(0,0,0,0)");
+  vignette.addColorStop(1, "rgba(0,0,0,0.35)");
+  ctx.fillStyle = vignette;
+  ctx.fillRect(padding, padding, sw, sh);
+
+  const { metadata } = options;
+  const stampSize = Math.max(14, Math.round(sw * 0.024));
+  const amber = "#ff8a00";
+  const stampX = padding + sw - Math.round(sw * 0.03);
+  const stampY = padding + sh - Math.round(sw * 0.03);
+
+  if (metadata.takenAt) {
+    ctx.save();
+    ctx.shadowColor = "rgba(255,138,0,0.55)";
+    ctx.shadowBlur = stampSize * 0.4;
+    ctx.fillStyle = amber;
+    ctx.font = `600 ${stampSize}px ${fontFamily}`;
+    ctx.textAlign = "right";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText(metadata.takenAt, stampX, stampY);
+    ctx.restore();
+  }
+
+  if (metadata.camera) {
+    const labelSize = Math.max(11, Math.round(sw * 0.016));
+    ctx.fillStyle = "#f5ead2";
+    ctx.font = `400 ${labelSize}px ${fontFamily}`;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText(
+      [metadata.camera, specLine(metadata)].filter(Boolean).join("   ·   "),
+      padding + Math.round(sw * 0.02),
+      padding + sh - Math.round(sw * 0.03),
+      sw * 0.65,
+    );
+  }
+}
+
+/** Grid spec sheet: photo on top, an even grid of labeled spec cells (CAMERA / LENS / FOCAL / APERTURE / SHUTTER / ISO) below. */
+function drawGridSpecLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw);
+  const gridHeight = Math.round(sw * 0.15);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2 + gridHeight;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const { metadata } = options;
+  // Short spec-sheet-style labels are kept in English regardless of UI
+  // locale, matching the existing "ISO" convention used elsewhere in this
+  // module — these read as universal gear-spec shorthand, not prose.
+  const fields = [
+    { label: "CAMERA", value: metadata.camera },
+    { label: "LENS", value: metadata.lens },
+    { label: "FOCAL", value: metadata.focalLength },
+    { label: "APERTURE", value: metadata.aperture },
+    { label: "SHUTTER", value: metadata.shutter },
+    { label: "ISO", value: metadata.iso ? `ISO${metadata.iso}` : "" },
+  ].filter((field) => field.value);
+
+  if (fields.length === 0) return;
+
+  const cellWidth = (canvas.width - padding * 2) / fields.length;
+  const gridY = padding * 2 + sh;
+  const labelSize = Math.max(9, Math.round(gridHeight * 0.16));
+  const valueSize = Math.max(12, Math.round(gridHeight * 0.24));
+
+  ctx.textAlign = "center";
+  fields.forEach((field, i) => {
+    const cx = padding + cellWidth * (i + 0.5);
+    if (i > 0) {
+      ctx.strokeStyle = theme.subtextColor;
+      ctx.globalAlpha = 0.25;
+      ctx.beginPath();
+      ctx.moveTo(padding + cellWidth * i, gridY + gridHeight * 0.2);
+      ctx.lineTo(padding + cellWidth * i, gridY + gridHeight * 0.8);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    ctx.fillStyle = theme.subtextColor;
+    ctx.font = `500 ${labelSize}px ${fontFamily}`;
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText(field.label, cx, gridY + gridHeight * 0.42, cellWidth - 8);
+
+    ctx.fillStyle = theme.textColor;
+    ctx.font = `700 ${valueSize}px ${fontFamily}`;
+    ctx.fillText(field.value, cx, gridY + gridHeight * 0.72, cellWidth - 8);
+  });
+}
+
+/** Dark gradient overlay: borderless bleed photo, a taller/darker bottom gradient than minimal-overlay, bigger type, subtle date watermark top-right. */
+function drawDarkGradientLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2;
+
+  if (padding > 0) {
+    ctx.fillStyle = theme.backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const { metadata } = options;
+  const overlayHeight = Math.round(sh * 0.32);
+  const overlayY = padding + sh - overlayHeight;
+
+  const gradient = ctx.createLinearGradient(0, overlayY, 0, overlayY + overlayHeight);
+  gradient.addColorStop(0, "rgba(0,0,0,0)");
+  gradient.addColorStop(1, "rgba(0,0,0,0.78)");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(padding, overlayY, sw, overlayHeight);
+
+  const paddingX = Math.round(sw * 0.045);
+  const titleSize = Math.max(16, Math.round(overlayHeight * 0.22));
+  const subtitleSize = Math.max(12, Math.round(overlayHeight * 0.14));
+
+  ctx.textBaseline = "alphabetic";
+  ctx.textAlign = "left";
+  ctx.fillStyle = theme.textColor;
+  ctx.font = `700 ${titleSize}px ${fontFamily}`;
+  const title = [metadata.camera, metadata.lens].filter(Boolean).join("  —  ");
+  ctx.fillText(title, padding + paddingX, padding + sh - overlayHeight * 0.42, sw - paddingX * 2);
+
+  ctx.fillStyle = theme.subtextColor;
+  ctx.font = `400 ${subtitleSize}px ${fontFamily}`;
+  ctx.fillText(specLine(metadata), padding + paddingX, padding + sh - overlayHeight * 0.2, sw * 0.75);
+
+  if (metadata.takenAt) {
+    ctx.fillStyle = "rgba(255,255,255,0.55)";
+    ctx.font = `400 ${subtitleSize}px ${fontFamily}`;
+    ctx.textAlign = "right";
+    ctx.fillText(
+      metadata.takenAt,
+      padding + sw - paddingX,
+      padding + Math.round(sw * 0.04) + subtitleSize,
+      sw * 0.4,
+    );
+  }
 }
