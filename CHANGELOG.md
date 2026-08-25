@@ -5,7 +5,8 @@
 - 도메인 `exifnd.com` 구매(Namecheap) 완료. GitHub 저장소(`SH8952/exiflens`) 생성 및 전체 커밋 이력 푸시, Vercel 프로젝트(`Moneypick` 팀) 생성 및 GitHub 연동 배포, 커스텀 도메인 `exifnd.com` 연결(A 레코드 `216.198.79.1`), Google Search Console 도메인 속성 소유권 확인(TXT 레코드) 및 `sitemap.xml` 제출까지 완료
 - 애드센스 사이트 추가 시 "사이트를 확인할 수 없습니다" 오류 발생. 원인 분석 결과, `src/app/[locale]/layout.tsx`가 `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID`(`pub-0042120343274941`, `ca-` 접두사 없음) 값을 그대로 애드센스 스크립트 태그의 `client=` 쿼리에 사용하고 있어, 실제 배포된 페이지의 스크립트가 `client=pub-0042120343274941`로 렌더링됨 — 애드센스가 요구하는 정확한 형식(`client=ca-pub-0042120343274941`)과 불일치해 크롤러가 소유권을 확인하지 못함
 - 수정: `layout.tsx`에 `ca-` 접두사가 없으면 자동으로 붙여주는 정규화 로직(`ADSENSE_CLIENT_ID`)을 추가해 스크립트 태그에만 `ca-pub-...` 형식이 적용되도록 함. `ads.txt`(접두사 없는 `pub-...` 형식이 정상)와 환경변수 원본 값은 변경하지 않아 다른 용도와의 호환성 유지
-- 검증: `npm run build` 정상 통과, 프로덕션 서버 기동 후 `curl`로 실제 렌더링된 HTML의 `client=ca-pub-0042120343274941` 값 확인
+- 검증: `npm run build` 정상 통과, 프로덕션 서버 기동 후 `curl`로 실제 렌더링된 HTML의 `client=ca-pub-0042120343274941` 값 확인. 배포 후 실제 라이브 사이트(`https://exifnd.com`)에서도 브라우저로 재확인 완료
+- 결과: 코드 수정 후에도 애드센스 "애드센스 코드 스니펫" 방식 재확인은 즉시 통과하지 못함(크롤러 캐시 지연 추정). **"Ads.txt 스니펫" 확인 방식으로 전환하니 즉시 소유권 확인 성공** — 사이트 소유권 확인 완료, 이후 "검토 요청" 제출 단계로 진행
 
 ## 2026-08-29 — Mac 로컬 개발 환경 빌드 에러 해결 (`Can't resolve '@tailwindcss/typography'`)
 
