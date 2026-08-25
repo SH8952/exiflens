@@ -1,5 +1,15 @@
 # 개발 이력 (Development History)
 
+## 2026-08-26 — 구글 애드센스 심사 대비: 가이드 아티클 3개 추가 (Phase 4 · 2차 배치)
+
+- 15~20개 아티클 목표를 향한 두 번째 배치. 3개 주제 × 4개 언어 = 12개 파일 신규 작성 (누적 7개 아티클, 총 28개 파일)
+  - "ND Filter Types Explained: Screw-On vs Square, Solid vs Graduated" — 1차 배치의 필터 강도 가이드를 보완하는 주제. 원형 스크류 필터 vs 사각/슬롯 홀더 시스템, 솔리드 ND vs 그라데이션 ND(소프트/하드/리버스 엣지), 어떤 조합을 먼저 구매할지에 대한 실전 조언. 1차 배치 글로 내부링크 연결
+  - "Astrophotography Basics: Camera Settings for the Night Sky" — 기획서 예시 주제. 필요 장비, 조리개·셔터스피드(500 룰)·ISO 설정, 어두운 곳에서 초점 맞추는 법, 별 궤적을 의도적으로 활용하는 법, 광해가 가장 큰 제약 요인이라는 점까지 다룸
+  - "Understanding Depth of Field: Aperture, Focal Length, and Distance" — 기획서 예시 주제. 심도를 결정하는 3요소(조리개·초점거리·피사체 거리)와 상호작용, 과초점 거리, 포커스 스태킹까지 다룸
+- 슬러그: `nd-filter-types-explained`, `astrophotography-camera-settings-night-sky`, `understanding-depth-of-field` (4개 언어 모두 동일 슬러그, hreflang 자동 매칭)
+- 검증: `npm run build`에서 62개 페이지 전체 SSG 유지 확인(기존 50 + 신규 아티클 12페이지). 새 포트(4241)로 프로덕션 서버를 띄워 신규 12개 URL 전체 200 응답 확인, `/ko/guides` 목록에 아티클 7개 전체가 최신순으로 정상 표시되는 것과 `/ja/guides/understanding-depth-of-field` 본문 렌더링을 Playwright 스크린샷으로 확인, `sitemap.xml`이 44개 → 56개 URL로 정확히 증가함을 확인, `git status`로 의도한 12개 신규 파일 외에 다른 변경/임시 파일이 없음을 확인
+- 다음 단계: 남은 8~13개 아티클을 계속 배치로 작성 (남은 후보 주제: RAW vs JPEG, 히스토그램 읽는 법, 매뉴얼 모드 입문, 장노출 손떨림 방지, 일출·일몰 촬영 설정, 광궤적 촬영, 광각 vs 망원 초점거리 비교 등 — 심도 아티클과 겹치지 않는 주제 위주로 선별 예정)
+
 ## 2026-08-25 — 구글 애드센스 심사 대비: 가이드 아티클 3개 추가 (Phase 4 · 1차 배치)
 
 - 애드센스 기획서 2번 항목의 "15~20개 아티클" 목표를 향한 첫 배치. 3개 주제 × 4개 언어 = 12개 파일 신규 작성 (누적 4개 아티클, 총 16개 파일)
