@@ -61,6 +61,9 @@
       "no-frame": "No Frame",
       "just-frame": "Just Frame",
       "cinema-scope": "Cinema Scope",
+      "lightroom": "Lightroom",
+      "film": "Film",
+      "monitor": "Monitor",
       "custom": "Custom"
     },
     "customBackground": "Background Color",

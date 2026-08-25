@@ -61,6 +61,9 @@
       "no-frame": "Sin Marco",
       "just-frame": "Solo Marco",
       "cinema-scope": "Cinemascope",
+      "lightroom": "Lightroom",
+      "film": "Película",
+      "monitor": "Monitor",
       "custom": "Personalizado"
     },
     "customBackground": "Color de Fondo",

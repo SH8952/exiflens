@@ -54,7 +54,10 @@ export type LayoutStyle =
   | "dark-gradient"
   | "no-frame"
   | "just-frame"
-  | "cinema-scope";
+  | "cinema-scope"
+  | "lightroom-mat"
+  | "film-lcd"
+  | "monitor";
 
 export type ThemeFont = "sans" | "serif" | "mono";
 
@@ -74,6 +77,9 @@ export type ThemeId =
   | "no-frame"
   | "just-frame"
   | "cinema-scope"
+  | "lightroom"
+  | "film"
+  | "monitor"
   | "custom";
 
 export type ThemeDefinition = {
@@ -229,6 +235,33 @@ export const THEME_PRESETS: ThemeDefinition[] = [
     fontFamily: "sans",
     layoutStyle: "cinema-scope",
     paddingPercent: 0,
+  },
+  {
+    id: "lightroom",
+    backgroundColor: "#1a1a1a",
+    textColor: "#e5e5e5",
+    subtextColor: "#8a8a8a",
+    fontFamily: "sans",
+    layoutStyle: "lightroom-mat",
+    paddingPercent: 8,
+  },
+  {
+    id: "film",
+    backgroundColor: "#000000",
+    textColor: "#ff8a00",
+    subtextColor: "#ff8a00",
+    fontFamily: "mono",
+    layoutStyle: "film-lcd",
+    paddingPercent: 0,
+  },
+  {
+    id: "monitor",
+    backgroundColor: "#0d0d0d",
+    textColor: "#e5e5e5",
+    subtextColor: "#7a7a7a",
+    fontFamily: "mono",
+    layoutStyle: "monitor",
+    paddingPercent: 3,
   },
 ];
 
@@ -412,6 +445,15 @@ export function renderThemedFrame(
       break;
     case "cinema-scope":
       drawCinemaScopeLayout(ctx, canvas, params);
+      break;
+    case "lightroom-mat":
+      drawLightroomMatLayout(ctx, canvas, params);
+      break;
+    case "film-lcd":
+      drawFilmLcdLayout(ctx, canvas, params);
+      break;
+    case "monitor":
+      drawMonitorLayout(ctx, canvas, params);
       break;
   }
 
@@ -1172,5 +1214,173 @@ function drawCinemaScopeLayout(
       ctx.fillRect(padding, padding, sw, barHeight);
       ctx.fillRect(padding, padding + sh - barHeight, sw, barHeight);
     }
+  }
+}
+
+/**
+ * Lightroom: a generous, uniform dark mat (like Lightroom's own export
+ * watermark preview) with a single small, unobtrusive caption tucked into
+ * the bottom-right corner of that mat — deliberately quiet, no bold
+ * accents or brand mark. Distinct from Hasselblad's centered/letter-spaced
+ * caption: this one sits off to the side, unassuming.
+ */
+function drawLightroomMatLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw) || Math.round(sw * 0.06);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const { metadata } = options;
+  const line = [metadata.camera, metadata.lens, specLine(metadata)]
+    .filter(Boolean)
+    .join("   ·   ");
+  if (!line) return;
+
+  const fontSize = Math.max(10, Math.round(padding * 0.28));
+  const captionY = padding + sh + padding * 0.42;
+  const maxWidth = canvas.width - padding * 2;
+
+  // Equipment names never truncate — if the combined line is too wide for
+  // the mat, shrink the font (no floor) instead of cutting it off.
+  let size = fontSize;
+  ctx.font = `400 ${size}px ${fontFamily}`;
+  while (size > 1 && ctx.measureText(line).width > maxWidth) {
+    size -= 1;
+    ctx.font = `400 ${size}px ${fontFamily}`;
+  }
+
+  ctx.fillStyle = theme.subtextColor;
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  ctx.fillText(line, canvas.width - padding, captionY, maxWidth);
+}
+
+/**
+ * Film: an old point-and-shoot "data back" look — black frame, no border
+ * by default, and an amber LCD-style multi-line stamp burned into the
+ * photo's bottom-left corner (date on top, camera/lens/specs below), with
+ * a soft amber glow. Distinct from the existing Vintage Amber theme (cream
+ * mat + single-line date stamp bottom-right) and Film Strip (sprocket
+ * holes + caption bar below the photo) — same "old camera readout" family,
+ * different position and density of text (석한님 피드백: "폰트 위치가 다름").
+ */
+function drawFilmLcdLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2;
+
+  if (padding > 0) {
+    ctx.fillStyle = theme.backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const { metadata } = options;
+  const gearLine = [metadata.camera, metadata.lens, specLine(metadata)]
+    .filter(Boolean)
+    .join("   ·   ");
+  const stampX = padding + Math.round(sw * 0.025);
+  const inset = Math.round(sw * 0.025);
+  const dateSize = Math.max(13, Math.round(sw * 0.02));
+  const gearSize = Math.max(10, Math.round(sw * 0.014));
+  const maxWidth = sw - inset * 2;
+
+  ctx.save();
+  ctx.shadowColor = "rgba(255,138,0,0.55)";
+  ctx.shadowBlur = dateSize * 0.4;
+  ctx.fillStyle = theme.textColor;
+  ctx.textAlign = "left";
+
+  let gearY = padding + sh - inset;
+  if (gearLine) {
+    // Gear info is equipment-identifying, so shrink (no floor) instead of
+    // truncating if it's wider than the photo.
+    let size = gearSize;
+    ctx.font = `400 ${size}px ${fontFamily}`;
+    while (size > 1 && ctx.measureText(gearLine).width > maxWidth) {
+      size -= 1;
+      ctx.font = `400 ${size}px ${fontFamily}`;
+    }
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText(gearLine, stampX, gearY, maxWidth);
+  }
+
+  if (metadata.takenAt) {
+    const dateY = gearLine ? gearY - gearSize * 1.6 : gearY;
+    ctx.font = `700 ${dateSize}px ${fontFamily}`;
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText(metadata.takenAt, stampX, dateY);
+  }
+
+  ctx.restore();
+}
+
+/**
+ * Monitor: a thin, near-black bezel around the photo (like a display
+ * frame) with tiny monospace readouts tucked into the bottom corners of
+ * that bezel — camera/lens on the left, specs/date on the right. Deliberately
+ * compact/quiet, unlike Strap's prominent info bar.
+ */
+function drawMonitorLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options, fontFamily }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw) || Math.round(sw * 0.025);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const { metadata } = options;
+  const left = [metadata.camera, metadata.lens].filter(Boolean).join("  ·  ");
+  const right = [specLine(metadata), metadata.takenAt].filter(Boolean).join("   ·   ");
+  if (!left && !right) return;
+
+  const bezelCenterY = padding + sh + padding / 2;
+  const baseSize = Math.max(8, Math.round(padding * 0.34));
+  const gap = Math.round(sw * 0.02);
+  const availableWidth = canvas.width - padding * 2 - gap;
+
+  // Shared shrink (no truncation) if both corners together are wider than
+  // the thin bezel allows.
+  let size = baseSize;
+  ctx.font = `400 ${size}px ${fontFamily}`;
+  while (
+    size > 1 &&
+    ctx.measureText(left).width + ctx.measureText(right).width > availableWidth
+  ) {
+    size -= 1;
+    ctx.font = `400 ${size}px ${fontFamily}`;
+  }
+
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = theme.subtextColor;
+  if (left) {
+    ctx.textAlign = "left";
+    ctx.fillText(left, padding, bezelCenterY);
+  }
+  if (right) {
+    ctx.textAlign = "right";
+    ctx.fillText(right, canvas.width - padding, bezelCenterY);
   }
 }
