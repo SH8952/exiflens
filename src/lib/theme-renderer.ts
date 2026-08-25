@@ -240,10 +240,11 @@ export const THEME_PRESETS: ThemeDefinition[] = [
     id: "lightroom",
     backgroundColor: "#1a1a1a",
     textColor: "#e5e5e5",
-    subtextColor: "#8a8a8a",
+    subtextColor: "#c9c9c9",
     fontFamily: "sans",
     layoutStyle: "lightroom-mat",
-    paddingPercent: 8,
+    // 참고 이미지처럼 두꺼운 매트가 아닌 얇은 균일 테두리 (석한님 요청).
+    paddingPercent: 2,
   },
   {
     id: "film",
@@ -1218,11 +1219,13 @@ function drawCinemaScopeLayout(
 }
 
 /**
- * Lightroom: a generous, uniform dark mat (like Lightroom's own export
- * watermark preview) with a single small, unobtrusive caption tucked into
- * the bottom-right corner of that mat — deliberately quiet, no bold
- * accents or brand mark. Distinct from Hasselblad's centered/letter-spaced
- * caption: this one sits off to the side, unassuming.
+ * Lightroom: a thin, uniform dark mat around the photo (like Lightroom's
+ * own export border) with a quiet caption tucked inside the bottom edge of
+ * that mat — camera+lens on the left, date on the right, no exposure
+ * specs, plain text with no accents or brand mark. Matches a reference
+ * export 석한님 sent exactly: thin ~1.5% border on all sides (not a thick
+ * mat), caption sized to fit inside that thin strip rather than adding
+ * extra canvas height.
  */
 function drawLightroomMatLayout(
   ctx: CanvasRenderingContext2D,
@@ -1230,7 +1233,7 @@ function drawLightroomMatLayout(
   { image, crop, theme, options, fontFamily }: DrawParams,
 ) {
   const { sx, sy, sw, sh } = crop;
-  const padding = Math.round((options.paddingPercent / 100) * sw) || Math.round(sw * 0.06);
+  const padding = Math.round((options.paddingPercent / 100) * sw) || Math.round(sw * 0.015);
 
   canvas.width = sw + padding * 2;
   canvas.height = sh + padding * 2;
@@ -1240,38 +1243,49 @@ function drawLightroomMatLayout(
   ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
 
   const { metadata } = options;
-  const line = [metadata.camera, metadata.lens, specLine(metadata)]
-    .filter(Boolean)
-    .join("   ·   ");
-  if (!line) return;
+  const left = [metadata.camera, metadata.lens].filter(Boolean).join("   ");
+  const right = metadata.takenAt;
+  if (!left && !right) return;
 
-  const fontSize = Math.max(10, Math.round(padding * 0.28));
-  const captionY = padding + sh + padding * 0.42;
-  const maxWidth = canvas.width - padding * 2;
+  const captionY = padding + sh + padding / 2;
+  const baseSize = Math.max(8, Math.round(padding * 0.32));
+  const gap = Math.round(sw * 0.02);
+  const maxTotalWidth = canvas.width - padding * 2 - gap;
 
-  // Equipment names never truncate — if the combined line is too wide for
-  // the mat, shrink the font (no floor) instead of cutting it off.
-  let size = fontSize;
+  // Camera/lens are equipment-identifying text, so shrink (no floor)
+  // rather than truncate if the two sides together are too wide for the
+  // thin border strip.
+  let size = baseSize;
   ctx.font = `400 ${size}px ${fontFamily}`;
-  while (size > 1 && ctx.measureText(line).width > maxWidth) {
+  while (
+    size > 1 &&
+    ctx.measureText(left).width + ctx.measureText(right).width > maxTotalWidth
+  ) {
     size -= 1;
     ctx.font = `400 ${size}px ${fontFamily}`;
   }
 
   ctx.fillStyle = theme.subtextColor;
-  ctx.textAlign = "right";
   ctx.textBaseline = "middle";
-  ctx.fillText(line, canvas.width - padding, captionY, maxWidth);
+  if (left) {
+    ctx.textAlign = "left";
+    ctx.fillText(left, padding, captionY);
+  }
+  if (right) {
+    ctx.textAlign = "right";
+    ctx.fillText(right, canvas.width - padding, captionY);
+  }
 }
 
 /**
- * Film: an old point-and-shoot "data back" look — black frame, no border
- * by default, and an amber LCD-style multi-line stamp burned into the
- * photo's bottom-left corner (date on top, camera/lens/specs below), with
- * a soft amber glow. Distinct from the existing Vintage Amber theme (cream
- * mat + single-line date stamp bottom-right) and Film Strip (sprocket
- * holes + caption bar below the photo) — same "old camera readout" family,
- * different position and density of text (석한님 피드백: "폰트 위치가 다름").
+ * Film: an old point-and-shoot "data back" look — no border by default,
+ * amber LCD-style stamp burned into the photo's bottom-left corner as 3
+ * stacked, uppercase, letter-spaced lines (date / camera / lens — no
+ * exposure specs), all one size, with a soft amber glow. Matches a
+ * reference export 석한님 sent exactly: same 3-line order, all caps, no
+ * f-stop/shutter/ISO line. Distinct from Vintage Amber (cream mat +
+ * single-line date stamp bottom-right) and Film Strip (sprocket holes +
+ * caption bar below photo).
  */
 function drawFilmLcdLayout(
   ctx: CanvasRenderingContext2D,
@@ -1291,41 +1305,39 @@ function drawFilmLcdLayout(
   ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
 
   const { metadata } = options;
-  const gearLine = [metadata.camera, metadata.lens, specLine(metadata)]
+  const lines = [metadata.takenAt, metadata.camera, metadata.lens]
     .filter(Boolean)
-    .join("   ·   ");
+    .map((s) => s.toUpperCase());
+  if (lines.length === 0) return;
+
   const stampX = padding + Math.round(sw * 0.025);
-  const inset = Math.round(sw * 0.025);
-  const dateSize = Math.max(13, Math.round(sw * 0.02));
-  const gearSize = Math.max(10, Math.round(sw * 0.014));
+  const inset = Math.round(sw * 0.03);
+  const baseSize = Math.max(13, Math.round(sw * 0.02));
+  const lineHeight = baseSize * 1.75;
   const maxWidth = sw - inset * 2;
+
+  // Camera/lens are equipment-identifying text, so shrink (no floor)
+  // rather than truncate if any line is wider than the photo.
+  let size = baseSize;
+  ctx.font = `700 ${size}px ${fontFamily}`;
+  while (size > 1 && lines.some((l) => ctx.measureText(l).width > maxWidth)) {
+    size -= 1;
+    ctx.font = `700 ${size}px ${fontFamily}`;
+  }
 
   ctx.save();
   ctx.shadowColor = "rgba(255,138,0,0.55)";
-  ctx.shadowBlur = dateSize * 0.4;
+  ctx.shadowBlur = size * 0.4;
   ctx.fillStyle = theme.textColor;
   ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+  ctx.font = `700 ${size}px ${fontFamily}`;
 
-  let gearY = padding + sh - inset;
-  if (gearLine) {
-    // Gear info is equipment-identifying, so shrink (no floor) instead of
-    // truncating if it's wider than the photo.
-    let size = gearSize;
-    ctx.font = `400 ${size}px ${fontFamily}`;
-    while (size > 1 && ctx.measureText(gearLine).width > maxWidth) {
-      size -= 1;
-      ctx.font = `400 ${size}px ${fontFamily}`;
-    }
-    ctx.textBaseline = "alphabetic";
-    ctx.fillText(gearLine, stampX, gearY, maxWidth);
-  }
-
-  if (metadata.takenAt) {
-    const dateY = gearLine ? gearY - gearSize * 1.6 : gearY;
-    ctx.font = `700 ${dateSize}px ${fontFamily}`;
-    ctx.textBaseline = "alphabetic";
-    ctx.fillText(metadata.takenAt, stampX, dateY);
-  }
+  const bottomY = padding + sh - inset;
+  const startY = bottomY - lineHeight * (lines.length - 1);
+  lines.forEach((line, i) => {
+    ctx.fillText(line, stampX, startY + lineHeight * i, maxWidth);
+  });
 
   ctx.restore();
 }
