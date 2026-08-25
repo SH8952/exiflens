@@ -1,5 +1,15 @@
 # 개발 이력 (Development History)
 
+## 2026-08-28 — 구글 애드센스 심사 대비: 가이드 아티클 3개 추가 (Phase 4 · 4차 배치)
+
+- 15~20개 아티클 목표를 향한 네 번째 배치. 3개 주제 × 4개 언어 = 12개 파일 신규 작성 (누적 13개 아티클, 총 52개 파일)
+  - "Beginner's Guide to Manual Mode: When and How to Leave Auto Behind" — 매뉴얼 모드가 오토·반자동 모드와 실제로 무엇이 다른지, 조리개→셔터스피드→ISO 순으로 설정하는 실전 순서, 오토·반자동이 더 나은 상황까지 다룸
+  - "Best Camera Settings for Sunrise and Sunset Photography" — 골든아워의 높은 다이내믹 레인지 문제, 스팟 측광, 그라데이션 ND 필터, 화이트밸런스, 블루아워 타이밍까지 다룸. 이전 배치의 ND 필터·풍경 아티클들과 자연스럽게 연결
+  - "Understanding Metering Modes: Matrix, Center-Weighted, and Spot" — 노출계의 "평균 = 중간 회색" 기본 원리와 다분할·중앙중점·스팟 측광의 차이, 상황별 선택 기준을 다룸
+- 슬러그: `beginners-guide-to-manual-mode`, `sunrise-sunset-photography-camera-settings`, `understanding-metering-modes` (4개 언어 모두 동일 슬러그, hreflang 자동 매칭)
+- 검증: `npm run build`에서 86개 페이지 전체 SSG 유지 확인(기존 74 + 신규 아티클 12페이지). 새 포트(4273)로 프로덕션 서버를 띄워 신규 12개 URL 전체 200 응답 확인, `/ja/guides` 목록에 아티클 13개 전체가 최신순으로 정상 표시되는 것과 `/ko/guides/understanding-metering-modes` 본문 렌더링을 Playwright 스크린샷으로 확인, `sitemap.xml`이 68개 → 80개 URL로 정확히 증가함을 확인, `git status`로 의도한 12개 신규 파일 외에 다른 변경/임시 파일이 없음을 확인
+- 다음 단계: 남은 2~7개 아티클로 목표(15~20개) 달성 예정 (남은 후보 주제: 광궤적 촬영, 광각 vs 망원 초점거리 비교, 카메라별 EXIF 확인법, GPS 데이터 프라이버시 등 — 지금까지 다룬 13개 주제와 겹치지 않는 것 위주로 선별). 애드센스 승인 이후 지속 발행을 위한 확장 주제 목록 정리는 사용자 요청 시 별도 진행 예정
+
 ## 2026-08-27 — 구글 애드센스 심사 대비: 가이드 아티클 3개 추가 (Phase 4 · 3차 배치)
 
 - 15~20개 아티클 목표를 향한 세 번째 배치. 3개 주제 × 4개 언어 = 12개 파일 신규 작성 (누적 10개 아티클, 총 40개 파일)
