@@ -1,5 +1,14 @@
 # 개발 이력 (Development History)
 
+## 2026-08-29 — Mac 로컬 개발 환경 빌드 에러 해결 (`Can't resolve '@tailwindcss/typography'`)
+
+- 증상: Mac 로컬 프리뷰(`localhost:3000`)에서 `CssSyntaxError: tailwindcss ... Can't resolve '@tailwindcss/typography'` 빌드 에러 발생. Phase 3에서 추가된 `@tailwindcss/typography` 등 신규 npm 의존성이 Mac 쪽 `node_modules`에 설치되지 않은 상태였음 (원인: Phase 3 진행 당시 Mac 측 세션 샌드박스 디스크 공간 부족으로 `npm install`이 실패했고, 이후 배치들은 콘텐츠 파일만 동기화해 재설치가 이뤄지지 않음)
+- 1차 진단 오류 정정: 처음에는 Mac 홈 디렉터리(`/sessions` 파티션, 9.8GB)의 디스크 공간 부족이 원인이라 판단해 사용자 동의 하에 다른 프로젝트(네이버 블로그 자동화, moneypick_source_v3, youtube_news_automation, 숏폼 자동화)의 `node_modules`/`venv` 폴더를 임시 폴더로 이동 시도. 그러나 이 세션에는 실제 파일 삭제 권한을 요청하는 도구가 없어 `rm`이 "Operation not permitted"로 거부됨을 확인, 이동했던 4개 폴더는 즉시 원위치로 복원(사용 중인 프로젝트에 영향 없음)
+- 재진단: `df -h`로 다시 확인한 결과, 사용자가 연결한 바탕화면 폴더(`~/Desktop`)는 실제 Mac 디스크(총 927GB, 여유 224GB) 위에 있어 공간이 충분했고, 문제는 이 세션이 명령 실행에 사용하는 별도의 작은 샌드박스 파티션(9.8GB, 100% 사용) 자체였음 — 사용자 파일과 무관한 시스템 내부 영역이라 이 세션의 도구로는 접근·정리가 불가능함을 확인
+- 해결: 사용자가 Mac 터미널에서 직접 `cd ~/Desktop/exiflens && npm install` 실행 → `@tailwindcss/typography` 정상 설치 확인. 이후 Next.js 개발 서버가 "(stale)" 캐시 상태를 표시해 여전히 에러가 남아있었으나, `.next` 캐시 폴더 삭제 후 `npm run dev` 재시작 및 브라우저 강력 새로고침으로 완전히 해결. 사용자가 정상 렌더링을 최종 확인함
+- 참고: 클라우드 저장소(실제 배포 기준)는 이 문제와 무관하게 매 배치마다 `npm run build`로 정상 검증되어 왔으며, 이번 이슈는 Mac 로컬 프리뷰 환경에만 국한된 문제였음
+- 다음 단계: 애드센스 승인 이후 지속 발행을 위한 확장 주제 목록 정리
+
 ## 2026-08-29 — 구글 애드센스 심사 대비: 가이드 아티클 3개 추가, 목표(15~20개) 달성 (Phase 4 · 5차 배치)
 
 - 15~20개 아티클 목표를 향한 다섯 번째 배치. 3개 주제 × 4개 언어 = 12개 파일 신규 작성 (누적 16개 아티클, 총 64개 파일) — **목표 범위(15~20개) 달성**
