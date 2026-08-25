@@ -100,7 +100,7 @@ function FrameEditor({
     textColor: "#ffffff",
     subtextColor: "#a3a3a3",
     fontFamily: "sans",
-    layoutStyle: "shot-on-brand",
+    layoutStyle: "strap",
     paddingPercent: DEFAULT_PADDING_PERCENT,
     showBrandBadge: true,
   });

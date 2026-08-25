@@ -15,12 +15,19 @@ import {
  *
  * Phase 1 shipped 6 themes covering the core layout families (bottom bar,
  * overlay-on-photo, uniform border, polaroid-style thick margin, and the
- * two-column "shot on" wordmark style). Phase 2 (this file) adds the
- * remaining 7 presets from the original 15-theme request — Leica,
- * Hasselblad, Film Strip, Blurred Background, Vintage Amber, Grid Spec
- * Sheet, Dark Gradient — plus a fully user-customizable "Custom" theme
- * (background/text color, font, brand-logo toggle; padding is shared with
- * the existing padding slider). See CHANGELOG.md.
+ * two-column "shot on" wordmark style). Phase 2 added the remaining 7
+ * presets from the original 15-theme request — Leica, Hasselblad, Film
+ * Strip, Blurred Background, Vintage Amber, Grid Spec Sheet, Dark
+ * Gradient — plus a fully user-customizable "Custom" theme.
+ *
+ * Phase 3 (this round, in progress) reworks the theme lineup to track
+ * exif-frame.yuru.cam more closely per 석한님 요청: "샷 온 브랜드" was
+ * redesigned into "Strap" (two-row info band + on-photo date stamp),
+ * "풀 보더" was retired in favor of "핫셀블라드" (now defaulting to a
+ * tighter 2% margin, since the two only differed by padding), and three
+ * new text-free layouts were added — "No frame" (bare crop), "Just frame"
+ * (border only), and "Cinema Scope" (2.35:1 letterbox bars). See
+ * CHANGELOG.md for the full rollout across rounds.
  *
  * Brand marks: rather than embedding scraped/official brand SVG files (an
  * uncertain source to source authentically, and a separate legal question
@@ -36,16 +43,18 @@ import {
 export type LayoutStyle =
   | "bottom-bar"
   | "polaroid"
-  | "shot-on-brand"
+  | "strap"
   | "overlay"
-  | "square-border"
   | "leica-accent"
   | "centered-minimal"
   | "film-strip"
   | "blurred-bg"
   | "vintage-amber"
   | "grid-spec"
-  | "dark-gradient";
+  | "dark-gradient"
+  | "no-frame"
+  | "just-frame"
+  | "cinema-scope";
 
 export type ThemeFont = "sans" | "serif" | "mono";
 
@@ -53,9 +62,8 @@ export type ThemeId =
   | "classic-dark"
   | "classic-light"
   | "polaroid"
-  | "shot-on-brand"
+  | "strap"
   | "minimal-overlay"
-  | "full-border-square"
   | "leica"
   | "hasselblad"
   | "film-strip"
@@ -63,6 +71,9 @@ export type ThemeId =
   | "vintage-amber"
   | "grid-spec"
   | "dark-gradient"
+  | "no-frame"
+  | "just-frame"
+  | "cinema-scope"
   | "custom";
 
 export type ThemeDefinition = {
@@ -75,7 +86,7 @@ export type ThemeDefinition = {
   layoutStyle: LayoutStyle;
   /** Default padding (% of cropped photo width) applied when this theme is selected; still user-adjustable via the padding slider. */
   paddingPercent: number;
-  /** Whether brand-badge/accent rendering is shown (shot-on-brand, leica-accent). Defaults to true when omitted. */
+  /** Whether brand-badge/accent rendering is shown (strap, leica-accent). Defaults to true when omitted. */
   showBrandBadge?: boolean;
 };
 
@@ -108,12 +119,12 @@ export const THEME_PRESETS: ThemeDefinition[] = [
     paddingPercent: 3,
   },
   {
-    id: "shot-on-brand",
+    id: "strap",
     backgroundColor: "#050505",
     textColor: "#fafafa",
     subtextColor: "#d4d4d4",
     fontFamily: "sans",
-    layoutStyle: "shot-on-brand",
+    layoutStyle: "strap",
     paddingPercent: 3,
   },
   {
@@ -124,15 +135,6 @@ export const THEME_PRESETS: ThemeDefinition[] = [
     fontFamily: "sans",
     layoutStyle: "overlay",
     paddingPercent: 0,
-  },
-  {
-    id: "full-border-square",
-    backgroundColor: "#ffffff",
-    textColor: "#171717",
-    subtextColor: "#525252",
-    fontFamily: "sans",
-    layoutStyle: "square-border",
-    paddingPercent: 5,
   },
   {
     id: "leica",
@@ -150,7 +152,9 @@ export const THEME_PRESETS: ThemeDefinition[] = [
     subtextColor: "#8a8a85",
     fontFamily: "sans",
     layoutStyle: "centered-minimal",
-    paddingPercent: 9,
+    // Was 9%; 석한 요청으로 기존 "풀 보더" 테마를 흡수하며 2%로 축소
+    // (두 테마가 여백 값 말고는 사실상 같은 레이아웃이었음).
+    paddingPercent: 2,
   },
   {
     id: "film-strip",
@@ -195,6 +199,33 @@ export const THEME_PRESETS: ThemeDefinition[] = [
     subtextColor: "#d4d4d4",
     fontFamily: "sans",
     layoutStyle: "dark-gradient",
+    paddingPercent: 0,
+  },
+  {
+    id: "no-frame",
+    backgroundColor: "#000000",
+    textColor: "#ffffff",
+    subtextColor: "#ffffff",
+    fontFamily: "sans",
+    layoutStyle: "no-frame",
+    paddingPercent: 0,
+  },
+  {
+    id: "just-frame",
+    backgroundColor: "#ffffff",
+    textColor: "#171717",
+    subtextColor: "#525252",
+    fontFamily: "sans",
+    layoutStyle: "just-frame",
+    paddingPercent: 5,
+  },
+  {
+    id: "cinema-scope",
+    backgroundColor: "#000000",
+    textColor: "#ffffff",
+    subtextColor: "#ffffff",
+    fontFamily: "sans",
+    layoutStyle: "cinema-scope",
     paddingPercent: 0,
   },
 ];
@@ -353,14 +384,11 @@ export function renderThemedFrame(
     case "polaroid":
       drawPolaroidLayout(ctx, canvas, params);
       break;
-    case "shot-on-brand":
-      drawShotOnBrandLayout(ctx, canvas, params);
+    case "strap":
+      drawStrapLayout(ctx, canvas, params);
       break;
     case "overlay":
       drawOverlayLayout(ctx, canvas, params);
-      break;
-    case "square-border":
-      drawSquareBorderLayout(ctx, canvas, params);
       break;
     case "leica-accent":
       drawLeicaAccentLayout(ctx, canvas, params);
@@ -382,6 +410,15 @@ export function renderThemedFrame(
       break;
     case "dark-gradient":
       drawDarkGradientLayout(ctx, canvas, params);
+      break;
+    case "no-frame":
+      drawNoFrameLayout(ctx, canvas, params);
+      break;
+    case "just-frame":
+      drawJustFrameLayout(ctx, canvas, params);
+      break;
+    case "cinema-scope":
+      drawCinemaScopeLayout(ctx, canvas, params);
       break;
   }
 
@@ -475,18 +512,22 @@ function drawPolaroidLayout(
 }
 
 /**
- * Shot-on-brand: bottom bar split left (brand badge + model, or plain
- * "Shot on <camera>" when the make isn't a recognized brand, or the badge
- * is toggled off) / right (specs).
+ * Strap: a two-row dark info band beneath the photo — row 1 is the brand
+ * badge + camera model (bold, prominent, "strap label" feel), row 2 is the
+ * lens on the left and the exposure specs on the right. A small
+ * letter-spaced date stamp is overlaid directly on the photo's top-left
+ * corner, echoing how film-era straps/backs often printed the date
+ * straight onto the frame. Modeled after exif-frame.yuru.cam's "Strap"
+ * theme (참고 사이트 스타일을 최대한 흡사하게 재현 — 석한님 요청).
  */
-function drawShotOnBrandLayout(
+function drawStrapLayout(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
   { image, crop, theme, options, fontFamily }: DrawParams,
 ) {
   const { sx, sy, sw, sh } = crop;
   const padding = Math.round((options.paddingPercent / 100) * sw);
-  const barHeight = Math.round(sw * 0.09);
+  const barHeight = Math.round(sw * 0.15);
   const paddingX = Math.round(sw * 0.035);
 
   canvas.width = sw + padding * 2;
@@ -501,68 +542,100 @@ function drawShotOnBrandLayout(
   const { badge, rest } = showBadge
     ? detectBrand(metadata.camera)
     : { badge: null, rest: metadata.camera };
-  const modelText = badge
-    ? [rest, metadata.lens].filter(Boolean).join("  —  ")
-    : metadata.camera
-      ? `Shot on ${metadata.camera}`
-      : "";
-  const specs = specLine(metadata);
+  const modelText = rest || metadata.camera;
 
   const barY = padding * 2 + sh;
-  const centerY = barY + barHeight / 2;
-  const baseFontSize = Math.max(13, Math.round(barHeight * 0.26));
-  const minFontSize = Math.max(10, Math.round(baseFontSize * 0.6));
+  const row1Y = barY + barHeight * 0.32;
+  const row2Y = barY + barHeight * 0.72;
   const availableWidth = canvas.width - paddingX * 2;
-  const gap = Math.round(sw * 0.03);
-  const badgeGap = Math.round(sw * 0.018);
-  const badgeHeight = Math.round(barHeight * 0.46);
 
-  // The badge, the model text, and the specs on the right are all
-  // variable-width — a long camera name can otherwise overlap the specs.
-  // Shrink font size (and the badge along with it) until everything fits
-  // side by side with a gap.
-  let fontSize = baseFontSize;
+  // Row 1: badge + model. The camera model is equipment-identifying text,
+  // so it is never ellipsis-truncated (석한's standing rule from the grid
+  // spec sheet fix) — shrink the font (badge included) down as far as
+  // needed, with no floor, until it fits in full.
+  const baseModelSize = Math.max(15, Math.round(barHeight * 0.22));
+  const badgeHeight = Math.round(barHeight * 0.3);
+  const badgeGap = Math.round(sw * 0.02);
+
+  let modelSize = baseModelSize;
   let badgeWidth = 0;
   let modelWidth = 0;
-  let specsWidth = 0;
-  while (fontSize >= minFontSize) {
+  while (modelSize > 1) {
     badgeWidth = badge
-      ? measureBadgeWidth(ctx, badge.label, fontSize, fontFamily, fontSize * 0.55)
+      ? measureBadgeWidth(ctx, badge.label, modelSize * 0.82, fontFamily, modelSize * 0.45)
       : 0;
-    ctx.font = `700 ${fontSize}px ${fontFamily}`;
+    ctx.font = `700 ${modelSize}px ${fontFamily}`;
     modelWidth = ctx.measureText(modelText).width;
-    ctx.font = `400 ${fontSize}px ${fontFamily}`;
-    specsWidth = ctx.measureText(specs).width;
-    const leftWidth = (badge ? badgeWidth + badgeGap : 0) + modelWidth;
-    if (leftWidth + gap + specsWidth <= availableWidth) break;
-    fontSize -= 1;
+    const row1Width = (badge ? badgeWidth + badgeGap : 0) + modelWidth;
+    if (row1Width <= availableWidth) break;
+    modelSize -= 1;
   }
-
-  // Still doesn't fit at the floor size: truncate the model text so the
-  // specs on the right (shutter/aperture/ISO — the more useful half) and
-  // the badge stay fully legible rather than letting things overlap.
-  const maxModelWidth =
-    availableWidth - gap - specsWidth - (badge ? badgeWidth + badgeGap : 0);
-  const modelDisplay =
-    modelWidth > maxModelWidth && maxModelWidth > 0
-      ? truncateToWidth(ctx, modelText, maxModelWidth, `700 ${fontSize}px ${fontFamily}`)
-      : modelText;
+  const modelDisplay = modelText;
 
   ctx.textBaseline = "middle";
   let cursorX = paddingX;
   if (badge) {
-    cursorX += drawBrandBadge(ctx, cursorX, centerY, badgeHeight, badge, fontSize, fontFamily);
+    cursorX += drawBrandBadge(
+      ctx,
+      cursorX,
+      row1Y,
+      badgeHeight,
+      badge,
+      Math.round(modelSize * 0.82),
+      fontFamily,
+    );
     cursorX += badgeGap;
   }
-  ctx.font = `700 ${fontSize}px ${fontFamily}`;
+  ctx.font = `700 ${modelSize}px ${fontFamily}`;
   ctx.fillStyle = theme.textColor;
   ctx.textAlign = "left";
-  ctx.fillText(modelDisplay, cursorX, centerY);
+  ctx.fillText(modelDisplay, cursorX, row1Y);
 
-  ctx.font = `400 ${fontSize}px ${fontFamily}`;
+  // Row 2: lens (left) vs. specs (right). The lens name is equipment text
+  // too, so it shrinks (together with the specs, to stay visually
+  // balanced) rather than ever getting cut off — same no-truncation rule
+  // as row 1, no floor on the font size.
+  const lens = metadata.lens;
+  const specs = specLine(metadata);
+  const baseSubSize = Math.max(11, Math.round(barHeight * 0.15));
+  const gap = Math.round(sw * 0.025);
+
+  let subSize = baseSubSize;
+  let lensWidth = 0;
+  let specsWidth = 0;
+  while (subSize > 1) {
+    ctx.font = `400 ${subSize}px ${fontFamily}`;
+    lensWidth = ctx.measureText(lens).width;
+    specsWidth = ctx.measureText(specs).width;
+    if (lensWidth + gap + specsWidth <= availableWidth) break;
+    subSize -= 1;
+  }
+  const lensDisplay = lens;
+
+  ctx.font = `400 ${subSize}px ${fontFamily}`;
   ctx.fillStyle = theme.subtextColor;
+  ctx.textAlign = "left";
+  ctx.fillText(lensDisplay, paddingX, row2Y);
   ctx.textAlign = "right";
-  ctx.fillText(specs, canvas.width - paddingX, centerY);
+  ctx.fillText(specs, canvas.width - paddingX, row2Y);
+
+  // Date stamp printed directly on the photo's top-left corner.
+  if (metadata.takenAt) {
+    const stampSize = Math.max(10, Math.round(sw * 0.016));
+    ctx.save();
+    ctx.shadowColor = "rgba(0,0,0,0.6)";
+    ctx.shadowBlur = stampSize * 0.5;
+    ctx.fillStyle = "#ffffff";
+    ctx.font = `700 ${stampSize}px ${fontFamily}`;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText(
+      trackedUppercase(metadata.takenAt),
+      padding + Math.round(sw * 0.025),
+      padding + Math.round(sw * 0.025) + stampSize,
+    );
+    ctx.restore();
+  }
 }
 
 /** Overlay: translucent gradient bar drawn directly on the photo's bottom edge — canvas is just the (optionally padded) photo. */
@@ -609,37 +682,6 @@ function drawOverlayLayout(
   ctx.fillText(specLine(metadata), padding + paddingX, padding + sh - overlayHeight * 0.15, sw * 0.7);
 }
 
-/** Square border: uniform margin on all four sides (like a mat/frame), thin caption strip appended below. */
-function drawSquareBorderLayout(
-  ctx: CanvasRenderingContext2D,
-  canvas: HTMLCanvasElement,
-  { image, crop, theme, options, fontFamily }: DrawParams,
-) {
-  const { sx, sy, sw, sh } = crop;
-  const padding = Math.round((options.paddingPercent / 100) * sw);
-  const captionHeight = Math.round(sw * 0.07);
-
-  canvas.width = sw + padding * 2;
-  canvas.height = sh + padding * 2 + captionHeight;
-
-  ctx.fillStyle = theme.backgroundColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
-
-  const { metadata } = options;
-  const captionY = padding + sh + captionHeight / 2;
-  const fontSize = Math.max(11, Math.round(captionHeight * 0.32));
-
-  ctx.textBaseline = "middle";
-  ctx.textAlign = "center";
-  ctx.fillStyle = theme.subtextColor;
-  ctx.font = `400 ${fontSize}px ${fontFamily}`;
-  const line = [metadata.camera, specLine(metadata), metadata.takenAt]
-    .filter(Boolean)
-    .join("   ·   ");
-  ctx.fillText(line, canvas.width / 2, captionY, canvas.width - padding * 2);
-}
-
 /** Leica: minimal light bar with a small red accent square (echoing Leica's red-dot mark) beside the camera name. */
 function drawLeicaAccentLayout(
   ctx: CanvasRenderingContext2D,
@@ -679,7 +721,7 @@ function drawLeicaAccentLayout(
   const gap = Math.round(sw * 0.03);
   const availableWidth = canvas.width - cursorX - paddingX;
 
-  // Same overlap risk as shot-on-brand: a long camera+lens title can run
+  // Same overlap risk as strap: a long camera+lens title can run
   // into the right-aligned specs. Shrink the title font until both sides
   // fit with a gap, then fall back to ellipsis truncation.
   let titleSize = baseTitleSize;
@@ -1080,5 +1122,65 @@ function drawDarkGradientLayout(
       padding + Math.round(sw * 0.04) + subtitleSize,
       sw * 0.4,
     );
+  }
+}
+
+/** No frame: the cropped photo exactly as-is — no border, no text, no padding. */
+function drawNoFrameLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  canvas.width = sw;
+  canvas.height = sh;
+  ctx.drawImage(image, sx, sy, sw, sh, 0, 0, sw, sh);
+}
+
+/** Just frame: a uniform decorative border only — no caption text at all. */
+function drawJustFrameLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw) || Math.round(sw * 0.05);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2;
+
+  ctx.fillStyle = theme.backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+}
+
+/** Cinema scope: letterbox bars over the photo to a ~2.35:1 visible aspect — no text, pure widescreen crop feel. */
+function drawCinemaScopeLayout(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  { image, crop, theme, options }: DrawParams,
+) {
+  const { sx, sy, sw, sh } = crop;
+  const padding = Math.round((options.paddingPercent / 100) * sw);
+
+  canvas.width = sw + padding * 2;
+  canvas.height = sh + padding * 2;
+
+  if (padding > 0) {
+    ctx.fillStyle = theme.backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
+
+  const targetRatio = 2.35;
+  const currentRatio = sw / sh;
+  if (currentRatio < targetRatio) {
+    const visibleHeight = sw / targetRatio;
+    const barHeight = Math.max(0, (sh - visibleHeight) / 2);
+    if (barHeight > 0) {
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(padding, padding, sw, barHeight);
+      ctx.fillRect(padding, padding + sh - barHeight, sw, barHeight);
+    }
   }
 }
