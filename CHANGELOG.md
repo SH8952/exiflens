@@ -1,5 +1,15 @@
 # 개발 이력 (Development History)
 
+## 2026-08-25 — 구글 애드센스 심사 대비: sitemap.xml / robots.txt 추가 (Phase 2)
+
+- 애드센스 기획서 3번 항목("Google Search Console 인덱싱: sitemap.xml 및 robots.txt 제출") 진행
+- `src/app/sitemap.ts` 신규: 현재 존재하는 모든 정적 라우트(홈, 프레임, privacy, terms, about, disclosure)를 4개 언어 × 6개 경로 = 24개 URL로 나열, 각 URL마다 `alternates.languages`로 hreflang 4개 언어 + x-default까지 포함. `/guides`와 그 하위 아티클은 아직 라우트가 없으므로 이번엔 제외 — 3·4단계에서 실제 페이지가 생기는 시점에 추가 예정(존재하지 않는 페이지를 sitemap에 올리는 것은 검색엔진에 더 나쁜 신호이므로)
+- `src/app/robots.ts` 신규: 전체 허용 + `/api/`만 차단, `sitemap: https://exiflens.com/sitemap.xml` 명시
+- 기존 canonical/hreflang 메타 태그는 `src/lib/seo.ts`의 `languageAlternates()`를 모든 페이지(`layout.tsx`, `frame`, 그리고 이번에 만든 4개 정책 페이지)가 이미 공통으로 쓰고 있어 별도 작업 없이 요건 충족 확인
+- Schema.org Article/HowTo 스키마는 아직 추가하지 않음 — 현재는 홈/프레임 페이지뿐이라 Article·HowTo로 표시할 실제 콘텐츠가 없고, `WebApplication` 스키마는 이미 적용되어 있음. 가이드 아티클(4단계)과 FAQ 아코디언(3단계)이 만들어지면 그 콘텐츠에 맞춰 Article/HowTo/FAQPage 스키마를 함께 추가할 예정
+- 검증: `npm run build` 정상 완료(30개 페이지 + `/robots.txt`, `/sitemap.xml` 정적 생성). 별도 포트로 프로덕션 서버를 새로 띄워 `curl`로 `/robots.txt`가 올바른 텍스트를, `/sitemap.xml`이 24개 `<loc>` 전체와 hreflang alternate 태그를 정확히 반환함을 확인
+- 다음 단계: 3단계(가이드 콘텐츠 아키텍처 + 홈페이지 FAQ) → 4단계(가이드 아티클 15~20개 × 4개 언어 작성, 배치로 진행)
+
 ## 2026-08-25 — 구글 애드센스 심사 대비: 정책 페이지 4종 신규 추가 (Phase 1)
 
 - 석한님이 제미나이와 정리한 "구글 애드센스 승인 심사 통과율 극대화 전략" 기획 문서(AdSense_SEO_Optimization_Guide.md)를 첨부하며 순서대로 진행 요청. 기획서 검토 결과 4가지 확인: (1) 가이드 아티클 15~20개는 제가 초안 작성, (2) en/es/ja/ko 4개 언어 동시 작성, (3) 연락처는 skysmoga@gmail.com, (4) 제휴 마케팅 고지에 쿠팡 파트너스 + 아마존 어소시에이트 모두 포함
