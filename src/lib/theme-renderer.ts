@@ -917,7 +917,7 @@ function drawGridSpecLayout(
 ) {
   const { sx, sy, sw, sh } = crop;
   const padding = Math.round((options.paddingPercent / 100) * sw);
-  const gridHeight = Math.round(sw * 0.15);
+  const gridHeight = Math.round(sw * 0.17);
 
   canvas.width = sw + padding * 2;
   canvas.height = sh + padding * 2 + gridHeight;
@@ -947,9 +947,11 @@ function drawGridSpecLayout(
   const totalWeight = fields.reduce((sum, field) => sum + field.weight, 0);
   const availableWidth = canvas.width - padding * 2;
   const gridY = padding * 2 + sh;
-  const baseLabelSize = Math.max(9, Math.round(gridHeight * 0.16));
-  const baseValueSize = Math.max(12, Math.round(gridHeight * 0.24));
-  const cellPadding = Math.max(6, Math.round(sw * 0.012));
+  const baseLabelSize = Math.max(10, Math.round(gridHeight * 0.2));
+  const baseValueSize = Math.max(14, Math.round(gridHeight * 0.34));
+  // Tighter inner cell padding than before — trades some breathing room
+  // for bigger label/value text (더 크게 보이도록, 간격은 줄임 — 석한님 요청).
+  const cellPadding = Math.max(3, Math.round(sw * 0.006));
 
   const cellWidths = fields.map((field) => (field.weight / totalWeight) * availableWidth);
 
