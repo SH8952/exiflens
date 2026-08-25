@@ -35,7 +35,41 @@
     "gearSectionTitle": "Equipo recomendado",
     "gearSectionHint": "Aquí aparecerán filtros ND recomendados para tu selección.",
     "gearDisclosure": "Como afiliados, podemos ganar una comisión por compras cualificadas realizadas a través de estos enlaces, sin costo adicional para ti.",
-    "privacyNote": "100% en el navegador. Tus fotos nunca se suben a un servidor."
+    "privacyNote": "100% en el navegador. Tus fotos nunca se suben a un servidor.",
+    "usageTitle": "Cómo usar ExifLens",
+    "usageSteps": [
+      "Arrastra y suelta una foto (o haz clic para explorar) en el cargador de arriba: se admiten JPG, PNG y la mayoría de formatos RAW de cámara.",
+      "Tu cámara, objetivo, velocidad de obturación, apertura, ISO y distancia focal aparecen al instante en el panel EXIF, leído por completo en tu navegador.",
+      "Elige una velocidad de obturación base y una intensidad de filtro ND en la calculadora para obtener el tiempo de exposición larga exacto que necesitarás en el terreno.",
+      "Ve al Generador de Marcos para añadir un marco limpio con la información de la cámara a la foto y descargarla en resolución completa."
+    ],
+    "faqTitle": "Preguntas Frecuentes",
+    "faq": [
+      {
+        "question": "¿Necesito crear una cuenta para usar ExifLens?",
+        "answer": "No. ExifLens funciona completamente sin registro: solo abre la página y suelta una foto."
+      },
+      {
+        "question": "¿Mis fotos se suben a un servidor?",
+        "answer": "No. Todo el cálculo y procesamiento ocurre localmente en tu navegador. Tus fotos nunca salen de tu dispositivo."
+      },
+      {
+        "question": "¿Qué formatos de imagen admite ExifLens?",
+        "answer": "JPG y PNG son totalmente compatibles, junto con la mayoría de formatos RAW de cámara comunes (ARW, CR2, CR3, NEF, RAF, RW2, ORF, DNG, PEF, SRW)."
+      },
+      {
+        "question": "¿Cómo funciona la calculadora de filtros ND?",
+        "answer": "Ingresa tu velocidad de obturación base (sin filtro) y elige la intensidad del filtro ND que estás usando; la calculadora muestra al instante la nueva velocidad de obturación necesaria para la misma exposición, además de un temporizador opcional para la toma."
+      },
+      {
+        "question": "¿Puedo personalizar el marco antes de descargarlo?",
+        "answer": "Sí. Los colores, la fuente, el margen y la visibilidad del logo de marca de cada tema se pueden ajustar, y puedes editar cualquiera de los campos de texto que aparecen en el marco sin cambiar los datos EXIF originales."
+      },
+      {
+        "question": "¿Es gratis usar ExifLens?",
+        "answer": "Sí, totalmente gratis. El sitio se sostiene con publicidad y algunos enlaces de afiliados, que nunca afectan cómo funcionan las herramientas en sí."
+      }
+    ]
   },
   "Frame": {
     "title": "Generador de Marcos EXIF",
@@ -279,5 +313,12 @@
         ]
       }
     ]
+  },
+  "Guides": {
+    "title": "Guías",
+    "subtitle": "Guías prácticas y directas sobre datos EXIF, filtros ND, y cómo sacarle el máximo partido a la configuración de tu cámara.",
+    "empty": "Todavía no hay guías publicadas en este idioma — vuelve pronto.",
+    "readingTime": "{minutes} min de lectura",
+    "backToGuides": "← Volver a Guías"
   }
 }

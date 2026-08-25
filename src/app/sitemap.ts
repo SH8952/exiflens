@@ -1,22 +1,31 @@
 import type { MetadataRoute } from "next";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL, languageAlternates } from "@/lib/seo";
+import { getAllGuidesMeta } from "@/lib/guides";
 
 /**
  * Every static route currently in the app, per Google AdSense/SEO checklist
- * item 3 ("Google Search Console 인덱싱: sitemap.xml 제출"). `/guides` and
- * its articles are added here once that route ships (Phase 3/4) — listing
- * a path that 404s would be worse than omitting it.
+ * item 3 ("Google Search Console 인덱싱: sitemap.xml 제출"). `/guides` was
+ * added once that route shipped (Phase 3) — individual articles are listed
+ * separately below since each locale can have a different set of slugs.
  */
-const STATIC_PATHS = ["", "/frame", "/privacy", "/terms", "/about", "/disclosure"];
+const STATIC_PATHS = [
+  "",
+  "/frame",
+  "/privacy",
+  "/terms",
+  "/about",
+  "/disclosure",
+  "/guides",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  return STATIC_PATHS.flatMap((path) => {
+  const staticEntries = STATIC_PATHS.flatMap((path) => {
     const changeFrequency: "weekly" | "monthly" =
-      path === "" || path === "/frame" ? "weekly" : "monthly";
-    const priority = path === "" ? 1 : path === "/frame" ? 0.9 : 0.3;
+      path === "" || path === "/frame" || path === "/guides" ? "weekly" : "monthly";
+    const priority = path === "" ? 1 : path === "/frame" ? 0.9 : path === "/guides" ? 0.7 : 0.3;
 
     return routing.locales.map((locale) => ({
       url: `${SITE_URL}/${locale}${path}`,
@@ -28,4 +37,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     }));
   });
+
+  const guideEntries = routing.locales.flatMap((locale) =>
+    getAllGuidesMeta(locale as Locale).map((guide) => ({
+      url: `${SITE_URL}/${locale}/guides/${guide.slug}`,
+      lastModified: new Date(guide.updatedAt ?? guide.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+      alternates: {
+        languages: languageAlternates(`/guides/${guide.slug}`),
+      },
+    })),
+  );
+
+  return [...staticEntries, ...guideEntries];
 }

@@ -4,6 +4,7 @@ import { ExifUploader } from "@/components/exif-uploader";
 import { ExifPanel } from "@/components/exif-panel";
 import { NdCalculatorCard } from "@/components/nd-calculator-card";
 import { GearRecommendationSection } from "@/components/gear-recommendation-section";
+import { HomeFaqSection } from "@/components/home-faq-section";
 
 export default async function HomePage({
   params,
@@ -47,6 +48,9 @@ export default async function HomePage({
       <p className="text-center text-xs text-muted-foreground">
         {t("privacyNote")}
       </p>
+
+      {/* Section 5: crawlable usage text + FAQ (AdSense/SEO checklist item 2) */}
+      <HomeFaqSection />
     </div>
   );
 }

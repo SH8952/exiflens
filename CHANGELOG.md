@@ -1,5 +1,19 @@
 # 개발 이력 (Development History)
 
+## 2026-08-25 — 구글 애드센스 심사 대비: 가이드 콘텐츠 아키텍처 + 홈페이지 FAQ (Phase 3)
+
+- 애드센스 기획서 2번 항목("가치 있는 텍스트 콘텐츠 확보") 진행. 사용자와 상의해 가이드(블로그) 저장 방식은 MDX(frontmatter + 마크다운, 코드 하이라이트 지원)로 결정 — JSON 방식과 비교 설명 후 채택
+- `@mdx-js/mdx`, `gray-matter`, `remark-gfm`, `rehype-slug`, `rehype-autolink-headings`, `@tailwindcss/typography` 신규 설치. Tailwind v4 방식대로 `globals.css`에 `@plugin "@tailwindcss/typography"` 추가
+- `content/guides/<locale>/<slug>.mdx` 콘텐츠 디렉터리 신규 구성 — frontmatter(title/description/publishedAt/tags)와 마크다운 본문 분리, 언어별로 같은 slug 사용
+- `src/lib/guides.ts` 신규: 슬러그 목록 조회, frontmatter만 빠르게 읽는 목록용 함수, MDX 본문을 실제 React 컴포넌트로 컴파일하는 함수(RSC에서 `@mdx-js/mdx`의 `evaluate` 사용), 단어 수 기반 예상 읽기 시간 계산을 제공
+- `src/app/[locale]/guides/page.tsx`(목록), `src/app/[locale]/guides/[slug]/page.tsx`(본문) 신규 라우트 추가. 본문 페이지에는 Schema.org `Article` JSON-LD도 함께 추가(2단계에서 콘텐츠가 없어 보류했던 항목)
+- 첫 번째 가이드 아티클 발행(4개 언어 전체): "Understanding EXIF Data: ISO, Shutter Speed, and Aperture Explained" — 애드센스 기획서가 예시로 제시한 주제 중 하나를 골라 실제로 작성. ISO·셔터스피드·조리개의 의미, 노출 삼각형, EXIF 확인 방법, FAQ까지 다룸 (영어 기준 약 900단어)
+- 메인 페이지 하단에 `HomeFaqSection` 신규 추가 — 애드센스 기획서 2번 항목의 "메인 페이지 하단 설명 텍스트: 사용법, FAQ" 요건. "ExifLens 사용법" 4단계 설명과 자주 묻는 질문 6개를 `<details>/<summary>` 아코디언으로 구현(별도 JS 라이브러리 없이 시맨틱 HTML만 사용), Schema.org `FAQPage` JSON-LD도 함께 추가해 리치 스니펫 노출 가능성 확보
+- `messages/{en,es,ja,ko}.json`에 `Guides`(목록/읽기시간/뒤로가기) 및 `Home.usageTitle`/`usageSteps`/`faqTitle`/`faq` 네임스페이스 신규 추가, 4개 언어 전체 작성
+- `sitemap.ts`를 갱신해 `/guides` 목록 페이지와 신규 아티클 URL을 hreflang alternate와 함께 포함하도록 변경(총 32개 URL)
+- 검증: `npm run build`에서 38개 페이지 모두 SSG 유지 확인(가이드 목록·본문 각 4개 언어 신규 포함). 별도 포트로 새 프로덕션 서버를 띄워 `/guides`, `/guides/[slug]` 4개 언어 전체 200 응답과 렌더링을 Playwright 스크린샷으로 확인, Article/FAQPage JSON-LD가 실제 응답에 포함됨을 `curl`로 확인, `sitemap.xml`에 신규 32개 URL이 정확히 반영됨을 확인, `eslint` 통과 확인
+- 다음 단계: 4단계 — 나머지 가이드 아티클 14~19개를 4개 언어로 배치 작성 (한 번에 전부가 아니라 3~4개씩 나눠 진행)
+
 ## 2026-08-25 — 구글 애드센스 심사 대비: sitemap.xml / robots.txt 추가 (Phase 2)
 
 - 애드센스 기획서 3번 항목("Google Search Console 인덱싱: sitemap.xml 및 robots.txt 제출") 진행

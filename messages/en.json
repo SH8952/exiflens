@@ -35,7 +35,41 @@
     "gearSectionTitle": "Gear Recommendations",
     "gearSectionHint": "Recommended ND filters for your selection will appear here.",
     "gearDisclosure": "As an affiliate, we may earn a commission from qualifying purchases made through these links, at no extra cost to you.",
-    "privacyNote": "100% client-side. Your photos are never uploaded to a server."
+    "privacyNote": "100% client-side. Your photos are never uploaded to a server.",
+    "usageTitle": "How to Use ExifLens",
+    "usageSteps": [
+      "Drag and drop a photo (or click to browse) into the uploader above — JPG, PNG, and most camera RAW formats are supported.",
+      "Your camera, lens, shutter speed, aperture, ISO, and focal length appear instantly in the EXIF panel, read entirely in your browser.",
+      "Pick a base shutter speed and an ND filter strength in the calculator to get the exact long-exposure time you'll need in the field.",
+      "Head to the Frame Generator to add a clean camera-info frame to the photo and download it in full resolution."
+    ],
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "Do I need to create an account to use ExifLens?",
+        "answer": "No. ExifLens works entirely without sign-up — just open the page and drop in a photo."
+      },
+      {
+        "question": "Are my photos uploaded to a server?",
+        "answer": "No. Every calculation and every pixel of processing happens locally in your browser. Your photos never leave your device."
+      },
+      {
+        "question": "What image formats does ExifLens support?",
+        "answer": "JPG and PNG are fully supported, along with most common camera RAW formats (ARW, CR2, CR3, NEF, RAF, RW2, ORF, DNG, PEF, SRW)."
+      },
+      {
+        "question": "How does the ND filter calculator work?",
+        "answer": "Enter your base (unfiltered) shutter speed and pick the ND filter strength you're using — the calculator instantly shows the new shutter speed needed for the same exposure, plus an optional countdown timer for the shot."
+      },
+      {
+        "question": "Can I customize the frame before downloading?",
+        "answer": "Yes. Every theme's colors, font, padding, and brand logo visibility can be adjusted, and you can edit any of the text fields shown on the frame without changing the EXIF data itself."
+      },
+      {
+        "question": "Is ExifLens free to use?",
+        "answer": "Yes, completely free. The site is supported by ads and occasional affiliate links, which never affect how the tools themselves work."
+      }
+    ]
   },
   "Frame": {
     "title": "EXIF Frame Generator",
@@ -279,5 +313,12 @@
         ]
       }
     ]
+  },
+  "Guides": {
+    "title": "Guides",
+    "subtitle": "Practical, no-nonsense guides on EXIF data, ND filters, and getting the most out of your camera settings.",
+    "empty": "No guides published in this language yet — check back soon.",
+    "readingTime": "{minutes} min read",
+    "backToGuides": "← Back to Guides"
   }
 }

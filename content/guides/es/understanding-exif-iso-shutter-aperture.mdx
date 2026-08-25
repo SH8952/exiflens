@@ -1,0 +1,50 @@
+---
+title: "Entendiendo los Datos EXIF: ISO, Velocidad de Obturación y Apertura Explicados"
+description: "Una guía sencilla sobre los metadatos EXIF que llevan todas tus fotos: qué significan realmente el ISO, la velocidad de obturación y la apertura, y cómo trabajan juntos para controlar la exposición."
+publishedAt: "2026-08-25"
+tags: ["exif", "fundamentos de cámara", "exposición"]
+---
+
+Cada foto que guarda tu cámara lleva dentro un pequeño archivo invisible: los datos EXIF (Exchangeable Image File Format). Es un registro exacto de cómo se tomó la foto: qué cámara y objetivo se usaron, y los tres ajustes que determinan cuán clara u oscura sale la imagen: ISO, velocidad de obturación y apertura. Si alguna vez abriste el panel de "detalles" de una foto y viste una pared de números que no entendías del todo, esta guía repasa qué significa cada uno y por qué importa.
+
+## ¿Qué son los datos EXIF?
+
+Los datos EXIF son metadatos: información sobre la foto, no la foto en sí, escrita dentro del archivo de imagen en el momento en que presionas el disparador. Normalmente incluyen la marca y modelo de la cámara, el objetivo usado, la fecha y hora en que se tomó la foto, coordenadas GPS (si los servicios de ubicación estaban activados) y los tres ajustes de exposición que veremos a continuación. Nada de esto es visible en la imagen misma; necesitas un visor que lea los metadatos del archivo, como el panel en la parte superior de esta página.
+
+## ISO: Qué tan sensible es tu sensor
+
+El ISO controla qué tan sensible es el sensor de tu cámara a la luz. Un ISO bajo (100 o 200) significa que el sensor necesita más luz para producir una imagen correctamente expuesta; esto es lo que usarías en un día soleado y luminoso. Un ISO alto (1600, 3200 o más) hace que el sensor reaccione con más fuerza a la luz disponible, lo cual es útil en interiores o de noche, pero tiene una contrapartida: más ruido digital (grano o manchas visibles) en la foto final.
+
+La regla general es mantener el ISO lo más bajo posible según las condiciones de luz. Si tu foto se ve ruidosa o granulada, revisar su valor de ISO en el EXIF suele ser el primer paso para diagnosticar por qué.
+
+## Velocidad de obturación: cuánto tiempo permanece abierto el obturador
+
+La velocidad de obturación es el tiempo durante el cual el sensor de tu cámara queda expuesto a la luz, medido en segundos o fracciones de segundo: 1/1000s, 1/125s, 1/30s, 2s, y así sucesivamente. Una velocidad de obturación rápida (1/1000s o más rápida) congela el movimiento, por eso se usa en fotografía deportiva o de vida silvestre. Una velocidad lenta (1/30s o más lenta) deja entrar más luz pero corre el riesgo de desenfoque por movimiento, ya sea por el temblor de la cámara, un sujeto en movimiento, o ambos.
+
+Las velocidades de obturación lentas también son la base de la fotografía de larga exposición: cascadas sedosas, estelas de luz y estelas de estrellas se crean dejando el obturador abierto durante segundos, o incluso minutos. Si fotografías exposiciones largas de día, generalmente necesitarás un filtro de densidad neutra (ND) para evitar sobreexponer la toma; nuestra calculadora de filtros ND hace esos cálculos por ti.
+
+## Apertura: cuánta luz pasa
+
+La apertura es el tamaño de la abertura en tu objetivo por donde pasa la luz, expresada como un número f (f/1.8, f/4, f/11, etc.). De forma contraintuitiva, un número f más pequeño significa una abertura más grande: f/1.8 deja pasar mucha más luz que f/11. La apertura afecta dos cosas a la vez: cuánta luz llega al sensor, y la profundidad de campo, es decir, cuánto de la escena, desde el primer plano hasta el fondo, queda nítidamente enfocado.
+
+Una apertura amplia (f/1.8, f/2.8) deja entrar mucha luz y produce una profundidad de campo reducida, por lo que los fotógrafos de retratos la usan para desenfocar el fondo detrás del sujeto. Una apertura estrecha (f/11, f/16) deja entrar menos luz pero mantiene mucha más de la escena enfocada, por lo que los fotógrafos de paisajes la prefieren.
+
+## Cómo funcionan juntos estos tres factores (el triángulo de exposición)
+
+El ISO, la velocidad de obturación y la apertura se conocen colectivamente como el triángulo de exposición, porque cambiar cualquiera de ellos afecta cuánto ajuste necesitan los otros dos para mantener la exposición equilibrada. Si abres más la apertura, puedes usar una velocidad de obturación más rápida o un ISO más bajo para el mismo brillo. Si subes el ISO, puedes usar una velocidad de obturación más rápida o una apertura más estrecha. No existe una única combinación "correcta"; los ajustes adecuados dependen de qué estés fotografiando y de qué compromiso (desenfoque por movimiento, ruido, profundidad de campo) importa más en esa toma.
+
+Por eso mismo es tan útil revisar los datos EXIF después: te dice exactamente qué combinación produjo un resultado que te gustó (o no), para que puedas repetirlo o ajustarlo la próxima vez.
+
+## Cómo revisar los datos EXIF de tu foto
+
+La mayoría del software de fotografía de escritorio, e incluso la app de galería nativa de tu teléfono, pueden mostrar datos EXIF básicos, pero la forma más rápida, sin instalar nada, es soltar la foto en un visor EXIF basado en navegador como ExifLens. Lee la cámara, el objetivo, el ISO, la velocidad de obturación, la apertura y la distancia focal directamente del archivo, todo dentro de tu navegador; la foto nunca se sube a ningún lado.
+
+Si estás ajustando tus configuraciones de filtro ND o exportando una foto con su información de cámara mostrada en el marco, tener los datos EXIF extraídos automáticamente te ahorra tener que buscar en menús de software de edición solo para encontrar un número.
+
+## Algunas preguntas frecuentes
+
+**¿Eliminar o editar una foto elimina sus datos EXIF?** Algunas ediciones los eliminan por completo (especialmente las apps de mensajería y las plataformas sociales, que a menudo borran el EXIF por privacidad), mientras que otras los conservan. Si necesitas verificarlo, vuelve a subir el archivo editado a un visor EXIF.
+
+**¿Por qué mi foto no tiene ningún dato EXIF?** Las capturas de pantalla, las imágenes escaneadas y las exportaciones muy procesadas (algunas descargas de redes sociales, por ejemplo) suelen no tener metadatos de cámara porque nunca fueron generadas por un sensor de cámara en primer lugar.
+
+**¿Los datos EXIF son un problema de privacidad?** Pueden serlo; las coordenadas GPS en particular revelan dónde se tomó una foto. Si vas a compartir fotos públicamente, vale la pena verificar si incluyen datos de ubicación antes de publicarlas.
