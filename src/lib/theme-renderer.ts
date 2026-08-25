@@ -257,12 +257,12 @@ export const THEME_PRESETS: ThemeDefinition[] = [
   },
   {
     id: "monitor",
-    backgroundColor: "#0d0d0d",
+    backgroundColor: "#000000",
     textColor: "#e5e5e5",
     subtextColor: "#7a7a7a",
     fontFamily: "mono",
     layoutStyle: "monitor",
-    paddingPercent: 3,
+    paddingPercent: 0,
   },
 ];
 
@@ -1343,56 +1343,27 @@ function drawFilmLcdLayout(
 }
 
 /**
- * Monitor: a thin, near-black bezel around the photo (like a display
- * frame) with tiny monospace readouts tucked into the bottom corners of
- * that bezel — camera/lens on the left, specs/date on the right. Deliberately
- * compact/quiet, unlike Strap's prominent info bar.
+ * Monitor: full-bleed photo with a thin, solid black band along the bottom
+ * only — no border on the other three sides, no text at all. Matches the
+ * reference design exactly (confirmed by the user: "모니터 테마는 하단에
+ * 검은색 띠만 있는게 정상이야").
  */
 function drawMonitorLayout(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
-  { image, crop, theme, options, fontFamily }: DrawParams,
+  { image, crop, theme, options }: DrawParams,
 ) {
   const { sx, sy, sw, sh } = crop;
-  const padding = Math.round((options.paddingPercent / 100) * sw) || Math.round(sw * 0.025);
+  // The padding slider (default 0) adds an optional uniform outer margin on
+  // top of the fixed-ratio bottom band, consistent with how other themes
+  // let padding grow beyond their built-in accent.
+  const margin = Math.round((options.paddingPercent / 100) * sw);
+  const bandHeight = Math.round(sw * 0.035);
 
-  canvas.width = sw + padding * 2;
-  canvas.height = sh + padding * 2;
+  canvas.width = sw + margin * 2;
+  canvas.height = sh + margin * 2 + bandHeight;
 
   ctx.fillStyle = theme.backgroundColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(image, sx, sy, sw, sh, padding, padding, sw, sh);
-
-  const { metadata } = options;
-  const left = [metadata.camera, metadata.lens].filter(Boolean).join("  ·  ");
-  const right = [specLine(metadata), metadata.takenAt].filter(Boolean).join("   ·   ");
-  if (!left && !right) return;
-
-  const bezelCenterY = padding + sh + padding / 2;
-  const baseSize = Math.max(8, Math.round(padding * 0.34));
-  const gap = Math.round(sw * 0.02);
-  const availableWidth = canvas.width - padding * 2 - gap;
-
-  // Shared shrink (no truncation) if both corners together are wider than
-  // the thin bezel allows.
-  let size = baseSize;
-  ctx.font = `400 ${size}px ${fontFamily}`;
-  while (
-    size > 1 &&
-    ctx.measureText(left).width + ctx.measureText(right).width > availableWidth
-  ) {
-    size -= 1;
-    ctx.font = `400 ${size}px ${fontFamily}`;
-  }
-
-  ctx.textBaseline = "middle";
-  ctx.fillStyle = theme.subtextColor;
-  if (left) {
-    ctx.textAlign = "left";
-    ctx.fillText(left, padding, bezelCenterY);
-  }
-  if (right) {
-    ctx.textAlign = "right";
-    ctx.fillText(right, canvas.width - padding, bezelCenterY);
-  }
+  ctx.drawImage(image, sx, sy, sw, sh, margin, margin, sw, sh);
 }
