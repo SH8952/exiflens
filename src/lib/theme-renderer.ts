@@ -120,12 +120,14 @@ export const THEME_PRESETS: ThemeDefinition[] = [
   },
   {
     id: "strap",
-    backgroundColor: "#050505",
-    textColor: "#fafafa",
-    subtextColor: "#d4d4d4",
+    backgroundColor: "#ffffff",
+    textColor: "#111111",
+    subtextColor: "#6b6b6b",
     fontFamily: "sans",
     layoutStyle: "strap",
-    paddingPercent: 3,
+    // 참고 스크린샷처럼 사진이 정보 바에 바로 맞닿도록 기본 여백 0% (석한님 요청 —
+    // 슬라이더로는 여전히 조절 가능).
+    paddingPercent: 0,
   },
   {
     id: "minimal-overlay",
@@ -291,42 +293,33 @@ function detectBrand(camera: string): { badge: BrandBadge | null; rest: string }
   return { badge, rest: badge ? remainder.trim() : trimmed };
 }
 
-function measureBadgeWidth(
+/** Dedicated italic-serif stack for brand wordmarks — evokes a logotype feel (script-like, not a plain system sans) without tracing any brand's actual proprietary typeface. Combined with each brand's own signature color (BRAND_BADGES.bg), per 석한's explicit direction. */
+const WORDMARK_FONT_STACK = "Georgia, 'Times New Roman', ui-serif, serif";
+
+function measureWordmarkWidth(
   ctx: CanvasRenderingContext2D,
   label: string,
   fontSize: number,
-  fontFamily: string,
-  paddingX: number,
 ): number {
-  ctx.font = `700 ${fontSize}px ${fontFamily}`;
-  return ctx.measureText(label).width + paddingX * 2;
+  ctx.font = `italic 700 ${fontSize}px ${WORDMARK_FONT_STACK}`;
+  return ctx.measureText(label).width;
 }
 
-/** Draws a rounded, brand-colored wordmark badge; returns its width so callers can position what follows. */
-function drawBrandBadge(
+/** Draws a brand-colored italic-serif wordmark as plain text — no pill/capsule background, echoing a logotype rather than a colored badge (석한 피드백: "브랜드 둥근 캡슐모양 말고, 폰트도 똑같이"). Returns its width so callers can position what follows. `align` controls whether `x` is the left or right edge of the text. */
+function drawBrandWordmark(
   ctx: CanvasRenderingContext2D,
   x: number,
   centerY: number,
-  height: number,
   badge: BrandBadge,
   fontSize: number,
-  fontFamily: string,
+  align: "left" | "right" = "left",
 ): number {
-  const paddingX = fontSize * 0.55;
-  const width = measureBadgeWidth(ctx, badge.label, fontSize, fontFamily, paddingX);
-  const radius = height / 2;
-
+  ctx.font = `italic 700 ${fontSize}px ${WORDMARK_FONT_STACK}`;
+  const width = ctx.measureText(badge.label).width;
   ctx.fillStyle = badge.bg;
-  ctx.beginPath();
-  ctx.roundRect(x, centerY - height / 2, width, height, radius);
-  ctx.fill();
-
-  ctx.fillStyle = badge.text;
-  ctx.font = `700 ${fontSize}px ${fontFamily}`;
-  ctx.textAlign = "left";
+  ctx.textAlign = align;
   ctx.textBaseline = "middle";
-  ctx.fillText(badge.label, x + paddingX, centerY);
-
+  ctx.fillText(badge.label, x, centerY);
   return width;
 }
 
@@ -512,22 +505,24 @@ function drawPolaroidLayout(
 }
 
 /**
- * Strap: a two-row dark info band beneath the photo — row 1 is the brand
- * badge + camera model (bold, prominent, "strap label" feel), row 2 is the
- * lens on the left and the exposure specs on the right. A small
- * letter-spaced date stamp is overlaid directly on the photo's top-left
- * corner, echoing how film-era straps/backs often printed the date
- * straight onto the frame. Modeled after exif-frame.yuru.cam's "Strap"
- * theme (참고 사이트 스타일을 최대한 흡사하게 재현 — 석한님 요청).
+ * Strap: a plain white info bar beneath the photo — date on the left;
+ * on the right, a brand wordmark (italic serif, brand-signature color, no
+ * capsule background), a thin vertical divider, then a two-line stacked
+ * block (camera model bold on top, lens regular below), all right-aligned.
+ * No exposure spec line — this theme is deliberately just date + gear ID,
+ * matching a specific reference screenshot 석한님 provided (사진 자체는 이미
+ * Lightroom 워터마크가 포함된 원본이라 프레임에서 별도 워터마크는 추가하지 않음).
+ * Photo sits flush against the bar by default (0% padding) — the padding
+ * slider still adds a uniform margin around everything if the user wants one.
  */
 function drawStrapLayout(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
-  { image, crop, theme, options, fontFamily }: DrawParams,
+  { image, crop, theme, options }: DrawParams,
 ) {
   const { sx, sy, sw, sh } = crop;
   const padding = Math.round((options.paddingPercent / 100) * sw);
-  const barHeight = Math.round(sw * 0.15);
+  const barHeight = Math.round(sw * 0.09);
   const paddingX = Math.round(sw * 0.035);
 
   canvas.width = sw + padding * 2;
@@ -543,98 +538,93 @@ function drawStrapLayout(
     ? detectBrand(metadata.camera)
     : { badge: null, rest: metadata.camera };
   const modelText = rest || metadata.camera;
+  const lens = metadata.lens;
+  const date = metadata.takenAt;
 
   const barY = padding * 2 + sh;
-  const row1Y = barY + barHeight * 0.32;
-  const row2Y = barY + barHeight * 0.72;
+  const centerY = barY + barHeight / 2;
+  const rightEdge = canvas.width - paddingX;
   const availableWidth = canvas.width - paddingX * 2;
 
-  // Row 1: badge + model. The camera model is equipment-identifying text,
-  // so it is never ellipsis-truncated (석한's standing rule from the grid
-  // spec sheet fix) — shrink the font (badge included) down as far as
-  // needed, with no floor, until it fits in full.
-  const baseModelSize = Math.max(15, Math.round(barHeight * 0.22));
-  const badgeHeight = Math.round(barHeight * 0.3);
-  const badgeGap = Math.round(sw * 0.02);
+  // Base sizes for every text element in the bar. All of them shrink
+  // together (same scale factor) if the bar gets too crowded, rather than
+  // any one of them (camera model, lens — equipment-identifying text) ever
+  // being ellipsis-truncated, per 석한's standing "shrink, never truncate"
+  // rule for gear names.
+  const baseDateSize = Math.max(10, Math.round(barHeight * 0.26));
+  const baseModelSize = Math.max(12, Math.round(barHeight * 0.24));
+  const baseLensSize = Math.max(9, Math.round(barHeight * 0.16));
+  const baseWordmarkSize = Math.max(13, Math.round(barHeight * 0.28));
+  const dividerGap = Math.round(sw * 0.012);
+  const badgeGap = Math.round(sw * 0.012);
+  const midGap = Math.round(sw * 0.025);
 
-  let modelSize = baseModelSize;
-  let badgeWidth = 0;
+  let scale = 1;
+  let dateWidth = 0;
   let modelWidth = 0;
-  while (modelSize > 1) {
-    badgeWidth = badge
-      ? measureBadgeWidth(ctx, badge.label, modelSize * 0.82, fontFamily, modelSize * 0.45)
-      : 0;
-    ctx.font = `700 ${modelSize}px ${fontFamily}`;
-    modelWidth = ctx.measureText(modelText).width;
-    const row1Width = (badge ? badgeWidth + badgeGap : 0) + modelWidth;
-    if (row1Width <= availableWidth) break;
-    modelSize -= 1;
-  }
-  const modelDisplay = modelText;
-
-  ctx.textBaseline = "middle";
-  let cursorX = paddingX;
-  if (badge) {
-    cursorX += drawBrandBadge(
-      ctx,
-      cursorX,
-      row1Y,
-      badgeHeight,
-      badge,
-      Math.round(modelSize * 0.82),
-      fontFamily,
-    );
-    cursorX += badgeGap;
-  }
-  ctx.font = `700 ${modelSize}px ${fontFamily}`;
-  ctx.fillStyle = theme.textColor;
-  ctx.textAlign = "left";
-  ctx.fillText(modelDisplay, cursorX, row1Y);
-
-  // Row 2: lens (left) vs. specs (right). The lens name is equipment text
-  // too, so it shrinks (together with the specs, to stay visually
-  // balanced) rather than ever getting cut off — same no-truncation rule
-  // as row 1, no floor on the font size.
-  const lens = metadata.lens;
-  const specs = specLine(metadata);
-  const baseSubSize = Math.max(11, Math.round(barHeight * 0.15));
-  const gap = Math.round(sw * 0.025);
-
-  let subSize = baseSubSize;
   let lensWidth = 0;
-  let specsWidth = 0;
-  while (subSize > 1) {
-    ctx.font = `400 ${subSize}px ${fontFamily}`;
-    lensWidth = ctx.measureText(lens).width;
-    specsWidth = ctx.measureText(specs).width;
-    if (lensWidth + gap + specsWidth <= availableWidth) break;
-    subSize -= 1;
+  let badgeWidth = 0;
+  for (; scale > 0.05; scale -= 0.02) {
+    ctx.font = `400 ${Math.max(1, Math.round(baseDateSize * scale))}px ${WORDMARK_FONT_STACK}`;
+    dateWidth = date ? ctx.measureText(date).width : 0;
+    ctx.font = `700 ${Math.max(1, Math.round(baseModelSize * scale))}px ${WORDMARK_FONT_STACK}`;
+    modelWidth = ctx.measureText(modelText).width;
+    ctx.font = `400 ${Math.max(1, Math.round(baseLensSize * scale))}px ${WORDMARK_FONT_STACK}`;
+    lensWidth = lens ? ctx.measureText(lens).width : 0;
+    badgeWidth = badge
+      ? measureWordmarkWidth(ctx, badge.label, Math.max(1, Math.round(baseWordmarkSize * scale)))
+      : 0;
+
+    const blockWidth = Math.max(modelWidth, lensWidth);
+    const rightWidth = (badge ? badgeWidth + badgeGap + dividerGap : 0) + blockWidth;
+    if (dateWidth + midGap + rightWidth <= availableWidth) break;
   }
-  const lensDisplay = lens;
 
-  ctx.font = `400 ${subSize}px ${fontFamily}`;
-  ctx.fillStyle = theme.subtextColor;
-  ctx.textAlign = "left";
-  ctx.fillText(lensDisplay, paddingX, row2Y);
-  ctx.textAlign = "right";
-  ctx.fillText(specs, canvas.width - paddingX, row2Y);
+  const dateSize = Math.max(1, Math.round(baseDateSize * scale));
+  const modelSize = Math.max(1, Math.round(baseModelSize * scale));
+  const lensSize = Math.max(1, Math.round(baseLensSize * scale));
+  const wordmarkSize = Math.max(1, Math.round(baseWordmarkSize * scale));
+  const blockWidth = Math.max(modelWidth, lensWidth);
 
-  // Date stamp printed directly on the photo's top-left corner.
-  if (metadata.takenAt) {
-    const stampSize = Math.max(10, Math.round(sw * 0.016));
-    ctx.save();
-    ctx.shadowColor = "rgba(0,0,0,0.6)";
-    ctx.shadowBlur = stampSize * 0.5;
-    ctx.fillStyle = "#ffffff";
-    ctx.font = `700 ${stampSize}px ${fontFamily}`;
+  // Left: date.
+  if (date) {
+    ctx.font = `400 ${dateSize}px ${WORDMARK_FONT_STACK}`;
+    ctx.fillStyle = theme.subtextColor;
     ctx.textAlign = "left";
-    ctx.textBaseline = "alphabetic";
-    ctx.fillText(
-      trackedUppercase(metadata.takenAt),
-      padding + Math.round(sw * 0.025),
-      padding + Math.round(sw * 0.025) + stampSize,
-    );
-    ctx.restore();
+    ctx.textBaseline = "middle";
+    ctx.fillText(date, paddingX, centerY);
+  }
+
+  // Right: two-line block (model / lens), right-aligned to the bar's edge.
+  const lineGap = Math.round(barHeight * 0.06);
+  const modelY = centerY - modelSize * 0.4 - lineGap / 2;
+  const lensY = centerY + lensSize * 0.55 + lineGap / 2;
+
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  ctx.font = `700 ${modelSize}px ${WORDMARK_FONT_STACK}`;
+  ctx.fillStyle = theme.textColor;
+  ctx.fillText(modelText, rightEdge, modelY);
+
+  if (lens) {
+    ctx.font = `400 ${lensSize}px ${WORDMARK_FONT_STACK}`;
+    ctx.fillStyle = theme.subtextColor;
+    ctx.fillText(lens, rightEdge, lensY);
+  }
+
+  // Divider + brand wordmark, positioned to the left of the text block.
+  if (badge) {
+    const dividerX = rightEdge - blockWidth - dividerGap;
+    ctx.strokeStyle = theme.subtextColor;
+    ctx.globalAlpha = 0.4;
+    ctx.lineWidth = Math.max(1, Math.round(sw * 0.0015));
+    ctx.beginPath();
+    ctx.moveTo(dividerX, barY + barHeight * 0.24);
+    ctx.lineTo(dividerX, barY + barHeight * 0.76);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    drawBrandWordmark(ctx, dividerX - badgeGap, centerY, badge, wordmarkSize, "right");
   }
 }
 
