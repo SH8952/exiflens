@@ -1,5 +1,15 @@
 # 개발 이력 (Development History)
 
+## 2026-08-25 — 구글 애드센스 심사 대비: 가이드 아티클 3개 추가 (Phase 4 · 1차 배치)
+
+- 애드센스 기획서 2번 항목의 "15~20개 아티클" 목표를 향한 첫 배치. 3개 주제 × 4개 언어 = 12개 파일 신규 작성 (누적 4개 아티클, 총 16개 파일)
+  - "How to Choose the Right ND Filter for Long Exposure Photography" — 기획서 예시 주제 그대로. ND 필터 강도(스탑 수)별 활용법, 필터 겹쳐쓰기·가변 ND의 장단점, 실전 워크플로우
+  - "Best Camera Settings for Landscape and Waterfall Photography" — 기획서 예시 주제(Waterflow)를 폭포로 구체화. 조리개·ISO·셔터스피드 설정과 폭포 촬영 시 ND 필터가 필요한 이유
+  - "How to Add a Professional EXIF Frame to Your Photos" — 기획서 예시 주제 그대로, ExifLens의 프레임 생성기 기능과 직접 연결되는 주제로 자연스러운 내부 전환 유도
+- 슬러그: `choosing-the-right-nd-filter`, `landscape-waterfall-camera-settings`, `how-to-add-exif-frame-to-photos` (4개 언어 모두 동일 슬러그 사용, hreflang 자동 매칭)
+- 검증: `npm run build`에서 50개 페이지 전체 SSG 유지 확인(신규 아티클 12개 페이지 포함). 별도 포트로 새 서버를 띄워 12개 URL 전체 200 응답 확인, `/guides` 목록에 4개 아티클이 모두 정상 표시되는 것을 Playwright 스크린샷으로 확인, `sitemap.xml`에 44개 URL(기존 24 + 목록 4 + 아티클 16)이 정확히 반영됨을 확인
+- 다음 단계: 남은 11~16개 아티클을 계속 배치로 작성 (남은 주제: ND 필터 개념 입문, 별사진·광궤적 등 장노출 응용, RAW vs JPEG, 히스토그램 읽는 법, 매뉴얼 모드 입문, 심도·초점거리 이해, 손떨림 방지, 일출·일몰 촬영 등)
+
 ## 2026-08-25 — 구글 애드센스 심사 대비: 가이드 콘텐츠 아키텍처 + 홈페이지 FAQ (Phase 3)
 
 - 애드센스 기획서 2번 항목("가치 있는 텍스트 콘텐츠 확보") 진행. 사용자와 상의해 가이드(블로그) 저장 방식은 MDX(frontmatter + 마크다운, 코드 하이라이트 지원)로 결정 — JSON 방식과 비교 설명 후 채택
