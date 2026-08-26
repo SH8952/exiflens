@@ -1,0 +1,275 @@
+{
+  "description": "애드센스 승인 대기 기간 중 매일 자동 발행되는 가이드 아티클 주제 큐. 예약 작업(scheduled task)이 매일 한국시간 오전 6시에 순서대로 1개씩 처리하며, 처리 후 published를 true로 갱신하고 publishedDate를 기록한다.",
+  "topics": [
+    {
+      "order": 1,
+      "slug": "portrait-photography-camera-settings",
+      "titleKo": "인물 사진 카메라 설정",
+      "titleEn": "Portrait Photography Camera Settings",
+      "published": true,
+      "publishedDate": "2026-08-26",
+      "mirrored": true
+    },
+    {
+      "order": 2,
+      "slug": "macro-photography-basics",
+      "titleKo": "매크로 사진 촬영 기초",
+      "titleEn": "Macro Photography Basics",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 3,
+      "slug": "wildlife-photography-camera-settings",
+      "titleKo": "야생동물 사진 촬영 설정",
+      "titleEn": "Wildlife Photography Camera Settings",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 4,
+      "slug": "street-photography-exposure-settings",
+      "titleKo": "스트리트 포토그래피 노출 설정",
+      "titleEn": "Street Photography Exposure Settings",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 5,
+      "slug": "night-cityscape-photography-settings",
+      "titleKo": "야경 도시 야간 사진 설정",
+      "titleEn": "Night Cityscape Photography Settings",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 6,
+      "slug": "panning-shot-technique",
+      "titleKo": "패닝샷(동체 흐림 효과) 촬영법",
+      "titleEn": "Panning Shot Technique",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 7,
+      "slug": "white-balance-explained",
+      "titleKo": "화이트밸런스 완벽 가이드",
+      "titleEn": "White Balance Explained",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 8,
+      "slug": "focus-modes-af-s-vs-af-c-vs-mf",
+      "titleKo": "초점 모드 비교 (AF-S vs AF-C vs MF)",
+      "titleEn": "Focus Modes: AF-S vs AF-C vs Manual Focus",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 9,
+      "slug": "exposure-bracketing-hdr-basics",
+      "titleKo": "브라케팅과 HDR 촬영 기초",
+      "titleEn": "Exposure Bracketing & HDR Basics",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 10,
+      "slug": "the-exposure-triangle-explained",
+      "titleKo": "노출 삼각형(ISO·조리개·셔터) 이해하기",
+      "titleEn": "The Exposure Triangle Explained",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 11,
+      "slug": "diffraction-and-optimal-aperture",
+      "titleKo": "회절 현상과 최적 조리개값",
+      "titleEn": "Diffraction & Optimal Aperture",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 12,
+      "slug": "hyperfocal-distance-explained",
+      "titleKo": "하이퍼포컬 디스턴스 계산법",
+      "titleEn": "Hyperfocal Distance Explained",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 13,
+      "slug": "color-space-srgb-vs-adobe-rgb",
+      "titleKo": "sRGB vs Adobe RGB 색공간 차이",
+      "titleEn": "Color Space: sRGB vs Adobe RGB",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 14,
+      "slug": "image-stabilization-explained",
+      "titleKo": "손떨림 보정(IBIS/렌즈 손떨림방지) 이해하기",
+      "titleEn": "Image Stabilization Explained",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 15,
+      "slug": "sensor-size-and-crop-factor-explained",
+      "titleKo": "크롭바디 vs 풀프레임 센서 크기 차이",
+      "titleEn": "Sensor Size & Crop Factor Explained",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 16,
+      "slug": "understanding-dynamic-range",
+      "titleKo": "다이나믹 레인지 이해하기",
+      "titleEn": "Understanding Dynamic Range",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 17,
+      "slug": "nd-filter-vs-polarizer-filter",
+      "titleKo": "ND필터 vs 편광필터(CPL) 차이",
+      "titleEn": "ND Filter vs Polarizer Filter",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 18,
+      "slug": "graduated-nd-filter-guide",
+      "titleKo": "그라데이션 ND필터 사용법",
+      "titleEn": "Graduated ND Filter Guide",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 19,
+      "slug": "filter-stacking-guide",
+      "titleKo": "필터 스태킹(중첩) 시 주의사항",
+      "titleEn": "Filter Stacking Guide",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 20,
+      "slug": "mirrorless-vs-dslr-explained",
+      "titleKo": "미러리스 vs DSLR 차이점",
+      "titleEn": "Mirrorless vs DSLR Explained",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 21,
+      "slug": "prime-lens-vs-zoom-lens",
+      "titleKo": "단렌즈 vs 줌렌즈 선택 가이드",
+      "titleEn": "Prime Lens vs Zoom Lens",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 22,
+      "slug": "how-to-choose-a-tripod",
+      "titleKo": "삼각대 선택 가이드",
+      "titleEn": "How to Choose a Tripod",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 23,
+      "slug": "timelapse-camera-settings",
+      "titleKo": "릴리즈/인터벌미터로 타임랩스 설정하기",
+      "titleEn": "Timelapse Camera Settings",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 24,
+      "slug": "focus-stacking-for-macro-photography",
+      "titleKo": "매크로 포커스 스태킹 기법",
+      "titleEn": "Focus Stacking for Macro Photography",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 25,
+      "slug": "panorama-photography-settings",
+      "titleKo": "파노라마 스티칭 촬영 설정",
+      "titleEn": "Panorama Photography Settings",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 26,
+      "slug": "low-light-noise-reduction-settings",
+      "titleKo": "저조도 노이즈 최소화 설정",
+      "titleEn": "Low-Light Noise Reduction Settings",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 27,
+      "slug": "flash-sync-speed-explained",
+      "titleKo": "플래시 동조 속도 이해하기",
+      "titleEn": "Flash Sync Speed Explained",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 28,
+      "slug": "studio-lighting-basics",
+      "titleKo": "스튜디오 조명 기초",
+      "titleEn": "Studio Lighting Basics",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 29,
+      "slug": "using-exposure-compensation",
+      "titleKo": "노출 보정(EV) 활용법",
+      "titleEn": "Using Exposure Compensation",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    },
+    {
+      "order": 30,
+      "slug": "back-button-focus-explained",
+      "titleKo": "백버튼 포커스 설정법",
+      "titleEn": "Back-Button Focus Explained",
+      "published": false,
+      "publishedDate": null,
+      "mirrored": false
+    }
+  ]
+}
