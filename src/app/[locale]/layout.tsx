@@ -32,7 +32,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Home" });
-  const title = "ExifLens — EXIF Viewer & ND Filter Long Exposure Calculator";
+  const title = "ExifLens — EXIF Viewer & ND Calculator";
   const description = t("subtitle");
 
   return {

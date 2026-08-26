@@ -1,5 +1,12 @@
 # 개발 이력 (Development History)
 
+## 2026-08-26 — 네이버 서치어드바이저 URL 검사 경고 대응: 페이지 제목/Open Graph 제목 단축
+
+- 네이버 서치어드바이저 "URL 검사"에서 페이지 제목과 Open Graph 제목이 40자 권장 기준을 초과(기존 59자)한다는 경고 확인
+- `src/app/[locale]/layout.tsx`의 공통 타이틀을 `"ExifLens — EXIF Viewer & ND Filter Long Exposure Calculator"`(59자)에서 `"ExifLens — EXIF Viewer & ND Calculator"`(38자)로 단축 — 검색 결과 노출 시 잘리지 않도록 개선
+- "robots.txt가 존재하지 않습니다" 경고는 실제로는 `https://exifnd.com/robots.txt`가 정상 응답하는 것을 확인, 네이버 측 크롤링 타이밍 문제로 판단되어 코드 수정 없이 재검증만 필요
+- `npm run build` 및 컴파일된 HTML의 `<title>` 태그 확인으로 검증 완료
+
 ## 2026-08-26 — 맥 로컬 저장소 git 커밋 잠김(lock) 문제 발견 및 해결, 1회성 실행 스크립트 종료 팝업 제거
 
 - 네이버 인증 태그 반영 과정에서 맥(Mac) 로컬 저장소(`~/Desktop/exiflens`)의 `.git/HEAD.lock` 파일이 8/25 22:18경부터 남아있어, 그 이후로 실행된 모든 `git commit`이 "cannot lock ref 'HEAD'" 오류로 조용히 실패하고 있었던 것을 발견 (전날 자동 발행 스크립트가 강제 종료되며 남긴 것으로 추정)
