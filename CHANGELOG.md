@@ -1,5 +1,25 @@
 # 개발 이력 (Development History)
 
+## 2026-08-26 — 네이버 서치어드바이저 사이트 소유확인 메타 태그 추가
+
+- 네이버 웹마스터도구(서치어드바이저)에 `https://exifnd.com` 등록을 위해 HTML 태그 방식 소유확인 진행. 루트 레이아웃(`src/app/layout.tsx`)의 정적 `metadata` 객체에 `verification.other["naver-site-verification"]` 필드를 추가해 `<meta name="naver-site-verification" content="...">` 태그가 모든 페이지에 렌더링되도록 처리 (로케일별 `generateMetadata()`가 아닌 루트 레이아웃에 추가한 이유는, 루트 레이아웃 메타데이터가 모든 라우트에 공통 병합되기 때문)
+- `npm run build`로 빌드 후 컴파일된 HTML에 태그가 정상 렌더링되는 것을 확인
+- 실제 GitHub 커밋/푸시는 클라우드 세션이 아닌, 사용자 맥(Mac) 로컬 저장소에서 1회성 스크립트(`네이버인증 푸시하기.command`)를 통해 수행
+
+## 2026-08-26 — 가이드 아티클 자동 발행 1일차: "인물 사진 카메라 설정"
+
+- 확장 주제 큐(`automation/guide-topics-queue.json`) 1번 항목 "Portrait Photography Camera Settings" 4개 언어(en/ja/ko/es) 작성 완료, `published: true`로 갱신
+- 조리개별 배경 분리, 아이(눈) AF 활용, 셔터스피드·ISO 조합, 인물용 렌즈 화각 선택 등 실전 설정 위주로 구성
+- `npm run build` 정상 통과 확인
+- GitHub push는 이 클라우드 환경에서 직접 불가하여(네트워크 정책상 git proxy 차단), 결과물을 사용자 맥(Mac) 작업 폴더로 전달하고 더블클릭 실행형 커밋·푸시 스크립트를 함께 생성하는 방식으로 반영
+
+## 2026-08-26 — 가이드 아티클 매일 자동 발행 파이프라인 구축
+
+- 애드센스 심사 대기 기간 동안 사이트 활성도를 유지하기 위해, 매일 한국시간 오전 6시에 가이드 아티클 1개(4개 언어: en/ja/ko/es)를 자동 작성하는 파이프라인을 구축
+- 확장 주제 30개를 `automation/guide-topics-queue.json`에 순서(order)와 발행 여부(published)를 포함해 등록. 매일 실행 시 미발행 항목 중 순서가 가장 빠른 1개를 처리하고 완료 후 `published: true`, `publishedDate`를 기록해 다음 실행 시 자동으로 이어서 처리되도록 함
+- 클라우드 환경에서 GitHub로 직접 push가 차단됨을 확인(`access denied by the git proxy`) → 콘텐츠 생성은 클라우드에서 매일 자동으로 진행하되, 실제 반영은 맥(Mac) 작업 폴더에 결과물과 더블클릭 실행형 커밋·푸시 스크립트(`.command`)를 가져다 놓고 사용자가 클릭 한 번으로 완료하는 방식으로 확정
+- 애드센스 승인 완료 후에는 가이드 페이지 주제를 카테고리별로 세분화(현재는 카테고리 구분 없이 단일 목록이라 세로 스크롤이 긺)하는 작업을 별도로 진행 예정
+
 ## 2026-08-26 — GitHub/Vercel 배포 및 애드센스 사이트 소유권 확인 실패 수정
 
 - 도메인 `exifnd.com` 구매(Namecheap) 완료. GitHub 저장소(`SH8952/exiflens`) 생성 및 전체 커밋 이력 푸시, Vercel 프로젝트(`Moneypick` 팀) 생성 및 GitHub 연동 배포, 커스텀 도메인 `exifnd.com` 연결(A 레코드 `216.198.79.1`), Google Search Console 도메인 속성 소유권 확인(TXT 레코드) 및 `sitemap.xml` 제출까지 완료
