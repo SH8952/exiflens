@@ -1,5 +1,13 @@
 # 개발 이력 (Development History)
 
+## 2026-08-28 — 미래 날짜로 발행된 가이드 글 발행일 정정
+
+- 구글 서치 센트럴 공식 가이드("미래 날짜를 지정하지 마세요")에 따라, 8/25~8/29 사이 미래 날짜가 섞여 있던 기존 가이드 18개(4개 언어, 총 72개 파일)의 `publishedAt`을 오늘(8/28) 기준으로 3개씩 8/23~8/28로 재배정
+- `automation/guide-topics-queue.json`의 1번(portrait-photography-camera-settings), 2번(macro-photography-basics) 항목 `publishedDate`도 동일하게 갱신
+- `npm run build` 정상 통과 확인
+
+
+
 ## 2026-08-27
 - 가이드 아티클 자동 발행: "매크로 사진 촬영 기초" (Macro Photography Basics) — en/ja/ko/es 4개 언어 전체 작성 및 추가 (slug: macro-photography-basics)
 
