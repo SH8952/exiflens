@@ -6,35 +6,37 @@ import {
   type CoupangProduct,
 } from "@/lib/coupang";
 
-// Whitelisted keywords only — the Coupang Open API allows just 10 calls per
-// hour for this account, and Next.js's fetch cache (see src/lib/coupang.ts)
-// dedupes calls by exact keyword for its revalidate window. Accepting
-// arbitrary free-text from the client would let each unique query burn a
-// call and bypass the cache, so we only ever search for one of these fixed,
-// ND-filter-relevant terms.
-const FILTER_KEYWORDS: Record<string, string> = {
-  nd4: "ND4 카메라 필터",
-  nd8: "ND8 카메라 필터",
-  nd64: "ND64 카메라 필터",
-  nd1000: "ND1000 카메라 필터",
-  nd32000: "가변 ND 카메라 필터",
-  custom: "ND 필터 카메라",
-};
+// Row 1 (ND filter section): well-known filter brand names plus one generic
+// "가변 ND" search, so results span multiple manufacturers instead of being
+// dominated by whichever single brand ranks highest for one generic
+// keyword. Only ROW1_DISPLAY_COUNT of these are shown per visit, so the
+// exact line-up (which brand/keyword is included) also varies.
+const ROW1_KEYWORDS = [
+  "에이치앤와이 nd",
+  "겐코 nd",
+  "니시 nd",
+  "벤로 nd",
+  "슈나이더크로이츠나흐 nd",
+  "가변nd",
+];
+const ROW1_DISPLAY_COUNT = 5;
+// Per keyword, how many of its top results we pool from so a different
+// product from the same brand/keyword can show up on different visits.
+const ROW1_POOL_SIZE = 5;
 
-// Camera-accessory keywords shown alongside the ND-filter results. One is
-// picked at random per request; combined with the 6 filter keywords above,
-// the worst case is 6 + 3 = 9 distinct cached Coupang searches within any
-// rolling hour — still under the account's 10 calls/hour limit.
+// Row 2 (camera accessories): all three categories are always queried and
+// mixed together (rather than picking a single category per visit), so
+// every visit shows a blend of bags/tripods/memory cards rather than one
+// category monopolizing the row.
 const ACCESSORY_KEYWORDS = ["카메라 가방", "카메라 삼각대", "카메라 메모리카드"];
+const ACCESSORY_DISPLAY_COUNT = 5;
+const ACCESSORY_POOL_SIZE = 10;
 
-// How many products each half of the grid shows, and how large a pool we
-// pull from Coupang (capped at the API's own max of 10) so we can show a
-// different random subset on every request without any extra API calls —
-// the underlying Coupang fetch for a given keyword is still cached for the
-// revalidate window in src/lib/coupang.ts, so this pool is reused across
-// every visitor during that window at no extra API cost.
-const RESULTS_PER_SECTION = 5;
-const POOL_SIZE = 10;
+// Total distinct keywords across both rows: 6 (row 1) + 3 (row 2) = 9,
+// still under the Coupang Open API's 10 calls/hour account limit — each
+// keyword's underlying fetch is cached (see src/lib/coupang.ts), so
+// re-running this handler on every request re-shuffles the display without
+// costing any extra API calls.
 
 function pickRandom<T>(items: T[], count: number): T[] {
   const shuffled = [...items];
@@ -42,40 +44,53 @@ function pickRandom<T>(items: T[], count: number): T[] {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-  return shuffled.slice(0, count);
+  return shuffled.slice(0, Math.max(0, count));
 }
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const filter = searchParams.get("filter") ?? "";
-  const filterKeyword = FILTER_KEYWORDS[filter];
-
-  if (!filterKeyword) {
-    return NextResponse.json(
-      { error: "unknown filter", allowed: Object.keys(FILTER_KEYWORDS) },
-      { status: 400 },
-    );
+/**
+ * Splits `total` into `parts` non-negative integers that sum to `total`,
+ * giving every part at least 1 (when total >= parts) and randomly
+ * distributing the remainder — e.g. for 3 parts summing to 5, produces
+ * something like [2, 2, 1] or [3, 1, 1], never fewer than 1 per part.
+ */
+function randomDistribution(total: number, parts: number): number[] {
+  const counts = new Array(parts).fill(0);
+  let remaining = total;
+  for (let i = 0; i < parts && remaining > 0; i++) {
+    counts[i] = 1;
+    remaining--;
   }
+  while (remaining > 0) {
+    const i = Math.floor(Math.random() * parts);
+    counts[i]++;
+    remaining--;
+  }
+  return counts;
+}
 
-  const accessoryKeyword =
-    ACCESSORY_KEYWORDS[Math.floor(Math.random() * ACCESSORY_KEYWORDS.length)];
-
-  const [filterResult, accessoryResult] = await Promise.allSettled([
-    searchCoupangProducts(filterKeyword, POOL_SIZE),
-    searchCoupangProducts(accessoryKeyword, POOL_SIZE),
+export async function GET() {
+  const [row1Settled, accessorySettled] = await Promise.all([
+    Promise.allSettled(
+      ROW1_KEYWORDS.map((keyword) => searchCoupangProducts(keyword, ROW1_POOL_SIZE)),
+    ),
+    Promise.allSettled(
+      ACCESSORY_KEYWORDS.map((keyword) =>
+        searchCoupangProducts(keyword, ACCESSORY_POOL_SIZE),
+      ),
+    ),
   ]);
 
   // A config error (missing API keys) affects every call identically, so
   // one is enough to tell the UI to hide the section quietly rather than
-  // show a scary error — matches the previous single-call behavior.
-  const configMissing = [filterResult, accessoryResult].some(
+  // show a scary error.
+  const anyConfigMissing = [...row1Settled, ...accessorySettled].some(
     (r) => r.status === "rejected" && r.reason instanceof CoupangConfigError,
   );
-  if (configMissing) {
+  if (anyConfigMissing) {
     return NextResponse.json({ products: [] }, { status: 200 });
   }
 
-  for (const result of [filterResult, accessoryResult]) {
+  for (const result of [...row1Settled, ...accessorySettled]) {
     if (result.status === "rejected") {
       if (result.reason instanceof CoupangApiError) {
         console.error("[coupang] API error:", result.reason.message);
@@ -85,18 +100,40 @@ export async function GET(request: Request) {
     }
   }
 
-  const filterPool: CoupangProduct[] =
-    filterResult.status === "fulfilled" ? filterResult.value : [];
-  const accessoryPool: CoupangProduct[] =
-    accessoryResult.status === "fulfilled" ? accessoryResult.value : [];
+  const row1Pools: CoupangProduct[][] = row1Settled.map((r) =>
+    r.status === "fulfilled" ? r.value : [],
+  );
+  const accessoryPools: CoupangProduct[][] = accessorySettled.map((r) =>
+    r.status === "fulfilled" ? r.value : [],
+  );
 
-  // First half: ND-filter products for the selected filter. Second half:
-  // camera accessories from a randomly chosen category. Returned as one
-  // flat list — the client grid wraps every RESULTS_PER_SECTION items onto
-  // its own row, so no section heading or visual divider is needed.
+  // Row 1: randomly keep ROW1_DISPLAY_COUNT of the available keyword pools
+  // (dropping the rest for this visit), then pick one random product from
+  // each kept pool.
+  const availableRow1Indexes = row1Pools
+    .map((pool, i) => (pool.length > 0 ? i : -1))
+    .filter((i) => i >= 0);
+  const chosenRow1Indexes = pickRandom(
+    availableRow1Indexes,
+    Math.min(ROW1_DISPLAY_COUNT, availableRow1Indexes.length),
+  );
+  const row1Products = chosenRow1Indexes
+    .map((i) => pickRandom(row1Pools[i], 1)[0])
+    .filter((p): p is CoupangProduct => Boolean(p));
+
+  // Row 2: split ACCESSORY_DISPLAY_COUNT across the three categories with a
+  // random-but-balanced distribution, then pick that many random products
+  // from each category's pool.
+  const distribution = randomDistribution(ACCESSORY_DISPLAY_COUNT, accessoryPools.length);
+  const accessoryProducts = accessoryPools.flatMap((pool, i) =>
+    pickRandom(pool, distribution[i]),
+  );
+
+  // Combine, then shuffle within each row so brand/category groupings
+  // aren't visually clustered in a fixed order.
   const products = [
-    ...pickRandom(filterPool, RESULTS_PER_SECTION),
-    ...pickRandom(accessoryPool, RESULTS_PER_SECTION),
+    ...pickRandom(row1Products, row1Products.length),
+    ...pickRandom(accessoryProducts, accessoryProducts.length),
   ];
 
   if (products.length === 0) {
@@ -108,7 +145,7 @@ export async function GET(request: Request) {
     // No response caching here: the underlying Coupang fetch (see
     // src/lib/coupang.ts) is already cached per keyword, so re-running this
     // handler on every request costs no extra API calls — it just
-    // re-shuffles which items from the cached pool are shown.
+    // re-shuffles which items from the cached pools are shown.
     { headers: { "Cache-Control": "no-store" } },
   );
 }
