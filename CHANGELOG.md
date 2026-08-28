@@ -1,5 +1,8 @@
 # 개발 이력 (Development History)
 
+## 2026-08-27
+- 가이드 아티클 자동 발행: "매크로 사진 촬영 기초" (Macro Photography Basics) — en/ja/ko/es 4개 언어 전체 작성 및 추가 (slug: macro-photography-basics)
+
 ## 2026-08-26 — 네이버 서치어드바이저 URL 검사 경고 대응: 페이지 제목/Open Graph 제목 단축
 
 - 네이버 서치어드바이저 "URL 검사"에서 페이지 제목과 Open Graph 제목이 40자 권장 기준을 초과(기존 59자)한다는 경고 확인
