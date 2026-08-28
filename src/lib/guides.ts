@@ -17,6 +17,14 @@ export type GuideFrontmatter = {
   publishedAt: string;
   updatedAt?: string;
   tags?: string[];
+  /**
+   * Free-text category label, written in the guide's own locale (like
+   * `tags`), used to group guides on the /guides index page. Older guides
+   * written before this field existed may not have one — the guides index
+   * falls back to a generic "Other" bucket for those (see
+   * FALLBACK_CATEGORY in the guides page).
+   */
+  category?: string;
 };
 
 export type GuideMeta = GuideFrontmatter & {

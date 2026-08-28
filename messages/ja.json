@@ -319,6 +319,7 @@
     "subtitle": "EXIFデータ、NDフィルター、カメラ設定を使いこなすための実践的なガイドです。",
     "empty": "この言語で公開されているガイドはまだありません。近日公開予定です。",
     "readingTime": "{minutes}分で読めます",
-    "backToGuides": "← ガイド一覧に戻る"
+    "backToGuides": "← ガイド一覧に戻る",
+    "otherCategory": "その他のガイド"
   }
 }

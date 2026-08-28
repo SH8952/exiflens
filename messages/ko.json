@@ -319,6 +319,7 @@
     "subtitle": "EXIF 데이터, ND 필터, 카메라 설정을 제대로 활용하는 방법을 실용적으로 다루는 가이드입니다.",
     "empty": "이 언어로 발행된 가이드가 아직 없습니다 — 곧 추가될 예정입니다.",
     "readingTime": "{minutes}분 읽기",
-    "backToGuides": "← 가이드 목록으로"
+    "backToGuides": "← 가이드 목록으로",
+    "otherCategory": "기타 가이드"
   }
 }

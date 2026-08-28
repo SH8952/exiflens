@@ -319,6 +319,7 @@
     "subtitle": "Guías prácticas y directas sobre datos EXIF, filtros ND, y cómo sacarle el máximo partido a la configuración de tu cámara.",
     "empty": "Todavía no hay guías publicadas en este idioma — vuelve pronto.",
     "readingTime": "{minutes} min de lectura",
-    "backToGuides": "← Volver a Guías"
+    "backToGuides": "← Volver a Guías",
+    "otherCategory": "Otras guías"
   }
 }
