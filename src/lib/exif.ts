@@ -1,5 +1,3 @@
-import ExifReader from "exifreader";
-
 export type ParsedExif = {
   fileName: string;
   camera: string | null;
@@ -113,8 +111,14 @@ function combineMakeAndModel(
 /**
  * Parses EXIF metadata from an image file entirely in the browser.
  * The file's bytes never leave the client — no network request is made.
+ *
+ * `exifreader` is loaded lazily (dynamic import) instead of at module scope
+ * so it isn't part of the initial page bundle every visitor downloads —
+ * it's only fetched once someone actually drops/selects a photo. (PSI 성능
+ * 개선: 초기 로딩에 불필요한 자바스크립트 제거, 2026-08-29)
  */
 export async function parseExifFile(file: File): Promise<ParsedExif> {
+  const { default: ExifReader } = await import("exifreader");
   const tags = await ExifReader.load(file, { expanded: true });
   const exif = tags.exif ?? {};
 
