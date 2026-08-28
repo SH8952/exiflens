@@ -43,8 +43,8 @@ export function CoupangGearCards() {
   // to a previous filterId (a new fetch just kicked off above).
   if (state === null || state.filterId !== filterId) {
     return (
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {Array.from({ length: 4 }).map((_, i) => (
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+        {Array.from({ length: 10 }).map((_, i) => (
           <div
             key={i}
             className="aspect-[3/4] animate-pulse rounded-lg bg-muted"
@@ -60,7 +60,7 @@ export function CoupangGearCards() {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
         {state.products.map((product) => (
           <a
             key={product.productId}
@@ -74,7 +74,7 @@ export function CoupangGearCards() {
                 src={product.productImage}
                 alt={product.productName}
                 fill
-                sizes="(min-width: 640px) 25vw, 45vw"
+                sizes="(min-width: 640px) 20vw, 45vw"
                 className="object-cover transition-transform group-hover:scale-105"
                 unoptimized
               />

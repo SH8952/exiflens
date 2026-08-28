@@ -53,8 +53,8 @@ export function GearRecommendation({ locale }: { locale: string }) {
 
   if (provider === "pending") {
     return (
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {Array.from({ length: 4 }).map((_, i) => (
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+        {Array.from({ length: 10 }).map((_, i) => (
           <div
             key={i}
             className="aspect-[3/4] animate-pulse rounded-lg bg-muted"
