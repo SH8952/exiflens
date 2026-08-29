@@ -1,6 +1,15 @@
 # 개발 이력 (Development History)
 
-## 2026-08-28
+## 2026-08-29 — 예약 발행 글의 발행일 오기재(하루 밀림) 수정 및 재발방지
+
+- 문제: 오늘(2026-08-29 KST 06:03) 자동 발행된 "야생동물 사진 촬영 설정" 가이드의 publishedAt/publishedDate가 하루 전날(2026-08-28)로 잘못 기록됨을 확인
+- 원인: 예약 작업이 UTC 21:00(=KST 06:00)에 실행되는데, 지시문이 "오늘 날짜"를 서버 기본 시간대(UTC) 기준 date +%Y-%m-%d로 구하도록 되어 있어, UTC 기준으로는 아직 전날이라 하루 밀린 날짜가 기록됨
+- 조치 1: 4개 언어(en/ko/ja/es) mdx 프론트매터의 publishedAt과 automation/guide-topics-queue.json의 publishedDate를 2026-08-29로 소급 수정
+- 조치 2: 예약 작업(트리거) 지시문에 "오늘 날짜는 반드시 TZ=Asia/Seoul date +%Y-%m-%d(KST 기준)로 계산" 규칙을 추가하여 재발 방지 (FlyDroneMap 예약 작업에 이미 적용되어 있던 동일한 수정을 ExifLens에도 반영)
+- 애드센스 검수와는 무관한 콘텐츠 날짜 메타데이터 수정으로, 검수에 영향 없음
+
+
+## 2026-08-29
 
 ### Added
 - New guide article published in all 4 languages (en/ja/ko/es): "Wildlife Photography Camera Settings" (야생동물 사진 촬영 설정) — covers shutter speed selection for animal movement, continuous AF (AF-C) vs single-shot, aperture trade-offs for background separation, ISO strategy in low dawn/dusk light, and telephoto lens/teleconverter choices. Filed under the "Photography Genres" category (reused existing category across all locales).
