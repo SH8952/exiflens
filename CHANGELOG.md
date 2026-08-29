@@ -1,5 +1,10 @@
 # 개발 이력 (Development History)
 
+## 2026-08-28
+
+### Added
+- New guide article published in all 4 languages (en/ja/ko/es): "Wildlife Photography Camera Settings" (야생동물 사진 촬영 설정) — covers shutter speed selection for animal movement, continuous AF (AF-C) vs single-shot, aperture trade-offs for background separation, ISO strategy in low dawn/dusk light, and telephoto lens/teleconverter choices. Filed under the "Photography Genres" category (reused existing category across all locales).
+
 ## 2026-08-29 — 홈페이지 초기 로딩 속도 개선 (exifreader 지연 로딩)
 
 - 계기: 구글 PageSpeed Insights 측정 결과 모바일 성능 69점(FCP 3.5초, LCP 6.2초), "사용하지 않는 자바스크립트 232KiB" 등 지적
