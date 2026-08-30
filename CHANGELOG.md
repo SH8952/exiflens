@@ -1,5 +1,10 @@
 # 개발 이력 (Development History)
 
+## 2026-08-30
+
+### Added
+- New guide article published in all 4 languages (en/ja/ko/es): "Street Photography Exposure Settings" (스트리트 포토그래피 노출 설정) — covers zone focusing for fast candid shots, minimum shutter speed thresholds for freezing walking pedestrians, auto-ISO with a locked shutter floor, highlight-priority metering for high-contrast sun/shadow scenes, and discreet-shooting settings (electronic shutter, viewfinder use). Filed under the "Photography Genres" category (reused existing category across all locales).
+
 ## 2026-08-29 — 예약 발행 글의 발행일 오기재(하루 밀림) 수정 및 재발방지
 
 - 문제: 오늘(2026-08-29 KST 06:03) 자동 발행된 "야생동물 사진 촬영 설정" 가이드의 publishedAt/publishedDate가 하루 전날(2026-08-28)로 잘못 기록됨을 확인
