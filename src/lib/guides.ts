@@ -80,6 +80,27 @@ export function getAllGuidesMeta(locale: Locale): GuideMeta[] {
 }
 
 /**
+ * Up to `limit` other guides to link to from the bottom of a guide page.
+ * Same-category guides are preferred (photographers reading an ND filter
+ * guide are more likely to want another ND filter guide next); if there
+ * aren't enough in the same category, the list is padded out with the
+ * most recent guides from other categories.
+ */
+export function getRelatedGuides(
+  locale: Locale,
+  currentSlug: string,
+  limit = 3,
+): GuideMeta[] {
+  const all = getAllGuidesMeta(locale).filter((g) => g.slug !== currentSlug);
+  const current = getGuideMeta(locale, currentSlug);
+
+  const sameCategory = all.filter((g) => g.category === current?.category);
+  const rest = all.filter((g) => g.category !== current?.category);
+
+  return [...sameCategory, ...rest].slice(0, limit);
+}
+
+/**
  * Compiles one guide's MDX body into a renderable React component. Called
  * from a server component (RSC) — @mdx-js/mdx's `evaluate` runs the MDX
  * compiler and hands back a ready-to-render `default` export, following the

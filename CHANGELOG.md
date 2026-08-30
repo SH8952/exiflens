@@ -1,5 +1,15 @@
 # 개발 이력 (Development History)
 
+## 2026-08-30 — 가이드 상세 페이지에 "관련 가이드" 섹션 추가
+
+- FlyDroneMap 프로젝트에 이미 있는 "관련 가이드" 내비게이션 기능을 ExifLens에도 동일하게 적용
+- `src/lib/guides.ts`에 `getRelatedGuides()` 추가: 같은 카테고리의 다른 가이드를 우선하고, 부족하면 최신 가이드로 채워 최대 3개 추천
+- 가이드 상세 페이지(`src/app/[locale]/guides/[slug]/page.tsx`) 본문 하단에 구분선 + "관련 가이드" 목록 섹션 추가
+- 4개 언어(en/ko/ja/es) messages 파일에 `Guides.relatedGuides` 번역 키 추가
+- `npm run build` 정상 완료 확인, 실제 빌드 결과물에서 관련 가이드 링크가 정상 렌더링되는 것을 확인
+- 애드센스 검수와는 무관한 순수 UI/네비게이션 추가
+
+
 ## 2026-08-30
 
 ### Added
