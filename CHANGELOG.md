@@ -1,5 +1,12 @@
 # 개발 이력 (Development History)
 
+## 2026-08-31 — 가이드 아티클 자동 발행: "야경 도시 사진 카메라 설정"
+
+- New guide article published in all 4 languages (en/ja/ko/es): "Night Cityscape Photography Settings" (야경 도시 야간 사진 설정) — covers aperture choice for starburst effects vs. depth of field, tripod vs. handheld shutter speed ranges (including car light trails), ISO priorities around dynamic range loss rather than just noise, white balance strategy for mixed sodium/fluorescent/LED lighting, exposure bracketing for window highlights vs. shadow detail, and the infinity-focus trap with live-view fine focusing. Filed under the "Photography Genres" category (재사용: 기존 "장르별 촬영 가이드" / "Photography Genres" / "ジャンル別撮影ガイド" / "Guías por género fotográfico" 카테고리를 4개 언어 모두 그대로 재사용).
+- `automation/guide-topics-queue.json`의 order 5 항목(night-cityscape-photography-settings)을 published: true, publishedDate: "2026-08-31"로 갱신
+- `npm run build` 정상 완료 확인
+- 애드센스 검수와는 무관한 콘텐츠 추가 작업
+
 ## 2026-08-30 — 파비콘을 create-next-app 기본(Vercel) 로고에서 사이트 아이덴티티로 교체
 
 - 문제: 크롬 탭에 표시되는 파비콘이 create-next-app이 기본 제공하는 Vercel 삼각형 로고 그대로 남아있어 사이트가 전문적으로 보이지 않음
