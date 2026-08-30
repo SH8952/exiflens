@@ -1,5 +1,13 @@
 # 개발 이력 (Development History)
 
+## 2026-08-30 — 구글 애널리틱스(GA4) 태그 설치
+
+- FlyDroneMap 프로젝트에서 먼저 검증된 방식(애드센스 검수/속도 영향 없음 확인됨)을 ExifLens에도 동일하게 적용
+- `src/app/[locale]/layout.tsx`에 GA4 측정 ID(G-1P4CBYCR1V)로 gtag.js 스크립트 2개를 추가, 기존 애드센스 스크립트와 동일하게 `next/script`의 `strategy="afterInteractive"`로 비동기 로드하여 LCP 등 페이지 속도에 영향 없도록 처리
+- `tsc --noEmit` 타입 체크 통과, `npm run build` 정상 완료, 빌드 결과물에서 gtag 스크립트와 config 호출이 정상 삽입된 것을 확인
+- `git diff --stat`으로 의도한 파일(layout.tsx) 한 곳만 변경되었음을 확인
+
+
 ## 2026-08-30 — 가이드 본문에 ** 기호가 그대로 노출되던 문제 수정 및 재발방지
 
 - 문제: 일부 가이드 글에서 굵게 표시하려던 부분이 굵게 처리되지 않고 `**광각(14mm~35mm)**`처럼 별표(**)가 그대로 화면에 보임

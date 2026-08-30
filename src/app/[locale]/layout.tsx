@@ -15,6 +15,11 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+// GA4 measurement ID isn't a secret — it's exposed in every page's public
+// HTML/network requests regardless, so it's fine to hardcode rather than
+// wire up an env var for it.
+const GA4_MEASUREMENT_ID = "G-1P4CBYCR1V";
+
 const ADSENSE_PUBLISHER_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
 // AdSense's script tag requires the "ca-" prefixed client id (e.g.
 // "ca-pub-XXXX"), while ads.txt and most dashboards use the bare "pub-XXXX"
@@ -86,6 +91,19 @@ export default async function LocaleLayout({
             __html: JSON.stringify(webApplicationJsonLd(locale)),
           }}
         />
+        <Script
+          async
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA4_MEASUREMENT_ID}');
+          `}
+        </Script>
         {ADSENSE_CLIENT_ID ? (
           <Script
             async
