@@ -1,5 +1,17 @@
 # 개발 이력 (Development History)
 
+## 2026-08-30 — 파비콘을 create-next-app 기본(Vercel) 로고에서 사이트 아이덴티티로 교체
+
+- 문제: 크롬 탭에 표시되는 파비콘이 create-next-app이 기본 제공하는 Vercel 삼각형 로고 그대로 남아있어 사이트가 전문적으로 보이지 않음
+- 확인: `src/app/favicon.ico`를 직접 렌더링해본 결과 실제로 기본 Vercel 로고(원 안에 삼각형)였음. 사이트에는 별도의 로고 이미지 파일이 없고, 헤더에 조리개(Aperture) 아이콘 + "ExifLens" 글자만 사용 중이었음
+- 조치: 헤더에서 쓰이는 조리개(Aperture) 아이콘을 사이트의 브랜드 색상(다크 테마 primary 색상 #e38d3d, 배경 #0a0a0a)으로 새로 그려 파비콘 세트를 제작
+  - `src/app/favicon.ico` 교체 (16/32/48/256px 포함 멀티 사이즈, 구형 브라우저 호환용)
+  - `src/app/icon.png` 추가 (512px, 최신 브라우저·고해상도 디스플레이용)
+  - `src/app/apple-icon.png` 추가 (180px, iOS 홈 화면 아이콘용)
+  - Next.js App Router 규칙에 따라 파일만 추가/교체하면 자동으로 `<link rel="icon">` 등 메타 태그에 반영되므로 별도 코드 수정 없음
+- 검증: `npm run build` 성공, 빌드된 HTML에서 새 아이콘 경로(콘텐츠 해시 포함)로 `<link rel="icon">`, `<link rel="apple-touch-icon">` 태그가 정상 생성됨을 확인. `git diff --stat`으로 의도한 3개 아이콘 파일만 변경/추가되었음을 확인
+
+
 ## 2026-08-30 — 구글 애널리틱스(GA4) 태그 설치
 
 - FlyDroneMap 프로젝트에서 먼저 검증된 방식(애드센스 검수/속도 영향 없음 확인됨)을 ExifLens에도 동일하게 적용
