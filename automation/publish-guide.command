@@ -4,7 +4,7 @@
 # 이후에는 이 파일을 다시 받을 필요 없이, 저장소의 automation 폴더에 있는
 # 이 스크립트를 계속 재사용하시면 매번 보안 경고 없이 실행됩니다.
 
-REPO="$HOME/Desktop/exiflens"
+REPO="$HOME/Desktop/애드센스 제휴 마케팅/exiflens"
 SCRIPT_NAME="publish-guide.command"
 SCRIPT_PATH="$REPO/automation/$SCRIPT_NAME"
 
