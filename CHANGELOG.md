@@ -1,5 +1,15 @@
 # 개발 이력 (Development History)
 
+## 2026-08-31 — 헤더 '프레임 생성기' 버튼 문구를 '프레임 만들기'로 통일
+
+- 요청: 업로드 박스 위에 새로 추가한 "프레임 만들기" 버튼과 최상단 헤더의 기존 "프레임 생성기" 버튼 문구가 달라 통일감이 떨어진다는 석한님 피드백. 모든 언어를 동일한 기준으로 맞춰 달라는 확인
+- 조치: `messages/{ko,en,ja,es}.json`의 `Header.frameNav` 값을 각 언어의 `Home.goToFrameButton`과 동일한 문구로 변경
+  - ko: 프레임 생성기 → 프레임 만들기
+  - en: Frame Generator → Create a Frame
+  - ja: フレーム生成 → フレームを作る
+  - es: Generador de Marcos → Crear un marco
+- 검증: 실제 프로덕션 빌드(`next build && next start`) 위에서 Playwright로 4개 언어 헤더 텍스트를 모두 실측해 의도한 문구로 정상 표시됨을 확인. `npx tsc --noEmit`, `npx eslint`, JSON 유효성 검사 정상 통과
+
 ## 2026-08-31 — 홈 업로드 박스 사진 미리보기 크기 확대
 
 - 요청: 방금 추가한 홈 업로드 박스 사진 미리보기가 프레임 생성기보다 작게 보인다는 석한님 피드백. 사진을 박스 크기만큼 크게 채우면 하단 파일명/재업로드 바는 지금 그대로 유지해도 괜찮다는 확인
