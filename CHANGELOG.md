@@ -1,5 +1,10 @@
 # 개발 이력 (Development History)
 
+## 2026-09-01
+
+### Added
+- New guide article published in 4 languages (en/ja/ko/es): "Panning Shot Technique" (패닝샷(동체 흐림 효과) 촬영법) — shutter speed selection, subject tracking, and ND filter usage for panning shots. Category: Camera Basics & Exposure (카메라 기초 & 노출).
+
 ## 2026-08-31 — 추출된 EXIF에 GPS 위치 + 지도보기 모달 추가
 
 - 요청: 추출된 EXIF 목록의 초점거리 아래에 GPS 정보도 노출할 수 있는지 석한님 문의. 위경도는 텍스트로, 우측에 "지도보기" 링크를 두어 클릭 시 구글 지도 모달이 뜨도록, GPS 없는 사진은 다른 항목처럼 그대로 표시하도록 확정
