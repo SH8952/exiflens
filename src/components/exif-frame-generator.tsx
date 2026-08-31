@@ -22,6 +22,7 @@ import {
   ASPECT_RATIO_OPTIONS,
   canvasToBlob,
   downloadBlob,
+  loadImageForFrame,
   type AspectRatioOption,
   type FrameMetadata,
 } from "@/lib/frame-canvas";
@@ -139,11 +140,14 @@ function FrameEditor({
 
   React.useEffect(() => {
     let cancelled = false;
-    const img = new Image();
-    img.onload = () => {
-      if (!cancelled) setImage(img);
-    };
-    img.src = imageUrl;
+    loadImageForFrame(imageUrl)
+      .then((img) => {
+        if (!cancelled) setImage(img);
+      })
+      .catch(() => {
+        // Leave `image` as null — the canvas stays blank and the disabled
+        // download button already reflects that nothing is ready yet.
+      });
     return () => {
       cancelled = true;
     };
@@ -220,9 +224,15 @@ function FrameEditor({
           <canvas ref={canvasRef} className="h-auto w-full" />
           <div
             className={cn(
-              "pointer-events-none absolute inset-0 flex items-center justify-center bg-black/55 text-sm font-medium text-white opacity-0 transition-opacity",
+              // `group-hover` alone never triggers on touch devices (no
+              // mouse to hover with), so the replace hint was invisible on
+              // mobile — this box just looked like a dead black box with no
+              // affordance. Shown at a low, always-on opacity by default so
+              // touch users still see it, and only faded out on pointers
+              // that support real hovering (desktop mice/trackpads).
+              "pointer-events-none absolute inset-0 flex items-center justify-center bg-black/55 text-sm font-medium text-white opacity-70 transition-opacity md:opacity-0",
               isDragging && "opacity-100",
-              "group-hover:opacity-100",
+              "md:group-hover:opacity-100",
             )}
           >
             {t("dropToReplace")}

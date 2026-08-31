@@ -81,6 +81,7 @@ echo "=== ExifLens 가이드 자동 발행: $TITLE ==="
 
 # --- 3. 작업 전 백업 (always-backup-before-work 규칙) ---
 BACKUP_DIR="$REPO/_backups/exiflens_backup_$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$REPO/_backups"
 echo "백업 생성 중: $BACKUP_DIR"
 if command -v rsync >/dev/null 2>&1; then
   rsync -a --exclude 'node_modules' --exclude '.next' --exclude '.git' --exclude '_backups' "$REPO/" "$BACKUP_DIR/"
