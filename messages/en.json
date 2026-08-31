@@ -10,6 +10,7 @@
     "uploaderHint": "Supports JPG, PNG and most camera RAW files. Nothing leaves your browser.",
     "uploaderButton": "Or click to select a file",
     "uploaderReset": "Upload another photo",
+    "goToFrameButton": "Create a Frame",
     "uploaderErrorUnsupported": "Unsupported file type. Please upload a JPG, PNG or a supported camera RAW file.",
     "uploaderErrorTooLarge": "This file is too large (max 100MB).",
     "uploaderErrorParse": "Couldn't read EXIF data from this photo. It may not contain any metadata.",

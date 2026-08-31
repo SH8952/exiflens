@@ -10,6 +10,7 @@
     "uploaderHint": "Compatible con JPG, PNG y la mayoría de archivos RAW. Nada sale de tu navegador.",
     "uploaderButton": "O haz clic para seleccionar un archivo",
     "uploaderReset": "Subir otra foto",
+    "goToFrameButton": "Crear un marco",
     "uploaderErrorUnsupported": "Tipo de archivo no compatible. Sube un JPG, PNG o un archivo RAW compatible.",
     "uploaderErrorTooLarge": "Este archivo es demasiado grande (máx. 100MB).",
     "uploaderErrorParse": "No se pudo leer el EXIF de esta foto. Puede que no contenga metadatos.",

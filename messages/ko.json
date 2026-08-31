@@ -10,6 +10,7 @@
     "uploaderHint": "JPG, PNG 및 대부분의 카메라 RAW 파일을 지원합니다. 브라우저 밖으로 전송되지 않습니다.",
     "uploaderButton": "또는 클릭하여 파일 선택",
     "uploaderReset": "다른 사진 업로드",
+    "goToFrameButton": "프레임 만들기",
     "uploaderErrorUnsupported": "지원하지 않는 파일 형식입니다. JPG, PNG 또는 지원되는 카메라 RAW 파일을 업로드해 주세요.",
     "uploaderErrorTooLarge": "파일 용량이 너무 큽니다 (최대 100MB).",
     "uploaderErrorParse": "이 사진에서 EXIF 정보를 읽을 수 없습니다. 메타데이터가 없는 사진일 수 있습니다.",
