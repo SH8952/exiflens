@@ -79,6 +79,7 @@
     "downloadButton": "Descargar Foto con Marco",
     "dropToReplace": "Suelta una foto aquí para reemplazarla",
     "loadError": "No se pudo cargar esta foto en tu dispositivo ({reason}). Prueba con otra foto o con una versión de menor resolución de esta.",
+    "loadErrorUnsupportedFormat": "Este formato de archivo no es compatible con la vista previa (RAW o HEIC/HEIF). Conviértelo a JPG o PNG e inténtalo de nuevo.",
     "themeLabel": "Tema del Marco",
     "themes": {
       "classic-dark": "Clásico Oscuro",

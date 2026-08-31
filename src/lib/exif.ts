@@ -38,6 +38,31 @@ export function isSupportedImageFile(file: File): boolean {
 /** `accept` attribute for file inputs — shared by every upload/replace entry point. */
 export const FILE_INPUT_ACCEPT = `image/*,${ACCEPTED_RAW_EXTENSIONS.join(",")}`;
 
+// `isSupportedImageFile` above accepts these for EXIF *metadata* parsing —
+// `exifreader` can read tags out of RAW/HEIC files just fine. But no
+// browser can decode any of these as a raster `<img>`/canvas source, so the
+// EXIF Frame Generator (which draws the actual photo onto a canvas) needs a
+// stricter check to avoid attempting — and failing — a decode it was never
+// going to succeed at (2026-08-31, 모바일에서 "이미지를 디코딩하지 못했습니다" 오류의
+// 실제 원인: RAW/HEIC 파일도 EXIF 파싱은 성공하지만 캔버스 렌더링은 애초에 불가능함).
+const CANVAS_UNSUPPORTED_EXTENSIONS = [...ACCEPTED_RAW_EXTENSIONS, ".heic", ".heif"];
+const CANVAS_UNSUPPORTED_MIME_TYPES = ["image/heic", "image/heif"];
+
+/**
+ * True when a file that passed `isSupportedImageFile` (so EXIF parsing
+ * succeeded) is nonetheless a format no browser can render as an image —
+ * camera RAW files or HEIC/HEIF (the default format on many iPhones).
+ */
+export function isCanvasUnsupportedFormat(
+  fileName: string,
+  mimeType: string | null,
+): boolean {
+  const type = (mimeType ?? "").toLowerCase();
+  if (CANVAS_UNSUPPORTED_MIME_TYPES.includes(type)) return true;
+  const name = fileName.toLowerCase();
+  return CANVAS_UNSUPPORTED_EXTENSIONS.some((ext) => name.endsWith(ext));
+}
+
 /** Formats a rational EXIF value (e.g. shutter speed [1, 125]) as seconds. */
 function rationalToSeconds(value: [number, number] | undefined): number | null {
   if (!value || value[1] === 0) return null;

@@ -4,7 +4,7 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { Download, RotateCcw } from "lucide-react";
 import { useExifStore } from "@/store/exif-store";
-import { FILE_INPUT_ACCEPT, type ParsedExif } from "@/lib/exif";
+import { FILE_INPUT_ACCEPT, isCanvasUnsupportedFormat, type ParsedExif } from "@/lib/exif";
 import { usePhotoUpload } from "@/hooks/use-photo-upload";
 import { ExifUploader } from "@/components/exif-uploader";
 import { Button } from "@/components/ui/button";
@@ -79,6 +79,7 @@ export function ExifFrameGenerator() {
   const data = useExifStore((s) => s.data);
   const imageUrl = useExifStore((s) => s.imageUrl);
   const fileName = useExifStore((s) => s.fileName);
+  const fileType = useExifStore((s) => s.fileType);
 
   if (status !== "success" || !imageUrl) {
     return (
@@ -98,6 +99,7 @@ export function ExifFrameGenerator() {
       imageUrl={imageUrl}
       data={data}
       fileName={fileName}
+      fileType={fileType}
     />
   );
 }
@@ -106,10 +108,12 @@ function FrameEditor({
   imageUrl,
   data,
   fileName,
+  fileType,
 }: {
   imageUrl: string;
   data: ParsedExif | null;
   fileName: string | null;
+  fileType: string | null;
 }) {
   const t = useTranslations("Frame");
 
@@ -146,7 +150,21 @@ function FrameEditor({
 
   React.useEffect(() => {
     let cancelled = false;
-    setLoadError(null);
+    // No synchronous reset needed here: FrameEditor is remounted (`key={imageUrl}`)
+    // whenever the photo changes, so `loadError`/`image` already start at their
+    // initial `null` values for a new photo.
+
+    // RAW (.arw/.cr2/.dng/...) and HEIC/HEIF files parse EXIF fine but no
+    // browser can decode them as a raster image — attempting to anyway just
+    // produces a generic "failed to decode" error with no useful next step.
+    // Catch that up front and tell the user exactly what to do instead
+    // (2026-08-31, 모바일 "이미지를 디코딩하지 못했습니다" 오류의 실제 원인 확인).
+    if (isCanvasUnsupportedFormat(fileName ?? "", fileType)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- deliberate: skip the decode attempt entirely for a known-unrenderable format.
+      setLoadError(t("loadErrorUnsupportedFormat"));
+      return;
+    }
+
     loadImageForFrame(imageUrl)
       .then((img) => {
         if (!cancelled) setImage(img);
@@ -154,12 +172,12 @@ function FrameEditor({
       .catch((err: unknown) => {
         if (cancelled) return;
         setImage(null);
-        setLoadError(err instanceof Error ? err.message : String(err));
+        setLoadError(t("loadError", { reason: err instanceof Error ? err.message : String(err) }));
       });
     return () => {
       cancelled = true;
     };
-  }, [imageUrl]);
+  }, [imageUrl, fileName, fileType, t]);
 
   React.useEffect(() => {
     if (!image || !canvasRef.current) return;
@@ -169,11 +187,17 @@ function FrameEditor({
         { themeId, aspect, paddingPercent, metadata, customTheme },
         canvasRef.current,
       );
+      // Clears an error from a *previous* render attempt (e.g. the user
+      // fixed a transient issue by switching themes/aspect) — this isn't a
+      // decorative reset, it's the effect's actual result.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLoadError(null);
     } catch (err) {
-      setLoadError(err instanceof Error ? err.message : String(err));
+      setLoadError(
+        t("loadError", { reason: err instanceof Error ? err.message : String(err) }),
+      );
     }
-  }, [image, themeId, aspect, paddingPercent, metadata, customTheme]);
+  }, [image, themeId, aspect, paddingPercent, metadata, customTheme, t]);
 
   // Switching theme resets the editable overrides (colors/font/padding/logo)
   // to the newly-selected preset's own defaults — predictable behavior
@@ -253,7 +277,7 @@ function FrameEditor({
         </div>
         {loadError ? (
           <p role="alert" className="text-sm text-destructive">
-            {t("loadError", { reason: loadError })}
+            {loadError}
           </p>
         ) : null}
         <Button onClick={handleDownload} className="self-start" disabled={!image}>

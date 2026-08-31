@@ -79,6 +79,7 @@
     "downloadButton": "Download Framed Photo",
     "dropToReplace": "Drop a photo here to replace it",
     "loadError": "Couldn't load this photo on your device ({reason}). Try a different photo, or a lower-resolution version of this one.",
+    "loadErrorUnsupportedFormat": "This file format isn't supported for preview (RAW or HEIC/HEIF). Please export or convert it to JPG or PNG and try again.",
     "themeLabel": "Frame Theme",
     "themes": {
       "classic-dark": "Classic Dark",

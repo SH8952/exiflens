@@ -15,9 +15,17 @@ type ExifState = {
    * memory across a long session.
    */
   imageUrl: string | null;
+  /**
+   * The uploaded file's MIME type (`file.type`), kept alongside `imageUrl`
+   * so consumers like the EXIF Frame Generator can tell a browser-renderable
+   * photo (JPEG/PNG/WebP/...) apart from a format that only supports EXIF
+   * metadata extraction, not canvas rendering (RAW/HEIC) — see
+   * `isCanvasUnsupportedFormat` in `@/lib/exif` (2026-08-31).
+   */
+  fileType: string | null;
   errorMessage: string | null;
   startLoading: (fileName: string) => void;
-  setSuccess: (data: ParsedExif, imageUrl: string) => void;
+  setSuccess: (data: ParsedExif, imageUrl: string, fileType: string) => void;
   setError: (message: string) => void;
   reset: () => void;
 };
@@ -31,6 +39,7 @@ export const useExifStore = create<ExifState>((set, get) => ({
   fileName: null,
   data: null,
   imageUrl: null,
+  fileType: null,
   errorMessage: null,
   startLoading: (fileName) => {
     revoke(get().imageUrl);
@@ -40,13 +49,20 @@ export const useExifStore = create<ExifState>((set, get) => ({
       errorMessage: null,
       data: null,
       imageUrl: null,
+      fileType: null,
     });
   },
-  setSuccess: (data, imageUrl) =>
-    set({ status: "success", data, imageUrl, errorMessage: null }),
+  setSuccess: (data, imageUrl, fileType) =>
+    set({ status: "success", data, imageUrl, fileType, errorMessage: null }),
   setError: (message) => {
     revoke(get().imageUrl);
-    set({ status: "error", errorMessage: message, data: null, imageUrl: null });
+    set({
+      status: "error",
+      errorMessage: message,
+      data: null,
+      imageUrl: null,
+      fileType: null,
+    });
   },
   reset: () => {
     revoke(get().imageUrl);
@@ -55,6 +71,7 @@ export const useExifStore = create<ExifState>((set, get) => ({
       fileName: null,
       data: null,
       imageUrl: null,
+      fileType: null,
       errorMessage: null,
     });
   },
