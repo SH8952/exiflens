@@ -4,6 +4,7 @@ import { formatShutterSpeed } from "./exif";
 // devDependency purely for this) never reaches the runtime bundle. See
 // `importLibRaw` below for why the real module is loaded a different way.
 import type LibRawCtor from "libraw-wasm";
+import type { GpsData } from "libraw-wasm";
 
 /**
  * Loads LibRaw-Wasm from a vendored copy in `public/vendor/libraw-wasm/`
@@ -89,6 +90,27 @@ function formatRawTakenDate(timestamp: Date | undefined): string | null {
   return `${datePart} ${timePart}`;
 }
 
+/**
+ * Converts LibRaw's `[degrees, minutes, seconds]` GPS tuple to signed decimal
+ * degrees, applying the hemisphere reference ('S'/'W' negate). Returns `null`
+ * when the file has no parsed GPS block at all — `gpsparsed` is what tells
+ * "no GPS in file" apart from "GPS at exactly 0,0" (석한 요청, 2026-08-31:
+ * 추출된 EXIF 목록에 GPS 위치 추가).
+ */
+function parseRawGps(
+  gpsData: GpsData | undefined,
+): { latitude: number; longitude: number } | null {
+  if (!gpsData || !gpsData.gpsparsed) return null;
+  const toDecimal = ([deg, min, sec]: [number, number, number]) =>
+    deg + min / 60 + sec / 3600;
+  let latitude = toDecimal(gpsData.latitude);
+  let longitude = toDecimal(gpsData.longitude);
+  if (gpsData.latref === "S") latitude = -latitude;
+  if (gpsData.longref === "W") longitude = -longitude;
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null;
+  return { latitude, longitude };
+}
+
 /** Parses camera EXIF-equivalent metadata out of a RAW file via LibRaw. */
 export async function parseRawExifFile(file: File): Promise<ParsedExif> {
   const { default: LibRaw } = await importLibRaw();
@@ -140,6 +162,7 @@ export async function parseRawExifFile(file: File): Promise<ParsedExif> {
       aperture,
       iso,
       focalLength,
+      gps: parseRawGps(meta.gps_data),
       takenAt: formatRawTakenDate(meta.timestamp),
     };
   } finally {

@@ -8,6 +8,8 @@ export type ParsedExif = {
   aperture: string | null;
   iso: string | null;
   focalLength: string | null;
+  /** Decimal-degree GPS coordinates, when the photo has embedded location data. */
+  gps: { latitude: number; longitude: number } | null;
   /** Date the photo was taken, formatted "YYYY-MM-DD" (used by the EXIF frame generator). */
   takenAt: string | null;
 };
@@ -179,6 +181,18 @@ export async function parseExifFile(file: File): Promise<ParsedExif> {
       undefined,
   );
 
+  // `expanded: true` above gives us `tags.gps` already resolved to signed
+  // decimal degrees (S/W hemispheres negated) — no separate hemisphere-ref
+  // handling needed here, unlike the RAW/LibRaw path (석한 요청, 2026-08-31:
+  // 추출된 EXIF 목록에 GPS 위치 추가).
+  const gpsGroup = tags.gps;
+  const gps =
+    gpsGroup &&
+    typeof gpsGroup.Latitude === "number" &&
+    typeof gpsGroup.Longitude === "number"
+      ? { latitude: gpsGroup.Latitude, longitude: gpsGroup.Longitude }
+      : null;
+
   return {
     fileName: file.name,
     camera,
@@ -188,6 +202,7 @@ export async function parseExifFile(file: File): Promise<ParsedExif> {
     aperture: formatAperture(exif.FNumber?.value as [number, number] | undefined),
     iso,
     focalLength: formatFocalLength(exif.FocalLength?.value as [number, number] | undefined),
+    gps,
     takenAt,
   };
 }
