@@ -114,6 +114,12 @@ function FrameEditor({
   const t = useTranslations("Frame");
 
   const [image, setImage] = React.useState<HTMLImageElement | null>(null);
+  // Surfaces *why* the photo failed to load/render instead of leaving the
+  // preview box silently blank (the mobile bug this was added to diagnose:
+  // 2026-08-31, 사진이 안 보이는데 원인을 알 수 없어 재현 확인이 어려웠음). A short,
+  // literal error string is more useful here than another translated
+  // message — this is a diagnostic detail, not normal UI copy.
+  const [loadError, setLoadError] = React.useState<string | null>(null);
   const [aspect, setAspect] = React.useState<AspectRatioOption>("original");
   const [paddingPercent, setPaddingPercent] = React.useState(
     DEFAULT_PADDING_PERCENT,
@@ -140,13 +146,15 @@ function FrameEditor({
 
   React.useEffect(() => {
     let cancelled = false;
+    setLoadError(null);
     loadImageForFrame(imageUrl)
       .then((img) => {
         if (!cancelled) setImage(img);
       })
-      .catch(() => {
-        // Leave `image` as null — the canvas stays blank and the disabled
-        // download button already reflects that nothing is ready yet.
+      .catch((err: unknown) => {
+        if (cancelled) return;
+        setImage(null);
+        setLoadError(err instanceof Error ? err.message : String(err));
       });
     return () => {
       cancelled = true;
@@ -155,11 +163,16 @@ function FrameEditor({
 
   React.useEffect(() => {
     if (!image || !canvasRef.current) return;
-    renderThemedFrame(
-      image,
-      { themeId, aspect, paddingPercent, metadata, customTheme },
-      canvasRef.current,
-    );
+    try {
+      renderThemedFrame(
+        image,
+        { themeId, aspect, paddingPercent, metadata, customTheme },
+        canvasRef.current,
+      );
+      setLoadError(null);
+    } catch (err) {
+      setLoadError(err instanceof Error ? err.message : String(err));
+    }
   }, [image, themeId, aspect, paddingPercent, metadata, customTheme]);
 
   // Switching theme resets the editable overrides (colors/font/padding/logo)
@@ -238,6 +251,11 @@ function FrameEditor({
             {t("dropToReplace")}
           </div>
         </div>
+        {loadError ? (
+          <p role="alert" className="text-sm text-destructive">
+            {t("loadError", { reason: loadError })}
+          </p>
+        ) : null}
         <Button onClick={handleDownload} className="self-start" disabled={!image}>
           <Download className="size-4" />
           {t("downloadButton")}

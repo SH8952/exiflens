@@ -78,6 +78,7 @@
     "privacyNote": "100% 브라우저에서 처리됩니다. 프레임이 적용된 사진은 어디로도 전송되지 않습니다.",
     "downloadButton": "프레임 사진 다운로드",
     "dropToReplace": "여기에 다른 사진을 드래그하면 교체됩니다",
+    "loadError": "이 기기에서 사진을 불러오지 못했습니다 ({reason}). 다른 사진을 시도하거나, 이 사진의 해상도를 낮춰서 다시 시도해 보세요.",
     "themeLabel": "프레임 테마",
     "themes": {
       "classic-dark": "클래식 다크",

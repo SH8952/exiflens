@@ -78,6 +78,7 @@
     "privacyNote": "100% en el navegador. La foto enmarcada se genera por completo en tu navegador y nunca se sube a ningún sitio.",
     "downloadButton": "Descargar Foto con Marco",
     "dropToReplace": "Suelta una foto aquí para reemplazarla",
+    "loadError": "No se pudo cargar esta foto en tu dispositivo ({reason}). Prueba con otra foto o con una versión de menor resolución de esta.",
     "themeLabel": "Tema del Marco",
     "themes": {
       "classic-dark": "Clásico Oscuro",

@@ -81,57 +81,89 @@ export function computeCropRect(
  */
 const MAX_IMAGE_DIMENSION = 4000;
 
+function loadPlainImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error("이미지를 디코딩하지 못했습니다"));
+    img.src = url;
+  });
+}
+
+/** Renders a decoded bitmap onto a canvas at `width`×`height`, then returns
+ * it as a normal `<img>` (via a fresh object URL) so callers downstream can
+ * keep relying on `naturalWidth`/`naturalHeight` unchanged. */
+function bitmapToImage(
+  source: CanvasImageSource,
+  width: number,
+  height: number,
+): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      reject(new Error("Canvas 2D 컨텍스트를 사용할 수 없습니다"));
+      return;
+    }
+    ctx.drawImage(source, 0, 0, width, height);
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        reject(new Error("축소된 이미지를 만들지 못했습니다"));
+        return;
+      }
+      const url = URL.createObjectURL(blob);
+      loadPlainImage(url)
+        .then(resolve, reject)
+        .finally(() => URL.revokeObjectURL(url));
+    });
+  });
+}
+
 /**
  * Loads an image from a URL (typically an object URL for the uploaded
- * file), downscaling it first if either dimension exceeds
- * `MAX_IMAGE_DIMENSION` so the frame canvas stays within mobile browser
- * size limits. Returns a fresh `HTMLImageElement` either way so callers
- * can keep using `naturalWidth`/`naturalHeight` as before.
+ * file), downscaling it if either dimension exceeds `MAX_IMAGE_DIMENSION`
+ * so the frame canvas stays within mobile browser size limits. Returns a
+ * fresh `HTMLImageElement` either way so callers can keep using
+ * `naturalWidth`/`naturalHeight` as before.
+ *
+ * Prefers `createImageBitmap` over a plain `<img>` decode when available:
+ * a first pass (2026-08-31) downscaled *after* a plain `<img>` finished
+ * loading, but on some mobile devices the plain decode of a very large
+ * photo already fails/produces nothing before that downscale step ever
+ * runs — `createImageBitmap` lets the browser decode more efficiently
+ * (and, since it hands back real pixel dimensions immediately, we can
+ * downscale it in one `drawImage` without ever holding a full-resolution
+ * `<img>` in memory). Falls back to the plain-`<img>` path for older
+ * browsers without `createImageBitmap`.
  */
-export function loadImageForFrame(url: string): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const original = new Image();
-    original.onload = () => {
-      const { naturalWidth: w, naturalHeight: h } = original;
-      if (w <= MAX_IMAGE_DIMENSION && h <= MAX_IMAGE_DIMENSION) {
-        resolve(original);
-        return;
+export async function loadImageForFrame(url: string): Promise<HTMLImageElement> {
+  if (typeof createImageBitmap === "function") {
+    try {
+      const blob = await (await fetch(url)).blob();
+      const bitmap = await createImageBitmap(blob);
+      try {
+        const scale = Math.min(1, MAX_IMAGE_DIMENSION / Math.max(bitmap.width, bitmap.height));
+        const width = Math.round(bitmap.width * scale);
+        const height = Math.round(bitmap.height * scale);
+        return await bitmapToImage(bitmap, width, height);
+      } finally {
+        bitmap.close();
       }
+    } catch {
+      // Fall through to the plain-<img> path below — e.g. an older WebView
+      // that exposes createImageBitmap but rejects on some inputs.
+    }
+  }
 
-      const scale = MAX_IMAGE_DIMENSION / Math.max(w, h);
-      const scaledCanvas = document.createElement("canvas");
-      scaledCanvas.width = Math.round(w * scale);
-      scaledCanvas.height = Math.round(h * scale);
-      const ctx = scaledCanvas.getContext("2d");
-      if (!ctx) {
-        // Extremely unlikely, but fall back to the original rather than
-        // failing outright — better a possibly-blank canvas than none.
-        resolve(original);
-        return;
-      }
-      ctx.drawImage(original, 0, 0, scaledCanvas.width, scaledCanvas.height);
-
-      scaledCanvas.toBlob((blob) => {
-        if (!blob) {
-          resolve(original);
-          return;
-        }
-        const scaledUrl = URL.createObjectURL(blob);
-        const scaled = new Image();
-        scaled.onload = () => {
-          URL.revokeObjectURL(scaledUrl);
-          resolve(scaled);
-        };
-        scaled.onerror = () => {
-          URL.revokeObjectURL(scaledUrl);
-          resolve(original);
-        };
-        scaled.src = scaledUrl;
-      });
-    };
-    original.onerror = reject;
-    original.src = url;
-  });
+  const original = await loadPlainImage(url);
+  const { naturalWidth: w, naturalHeight: h } = original;
+  if (w <= MAX_IMAGE_DIMENSION && h <= MAX_IMAGE_DIMENSION) {
+    return original;
+  }
+  const scale = MAX_IMAGE_DIMENSION / Math.max(w, h);
+  return bitmapToImage(original, Math.round(w * scale), Math.round(h * scale));
 }
 
 export async function canvasToBlob(
