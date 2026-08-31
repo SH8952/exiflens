@@ -1,5 +1,18 @@
 # 개발 이력 (Development History)
 
+## 2026-08-31 — RAW 파일 실제 지원 추가 (LibRaw 기반, 근본 원인 수정)
+
+- 문제: 앞선 프레임 생성기 수정(RAW/HEIC 사전 감지, 이 파일의 바로 위 항목) 이후에도 석한님이 데스크탑에서 RAW 파일 업로드 시 "이 사진에서 EXIF 정보를 읽을 수 없습니다" 오류가 계속 발생한다고 제보. 갤럭시24 Expert RAW(DNG)로 촬영한 모바일 사진도 동일하게 실패. 사이트 문구("대부분의 카메라 RAW 파일을 지원합니다")와 실제 동작이 맞지 않는 심각한 문제로 확인됨
+- 근본 원인 재확인: 이번 문제는 모바일 프레임 생성기 수정과 무관하게 **처음부터 있던 문제**였음. 사이트가 EXIF 파싱에 사용하는 `exifreader` 라이브러리는 공식 README 지원표에 JPEG/JPEG XL/TIFF/PNG/HEIC/AVIF/WebP/GIF만 명시하고 있고, 카메라 RAW 포맷(ARW/CR2/CR3/NEF/DNG 등)은 애초에 지원 대상이 아니었음. 특히 캐논 CR3는 TIFF가 아닌 ISO-BMFF 컨테이너를 사용하는데, `exifreader`가 인식하는 ISO-BMFF 브랜드는 HEIC/AVIF뿐이라 CR3는 파일 형식 자체를 인식조차 못해 100% 실패. DNG는 TIFF 기반이라 종종 되지만 기종/설정에 따라 실패 가능
+- 조치: `libraw-wasm`(LibRaw를 WebAssembly로 빌드한 라이브러리, ISC 라이선스, Canon/Nikon/Sony/Fuji/Panasonic/Olympus/Pentax/Samsung/Hasselblad 등 업계 표준 수준의 광범위한 실제 카메라 지원)을 도입해 RAW 파일 처리를 전면 교체
+  - `src/lib/raw-exif.ts` 신규: RAW 파일의 카메라/렌즈/셔터/조리개/ISO/초점거리/촬영일을 LibRaw로 파싱
+  - `src/lib/exif.ts`: RAW 확장자 파일은 더 이상 `exifreader`를 시도하지 않고 바로 LibRaw로 라우팅
+  - `src/components/exif-frame-generator.tsx`: RAW 파일 대부분이 내장하고 있는 JPEG 미리보기(카메라 LCD가 보여주는 것과 동일한 이미지)를 추출해 프레임 생성기 사진 소스로 사용. 미리보기가 없는 극소수 RAW 파일은 명확한 안내 메시지로 처리(새 메시지 키 `loadErrorRawNoPreview`, 4개 언어 번역)
+  - `src/store/exif-store.ts`: 프레임 생성기가 RAW 원본 바이트에 접근할 수 있도록 store에 `fileType` 대신 `file`(원본 File 객체) 보관
+  - `public/vendor/libraw-wasm/`: `libraw-wasm` 빌드 결과물을 정적 자산으로 vendor 처리. 일반 npm 의존성으로 import하면 Next.js Turbopack의 `next build`가 해당 패키지의 Worker+wasm 조합을 번들링하려다 무한 대기하는 문제를 실제로 재현 확인(5분 이상 진행 없음) → 정적 파일로 서빙 후 런타임에 절대경로로 동적 import하는 방식으로 우회. `libraw-wasm`은 타입 전용 devDependency로만 유지(런타임 번들 미포함)
+- 검증: 합성 DNG 테스트 파일로 실제 프로덕션 빌드(`next build && next start`) 위에서 Playwright 헤드리스 브라우저 E2E 테스트 수행 — 홈 페이지 EXIF 업로드 시 카메라 정보 정상 추출 확인, 프레임 생성기에서 미리보기 없는 RAW에 대해 크래시 없이 안내 메시지 정상 표시 확인. `npx tsc --noEmit`, `npx eslint` 정상 통과. 다만 실제 카메라로 촬영한 CR3/DNG 등 진짜 RAW 파일로는 재현 환경 제약상 직접 테스트하지 못했으므로 **사용자 확인 필요**
+- 참고: `push`는 이번에도 device_bash 인증 제약으로 커밋까지만 진행. 사용자가 Terminal에서 직접 push 필요
+
 ## 2026-08-31 — 모바일 프레임 생성기 "사진 디코딩 실패" 오류 근본 원인 수정 (RAW/HEIC 사전 감지)
 
 - 문제: 모바일에서 EXIF 프레임 생성기에 사진을 첨부하면 미리보기/다운로드에 사진이 나타나지 않음. 앞선 두 차례 수정(해상도 다운스케일, createImageBitmap 기반 디코딩 + 오류 메시지 표시)을 적용한 뒤에도 재현되었고, 새로 추가한 진단 메시지에 "이미지를 디코딩하지 못했습니다"라는 원인이 표시됨
