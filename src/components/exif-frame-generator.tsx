@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Download, RotateCcw } from "lucide-react";
 import { useExifStore } from "@/store/exif-store";
 import { FILE_INPUT_ACCEPT, isCanvasUnsupportedFormat, type ParsedExif } from "@/lib/exif";
+import { extractRawPreviewBlob, isRawExtension } from "@/lib/raw-exif";
 import { usePhotoUpload } from "@/hooks/use-photo-upload";
 import { ExifUploader } from "@/components/exif-uploader";
 import { Button } from "@/components/ui/button";
@@ -79,7 +80,7 @@ export function ExifFrameGenerator() {
   const data = useExifStore((s) => s.data);
   const imageUrl = useExifStore((s) => s.imageUrl);
   const fileName = useExifStore((s) => s.fileName);
-  const fileType = useExifStore((s) => s.fileType);
+  const file = useExifStore((s) => s.file);
 
   if (status !== "success" || !imageUrl) {
     return (
@@ -99,7 +100,7 @@ export function ExifFrameGenerator() {
       imageUrl={imageUrl}
       data={data}
       fileName={fileName}
-      fileType={fileType}
+      file={file}
     />
   );
 }
@@ -108,12 +109,12 @@ function FrameEditor({
   imageUrl,
   data,
   fileName,
-  fileType,
+  file,
 }: {
   imageUrl: string;
   data: ParsedExif | null;
   fileName: string | null;
-  fileType: string | null;
+  file: File | null;
 }) {
   const t = useTranslations("Frame");
 
@@ -150,19 +151,51 @@ function FrameEditor({
 
   React.useEffect(() => {
     let cancelled = false;
+    let revocableUrl: string | null = null;
     // No synchronous reset needed here: FrameEditor is remounted (`key={imageUrl}`)
     // whenever the photo changes, so `loadError`/`image` already start at their
     // initial `null` values for a new photo.
 
-    // RAW (.arw/.cr2/.dng/...) and HEIC/HEIF files parse EXIF fine but no
-    // browser can decode them as a raster image — attempting to anyway just
-    // produces a generic "failed to decode" error with no useful next step.
-    // Catch that up front and tell the user exactly what to do instead
-    // (2026-08-31, 모바일 "이미지를 디코딩하지 못했습니다" 오류의 실제 원인 확인).
-    if (isCanvasUnsupportedFormat(fileName ?? "", fileType)) {
+    // HEIC/HEIF files parse EXIF fine but no browser can decode them as a
+    // raster image — attempting to anyway just produces a generic "failed to
+    // decode" error with no useful next step. Catch that up front and tell
+    // the user exactly what to do instead (2026-08-31, 모바일 "이미지를 디코딩하지
+    // 못했습니다" 오류의 실제 원인 확인).
+    if (isCanvasUnsupportedFormat(fileName ?? "", file?.type ?? null)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect -- deliberate: skip the decode attempt entirely for a known-unrenderable format.
       setLoadError(t("loadErrorUnsupportedFormat"));
       return;
+    }
+
+    // RAW files (.arw/.cr2/.dng/...) can't be decoded as an <img>/canvas
+    // source directly either, but almost every RAW file embeds a JPEG
+    // preview (the same image the camera's LCD shows) — extract that via
+    // LibRaw and use it as the photo source instead (2026-08-31, RAW 업로드가
+    // 실패하는 근본 원인이 exifreader의 RAW 미지원이었음을 확인한 뒤 추가:
+    // isSupportedImageFile/RAW_EXTENSIONS와 마찬가지로 @/lib/raw-exif 참고).
+    if (isRawExtension(fileName ?? "") && file) {
+      extractRawPreviewBlob(file)
+        .then((blob) => {
+          if (cancelled) return;
+          if (!blob) {
+            setLoadError(t("loadErrorRawNoPreview"));
+            return;
+          }
+          const previewUrl = URL.createObjectURL(blob);
+          revocableUrl = previewUrl;
+          return loadImageForFrame(previewUrl).then((img) => {
+            if (!cancelled) setImage(img);
+          });
+        })
+        .catch((err: unknown) => {
+          if (cancelled) return;
+          setImage(null);
+          setLoadError(t("loadError", { reason: err instanceof Error ? err.message : String(err) }));
+        });
+      return () => {
+        cancelled = true;
+        if (revocableUrl) URL.revokeObjectURL(revocableUrl);
+      };
     }
 
     loadImageForFrame(imageUrl)
@@ -177,7 +210,7 @@ function FrameEditor({
     return () => {
       cancelled = true;
     };
-  }, [imageUrl, fileName, fileType, t]);
+  }, [imageUrl, fileName, file, t]);
 
   React.useEffect(() => {
     if (!image || !canvasRef.current) return;

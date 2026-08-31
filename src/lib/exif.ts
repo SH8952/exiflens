@@ -38,20 +38,19 @@ export function isSupportedImageFile(file: File): boolean {
 /** `accept` attribute for file inputs — shared by every upload/replace entry point. */
 export const FILE_INPUT_ACCEPT = `image/*,${ACCEPTED_RAW_EXTENSIONS.join(",")}`;
 
-// `isSupportedImageFile` above accepts these for EXIF *metadata* parsing —
-// `exifreader` can read tags out of RAW/HEIC files just fine. But no
-// browser can decode any of these as a raster `<img>`/canvas source, so the
-// EXIF Frame Generator (which draws the actual photo onto a canvas) needs a
-// stricter check to avoid attempting — and failing — a decode it was never
-// going to succeed at (2026-08-31, 모바일에서 "이미지를 디코딩하지 못했습니다" 오류의
-// 실제 원인: RAW/HEIC 파일도 EXIF 파싱은 성공하지만 캔버스 렌더링은 애초에 불가능함).
-const CANVAS_UNSUPPORTED_EXTENSIONS = [...ACCEPTED_RAW_EXTENSIONS, ".heic", ".heif"];
+// No browser can decode HEIC/HEIF as a raster `<img>`/canvas source (Canon
+// RAW etc. used to be in this list too, but the EXIF Frame Generator now
+// extracts each RAW file's embedded JPEG preview via LibRaw instead of
+// attempting a direct decode — see `extractRawPreviewBlob` in
+// `@/lib/raw-exif` — so RAW is no longer categorically unsupported here).
+const CANVAS_UNSUPPORTED_EXTENSIONS = [".heic", ".heif"];
 const CANVAS_UNSUPPORTED_MIME_TYPES = ["image/heic", "image/heif"];
 
 /**
  * True when a file that passed `isSupportedImageFile` (so EXIF parsing
  * succeeded) is nonetheless a format no browser can render as an image —
- * camera RAW files or HEIC/HEIF (the default format on many iPhones).
+ * HEIC/HEIF (the default photo format on many iPhones, and some Android
+ * phones when "high efficiency" capture is enabled).
  */
 export function isCanvasUnsupportedFormat(
   fileName: string,
@@ -143,6 +142,16 @@ function combineMakeAndModel(
  * 개선: 초기 로딩에 불필요한 자바스크립트 제거, 2026-08-29)
  */
 export async function parseExifFile(file: File): Promise<ParsedExif> {
+  // Camera RAW files never reliably parsed via exifreader (see the comment
+  // on RAW_EXTENSIONS in @/lib/raw-exif) — route them to LibRaw instead of
+  // attempting exifreader's generic TIFF parser, which either throws
+  // outright (Canon .cr3 isn't even recognized as an image) or silently
+  // misses fields depending on the camera/format variant.
+  const { isRawExtension, parseRawExifFile } = await import("./raw-exif");
+  if (isRawExtension(file.name)) {
+    return parseRawExifFile(file);
+  }
+
   const { default: ExifReader } = await import("exifreader");
   const tags = await ExifReader.load(file, { expanded: true });
   const exif = tags.exif ?? {};

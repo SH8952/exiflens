@@ -16,16 +16,17 @@ type ExifState = {
    */
   imageUrl: string | null;
   /**
-   * The uploaded file's MIME type (`file.type`), kept alongside `imageUrl`
-   * so consumers like the EXIF Frame Generator can tell a browser-renderable
-   * photo (JPEG/PNG/WebP/...) apart from a format that only supports EXIF
-   * metadata extraction, not canvas rendering (RAW/HEIC) — see
-   * `isCanvasUnsupportedFormat` in `@/lib/exif` (2026-08-31).
+   * The uploaded `File` itself, kept alongside `imageUrl` so consumers that
+   * need the raw bytes — not just something an `<img>` can point at — can
+   * get them back out. The EXIF Frame Generator uses this to detect
+   * HEIC/HEIF (unrenderable) and RAW (needs its embedded JPEG preview
+   * extracted via LibRaw — see `@/lib/raw-exif`) before attempting to draw
+   * the photo onto a canvas (2026-08-31).
    */
-  fileType: string | null;
+  file: File | null;
   errorMessage: string | null;
   startLoading: (fileName: string) => void;
-  setSuccess: (data: ParsedExif, imageUrl: string, fileType: string) => void;
+  setSuccess: (data: ParsedExif, imageUrl: string, file: File) => void;
   setError: (message: string) => void;
   reset: () => void;
 };
@@ -39,7 +40,7 @@ export const useExifStore = create<ExifState>((set, get) => ({
   fileName: null,
   data: null,
   imageUrl: null,
-  fileType: null,
+  file: null,
   errorMessage: null,
   startLoading: (fileName) => {
     revoke(get().imageUrl);
@@ -49,11 +50,11 @@ export const useExifStore = create<ExifState>((set, get) => ({
       errorMessage: null,
       data: null,
       imageUrl: null,
-      fileType: null,
+      file: null,
     });
   },
-  setSuccess: (data, imageUrl, fileType) =>
-    set({ status: "success", data, imageUrl, fileType, errorMessage: null }),
+  setSuccess: (data, imageUrl, file) =>
+    set({ status: "success", data, imageUrl, file, errorMessage: null }),
   setError: (message) => {
     revoke(get().imageUrl);
     set({
@@ -61,7 +62,7 @@ export const useExifStore = create<ExifState>((set, get) => ({
       errorMessage: message,
       data: null,
       imageUrl: null,
-      fileType: null,
+      file: null,
     });
   },
   reset: () => {
@@ -71,7 +72,7 @@ export const useExifStore = create<ExifState>((set, get) => ({
       fileName: null,
       data: null,
       imageUrl: null,
-      fileType: null,
+      file: null,
       errorMessage: null,
     });
   },

@@ -79,7 +79,8 @@
     "downloadButton": "フレーム付き写真をダウンロード",
     "dropToReplace": "ここに写真をドラッグすると置き換わります",
     "loadError": "この端末では写真を読み込めませんでした（{reason}）。別の写真を試すか、この写真の解像度を下げて再度お試しください。",
-    "loadErrorUnsupportedFormat": "このファイル形式（RAWまたはHEIC/HEIF）はプレビューに対応していません。JPGまたはPNG形式に変換してからお試しください。",
+    "loadErrorUnsupportedFormat": "このファイル形式（HEIC/HEIF）はプレビューに対応していません。JPGまたはPNG形式に変換してからお試しください。",
+    "loadErrorRawNoPreview": "このRAWファイルにはプレビュー画像が含まれていないため、ここに表示できません。別のRAWファイルを試すか、編集ソフトでJPGとして書き出してからお試しください。",
     "themeLabel": "フレームテーマ",
     "themes": {
       "classic-dark": "クラシックダーク",
