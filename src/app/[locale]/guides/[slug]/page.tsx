@@ -3,7 +3,12 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { SITE_URL, languageAlternates, ogLocale } from "@/lib/seo";
+import {
+  SITE_URL,
+  breadcrumbJsonLd,
+  languageAlternates,
+  ogLocale,
+} from "@/lib/seo";
 import {
   compileGuide,
   getGuideMeta,
@@ -59,6 +64,7 @@ export default async function GuidePage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Guides");
+  const tHome = await getTranslations("Home");
 
   const compiled = await compileGuide(locale as Locale, slug);
   if (!compiled) notFound();
@@ -90,11 +96,21 @@ export default async function GuidePage({
     inLanguage: locale,
   };
 
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: tHome("title"), url: `${SITE_URL}/${locale}` },
+    { name: t("title"), url: `${SITE_URL}/${locale}/guides` },
+    { name: meta.title, url: `${SITE_URL}/${locale}/guides/${slug}` },
+  ]);
+
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
       />
 
       <Link

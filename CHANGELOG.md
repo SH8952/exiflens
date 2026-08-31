@@ -1,5 +1,16 @@
 # 개발 이력 (Development History)
 
+## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
+
+- 배경: 구글 서치 콘솔 분석 결과(2026-08-31) 노출은 급증하지만 클릭률이 거의 없는 문제 확인. Gemini가 제안한 안전한 개선안을 하루 하나씩 자동 적용하기로 함(석한님 승인). 1일차 항목 진행.
+- 조치:
+  - `src/lib/seo.ts`: `breadcrumbJsonLd(items)` 헬퍼 함수 신규 추가 — schema.org `BreadcrumbList` JSON-LD 생성
+  - `src/app/[locale]/guides/[slug]/page.tsx`: 기존 `articleJsonLd` 스크립트 옆에 breadcrumb 스크립트 추가. 경로: Home(`ExifLens`) → Guides → 현재 글 제목
+  - `src/app/[locale]/guides/page.tsx`(가이드 목록): Home → Guides 2단계 breadcrumb 추가
+  - 새 번역 키 추가 없이 기존 `Home.title`, `Guides.title` 재사용
+  - 검색결과에 "ExifLens › Guides › 글 제목" 형태의 경로 노출을 기대하는 변경으로, 광고 코드(GA4/AdSense/ads.txt)는 건드리지 않음
+- 검증: `npx tsc --noEmit`, `npx eslint src/lib/seo.ts src/app/[locale]/guides/page.tsx src/app/[locale]/guides/[slug]/page.tsx` 정상 통과. `next build` 정상 완료(124개 정적 페이지). `next start` 위에서 가이드 목록/상세 페이지 각각 curl로 렌더링된 HTML을 확인해 `BreadcrumbList` JSON-LD가 올바른 이름·URL·순서로 삽입됨을 확인
+
 ## 2026-09-01
 
 ### Added
