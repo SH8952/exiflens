@@ -98,7 +98,12 @@ export async function parseRawExifFile(file: File): Promise<ParsedExif> {
     await raw.open(bytes, {});
     let meta;
     try {
-      meta = await raw.metadata(false);
+      // `fullOutput: true` — the base (non-full) metadata call omits
+      // `imgdata.lens` entirely (confirmed 2026-08-31: 석한님 RAW 파일에서
+      // 카메라/셔터/조리개/ISO/초점거리는 정상 추출되지만 렌즈만 계속 비어 있던 원인.
+      // 같은 컷을 동시 저장한 JPG는 정상 표시되어 라이브러리 자체 한계가 아니라
+      // 여기서 fullOutput 플래그를 빠뜨린 버그였음을 확인).
+      meta = await raw.metadata(true);
     } catch {
       throw new Error("RAW 메타데이터를 읽는 중 오류가 발생했습니다");
     }
