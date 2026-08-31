@@ -66,7 +66,11 @@ export function ExifUploader() {
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         className={cn(
-          "relative flex min-h-[180px] cursor-pointer flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed border-border bg-card/50 px-6 py-10 text-center transition-colors",
+          "relative flex min-h-[180px] cursor-pointer flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed border-border bg-card/50 text-center transition-colors",
+          // Preview state fills the box edge-to-edge like the Frame
+          // Generator's photo box, instead of sitting inside the empty-state
+          // padding meant for the icon/text prompt (2026-08-31, 석한 요청).
+          previewUrl ? "p-0" : "px-6 py-10",
           isDragging && "border-primary bg-primary/5",
           status === "success" && "border-primary/40",
         )}
@@ -94,7 +98,11 @@ export function ExifUploader() {
               <img
                 src={previewUrl}
                 alt={fileName ?? ""}
-                className="max-h-[320px] w-full rounded-lg object-contain"
+                // No max-h/object-contain cap here — matches the Frame
+                // Generator's `h-auto w-full` canvas so the photo fills the
+                // box at its natural aspect ratio instead of shrinking to
+                // fit a fixed height (2026-08-31, 석한 요청).
+                className="h-auto w-full"
               />
               <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-black/55 px-4 py-2 text-left text-white">
                 <span className="truncate text-sm">{fileName}</span>
