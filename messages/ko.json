@@ -1,7 +1,7 @@
 {
   "Header": {
     "tagline": "EXIF 분석 & ND 필터 계산기",
-    "frameNav": "프레임 생성기"
+    "frameNav": "프레임 만들기"
   },
   "Home": {
     "title": "ExifLens",

@@ -1,7 +1,7 @@
 {
   "Header": {
     "tagline": "EXIF Analyzer & ND Filter Calculator",
-    "frameNav": "Frame Generator"
+    "frameNav": "Create a Frame"
   },
   "Home": {
     "title": "ExifLens",

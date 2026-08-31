@@ -1,7 +1,7 @@
 {
   "Header": {
     "tagline": "EXIF解析 & NDフィルター計算機",
-    "frameNav": "フレーム生成"
+    "frameNav": "フレームを作る"
   },
   "Home": {
     "title": "ExifLens",
