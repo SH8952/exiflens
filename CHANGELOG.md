@@ -1,5 +1,16 @@
 # 개발 이력 (Development History)
 
+## 2026-08-31 — 추출된 EXIF에 GPS 위치 + 지도보기 모달 추가
+
+- 요청: 추출된 EXIF 목록의 초점거리 아래에 GPS 정보도 노출할 수 있는지 석한님 문의. 위경도는 텍스트로, 우측에 "지도보기" 링크를 두어 클릭 시 구글 지도 모달이 뜨도록, GPS 없는 사진은 다른 항목처럼 그대로 표시하도록 확정
+- 조치:
+  - `src/lib/exif.ts`: 일반 이미지(exifreader, `expanded: true`) 경로에서 `tags.gps`(이미 부호가 적용된 십진수 위경도)를 `ParsedExif.gps`로 매핑
+  - `src/lib/raw-exif.ts`: RAW(LibRaw) 경로에서 `gps_data`(도/분/초 튜플 + N/S/E/W 반구 기준)를 십진수로 변환. `gpsparsed` 플래그로 "GPS 정보 없음"과 "위경도 0,0"을 구분
+  - `src/components/gps-map-modal.tsx` 신규: 새 npm 의존성 추가 없이 커스텀 모달로 구현(배경 클릭/ESC로 닫힘). 구글 지도 무료 임베드 URL(`output=embed`, API 키 불필요) 사용
+  - `src/components/exif-panel.tsx`: 초점거리 바로 아래 GPS 위치 행 추가
+  - 4개 언어(en/ja/ko/es) 번역 추가
+- 검증: 실제 프로덕션 빌드(`next build && next start`) 위에서 Playwright로 GPS 있는/없는 합성 JPG 각각 테스트해 위경도 표시, "지도보기" 버튼 노출 여부, 모달 오픈 시 좌표가 반영된 구글 지도 URL, ESC로 닫힘까지 확인. `npx tsc --noEmit`, `npx eslint` 정상 통과. 진짜 GPS 태그가 있는 RAW 원본 파일이 없어 RAW 경로의 실제 파일 재현 검증은 못했음 — **사용자 확인 필요**
+
 ## 2026-08-31 — 헤더 '프레임 생성기' 버튼 문구를 '프레임 만들기'로 통일
 
 - 요청: 업로드 박스 위에 새로 추가한 "프레임 만들기" 버튼과 최상단 헤더의 기존 "프레임 생성기" 버튼 문구가 달라 통일감이 떨어진다는 석한님 피드백. 모든 언어를 동일한 기준으로 맞춰 달라는 확인
