@@ -1,5 +1,17 @@
 # 개발 이력 (Development History)
 
+## 2026-08-31 — 모바일 프레임 생성기 "사진 디코딩 실패" 오류 근본 원인 수정 (RAW/HEIC 사전 감지)
+
+- 문제: 모바일에서 EXIF 프레임 생성기에 사진을 첨부하면 미리보기/다운로드에 사진이 나타나지 않음. 앞선 두 차례 수정(해상도 다운스케일, createImageBitmap 기반 디코딩 + 오류 메시지 표시)을 적용한 뒤에도 재현되었고, 새로 추가한 진단 메시지에 "이미지를 디코딩하지 못했습니다"라는 원인이 표시됨
+- 근본 원인 확인: 해상도/메모리 문제가 아니라, 업로드된 파일이 RAW(.arw/.cr2/.cr3/.nef/.raf/.rw2/.orf/.dng/.pef/.srw) 또는 HEIC/HEIF 형식이기 때문이었음. `src/lib/exif.ts`의 `isSupportedImageFile()`은 EXIF 메타데이터 추출(exifreader)을 위해 이 형식들을 계속 허용하고 있어 업로드/파싱 단계는 성공하지만, 어떤 브라우저도 이 형식들을 `<img>`/canvas 소스로 디코딩할 수 없어 프레임 생성기의 이미지 렌더링 단계에서 항상 실패함
+- 조치:
+  - `src/lib/exif.ts`에 `isCanvasUnsupportedFormat(fileName, mimeType)` 추가 — RAW 확장자 및 HEIC/HEIF MIME 타입을 감지
+  - `src/store/exif-store.ts`에 `fileType` 필드 추가 (업로드된 파일의 MIME 타입을 프레임 생성기까지 전달)
+  - `src/components/exif-frame-generator.tsx`: 이미지 로드를 시도하기 전에 위 체크를 먼저 수행해, 지원되지 않는 형식이면 디코딩 시도 자체를 건너뛰고 "이 파일 형식(RAW 또는 HEIC/HEIF)은 미리보기가 지원되지 않습니다. JPG 또는 PNG로 변환한 뒤 다시 시도해 주세요" 메시지를 즉시 표시 (기존 일반 디코딩 실패 메시지 `loadError`는 그대로 유지, 새 메시지는 `loadErrorUnsupportedFormat` 키로 4개 언어(en/ja/ko/es) 번역 추가)
+  - React Hooks lint 규칙(`react-hooks/set-state-in-effect`) 위반 정리: 불필요한 동기 상태 초기화 제거(컴포넌트가 `key={imageUrl}`로 이미 리마운트되므로 중복), 의도적으로 필요한 두 곳은 근거 주석과 함께 예외 처리
+- 검증: `npx tsc --noEmit`, `npx eslint`, `npm run build` 모두 정상 통과 확인 (로컬 재현 환경 기준). 실제 기기(iPhone 등)에서 RAW/HEIC 사진으로 재현 테스트는 사용자 확인 필요
+- 참고: 일반 JPG/PNG 사진에서 여전히 디코딩 실패가 발생한다면 이는 별개의 원인이므로 재현 시 알려주시기 바랍니다.
+
 ## 2026-08-31 — 가이드 아티클 자동 발행: "야경 도시 사진 카메라 설정"
 
 - New guide article published in all 4 languages (en/ja/ko/es): "Night Cityscape Photography Settings" (야경 도시 야간 사진 설정) — covers aperture choice for starburst effects vs. depth of field, tripod vs. handheld shutter speed ranges (including car light trails), ISO priorities around dynamic range loss rather than just noise, white balance strategy for mixed sodium/fluorescent/LED lighting, exposure bracketing for window highlights vs. shadow detail, and the infinity-focus trap with live-view fine focusing. Filed under the "Photography Genres" category (재사용: 기존 "장르별 촬영 가이드" / "Photography Genres" / "ジャンル別撮影ガイド" / "Guías por género fotográfico" 카테고리를 4개 언어 모두 그대로 재사용).
