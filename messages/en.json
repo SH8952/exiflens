@@ -1,7 +1,10 @@
 {
   "Header": {
     "tagline": "EXIF Analyzer & ND Filter Calculator",
-    "frameNav": "Create a Frame"
+    "frameNav": "Create a Frame",
+    "aboutNav": "About",
+    "guidesNav": "Guides",
+    "faqNav": "FAQ"
   },
   "Home": {
     "title": "ExifLens",
@@ -334,5 +337,9 @@
     "backToGuides": "← Back to Guides",
     "relatedGuides": "Related Guides",
     "otherCategory": "Other Guides"
+  },
+  "Faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to common questions about using ExifLens."
   }
 }

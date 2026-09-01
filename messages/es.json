@@ -1,7 +1,10 @@
 {
   "Header": {
     "tagline": "Analizador EXIF y Calculadora de Filtro ND",
-    "frameNav": "Crear un marco"
+    "frameNav": "Crear un marco",
+    "aboutNav": "Sobre nosotros",
+    "guidesNav": "Guías",
+    "faqNav": "FAQ"
   },
   "Home": {
     "title": "ExifLens",
@@ -334,5 +337,9 @@
     "backToGuides": "← Volver a Guías",
     "relatedGuides": "Guías relacionadas",
     "otherCategory": "Otras guías"
+  },
+  "Faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Respuestas a las preguntas más comunes sobre el uso de ExifLens."
   }
 }

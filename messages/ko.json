@@ -1,7 +1,10 @@
 {
   "Header": {
     "tagline": "EXIF 분석 & ND 필터 계산기",
-    "frameNav": "프레임 만들기"
+    "frameNav": "프레임 만들기",
+    "aboutNav": "소개",
+    "guidesNav": "가이드",
+    "faqNav": "FAQ"
   },
   "Home": {
     "title": "ExifLens",
@@ -334,5 +337,9 @@
     "backToGuides": "← 가이드 목록으로",
     "relatedGuides": "관련 가이드",
     "otherCategory": "기타 가이드"
+  },
+  "Faq": {
+    "title": "자주 묻는 질문",
+    "subtitle": "ExifLens 이용 중 자주 묻는 질문을 모았습니다."
   }
 }

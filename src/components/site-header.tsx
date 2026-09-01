@@ -26,6 +26,25 @@ export function SiteHeader() {
         </Link>
 
         <nav className="flex items-center gap-4">
+          <Link
+            href="/about"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {t("aboutNav")}
+          </Link>
+          <Link
+            href="/guides"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {t("guidesNav")}
+          </Link>
+          <Link
+            href="/faq"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {t("faqNav")}
+          </Link>
+
           {/*
             Same nav slot toggles its destination based on the current page:
             "Frame Generator" navigates there from the home page, and while

@@ -5,7 +5,7 @@ import { ExifPanel } from "@/components/exif-panel";
 import { NdCalculatorCard } from "@/components/nd-calculator-card";
 import { GearRecommendationSection } from "@/components/gear-recommendation-section";
 import { CrossLinkFlyDroneMap } from "@/components/cross-link/cross-link-flydronemap";
-import { HomeFaqSection } from "@/components/home-faq-section";
+import { HomeUsageSection } from "@/components/home-usage-section";
 
 export default async function HomePage({
   params,
@@ -53,8 +53,8 @@ export default async function HomePage({
         {t("privacyNote")}
       </p>
 
-      {/* Section 5: crawlable usage text + FAQ (AdSense/SEO checklist item 2) */}
-      <HomeFaqSection />
+      {/* Section 5: crawlable usage text (AdSense/SEO checklist item 2). FAQ now lives on its own /faq page. */}
+      <HomeUsageSection />
     </div>
   );
 }

@@ -1,7 +1,10 @@
 {
   "Header": {
     "tagline": "EXIF解析 & NDフィルター計算機",
-    "frameNav": "フレームを作る"
+    "frameNav": "フレームを作る",
+    "aboutNav": "サイトについて",
+    "guidesNav": "ガイド",
+    "faqNav": "FAQ"
   },
   "Home": {
     "title": "ExifLens",
@@ -334,5 +337,9 @@
     "backToGuides": "← ガイド一覧に戻る",
     "relatedGuides": "関連ガイド",
     "otherCategory": "その他のガイド"
+  },
+  "Faq": {
+    "title": "よくある質問",
+    "subtitle": "ExifLensの使用に関するよくある質問をまとめました。"
   }
 }
