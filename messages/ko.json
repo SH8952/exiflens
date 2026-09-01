@@ -4,7 +4,9 @@
     "frameNav": "프레임 만들기",
     "aboutNav": "소개",
     "guidesNav": "가이드",
-    "faqNav": "FAQ"
+    "faqNav": "FAQ",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기"
   },
   "Home": {
     "title": "ExifLens",

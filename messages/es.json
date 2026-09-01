@@ -4,7 +4,9 @@
     "frameNav": "Crear un marco",
     "aboutNav": "Sobre nosotros",
     "guidesNav": "Guías",
-    "faqNav": "FAQ"
+    "faqNav": "FAQ",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "Home": {
     "title": "ExifLens",

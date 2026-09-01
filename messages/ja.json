@@ -4,7 +4,9 @@
     "frameNav": "フレームを作る",
     "aboutNav": "サイトについて",
     "guidesNav": "ガイド",
-    "faqNav": "FAQ"
+    "faqNav": "FAQ",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる"
   },
   "Home": {
     "title": "ExifLens",
