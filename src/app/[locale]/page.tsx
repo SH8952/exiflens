@@ -4,6 +4,7 @@ import { ExifUploader } from "@/components/exif-uploader";
 import { ExifPanel } from "@/components/exif-panel";
 import { NdCalculatorCard } from "@/components/nd-calculator-card";
 import { GearRecommendationSection } from "@/components/gear-recommendation-section";
+import { CrossLinkFlyDroneMap } from "@/components/cross-link/cross-link-flydronemap";
 import { HomeFaqSection } from "@/components/home-faq-section";
 
 export default async function HomePage({
@@ -37,6 +38,9 @@ export default async function HomePage({
 
       {/* Section 4: Gear recommendation */}
       <GearRecommendationSection locale={locale} />
+
+      {/* Section 4.5: cross-link to sister site (contextual, single link) */}
+      <CrossLinkFlyDroneMap locale={locale} />
 
       <AdZone
         id="mid-content"

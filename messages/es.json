@@ -74,7 +74,11 @@
         "question": "¿Es gratis usar ExifLens?",
         "answer": "Sí, totalmente gratis. El sitio se sostiene con publicidad y algunos enlaces de afiliados, que nunca afectan cómo funcionan las herramientas en sí."
       }
-    ]
+    ],
+    "crossLinkTitle": "Herramienta relacionada",
+    "crossLinkDescription": "¿Vas a grabar con dron de noche o durante la hora dorada? Revisa el viento y las condiciones meteorológicas antes de volar.",
+    "crossLinkCta": "Consultar el clima de vuelo del dron",
+    "crossLinkCtaAria": "Abre FlyDroneMap en una pestaña nueva — consultar el clima de vuelo del dron"
   },
   "Frame": {
     "title": "Generador de Marcos EXIF",

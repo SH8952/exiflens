@@ -74,7 +74,11 @@
         "question": "Is ExifLens free to use?",
         "answer": "Yes, completely free. The site is supported by ads and occasional affiliate links, which never affect how the tools themselves work."
       }
-    ]
+    ],
+    "crossLinkTitle": "Related tool",
+    "crossLinkDescription": "Planning a drone shoot at night or during golden hour? Check wind and weather conditions before you fly.",
+    "crossLinkCta": "Check drone flight weather",
+    "crossLinkCtaAria": "Opens FlyDroneMap in a new tab — check drone flight weather"
   },
   "Frame": {
     "title": "EXIF Frame Generator",

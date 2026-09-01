@@ -74,7 +74,11 @@
         "question": "ExifLensは無料で使えますか？",
         "answer": "はい、完全に無料です。本サイトは広告と一部のアフィリエイトリンクによって運営されており、これらがツール自体の動作に影響を与えることはありません。"
       }
-    ]
+    ],
+    "crossLinkTitle": "関連ツール",
+    "crossLinkDescription": "夜間や朝夕のゴールデンアワーにドローン撮影を計画しているなら、飛行前に風や気象条件を確認しましょう。",
+    "crossLinkCta": "ドローン飛行の天気を確認する",
+    "crossLinkCtaAria": "新しいタブでFlyDroneMapを開く — ドローン飛行の天気を確認する"
   },
   "Frame": {
     "title": "EXIFフレーム生成",
