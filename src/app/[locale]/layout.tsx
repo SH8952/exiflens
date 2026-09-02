@@ -51,6 +51,15 @@ export async function generateMetadata({
       canonical: `${SITE_URL}/${locale}`,
       languages: languageAlternates(),
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+      },
+    },
     openGraph: {
       type: "website",
       locale: ogLocale(locale),

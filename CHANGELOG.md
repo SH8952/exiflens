@@ -1,3 +1,10 @@
+## 2026-09-02 — 구글 디스커버 노출 대비 1단계: robots 메타태그에 max-image-preview:large 추가
+
+- 구글 디스커버(Discover) 노출 필수 조건 중 하나인 large 이미지 미리보기 허용 메타태그를 사이트 전역 metadata에 추가
+- `src/app/[locale]/layout.tsx`의 루트 generateMetadata에 `robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } }` 추가 (다른 페이지들은 자체 robots 설정이 없어 이 레이아웃 값을 그대로 상속)
+- 디스커버 노출을 위한 후속 작업(가이드 아티클 대표 이미지 자동 첨부 등)이 진행 중이며, 이번 커밋은 그 1단계
+- 기존 색인/광고 관련 설정은 변경 없음
+
 ## 2026-09-02 — SEO 개선 2일차: WebApplication 구조화 데이터 범위를 실제 도구 페이지로 한정
 
 - 서치 콘솔 노출 급증 대비 클릭률 저조 문제 개선 작업의 2일차 항목(안전한 것부터 하루 하나씩 적용, 2026-08-31 승인)
