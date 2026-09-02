@@ -1,3 +1,9 @@
+## 2026-09-02 — 개발자 이미지 관리 도구로 대표 이미지 10건 재검색/교체
+
+- 새로 추가한 로컬 전용 이미지 관리 패널을 사용해, 서로 다른 글에 동일한 사진이 중복 사용되던 문제(avoiding-camera-shake-long-exposure / portrait-photography-camera-settings / raw-vs-jpeg-which-should-you-shoot)를 포함해 총 10개 글의 대표 이미지를 검색어를 바꿔가며 재선택
+- 이전 소급 적용 단계에서 검색 결과가 없어 이미지가 비어 있던 understanding-exif-iso-shutter-aperture 에도 이번에 이미지 신규 적용
+- 대상: gps-data-in-photos-privacy, nd-filter-types-explained, panning-shot-technique, understanding-depth-of-field, white-balance-explained, wide-angle-vs-telephoto-focal-length 포함 (4개 언어 mdx의 image/imageCredit/imageCreditUrl 및 해당 webp 파일 갱신)
+
 ## 2026-09-02 — 개발자 전용 가이드 이미지 관리 도구 추가 (상시 도구)
 
 - 배경: 가이드 아티클에 자동 첨부된 Unsplash 대표 이미지가 서로 다른 글에 동일한 사진으로 중복되거나, 주제와 맞지 않는 사진이 붙는 경우를 스크립트 재실행 없이 바로 고칠 수 있어야 한다는 요구로 추가
