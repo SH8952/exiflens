@@ -16,6 +16,7 @@ import {
   getGuideSlugs,
   getRelatedGuides,
 } from "@/lib/guides";
+import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -195,6 +196,15 @@ export default async function GuidePage({
             ))}
           </ul>
         </nav>
+      ) : null}
+
+      {process.env.NODE_ENV === "development" ? (
+        <GuideImageDevPanel
+          slug={slug}
+          currentImage={meta.image}
+          currentImageCredit={meta.imageCredit}
+          tags={meta.tags}
+        />
       ) : null}
     </div>
   );

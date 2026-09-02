@@ -1,3 +1,14 @@
+## 2026-09-02 — 개발자 전용 가이드 이미지 관리 도구 추가 (상시 도구)
+
+- 배경: 가이드 아티클에 자동 첨부된 Unsplash 대표 이미지가 서로 다른 글에 동일한 사진으로 중복되거나, 주제와 맞지 않는 사진이 붙는 경우를 스크립트 재실행 없이 바로 고칠 수 있어야 한다는 요구로 추가
+- 로컬 개발 서버(localhost, NODE_ENV=development)에서만 가이드 상세 페이지 우측 하단에 뜨는 플로팅 패널("🛠 이미지 관리 (DEV)") — 프로덕션(exifnd.com)에는 노출되지 않으며, 프로덕션 빌드 시 정적 HTML에서도 제거됨을 확인
+- 검색어 입력 → Unsplash 후보 이미지 9장을 썸네일로 표시 → 원하는 사진을 클릭하면 그때 고화질 다운로드 + download_location 트래킹 호출 + 해당 글의 webp 및 4개 언어(en/ja/ko/es) mdx frontmatter(image/imageCredit/imageCreditUrl)를 즉시 갱신
+- 신규 파일: src/lib/dev/guide-image-tool.ts(검색/적용 로직), src/app/api/dev/guide-image-search·guide-image-apply/route.ts(둘 다 NODE_ENV 가드로 프로덕션에서 403), src/components/dev/guide-image-dev-panel.tsx(패널 UI), src/app/[locale]/guides/[slug]/page.tsx에 조건부 렌더링 연결
+- Unsplash API 키를 automation/.env뿐 아니라 .env.local(Next.js 표준 로딩 경로)에도 동일하게 등록 (기존과 동일한 키, git 추적 제외)
+- 이 도구는 로컬 파일(webp, mdx)만 수정하며 git add/commit/push는 하지 않음 - 적용 후에는 기존 push 스크립트로 별도 커밋 필요
+- 1회성 작업이 아니라 사이트를 운영하는 동안 계속 사용할 상시 개발자 도구로, 발행 자동화 스크립트처럼 자체 삭제되지 않음
+- 검증: 대상 파일 npx eslint / npx tsc --noEmit 통과, npm run build 정상 완료 및 프로덕션 산출물에 패널 미포함 확인. 실제 Unsplash API 호출은 샌드박스에 외부 네트워크가 없어 이번 검증에서는 진행하지 못했음 - 실제 로컬 환경(사용자 Mac)에서 첫 사용 시 동작 확인 필요
+
 ## 2026-09-02 — 더블클릭 Push 스크립트 추가 ("변경사항 Push.command")
 
 - Claude가 로컬에 커밋한 변경사항을 push할 때마다 터미널에 직접 명령어를 입력해야 했던 불편 해소
