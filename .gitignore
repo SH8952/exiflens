@@ -42,3 +42,6 @@ next-env.d.ts
 
 # local backups (작업 전 자동 백업 폴더, git에는 포함하지 않음)
 /_backups
+
+# 1회용 push 스크립트 (실행 완료 후 자동 삭제되지만, 혹시 남아있어도 커밋되지 않도록)
+"변경사항 Push.command"
