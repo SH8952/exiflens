@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { SITE_URL, languageAlternates, ogLocale } from "@/lib/seo";
+import { SITE_URL, languageAlternates, ogLocale, webApplicationJsonLd } from "@/lib/seo";
 import { ExifFrameGenerator } from "@/components/exif-frame-generator";
 
 export async function generateMetadata({
@@ -44,9 +44,18 @@ export default async function FramePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Frame");
+  const frameJsonLd = {
+    ...webApplicationJsonLd(locale),
+    url: `${SITE_URL}/${locale}/frame`,
+  };
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(frameJsonLd) }}
+      />
+
       <div className="flex flex-col gap-2 text-center">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           {t("title")}

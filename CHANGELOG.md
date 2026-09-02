@@ -1,3 +1,12 @@
+## 2026-09-02 — SEO 개선 2일차: WebApplication 구조화 데이터 범위를 실제 도구 페이지로 한정
+
+- 서치 콘솔 노출 급증 대비 클릭률 저조 문제 개선 작업의 2일차 항목(안전한 것부터 하루 하나씩 적용, 2026-08-31 승인)
+- 기존에는 `WebApplication` JSON-LD가 `src/app/[locale]/layout.tsx`의 `<head>`에서 전체 페이지(약관/개인정보처리방침/가이드 글 등 포함)에 동일하게 삽입되어, 실제 도구가 아닌 페이지에도 부정확한 구조화 데이터가 노출되던 문제 해결
+- `layout.tsx`에서 전역 `webApplicationJsonLd` 스크립트 삽입 제거(GA4/AdSense 등 광고 관련 스크립트는 그대로 유지, 손대지 않음)
+- 실제 도구 페이지인 홈(`/`)과 프레임 생성기(`/frame`) 각각의 본문 최상단에 `webApplicationJsonLd`를 직접 삽입(FAQ 페이지가 이미 쓰던 body 내 JSON-LD 패턴과 동일). 프레임 생성기 페이지는 `url`만 `${SITE_URL}/${locale}/frame`로 재정의
+- 다른 페이지(terms/privacy/about/disclosure/guides)는 변경 없음
+- 검증: `npx tsc --noEmit`, 대상 파일 `eslint`, `npm run build` 모두 통과. `npm run start` + Playwright(헤드리스 크로미움)로 `/en`·`/en/frame`에는 `WebApplication` 스크립트가 올바른 url로 존재하고, `/en/terms`에는 구조화 데이터가 없으며, `/en/guides`에는 1일차에 추가한 `BreadcrumbList`만 남아 있음을 실제 렌더링으로 확인
+
 ## 2026-09-01 — 모바일 헤더 내비게이션이 줄바꿈되던 문제 수정: 햄버거 메뉴로 전환
 
 - 직전 배치에서 헤더에 소개/가이드/FAQ 링크 3개를 추가한 뒤, 모바일 화면에서 로고+링크 5개+언어 선택이 한 줄에 다 들어가지 못해 "소개"가 두 줄로 쪼개지는 등 레이아웃이 깨지는 문제 발생 (사용자가 실제 모바일 스크린샷으로 제보)
@@ -26,14 +35,6 @@
 - (부수 수정) tsconfig.json에 `_backups`(로컬 전용, git 추적 안 됨) 제외 처리 — 로컬 백업 폴더의 낡은 스냅샷이 `npm run build`의 타입 체크를 방해하던 문제 해결
 
 # 개발 이력 (Development History)
-
-## 2026-09-02 — 가이드 아티클 자동 발행: 화이트밸런스 완벽 가이드
-
-- 예약 작업(scheduled task)이 automation/guide-topics-queue.json의 order 7 주제를 선택해 4개 언어(en/ja/ko/es)로 신규 작성: "화이트밸런스 완벽 가이드: 켈빈 값부터 커스텀 설정까지" (White Balance Explained)
-- 켈빈 색온도의 의미, 화이트밸런스 프리셋과 혼합광에서의 한계, 커스텀 화이트밸런스(그레이카드) 설정법, RAW vs JPEG에서 화이트밸런스 되돌리기 가능 여부, 자주 하는 실수(AWB로 노을/일출 색감이 지워지는 문제), 실전 체크리스트로 구성
-- 카테고리는 기존 "카메라 기초 & 노출"(Camera Basics & Exposure) 재사용 — 4개 언어 모두 동일 카테고리에 배정
-- automation/guide-topics-queue.json: order 7 항목 published: true, publishedDate: "2026-09-02"로 갱신
-- 검증: 클라우드 세션에서 `npm run build` 통과 확인 후 발행 패키지 생성
 
 ## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
 
