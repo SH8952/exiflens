@@ -1,3 +1,10 @@
+## 2026-09-02 — 개발자 이미지 관리 도구: 직접 업로드 + 검색 재시도 시 새 결과
+
+- 직접 촬영/보유한 사진을 Unsplash 검색 없이 그대로 대표 이미지로 적용할 수 있는 업로드 기능 추가 (src/app/api/dev/guide-image-upload/route.ts, 패널 하단 파일 선택 UI) - jpg/jpeg/png/webp, 최대 15MB, 저작자 표기(imageCredit/imageCreditUrl)는 붙지 않음(기존 값이 있었다면 제거)
+- 같은 검색어로 "검색"(적용 후에는 "다른 사진") 버튼을 다시 누르면 Unsplash 검색 결과의 다음 페이지를 보여주도록 변경 - 마음에 드는 사진이 없을 때 같은 사진만 반복해서 보이지 않고 계속 새 후보를 확인 가능. 검색어를 바꾸면 1페이지부터 다시 시작
+- src/lib/dev/guide-image-tool.ts: frontmatter 갱신 로직을 writeGuideImageFrontmatter로 통합해 Unsplash 적용/직접 업로드가 동일한 방식으로 처리되도록 정리, 확장자가 바뀌어도 이전 이미지 파일이 남지 않도록 적용 전 {slug}.* 파일 정리 로직 추가
+- 검증: 대상 파일 npx eslint / npx tsc --noEmit 통과, npm run build 정상 완료(신규 업로드 라우트 등록 확인)
+
 ## 2026-09-02 — 개발자 이미지 관리 도구로 대표 이미지 10건 재검색/교체
 
 - 새로 추가한 로컬 전용 이미지 관리 패널을 사용해, 서로 다른 글에 동일한 사진이 중복 사용되던 문제(avoiding-camera-shake-long-exposure / portrait-photography-camera-settings / raw-vs-jpeg-which-should-you-shoot)를 포함해 총 10개 글의 대표 이미지를 검색어를 바꿔가며 재선택

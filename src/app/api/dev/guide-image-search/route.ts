@@ -10,13 +10,14 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json().catch(() => null);
   const query = typeof body?.query === "string" ? body.query.trim() : "";
+  const page = Number.isFinite(body?.page) ? Math.max(1, Math.floor(body.page)) : 1;
   if (!query) {
     return NextResponse.json({ error: "query가 필요합니다." }, { status: 400 });
   }
 
   try {
-    const results = await searchGuideImageCandidates(query, 9);
-    return NextResponse.json({ results });
+    const results = await searchGuideImageCandidates(query, 9, page);
+    return NextResponse.json({ results, page });
   } catch (e) {
     if (e instanceof DevImageToolError) {
       return NextResponse.json({ error: e.message }, { status: e.status });
