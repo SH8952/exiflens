@@ -27,6 +27,14 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-02 — 가이드 아티클 자동 발행: 화이트밸런스 완벽 가이드
+
+- 예약 작업(scheduled task)이 automation/guide-topics-queue.json의 order 7 주제를 선택해 4개 언어(en/ja/ko/es)로 신규 작성: "화이트밸런스 완벽 가이드: 켈빈 값부터 커스텀 설정까지" (White Balance Explained)
+- 켈빈 색온도의 의미, 화이트밸런스 프리셋과 혼합광에서의 한계, 커스텀 화이트밸런스(그레이카드) 설정법, RAW vs JPEG에서 화이트밸런스 되돌리기 가능 여부, 자주 하는 실수(AWB로 노을/일출 색감이 지워지는 문제), 실전 체크리스트로 구성
+- 카테고리는 기존 "카메라 기초 & 노출"(Camera Basics & Exposure) 재사용 — 4개 언어 모두 동일 카테고리에 배정
+- automation/guide-topics-queue.json: order 7 항목 published: true, publishedDate: "2026-09-02"로 갱신
+- 검증: 클라우드 세션에서 `npm run build` 통과 확인 후 발행 패키지 생성
+
 ## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
 
 - 배경: 구글 서치 콘솔 분석 결과(2026-08-31) 노출은 급증하지만 클릭률이 거의 없는 문제 확인. Gemini가 제안한 안전한 개선안을 하루 하나씩 자동 적용하기로 함(석한님 승인). 1일차 항목 진행.

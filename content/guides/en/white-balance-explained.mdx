@@ -1,0 +1,37 @@
+---
+title: "White Balance Explained: From Kelvin Values to Custom Presets"
+description: "Why the same scene comes out orange or blue depending on your camera settings, and how to work with Kelvin color temperature and white balance presets in real shooting situations."
+publishedAt: "2026-09-02"
+tags: ["white-balance", "color-temperature", "camera-basics"]
+category: "Camera Basics & Exposure"
+---
+
+If you've ever shot under the same indoor lighting and gotten one frame that looks orange and another that looks blue, the culprit isn't your lens or sensor — it's white balance misreading the color temperature of your light source. White balance works by assuming "white should look like this" for a given scene and shifting every color to match that assumption; when the assumption doesn't match the actual light, the whole image ends up with a color cast.
+
+## What Kelvin (K) actually measures
+
+Color temperature is measured in Kelvin, where lower numbers mean warmer, redder light (candlelight, incandescent bulbs) and higher numbers mean cooler, bluer light (open shade, overcast sky). A candle flame sits around 1900K, a household incandescent bulb around 2700K, direct midday sun near 5500K, and open shade on a clear day can climb to 7000-8000K. Your camera corrects in the opposite direction of the light's actual temperature — a warm, low-Kelvin light source gets blue added to neutralize it, while a cool, high-Kelvin source gets orange added. The part that trips people up is that manually raising the Kelvin setting on your camera makes the image warmer (more orange), not cooler, because you're telling the camera "the light here is this blue," and it compensates by adding warmth.
+
+## Presets and where they fall apart
+
+Daylight (roughly 5500K), Cloudy (roughly 6500K), Shade (roughly 7500K), Tungsten (roughly 3200K), and Fluorescent (roughly 4000K) presets each assume an average value for that lighting type, so they drift when your actual source doesn't match. Mixed lighting is where this becomes a real problem — shoot a portrait near a window with an incandescent lamp also lighting the room, and you're mixing roughly 5500K daylight with roughly 3200K tungsten in a single frame. No single preset fixes both sides evenly, so one side of the face reads warm while the other reads cool. In that situation, a custom white balance reading is far more reliable than guessing between presets.
+
+## Setting a custom white balance
+
+Most cameras let you photograph a white or 18% gray card and use that frame as the reference for white balance calculation. Fill the frame with the card or a sheet of white paper under the same light you'll actually be shooting in, then use your camera's "set white balance from this image" function. This is especially worth doing for studio lighting, events with mixed colored lighting, and unusual sources presets can't handle well — sodium vapor or mercury vapor street lighting being a common example that trips up every preset.
+
+## RAW keeps white balance reversible
+
+Shoot RAW and white balance is stored as metadata rather than baked into the pixel data, so even an imperfect in-camera white balance can be corrected precisely later using the Kelvin slider in your RAW processor. Shoot JPEG and white balance gets applied directly to the pixel values at capture time, which makes a badly off color cast much harder to fully recover afterward. If you know you're heading into tricky mixed or colored lighting, shooting RAW takes real pressure off getting the in-camera setting perfect.
+
+## A common mistake worth avoiding
+
+Leaving Auto White Balance (AWB) on across a series of shots in the same session often produces slightly different color casts frame to frame, which adds extra work when you're trying to match colors across a set in post. AWB is also prone to "correcting away" warm color that's actually the point of the shot — sunrise and sunset scenes especially — treating that warmth as an unwanted cast rather than the subject. For scenes where color itself is the subject, locking to the Daylight preset usually preserves more of what you actually saw.
+
+## Practical checklist
+
+- In mixed lighting (window light plus indoor lamps), reach for custom white balance before cycling through presets.
+- For sunrise, sunset, and other color-driven scenes, lock the Daylight preset instead of relying on AWB.
+- Shoot RAW under tricky or unusual light sources so you can correct precisely afterward.
+- Lock white balance for any set of images you plan to edit together, to save time matching colors later.
+- Checking the white balance setting recorded in a shot's EXIF is often the fastest way to figure out why one frame's color doesn't match the rest of the set.

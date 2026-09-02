@@ -1,0 +1,37 @@
+---
+title: "Balance de blancos explicado: de los valores Kelvin a los ajustes personalizados"
+description: "Por qué la misma escena sale anaranjada o azulada según los ajustes de la cámara, y cómo trabajar con la temperatura de color en Kelvin y los preajustes de balance de blancos en situaciones reales de disparo."
+publishedAt: "2026-09-02"
+tags: ["balance-de-blancos", "temperatura-de-color", "fundamentos-de-camara"]
+category: "Fundamentos de cámara y exposición"
+---
+
+Si alguna vez fotografiaste bajo la misma luz interior y obtuviste un fotograma anaranjado y otro azulado, el problema no es el objetivo ni el sensor: es el balance de blancos interpretando mal la temperatura de color de la fuente de luz. El balance de blancos parte de la suposición de "así debería verse el blanco en esta escena" y ajusta todos los colores a partir de esa referencia; cuando la suposición no coincide con la luz real, toda la imagen queda con un dominante de color.
+
+## Qué mide realmente el Kelvin (K)
+
+La temperatura de color se mide en Kelvin: los valores bajos indican una luz más cálida y rojiza (velas, bombillas incandescentes), y los valores altos indican una luz más fría y azulada (sombra abierta, cielo nublado). La llama de una vela ronda los 1900K, una bombilla incandescente doméstica los 2700K, el sol directo del mediodía cerca de 5500K, y la sombra abierta en un día despejado puede llegar a 7000-8000K. La cámara corrige en la dirección opuesta a la temperatura real de la luz: si la fuente es cálida (Kelvin bajo), añade azul para neutralizarla; si es fría (Kelvin alto), añade naranja. Lo que suele confundir es que subir manualmente el valor Kelvin en la cámara hace que la imagen se vea más cálida (más anaranjada), no más fría, porque le estás diciendo a la cámara "la luz aquí es así de azul" y ella compensa añadiendo calidez.
+
+## Los preajustes y dónde fallan
+
+Los preajustes de Luz de día (aprox. 5500K), Nublado (aprox. 6500K), Sombra (aprox. 7500K), Tungsteno (aprox. 3200K) y Fluorescente (aprox. 4000K) asumen un valor promedio para ese tipo de iluminación, así que se desvían cuando tu fuente real no coincide. La iluminación mixta es donde esto se convierte en un problema real: fotografiar un retrato junto a una ventana con una lámpara incandescente encendida en la misma habitación mezcla luz de día de aprox. 5500K con tungsteno de aprox. 3200K en un mismo encuadre. Ningún preajuste corrige ambos lados por igual, así que un lado del rostro sale cálido y el otro frío. En ese caso, una lectura de balance de blancos personalizado es mucho más fiable que ir probando preajustes.
+
+## Cómo ajustar un balance de blancos personalizado
+
+La mayoría de las cámaras permiten fotografiar una tarjeta blanca o gris al 18% y usar ese fotograma como referencia para calcular el balance de blancos. Llena el encuadre con la tarjeta o una hoja blanca bajo la misma luz en la que vas a disparar, y luego usa la función "ajustar balance de blancos desde esta imagen" del menú de tu cámara. Vale especialmente la pena hacerlo en iluminación de estudio, eventos con luces de colores mezcladas y fuentes poco habituales que ningún preajuste maneja bien, como el alumbrado público de vapor de sodio o de mercurio.
+
+## El RAW mantiene el balance de blancos reversible
+
+Al disparar en RAW, el balance de blancos se guarda como metadato en lugar de quedar fijado en los datos de píxel, así que incluso un balance de blancos imperfecto en cámara se puede corregir con precisión después usando el control deslizante de Kelvin en tu revelador RAW. Al disparar en JPEG, el balance de blancos se aplica directamente a los valores de píxel en el momento de la captura, lo que hace mucho más difícil recuperar por completo un dominante de color muy desviado más adelante. Si sabes que vas a enfrentarte a luz mixta o de colores complicados, disparar en RAW quita bastante presión sobre acertar el ajuste en cámara.
+
+## Un error común que conviene evitar
+
+Dejar el balance de blancos automático (AWB) activado durante una serie de tomas en la misma sesión suele producir dominantes de color ligeramente distintos de una toma a otra, lo que añade trabajo extra al intentar igualar los colores de todo un conjunto en la edición. El AWB también tiende a "corregir" el color cálido que en realidad es el motivo de la toma, algo especialmente frecuente en amaneceres y atardeceres, tratando esa calidez como un dominante no deseado en lugar de como el sujeto de la foto. Para escenas donde el color en sí es el protagonista, fijar el preajuste de Luz de día suele conservar mejor lo que realmente viste.
+
+## Lista de verificación práctica
+
+- Con luz mixta (luz de ventana más lámparas interiores), recurre al balance de blancos personalizado antes de ir probando preajustes.
+- Para amaneceres, atardeceres y otras escenas donde el color es protagonista, fija el preajuste de Luz de día en lugar de confiar en el AWB.
+- Dispara en RAW bajo fuentes de luz difíciles o poco habituales para poder corregir con precisión después.
+- Fija el balance de blancos para cualquier conjunto de imágenes que vayas a editar junto, y ahorra tiempo igualando colores más tarde.
+- Revisar el balance de blancos registrado en el EXIF de una toma suele ser la forma más rápida de averiguar por qué un fotograma no coincide en color con el resto del conjunto.
