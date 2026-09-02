@@ -25,6 +25,12 @@ export type GuideFrontmatter = {
    * FALLBACK_CATEGORY in the guides page).
    */
   category?: string;
+  /** Featured image path under /public (e.g. "/guides/images/{slug}.webp"), auto-attached at publish time. */
+  image?: string;
+  /** Unsplash photographer name, required for on-page attribution when `image` is set. */
+  imageCredit?: string;
+  /** Unsplash photographer profile URL (with UTM params), paired with `imageCredit`. */
+  imageCreditUrl?: string;
 };
 
 export type GuideMeta = GuideFrontmatter & {

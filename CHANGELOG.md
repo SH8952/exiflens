@@ -1,3 +1,15 @@
+## 2026-09-02 — 구글 디스커버 노출 대비 2~4단계: 가이드 아티클 Unsplash 대표 이미지 자동 첨부
+
+- (2단계) Unsplash API 키를 automation/.env 에 저장 (기존 발급 이력 재사용, git 추적 제외 - .gitignore의 .env* 패턴에 이미 포함)
+- (3단계) automation/attach-guide-image.py 신규 추가: 발행 시 영문 mdx의 tags(앞 2개)를 검색어로 Unsplash에서 가로 1600px webp 이미지를 검색·다운로드해 public/guides/images/{slug}.webp 에 저장하고, 4개 언어 mdx frontmatter에 image/imageCredit/imageCreditUrl 자동 삽입
+  - Unsplash API 가이드라인 준수: 이미지 사용 시 download_location 트래킹 엔드포인트 호출, 저작자 표기(사진작가명+링크, UTM 파라미터) 정보 함께 저장
+  - 네트워크 오류/키 없음/검색 결과 없음 등 실패 시에도 예외 없이 조용히 건너뛰고 텍스트만으로 발행 계속 (일일 자동 발행 파이프라인이 이미지 때문에 중단되지 않도록)
+  - automation/publish-guide.command 에 호출 지점 추가 (콘텐츠 반영 직후, git add 이전)
+- (4단계) src/lib/guides.ts GuideFrontmatter에 image/imageCredit/imageCreditUrl 필드 추가, 가이드 상세 페이지(src/app/[locale]/guides/[slug]/page.tsx)에 대표 이미지 렌더링(next/image, 16:9) + "Photo by X on Unsplash" 저작자 표기 링크 추가, openGraph.images/twitter.images에도 연결
+- 구글 디스커버 노출 필수 조건 중 "고화질 대표 이미지" 충족을 위한 작업 (1단계 robots 메타태그는 앞선 커밋에서 이미 반영)
+- 검증: 대상 파일 npx eslint, npx tsc --noEmit 통과. Unsplash API 실제 호출 테스트는 이 샌드박스에 외부 네트워크가 없어 진행하지 못했음 - 첫 자동 발행 시 실제 동작 확인 필요
+- 기존에 이미 발행된 과거 아티클(이미지 없음)에 대한 소급 적용은 별도 단계로 진행 예정 (이번 커밋 범위 아님)
+
 ## 2026-09-02 — 구글 디스커버 노출 대비 1단계: robots 메타태그에 max-image-preview:large 추가
 
 - 구글 디스커버(Discover) 노출 필수 조건 중 하나인 large 이미지 미리보기 허용 메타태그를 사이트 전역 metadata에 추가

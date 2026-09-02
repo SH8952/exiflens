@@ -96,6 +96,10 @@ cp "guide-${SLUG}-ko.mdx" "$REPO/content/guides/ko/${SLUG}.mdx"
 cp "guide-${SLUG}-es.mdx" "$REPO/content/guides/es/${SLUG}.mdx"
 cp "new-queue.json" "$REPO/automation/guide-topics-queue.json"
 
+# --- 4.5. 디스커버 노출 대비 대표 이미지 자동 첨부 (Unsplash) ---
+# 실패해도(네트워크 오류, API 키 없음 등) 발행 자체는 계속 진행됨 - 스크립트 내부에서 처리
+python3 "$REPO/automation/attach-guide-image.py" "$REPO" "$SLUG"
+
 python3 -c "
 import pathlib
 repo = pathlib.Path('$REPO')
@@ -113,7 +117,9 @@ if snippet_path.exists():
 cd "$REPO"
 [ -f .git/index.lock ] && rm -f .git/index.lock
 [ -f .git/HEAD.lock ] && rm -f .git/HEAD.lock
+IMAGE_PATH="public/guides/images/${SLUG}.webp"
 git add "content/guides/en/${SLUG}.mdx" "content/guides/ja/${SLUG}.mdx" "content/guides/ko/${SLUG}.mdx" "content/guides/es/${SLUG}.mdx" automation/guide-topics-queue.json CHANGELOG.md
+[ -f "$IMAGE_PATH" ] && git add "$IMAGE_PATH"
 git commit -m "feat: 가이드 아티클 추가 - ${TITLE} (자동 발행)"
 git push origin main
 
