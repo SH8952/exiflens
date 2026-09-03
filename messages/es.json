@@ -155,7 +155,8 @@
     "terms": "Términos de servicio",
     "guides": "Guías",
     "about": "Sobre nosotros",
-    "disclosure": "Divulgación de afiliados"
+    "disclosure": "Divulgación de afiliados",
+    "contact": "Contacto"
   },
   "Privacy": {
     "title": "Política de Privacidad",
@@ -343,5 +344,28 @@
   "Faq": {
     "title": "Preguntas Frecuentes",
     "subtitle": "Respuestas a las preguntas más comunes sobre el uso de ExifLens."
+  },
+  "Contact": {
+    "title": "Contacta con ExifLens",
+    "sections": [
+      {
+        "heading": "Escríbenos por correo",
+        "body": [
+          "La forma más rápida de contactarnos es por correo electrónico: skysmoga@gmail.com. Leemos todos los mensajes e intentamos responder en unos pocos días hábiles."
+        ]
+      },
+      {
+        "heading": "Reportar errores y sugerir funciones",
+        "body": [
+          "¿Encontraste algo que no funciona bien o tienes una idea para una nueva herramienta? Cuéntanos los detalles (qué ocurrió, tu navegador/dispositivo y los pasos para reproducirlo si es un error) y lo revisaremos."
+        ]
+      },
+      {
+        "heading": "Consultas comerciales y de colaboración",
+        "body": [
+          "Para consultas de publicidad, colaboración o prensa, escríbenos a la misma dirección de correo indicada arriba."
+        ]
+      }
+    ]
   }
 }

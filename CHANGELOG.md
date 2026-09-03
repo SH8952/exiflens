@@ -1,3 +1,12 @@
+## 2026-09-03 — Contact(문의) 페이지 신규 추가 (애드센스 재검토 대비)
+
+- 배경: 애드센스 심사에서 "가치가 별로 없는 콘텐츠" 사유로 반려됨에 따라 원인을 실제 데이터로 점검. 발행 가이드 글 수(언어별 24개, 총 96개)와 평균 분량(영문 기준 약 4,700자)은 이미 일반적인 최소 기준을 충분히 넘고 있었고, 저장소 최초 커밋일(2026-08-24)로 볼 때 사이트가 아직 10일밖에 안 된 신생 도메인이라는 점이 더 유력한 원인으로 파악됨. 다만 Privacy/Terms/About/Disclosure 페이지는 이미 있었지만 독립된 Contact(문의) 페이지가 없었던 점은 실제 개선 여지로 확인되어 이번에 보완
+- 신규 파일: `src/app/[locale]/contact/page.tsx` — 기존 About/Privacy/Terms와 동일하게 `LegalPage` 공통 컴포넌트 + next-intl 번역 네임스페이스(`Contact`)를 사용하는 4개 언어(en/ko/ja/es) 지원 페이지. 이메일 문의처(skysmoga@gmail.com), 버그 제보/기능 제안, 비즈니스·제휴 문의 3개 섹션으로 구성
+- 수정: `messages/{en,ko,ja,es}.json` — `Contact` 네임스페이스(제목+3개 섹션) 및 `Footer.contact` 라벨 추가
+- 수정: `src/components/site-footer.tsx` — 푸터 내비게이션에 Contact 링크 추가 (Privacy/Terms/Disclosure 옆)
+- 수정: `src/app/sitemap.ts` — `STATIC_PATHS`에 `/contact` 추가해 사이트맵에도 4개 언어 전부 반영
+- 검증: 변경/신규 파일 대상 `npx eslint`, `npx tsc --noEmit` 통과. `npm run build` 정상 완료(139 → 143개 정적 페이지로 정확히 +4, en/ko/ja/es 4개 언어의 `/contact.html`이 모두 생성된 것을 직접 확인)
+
 ## 2026-09-03 — 자주 쓰는 스크립트 3종에 구분용 아이콘 적용
 
 - 배경: 여러 스크립트를 함께 사용하다 보니 Finder에서 어떤 스크립트인지 구분이 어려워, 기존 이미지 관리 push 스크립트(카메라 아이콘)에 이어 나머지 상시 스크립트에도 목적을 바로 알 수 있는 아이콘을 적용
