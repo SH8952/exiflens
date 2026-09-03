@@ -6,7 +6,7 @@
  * Used by `npm run dev`. If you don't want the browser to open, use
  * `npm run dev:plain` instead.
  */
-import { spawn, exec } from "node:child_process";
+import { spawn, exec, execSync } from "node:child_process";
 
 const URL_REGEX = /(https?:\/\/localhost:\d+)/;
 const FALLBACK_URL = "http://localhost:3000";
@@ -72,8 +72,49 @@ function shutdown() {
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
-child.on("exit", (code) => process.exit(code ?? 0));
+// next dev(child)는 마지막 브라우저 탭이 닫히면(src/app/api/dev/watch)
+// 일반적인 종료가 아니라 exit code 42로 스스로를 종료시킨다 - 이 경우
+// 여기서 macOS 터미널 창까지 자동으로 닫아준다. (Ctrl+C 등 사용자가 직접
+// 종료한 경우는 SIGTERM 경로를 타므로 이 분기와 무관함)
+child.on("exit", (code) => {
+  if (code === 42 && process.platform === "darwin") {
+    closeTerminalWindow();
+    return;
+  }
+  process.exit(code ?? 0);
+});
 child.on("error", (err) => {
   console.error(err);
   process.exit(1);
 });
+
+function closeTerminalWindow() {
+  console.log(
+    "\n마지막 브라우저 탭이 닫혀 개발 서버를 종료합니다. 3초 후 이 창도 자동으로 닫힙니다.\n",
+  );
+  try {
+    const tty = execSync("tty", { stdio: ["inherit", "pipe", "ignore"] })
+      .toString()
+      .trim();
+    const script = `
+sleep 3
+osascript <<APPLESCRIPT
+tell application "Terminal"
+    repeat with w in windows
+        try
+            if tty of (selected tab of w) is "${tty}" then close w
+        end try
+    end repeat
+end tell
+delay 0.3
+try
+    tell application "System Events" to keystroke return
+end try
+APPLESCRIPT
+`;
+    spawn("bash", ["-c", script], { detached: true, stdio: "ignore" }).unref();
+  } catch (err) {
+    console.warn("터미널 자동 종료 실패 (수동으로 닫아주세요):", err.message);
+  }
+  setTimeout(() => process.exit(0), 200);
+}

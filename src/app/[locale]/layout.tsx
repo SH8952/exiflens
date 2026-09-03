@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { AdZone } from "@/components/ad-zone";
+import { DevServerWatch } from "@/components/dev/dev-server-watch";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -145,6 +146,7 @@ export default async function LocaleLayout({
             <SiteFooter />
           </NextIntlClientProvider>
         </ThemeProvider>
+        {process.env.NODE_ENV === "development" ? <DevServerWatch /> : null}
       </body>
     </html>
   );

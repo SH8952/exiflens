@@ -1,3 +1,15 @@
+## 2026-09-03 — Chrome 탭 종료 시 개발 서버 터미널 자동 종료 (SSE 기반)
+
+- 배경: `localhost:3000/ko` 탭을 닫아도 `npm run dev`를 실행 중인 터미널 창이 함께 꺼지지 않아, 여러 작업을 동시에 진행할 때 어떤 터미널이 어떤 작업인지 헷갈리는 문제 개선 요청
+- 최초에는 브라우저→서버 heartbeat(주기적 ping) 방식을 검토했으나, 이 경우 탭을 닫아도 서버가 "연결 끊김"을 확인하기까지 수 초의 지연이 발생함 — 예전에는 탭을 닫으면 터미널이 거의 동시에 꺼졌다는 피드백에 따라 지연이 큰 heartbeat 방식 대신 아래의 즉시 감지 방식으로 재설계
+- 신규 파일: `src/app/api/dev/watch/route.ts` — Server-Sent Events(SSE) 연결을 유지하는 라우트. Next.js Route Handler가 요청의 `AbortSignal`(`request.signal`)로 브라우저 연결 종료를 즉시(이벤트 기반, polling 아님) 감지. 탭을 새로고침할 때(브라우저가 짧게 재연결)와 실제로 탭을 닫을 때를 구분하기 위해 마지막 연결이 끊긴 뒤 700ms만 대기했다가 재연결이 없으면 개발 서버 프로세스를 특수 종료 코드(42)로 종료(`process.exit(42)`). NODE_ENV=development가 아니면 403.
+- 신규 파일: `src/components/dev/dev-server-watch.tsx` — 클라이언트에서 `EventSource`로 위 SSE 라우트에 연결만 유지하는 컴포넌트(화면에는 아무것도 렌더링하지 않음)
+- 수정: `src/app/[locale]/layout.tsx` — `NODE_ENV === "development"`일 때만 `<DevServerWatch />`를 body에 조건부 렌더링(프로덕션 빌드에는 포함되지 않음, 정적 산출물에서 확인 완료)
+- 수정: `scripts/dev-open.mjs` — `next dev` 자식 프로세스가 종료 코드 42로 끝나면(macOS 한정) `tty`를 확인해 현재 명령을 실행 중인 Terminal 창만 찾아 3초 뒤 자동으로 닫는 로직 추가(기존 이미지 도구용 스크립트와 동일한 detached osascript 패턴 재사용 — macOS의 "정말 종료하시겠습니까?" 확인 다이얼로그 없이 조용히 닫힘)
+- 수정: `.gitignore` — 빌드 정리 단계 EPERM 문제 회피용으로 `.next` 대신 이름을 바꿔 남기는 `.next.stale.*/` 패턴을 무시 목록에 추가(FlyDroneMap과 동일한 선례 적용, 실수로 git에 올라가지 않도록)
+- 안전장치: 위 기능은 전부 로컬 개발 환경 전용이며, NODE_ENV 가드와 프로덕션 빌드 트리쉐이킹으로 exifnd.com 실제 서비스에는 전혀 노출되지 않음
+- 검증: 변경/신규 파일 대상 `npx eslint`, `npx tsc --noEmit` 통과, `npm run build` 정상 완료(139/139 정적 페이지, 프로덕션 산출물에 해당 코드 미포함 확인). 다만 실제 macOS Terminal 창 종료 동작 자체는 클라우드 샌드박스에서 직접 실행/검증이 불가능한 영역이라 사용자 환경에서의 실사용 확인이 필요함
+
 ## 2026-09-03 — SEO 3일차: 노출 상위 가이드 2개 영어 타이틀/메타 디스크립션 개선
 
 - 배경: 구글 서치 콘솔 분석(2026-08-31) 결과 확인된 "노출 급증, 클릭률 저조" 문제 개선을 위한 SEO_TASKS.md 3일차 항목 진행
