@@ -1,3 +1,13 @@
+## 2026-09-03 — SEO 3일차: 노출 상위 가이드 2개 영어 타이틀/메타 디스크립션 개선
+
+- 배경: 구글 서치 콘솔 분석(2026-08-31) 결과 확인된 "노출 급증, 클릭률 저조" 문제 개선을 위한 SEO_TASKS.md 3일차 항목 진행
+- 서치 콘솔 노출 상위 영어(en) 가이드 2건의 frontmatter title/description을 클릭을 유도하는 문구로 개선(과장·클릭베이트 없이 실제 본문 내용에 맞춰 작성)
+  - content/guides/en/wide-angle-vs-telephoto-focal-length.mdx: "Wide-Angle vs. Telephoto: How Focal Length Changes Your Photos" → "Wide-Angle vs. Telephoto: The Complete Focal Length Guide (14mm-200mm+)", description을 질문형으로 변경
+  - content/guides/en/understanding-metering-modes.mdx: "Understanding Metering Modes: Matrix, Center-Weighted, and Spot" → "Matrix vs. Center-Weighted vs. Spot Metering: Which Should You Use?", description을 질문형으로 변경
+- generateMetadata가 frontmatter를 그대로 읽어 `<title>`/`<meta description>`에 반영하는 기존 구조를 그대로 사용, 코드 변경 없음
+- 다국어(ko/ja/es) 확대는 이번 항목 범위 밖(추후 별도 논의)
+- 검증: npx tsc --noEmit 통과, npm run build 정상 완료, 빌드 산출물(.next/server/app/en/guides/*.html)에서 새 title/description이 실제로 반영됨을 확인
+
 ## 2026-09-02 — 개발자 이미지 관리 도구: 직접 업로드 + 검색 재시도 시 새 결과
 
 - 직접 촬영/보유한 사진을 Unsplash 검색 없이 그대로 대표 이미지로 적용할 수 있는 업로드 기능 추가 (src/app/api/dev/guide-image-upload/route.ts, 패널 하단 파일 선택 UI) - jpg/jpeg/png/webp, 최대 15MB, 저작자 표기(imageCredit/imageCreditUrl)는 붙지 않음(기존 값이 있었다면 제거)
@@ -85,11 +95,6 @@
 - (부수 수정) tsconfig.json에 `_backups`(로컬 전용, git 추적 안 됨) 제외 처리 — 로컬 백업 폴더의 낡은 스냅샷이 `npm run build`의 타입 체크를 방해하던 문제 해결
 
 # 개발 이력 (Development History)
-
-## 2026-09-03
-
-### Added
-- New guide article published in 4 languages (en/ja/ko/es): "Focus Modes: AF-S vs AF-C vs Manual Focus" (초점 모드 비교 (AF-S vs AF-C vs MF)) — covers focus-and-recompose risk at shallow apertures with AF-S, continuous tracking behavior and back-button focus with AF-C, and when manual focus with live view magnification outperforms autofocus (through glass, low contrast, astrophotography, macro). Filed under the "Camera Basics & Exposure" category (reused existing category across all locales).
 
 ## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
 
