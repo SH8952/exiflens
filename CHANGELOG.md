@@ -86,6 +86,11 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-03
+
+### Added
+- New guide article published in 4 languages (en/ja/ko/es): "Focus Modes: AF-S vs AF-C vs Manual Focus" (초점 모드 비교 (AF-S vs AF-C vs MF)) — covers focus-and-recompose risk at shallow apertures with AF-S, continuous tracking behavior and back-button focus with AF-C, and when manual focus with live view magnification outperforms autofocus (through glass, low contrast, astrophotography, macro). Filed under the "Camera Basics & Exposure" category (reused existing category across all locales).
+
 ## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
 
 - 배경: 구글 서치 콘솔 분석 결과(2026-08-31) 노출은 급증하지만 클릭률이 거의 없는 문제 확인. Gemini가 제안한 안전한 개선안을 하루 하나씩 자동 적용하기로 함(석한님 승인). 1일차 항목 진행.
