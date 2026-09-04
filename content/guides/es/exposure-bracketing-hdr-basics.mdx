@@ -1,0 +1,45 @@
+---
+title: "Bracketing de exposición y fundamentos de HDR: capturar lo que el sensor no puede en una sola toma"
+description: "Cuando un cielo brillante y un interior oscuro conviven en el mismo encuadre, una sola exposición no basta. Aquí explicamos cómo configurar el bracketing AEB y evitar los errores más comunes al fusionar HDR."
+publishedAt: "2026-09-04"
+tags: ["bracketing-de-exposicion", "hdr", "rango-dinamico"]
+category: "Fundamentos de cámara y exposición"
+image: "/guides/images/exposure-bracketing-hdr-basics.webp"
+imageCredit: "Beatrice Ekenstierna"
+imageCreditUrl: "https://unsplash.com/@beatriceekenstierna?utm_source=ExifLens&utm_medium=referral"
+---
+
+Si alguna vez expusiste para un rostro junto a una ventana y el paisaje de fuera terminó quemado, o expusiste para la ventana y la cara quedó hundida en sombra, eso no es un problema de técnica: es que el rango dinámico de tu sensor (la diferencia entre el tono más claro y el más oscuro que puede registrar) se queda corto frente al contraste real de la escena. Ninguna exposición única puede resolver eso. La solución es disparar varias exposiciones del mismo encuadre y combinarlas después, una técnica llamada bracketing de exposición, cuyo resultado fusionado se conoce como HDR (High Dynamic Range).
+
+## Cómo configurar el AEB (bracketing automático de exposición)
+
+La mayoría de las cámaras permiten fijar tanto el número de tomas como el intervalo en pasos (EV) desde el menú AEB. Para una escena a contraluz normal, donde la diferencia entre interior y exterior no es extrema, suele bastar con 3 tomas a ±2EV (por ejemplo -2EV/0EV/+2EV). Pero en una escena extrema —un cielo de atardecer contra un primer plano oscuro— 5 tomas a ±1EV (-2/-1/0/+1/+2EV) capturan la transición tonal con más finura, lo que reduce notablemente el banding (bandas de color) y el ruido al fusionar después. La mayoría de las cámaras limita el AEB a 3 tomas, así que para ir más allá hay que cambiar la velocidad de obturación manualmente entre disparo y disparo.
+
+## Por qué solo se debe tocar la velocidad de obturación
+
+El bracketing solo funciona bien si la apertura y el ISO se mantienen fijos y toda la variación de exposición recae en la velocidad de obturación. Cambiar la apertura entre tomas altera también la profundidad de campo, lo que desalinea los bordes al fusionar. Cambiar el ISO hace que el patrón de ruido varíe de una toma a otra, lo que le complica al software de fusión unir los tonos con suavidad. Fija f/8 e ISO 100, y mueve solo la velocidad de obturación entre 1/500s (-2EV), 1/125s (0EV) y 1/30s (+2EV): las tres tomas conservan la misma profundidad de campo y el mismo carácter de ruido, así que la fusión queda coherente.
+
+## Por qué el trípode es casi obligatorio
+
+Como la técnica depende de fusionar varias tomas, hasta un movimiento mínimo entre disparos aparece como bordes duplicados o borrosos en la fusión. Si no puedes usar trípode, dispara la ráfaga AEB en modo de disparo continuo a alta velocidad para que las tres tomas ocurran en una fracción de segundo, minimizando la deriva por el pulso de la mano, y asegúrate de aplicar después el paso de alineación en tu software de fusión. La alineación automática funciona razonablemente bien en escenas planas, pero puede dejar distorsión visible en escenas con mucha perspectiva, así que trátala como respaldo y no como sustituto del trípode.
+
+## El fantasma (ghosting) con sujetos en movimiento
+
+Cualquier elemento que cambie de posición entre tomas —hojas movidas por el viento, una persona caminando, agua ondulándose— tiende a aparecer como una imagen doble translúcida tras la fusión, un problema conocido como ghosting. La mayoría del software HDR (Lightroom, Photomatix y similares) ofrece eliminación de fantasmas, pero funciona tomando la exposición de una sola toma de referencia solo para esa zona, lo cual no es una solución perfecta. Para una calle concurrida con mucho movimiento, a menudo una sola exposición RAW recuperada con los deslizadores de luces/sombras en la edición se ve más natural que una fusión de bracketing.
+
+## Por qué RAW importa aquí
+
+Los fotogramas en JPEG ya están comprimidos a datos tonales de 8 bits, lo que limita cuánta información de brillo tiene disponible la fusión. RAW conserva el rango tonal original de 12 a 14 bits, así que fusionar las mismas tres exposiciones produce una transición notablemente más suave entre el cielo y la sombra. La diferencia entre RAW y JPEG se hace más evidente cuanto más agresivo es el tone mapping (cuanto más marcado ese aspecto "HDR" exagerado), así que vale la pena disparar las secuencias de bracketing en RAW pese al mayor peso de archivo.
+
+## Un error habitual
+
+Es fácil fijar un intervalo de pasos demasiado ajustado —±0.3EV, por ejemplo— y terminar con tres tomas que apenas amplían el rango dinámico real. El intervalo debe ajustarse a la diferencia de brillo real de la escena, y conviene revisar en la pantalla trasera de la cámara, justo después de disparar, las luces de la toma más clara y las sombras de la más oscura, para detectar tonos quemados o hundidos antes de dejar el lugar.
+
+## Lista de verificación práctica
+
+- Fija la apertura y el ISO, y varía solo la velocidad de obturación en el bracketing.
+- Prueba 3 tomas a ±2EV para escenas a contraluz normales, y 5 tomas a ±1EV para rangos dinámicos extremos.
+- Usa trípode cuando puedas; si no, recurre al disparo continuo para minimizar la deriva por el pulso de la mano.
+- En escenas con mucho movimiento, considera una sola exposición RAW con recuperación de luces/sombras en vez de bracketing.
+- Dispara en RAW para conservar la mayor cantidad de información tonal posible para la fusión.
+- Revisa in situ el recorte de luces y sombras en tu toma más clara y más oscura antes de continuar.

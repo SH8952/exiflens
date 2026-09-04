@@ -128,6 +128,13 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-04 — 가이드 아티클 자동 발행: "브라케팅과 HDR 촬영 기초"
+
+- New guide article published in all 4 languages (en/ja/ko/es): "Exposure Bracketing & HDR Basics" (브라케팅과 HDR 촬영 기초) — covers AEB frame count/stop-spacing selection (3 frames ±2EV vs. 5 frames ±1EV for extreme dynamic range scenes), why only shutter speed (not aperture or ISO) should vary across the bracket, tripod vs. continuous-burst alignment, ghosting from moving subjects and when to prefer a single RAW exposure instead, and why RAW outperforms JPEG for tone-mapped blends. Filed under the "Camera Basics & Exposure" category (재사용: 기존 "카메라 기초 & 노출" / "Camera Basics & Exposure" / "カメラ基礎と露出" / "Fundamentos de cámara y exposición" 카테고리를 4개 언어 모두 그대로 재사용).
+- `automation/guide-topics-queue.json`의 order 9 항목(exposure-bracketing-hdr-basics)을 published: true, publishedDate: "2026-09-04"로 갱신
+- `npm run build` 정상 완료 확인 (143 → 147개 정적 페이지로 정확히 +4, en/ko/ja/es 4개 언어의 신규 가이드 페이지 생성 확인)
+- 애드센스 심사 대기 기간 콘텐츠 활성도 유지를 위한 자동 발행 작업
+
 ## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
 
 - 배경: 구글 서치 콘솔 분석 결과(2026-08-31) 노출은 급증하지만 클릭률이 거의 없는 문제 확인. Gemini가 제안한 안전한 개선안을 하루 하나씩 자동 적용하기로 함(석한님 승인). 1일차 항목 진행.
