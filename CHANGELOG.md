@@ -1,3 +1,12 @@
+## 2026-09-04 — 가이드 글 내 메인 도구 CTA 배너 추가 (SEO 개선 4일차)
+
+- 배경: 구글 서치 콘솔 분석(2026-08-31, Gemini 분석 의뢰) 결과 노출은 급증하지만 클릭률이 낮은 문제에 대응해 하루 한 항목씩 안전한 개선을 적용 중(SEO_TASKS.md 4일차). 가이드 글을 읽는 방문자가 메인 EXIF 분석 도구(홈페이지)로 자연스럽게 유도되도록 CTA 배너를 추가
+- 신규 파일: `src/components/guide-tool-cta.tsx` — 가이드 콘텐츠와 무관한 템플릿 컴포넌트라 전체 가이드/전체 언어에 한 번에 적용 가능. 기존 `cross-link-flydronemap.tsx`와 동일한 `border-border bg-card` 카드 스타일 및 `Button`(shadcn) 컴포넌트를 그대로 재사용, 새 디자인 시스템을 만들지 않음. `@/i18n/navigation`의 `Link`로 홈(`/`)으로 연결
+- 수정: `src/app/[locale]/guides/[slug]/page.tsx` — 글 제목/날짜 바로 아래(본문 상단)와 본문 하단(관련 가이드 섹션 위) 두 곳에 `<GuideToolCta locale={locale} />` 배치
+- 수정: `messages/{en,ko,ja,es}.json` — `Guides` 네임스페이스에 `ctaBannerText`(배너 문구), `ctaBannerButton`(버튼 라벨) 키 추가. 4개 언어 모두 자연스러운 표현으로 개별 작성(직역 금지 원칙 준수)
+- 광고 코드(GA4/AdSense/ads.txt) 미변경 — 애드센스 심사 진행 중이므로 이번 항목에서도 손대지 않음
+- 검증: 변경/신규 파일 대상 `npx eslint`, `npx tsc --noEmit` 통과. `npm run build` 정상 완료(기존 143개 정적 페이지 유지, 신규 라우트 없음 — 기존 페이지에 컴포넌트만 추가되었으므로 페이지 수 변동 없음이 정상). `npm run start` + Playwright(헤드리스 크로미움)로 en/ko 두 언어의 실제 가이드 상세 페이지를 스크린샷 확인 — 배너가 광고 영역과 겹치지 않고 자연스럽게 배치됨, 한국어 줄바꿈도 레이아웃 깨짐 없음 확인
+
 ## 2026-09-03 — Contact(문의) 페이지 신규 추가 (애드센스 재검토 대비)
 
 - 배경: 애드센스 심사에서 "가치가 별로 없는 콘텐츠" 사유로 반려됨에 따라 원인을 실제 데이터로 점검. 발행 가이드 글 수(언어별 24개, 총 96개)와 평균 분량(영문 기준 약 4,700자)은 이미 일반적인 최소 기준을 충분히 넘고 있었고, 저장소 최초 커밋일(2026-08-24)로 볼 때 사이트가 아직 10일밖에 안 된 신생 도메인이라는 점이 더 유력한 원인으로 파악됨. 다만 Privacy/Terms/About/Disclosure 페이지는 이미 있었지만 독립된 Contact(문의) 페이지가 없었던 점은 실제 개선 여지로 확인되어 이번에 보완
@@ -127,13 +136,6 @@
 - (부수 수정) tsconfig.json에 `_backups`(로컬 전용, git 추적 안 됨) 제외 처리 — 로컬 백업 폴더의 낡은 스냅샷이 `npm run build`의 타입 체크를 방해하던 문제 해결
 
 # 개발 이력 (Development History)
-
-## 2026-09-04 — 가이드 아티클 자동 발행: "브라케팅과 HDR 촬영 기초"
-
-- New guide article published in all 4 languages (en/ja/ko/es): "Exposure Bracketing & HDR Basics" (브라케팅과 HDR 촬영 기초) — covers AEB frame count/stop-spacing selection (3 frames ±2EV vs. 5 frames ±1EV for extreme dynamic range scenes), why only shutter speed (not aperture or ISO) should vary across the bracket, tripod vs. continuous-burst alignment, ghosting from moving subjects and when to prefer a single RAW exposure instead, and why RAW outperforms JPEG for tone-mapped blends. Filed under the "Camera Basics & Exposure" category (재사용: 기존 "카메라 기초 & 노출" / "Camera Basics & Exposure" / "カメラ基礎と露出" / "Fundamentos de cámara y exposición" 카테고리를 4개 언어 모두 그대로 재사용).
-- `automation/guide-topics-queue.json`의 order 9 항목(exposure-bracketing-hdr-basics)을 published: true, publishedDate: "2026-09-04"로 갱신
-- `npm run build` 정상 완료 확인 (143 → 147개 정적 페이지로 정확히 +4, en/ko/ja/es 4개 언어의 신규 가이드 페이지 생성 확인)
-- 애드센스 심사 대기 기간 콘텐츠 활성도 유지를 위한 자동 발행 작업
 
 ## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
 

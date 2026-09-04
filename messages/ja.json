@@ -339,7 +339,9 @@
     "readingTime": "{minutes}分で読めます",
     "backToGuides": "← ガイド一覧に戻る",
     "relatedGuides": "関連ガイド",
-    "otherCategory": "その他のガイド"
+    "otherCategory": "その他のガイド",
+    "ctaBannerText": "写真に隠された焦点距離やレンズ情報を今すぐ確認しましょう。",
+    "ctaBannerButton": "無料で写真を解析する"
   },
   "Faq": {
     "title": "よくある質問",

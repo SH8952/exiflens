@@ -339,7 +339,9 @@
     "readingTime": "{minutes} min de lectura",
     "backToGuides": "← Volver a Guías",
     "relatedGuides": "Guías relacionadas",
-    "otherCategory": "Otras guías"
+    "otherCategory": "Otras guías",
+    "ctaBannerText": "Descubre la distancia focal y los datos del objetivo ocultos en tu foto.",
+    "ctaBannerButton": "Analiza tu foto gratis"
   },
   "Faq": {
     "title": "Preguntas Frecuentes",
