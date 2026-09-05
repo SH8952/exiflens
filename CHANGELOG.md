@@ -150,6 +150,13 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-06 — 가이드 아티클 자동 발행: "회절 현상과 최적 조리개값"
+
+- New guide article published in all 4 languages (en/ja/ko/es): "Diffraction & Optimal Aperture" (회절 현상과 최적 조리개값) — covers why diffraction happens (light bending through the aperture opening as a wave), how sensor pixel pitch (not the lens) determines the practical diffraction limit for a given body, a real landscape scenario comparing f/11 vs. f/16 with hyperfocal distance, the common "smaller aperture is always safer" mistake, and how to tell diffraction softness apart from camera shake or missed focus. Filed under the "Camera Basics & Exposure" category (재사용: 기존 "카메라 기초 & 노출" / "Camera Basics & Exposure" / "カメラ基礎と露出" / "Fundamentos de cámara y exposición" 카테고리를 4개 언어 모두 그대로 재사용).
+- `automation/guide-topics-queue.json`의 order 11 항목(diffraction-and-optimal-aperture)을 published: true, publishedDate: "2026-09-06"으로 갱신
+- `npm run build` 정상 완료 확인
+- 애드센스 검수와는 무관한 콘텐츠 추가 작업
+
 ## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
 
 - 배경: 구글 서치 콘솔 분석 결과(2026-08-31) 노출은 급증하지만 클릭률이 거의 없는 문제 확인. Gemini가 제안한 안전한 개선안을 하루 하나씩 자동 적용하기로 함(석한님 승인). 1일차 항목 진행.
