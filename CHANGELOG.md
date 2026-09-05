@@ -137,6 +137,14 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-05 — 가이드 아티클 신규 발행: 노출 삼각형(ISO·조리개·셔터) 이해하기
+
+- 매일 자동 발행 예약 작업(automation/guide-topics-queue.json 큐 기반)에 따라 신규 가이드 발행. 주제: order 10 "the-exposure-triangle-explained" (ISO·조리개·셔터스피드가 '스톱' 단위로 서로 맞바꿔지는 원리와 상황별 우선순위)
+- 신규 파일: `content/guides/{en,ja,ko,es}/the-exposure-triangle-explained.mdx` — 4개 언어 모두 번역이 아닌 개별 작성. 각 언어별로 실제 스톱 계산 예시(흐린 날 인물 사진: f/4·1/500초·ISO 400 → 셔터 1/2000초로 변경 시 조리개 f/2 또는 ISO 1600으로 2스톱 보정하는 예시)와 장르별 우선순위, 흔한 실수(ISO를 무조건 낮게 고집하다 손떨림 발생) 등을 포함해 E-E-A-T 기준(구체적 수치, 실전 경험, 이유 설명)을 충족하도록 작성
+- category: "카메라 기초 & 노출"(en: "Camera Basics & Exposure", ja: "カメラ基礎と露出", es: "Fundamentos de cámara y exposición") — 4개 언어 모두 기존 카테고리 재사용
+- 수정: `automation/guide-topics-queue.json` — order 10 항목을 published: true, publishedDate: "2026-09-05"로 갱신
+- 검증: `npm run build` 정상 완료(151개 정적 페이지 생성, 신규 가이드 4개 언어 라우트 정상 포함)
+
 ## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
 
 - 배경: 구글 서치 콘솔 분석 결과(2026-08-31) 노출은 급증하지만 클릭률이 거의 없는 문제 확인. Gemini가 제안한 안전한 개선안을 하루 하나씩 자동 적용하기로 함(석한님 승인). 1일차 항목 진행.
