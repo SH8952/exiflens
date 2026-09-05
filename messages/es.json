@@ -9,8 +9,8 @@
     "closeMenu": "Cerrar menú"
   },
   "Home": {
-    "title": "ExifLens",
-    "subtitle": "Suelta una foto. Obtén su EXIF al instante. Calcula tu exposición larga con filtro ND en un clic.",
+    "title": "ExifLens — Visor EXIF Gratis en Línea y Verificador de Metadatos de Fotos",
+    "subtitle": "Sube una foto para extraer su EXIF en línea al instante y calcula tu exposición larga con filtro ND en un clic.",
     "uploaderTitle": "Arrastra y suelta tu foto aquí para extraer el EXIF",
     "uploaderHint": "Compatible con JPG, PNG y la mayoría de archivos RAW. Nada sale de tu navegador.",
     "uploaderButton": "O haz clic para seleccionar un archivo",

@@ -100,7 +100,7 @@
 
 ## 5일차 — 홈페이지 H1/H2 타겟 키워드 보강
 
-- [ ] 미완료
+- [x] 완료 (2026-09-05)
 
 **내용**: 현재 홈페이지 H1이 브랜드명("ExifLens")만 있고 타겟 키워드가 부족함. Gemini는 `EXIF viewer`, `Extract EXIF online`, `Photo metadata checker` 같은 롱테일 키워드가 H1/H2/소개 문구에 자연스럽게 포함되도록 보강할 것을 제안함.
 

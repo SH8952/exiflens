@@ -1,3 +1,16 @@
+## 2026-09-05 — 홈페이지 H1/부제 타겟 키워드 보강 (SEO 개선 5일차)
+
+- 배경: 구글 서치 콘솔 분석(2026-08-31, Gemini 분석 의뢰) 결과 노출은 급증하지만 클릭률이 낮은 문제에 대응해 하루 한 항목씩 안전한 개선을 적용 중(SEO_TASKS.md 5일차). 홈페이지 H1이 브랜드명("ExifLens")만 있고 `EXIF viewer`, `Extract EXIF online`, `Photo metadata checker` 같은 타겟 키워드가 부족하다는 지적에 따라 4개 언어 모두 H1/부제 문구를 보강
+- 수정: `messages/{en,ko,ja,es}.json`의 `Home.title`/`Home.subtitle` — 브랜드명("ExifLens")은 그대로 유지하고, 부제 형태로 핵심 키워드를 각 언어의 자연스러운 표현으로 추가. 직역이 아닌 개별 언어별 문구로 작성했으며 키워드 스터핑 없이 실제 도구 기능(EXIF 추출, ND 필터 계산)을 정확히 설명하는 범위 안에서 보강
+  - en: "ExifLens — Free Online EXIF Viewer & Photo Metadata Checker" / "Drop a photo to extract EXIF metadata online instantly, then calculate your ND filter long exposure in one click."
+  - ko: "ExifLens — 무료 온라인 EXIF 뷰어 & 사진 메타데이터 확인" / "사진을 올리면 온라인에서 바로 EXIF 정보를 추출하고, 클릭 한 번으로 ND 필터 장노출 시간을 계산하세요."
+  - ja: "ExifLens — 無料オンラインEXIFビューア＆写真メタデータチェッカー" / "写真をアップロードするだけでオンラインでEXIF情報を即座に抽出。ワンクリックでNDフィルターの長時間露光を計算します。"
+  - es: "ExifLens — Visor EXIF Gratis en Línea y Verificador de Metadatos de Fotos" / "Sube una foto para extraer su EXIF en línea al instante y calcula tu exposición larga con filtro ND en un clic."
+- `src/app/[locale]/page.tsx`의 H1/부제 JSX 구조와 `<head>` 메타데이터(`layout.tsx`의 하드코딩된 영문 title)는 변경하지 않음 — 과도한 확장을 피하고 이번 항목의 범위를 문구 보강으로 한정
+- 참고: 한국어 H1에 `break-keep`(word-break: keep-all) 유틸리티 클래스를 시도했으나, 모바일 뷰포트에서 일본어(`EXIF`와 한자·가나가 섞인 구간에 공백이 없어 줄바꿈 지점을 찾지 못함)에서 텍스트가 화면 밖으로 잘려나가는(overflow) 부작용이 확인되어 적용하지 않고 원래 상태(기본 word-break)로 되돌림. 한국어에서 "메타데이터"가 두 줄에 걸쳐 나뉘는 것은 미관상 아쉽지만 레이아웃이 깨지지는 않으므로, 4개 언어 모두에 안전한 기본 동작을 유지
+- 광고 코드(GA4/AdSense/ads.txt) 미변경 — 애드센스 심사 진행 중이므로 이번 항목에서도 손대지 않음
+- 검증: `npx tsc --noEmit`, `npx eslint src/app/[locale]/page.tsx` 통과. `npm run build` 정상 완료(143개 정적 페이지 유지, 텍스트만 변경되었으므로 페이지 수 변동 없음이 정상). `npm run start` + Playwright(헤드리스 크로미움)로 4개 언어(en/ko/ja/es) 모두 모바일(390×844)·데스크톱(1440×900) 뷰포트에서 홈페이지 스크린샷을 확인 — 어느 언어에서도 텍스트 잘림(overflow)이나 레이아웃 깨짐 없음을 확인
+
 ## 2026-09-04 — 가이드 글 내 메인 도구 CTA 배너 추가 (SEO 개선 4일차)
 
 - 배경: 구글 서치 콘솔 분석(2026-08-31, Gemini 분석 의뢰) 결과 노출은 급증하지만 클릭률이 낮은 문제에 대응해 하루 한 항목씩 안전한 개선을 적용 중(SEO_TASKS.md 4일차). 가이드 글을 읽는 방문자가 메인 EXIF 분석 도구(홈페이지)로 자연스럽게 유도되도록 CTA 배너를 추가
@@ -136,14 +149,6 @@
 - (부수 수정) tsconfig.json에 `_backups`(로컬 전용, git 추적 안 됨) 제외 처리 — 로컬 백업 폴더의 낡은 스냅샷이 `npm run build`의 타입 체크를 방해하던 문제 해결
 
 # 개발 이력 (Development History)
-
-## 2026-09-05 — 가이드 아티클 신규 발행: 노출 삼각형(ISO·조리개·셔터) 이해하기
-
-- 매일 자동 발행 예약 작업(automation/guide-topics-queue.json 큐 기반)에 따라 신규 가이드 발행. 주제: order 10 "the-exposure-triangle-explained" (ISO·조리개·셔터스피드가 '스톱' 단위로 서로 맞바꿔지는 원리와 상황별 우선순위)
-- 신규 파일: `content/guides/{en,ja,ko,es}/the-exposure-triangle-explained.mdx` — 4개 언어 모두 번역이 아닌 개별 작성. 각 언어별로 실제 스톱 계산 예시(흐린 날 인물 사진: f/4·1/500초·ISO 400 → 셔터 1/2000초로 변경 시 조리개 f/2 또는 ISO 1600으로 2스톱 보정하는 예시)와 장르별 우선순위, 흔한 실수(ISO를 무조건 낮게 고집하다 손떨림 발생) 등을 포함해 E-E-A-T 기준(구체적 수치, 실전 경험, 이유 설명)을 충족하도록 작성
-- category: "카메라 기초 & 노출"(en: "Camera Basics & Exposure", ja: "カメラ基礎と露出", es: "Fundamentos de cámara y exposición") — 4개 언어 모두 기존 카테고리 재사용
-- 수정: `automation/guide-topics-queue.json` — order 10 항목을 published: true, publishedDate: "2026-09-05"로 갱신
-- 검증: `npm run build` 정상 완료(151개 정적 페이지 생성, 신규 가이드 4개 언어 라우트 정상 포함)
 
 ## 2026-09-01 — SEO 개선 1일차: 가이드 페이지 BreadcrumbList 구조화 데이터 추가
 
