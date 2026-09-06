@@ -1,4 +1,4 @@
-export type AffiliateProvider = "coupang" | "amazon" | null;
+export type AffiliateProvider = "coupang" | "aliexpress" | null;
 
 /**
  * Decides which affiliate program to show, mixing two signals:
@@ -14,27 +14,24 @@ export type AffiliateProvider = "coupang" | "amazon" | null;
  * opting the whole route into per-request dynamic rendering, which is what
  * happens if a Server Component reads cookies() here instead.
  *
- * Coupang Partners is wired up now. Amazon Associates is not set up yet,
- * so every non-Korea case resolves to null (the UI hides the section)
- * until a real Associate tag is added.
+ * Korea shows Coupang Partners. Everywhere else shows AliExpress
+ * Affiliate (2026-09-06) — Amazon Associates was ruled out due to payout
+ * cash-out issues, so every non-Korea case now resolves to "aliexpress"
+ * rather than the old Amazon stub (which always returned null and just
+ * hid the section for every visitor outside Korea).
+ *
+ * Note for local dev: with no `x-vercel-ip-country` header (see
+ * src/proxy.ts), `geoCountry` is always null locally, so the UI locale
+ * alone decides the provider — switching the site's language switcher
+ * between ko and en/ja/es previews both experiences without needing a
+ * real overseas connection.
  */
 export function resolveAffiliateProvider(
   locale: string,
   geoCountry: string | null,
 ): AffiliateProvider {
   if (geoCountry) {
-    return geoCountry === "KR" ? "coupang" : amazonForCountry();
+    return geoCountry === "KR" ? "coupang" : "aliexpress";
   }
-  return locale === "ko" ? "coupang" : amazonForLocale();
-}
-
-// TODO: once an Amazon Associates tag exists, map country -> Amazon
-// domain + tag here (e.g. US -> amazon.com, JP -> amazon.co.jp).
-function amazonForCountry(): AffiliateProvider {
-  return null;
-}
-
-// TODO: same mapping as amazonForCountry, keyed by UI locale instead.
-function amazonForLocale(): AffiliateProvider {
-  return null;
+  return locale === "ko" ? "coupang" : "aliexpress";
 }

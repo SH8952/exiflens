@@ -4,6 +4,7 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { resolveAffiliateProvider } from "@/lib/affiliate";
 import { CoupangGearCards } from "@/components/coupang-gear-cards";
+import { AliexpressGearCards } from "@/components/aliexpress-gear-cards";
 
 function readGeoCountryCookie(): string | null {
   if (typeof document === "undefined") return null;
@@ -66,6 +67,10 @@ export function GearRecommendation({ locale }: { locale: string }) {
 
   if (provider === "coupang") {
     return <CoupangGearCards />;
+  }
+
+  if (provider === "aliexpress") {
+    return <AliexpressGearCards />;
   }
 
   return <p className="text-sm text-muted-foreground">{t("gearSectionHint")}</p>;

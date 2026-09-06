@@ -9,11 +9,19 @@ import { NextRequest } from "next/server";
 // 새로고침 시에도 연결이 잠깐 끊기지만, 새 페이지가 곧바로 새 연결을 열기
 // 때문에 아래 CLOSE_DEBOUNCE_MS 안에 activeConnections가 다시 올라가면
 // 종료가 취소된다.
-
+//
+// 2026-09-06 수정: 언어 스위처로 로케일을 바꾸면([locale] 세그먼트가 바뀌는
+// 클라이언트 내비게이션) DevServerWatch가 마운트된 레이아웃 트리 전체가
+// 언마운트→재마운트되면서 SSE 연결도 한 번 끊겼다가 새로 열린다. 처음
+// 방문하는 로케일 페이지는 Turbopack이 그 라우트(및 새로 추가된
+// /api/aliexpress/search 같은 API 라우트)를 그 자리에서 처음 컴파일해야
+// 해서 새 연결이 열리기까지 700ms를 넘기는 경우가 있었고, 그 사이 debounce
+// 타이머가 만료되어 "탭이 닫혔다"고 오판 → 개발 서버가 실제로 죽는 버그가
+// 있었다. 실제 탭을 닫았을 때와 체감상 차이가 없는 선에서 여유 있게 늘림.
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const CLOSE_DEBOUNCE_MS = 700;
+const CLOSE_DEBOUNCE_MS = 6000;
 
 let activeConnections = 0;
 let closeTimer: ReturnType<typeof setTimeout> | null = null;
