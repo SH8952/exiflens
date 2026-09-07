@@ -1,3 +1,14 @@
+## 2026-09-08 (추가) — 방문자 카운터 + 개발자 방문 제외(GA/카운터) 기능 추가
+
+- 배경: 배포된 사이트에 방문자 수를 표시하고 싶으나, 개발자 본인의 방문(집 + 외부에서 모바일 북마크로 접속하는 경우 모두)은 집계에서 제외하고 싶다는 요청. IP 기반 제외는 외부 접속 시 걸러내지 못하는 문제가 있어(사용자 확인), 네트워크/위치와 무관하게 동작하는 쿠키 기반 방식으로 설계.
+- 추가: `src/proxy.ts` — `?dev=<DEV_EXCLUDE_TOKEN>` 쿼리 파라미터로 접속하면 1년 만료 `dev_exclude` 쿠키를 심는 로직 추가(기존 geo-country 쿠키 로직과 나란히 동작).
+- 추가: `src/app/[locale]/layout.tsx` — GA4 인라인 스크립트에서 `dev_exclude` 쿠키가 있으면 `gtag('config', ...)` 호출(및 그로 인한 페이지뷰 수집)을 건너뛰도록 수정.
+- 추가: `src/lib/visitor-counter.ts`, `src/app/api/visitor-count/route.ts` — Vercel KV(Upstash Redis)를 raw fetch(REST API)로 호출해 방문자 수를 증가/조회. `dev_exclude` 쿠키가 있으면 증가 없이 조회만 수행. Redis 키는 `exiflens:visitor_count`로, FlyDroneMap/firelic과 공유하는 Vercel KV 인스턴스 1개를 프로젝트별 키 접두어로 구분해서 사용.
+- 추가: `src/components/visitor-counter.tsx` — 클라이언트 컴포넌트로 카운트를 fetch해 표시. `src/components/site-footer.tsx` 푸터에 배치.
+- 추가: `.env.example`에 `KV_REST_API_URL`/`KV_REST_API_TOKEN`/`DEV_EXCLUDE_TOKEN` 안내 추가.
+- 검증: `npx tsc --noEmit`, `npx eslint`(변경 파일) 통과. `npm run build`로 전체 빌드 확인 — 기존 페이지들은 여전히 SSG(●)로 정적 생성되고, `/api/visitor-count`만 동적(ƒ)으로 분리되어 있어 정적 생성에 영향 없음을 확인.
+- 참고: Vercel 대시보드에서 KV(Upstash Redis) 스토리지를 exiflens/flydronemap/firelic 3개 프로젝트에 공유 연결 완료(사용자 작업). `DEV_EXCLUDE_TOKEN` 값은 각 프로젝트의 Vercel 환경변수에도 별도로 등록 필요(사용자 작업, 다음 배포 전).
+
 ## 2026-09-07 (추가) — 쿠팡파트너스 subId 트래킹 파라미터 실제 연동
 
 - 배경: 사용자가 `.env.local`에 `COUPANG_PARTNER_SUBID` 값을 직접 입력했으나, 점검 결과 `src/lib/coupang.ts`를 포함한 코드베이스 어디에서도 이 환경변수를 읽어서 사용하는 곳이 없어 실제로는 아무 효과가 없는 상태였음(값만 존재, 미배선).

@@ -105,7 +105,9 @@ export default async function LocaleLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${GA4_MEASUREMENT_ID}');
+            if (!/(?:^|; )dev_exclude=1(?:;|$)/.test(document.cookie)) {
+              gtag('config', '${GA4_MEASUREMENT_ID}');
+            }
           `}
         </Script>
         {ADSENSE_CLIENT_ID ? (
