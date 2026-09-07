@@ -1,0 +1,37 @@
+---
+title: "Espacio de color: sRGB vs Adobe RGB — cuál elegir y dónde configurarlo"
+description: "¿No sabes si dejar el espacio de color de tu cámara en sRGB o cambiarlo a Adobe RGB? Aquí te explicamos cuánto más amplio es realmente el gamut de Adobe RGB y por qué elegir mal puede dejar tus fotos apagadas y sin vida."
+publishedAt: "2026-09-08"
+tags: ["espacio de color", "sRGB", "Adobe RGB"]
+category: "Fundamentos de cámara y exposición"
+---
+
+En algún menú escondido de tu cámara existe una opción de "Espacio de color", y es tentador pensar que cambiarla de sRGB a Adobe RGB simplemente va a mejorar tus fotos. Pero si alguna vez disparaste JPEG así y luego los subiste a Instagram solo para ver que los colores salían apagados y sucios, el problema no es tu cámara ni tu objetivo: es un desajuste entre el espacio de color que lleva tu archivo y el software que lo interpreta. sRGB y Adobe RGB definen cada uno un rango distinto de colores reproducibles (un gamut), y los mismos datos de píxel pueden verse completamente diferentes según qué tan bien interprete ese gamut la pantalla o el entorno de impresión final.
+
+## Qué es en realidad un espacio de color
+
+Un espacio de color es un subconjunto definido de todo el rango de colores que el ojo humano puede percibir, mapeado para un dispositivo o estándar específico. Medido sobre el diagrama de cromaticidad CIE 1931, sRGB cubre aproximadamente el 35,9% del color visible, mientras que Adobe RGB cubre alrededor del 52,1%. La diferencia es más notoria en la zona de verdes y cianes, donde Adobe RGB puede reproducir verdes notablemente más saturados de los que sRGB puede alcanzar; en la zona de azules y violetas la brecha es comparativamente pequeña. Un gamut más amplio no hace automáticamente que una foto sea mejor: esa información de color extra solo importa si la pantalla, la impresora o el navegador que muestra la imagen final es realmente capaz de interpretarla correctamente.
+
+## El espacio de color se comporta distinto en RAW y en JPEG
+
+Conviene saber de entrada que el ajuste de espacio de color de tu cámara prácticamente no tiene efecto sobre un archivo RAW. Los datos RAW conservan la lectura cruda del sensor, y el ajuste de espacio de color de la cámara queda guardado solo como metadato de referencia para el software de edición, sin limitar la información de color realmente capturada. Cuando abres un RAW en Lightroom o Capture One, normalmente se convierte de forma automática a un espacio de trabajo interno amplio como ProPhoto RGB o Adobe RGB, permitiéndote usar todo el rango de color que capturó el sensor sin importar cómo estuviera configurado el menú de la cámara. Un JPEG generado por la cámara, en cambio, incorpora ese ajuste directamente en el archivo como color final ya fijado. Así que si haces una sesión de retrato en estudio disparando solo en RAW y editas después, el ajuste de espacio de color de la cámara es prácticamente irrelevante; pero si entregas los JPEG directamente a un cliente en el lugar o los publicas en redes sociales, ese ajuste determina directamente lo que la gente ve.
+
+## Un escenario real: impresión versus entrega web — cuándo realmente ayuda Adobe RGB
+
+Si vas a imprimir una foto de paisaje en una impresora de inyección de tinta de gran formato para exhibirla, disparar y editar en Adobe RGB juega a tu favor. Los verdes saturados del musgo de un bosque profundo o los naranjas del follaje otoñal muchas veces quedan directamente fuera del gamut de sRGB, así que disparar en sRGB recorta ese rango antes de que una impresora tenga siquiera la oportunidad de reproducirlo. La mayoría de las impresoras fotográficas y talleres de impresión comercial soportan un gamut al menos tan amplio como Adobe RGB, por eso el flujo de trabajo estándar es mantener el archivo de trabajo en Adobe RGB (o ProPhoto RGB durante la edición) y convertir al perfil final que pida la imprenta solo en el último paso. El cálculo cambia si esa misma foto va directo a Instagram, un blog o una app de mensajería. Muchas de estas plataformas eliminan los perfiles de color al subir la imagen o fuerzan silenciosamente todo a sRGB, y cuando un JPEG codificado realmente en Adobe RGB se interpreta erróneamente como sRGB, sus colores antes vívidos terminan viéndose más apagados y menos saturados de lo que deberían. Si la web o las redes sociales son el destino final, es mucho más seguro mantener todo el flujo —captura, edición, exportación— consistentemente en sRGB.
+
+## El error común: cambiar de espacio de color a mitad del flujo de trabajo
+
+El problema más frecuente es disparar en Adobe RGB y luego nunca revisar el ajuste de espacio de color al momento de exportar, de modo que el archivo sale del programa de edición con lo que el software trae por defecto en vez de lo que realmente necesita el uso final. En Lightroom, por ejemplo, exportar un JPEG destinado a la web con el menú desplegable de "Espacio de color" todavía en Adobe RGB hace que ese archivo pueda verse sobresaturado y desviado, o al contrario, apagado, al abrirse en un navegador o visor antiguo sin gestión de color. Otro error habitual es entregarle a un cliente un solo archivo sin diferenciar entre la versión para impresión y la versión para web. Eso suele generar exactamente las quejas que uno esperaría: los colores se ven más apagados de lo previsto una vez que el archivo llega a la imprenta, o la saturación se ve desajustada una vez que ese mismo archivo se publica en línea. La solución es decidir el destino final —impresión o pantalla— antes incluso de disparar, y mantener ese espacio de color consistente desde la captura hasta la exportación.
+
+## Cómo configurar el espacio de color en la cámara y en el software de edición
+
+La mayoría de las cámaras tienen una opción de "Espacio de color" en el menú de disparo, con sRGB como valor predeterminado. Si disparas en RAW+JPEG, el archivo RAW siempre se puede reasignar al espacio de color que necesites durante la edición, así que si el JPEG no va directo a la web, es razonable dejar la cámara en Adobe RGB y convertir al espacio correcto para cada uso final durante la posproducción. En Lightroom Classic, el catálogo en sí trabaja internamente en un espacio de color amplio, así que no hay nada de qué preocuparse al importar; lo que realmente importa es el menú desplegable "Espacio de color" del cuadro de diálogo de exportación, donde elegirías sRGB para salida web y Adobe RGB (o el perfil ICC que exija la imprenta) para impresión. Si una foto necesita servir para ambos propósitos, no intentes que un solo archivo haga doble función: exporta dos versiones separadas, cada una en el espacio de color adecuado a su uso.
+
+## Lista de verificación
+
+- Si disparas en RAW, el ajuste de espacio de color de tu cámara casi no afecta el color final, así que no es algo por lo que preocuparse demasiado.
+- Si los JPEG de la cámara van directo a redes sociales o a la web, dispara y configura la cámara en sRGB.
+- Para impresiones de gran formato o entregas a imprentas comerciales, trabaja en Adobe RGB (o ProPhoto RGB durante la edición) y convierte al perfil de impresión final solo en el último paso.
+- Revisa siempre la opción de espacio de color al exportar en tu software de edición, y exporta archivos separados para web e impresión.
+- Si los colores se ven apagados o sobresaturados, revisa primero si hay un desajuste de espacio de color en algún punto del flujo captura-edición-subida.

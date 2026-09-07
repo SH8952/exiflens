@@ -1,0 +1,37 @@
+---
+title: "Color Space: sRGB vs Adobe RGB — Which One to Pick and Where to Set It"
+description: "Wondering whether to leave your camera's color space on sRGB or switch to Adobe RGB? Here's how much wider a gamut Adobe RGB actually covers, and why picking the wrong one can leave your photos looking dull and washed out."
+publishedAt: "2026-09-08"
+tags: ["color space", "sRGB", "Adobe RGB"]
+category: "Camera Basics & Exposure"
+---
+
+Buried deep in your camera's menu is a "Color Space" setting, and it's tempting to assume switching it from sRGB to Adobe RGB will simply give you better photos. But if you've ever shot JPEGs that way and then uploaded them to Instagram only to see the colors come out flat and muddy, the problem isn't your camera or lens — it's a mismatch between the color space your file carries and the software reading it. sRGB and Adobe RGB each define a different range of reproducible colors (a gamut), and the same underlying pixel data can look completely different depending on how accurately the display or print environment on the receiving end interprets that gamut.
+
+## What a color space actually is
+
+A color space is a defined subset of the full range of colors the human eye can perceive, mapped out for a specific device or standard. Measured against the CIE 1931 chromaticity diagram, sRGB covers roughly 35.9% of visible color, while Adobe RGB covers about 52.1%. The difference is most pronounced in the green and cyan range, where Adobe RGB can render noticeably more saturated greens than sRGB can reach; the gap in the blue and violet range is comparatively small. A wider gamut doesn't automatically make a photo better, though — that extra color information only matters if the display, printer, or browser rendering the final image is actually capable of interpreting it correctly.
+
+## Color space behaves differently in RAW versus JPEG
+
+It helps to know upfront that your camera's color space setting has essentially no effect on a RAW file. RAW data preserves the sensor's raw readout, and the camera's color space setting is stored only as reference metadata for editing software — it doesn't constrain the actual color information captured. When you open a RAW file in Lightroom or Capture One, it's typically converted automatically into a wide internal working space like ProPhoto RGB or Adobe RGB, letting you use the full color range the sensor captured regardless of what the camera menu was set to. A camera-generated JPEG, on the other hand, bakes that setting directly into the file as final, committed color. So if you shoot RAW-only for a studio portrait session and edit afterward, the camera's color space setting is largely irrelevant — but if you're handing JPEGs straight to a client on location or posting them to social media, that setting directly shapes what people see.
+
+## A real scenario: print work versus web delivery — when Adobe RGB actually helps
+
+If you're planning to print a landscape shot on a large-format inkjet printer for a gallery show, shooting and editing in Adobe RGB works in your favor. Saturated greens in deep forest moss or the oranges of autumn foliage often fall outside sRGB's gamut entirely, so shooting in sRGB clips that range before a printer ever gets a chance to reproduce it. Most photo printers and commercial print shops support a gamut at least as wide as Adobe RGB, which is why the standard workflow is to keep the working file in Adobe RGB (or ProPhoto RGB during editing) and convert to whatever final profile the print shop specifies only at the last step. The calculation flips if that same shot is headed straight for Instagram, a blog, or a messaging app. Many of these platforms strip color profiles on upload or silently force everything to sRGB, and when a JPEG actually encoded in Adobe RGB gets misread as sRGB, its once-vivid colors come out looking duller and less saturated than they should. If web or social media is the final destination, it's far safer to keep the entire pipeline — capture, edit, export — consistently in sRGB.
+
+## The common mistake: switching color spaces partway through the pipeline
+
+The most frequent problem is shooting in Adobe RGB and then never double-checking the color space setting at export time, so a file leaves the editing program in whatever the software defaulted to rather than what the final use case actually needs. In Lightroom, for instance, exporting a web-bound JPEG with the "Color Space" dropdown still set to Adobe RGB means that file can look oversaturated and shifted, or conversely dull, when opened in an older browser or viewer that isn't color-managed. Another common mistake is delivering a single file to a client without distinguishing between print and web versions. That tends to produce exactly the complaints you'd expect — colors look muddier than intended once the file hits a print shop, or saturation looks off once the same file gets posted online. The fix is to decide the final destination — print or screen — before you even shoot, and keep that color space consistent from capture all the way through export.
+
+## Setting color space in-camera and in post-processing software
+
+Most cameras have a "Color Space" option in the shooting menu, defaulting to sRGB. If you're shooting RAW+JPEG, the RAW file can always be reassigned to whatever color space you need during editing, so if the JPEG isn't going straight to the web, it's reasonable to leave the camera on Adobe RGB and convert to the right space for each final use during post. In Lightroom Classic, the catalog itself works internally in a wide color space, so there's nothing to worry about at import — the setting that actually matters is the "Color Space" dropdown in the Export dialog, where you'd choose sRGB for web output and Adobe RGB (or whatever ICC profile the print shop requires) for print. If a shot needs to serve both purposes, don't try to make one file do double duty — export two separate versions, each in the color space appropriate to its use.
+
+## Checklist
+
+- If you shoot RAW, your camera's color space setting has almost no effect on final color, so it's not something to worry much about.
+- If camera JPEGs are going straight to social media or the web, shoot and set the camera to sRGB.
+- For large-format prints or commercial print delivery, work in Adobe RGB (or ProPhoto RGB during editing) and convert to the final print profile only at the last step.
+- Always check the color space option at export time in your editing software, and export separate files for web and print.
+- If colors look dull or oversaturated, check first for a color space mismatch somewhere along the capture-edit-upload pipeline.

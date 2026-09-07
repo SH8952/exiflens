@@ -114,8 +114,8 @@
       "slug": "color-space-srgb-vs-adobe-rgb",
       "titleKo": "sRGB vs Adobe RGB 색공간 차이",
       "titleEn": "Color Space: sRGB vs Adobe RGB",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-09-08",
       "mirrored": false
     },
     {

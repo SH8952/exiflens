@@ -218,6 +218,13 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-08 — 가이드 아티클 자동 발행: "sRGB vs Adobe RGB 색공간 차이"
+
+- New guide article published in all 4 languages (en/ja/ko/es): "Color Space: sRGB vs Adobe RGB" (sRGB vs Adobe RGB 색공간 차이) — covers what a color space/gamut actually is (sRGB ~35.9% vs Adobe RGB ~52.1% of the CIE 1931 visible spectrum, biggest gap in green/cyan), why the camera's color space setting barely matters for RAW but is baked directly into camera JPEGs, a real print-vs-web scenario (Adobe RGB for large-format prints where saturated greens/oranges fall outside sRGB's gamut, sRGB for Instagram/blogs/messaging apps that strip or force-convert profiles), the common mistake of not checking the export color space and delivering one file for both print and web, and practical camera/Lightroom export settings. Filed under the "Camera Basics & Exposure" category (재사용: 기존 "카메라 기초 & 노출" / "Camera Basics & Exposure" / "カメラ基礎と露出" / "Fundamentos de cámara y exposición" 카테고리를 4개 언어 모두 그대로 재사용).
+- `automation/guide-topics-queue.json`의 order 13 항목(color-space-srgb-vs-adobe-rgb)을 published: true, publishedDate: "2026-09-08"으로 갱신
+- `npm run build` 정상 완료 확인
+- 애드센스 검수와는 무관한 콘텐츠 추가 작업
+
 ## 2026-09-07 — 가이드 아티클 자동 발행: "하이퍼포컬 디스턴스 계산법"
 
 - New guide article published in all 4 languages (en/ja/ko/es): "Hyperfocal Distance Explained" (하이퍼포컬 디스턴스 계산법) — covers what hyperfocal distance is and why focusing at infinity wastes half the depth of field, the formula H = f² / (N × c) + f with a worked full-frame vs. APS-C example (24mm f/11 full frame ≈ 1.77m vs. equivalent 16mm f/11 APS-C ≈ 1.18m), a real riverside-landscape scenario, the common mistakes of focusing at infinity or zooming in on live view for one subject, and practical field methods (lens DOF scale, calculator apps, adding a stop of margin). Filed under the "Camera Basics & Exposure" category (재사용: 기존 "카메라 기초 & 노출" / "Camera Basics & Exposure" / "カメラ基礎と露出" / "Fundamentos de cámara y exposición" 카테고리를 4개 언어 모두 그대로 재사용).
