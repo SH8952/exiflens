@@ -1,3 +1,10 @@
+## 2026-09-07 (추가) — 쿠팡파트너스 subId 트래킹 파라미터 실제 연동
+
+- 배경: 사용자가 `.env.local`에 `COUPANG_PARTNER_SUBID` 값을 직접 입력했으나, 점검 결과 `src/lib/coupang.ts`를 포함한 코드베이스 어디에서도 이 환경변수를 읽어서 사용하는 곳이 없어 실제로는 아무 효과가 없는 상태였음(값만 존재, 미배선).
+- 수정: `src/lib/coupang.ts`의 `searchCoupangProducts()` — `COUPANG_PARTNER_SUBID`가 설정되어 있으면 쿠팡 상품 검색 API 요청에 `subId` 파라미터로 함께 전달하도록 추가. 이렇게 하면 응답으로 받는 `productUrl`에 subId가 자동으로 포함되어, 쿠팡 파트너스 대시보드에서 이 subId 기준으로 클릭/매출 성과를 구분해서 확인할 수 있음. 값이 없으면 기존과 동일하게 파라미터 자체를 생략(빈 값으로 보내지 않음).
+- 검증: `npx tsc --noEmit`, `npx eslint src/lib/coupang.ts` 모두 통과. 실제 API 호출 결과(subId가 반영된 링크가 실제로 반환되는지)는 클라우드 세션에서 검증 불가 — 로컬 개발 서버 재시작 후 확인 필요.
+- 작업 전 `_backups/coupang.ts.backup_20260907_082003`로 해당 파일 백업.
+
 ## 2026-09-08 — 가이드 자동 발행 결과물 zip 자동 압축 해제 지원
 
 - 배경: 매일 자동 발행 예약 작업 결과물이 zip 1개로 전달되도록 이미 바뀌어 있었으나(2026-09-06), `automation/publish-guide.command` 자체는 여전히 개별 mdx/json/txt 파일만 인식해 사용자가 매번 수동으로 압축을 풀어야 했음. firelic에 이미 적용된 동일 기능(2026-09-07)을 ExifLens에도 이식.
