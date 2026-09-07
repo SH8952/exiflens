@@ -186,6 +186,13 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-07 — 가이드 아티클 자동 발행: "하이퍼포컬 디스턴스 계산법"
+
+- New guide article published in all 4 languages (en/ja/ko/es): "Hyperfocal Distance Explained" (하이퍼포컬 디스턴스 계산법) — covers what hyperfocal distance is and why focusing at infinity wastes half the depth of field, the formula H = f² / (N × c) + f with a worked full-frame vs. APS-C example (24mm f/11 full frame ≈ 1.77m vs. equivalent 16mm f/11 APS-C ≈ 1.18m), a real riverside-landscape scenario, the common mistakes of focusing at infinity or zooming in on live view for one subject, and practical field methods (lens DOF scale, calculator apps, adding a stop of margin). Filed under the "Camera Basics & Exposure" category (재사용: 기존 "카메라 기초 & 노출" / "Camera Basics & Exposure" / "カメラ基礎と露出" / "Fundamentos de cámara y exposición" 카테고리를 4개 언어 모두 그대로 재사용).
+- `automation/guide-topics-queue.json`의 order 12 항목(hyperfocal-distance-explained)을 published: true, publishedDate: "2026-09-07"으로 갱신
+- `npm run build` 정상 완료 확인
+- 애드센스 검수와는 무관한 콘텐츠 추가 작업
+
 ## 2026-09-06 — 가이드 아티클 자동 발행: "회절 현상과 최적 조리개값"
 
 - New guide article published in all 4 languages (en/ja/ko/es): "Diffraction & Optimal Aperture" (회절 현상과 최적 조리개값) — covers why diffraction happens (light bending through the aperture opening as a wave), how sensor pixel pitch (not the lens) determines the practical diffraction limit for a given body, a real landscape scenario comparing f/11 vs. f/16 with hyperfocal distance, the common "smaller aperture is always safer" mistake, and how to tell diffraction softness apart from camera shake or missed focus. Filed under the "Camera Basics & Exposure" category (재사용: 기존 "카메라 기초 & 노출" / "Camera Basics & Exposure" / "カメラ基礎と露出" / "Fundamentos de cámara y exposición" 카테고리를 4개 언어 모두 그대로 재사용).
