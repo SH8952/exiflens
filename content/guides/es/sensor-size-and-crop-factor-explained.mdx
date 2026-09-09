@@ -1,0 +1,36 @@
+---
+title: "Sensor APS-C vs Full Frame: Qué cambia realmente el tamaño de sensor y el factor de recorte"
+description: "El mismo objetivo de 50mm se ve más 'teleobjetivo' al montarlo en un cuerpo APS-C. Aquí está lo que el factor de recorte cambia de verdad en el ángulo de visión, la profundidad de campo y el ruido en ISO alto, con números concretos."
+publishedAt: "2026-09-10"
+tags: ["tamaño de sensor", "factor de recorte", "full frame"]
+category: "Fundamentos de cámara y exposición"
+image: "/guides/images/sensor-size-and-crop-factor-explained.webp"
+imageCredit: "Alexander Andrews"
+imageCreditUrl: "https://unsplash.com/@alex_andrews?utm_source=ExifLens&utm_medium=referral"
+---
+
+Monta un objetivo de 50mm en un cuerpo full frame y luego en un cuerpo APS-C, dispara desde el mismo punto, y el encuadre de repente se ve más cerrado, casi como si hubieras hecho zoom. La explicación habitual es que "los cuerpos APS-C recortan el ángulo de visión", pero lo que realmente ocurre es más sutil: la distancia focal del objetivo no cambia en absoluto, solo se reduce el área del círculo de imagen que el sensor capta. Confundir estas dos ideas lleva fácilmente a errores al calcular la profundidad de campo o al comparar el ruido en ISO alto. Veamos qué cambia el factor de recorte y qué no toca nunca.
+
+## El factor de recorte es lo que recorta el sensor, no lo que hace el objetivo
+
+Respecto a un sensor full frame (36×24mm), un sensor APS-C (aproximadamente 22.3–23.6×14.9–15.7mm según el fabricante) es cerca de 1.5x más pequeño en la medida diagonal (1.6x en Canon), y Micro Cuatro Tercios es 2x más pequeño. Un objetivo simplemente proyecta un círculo de imagen; el sensor solo recorta lo que cabe dentro de su propio tamaño físico. Eso significa que un objetivo de 50mm sigue siendo un verdadero 50mm en cualquier cuerpo: su perspectiva, distorsión y cualquier propiedad óptica ligada a la distancia focal real no cambian. Lo que cambia es que el sensor solo te muestra la porción central de esa imagen proyectada, por lo que la misma toma desde el mismo lugar se percibe con un ángulo de visión más estrecho, imitando un objetivo más largo. Cuando ves cálculos de "distancia focal equivalente" como 50mm × 1.5 = 75mm, eso es un valor de referencia para saber qué distancia focal necesitarías en full frame para igualar el mismo ángulo de visión; no significa que el objetivo se convierta en un 75mm real.
+
+## La profundidad de campo no escala de forma tan directa como sugiere la conversión de distancia focal
+
+El ángulo de visión es bastante predecible con la fórmula de conversión, pero la profundidad de campo (el desenfoque de fondo) no sigue esa misma multiplicación simple. Para igualar el ángulo de visión de un retrato tomado a 50mm f/1.8 en full frame, necesitarías aproximadamente un objetivo de 33mm en APS-C (50mm ÷ 1.5); y disparando a ese mismo f/1.8, el desenfoque de fondo resulta cerca de 1.5 pasos menos pronunciado que en la toma de full frame. Como ejemplo concreto: reproducir el desenfoque de fondo de una toma a 85mm f/1.4 en full frame sobre un cuerpo APS-C requiere un objetivo de 56mm para igualar el ángulo de visión, pero el desenfoque equivalente (apertura equivalente) se acerca más a f/2.1–f/2.2. Esto no significa que el valor de apertura real cambie —la exposición sigue rigiéndose por el f/1.4 configurado—, sino que la representación de la profundidad de campo termina siendo más amplia (menos desenfocada) que su equivalente en full frame. Si maximizar el desenfoque de fondo en retratos es importante, conviene tener esto en cuenta y elegir un objetivo más luminoso o de mayor distancia focal de lo que sugiere la conversión bruta.
+
+## Ruido en ISO alto: un sensor más grande no gana automáticamente
+
+La afirmación común de que "un sensor más grande significa menos ruido en ISO alto" solo se sostiene al comparar el mismo tamaño de píxel (pixel pitch). Un sensor físicamente más grande, con el mismo número de píxeles, tiene fotositos individuales más grandes que captan más luz, lo que mejora la relación señal-ruido. Pero la gama actual de full frame incluye tanto cuerpos de alta resolución con más de 60 megapíxeles como modelos de baja densidad de 20 megapíxeles, y algunos cuerpos APS-C están diseñados deliberadamente con menor densidad de píxeles, así que "tamaño de sensor equivale a rendimiento en ruido" ya no es un atajo confiable. Como escenario real: si vas a fotografiar un evento nocturno en interior a ISO 6400, revisar el rango dinámico medido y las pruebas de ruido de esa cámara específica (DxOMark y fuentes similares) es una guía mucho más fiable que asumir que el tamaño del sensor lo resuelve todo por sí solo. Dicho esto, dentro de la misma generación de sensores, sigue siendo razonable esperar que full frame tenga aproximadamente un paso de ventaja sobre APS-C, y APS-C sobre Micro Cuatro Tercios, en igualdad de condiciones.
+
+## Un error común: elegir cuerpos APS-C solo para "llegar más lejos"
+
+Los fotógrafos de fauna y aves suelen inclinarse por cuerpos APS-C con el razonamiento de que un ángulo de visión más estrecho equivale a llegar más lejos, pero esa es solo media verdad. Si fotografías la misma escena con un cuerpo full frame de igual número de píxeles y luego recortas el archivo con la misma proporción, obtienes teóricamente el mismo resultado. Lo que realmente favorece a un cuerpo APS-C es la densidad de píxeles para un ángulo de visión dado: con la misma cantidad total de megapíxeles, un sensor APS-C concentra más píxeles por unidad de área del sujeto, lo que ofrece mayor poder de resolución efectivo sobre sujetos lejanos. Sin embargo, la contrapartida es real: esa ventaja de densidad viene acompañada de una penalización en ruido a ISO alto. Con buena luz diurna, la ventaja de densidad de píxeles de un cuerpo APS-C para fotografía de fauna es significativa; al amanecer o al atardecer, con poca luz, esa misma ventaja puede verse anulada por el aumento del ruido.
+
+## Lista de verificación
+
+- La distancia focal real de un objetivo nunca cambia en un cuerpo distinto; solo cambia el ángulo de visión que capta tu sensor.
+- Al comparar el desenfoque de fondo para el mismo encuadre entre distintos tamaños de sensor, piensa en términos de apertura equivalente, no en el valor de f/stop bruto.
+- El ruido en ISO alto depende de la densidad de píxeles y la generación del sensor, no solo del tamaño del sensor; revisa pruebas medidas antes de asumir.
+- Si eliges un cuerpo APS-C específicamente por alcance, sopesa la ventaja de densidad de píxeles frente a su contrapartida de ruido en poca luz.
+- Trata la "distancia focal equivalente" (distancia focal × factor de recorte) solo como referencia de ángulo de visión, no la apliques directamente en cálculos de profundidad de campo o exposición.

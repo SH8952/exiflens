@@ -218,6 +218,9 @@
 
 # 개발 이력 (Development History)
 
+### 2026-09-10
+- 가이드 아티클 자동 발행: "크롭바디 vs 풀프레임: 센서 크기와 크롭팩터가 실제로 바꾸는 것들" (sensor-size-and-crop-factor-explained) — en/ja/ko/es 4개 언어 발행, 카테고리: 카메라 기초 & 노출 (기존 카테고리 재사용)
+
 ## 2026-09-09 — 가이드 아티클 자동 발행: 손떨림 보정(IBIS/렌즈 손떨림방지) 이해하기
 
 - 예약 작업(매일 오전 6시 KST)으로 새 가이드 아티클 1건 발행: "손떨림 보정(IBIS·렌즈 손떨림방지) 이해하기" (slug: `image-stabilization-explained`, order 14).

@@ -1,0 +1,36 @@
+---
+title: "Crop Sensor vs Full Frame: What Sensor Size and Crop Factor Actually Change"
+description: "Mount the same 50mm lens on a crop-sensor body and the shot suddenly looks more 'telephoto.' Here's what crop factor really does to field of view, depth of field, and high-ISO noise, with real numbers."
+publishedAt: "2026-09-10"
+tags: ["sensor size", "crop factor", "full frame"]
+category: "Camera Basics & Exposure"
+image: "/guides/images/sensor-size-and-crop-factor-explained.webp"
+imageCredit: "Alexander Andrews"
+imageCreditUrl: "https://unsplash.com/@alex_andrews?utm_source=ExifLens&utm_medium=referral"
+---
+
+Move a 50mm lens from a full-frame body to an APS-C crop body, shoot from the same spot, and the frame suddenly looks tighter, almost zoomed in. The usual shorthand is "crop bodies narrow the field of view," but what's actually happening is subtler: the lens's focal length hasn't changed at all, only the area of the image circle the sensor captures has shrunk. Confuse those two ideas and it's easy to get depth-of-field math or high-ISO comparisons wrong. Here's what crop factor changes, and what it never touches.
+
+## Crop factor is what the sensor crops, not what the lens does
+
+Relative to a full-frame sensor (36×24mm), an APS-C sensor (roughly 22.3–23.6×14.9–15.7mm depending on the maker) is about 1.5x smaller by diagonal measurement (1.6x for Canon), and Micro Four Thirds is 2x smaller. A lens simply projects an image circle; the sensor just crops out whatever fits inside its own physical size. That means a 50mm lens stays a genuine 50mm on any body — its perspective, distortion, and every optical property tied to true focal length are unchanged. What changes is that the sensor only shows you the center slice of that projected image, so the same shot from the same spot reads as a narrower field of view, mimicking a longer lens. When you see "equivalent focal length" math like 50mm × 1.5 = 75mm, that's a reference value for what focal length you'd need on full frame to match the same field of view — it does not mean the lens itself is now a 75mm.
+
+## Depth of field doesn't scale as cleanly as the focal-length conversion suggests
+
+Field of view is fairly predictable with the conversion formula, but depth of field (background blur) doesn't follow the same simple multiplication. To match the field of view of a 50mm f/1.8 portrait shot on full frame, you'd need roughly a 33mm lens on APS-C (50mm ÷ 1.5) — and shooting that at the same f/1.8, the background blur comes out about 1.5 stops shallower-looking than the full-frame shot. As a concrete example: reproducing the background blur of an 85mm f/1.4 shot from full frame on APS-C requires a 56mm lens to match the field of view, but the equivalent blur (equivalent aperture) works out closer to f/2.1–f/2.2. That doesn't mean the actual aperture value changes — exposure stays governed by f/1.4 as set — it means the depth-of-field rendering ends up wider (less blurred) than the full-frame equivalent. If maximizing background blur for portraits matters, factor this in and lean toward a faster lens or longer focal length than the raw conversion suggests.
+
+## High-ISO noise: a bigger sensor isn't automatically the winner
+
+The common claim that "bigger sensor means less high-ISO noise" only holds when comparing equal pixel pitch. A physically larger sensor, at the same pixel count, has larger individual photosites that gather more light, which improves signal-to-noise ratio. But today's full-frame lineup spans 60+ megapixel high-resolution bodies right next to 20-megapixel low-density ones, and some crop bodies are deliberately designed with lower pixel density — so "sensor size equals noise performance" isn't a reliable shortcut anymore. As a real scenario: if you're shooting an indoor evening event at ISO 6400, checking that specific camera's measured dynamic range and noise performance (DxOMark and similar sources) is a far more reliable guide than assuming sensor size alone settles it. That said, within the same sensor generation, it's still reasonable to expect full frame to have roughly a stop of headroom over APS-C, and APS-C over Micro Four Thirds, all else equal.
+
+## A common mistake: choosing crop bodies purely to "reach further"
+
+Wildlife and bird photographers often gravitate to crop bodies with the reasoning that a narrower field of view effectively reaches farther, but that's only half the story. Shoot the same scene on a full-frame body with matching pixel count and crop the file afterward to the same ratio, and you get theoretically the same result. What actually favors a crop body is pixel density for a given field of view — at equal total megapixels, a crop sensor packs more pixels per unit of subject area, giving you higher effective resolving power on distant subjects. The trade-off is real, though: that density advantage comes with a high-ISO noise penalty. In good daylight, the pixel-density benefit of a crop body for wildlife work is significant; at dawn or dusk with limited light, that same advantage can get eaten up by the increase in noise.
+
+## Checklist
+
+- A lens's actual focal length never changes on a different body — only the field of view your sensor captures does.
+- When comparing background blur for the same framing across sensor sizes, think in terms of equivalent aperture, not the raw f-stop number.
+- High-ISO noise depends on pixel density and sensor generation, not sensor size alone — check measured reviews before assuming.
+- If you're picking a crop body specifically for reach, weigh the pixel-density advantage against its low-light noise trade-off.
+- Treat "equivalent focal length" (focal length × crop factor) as a field-of-view reference only — don't plug it directly into depth-of-field or exposure math.
