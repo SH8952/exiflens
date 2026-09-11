@@ -218,6 +218,13 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-12 (추가) — 가이드 아티클 자동 발행: "ND필터 vs 편광필터(CPL) 차이"
+
+- 배경: 가이드 아티클 매일 자동 발행 예약 작업(order 17)에 따라 신규 가이드 1편을 4개 언어(en/ja/ko/es)로 작성.
+- 추가: `content/guides/{en,ja,ko,es}/nd-filter-vs-polarizer-filter.mdx` — ND필터와 편광필터(CPL)의 역할 차이, 실전 노출 수치 예시(f/8·ISO100 기준 셔터스피드 비교 등), 시나리오별 선택 기준, 두 필터를 함께 쓸 때의 광각 렌즈 밴딩·비네팅 주의사항, 실전 체크리스트를 포함. 카테고리는 기존 "ND 필터 & 장노출"(en: "ND Filters & Long Exposure", ja: "NDフィルターと長秒露光", es: "Filtros ND y exposición larga") 카테고리를 그대로 재사용.
+- 수정: `automation/guide-topics-queue.json` — order 17 항목(`nd-filter-vs-polarizer-filter`)을 `published: true`, `publishedDate: "2026-09-12"`로 갱신.
+- 검증: `npm run build` 전체 빌드 통과 (신규 슬러그 4개 언어 페이지 모두 정상 생성 확인).
+
 ## 2026-09-11 — 가이드 아티클 자동 발행: 다이나믹 레인지 이해하기
 
 - 예약 작업(매일 오전 6시 KST)으로 새 가이드 아티클 1건 발행: "다이나믹 레인지란? 계조 손실 없이 담을 수 있는 밝기 범위 완벽 이해" (slug: `understanding-dynamic-range`, order 16).
