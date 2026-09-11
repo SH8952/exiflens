@@ -218,6 +218,15 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-11 — 가이드 아티클 자동 발행: 다이나믹 레인지 이해하기
+
+- 예약 작업(매일 오전 6시 KST)으로 새 가이드 아티클 1건 발행: "다이나믹 레인지란? 계조 손실 없이 담을 수 있는 밝기 범위 완벽 이해" (slug: `understanding-dynamic-range`, order 16).
+- 4개 언어(en/ja/ko/es) 모두 작성 완료. 다이나믹 레인지의 정의(포화점~노이즈 바닥, 스톱 단위), ISO에 따른 다이나믹 레인지 변화와 ISO 불변(ISO-invariant) 구간, 노을 풍경 실측 예시(약 12스톱 차이)와 ETTR(노출을 오른쪽으로 밀기) 기법, 화소수·카메라 하이라이트 보정 기능(액티브 D-라이팅/D-레인지 옵티마이저)과 실제 다이나믹 레인지의 차이, 노출 브라케팅 및 HDR 합성 활용법을 다룸.
+- 카테고리는 기존 "카메라 기초 & 노출"(각 언어별 대응 카테고리: Camera Basics & Exposure / カメラ基礎と露出 / Fundamentos de cámara y exposición) 재사용.
+- `automation/guide-topics-queue.json`의 해당 항목을 `published: true`, `publishedDate: 2026-09-11`로 갱신.
+- `npm run build` 검증 통과.
+- 애드센스 검수와는 무관한 콘텐츠 추가 작업.
+
 ### 2026-09-10
 - 가이드 아티클 자동 발행: "크롭바디 vs 풀프레임: 센서 크기와 크롭팩터가 실제로 바꾸는 것들" (sensor-size-and-crop-factor-explained) — en/ja/ko/es 4개 언어 발행, 카테고리: 카메라 기초 & 노출 (기존 카테고리 재사용)
 

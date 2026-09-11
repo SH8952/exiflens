@@ -1,0 +1,40 @@
+---
+title: "Qué es el rango dinámico: el margen de brillo que tu sensor realmente puede capturar"
+description: "¿Alguna vez fotografiaste un atardecer donde el cielo quedó completamente blanco mientras las sombras se hundían en negro puro? Aquí te explicamos qué mide el rango dinámico en stops (EV), por qué subir el ISO lo reduce, y qué hacer cuando una escena simplemente no entra en una sola toma."
+publishedAt: "2026-09-11"
+tags: ["rango dinámico", "exposición", "luces altas"]
+category: "Fundamentos de cámara y exposición"
+image: "/guides/images/understanding-dynamic-range.webp"
+imageCredit: "Adrien"
+imageCreditUrl: "https://unsplash.com/@add_rien_20?utm_source=ExifLens&utm_medium=referral"
+---
+
+Apunta la cámara a una playa al atardecer —cielo encendido arriba, rocas en sombra abajo— y si expones para el cielo, las sombras se hunden en negro puro; si expones para las sombras, el cielo se quema hasta quedar blanco sin detalle. Ninguno de los dos resultados es un defecto de la cámara ni del objetivo: la diferencia de brillo en esa escena simplemente supera lo que el sensor puede registrar en una sola toma. Ese margen se llama rango dinámico, y entender exactamente qué mide, y en qué condiciones se estrecha, te permite saber antes de disparar si una escena va a entrar en una sola exposición o no.
+
+## El rango dinámico es la distancia entre el punto de saturación y el piso de ruido
+
+El rango dinámico es la diferencia de brillo, medida en stops (EV), entre el tono más claro que un sensor puede registrar antes de quemarse a blanco puro (el punto de saturación) y el tono más oscuro que todavía puede distinguir del ruido aleatorio (el piso de ruido). Cada stop representa el doble de luz, así que un sensor de 13 stops está capturando una relación de brillo de 2 elevado a la 13, es decir, aproximadamente 8.192 a 1, entre su tono más claro y más oscuro utilizable. Mediciones de laboratorio como las de DxOMark ubican a los sensores full frame actuales en torno a 13 a 14,8 stops en el ISO base (normalmente ISO 100), mientras que los cuerpos APS-C y Micro Cuatro Tercios de gama media suelen rondar los 12 a 13 stops. A modo de comparación, el ojo humano percibe instantáneamente entre 10 y 14 stops aproximadamente, pero puede llegar a captar hasta unos 20 stops a medida que la pupila se ajusta y vas recorriendo la escena con la mirada a lo largo del tiempo —por eso una sola foto de una escena de alto contraste suele verse más plana o más dura de lo que recordabas haber visto con tus propios ojos.
+
+## Por qué subir el ISO estrecha tu rango dinámico
+
+Es fácil pensar en el rango dinámico como una especificación fija, pero en realidad cambia según el ISO. Subir el ISO amplifica la señal analógica del sensor, lo que baja el punto de saturación proporcionalmente, pero el piso de ruido no baja en la misma medida. Si llevas un sensor de 14 stops en ISO 100 hasta ISO 1600 (un aumento de 4 stops), el rango dinámico resultante normalmente no se reduce en 4 stops completos: suele estrecharse más bien entre 3 y 3,5 stops, porque la mayoría de los sensores modernos se vuelven "ISO invariantes" por encima de cierto umbral, a menudo alrededor de ISO 800 a 1600. En ese rango invariante, disparar con un ISO más alto directamente en la cámara produce un ruido casi idéntico a disparar más oscuro en el ISO base y subir la exposición después en la edición. Por debajo de ese umbral, en cambio, el rango dinámico se estrecha casi stop por stop con cada aumento de ISO, algo que conviene tener presente antes de asumir que "ISO más bajo siempre es mejor" se cumple de manera uniforme en todo el rango.
+
+## Un escenario real: midiendo la diferencia de stops en un paisaje de atardecer
+
+Si mides puntualmente la parte más clara del cielo en un atardecer de playa, suele dar alrededor de EV 14 a 15; si mides las rocas en sombra, puede dar EV 2 a 3. Eso es una diferencia de aproximadamente 12 stops, justo en el límite de lo que un sensor full frame moderno puede capturar en una sola toma en ISO base, pero muy por encima de lo que un sensor de teléfono o un cuerpo APS-C antiguo (a menudo más cerca de 10 a 11 stops) puede manejar en una sola exposición. Una técnica habitual en estos casos es exponer hacia la derecha (ETTR, por sus siglas en inglés): llevar la exposición lo más brillante posible sin llegar a quemar las luces, y luego bajarla en la edición. Como el ruido del sensor representa una proporción mayor de la señal cuanto más oscuro es el tono, capturar toda la luz que las luces altas permitan significa menos ruido visible al levantar las sombras después. Este truco funciona mejor en ISOs bajos, fuera del rango invariante, y solo tiene sentido si disparas en RAW y no en JPEG.
+
+## El error común: confundir el número de megapíxeles o las herramientas de luces altas de la cámara con el rango dinámico real
+
+Es tentador asumir que una cámara con más megapíxeles tiene automáticamente un rango dinámico más amplio, pero el tamaño físico de cada píxel (el paso de píxel) y el diseño del circuito según la generación del sensor suelen importar más que la cantidad bruta de píxeles. Si metes más píxeles en la misma área de sensor, cada píxel individual capta menos luz, lo que en realidad puede recortar un poco el rango dinámico medido a resolución completa, aunque reducir ese archivo de alta resolución a un tamaño de salida menor suele promediar el ruido y recuperar parte de ese rango percibido. Un segundo malentendido común es pensar que herramientas de la cámara como el Active D-Lighting de Nikon o el D-Range Optimizer de Sony amplían el rango dinámico real del sensor. No lo hacen: estas funciones ajustan la curva de tonos que queda grabada en el JPEG, aclarando las sombras y controlando las luces altas después del hecho, sin cambiar el rango de brillo bruto que el sensor capturó físicamente. Si disparas en RAW, estos ajustes solo afectan la vista previa de la cámara y la visualización del histograma, no el rango dinámico real disponible en la edición.
+
+## Cuando una sola toma no alcanza: bracketing y fusión HDR
+
+Cuando la diferencia de brillo de una escena supera claramente el rango dinámico de tu sensor —una toma de interior que necesita conservar detalle hasta el exterior brillante a través de una ventana puede fácilmente abarcar 8 a 10 stops o más entre el interior y la vista de afuera—, el bracketing de exposición se vuelve la solución práctica. Disparar entre 3 y 5 tomas con intervalos aproximados de 2 stops (por ejemplo, -2EV, 0EV, +2EV) y fusionarlas con un software de HDR, o con el modo HDR integrado de la cámara, puede reconstruir un rango de brillo de 18 a 20 stops o más que ninguna toma individual podría capturar. El problema es que cualquier movimiento entre las tomas del bracketing —hojas moviéndose con el viento, alguien caminando por el encuadre— tiende a generar fantasmas, donde la fusión muestra duplicados semitransparentes del sujeto en movimiento, así que esta técnica funciona de forma más confiable con trípode y en escenas mayormente estáticas.
+
+## Lista de verificación
+
+- Recuerda que el rango dinámico es la distancia entre el punto de saturación y el piso de ruido, medida en stops (EV).
+- Mide puntualmente las zonas más claras y más oscuras de una escena antes de disparar para estimar la diferencia de stops y saber si una sola exposición la va a cubrir.
+- Ten en cuenta que subir el ISO estrecha el rango dinámico, pero esa caída se suaviza una vez que superas el umbral ISO invariante de tu cámara.
+- Exponer hacia la derecha (llevar el brillo al límite sin quemar las luces y bajarlo después en la edición) reduce el ruido en las sombras, pero solo vale la pena si disparas en RAW.
+- Cuando la diferencia de brillo de una escena supera claramente el rango de tu sensor, usa bracketing de exposición con trípode y fusión HDR en lugar de forzarla en una sola toma.
