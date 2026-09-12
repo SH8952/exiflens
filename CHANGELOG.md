@@ -218,6 +218,11 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-13
+
+- 새 가이드 발행: "그라데이션 ND필터 완벽 사용법: 스탑 선택부터 포지셔닝까지" (Graduated ND Filter Guide) — en/ja/ko/es 4개 언어
+  - 카테고리: ND 필터 & 장노출 (ND Filters & Long Exposure / NDフィルターと長秒露光 / Filtros ND y exposición larga)
+
 ## 2026-09-12 (추가) — 가이드 아티클 자동 발행: "ND필터 vs 편광필터(CPL) 차이"
 
 - 배경: 가이드 아티클 매일 자동 발행 예약 작업(order 17)에 따라 신규 가이드 1편을 4개 언어(en/ja/ko/es)로 작성.
