@@ -7,6 +7,7 @@ import { NdCalculatorCard } from "@/components/nd-calculator-card";
 import { GearRecommendationSection } from "@/components/gear-recommendation-section";
 import { CrossLinkFlyDroneMap } from "@/components/cross-link/cross-link-flydronemap";
 import { HomeUsageSection } from "@/components/home-usage-section";
+import { HomeGuideHighlights } from "@/components/home-guide-highlights";
 
 export default async function HomePage({
   params,
@@ -63,6 +64,9 @@ export default async function HomePage({
 
       {/* Section 5: crawlable usage text (AdSense/SEO checklist item 2). FAQ now lives on its own /faq page. */}
       <HomeUsageSection />
+
+      {/* Section 6: guide article highlights — homepage text/link richness for AdSense re-review */}
+      <HomeGuideHighlights locale={locale} />
     </div>
   );
 }
