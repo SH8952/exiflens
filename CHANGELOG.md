@@ -1,3 +1,13 @@
+## 2026-09-13 (추가) — RSS 메타 태그 및 푸터 아이콘 추가
+
+- 배경: RSS 피드(`/rss.xml`)를 만들었지만 화면상 확인 방법과 검색엔진에 알리는 표준 신호가 없었음.
+- 수정1(SEO용, 비노출): `src/app/[locale]/layout.tsx`의 `generateMetadata()` alternates에 `types: { "application/rss+xml": SITE_URL + "/rss.xml" }` 추가 → `<head>`에 `<link rel="alternate" type="application/rss+xml" href=".../rss.xml">` 자동 생성.
+- 수정2(시각적 확인용): `src/components/site-footer.tsx` 네비게이션의 "문의하기" 링크 바로 오른쪽에 `lucide-react`의 `Rss` 아이콘 링크 추가(`/rss.xml`로 이동). 기능적 차이는 없고, 완성도 있는 사이트로 보이도록 하는 목적.
+- 검증: `npx tsc --noEmit`, `npx eslint`(변경 파일), `npm run build` 통과. `next start` 로컬 서버로 실제 렌더링된 HTML에서 `<link rel="alternate" type="application/rss+xml">` 태그와 푸터 아이콘(`aria-label="RSS feed"`) 둘 다 정상 출력 확인.
+- 작업 전 `_backups/exiflens_backup_*_RSS메타태그_푸터아이콘전`으로 백업 완료.
+
+
+
 ## 2026-09-13 (추가) — RSS 피드 신규 추가 (네이버 크롤링 유도)
 
 - 배경: 네이버 서치어드바이저에서 exifnd.com 색인이 메인페이지 1건뿐이고 수집 활동이 8/29~9/1 이후 멈춘 것을 발견. `robots.ts`/`sitemap.ts` 모두 정상(전체 정적 경로 + 가이드 34개×4개 언어 포함, 사이트맵도 26.08.27 제출 확인)임을 확인해 코드 결함은 아니었으나, RSS 피드가 아예 없어 신규/갱신 콘텐츠를 크롤러에게 더 빠르게 알릴 방법이 부족했음.
