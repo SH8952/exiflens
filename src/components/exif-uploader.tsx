@@ -79,6 +79,7 @@ export function ExifUploader() {
           ref={inputRef}
           type="file"
           accept={FILE_INPUT_ACCEPT}
+          aria-label={t("uploaderTitle")}
           className="sr-only"
           onChange={onInputChange}
         />

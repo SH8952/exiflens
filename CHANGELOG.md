@@ -1,3 +1,11 @@
+## 2026-09-14 (추가) — 사진 업로드 입력창 접근성 라벨 추가 (PageSpeed Insights 진단 반영)
+
+- 배경: 제미나이 SEO/GEO 진단에 이어 PageSpeed Insights(pagespeed.web.dev)로 3개 사이트를 실측한 결과, exifnd.com의 접근성 점수(95점) 및 신규 "에이전트형 브라우징" 항목(1/2) 감점 사유가 "Form elements must have labels" — 즉 숨김 처리된 파일 업로드 `<input type="file">`에 스크린리더/AI 에이전트가 인식할 수 있는 이름이 연결되어 있지 않은 것으로 확인됨.
+- 수정: `src/components/exif-uploader.tsx`의 숨김 파일 입력(`className="sr-only"`)에 `aria-label={t("uploaderTitle")}` 추가. 기존 번역 문구("Drag & Drop photo here to auto-extract EXIF" 등)를 그대로 재사용해 별도 번역 키 추가 없이 4개 언어 모두 자동 반영됨. 시각적 UI·동작 변경 없음.
+- 검증: `npx tsc --noEmit`, `npx eslint`(변경 파일), `npm run build` 통과. `next start` 로컬 서버로 렌더링된 HTML에 `aria-label="Drag & Drop photo here to auto-extract EXIF"`가 정상 출력되는 것 확인.
+- 작업 전 `_backups/exiflens_backup_*_업로드접근성라벨전`으로 백업 완료.
+
+
 ## 2026-09-13 (추가) — RSS 메타 태그 및 푸터 아이콘 추가
 
 - 배경: RSS 피드(`/rss.xml`)를 만들었지만 화면상 확인 방법과 검색엔진에 알리는 표준 신호가 없었음.
