@@ -1,3 +1,13 @@
+## 2026-09-14 (추가) — 홈 화면 가이드 썸네일 이미지 sizes 속성 보정 + browserslist 명시로 레거시 JS 폴리필 제거 (PageSpeed 진단 반영)
+
+- 배경: PageSpeed Insights(모바일) 재측정 결과 exifnd.com에서 firelic.com과 동일한 두 가지 진단이 발견됨. (1) "이미지 전송 개선"(약 21KiB)이 `src/components/home-guide-highlights.tsx`의 가이드 썸네일 이미지 1건으로 전부 집계. (2) "레거시 JavaScript"(14KiB) — `Array.prototype.at/flat/flatMap`, `Object.fromEntries/hasOwn`, `String.prototype.trimEnd/trimStart` 폴리필이 번들에 항상 포함됨.
+- 원인 (1): `<Image sizes="(min-width: 640px) 33vw, 100vw" .../>`의 모바일 분기(`100vw`)가 카드에 중첩된 패딩(바깥 컨테이너 `px-4` 32px + 카드 `p-4` 32px, 합계 약 64px)을 반영하지 못해, Next.js가 실제 렌더링 폭(약 346px)보다 큰 이미지 버킷을 요청.
+- 원인 (2): `package.json`에 `browserslist` 설정이 없어 Next.js 빌드가 오래된 브라우저까지 지원하는 기본값을 사용, 최신 브라우저에서는 불필요한 폴리필이 번들에 항상 포함됨.
+- 수정 (1): `src/components/home-guide-highlights.tsx`의 `sizes` 값을 `"(min-width: 640px) 33vw, 100vw"` → `"(min-width: 640px) 33vw, calc(100vw - 64px)"`로 변경. 데스크톱(640px 이상) 분기는 그대로 유지, 시각적/레이아웃 변경 없음.
+- 수정 (2): `package.json`에 `browserslist`를 FlyDroneMap에서 이미 사용자 승인 후 적용한 것과 동일한 기준(`chrome 64, edge 79, firefox 67, opera 51, safari 12` — 모두 2018년 이후 브라우저)으로 명시. **트레이드오프 안내**: 이 기준보다 오래된 브라우저 사용자는 빌드 타겟에서 명시적으로 제외됨(실무적으로 비중이 매우 작은 수준으로 판단, 동일한 정책에 대해 사용자 사전 확인 후 진행).
+- 검증: 작업 전 `_backups/exiflens_backup_20260913_201338_sizes속성및browserslist수정전.tar.gz`로 백업 생성. `npx tsc --noEmit`, `npx eslint src/components/home-guide-highlights.tsx` 모두 통과. `npm run build` 정상 완료(전체 페이지 정상 생성). 로컬 `next start`(포트 4125)로 실행 후 `curl`로 `/en` 렌더링 HTML을 직접 확인해 새 `sizes` 값이 실제 서버 응답에 정상 반영됨을 확인. 레거시 JS 폴리필 감소분은 배포 후 PageSpeed 재측정으로 최종 확인 예정.
+- 참고(별도 처리, 이번 세션에서 미착수): "사용하지 않는 자바스크립트"(265KiB) 중 약 219KiB(Google Ads/Doubleclick)와 167KiB(Google Tag Manager)는 제3자 스크립트로 저희가 손댈 수 없는 영역. 자사 몫(약 46KiB)과 자바스크립트 실행 시간(1.4초) 항목은 이름 없는 해시 청크에 분산되어 있어, 추측성 수정 대신 webpack-bundle-analyzer를 이용한 별도의 정밀 조사가 필요하다고 판단해 이번 세션에서는 손대지 않음. "효율적인 캐시 수명 사용"(16KiB) 역시 100% Google Ads 스크립트(제3자)로 개선 여지 없음. "렌더링 차단 요청"(180ms)/"네트워크 종속 항목 트리"는 Next.js가 자동 생성하는 CSS 청크 1개가 원인으로, 프레임워크 내부 동작이라 이번 세션에서는 손대지 않음.
+
 ## 2026-09-14 (추가) — 사진 업로드 입력창 접근성 라벨 추가 (PageSpeed Insights 진단 반영)
 
 - 배경: 제미나이 SEO/GEO 진단에 이어 PageSpeed Insights(pagespeed.web.dev)로 3개 사이트를 실측한 결과, exifnd.com의 접근성 점수(95점) 및 신규 "에이전트형 브라우징" 항목(1/2) 감점 사유가 "Form elements must have labels" — 즉 숨김 처리된 파일 업로드 `<input type="file">`에 스크린리더/AI 에이전트가 인식할 수 있는 이름이 연결되어 있지 않은 것으로 확인됨.

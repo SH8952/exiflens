@@ -45,7 +45,7 @@ export async function HomeGuideHighlights({ locale }: { locale: string }) {
                   src={guide.image}
                   alt={guide.title}
                   fill
-                  sizes="(min-width: 640px) 33vw, 100vw"
+                  sizes="(min-width: 640px) 33vw, calc(100vw - 64px)"
                   className="object-cover transition duration-300 group-hover:scale-105"
                 />
               </div>
