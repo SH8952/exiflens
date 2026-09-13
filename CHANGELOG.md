@@ -1,3 +1,13 @@
+## 2026-09-13 (추가) — RSS 피드 신규 추가 (네이버 크롤링 유도)
+
+- 배경: 네이버 서치어드바이저에서 exifnd.com 색인이 메인페이지 1건뿐이고 수집 활동이 8/29~9/1 이후 멈춘 것을 발견. `robots.ts`/`sitemap.ts` 모두 정상(전체 정적 경로 + 가이드 34개×4개 언어 포함, 사이트맵도 26.08.27 제출 확인)임을 확인해 코드 결함은 아니었으나, RSS 피드가 아예 없어 신규/갱신 콘텐츠를 크롤러에게 더 빠르게 알릴 방법이 부족했음.
+- 수정: 신규 `src/app/rss.xml/route.ts` — 기존 `getAllGuidesMeta()`를 재사용해 4개 언어(en/es/ja/ko) 가이드 전체를 최신순으로 모아 RSS 2.0 규격 XML을 직접 생성(별도 패키지 의존성 없음), 최근 50건으로 제한.
+- 검증: `npx tsc --noEmit`, `npx eslint src/app/rss.xml/route.ts`, `npm run build`(라우트가 `/rss.xml`로 정상 빌드됨) 통과. `next start`로 로컬 서버 구동 후 `curl`로 실제 XML 응답 확인, `xmllint --noout`으로 XML 유효성 검증 완료(정상).
+- 참고: exifnd.com(ExifLens)에만 우선 적용. flydronemap.com/firelic.com은 사용자 확인 후 동일 패턴으로 순차 적용 예정.
+- 작업 전 `_backups/exiflens_backup_20260913_151304_RSS추가전` 폴더로 전체 백업 완료.
+
+
+
 ## 2026-09-13 (추가) — AdSense 승인 전까지 광고 placeholder 박스 임시 숨김
 
 - 배경: 애드센스 재신청 전 정밀 진단 요청 결과, "Ad · 300×250" 같은 빈 광고 자리표시자 박스가 그대로 노출되면 "준비되지 않은 사이트"로 판단되어 승인 거절 위험이 있다는 지적을 받음(exifnd.com/flydronemap.com/firelic.com 3개 사이트 공통 요청).
