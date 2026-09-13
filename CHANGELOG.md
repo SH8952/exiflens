@@ -276,6 +276,13 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-14 — 가이드 아티클 자동 발행: 필터 스태킹(중첩) 시 주의사항
+
+- 배경: 가이드 아티클 매일 자동 발행 예약 작업(order 19)에 따라 신규 가이드 1편을 4개 언어(en/ja/ko/es)로 작성.
+- 추가: `content/guides/{en,ja,ko,es}/filter-stacking-guide.mdx` — ND·CPL·그라데이션 ND를 동시에 겹쳐 쓸 때 발생하는 비네팅(82mm 슬림 필터 2장 기준 24mm 이하에서 발생하는 등 실측 수치 포함), 스태킹 순서(CPL을 가장 바깥쪽에 배치)와 나사산 궁합, 저가형 필터 조합에서 누적되는 색 캐스트·고스트/플레어 문제, 100mm 사각 필터 홀더·마그네틱 시스템 선택 기준, 실전 체크리스트를 포함. 카테고리는 기존 "ND 필터 & 장노출"(en: "ND Filters & Long Exposure", ja: "NDフィルターと長秒露光", es: "Filtros ND y exposición larga") 카테고리를 그대로 재사용.
+- 수정: `automation/guide-topics-queue.json` — order 19 항목(`filter-stacking-guide`)을 `published: true`, `publishedDate: "2026-09-14"`로 갱신.
+- 검증: `npm run build` 전체 빌드 통과 (신규 슬러그 4개 언어 페이지 모두 정상 생성 확인).
+
 ## 2026-09-13
 
 - 새 가이드 발행: "그라데이션 ND필터 완벽 사용법: 스탑 선택부터 포지셔닝까지" (Graduated ND Filter Guide) — en/ja/ko/es 4개 언어
