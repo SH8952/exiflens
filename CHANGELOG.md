@@ -276,6 +276,13 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-15 — 가이드 아티클 자동 발행: "미러리스 vs DSLR 차이점"
+
+- 배경: 가이드 아티클 매일 자동 발행 예약 작업(order 20)에 따라 신규 가이드 1편을 4개 언어(en/ja/ko/es)로 작성.
+- 추가: `content/guides/{en,ja,ko,es}/mirrorless-vs-dslr-explained.mdx` — 미러리스와 DSLR의 근본 구조 차이(OVF vs EVF), 자동초점 커버리지 차이(DSLR 중앙 약 40% vs 미러리스 온센서 AF 90%+), 연사 속도와 뷰파인더 블랙아웃 유무(미러리스 초당 20장+ 블랙아웃 프리 vs DSLR 초당 10장 안팎), 크기·무게(풀프레임 DSLR 약 800g vs 미러리스 약 600g대) 및 CIPA 배터리 수명 실측 수치(미러리스 300~400장 vs DSLR 800~1200장), "미러리스가 무조건 상위호환"이라는 흔한 오해에 대한 균형 잡힌 반박, 상황별 선택 기준, 실전 체크리스트를 포함. 카테고리는 기존 "카메라 기초 & 노출"(en: "Camera Basics & Exposure", ja: "カメラ基礎と露出", es: "Fundamentos de cámara y exposición") 카테고리를 그대로 재사용.
+- 수정: `automation/guide-topics-queue.json` — order 20 항목(`mirrorless-vs-dslr-explained`)을 `published: true`, `publishedDate: "2026-09-15"`로 갱신.
+- 검증: `npm run build` 전체 빌드 통과 (신규 슬러그 4개 언어 페이지 모두 정상 생성 확인, 에러 없음).
+
 ## 2026-09-14 — 가이드 아티클 자동 발행: 필터 스태킹(중첩) 시 주의사항
 
 - 배경: 가이드 아티클 매일 자동 발행 예약 작업(order 19)에 따라 신규 가이드 1편을 4개 언어(en/ja/ko/es)로 작성.
