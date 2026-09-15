@@ -276,6 +276,14 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-16 — 가이드 아티클 자동 발행: "단렌즈 vs 줌렌즈 선택 가이드"
+
+- 배경: 가이드 아티클 매일 자동 발행 예약 작업(order 21)에 따라 신규 가이드 1편을 4개 언어(en/ja/ko/es)로 작성.
+- 추가: `content/guides/{en,ja,ko,es}/prime-lens-vs-zoom-lens.mdx` — 단렌즈와 줌렌즈의 구조적 차이(고정 vs 가변 초점거리), 개방 조리개 밝기 차이에 따른 저조도 성능 실측 비교(50mm f/1.8 vs 24-70mm f/2.8, 약 2스탑 차이로 셔터스피드 4배/ISO 4분의 1 차이), 최대개방 해상력·비네팅·왜곡 비교와 "단렌즈가 무조건 더 선명하다"는 통념에 대한 균형 잡힌 반박(고급 줌렌즈의 발전 반영), 무게 비교(50mm f/1.8 약 160g vs 24-70mm f/2.8 800g대, 단렌즈 여러 대 합산 시 체감 차이 변화), 줌렌즈가 유리한 현장 대응 시나리오(결혼식·행사·스포츠), 상황별 선택 기준, 실전 체크리스트를 포함. 카테고리는 기존 "카메라 기초 & 노출"(en: "Camera Basics & Exposure", ja: "カメラ基礎と露出", es: "Fundamentos de cámara y exposición") 카테고리를 그대로 재사용.
+- 수정: `automation/guide-topics-queue.json` — order 21 항목(`prime-lens-vs-zoom-lens`)을 `published: true`, `publishedDate: "2026-09-16"`로 갱신.
+- 검증: `npm run build` 전체 빌드 통과 (신규 슬러그 4개 언어 페이지 모두 정상 생성 확인, 에러 없음).
+
+
 ## 2026-09-15 — 가이드 아티클 자동 발행: "미러리스 vs DSLR 차이점"
 
 - 배경: 가이드 아티클 매일 자동 발행 예약 작업(order 20)에 따라 신규 가이드 1편을 4개 언어(en/ja/ko/es)로 작성.
