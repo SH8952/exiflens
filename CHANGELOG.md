@@ -1,3 +1,12 @@
+## 2026-09-17 — 가이드 목록 페이지: 카테고리별 "더보기" 펼치기 기능 추가 (애드센스 제휴 마케팅 공통 대화방에서 진행)
+
+- 배경: 가이드 게시글이 계속 늘어나면서 `/guides` 목록 페이지가 카테고리마다 전체 글을 다 나열해 세로 스크롤이 과도하게 길어짐. ExifLens/FlyDroneMap/firelic 3개 프로젝트에 동일하게 적용하기 위해 신설된 공통 대화방에서 작업 진행(FlyDroneMap에 먼저 적용한 뒤 이식).
+- **작업 전 백업**: `_backups/backup_20260916_234232_guides_showmore/`에 `src/app/[locale]/guides/page.tsx`, `messages/{en,ko,ja,es}.json` 백업.
+- **수정**: 카테고리별 카드 그리드를 신규 클라이언트 컴포넌트 `src/components/guides/guide-category-section.tsx`로 분리, 카테고리당 기본 4개(2행)만 노출하고 그 이상은 "더보기" 버튼(shadcn `Button`, outline/sm)으로 펼치도록 구현. 버튼은 카테고리별로 독립적으로 동작. `src/app/[locale]/guides/page.tsx`는 이 컴포넌트를 사용하도록 수정(카테고리 그룹이 `[category, guides]` 튜플 배열인 ExifLens 고유 구조에 맞춰 연결), 더 이상 쓰이지 않는 `Link` import 제거.
+- **i18n**: `messages/{en,ko,ja,es}.json`의 `Guides` 네임스페이스에 `showMore`/`showLess` 키 추가(ko: 더보기/접기, en: Show more/Show less, ja: もっと見る/閉じる, es: Ver más/Ver menos).
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint src`(오류/경고 0건), `npm run build`(오래된 `.next` 잔재를 `.next_old_*`로 옮긴 뒤 재시도 — Turbopack 컴파일 성공, TypeScript 통과, 202개 페이지 전부 정상 생성. 마지막 "Finalizing" 단계의 `.next/export-detail.json` unlink EPERM은 이 브릿지 환경 고유의 무해한 현상).
+- **다음 단계**: 로컬 커밋 완료 후 사용자가 저장소 루트의 push용 `.command` 스크립트를 실행해 push, 실사이트에서 카테고리별 더보기 동작 최종 확인 필요. 동일 작업을 firelic에도 이어서 적용 예정.
+
 ## 2026-09-14 (추가) — 홈 화면 가이드 썸네일 이미지 sizes 속성 보정 + browserslist 명시로 레거시 JS 폴리필 제거 (PageSpeed 진단 반영)
 
 - 배경: PageSpeed Insights(모바일) 재측정 결과 exifnd.com에서 firelic.com과 동일한 두 가지 진단이 발견됨. (1) "이미지 전송 개선"(약 21KiB)이 `src/components/home-guide-highlights.tsx`의 가이드 썸네일 이미지 1건으로 전부 집계. (2) "레거시 JavaScript"(14KiB) — `Array.prototype.at/flat/flatMap`, `Object.fromEntries/hasOwn`, `String.prototype.trimEnd/trimStart` 폴리필이 번들에 항상 포함됨.

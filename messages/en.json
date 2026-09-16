@@ -340,6 +340,8 @@
     "subtitle": "Practical, no-nonsense guides on EXIF data, ND filters, and getting the most out of your camera settings.",
     "empty": "No guides published in this language yet — check back soon.",
     "readingTime": "{minutes} min read",
+    "showMore": "Show more",
+    "showLess": "Show less",
     "backToGuides": "← Back to Guides",
     "relatedGuides": "Related Guides",
     "otherCategory": "Other Guides",

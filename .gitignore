@@ -52,3 +52,4 @@ __pycache__/
 
 # 빌드 정리 단계에서 EPERM으로 인해 .next 대신 이름을 바꿔 남겨진 임시 폴더
 .next.stale.*/
+.next_old_*/
