@@ -276,6 +276,16 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-17 — 가이드 아티클 자동 발행: 삼각대 선택 가이드 (How to Choose a Tripod)
+
+- 예약 작업(매일 오전 6시 KST)으로 신규 가이드 아티클 1건을 4개 언어(en/ja/ko/es)로 작성.
+- 주제: "삼각대 선택 가이드"(order 22, slug: how-to-choose-a-tripod) — 하중 지지력, 다리 재질(알루미늄 vs 카본), 다리 섹션 수, 헤드 방식(볼헤드 vs 팬틸트), 센터 컬럼 트레이드오프 등 실전 구매 기준을 구체적 수치와 함께 정리하고, 촬영 목적별(여행/풍경·장노출/실내) 추천 조합과 실전 체크리스트로 마무리.
+- 카테고리: 기존 4개 카테고리(카메라 기초 & 노출 / 장르별 촬영 가이드 / ND 필터 & 장노출 / EXIF 활용 & 공유) 중 적합한 것이 없어 신규 카테고리 "장비 & 액세서리"(en: Gear & Accessories / ja: 機材とアクセサリー / es: Equipo y accesorios) 신설.
+- automation/guide-topics-queue.json 갱신: order 22 항목 published: true, publishedDate: "2026-09-17"로 반영.
+- 검증: 클론 저장소에서 npm run build 전체 빌드 성공 확인(신규 가이드 포함 152개 가이드 상세 페이지 정상 생성).
+- 대표 이미지(image/imageCredit/imageCreditUrl)는 이번 자동 발행 단계에서는 첨부하지 않음 — automation/publish-guide.command 실행 시 attach-guide-image.py가 Unsplash에서 자동으로 가져와 4개 언어 mdx에 삽입함(기존 동작 방식과 동일).
+- 남은 미발행 주제: 8개 (timelapse-camera-settings, focus-stacking-for-macro-photography, panorama-photography-settings, low-light-noise-reduction-settings, flash-sync-speed-explained, studio-lighting-basics, using-exposure-compensation, back-button-focus-explained) — 순서대로 진행 예정, 큐 파일 참고.
+
 ## 2026-09-16 — 가이드 아티클 자동 발행: "단렌즈 vs 줌렌즈 선택 가이드"
 
 - 배경: 가이드 아티클 매일 자동 발행 예약 작업(order 21)에 따라 신규 가이드 1편을 4개 언어(en/ja/ko/es)로 작성.
