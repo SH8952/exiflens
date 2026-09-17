@@ -285,6 +285,16 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-18 — 가이드 아티클 자동 발행: 타임랩스 촬영 설정 (인터벌미터/노출 램핑)
+
+- 예약 작업(매일 오전 6시 KST)으로 신규 가이드 아티클 1건을 4개 언어(en/ja/ko/es)로 작성.
+- 주제: "릴리즈/인터벌미터로 타임랩스 설정하기"(order 23, slug: timelapse-camera-settings) — 내장/외장 인터벌미터 차이, 완성 영상 fps·재생시간에서 촬영 간격을 역산하는 방법(예: 24fps 10초 클립=240프레임, 2시간 촬영 시 인터벌 30초), 완전 수동 노출 고정이 필요한 이유와 플리커 발생 원리, 낮 시간대 180도 셔터 법칙과 ND 필터(ND8~ND64)로 스트로빙을 막는 방법, 일출·일몰을 가로지르는 홀리그레일 타임랩스의 수동/자동 노출 램핑(LRTimelapse 등), 배터리·저장공간 실전 계산(10초 인터벌 4시간=1,440프레임 기준), 리모트 릴리즈·미러업·전자식 셔터를 활용한 흔들림 방지, 실전 체크리스트로 마무리.
+- 카테고리: 기존 "장르별 촬영 가이드"(en: Photography Genres / ja: ジャンル別撮影ガイド / es: Guías por género fotográfico) 카테고리를 그대로 재사용 (야간·도심·야생동물 등 특정 촬영 기법 가이드와 동일 계열).
+- automation/guide-topics-queue.json 갱신: order 23 항목 published: true, publishedDate: "2026-09-18"로 반영.
+- 검증: 클론 저장소에서 npm run build 전체 빌드 성공 확인 (신규 가이드 포함 전체 페이지 정상 생성, 에러 없음).
+- 대표 이미지(image/imageCredit/imageCreditUrl)는 이번 자동 발행 단계에서는 첨부하지 않음 — automation/publish-guide.command 실행 시 attach-guide-image.py가 Unsplash에서 자동으로 가져와 4개 언어 mdx에 삽입함(기존 동작 방식과 동일).
+- 남은 미발행 주제: 7개 (order 24~30: focus-stacking-for-macro-photography, panorama-photography-settings, low-light-noise-reduction-settings, flash-sync-speed-explained, studio-lighting-basics, using-exposure-compensation, back-button-focus-explained) — 순서대로 진행 예정, 큐 파일 참고.
+
 ## 2026-09-17 — 가이드 아티클 자동 발행: 삼각대 선택 가이드 (How to Choose a Tripod)
 
 - 예약 작업(매일 오전 6시 KST)으로 신규 가이드 아티클 1건을 4개 언어(en/ja/ko/es)로 작성.

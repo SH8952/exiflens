@@ -1,0 +1,49 @@
+---
+title: "Timelapse Camera Settings: From Intervalometers to Exposure Ramping"
+description: "A practical guide to calculating shot intervals, locking exposure to prevent flicker, using ND filters to avoid strobing in daytime timelapses, ramping exposure across sunrise and sunset, and planning battery life and storage for long sessions."
+publishedAt: "2026-09-18"
+tags: ["timelapse", "intervalometer", "long-exposure"]
+category: "Photography Genres"
+image: "/guides/images/timelapse-camera-settings.webp"
+imageCredit: "Chris Liverani"
+imageCreditUrl: "https://unsplash.com/@chrisliverani?utm_source=ExifLens&utm_medium=referral"
+---
+
+A timelapse compresses hours or even days of change into a clip that plays back in seconds, but the moment you're standing in front of the scene, the practical questions pile up fast: how many seconds apart should each frame be, and how do you keep exposure from flickering as the scene shifts from day to night? Get the intervalometer settings and a handful of exposure rules right before you start shooting, and most of these problems never show up in the first place.
+
+## What an intervalometer actually does
+
+An intervalometer is a device or feature that fires the shutter automatically at a fixed time interval. Most current mirrorless cameras and DSLRs have one built in under a "timelapse" or "interval timer shooting" menu, and external remote releases add the same function to older bodies. The built-in option is convenient because it needs no extra gear, but some cameras compress the frames straight into a finished video file instead of saving individual RAW images, which leaves little room to fix mistakes afterward. An external intervalometer instead leaves the camera in ordinary single-shot mode and just triggers the shutter on schedule, so every frame lands on the card as a full RAW file you can grade, ramp, or recompose in post. That flexibility matters more the longer the shoot runs.
+
+## Setting the interval: working backward from frame count and playback length
+
+The interval isn't something you should guess at on location — it's a number you work out backward from how long the finished clip needs to be and at what frame rate. A 10-second clip at 24fps needs exactly 240 frames. If you're capturing 2 hours (7,200 seconds) of drifting clouds and need 240 frames, the interval comes out to 7,200 ÷ 240, or 30 seconds. Slow-moving subjects like star trails can stretch that interval to 20-30 seconds, while fast subjects like a busy street scene need something closer to 2-5 seconds to keep motion looking smooth rather than jumpy. Doing this math before you leave home also tells you exactly how many hours you need to be on location, instead of guessing in the field.
+
+## Locking exposure: why full manual mode isn't optional
+
+Shoot a timelapse in aperture priority or program mode and the camera will recalculate shutter speed or ISO every time a cloud passes in front of the sun, and those small exposure shifts show up as visible flicker once the frames are stitched into video. Lock aperture, shutter speed, ISO, and white balance manually before the first frame, and switch autofocus to manual focus after nailing the point you want in focus — autofocus hunting mid-sequence is one of the most common causes of a ruined timelapse. Many recent cameras include a built-in "exposure smoothing" feature for interval shooting, but it only softens abrupt brightness jumps rather than eliminating them, so it's a safety net, not a substitute for locking exposure manually.
+
+## Daytime timelapses and ND filters: avoiding flicker and strobing
+
+Stopping down to f/11-f/16 and dropping ISO to 100 in daylight still often leaves you with a shutter speed above 1/1000s, and when the shutter is that much faster than the interval, moving subjects — waves, pedestrians, swaying branches — end up looking choppy and disconnected from frame to frame, an effect commonly called strobing. Applying video's 180-degree shutter rule to timelapse means the shutter speed should sit at roughly half the interval. With a 2-second interval, that calls for a shutter speed around 1 second, which is wildly overexposed in daylight at any reasonable ISO — so the fix is to drop an ND8 to ND64 filter in front of the lens to cut the light and force that longer shutter speed back into range. A variable ND filter is especially useful here, since you can dial it in as the sun's angle and intensity change over the course of a multi-hour shoot.
+
+## Exposure ramping: holy-grail timelapses across sunrise and sunset
+
+A so-called "holy grail" timelapse that crosses from day to night, or night to day, moves through several stops of light change that no single fixed exposure can cover. Experienced shooters either ramp manually — keeping aperture fixed while nudging shutter speed up in small steps every few dozen frames (1/125s → 1/60s → 1/30s → ... → 1s → 2s) — or set up automatic ramping with a programmable intervalometer paired with software like LRTimelapse or GB Timelapse. Without dedicated ramping gear, the most reliable field approach is to shoot RAW throughout and set a handful of brightness keyframes in post, letting the software interpolate the transition between them.
+
+## Battery life and storage: doing the math for long sessions
+
+Shooting a 10-second interval for 4 hours (14,400 seconds) works out to 1,440 frames. A single mirrorless battery typically lasts around 300-400 shots on a full charge, so even that count alone can exceed what one battery holds. Before any long timelapse, plan for a dummy battery with a DC coupler and a power bank, or a direct AC adapter connection, and calculate storage the same way — at roughly 25-35MB per RAW frame, 1,440 frames needs at least 40-50GB, so bring a card with real headroom. If the battery dies partway through, every frame captured up to that point can become unusable, so it's safer to plan power for about 1.5x the expected shooting duration.
+
+## Preventing shake and choosing a stable release method
+
+Shooting hundreds of frames from the same fixed position for hours means even a tiny vibration repeats across the entire clip and becomes obvious once it's played back. Mount the camera on a sturdy tripod and use a wired or wireless remote release so your hands never touch the camera while it fires. On a DSLR, mirror lock-up removes the vibration from the mirror slapping up and down; on a mirrorless body, switching to the electronic (silent) shutter removes the repeated mechanical shutter vibration entirely. In windy outdoor conditions, spreading the tripod legs low and hanging weight from a hook lowers the center of gravity and helps further.
+
+## Practical checklist
+
+- Decide the finished clip's fps and length first, then work backward from the total frame count to set your interval.
+- Lock aperture, shutter speed, ISO, white balance, and focus manually before starting the sequence.
+- If your daytime shutter speed is much faster than half the interval, add an ND filter to slow it down and reduce strobing.
+- Plan manual or software-based automatic ramping in advance for any shoot that crosses sunrise or sunset.
+- Calculate frames-to-storage and frames-to-battery life, then bring about 1.5x that margin in cards and power.
+- Use a remote release with mirror lock-up or electronic shutter to eliminate vibration during the sequence.

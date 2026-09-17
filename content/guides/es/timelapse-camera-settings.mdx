@@ -1,0 +1,49 @@
+---
+title: "Ajustes de cámara para timelapse: del intervalómetro al rampeo de exposición"
+description: "Una guía práctica para calcular el intervalo de disparo, bloquear la exposición y evitar el parpadeo, usar filtros ND contra el efecto estroboscópico en timelapses diurnos, rampear la exposición al cruzar el amanecer o el atardecer, y planificar batería y almacenamiento en sesiones largas."
+publishedAt: "2026-09-18"
+tags: ["timelapse", "intervalometro", "exposicion-larga"]
+category: "Guías por género fotográfico"
+image: "/guides/images/timelapse-camera-settings.webp"
+imageCredit: "Chris Liverani"
+imageCreditUrl: "https://unsplash.com/@chrisliverani?utm_source=ExifLens&utm_medium=referral"
+---
+
+Un timelapse comprime horas —incluso días— de cambio en un clip que dura apenas unos segundos, pero en cuanto te plantas frente a la escena aparecen las preguntas prácticas: cada cuántos segundos debe disparar la cámara, y cómo evitar que la exposición parpadee cuando la escena pasa de día a noche. Resolver bien el intervalómetro y un puñado de reglas de exposición antes de empezar evita que la mayoría de estos problemas aparezcan siquiera.
+
+## Qué hace realmente un intervalómetro
+
+Un intervalómetro es un dispositivo o función que dispara el obturador automáticamente a un intervalo de tiempo fijo. La mayoría de las cámaras mirrorless y DSLR actuales lo traen integrado en un menú de "timelapse" o "disparo con temporizador de intervalo", y los disparadores remotos externos añaden la misma función a cuerpos más antiguos. La opción integrada es cómoda porque no requiere equipo adicional, pero algunas cámaras comprimen los fotogramas directamente en un archivo de video terminado en lugar de guardar imágenes RAW individuales, lo que deja poco margen para corregir errores después. Un intervalómetro externo, en cambio, deja la cámara en modo de disparo único normal y solo activa el obturador según el programa, así que cada fotograma queda en la tarjeta como un RAW completo que puedes graduar, rampear o recomponer en la posproducción. Esa flexibilidad pesa más cuanto más larga es la sesión.
+
+## Definir el intervalo: calculando hacia atrás desde el número de fotogramas y la duración
+
+El intervalo no es algo que se decide sobre la marcha en el lugar: es un número que se calcula hacia atrás a partir de cuánto debe durar el clip final y a qué velocidad de fotogramas. Un clip de 10 segundos a 24fps necesita exactamente 240 fotogramas. Si vas a capturar 2 horas (7.200 segundos) de nubes en movimiento y necesitas 240 fotogramas, el intervalo sale de 7.200 ÷ 240, es decir, 30 segundos. Los sujetos de movimiento lento, como las estrellas, permiten estirar el intervalo a 20-30 segundos, mientras que sujetos rápidos, como una calle concurrida, necesitan algo más cercano a 2-5 segundos para que el movimiento se vea fluido y no a saltos. Hacer este cálculo antes de salir de casa también te dice exactamente cuántas horas necesitas estar en el lugar, en vez de improvisar sobre la marcha.
+
+## Bloquear la exposición: por qué el modo manual completo no es opcional
+
+Si disparas un timelapse en prioridad de apertura o modo programa, la cámara recalculará la velocidad de obturación o el ISO cada vez que una nube pase frente al sol, y esos pequeños cambios de exposición se traducen en un parpadeo visible una vez que los fotogramas se unen en video. Bloquea manualmente la apertura, la velocidad de obturación, el ISO y el balance de blancos antes del primer fotograma, y cambia el enfoque automático a manual después de fijar el punto que quieres enfocado —el enfoque automático "buscando" a mitad de secuencia es una de las causas más comunes de un timelapse arruinado—. Muchas cámaras recientes incluyen una función de "suavizado de exposición" para el disparo con intervalo, pero solo atenúa los saltos de brillo bruscos en lugar de eliminarlos, así que es una red de seguridad, no un sustituto de bloquear la exposición manualmente.
+
+## Timelapses diurnos y filtros ND: evitar el parpadeo y el efecto estroboscópico
+
+Cerrar el diafragma a f/11-f/16 y bajar el ISO a 100 en luz de día a menudo deja una velocidad de obturación por encima de 1/1000s, y cuando el obturador es mucho más rápido que el intervalo, los sujetos en movimiento —olas, peatones, ramas que se mecen— acaban viéndose entrecortados de un fotograma a otro, un efecto que suele llamarse estroboscópico. Aplicar al timelapse la regla del obturador a 180 grados que se usa en video significa que la velocidad de obturación debería quedar en aproximadamente la mitad del intervalo. Con un intervalo de 2 segundos, eso pide una velocidad de obturación de alrededor de 1 segundo, que en luz de día resulta enormemente sobreexpuesta con cualquier ISO razonable, así que la solución es colocar un filtro ND8 a ND64 frente al objetivo para reducir la luz y forzar esa velocidad de obturación más larga. Un filtro ND variable es especialmente útil aquí, porque puedes ajustarlo a medida que cambian el ángulo y la intensidad del sol durante una sesión de varias horas.
+
+## Rampeo de exposición: timelapses "holy grail" que cruzan el amanecer o el atardecer
+
+Un timelapse llamado "holy grail", que pasa de día a noche o de noche a día, recorre varios pasos de cambio de luz que ninguna exposición fija puede cubrir por sí sola. Los fotógrafos con experiencia rampean manualmente —dejando la apertura fija mientras suben la velocidad de obturación en pequeños pasos cada varias decenas de fotogramas (1/125s → 1/60s → 1/30s → ... → 1s → 2s)— o configuran un rampeo automático con un intervalómetro programable combinado con software como LRTimelapse o GB Timelapse. Sin equipo de rampeo dedicado, el método más confiable en el terreno es disparar en RAW durante toda la sesión y fijar unos pocos fotogramas clave de brillo en la posproducción, dejando que el software interpole la transición entre ellos.
+
+## Batería y almacenamiento: haciendo los números para sesiones largas
+
+Disparar con un intervalo de 10 segundos durante 4 horas (14.400 segundos) da como resultado 1.440 fotogramas. Una sola batería de una cámara mirrorless suele durar entre 300 y 400 disparos con carga completa, así que esa cantidad por sí sola puede superar lo que aguanta una batería. Antes de cualquier timelapse largo, planifica una batería ficticia con acoplador DC y un power bank, o una conexión directa a un adaptador de corriente, y calcula el almacenamiento de la misma manera: a razón de unos 25-35MB por fotograma RAW, 1.440 fotogramas necesitan al menos 40-50GB, así que lleva una tarjeta con margen real. Si la batería se agota a mitad de la sesión, todos los fotogramas capturados hasta ese momento pueden quedar inservibles, así que es más seguro planificar la energía para aproximadamente 1,5 veces la duración estimada del disparo.
+
+## Evitar vibraciones y elegir un método de disparo estable
+
+Disparar cientos de fotogramas desde la misma posición fija durante horas significa que hasta la vibración más pequeña se repite en todo el clip y se vuelve evidente al reproducirlo. Monta la cámara en un trípode firme y usa un disparador remoto con cable o inalámbrico para que tus manos nunca toquen la cámara mientras dispara. En una DSLR, el bloqueo de espejo elimina la vibración del espejo al subir y bajar; en una mirrorless, cambiar al obturador electrónico (silencioso) elimina por completo la vibración mecánica repetida. En condiciones de viento al aire libre, abrir las patas del trípode lo más bajo posible y colgar peso de un gancho baja el centro de gravedad y ayuda todavía más.
+
+## Lista de verificación práctica
+
+- Decide primero los fps y la duración del clip final, y calcula el intervalo hacia atrás a partir del número total de fotogramas que necesitas.
+- Bloquea manualmente la apertura, la velocidad de obturación, el ISO, el balance de blancos y el enfoque antes de empezar la secuencia.
+- Si tu velocidad de obturación diurna es mucho más rápida que la mitad del intervalo, añade un filtro ND para reducirla y disminuir el efecto estroboscópico.
+- Planifica con antelación un rampeo manual o automático por software para cualquier sesión que cruce el amanecer o el atardecer.
+- Calcula fotogramas frente a almacenamiento y fotogramas frente a batería, y lleva un margen de aproximadamente 1,5 veces en tarjetas y energía.
+- Usa un disparador remoto con bloqueo de espejo u obturador electrónico para eliminar la vibración durante la secuencia.
