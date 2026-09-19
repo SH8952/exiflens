@@ -13,8 +13,8 @@ type FetchState =
 
 // 2026-09-06: 개발자 전용 "Ads Block" 기능. 노출된 알리익스프레스 상품 중
 // 무관한 것을 발견했을 때, 실제 상품 페이지로 이동해서 확인하면(클릭) 개발자
-// 본인이 어뷰징 클릭을 발생시키게 된다. 대신 이 상수가 true인
-// 로컬(NODE_ENV=development) 환경에서는 카드를 클릭해도 이동하지 않고 선택
+// 본인이 어붰징 클릭을 발생시키게 된다. 대신 이 상수가 true인
+// 로케준(NODE_ENV=development) 환경에서는 카드를 클릭해도 이동하지 않고 선택
 // 표시(테두리)만 하며, "Ads Block" 버튼으로 선택된 상품을 한꺼번에
 // /api/dev/aliexpress-block에 등록한다. 등록된 상품 ID는
 // src/lib/aliexpress-blocked-products.json에 저장되고
@@ -25,10 +25,24 @@ type FetchState =
 // 렌더링과 동일한 방식).
 const IS_DEV = process.env.NODE_ENV === "development";
 
-export function AliexpressGearCards() {
+/**
+ * initialProducts: 2026-09-19 추가 (AdSense 재심사 대응). 부모 서버
+ * 컴포넌트가 미리 조회해둔 실제 상품(src/lib/gear-recommendation-ssr.ts)이
+ * 있으면 초기 상태로 그것부터 보여주고, 마운트 후 기존처럼
+ * /api/aliexpress/search를 호출해 더 풍부한 개인화 결과로 자연스럽게 교체한다.
+ */
+export function AliexpressGearCards({
+  initialProducts,
+}: {
+  initialProducts?: AliexpressProduct[];
+}) {
   const t = useTranslations("Home");
   const locale = useLocale();
-  const [state, setState] = React.useState<FetchState | null>(null);
+  const [state, setState] = React.useState<FetchState | null>(() =>
+    initialProducts && initialProducts.length > 0
+      ? { status: "ok", locale, products: initialProducts }
+      : null,
+  );
   const [selectedIds, setSelectedIds] = React.useState<Set<string>>(new Set());
   const [blockStatus, setBlockStatus] = React.useState<"idle" | "sending" | "done" | "error">(
     "idle",
@@ -42,19 +56,22 @@ export function AliexpressGearCards() {
       .then((data: { products?: AliexpressProduct[] }) => {
         if (cancelled) return;
         const products = data.products ?? [];
-        setState(
-          products.length > 0
-            ? { status: "ok", locale, products }
-            : { status: "empty", locale },
-        );
+        if (products.length > 0) {
+          setState({ status: "ok", locale, products });
+        } else if (!initialProducts || initialProducts.length === 0) {
+          setState({ status: "empty", locale });
+        }
       })
       .catch(() => {
-        if (!cancelled) setState({ status: "error", locale });
+        if (!cancelled && (!initialProducts || initialProducts.length === 0)) {
+          setState({ status: "error", locale });
+        }
       });
 
     return () => {
       cancelled = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale]);
 
   const toggleSelected = React.useCallback((productId: string) => {

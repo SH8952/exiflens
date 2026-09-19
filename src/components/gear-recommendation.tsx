@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { resolveAffiliateProvider } from "@/lib/affiliate";
 import { CoupangGearCards } from "@/components/coupang-gear-cards";
 import { AliexpressGearCards } from "@/components/aliexpress-gear-cards";
+import type { InitialGearData } from "@/lib/gear-recommendation-ssr";
 
 function readGeoCountryCookie(): string | null {
   if (typeof document === "undefined") return null;
@@ -13,14 +14,7 @@ function readGeoCountryCookie(): string | null {
 }
 
 function subscribeNever() {
-  // The geo-country cookie doesn't change during a page's lifetime, so
-  // there's nothing to subscribe to — this just satisfies
-  // useSyncExternalStore's API.
   return () => {};
-}
-
-function getServerSnapshot(): "pending" {
-  return "pending";
 }
 
 /**
@@ -31,25 +25,30 @@ function getServerSnapshot(): "pending" {
  * Component reading cookies() during render. Reading cookies() in a
  * Server Component would opt the entire page out of static generation
  * (Next.js marks the whole route as dynamic), which would undo the
- * SSG/SEO benefit the site is built for. Since the gear section is
- * already a client-fetched, progressively-enhanced block (see
- * CoupangGearCards), resolving the provider here has no real UX cost:
- * it just renders the same loading skeleton for one extra tick.
+ * SSG/SEO benefit the site is built for.
+ *
+ * 2026-09-19 (AdSense 재심사 대응): 서버에서 로케일 기준 기본 제공사로
+ * 미리 조회해둔 실제 상품 2개(initialData, see
+ * src/lib/gear-recommendation-ssr.ts)가 있으면 그걸 getServerSnapshot의
+ * 기준값으로 삼는다 — 이전에는 이 값이 무조건 "pending"이라 서버
+ * HTML에는 항상 로딩 스켈레톤만 있었다. geo-country 쉷키에 따라
+ * 클라이언트에서 실제로 골라야 할 제공사가 initialData와 다르면(드물건 경우),
+ * useSyncExternalStore가 알아서 클라이언트 값으로 다시 렌더링한다 — 기존 개인화
+ * 동작은 그대로 유지된다.
  */
-export function GearRecommendation({ locale }: { locale: string }) {
+export function GearRecommendation({
+  locale,
+  initialData,
+}: {
+  locale: string;
+  initialData: InitialGearData | null;
+}) {
   const t = useTranslations("Home");
 
-  // Reading document.cookie must not happen during server rendering (it
-  // would either throw or, worse, silently diverge from the client's
-  // first paint). useSyncExternalStore is the React-sanctioned way to read
-  // a browser-only value like this: it renders the server snapshot
-  // ("pending") during SSR/prerender and hydration, then re-renders with
-  // the real client value right after mount — no manual effect+setState
-  // needed.
   const provider = React.useSyncExternalStore(
     subscribeNever,
     () => resolveAffiliateProvider(locale, readGeoCountryCookie()),
-    getServerSnapshot,
+    () => initialData?.provider ?? "pending",
   );
 
   if (provider === "pending") {
@@ -66,11 +65,23 @@ export function GearRecommendation({ locale }: { locale: string }) {
   }
 
   if (provider === "coupang") {
-    return <CoupangGearCards />;
+    return (
+      <CoupangGearCards
+        initialProducts={
+          initialData?.provider === "coupang" ? initialData.products : undefined
+        }
+      />
+    );
   }
 
   if (provider === "aliexpress") {
-    return <AliexpressGearCards />;
+    return (
+      <AliexpressGearCards
+        initialProducts={
+          initialData?.provider === "aliexpress" ? initialData.products : undefined
+        }
+      />
+    );
   }
 
   return <p className="text-sm text-muted-foreground">{t("gearSectionHint")}</p>;
