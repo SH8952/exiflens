@@ -1,3 +1,17 @@
+## 2026-09-19 — 홈 콘텐츠(빈 콘텐츠) 및 쿠키 동의 배너 공통 작업 — 항목 1: 장비 추천 섹션 SSR 시드 적용 (애드센스 제휴 마케팅 공통 대화방에서 진행)
+
+- 배경: FlyDroneMap과 동일한 문제 — 홈 화면 "장비 추천"(GearRecommendation) 섹션이 서버 렌더링 시점에는 로딩 스켈레톤만 그려지고 실제 상품은 클라이언트에서만 fetch됨. FlyDroneMap에 먼저 적용한 방식을 ExifLens 고유 구조(ND 필터 선택 `useNdCalculatorStore`/`filterId`, 기본값 `"nd1000"`)에 맞춰 이식.
+- **작업 전 백업**: `_backups/backup_20260919_090702_gear_ssr_content/`에 수정 대상 4개 파일 백업.
+- **수정**:
+  - 신규 `src/lib/gear-recommendation-ssr.ts` — 서버 전용 헬퍼. 캐시(6시간 revalidate) 적용 `searchCoupangProducts`/`searchAliexpressProducts`를 ExifLens ROW1 키워드("에이치앤와이 nd" / "nisi nd")로 호출해 2개 상품 미리 조회. 실패 시 `null` 반환.
+  - `src/components/gear-recommendation-section.tsx`, `src/components/gear-recommendation.tsx` → FlyDroneMap과 동일 패턴으로 `initialData`/`getServerSnapshot` 연결.
+  - `src/components/coupang-gear-cards.tsx` → `filterId`(현재 서버 라우트가 실제로는 읽지 않는 코스메틱 값)를 고려해, SSR로 시드된 `nd1000` 상태가 실 fetch 완료 전 성급히 "stale" 처리되지 않도록 조건 보정.
+  - `src/components/aliexpress-gear-cards.tsx` → FlyDroneMap과 동일 패턴(초기값 시드, 실패해도 시드 유지), 기존 ExifLens 파일의 "Ads Block" 개발자 도구 주석/구조는 그대로 보존.
+- **참고(설계 조정)**: FlyDroneMap과 동일하게, 계획서의 "고정 큐레이션(하드코딩)" 대신 기존 캐시된 서버 함수를 재사용하는 방식으로 구현(트래킹 URL 포함 상품 데이터를 브라우저 도구로 직접 추출하는 것이 안전상 차단되어 하드코딩이 불가능했음). 사용자 승인 의도는 동일하게 충족.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint src`(오류/경고 0건), `npm run build`(오래된 `.next`를 `.next_stale_*`로 옮긴 뒤 재시도 — Turbopack 컴파일 성공, TypeScript 통과, 210/210 페이지 전부 정상 생성. 샌드박스 네트워크 제한으로 API 호출이 `EAI_AGAIN`으로 실패했으나 catch 로직이 정상적으로 `null` 반환 — 안전 폴백 정상 동작 확인. 실제 상품 시드가 채워지는지는 실배포 환경에서 별도 확인 필요. `.next/export-detail.json` unlink EPERM은 브릿지 환경 고유의 무해한 현상).
+- **커밋**: `afc5828` "fix: SSR seed real gear-recommendation products to avoid empty homepage content"
+- **다음 단계**: push, 실배포 환경에서 최종 확인. 이어서 항목 2(쿠키 동의 배너)를 3개 프로젝트 공통으로 진행 예정.
+
 ## 2026-09-17 — 가이드 목록 페이지: 카테고리별 "더보기" 펼치기 기능 추가 (애드센스 제휴 마케팅 공통 대화방에서 진행)
 
 - 배경: 가이드 게시글이 계속 늘어나면서 `/guides` 목록 페이지가 카테고리마다 전체 글을 다 나열해 세로 스크롤이 과도하게 길어짐. ExifLens/FlyDroneMap/firelic 3개 프로젝트에 동일하게 적용하기 위해 신설된 공통 대화방에서 작업 진행(FlyDroneMap에 먼저 적용한 뒤 이식).
