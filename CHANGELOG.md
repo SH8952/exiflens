@@ -1,3 +1,12 @@
+## 2026-09-19 — 홈 콘텐츠(빈 콘텐츠) 및 쿠키 동의 배너 공통 작업 — 항목 2: Google Consent Mode v2 쿠키 동의 배너 추가 (애드센스 제휴 마케팅 공통 대화방에서 진행)
+
+- 배경: FlyDroneMap과 동일한 문제 — GA4와 애드센스가 모두 실제로 동작 중인데도 쿠키 동의 관리(CMP)가 전혀 없었음. FlyDroneMap에 먼저 적용한 Google Consent Mode v2 방식을 그대로 이식.
+- **작업 전 백업**: `_backups/backup_20260919_114658_consent_banner/`에 수정 대상 파일 백업.
+- **수정**: FlyDroneMap과 동일한 구성 — 신규 `src/lib/consent.ts`(EEA+영국+스위스 국가 코드 목록 + `needsConsentBanner`), `src/app/[locale]/layout.tsx`의 GA4 inline script에 `gtag('consent','default',{...})` 추가(region 범위 한정), Vercel `x-vercel-ip-country` 헤더로 `needsConsent` 계산, 신규 `src/components/consent-banner.tsx`(`useSyncExternalStore` 기반, 선택 로컬스토리지 저장), `messages/{en,es,ja,ko}.json`에 `Consent` 네임스페이스 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint src`(오류/경고 0건), `npm run build`(오래된 `.next`를 `.next_stale_*`로 옮긴 뒤 재시도 — Turbopack 컴파일 성공, TypeScript 통과, 210/210 페이지 전부 정상 생성. `.next/export-detail.json` unlink EPERM은 브릿지 환경 고유의 무해한 현상).
+- **커밋**: `d6c259f`
+- **다음 단계**: push, 실사이트에서 배너 노출/미노출 조건 및 동의 후 GA4 반영 최종 확인.
+
 ## 2026-09-19 — 홈 콘텐츠(빈 콘텐츠) 및 쿠키 동의 배너 공통 작업 — 항목 1: 장비 추천 섹션 SSR 시드 적용 (애드센스 제휴 마케팅 공통 대화방에서 진행)
 
 - 배경: FlyDroneMap과 동일한 문제 — 홈 화면 "장비 추천"(GearRecommendation) 섹션이 서버 렌더링 시점에는 로딩 스켈레톤만 그려지고 실제 상품은 클라이언트에서만 fetch됨. FlyDroneMap에 먼저 적용한 방식을 ExifLens 고유 구조(ND 필터 선택 `useNdCalculatorStore`/`filterId`, 기본값 `"nd1000"`)에 맞춰 이식.
