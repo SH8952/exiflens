@@ -1,0 +1,40 @@
+---
+title: "Ajustes de reducción de ruido en poca luz: cómo aprovechar bien la reducción de ruido de tu cámara"
+description: "¿Subiste al máximo la reducción de ruido en una foto a ISO 6400 y terminaste con el detalle convertido en una mancha borrosa? Aquí te explicamos la diferencia real entre la reducción de ruido de alto ISO y la de exposición larga, cuándo conviene desactivar cada una, y cómo reducir el ruido desde la toma misma, no solo después en la edición."
+publishedAt: "2026-09-21"
+tags: ["reducción de ruido", "ISO alto", "fotografía en poca luz"]
+category: "Fundamentos de cámara y exposición"
+image: "/guides/images/low-light-noise-reduction-settings.webp"
+imageCredit: "Wolfgang Hasselmann"
+imageCreditUrl: "https://unsplash.com/@wolfgang_hasselmann?utm_source=ExifLens&utm_medium=referral"
+---
+
+Sube la cámara a ISO 6400 o 12800 para un concierto o una escena nocturna y todo el cuadro vuelve lleno de grano. Activa la reducción de ruido de alto ISO al máximo y el grano efectivamente baja, pero el detalle fino —cabello, follaje, la textura de una tela— empieza a derretirse en una mancha suave, casi como una acuarela. Encontrar un equilibrio útil entre ambos extremos exige entender qué hace realmente cada ajuste de reducción de ruido, y tratarlos como una parte más de un flujo de trabajo en poca luz, no como la solución completa.
+
+## Tu cámara en realidad tiene dos funciones de reducción de ruido distintas
+
+Los menús de cámara suelen esconder dos ajustes con nombres parecidos pero funcionamiento muy distinto: reducción de ruido de alto ISO (High ISO NR) y reducción de ruido de exposición larga (Long Exposure NR), y es fácil asumir que son lo mismo. La reducción de ruido de alto ISO aplica un suavizado espacial (promediando píxeles vecinos) cuando la cámara genera el JPEG, específicamente para bajar la relación ruido-señal que aparece con ISOs elevados —si disparas en RAW, en la mayoría de las cámaras este ajuste solo afecta la vista previa en cámara, sin tocar los datos RAW reales (algunos modelos sí aplican una versión leve al RAW, así que vale la pena revisar las especificaciones de tu cámara). La reducción de ruido de exposición larga funciona de forma completamente distinta: después de cerrar el obturador, la cámara dispara una segunda exposición de la misma duración con el obturador bloqueado para capturar un fotograma oscuro (dark frame), y luego resta ese patrón de ruido térmico específico del sensor de tu foto real. Una es un algoritmo de procesamiento de imagen; la otra es, literalmente, tomar una segunda foto.
+
+## Por qué la reducción de ruido de exposición larga duplica tu tiempo de disparo
+
+Con la reducción de ruido de exposición larga activada, una exposición de 30 segundos va seguida automáticamente de un dark frame de otros 30 segundos, así que una sola toma termina tardando 60 segundos en total. Para fotografiar trazos de estrellas (star trails), donde disparas cientos de tomas consecutivas para apilarlas después en una sola imagen, dejar esto activado genera huecos visibles en el trazo entre exposiciones o duplica el tiempo total de sesión y gasta batería sin ningún beneficio real. Para una sola toma nocturna independiente, en cambio, ese tiempo extra suele valer la pena: elimina de forma confiable el ruido térmico del sensor, especialmente los píxeles calientes (puntos brillantes) que se vuelven más visibles cuanto más larga es la exposición. La regla práctica: desactívala cuando estés disparando una secuencia pensada para apilarse, y déjala activada cuando una sola toma tiene que sostenerse por sí sola.
+
+## Un escenario real: fotografiar de noche a pulso una ciudad a ISO 3200, f/2.8, 1/15s
+
+Supongamos que sostienes a pulso un objetivo f/2.8 de noche, disparando a ISO 3200 y 1/15s para mantener una velocidad de obturación lo bastante rápida como para evitar el movimiento de la cámara. A ese ISO, la mayoría de las cámaras genera bastante ruido, y el error habitual es compensar cerrando aún más el diafragma o subiendo el ISO todavía más. En vez de eso, exponer hacia la derecha (ETTR) —llevando el histograma ligeramente hacia las luces altas sin llegar a quemarlas— mejora la relación señal-ruido en comparación con una toma subexpuesta, así que el ruido se nota menos cuando bajas la exposición después en la edición. Si el trípode es una opción, bajar el ISO a 100–400 y estirar el obturador a 2–8 segundos ataca el problema desde la raíz en lugar de compensarlo después; para un edificio estático o un skyline, esto solo puede llevar el ruido a un nivel casi imperceptible.
+
+## Un error común: llevar el deslizador de reducción de ruido al máximo en la edición
+
+Otro error frecuente es subir el deslizador de reducción de ruido al tope en Lightroom o Capture One sin pensarlo dos veces. La reducción de ruido generalmente se divide en ruido de luminancia (la variación granulada del brillo) y ruido de color (manchas verdes o magentas); la reducción de ruido de color normalmente se puede aplicar con bastante fuerza sin efectos secundarios visibles, pero exagerar la reducción de ruido de luminancia difumina la textura fina —piel, hojas, tela— hasta darle un aspecto plástico y sobre-suavizado. Un enfoque más confiable es aplicar primero la reducción de ruido de color con generosidad (más o menos entre 25 y 50), y luego ajustar la reducción de ruido de luminancia con el zoom al 100%, observando el detalle en vivo mientras la subes, deteniéndote justo antes de que el ruido desaparezca por completo: dejar un poco de grano suele ser el punto óptimo entre textura y suavidad.
+
+## Una herramienta más potente que la edición: apilar varias tomas y promediarlas
+
+Como el ruido es básicamente aleatorio, promediar varias tomas idénticas de la misma escena lo cancela matemáticamente en gran parte. La reducción escala con la raíz cuadrada del número de tomas: promediar 4 fotos reduce el ruido en un factor aproximado de 2 (√4 = 2), y 9 fotos en un factor aproximado de 3 (√9 = 3). Fija la cámara en un trípode, dispara entre 4 y 8 tomas con los mismos ajustes, y combínalas con el modo de promedio de pila de Objetos Inteligentes de Photoshop o con software dedicado como Starry Landscape Stacker: esto te da niveles de ruido que ningún ajuste de ISO ni deslizador en una sola toma puede igualar. El problema es el movimiento entre tomas: nubes que se desplazan o alguien caminando por la escena dejarán fantasmas translúcidos, así que esta técnica funciona mejor en escenas nocturnas y paisajes relativamente estáticos.
+
+## Lista de verificación
+
+- Diferencia las dos funciones: la reducción de ruido de alto ISO es procesamiento de imagen, la de exposición larga dispara físicamente un segundo dark frame.
+- Desactiva la reducción de ruido de exposición larga para secuencias que vas a apilar (star trails); déjala activada para una sola exposición larga independiente.
+- Al fotografiar a pulso en poca luz, expón hacia la derecha (ETTR) para mejorar la relación señal-ruido antes de llegar a la edición.
+- En la edición, aplica primero la reducción de ruido de color con generosidad, y detén la de luminancia justo antes de que empiece a difuminar el detalle.
+- Para escenas estáticas, apila varias tomas con trípode y promédialas para lograr niveles de ruido que una sola exposición no puede alcanzar.

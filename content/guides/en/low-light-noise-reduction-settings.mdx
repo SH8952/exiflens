@@ -1,0 +1,40 @@
+---
+title: "Low-Light Noise Reduction Settings: Getting the Most Out of In-Camera Noise Reduction"
+description: "Cranked your camera's noise reduction all the way up on an ISO 6400 shot, only to watch fine detail turn to mush? Here's the real difference between High ISO NR and Long Exposure NR, when to switch each one off, and how to cut noise before it ever hits your RAW file, not just after."
+publishedAt: "2026-09-21"
+tags: ["noise reduction", "high ISO", "low-light photography"]
+category: "Camera Basics & Exposure"
+image: "/guides/images/low-light-noise-reduction-settings.webp"
+imageCredit: "Wolfgang Hasselmann"
+imageCreditUrl: "https://unsplash.com/@wolfgang_hasselmann?utm_source=ExifLens&utm_medium=referral"
+---
+
+Push a camera to ISO 6400 or 12800 for a concert or a night scene and the whole frame comes back speckled with grain. Flip High ISO Noise Reduction to its strongest setting and the grain does calm down, but fine detail — hair, foliage, fabric weave — starts to melt into a soft, watercolor-like smear instead. Getting a usable balance between the two means understanding what these noise reduction settings actually do, and treating them as one part of a bigger low-light workflow rather than the whole answer.
+
+## Your camera actually has two separate noise reduction features
+
+Camera menus usually bury two distinct settings under similar-sounding names: High ISO Noise Reduction and Long Exposure Noise Reduction, and it's easy to assume they're the same thing. High ISO NR applies spatial smoothing (averaging neighboring pixels) when the camera builds a JPEG, specifically to tamp down the higher noise-to-signal ratio that comes with elevated ISO — shoot RAW and on most cameras this setting only affects the in-camera preview, leaving the actual RAW data untouched (a handful of cameras apply a mild version to RAW too, so it's worth checking your specific model). Long Exposure NR works completely differently: after the shutter closes, the camera fires a second, equally long exposure with the shutter blocked to capture a dark frame, then subtracts that sensor-specific thermal noise pattern from your actual shot. One is an image-processing algorithm; the other is physically taking a second photo.
+
+## Why Long Exposure NR doubles your shooting time
+
+With Long Exposure NR on, a 30-second exposure is followed by an automatic 30-second dark frame, so one shot actually takes a full 60 seconds to complete. For star trail photography, where you're firing off hundreds of consecutive frames to stack into one image, leaving this on either creates visible gaps in the trail between exposures or doubles your total shoot time and drains the battery for no real benefit. For a single standalone night shot, though, spending that extra time is often worth it — it reliably strips out sensor thermal noise, especially the bright "hot pixel" artifacts that get more visible the longer an exposure runs. The practical rule: turn it off when you're shooting a sequence meant to be stacked, and leave it on when a single frame has to stand on its own.
+
+## Real scenario: hand-holding a city night shot at ISO 3200, f/2.8, 1/15s
+
+Say you're hand-holding an f/2.8 lens at night, shooting ISO 3200 and 1/15s to keep the shutter fast enough to avoid camera shake. At that ISO, most cameras generate substantial noise, and the common mistake is compensating by stopping down further or pushing ISO even higher. Instead, exposing to the right (ETTR) — nudging the histogram slightly toward the highlights without clipping them — improves the signal-to-noise ratio compared to an underexposed frame, so noise is less visible after you pull exposure back down in post. If a tripod is an option, dropping ISO to 100–400 and stretching the shutter to 2–8 seconds addresses the problem at its source rather than compensating for it after the fact — for a static building or skyline, this alone can push noise down to a level that's barely visible.
+
+## A common mistake: maxing out the noise reduction slider in post
+
+Cranking the noise reduction slider to maximum in Lightroom or Capture One is another common misstep. Noise reduction generally splits into luminance noise (the grainy brightness variation) and color noise (green or magenta blotches); color noise reduction can usually be pushed fairly hard without visible side effects, but overdoing luminance noise reduction smears out fine texture — skin, leaves, fabric — into a plasticky, over-smoothed look. A more reliable approach is to apply color noise reduction generously first (roughly 25–50), then dial in luminance noise reduction at 100% zoom, watching detail live as you increase it, and stopping just before the noise fully disappears — leaving a hint of grain is usually the sweet spot between texture and smoothness.
+
+## A stronger tool than post-processing: stack multiple frames and average them
+
+Because noise is essentially random, averaging several identical frames of the same scene mathematically cancels much of it out. The reduction scales with the square root of the number of frames: averaging 4 shots cuts noise by roughly a factor of 2 (√4 = 2), and 9 shots by roughly a factor of 3 (√9 = 3). Lock the camera on a tripod, fire off 4 to 8 frames at identical settings, and combine them with Photoshop's Smart Object stack-mode averaging or dedicated software like Starry Landscape Stacker — this gets you noise levels that no amount of raising ISO tolerance or slider-tweaking in a single frame can match. The catch is motion between frames: drifting clouds or a person walking through the scene will leave translucent ghosting artifacts, so this technique works best on relatively static night and landscape scenes.
+
+## Checklist
+
+- Know the difference: High ISO NR is image processing, Long Exposure NR physically shoots a second dark frame.
+- Turn off Long Exposure NR for sequences meant to be stacked (star trails); leave it on for a single standalone long exposure.
+- When hand-holding in low light, expose to the right (ETTR) to improve the signal-to-noise ratio before you get to post.
+- In post, apply color noise reduction generously first, then stop luminance noise reduction right before detail starts to smear.
+- For static scenes, stack multiple tripod-mounted frames and average them for noise levels a single exposure can't reach.
