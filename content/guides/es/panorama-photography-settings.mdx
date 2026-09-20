@@ -1,0 +1,49 @@
+---
+title: "Ajustes de cámara para fotografía panorámica: del solape al punto nodal"
+description: "Las costuras rotas y las bandas de color en el cielo de una panorámica casi siempre vienen de un error al disparar, no del software. Cómo calcular el solape, fijar el punto nodal y bloquear exposición y balance de blancos para que la fusión funcione de verdad."
+publishedAt: "2026-09-20"
+tags: ["panorámica", "fusión de imágenes", "punto nodal"]
+category: "Guías por género fotográfico"
+image: "/guides/images/panorama-photography-settings.webp"
+imageCredit: "Denis Volkov"
+imageCreditUrl: "https://unsplash.com/@mrparalloid?utm_source=ExifLens&utm_medium=referral"
+---
+
+La fotografía panorámica une varios fotogramas para lograr un campo de visión que ningún objetivo por sí solo puede capturar, pero al pasar la secuencia por el software de fusión suele aparecer una costura rota o un cielo que cambia de color de un fotograma a otro. La mayor parte de eso se decide durante la toma, no después en el software: unas pocas reglas sobre el solape y la exposición fija resuelven casi todo antes de que llegue a ser un problema.
+
+## Bloquear la exposición: por qué cada fotograma debe coincidir exactamente
+
+Disparar en prioridad de apertura o en modo programa hace que la cámara vuelva a medir la luz en cada fotograma, cambiando la velocidad de obturación sin que te des cuenta. En una zona con un degradado suave, como un cielo despejado, esa pequeña deriva de exposición se convierte en una banda visible una vez fusionados los fotogramas. Mide la parte más clara y la más oscura de la escena antes de disparar, decide un valor intermedio, y bloquea apertura, velocidad de obturación, ISO y balance de blancos en manual para toda la secuencia. Las composiciones a contraluz, donde el sol solo entra en parte del encuadre, amplían todavía más esta diferencia de exposición: suele ser más seguro aceptar una luz un poco quemada que dejar que la cámara vuelva a medir a mitad de secuencia.
+
+## Calcular el solape y el número de fotogramas que necesitas
+
+El software de fusión busca puntos coincidentes entre fotogramas adyacentes para alinearlos, así que un solape demasiado pequeño deja poco detalle para emparejar y la costura falla. Un solape de trabajo de alrededor del 30% es un objetivo fiable: por debajo de eso, zonas sin textura como el cielo o una pared lisa empiezan a fallar en la alineación, y por encima del 40% solo añades fotogramas sin ningún beneficio. Puedes calcular el número de fotogramas partiendo del campo de visión del objetivo. Un objetivo de 24mm en formato completo, sostenido en orientación vertical, usa su dimensión corta de 24mm como el lado horizontal del encuadre, lo que da un campo de visión horizontal de unos 53°. Con un solape del 30%, cada nuevo fotograma solo añade 53° × 0,7, es decir, unos 37° de cobertura nueva. Cubrir 360° completos requiere entonces 360 ÷ 37, alrededor de 10 fotogramas.
+
+## El punto nodal y por qué el paralaje arruina la fusión
+
+Girar la cámara sobre un trípode normal hace que los elementos frontales del objetivo se desplacen ligeramente hacia adelante y atrás alrededor de ese eje, introduciendo paralaje entre un objeto cercano en primer plano y el fondo lejano. Ese desajuste es lo que provoca bordes duplicados o fantasma en los elementos de primer plano una vez fusionados los fotogramas. El punto nodal —más precisamente el punto sin paralaje, situado en la pupila de entrada del objetivo— es el eje que elimina el paralaje por completo cuando una rótula panorámica gira la cámara alrededor de él. Para paisajes lejanos sin nada cerca en primer plano, el paralaje apenas importa y basta una rótula de trípode normal; pero cualquier composición con un objeto en primer plano a pocos metros hace que una rótula panorámica ajustada al punto sin paralaje sea prácticamente obligatoria.
+
+## Enfoque y apertura: equilibrar la difracción con la profundidad de campo
+
+Si el enfoque cambia entre fotogramas, se nota como un desajuste de nitidez justo en la línea de costura, así que enfoca una vez con autofoco y luego cambia a manual, manteniéndolo fijo durante toda la secuencia. La apertura suele funcionar mejor alrededor de f/8-f/11: lo bastante cerrada para una buena profundidad de campo, antes de que la difracción empiece a afectarla. Cerrar más allá de f/16 sigue aumentando la profundidad de campo, pero la difracción suaviza toda la imagen, algo que aquí pesa más de lo habitual porque las panorámicas suelen imprimirse o verse en tamaño grande. Si una composición necesita profundidad desde un primer plano cercano hasta un fondo lejano, enfocar a la distancia hiperfocal suele ser mejor primera opción que seguir cerrando el diafragma.
+
+## Por qué desactivar el balance de blancos automático, las correcciones de objetivo y el polarizador
+
+Dejar el balance de blancos en automático hace que la cámara recalcule la temperatura de color en cada fotograma, dando al cielo un tono ligeramente distinto cada vez, una variación que se convierte en bandas de color visibles al fusionar. Fija el balance de blancos en un valor Kelvin manual antes de disparar. Un [filtro polarizador](/guides/nd-filter-vs-polarizer-filter) oscurece el cielo de forma distinta según su ángulo respecto al sol, y en el barrido amplio de una panorámica ese ángulo cambia constantemente, dejando una banda oscura sobre parte del cielo: mejor evitarlo aquí salvo que ese efecto sea deliberado. La corrección automática de viñeteado y distorsión de la cámara también puede chocar con el propio tratamiento de bordes del algoritmo de fusión, así que disparar en RAW y corregir una sola vez en la posproducción suele dar resultados más predecibles.
+
+## Por qué la orientación vertical suele ganar
+
+Girar la cámara a orientación vertical con el mismo objetivo amplía el campo de visión vertical, añadiendo más información vertical a la panorámica final y más margen para recortar después. Una panorámica en orientación horizontal suele salir de la fusión con un borde superior e inferior en forma de trapecio que hay que recortar, un coste real cuando la toma necesita conservar tanto el cielo como el horizonte. La orientación vertical sí necesita más fotogramas para cubrir el mismo campo horizontal, así que hay que contar con más tiempo de disparo y más archivos.
+
+## Posproducción: elegir software y dejar margen para recortar
+
+La función Fotomerge de Adobe Lightroom o Photoshop resuelve sin problemas la mayoría de las panorámicas de paisaje, pero un sujeto con muchas líneas rectas —arquitectura, sobre todo— o una secuencia disparada con un objetivo ultra gran angular o de ojo de pez suele fusionarse de forma más fiable con software dedicado como PTGui o Hugin, que manejan con más cuidado la corrección de distorsión y la alineación. El resultado de la fusión casi siempre sale con un borde irregular, así que dispara con margen alrededor del encuadre final que tienes en mente para dejar espacio a ese recorte.
+
+## Lista de verificación práctica
+
+- Mide la parte más clara y la más oscura de la escena, fija un valor de exposición intermedio y bloquea exposición, balance de blancos y enfoque en manual para toda la secuencia.
+- Mantén el solape en torno al 30% y calcula el número de fotogramas a partir del campo de visión de tu objetivo antes de empezar a disparar.
+- Usa una rótula panorámica ajustada al punto sin paralaje siempre que haya un objeto cercano en primer plano dentro del encuadre.
+- Fija la apertura alrededor de f/8-f/11 para equilibrar la profundidad de campo con la difracción.
+- Evita el polarizador en panorámicas amplias salvo que la banda que produce en el cielo sea intencional.
+- Dispara con margen extra por todos los lados para dejar espacio al recorte que deja el software de fusión.

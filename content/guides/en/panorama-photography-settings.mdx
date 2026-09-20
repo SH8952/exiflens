@@ -1,0 +1,49 @@
+---
+title: "Panorama Photography Settings: From Overlap to the Nodal Point"
+description: "Torn seams and banding skies in a stitched panorama almost always trace back to a shooting mistake, not the software. Here's how to calculate overlap, lock the nodal point, and fix exposure and white balance so stitching actually holds together."
+publishedAt: "2026-09-20"
+tags: ["panorama", "stitching", "nodal point"]
+category: "Photography Genres"
+image: "/guides/images/panorama-photography-settings.webp"
+imageCredit: "Denis Volkov"
+imageCreditUrl: "https://unsplash.com/@mrparalloid?utm_source=ExifLens&utm_medium=referral"
+---
+
+Panorama photography stitches multiple frames into a field of view no single lens can capture, but running the sequence through stitching software often reveals cracked seams or a sky that shifts color from one frame to the next. Most of that comes down to decisions made during the shoot, not the software afterward — a few rules around overlap and locked exposure fix most of it before it ever becomes a problem.
+
+## Locking exposure: why every frame needs to match exactly
+
+Shoot in aperture priority or program mode and the camera re-meters brightness on every frame, quietly shifting shutter speed between shots. In a smoothly graded area like open sky, that tiny exposure drift shows up as a visible banding line once the frames are stitched. Meter the brightest and darkest parts of the scene before shooting, settle on a middle value, then lock aperture, shutter speed, ISO, and white balance all in manual mode for the entire sequence. Backlit compositions where the sun sits in only part of the frame push this exposure gap even wider — it's usually safer to accept a slightly blown highlight than to let the camera re-meter mid-sequence.
+
+## Working out overlap and the frame count you need
+
+Stitching software finds matching points between adjacent frames to align them, so too little overlap means not enough matching detail to work with, and the seam fails. A working overlap of around 30% is a reliable target: go narrower and featureless areas like sky or a blank wall start failing to align; push past 40% and you're just adding frames for no benefit. You can work backward from a lens's field of view to get the frame count. A 24mm lens on full-frame, held in portrait orientation, uses its short 24mm dimension for the horizontal frame, giving a horizontal field of view of roughly 53°. At 30% overlap, each new frame only adds 53° × 0.7, or about 37° of fresh coverage. Covering a full 360° then takes 360 ÷ 37, or around 10 frames.
+
+## The nodal point and why parallax wrecks a stitch
+
+Rotate a camera on an ordinary tripod head and the front elements of the lens sweep slightly forward and back around that pivot, introducing parallax between a near foreground object and the distant background. That mismatch is what causes doubled or ghosted edges on foreground elements once frames are stitched. The nodal point — more precisely the no-parallax point, at the lens's entrance pupil — is the pivot that eliminates parallax entirely when a panoramic head rotates the camera around it. For distant landscapes with nothing close in the foreground, parallax barely matters and a plain tripod head is fine; but any composition with a foreground object within a few meters makes a panoramic head set to the no-parallax point close to mandatory.
+
+## Focus and aperture: balancing diffraction against depth
+
+Focus that shifts between frames shows up as a visible sharpness mismatch right at the stitch line, so autofocus once, then switch to manual focus and hold it for the entire sequence. Aperture usually lands best around f/8–f/11 — tight enough for solid depth of field, before diffraction starts eating into it. Stop down past f/16 and depth of field keeps growing, but diffraction softens the whole image, which hurts more here than usual because panoramas are typically printed or viewed large. If a composition needs depth from near foreground to distant background, focusing at the hyperfocal distance is usually a better first move than stopping down further.
+
+## Why white balance, lens corrections, and polarizers should stay off
+
+Leave auto white balance on and the camera recalculates color temperature on every frame, giving the sky a subtly different tint each time — a shift that turns into visible color banding once stitched. Lock white balance to a manual Kelvin value before shooting. A [polarizing filter](/guides/nd-filter-vs-polarizer-filter) darkens sky differently depending on its angle to the sun, and across the wide sweep of a panorama that angle changes constantly, leaving a dark band across part of the sky — best avoided here unless that's the deliberate effect. In-camera vignette and distortion correction can also fight the stitching algorithm's own edge handling, so shooting RAW and correcting once in post tends to be more predictable.
+
+## Why portrait orientation usually wins
+
+Turning the camera to shoot in portrait orientation with the same lens widens the vertical field of view, adding more vertical data to the final panorama and more room to crop afterward. A landscape-orientation panorama often comes out of stitching with a trapezoid-shaped top and bottom edge that has to be cropped away — a real cost when the shot needs to keep both sky and horizon. Portrait orientation does need more frames to cover the same horizontal field, so factor in the extra shooting time and file count.
+
+## Post-processing: choosing software and leaving crop room
+
+Adobe Lightroom's or Photoshop's Photomerge handles most landscape panoramas without issue, but a subject with a lot of straight lines — architecture, especially — or a sequence shot with an ultra-wide or fisheye lens usually stitches more reliably in dedicated software like PTGui or Hugin, which handle distortion correction and alignment more carefully. Stitched output almost always comes out with an irregular edge, so shoot with some margin around your intended final frame to leave room for that crop.
+
+## Practical checklist
+
+- Meter the brightest and darkest parts of the scene, settle on a middle exposure, and lock exposure, white balance, and focus manually for the whole sequence.
+- Keep overlap around 30% and work out the frame count from your lens's field of view before you start shooting.
+- Use a panoramic head set to the no-parallax point whenever a nearby foreground object is in the frame.
+- Set aperture around f/8–f/11 to balance depth of field against diffraction.
+- Skip the polarizer for wide panoramas unless the sky banding it produces is intentional.
+- Shoot with extra margin on every side to leave room for the crop that stitching software leaves behind.
