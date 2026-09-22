@@ -6,7 +6,8 @@
     "guidesNav": "Guides",
     "faqNav": "FAQ",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "toolsNav": "Tools"
   },
   "Home": {
     "title": "ExifLens — Free Online EXIF Viewer & Photo Metadata Checker",
@@ -159,7 +160,8 @@
     "guides": "Guides",
     "about": "About",
     "disclosure": "Affiliate Disclosure",
-    "contact": "Contact"
+    "contact": "Contact",
+    "tools": "Tools"
   },
   "Privacy": {
     "title": "Privacy Policy",
@@ -379,5 +381,85 @@
     "message": "We use cookies to analyze traffic and personalize ads. You can accept or decline non-essential cookies.",
     "accept": "Accept",
     "reject": "Decline"
+  },
+  "ToolsHub": {
+    "title": "Photography Tools",
+    "subtitle": "Free, browser-only calculators for photographers — nothing uploaded, nothing to sign up for.",
+    "fieldSectionTitle": "On-Location Calculators",
+    "postShootSectionTitle": "Post-Shoot & Pro Tools",
+    "comingSoon": "Coming soon",
+    "tools": {
+      "dof-calculator": {
+        "name": "Depth of Field Calculator",
+        "description": "Find your near/far focus limits and hyperfocal distance from focal length, aperture, and sensor size."
+      },
+      "exposure-stops-calculator": {
+        "name": "Exposure Triangle / Stop Converter",
+        "description": "See the equivalent shutter speed, aperture, or ISO when you change one exposure setting."
+      },
+      "timelapse-calculator": {
+        "name": "Time-Lapse Calculator",
+        "description": "Work out shooting interval, total frames, and shoot duration from your target video length."
+      },
+      "astrophotography-calculator": {
+        "name": "Astrophotography Exposure Calculator",
+        "description": "Get the longest shutter speed before stars start trailing, using the NPF or 500 rule."
+      },
+      "bracketing-calculator": {
+        "name": "Exposure Bracketing Calculator",
+        "description": "Calculate the shutter speeds for an HDR bracket from your base exposure and stop spacing."
+      },
+      "print-resolution-calculator": {
+        "name": "Print Resolution / DPI Calculator",
+        "description": "Find the largest print size your photo supports at 300 DPI (or any target resolution)."
+      },
+      "storage-calculator": {
+        "name": "Photo Storage Calculator",
+        "description": "Estimate RAW/JPEG file sizes and how many shots fit on a memory card."
+      },
+      "exif-remover": {
+        "name": "EXIF Remover",
+        "description": "Strip location and camera metadata from your photos before sharing them online."
+      },
+      "crop-factor-calculator": {
+        "name": "Crop Factor / Focal Length Converter",
+        "description": "Convert a focal length between full-frame, APS-C, and Micro Four Thirds equivalents."
+      }
+    }
+  },
+  "DofCalculator": {
+    "cardTitle": "Depth of Field",
+    "focalLength": "Focal Length (mm)",
+    "aperture": "Aperture (f-stop)",
+    "sensor": "Sensor Size",
+    "customSensor": "Custom",
+    "customCocLabel": "Circle of Confusion (mm)",
+    "subjectDistance": "Subject Distance (m)",
+    "hyperfocal": "Hyperfocal Distance",
+    "nearLimit": "Near Focus Limit",
+    "farLimit": "Far Focus Limit",
+    "totalDof": "Total Depth of Field",
+    "infinity": "Infinity",
+    "invalidInput": "Enter valid, positive numbers for every field.",
+    "pageTitle": "Depth of Field (DoF) & Hyperfocal Distance Calculator",
+    "pageDescription": "Calculate your near and far focus limits, total depth of field, and hyperfocal distance from focal length, aperture, and sensor size — entirely in your browser.",
+    "aboutTitle": "About this calculator",
+    "aboutBody": "Depth of field is the zone in front of and behind your focus point that still looks acceptably sharp. It depends on your focal length, aperture, subject distance, and sensor size (via the circle of confusion). This calculator uses the standard hyperfocal-distance formulas that most photography references and DoF calculator apps use. Results are estimates for typical viewing conditions — actual sharpness also depends on print size, viewing distance, and lens quality.",
+    "disclaimer": "For reference only. Real-world sharpness can vary with your specific lens and how the final image is viewed or printed.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "What is hyperfocal distance?",
+        "answer": "It's the focus distance that gives you the maximum depth of field for a given focal length and aperture — everything from half that distance to infinity appears acceptably sharp."
+      },
+      {
+        "question": "Why does sensor size affect the result?",
+        "answer": "Smaller sensors need a smaller circle of confusion to look equally sharp when viewed at the same size, which changes the depth of field for the same focal length and aperture."
+      },
+      {
+        "question": "Is this exact for my camera?",
+        "answer": "It's a close, industry-standard approximation. For critical work, treat the results as a starting point rather than an exact guarantee."
+      }
+    ]
   }
 }

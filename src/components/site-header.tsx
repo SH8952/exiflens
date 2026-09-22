@@ -58,6 +58,9 @@ export function SiteHeader() {
           <Link href="/faq" className={navLinkClass}>
             {t("faqNav")}
           </Link>
+          <Link href="/tools" className={navLinkClass}>
+            {t("toolsNav")}
+          </Link>
           {frameLink}
           <LanguageSwitcher />
         </nav>
@@ -104,6 +107,13 @@ export function SiteHeader() {
             onClick={() => setMenuOpen(false)}
           >
             {t("faqNav")}
+          </Link>
+          <Link
+            href="/tools"
+            className={`${navLinkClass} py-2.5`}
+            onClick={() => setMenuOpen(false)}
+          >
+            {t("toolsNav")}
           </Link>
           <span className="py-2.5">{frameLink}</span>
         </nav>

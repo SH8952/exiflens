@@ -53,3 +53,6 @@ __pycache__/
 # 빌드 정리 단계에서 EPERM으로 인해 .next 대신 이름을 바꿔 남겨진 임시 폴더
 .next.stale.*/
 .next_old_*/
+
+# 임시 distDir 검증 빌드 폴더 (next.config.ts distDir 임시 오버라이드로 생성)
+.next-verify/

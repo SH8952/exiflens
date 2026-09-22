@@ -19,6 +19,8 @@ const STATIC_PATHS = [
   "/contact",
   "/guides",
   "/faq",
+  "/tools",
+  "/tools/dof-calculator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -6,7 +6,8 @@
     "guidesNav": "가이드",
     "faqNav": "FAQ",
     "openMenu": "메뉴 열기",
-    "closeMenu": "메뉴 닫기"
+    "closeMenu": "메뉴 닫기",
+    "toolsNav": "도구"
   },
   "Home": {
     "title": "ExifLens — 무료 온라인 EXIF 뷰어 & 사진 메타데이터 확인",
@@ -159,7 +160,8 @@
     "guides": "가이드",
     "about": "소개",
     "disclosure": "제휴 마케팅 고지",
-    "contact": "문의하기"
+    "contact": "문의하기",
+    "tools": "도구"
   },
   "Privacy": {
     "title": "개인정보처리방침",
@@ -379,5 +381,85 @@
     "message": "트래픽 분석과 광고 개인화를 위해 쿠키를 사용합니다. 선택적 쿠키의 사용 여부를 직접 선택하실 수 있습니다.",
     "accept": "동의",
     "reject": "거부"
+  },
+  "ToolsHub": {
+    "title": "사진 도구",
+    "subtitle": "회원가입 없이, 사진 업로드도 필요 없는 무료 브라우저 계산기 모음입니다.",
+    "fieldSectionTitle": "촬영 현장 계산 도구",
+    "postShootSectionTitle": "촬영 후 · 실무 도구",
+    "comingSoon": "준비 중",
+    "tools": {
+      "dof-calculator": {
+        "name": "심도(DoF) 계산기",
+        "description": "초점거리, 조리개, 센서 크기로 근거리/원거리 초점 한계와 과초점거리를 계산합니다."
+      },
+      "exposure-stops-calculator": {
+        "name": "노출 삼각형 / 스탑 변환 계산기",
+        "description": "셔터스피드·조리개·ISO 중 하나를 바꿔을 때 동일한 노출을 유지하는 나머지 값을 계산합니다."
+      },
+      "timelapse-calculator": {
+        "name": "타임랩스 계산기",
+        "description": "원하는 최종 영상 길이를 기준으로 촬영 간격, 총 촬영 매수, 소요 시간을 계산합니다."
+      },
+      "astrophotography-calculator": {
+        "name": "별사진(은하수) 노출 계산기",
+        "description": "NPF 또는 500 rule을 이용해 별이 흔리지 않는 최대 셔터스피드를 계산합니다."
+      },
+      "bracketing-calculator": {
+        "name": "브라케팅(HDR) 계산기",
+        "description": "기준 노출과 스탑 간격으로 HDR 브라케팅 셔터스피드 값을 계산합니다."
+      },
+      "print-resolution-calculator": {
+        "name": "인쇄 해상도 / DPI 계산기",
+        "description": "300DPI(또는 원하는 해상도) 기준으로 인쇄 가능한 최대 사진 크기를 계산합니다."
+      },
+      "storage-calculator": {
+        "name": "저장 용량 계산기",
+        "description": "RAW/JPEG 파일 크기와 메모리카드에 담을 수 있는 촬영 매수를 계산합니다."
+      },
+      "exif-remover": {
+        "name": "EXIF 일괄 제거 도구",
+        "description": "온라인에 공유하기 전에 사진 속 위치·카메라 정보를 제거합니다."
+      },
+      "crop-factor-calculator": {
+        "name": "센서 크기별 환산 화각 계산기",
+        "description": "풀프레임·APS-C·마이크로포서드 간 동일 화각의 초점거리를 환산합니다."
+      }
+    }
+  },
+  "DofCalculator": {
+    "cardTitle": "심도 계산",
+    "focalLength": "초점거리 (mm)",
+    "aperture": "조리개 값 (f-stop)",
+    "sensor": "센서 크기",
+    "customSensor": "직접 입력",
+    "customCocLabel": "착란원(Circle of Confusion, mm)",
+    "subjectDistance": "피사체 거리 (m)",
+    "hyperfocal": "과초점거리",
+    "nearLimit": "근거리 초점 한계",
+    "farLimit": "원거리 초점 한계",
+    "totalDof": "전체 심도 범위",
+    "infinity": "무한대",
+    "invalidInput": "모든 항목에 유효한 양수를 입력해 주세요.",
+    "pageTitle": "심도(DoF) & 과초점거리 계산기",
+    "pageDescription": "초점거리, 조리개, 센서 크기를 입력하면 근거리/원거리 초점 한계, 전체 심도 범위, 과초점거리를 브라우저에서 바로 계산합니다.",
+    "aboutTitle": "이 계산기에 대해",
+    "aboutBody": "심도(피사계 심도)는 초점을 맞춘 지점 앞뒤로 선명하게 보이는 범위를 말합니다. 초점거리, 조리개, 피사체 거리, 그리고 센서 크기(착란원 값)에 따라 달라집니다. 이 계산기는 대부분의 사진 참고 자료와 심도 계산 앱에서 사용하는 표준 과초점거리 공식을 사용합니다. 결과는 일반적인 감상 조건을 기준으로 한 근사값이며, 실제 선명도는 인쇄 크기, 감상 거리, 렌즈 성능에 따라 달라질 수 있습니다.",
+    "disclaimer": "본 계산 결과는 참고용입니다. 실제 선명도는 사용 중인 렌즈와 최종 이미지를 보는/인쇄하는 방식에 따라 달라질 수 있습니다.",
+    "faqTitle": "자주 묻는 질문",
+    "faq": [
+      {
+        "question": "과초점거리란 무엇인가요?",
+        "answer": "특정 초점거리와 조리개 값에서 최대 심도를 얻을 수 있는 초점 거리를 말합니다. 이 거리의 절반 지점부터 무한대까지 선명하게 보입니다."
+      },
+      {
+        "question": "센서 크기가 왜 결과에 영향을 주나요?",
+        "answer": "센서가 작을수록 같은 크기로 봤을 때 동일하게 선명해 보이려면 더 작은 착란원 값이 필요해, 같은 초점거리·조리개에서도 심도가 달라집니다."
+      },
+      {
+        "question": "제 카메라에 정확히 맞는 값인가요?",
+        "answer": "업계 표준에 가까운 근사값입니다. 중요한 작업이라면 정확한 보장이 아닌 참고 기준점으로 활용해 주세요."
+      }
+    ]
   }
 }

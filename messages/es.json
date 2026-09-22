@@ -6,7 +6,8 @@
     "guidesNav": "Guías",
     "faqNav": "FAQ",
     "openMenu": "Abrir menú",
-    "closeMenu": "Cerrar menú"
+    "closeMenu": "Cerrar menú",
+    "toolsNav": "Herramientas"
   },
   "Home": {
     "title": "ExifLens — Visor EXIF Gratis en Línea y Verificador de Metadatos de Fotos",
@@ -159,7 +160,8 @@
     "guides": "Guías",
     "about": "Sobre nosotros",
     "disclosure": "Divulgación de afiliados",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "tools": "Herramientas"
   },
   "Privacy": {
     "title": "Política de Privacidad",
@@ -379,5 +381,85 @@
     "message": "Utilizamos cookies para analizar el tráfico y personalizar los anuncios. Puede aceptar o rechazar las cookies no esenciales.",
     "accept": "Aceptar",
     "reject": "Rechazar"
+  },
+  "ToolsHub": {
+    "title": "Herramientas fotográficas",
+    "subtitle": "Calculadoras gratuitas que funcionan solo en tu navegador, sin registro ni subida de archivos.",
+    "fieldSectionTitle": "Calculadoras para el terreno",
+    "postShootSectionTitle": "Herramientas de posproducción y uso profesional",
+    "comingSoon": "Próximamente",
+    "tools": {
+      "dof-calculator": {
+        "name": "Calculadora de profundidad de campo",
+        "description": "Calcula los límites de enfoque cercano/lejano y la distancia hiperfocal según la distancia focal, la apertura y el tamaño del sensor."
+      },
+      "exposure-stops-calculator": {
+        "name": "Conversor de triángulo de exposición / pasos",
+        "description": "Calcula el valor equivalente de velocidad de obturación, apertura o ISO al cambiar uno de los ajustes de exposición."
+      },
+      "timelapse-calculator": {
+        "name": "Calculadora de time-lapse",
+        "description": "Calcula el intervalo de disparo, el número total de fotogramas y la duración de la sesión según la duración deseada del vídeo."
+      },
+      "astrophotography-calculator": {
+        "name": "Calculadora de exposición astrofotográfica",
+        "description": "Calcula la velocidad de obturación máxima antes de que las estrellas se muevan, usando la regla NPF o la regla 500."
+      },
+      "bracketing-calculator": {
+        "name": "Calculadora de bracketing (HDR)",
+        "description": "Calcula las velocidades de obturación para un bracket HDR según tu exposición base y el intervalo de pasos."
+      },
+      "print-resolution-calculator": {
+        "name": "Calculadora de resolución de impresión / DPI",
+        "description": "Calcula el tamaño máximo de impresión de tu foto a 300 DPI (o la resolución que prefieras)."
+      },
+      "storage-calculator": {
+        "name": "Calculadora de almacenamiento de fotos",
+        "description": "Estima el tamaño de los archivos RAW/JPEG y cuántas fotos caben en una tarjeta de memoria."
+      },
+      "exif-remover": {
+        "name": "Eliminador de EXIF",
+        "description": "Elimina la ubicación y los metadatos de la cámara de tus fotos antes de compartirlas en línea."
+      },
+      "crop-factor-calculator": {
+        "name": "Conversor de factor de recorte / distancia focal",
+        "description": "Convierte una distancia focal entre equivalentes de fotograma completo, APS-C y Micro Cuatro Tercios."
+      }
+    }
+  },
+  "DofCalculator": {
+    "cardTitle": "Profundidad de campo",
+    "focalLength": "Distancia focal (mm)",
+    "aperture": "Apertura (valor f)",
+    "sensor": "Tamaño del sensor",
+    "customSensor": "Personalizado",
+    "customCocLabel": "Círculo de confusión (mm)",
+    "subjectDistance": "Distancia al sujeto (m)",
+    "hyperfocal": "Distancia hiperfocal",
+    "nearLimit": "Límite de enfoque cercano",
+    "farLimit": "Límite de enfoque lejano",
+    "totalDof": "Profundidad de campo total",
+    "infinity": "Infinito",
+    "invalidInput": "Introduce números positivos válidos en todos los campos.",
+    "pageTitle": "Calculadora de profundidad de campo (DoF) y distancia hiperfocal",
+    "pageDescription": "Calcula los límites de enfoque cercano y lejano, la profundidad de campo total y la distancia hiperfocal a partir de la distancia focal, la apertura y el tamaño del sensor, directamente en tu navegador.",
+    "aboutTitle": "Sobre esta calculadora",
+    "aboutBody": "La profundidad de campo es la zona delante y detrás del punto de enfoque que aún se ve razonablemente nítida. Depende de la distancia focal, la apertura, la distancia al sujeto y el tamaño del sensor (a través del círculo de confusión). Esta calculadora utiliza las fórmulas estándar de distancia hiperfocal que emplean la mayoría de referencias fotográficas y aplicaciones de cálculo de profundidad de campo. Los resultados son estimaciones para condiciones de visualización típicas; la nitidez real también depende del tamaño de impresión, la distancia de visualización y la calidad del objetivo.",
+    "disclaimer": "Solo con fines de referencia. La nitidez real puede variar según tu objetivo específico y cómo se vea o imprima la imagen final.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Qué es la distancia hiperfocal?",
+        "answer": "Es la distancia de enfoque que ofrece la máxima profundidad de campo para una distancia focal y apertura dadas: todo desde la mitad de esa distancia hasta el infinito se ve razonablemente nítido."
+      },
+      {
+        "question": "¿Por qué el tamaño del sensor afecta el resultado?",
+        "answer": "Los sensores más pequeños necesitan un círculo de confusión menor para verse igual de nítidos al mismo tamaño de visualización, lo que cambia la profundidad de campo para la misma distancia focal y apertura."
+      },
+      {
+        "question": "¿Es exacto para mi cámara?",
+        "answer": "Es una aproximación cercana y estándar en la industria. Para trabajos críticos, trata los resultados como punto de partida y no como una garantía exacta."
+      }
+    ]
   }
 }

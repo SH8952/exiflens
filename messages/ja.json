@@ -6,7 +6,8 @@
     "guidesNav": "ガイド",
     "faqNav": "FAQ",
     "openMenu": "メニューを開く",
-    "closeMenu": "メニューを閉じる"
+    "closeMenu": "メニューを閉じる",
+    "toolsNav": "ツール"
   },
   "Home": {
     "title": "ExifLens — 無料オンラインEXIFビューア＆写真メタデータチェッカー",
@@ -159,7 +160,8 @@
     "guides": "ガイド",
     "about": "サイトについて",
     "disclosure": "アフィリエイト開示",
-    "contact": "お問い合わせ"
+    "contact": "お問い合わせ",
+    "tools": "ツール"
   },
   "Privacy": {
     "title": "プライバシーポリシー",
@@ -379,5 +381,85 @@
     "message": "トラフィック分析と広告のパーソナライズのためにCookieを使用しています。任意のCookieの使用可否を選択できます。",
     "accept": "同意する",
     "reject": "拒否する"
+  },
+  "ToolsHub": {
+    "title": "写真ツール",
+    "subtitle": "会員登録不要、アップロードも不要な無料のブラウザ計算ツール集です。",
+    "fieldSectionTitle": "撮影現場向け計算ツール",
+    "postShootSectionTitle": "撮影後・実務向けツール",
+    "comingSoon": "近日公開",
+    "tools": {
+      "dof-calculator": {
+        "name": "被写界深度(DoF)計算機",
+        "description": "焦点距離・絞り・センサーサイズから近点・遠点の合焦範囲と過焦点距離を計算します。"
+      },
+      "exposure-stops-calculator": {
+        "name": "露出トライアング/ストップ変換計算機",
+        "description": "シャッタースピード・絞り・ISOのいずれかを変更した際、同じ露出を保つための他の値を計算します。"
+      },
+      "timelapse-calculator": {
+        "name": "タイムラプス計算機",
+        "description": "目標の動画尺から撮影間隔・総撮影枚数・撮影時間を逆算します。"
+      },
+      "astrophotography-calculator": {
+        "name": "星景写真露出計算機",
+        "description": "NPFルールまたは500ルールで、星が流れない最長シャッタースピードを計算します。"
+      },
+      "bracketing-calculator": {
+        "name": "ブラケティング(HDR)計算機",
+        "description": "基準露出とストップ幅からHDRブラケティングのシャッタースピードを計算します。"
+      },
+      "print-resolution-calculator": {
+        "name": "印刷解像度/DPI計算機",
+        "description": "300DPI（または任意の解像度）で印刷可能な最大サイズを計算します。"
+      },
+      "storage-calculator": {
+        "name": "ストレージ容量計算機",
+        "description": "RAW/JPEGのファイルサイズとメモリーカードに収まる撮影枚数を計算します。"
+      },
+      "exif-remover": {
+        "name": "EXIF一括削除ツール",
+        "description": "オンライン共有前に写真から位置情報・カメラ情報を削除します。"
+      },
+      "crop-factor-calculator": {
+        "name": "センサーサイズ換算計算機",
+        "description": "フルサイズ・APS-C・マイクロフォーサーズ間で同じ画角になる焦点距離を換算します。"
+      }
+    }
+  },
+  "DofCalculator": {
+    "cardTitle": "被写界深度",
+    "focalLength": "焦点距離 (mm)",
+    "aperture": "絞り値 (F値)",
+    "sensor": "センサーサイズ",
+    "customSensor": "カスタム",
+    "customCocLabel": "許容錯乱円 (mm)",
+    "subjectDistance": "被写体距離 (m)",
+    "hyperfocal": "過焦点距離",
+    "nearLimit": "近点合焦限界",
+    "farLimit": "遠点合焦限界",
+    "totalDof": "被写界深度の合計",
+    "infinity": "無限遠",
+    "invalidInput": "すべての項目に有効な正の数値を入力してください。",
+    "pageTitle": "被写界深度(DoF)・過焦点距離計算機",
+    "pageDescription": "焦点距離・絞り・センサーサイズを入力すると、近点/遠点の合焦限界、被写界深度の合計、過焦点距離をブラウザ上ですぐに計算します。",
+    "aboutTitle": "この計算機について",
+    "aboutBody": "被写界深度とは、ピントを合わせた位置の前後で許容範囲内にシャープに見える範囲のことです。焦点距離・絞り・被写体距離、そしてセンサーサイズ（許容錯乱円の値）によって変化します。この計算機は、多くの写真関連資料やDoF計算アプリで使われている標準的な過焦点距離の公式を使用しています。結果は一般的な鑑賞条件を前提とした近似値であり、実際のシャープさはプリントサイズ、鑑賞距離、レンズの性能によっても変わります。",
+    "disclaimer": "この結果は参考値です。実際のシャープさは使用レンズや最終的な画像の鑑賞・印刷方法によって異なる場合があります。",
+    "faqTitle": "よくある質問",
+    "faq": [
+      {
+        "question": "過焦点距離とは何ですか？",
+        "answer": "特定の焦点距離と絞り値で最大の被写界深度が得られる合焦距離のことです。この距離の半分から無限遠までがシャープに見えます。"
+      },
+      {
+        "question": "なぜセンサーサイズが結果に影響するのですか？",
+        "answer": "センサーが小さいほど、同じサイズで見たときに同等にシャープに見せるための許容錯乱円が小さくなり、同じ焦点距離・絞りでも被写界深度が変わります。"
+      },
+      {
+        "question": "自分のカメラに正確な値ですか？",
+        "answer": "業界標準に近い近似値です。重要な撮影では、正確な保証ではなく目安としてご利用ください。"
+      }
+    ]
   }
 }
