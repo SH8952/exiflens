@@ -1,3 +1,14 @@
+## 2026-09-22 — /tools 허브 신설 및 심도(DoF)/과초점거리 계산기 추가 (기능 확장 1단계)
+
+- 배경: 애드센스 심사와 별개로 exifnd.com에 카메라/사진 카테고리 신규 도구를 추가하는 확장 전략 논의(`claude/exiflens-tool-expansion-strategy-and-freeimgfix-benchmark.md`, 2026-09-21) 및 사용자가 제시한 9개 도구 후보 이미지(2026-09-22)를 바탕으로, 하위 경로(subpath) 확장 방식과 이미지에 나열된 순서(심도 → 노출 스탑 → 타임랩스 → 별사진 → 브라케팅 → 인쇄해상도 → 저장용량 → EXIF제거 → 크롭팩터)대로 진행하기로 사용자 승인.
+- **작업 전 백업**: `_backups/backup_20260922_231810_tools_hub_and_dof_calculator/`에 수정 대상 파일(`page.tsx`, `site-header.tsx`, `messages/*.json`) 백업.
+- **신규**: `/tools` 허브 페이지(`src/app/[locale]/tools/page.tsx`) — 촬영 현장 계산 도구 / 촬영 후·실무 도구 2개 섹션, 9개 도구 카드(1번만 활성 링크, 나머지는 "준비 중" 배지). 1번 도구 심도(DoF)/과초점거리 계산기 구현: `src/lib/dof-calculator.ts`(과초점거리 공식 H=f²/(N·c)+f 기반 근거리/원거리 초점 한계·전체 심도 계산, 센서 크기별 착란원 프리셋 5종 + 직접 입력), `src/components/dof-calculator-card.tsx`(ND 계산기와 동일한 클라이언트 즉시 계산 카드 UI), `src/app/[locale]/tools/dof-calculator/page.tsx`(설명/FAQ 3문항/면책 문구 + BreadcrumbList·WebApplication·FAQPage JSON-LD).
+- **수정**: `src/components/site-header.tsx`/`site-footer.tsx`에 "Tools" 내비게이션 링크 추가(데스크톱/모바일 메뉴 모두), `src/app/sitemap.ts`에 `/tools`, `/tools/dof-calculator` 경로 추가, `messages/{en,ko,ja,es}.json`에 `Header.toolsNav`, `Footer.tools`, `ToolsHub`, `DofCalculator` 네임스페이스 전체 번역 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류·경고 0건), `npm run build`(브릿지 환경의 `.next` 캐시 폴더에 남은 macOS FUSE 잔여 파일로 빌드가 시작 단계에서 막혀, `next.config.ts`에 `distDir`를 임시로 `.next-verify`로 지정해 검증 후 원복 — Turbopack 컴파일 성공, TypeScript 통과, 234/234 페이지 전부 정상 생성. 알리익스프레스/쿠팡 API 호출 실패는 샌드박스 네트워크 제한에 의한 기존 현상으로 이번 작업과 무관. 마지막 "Finalizing" 단계의 `.next-verify/export-detail.json` unlink EPERM은 브릿지 환경 고유의 무해한 현상). 로컬 `npm run dev`(포트 3000) 실행 후 `curl`로 `/en/tools`, `/en/tools/dof-calculator`, `/ko/tools`, `/ko/tools/dof-calculator` 응답 코드(200) 및 실제 렌더링 텍스트(영/한 번역 정상 출력)까지 직접 확인.
+- **참고(환경 이슈)**: 이번 커밋 과정에서 `git add`/`git commit`이 남긴 `.git/index.lock`이 브릿지 환경의 파일 삭제 제한으로 자동 정리되지 않아 커밋이 일시 중단됨 — 사용자가 해당 lock 파일을 직접 삭제해 재개. 향후 동일 현상이 반복될 수 있음(삭제 권한이 없으면 git의 임시 파일 정리가 실패하는 이 브릿지 환경 고유의 제약).
+- **커밋**: `be9b042` "feat(tools): add /tools hub and Depth of Field / Hyperfocal Distance calculator"
+- **다음 단계**: push, 실사이트에서 `/tools`, `/tools/dof-calculator` 최종 확인. 이어서 이미지에 나열된 순서대로 2번 도구(노출 삼각형/스탑 변환 계산기)부터 순차 진행 예정.
+
 ## 2026-09-19 — 홈 콘텐츠(빈 콘텐츠) 및 쿠키 동의 배너 공통 작업 — 항목 2: Google Consent Mode v2 쿠키 동의 배너 추가 (애드센스 제휴 마케팅 공통 대화방에서 진행)
 
 - 배경: FlyDroneMap과 동일한 문제 — GA4와 애드센스가 모두 실제로 동작 중인데도 쿠키 동의 관리(CMP)가 전혀 없었음. FlyDroneMap에 먼저 적용한 Google Consent Mode v2 방식을 그대로 이식.
