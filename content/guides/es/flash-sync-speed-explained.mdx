@@ -1,0 +1,49 @@
+---
+title: "Velocidad de sincronización del flash explicada: el límite oculto de la velocidad de obturación"
+description: "Por qué la fotografía con flash tiene un límite duro de velocidad de obturación, qué causa la banda negra al superarlo y cómo la sincronización de alta velocidad (HSS) lo evita, con cálculos de exposición reales."
+publishedAt: "2026-09-22"
+tags: ["flash", "velocidad-de-sincronizacion", "hss"]
+category: "Iluminación y flash"
+image: "/guides/images/flash-sync-speed-explained.webp"
+imageCredit: "Luciano Zanollo"
+imageCreditUrl: "https://unsplash.com/@lucianozanollo7?utm_source=ExifLens&utm_medium=referral"
+---
+
+Si alguna vez disparaste flash y viste aparecer una banda negra inexplicable en un lado del encuadre al subir la velocidad de obturación, eso no es un fallo de la cámara: es un límite físico en la velocidad a la que el obturador y el flash pueden trabajar juntos. Ese límite se llama velocidad de sincronización, y no entenderlo bien lleva a fallos repetidos en sesiones al aire libre con mucha luz y en cualquier trabajo de flash que involucre movimiento.
+
+## Por qué existe un límite en la velocidad de obturación (cómo funciona el obturador de plano focal)
+
+La mayoría de las cámaras DSLR y mirrorless usan un obturador de plano focal formado por dos cortinas que recorren el sensor en secuencia. A velocidades suficientemente lentas, la primera cortina termina de abrirse y hay un breve instante antes de que la segunda empiece a cerrarse — durante esa ventana, todo el sensor queda expuesto a la vez. El flash tiene que dispararse justo en ese instante de apertura completa para que toda la imagen reciba luz de manera uniforme. Pero si subes la velocidad de obturación lo suficiente, la segunda cortina empieza a seguir a la primera antes de que esta termine de abrirse, y esa ventana de apertura completa desaparece por completo. La velocidad donde esa ventana desaparece es la velocidad de sincronización, que suele estar entre 1/200s y 1/250s en la mayoría de las cámaras full frame.
+
+## La banda negra que aparece al superar la sincronización
+
+Si disparas a 1/500s cuando tu velocidad de sincronización es 1/250s, solo una rendija estrecha entre las dos cortinas recorre el sensor. Como un flash estándar se dispara una sola vez, de forma instantánea, la luz solo llega al sensor donde esa rendija se encuentra en ese momento — el resto queda cubierto por la cortina, dejando una banda negra en parte del encuadre. Cuanto más superes la velocidad de sincronización, más estrecha es la rendija y más ancha la banda: a 1/500s suele cubrir entre el 40% y el 50% del encuadre, y por encima de 1/1000s puede llegar a más del 70%.
+
+## Cómo esquivarlo con la sincronización de alta velocidad (HSS) — y su costo
+
+Si necesitas disparar más rápido que la velocidad de sincronización, la Sincronización de Alta Velocidad (HSS, en Canon llamada flash FP) es la solución. En lugar de un único destello grande, el flash dispara decenas de pulsos de baja potencia en rápida sucesión durante todo el tiempo que la rendija tarda en cruzar el sensor, así que la luz llega sin importar dónde esté la rendija en cada instante. La contrapartida es que la misma cantidad total de luz se reparte en mucho menos tiempo, lo que reduce notablemente la potencia efectiva: pasar de tu velocidad máxima de sincronización a 1/1000s en HSS suele costar unos 2 pasos de potencia utilizable, así que tendrás que acercarte más al sujeto o abrir más el diafragma para compensar.
+
+## Un cálculo real de flash de relleno al mediodía
+
+Según la regla Sunny 16, un día despejado a ISO 100 pide f/16 a 1/100s. Si abres hasta f/2.8 para una menor profundidad de campo, eso es un salto de 5 pasos desde f/16, así que necesitarías una velocidad de obturación 5 pasos más rápida — alrededor de 1/3200s — para mantener la misma exposición. Si la velocidad de sincronización de tu cámara llega hasta 1/250s, eso es aproximadamente 3.7 pasos más lento de lo que realmente necesitas, y disparar a 1/250s quemaría gravemente el fondo. Tus opciones son un filtro ND8 (3 pasos de reducción de luz) para traer la exposición de vuelta dentro de la velocidad de sincronización, o cambiar a HSS y disparar directamente a 1/3200s. El filtro mantiene tu flash a plena potencia pero añade un cristal que cargar; el HSS evita el filtro pero implica la pérdida de potencia descrita arriba.
+
+## Sincronización a la primera cortina vs. a la segunda cortina
+
+El modo de sincronización también determina si el flash se dispara al inicio de la exposición (primera cortina) o justo antes de que termine (segunda cortina). Si fotografías un sujeto en movimiento con una velocidad lenta y sincronización a la primera cortina, el flash se dispara primero y cualquier estela de luz queda registrada después, así que la estela termina delante del sujeto, dando la sensación de que se mueve hacia atrás. La sincronización a la segunda cortina dispara el flash justo antes de que se cierre la exposición, así que la estela queda naturalmente detrás del sujeto. Para escenas que combinan desenfoque de movimiento con flash — una persona iluminada junto a estelas de luces de tráfico nocturnas, por ejemplo — la sincronización a la segunda cortina suele ser la opción más natural por defecto.
+
+## La velocidad de sincronización varía según la cámara
+
+Como la velocidad de sincronización depende de qué tan rápido se desplazan físicamente las cortinas del obturador, varía según el modelo. La mayoría de las DSLR y mirrorless full frame se sitúan entre 1/200s y 1/250s, aunque algunos cuerpos de gama alta llegan a 1/320s. Las cámaras de formato medio y los objetivos con obturador central (leaf shutter) funcionan de otra manera — el obturador se abre y cierra como un iris circular sobre todo el fotograma a la vez, así que pueden sincronizar con el flash prácticamente a cualquier velocidad. Comprueba siempre la velocidad de sincronización específica de tu cámara en el manual o en el menú del flash, en lugar de asumir que la ficha técnica de otro modelo aplica a la tuya.
+
+## Un error habitual
+
+Los disparadores de radio y los mandos inalámbricos antiguos pueden introducir un pequeño retraso entre el momento en que la cámara dispara el obturador y el momento en que el flash realmente destella. Aunque la ficha técnica de tu cámara indique 1/250s como velocidad de sincronización, ese retraso puede dejar una fina franja negra en un borde del encuadre justo a esa velocidad. Si sospechas de un retraso del disparador, bajar uno o dos pasos por debajo de tu velocidad de sincronización nominal (1/200s en vez de 1/250s, por ejemplo) suele resolverlo.
+
+## Lista de verificación práctica
+
+- Comprueba la velocidad de sincronización específica de tu cámara (normalmente 1/200-1/250s) en el manual.
+- Disparar más rápido que la velocidad de sincronización sin HSS deja una banda negra: activa HSS si necesitas superarla.
+- Para flash de relleno al mediodía con aperturas abiertas, elige entre un filtro ND y HSS según la situación.
+- El HSS cuesta una cantidad importante de potencia efectiva de flash: compénsalo con la distancia al sujeto o el diafragma.
+- Por defecto, usa sincronización a la segunda cortina en escenas que combinen desenfoque de movimiento con flash.
+- Si ves una banda negra con un disparador de radio, dispara uno o dos pasos por debajo de tu velocidad de sincronización nominal.

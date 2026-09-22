@@ -1,0 +1,49 @@
+---
+title: "Flash Sync Speed Explained: The Hidden Shutter Speed Ceiling"
+description: "Why flash photography hits a hard shutter speed limit, what causes the black band when you exceed it, and how High-Speed Sync (HSS) gets around it — with real exposure math."
+publishedAt: "2026-09-22"
+tags: ["flash", "sync-speed", "high-speed-sync"]
+category: "Lighting & Flash"
+image: "/guides/images/flash-sync-speed-explained.webp"
+imageCredit: "Luciano Zanollo"
+imageCreditUrl: "https://unsplash.com/@lucianozanollo7?utm_source=ExifLens&utm_medium=referral"
+---
+
+If you've ever fired a flash and watched an unexplained black band creep across one side of the frame as you pushed the shutter speed higher, that's not a camera malfunction — it's a hard physical limit on how fast the shutter and flash can work together. That limit is called sync speed, and not understanding it properly leads to repeated failures in bright outdoor shoots and any flash work involving motion.
+
+## Why there's a shutter speed ceiling (how focal-plane shutters work)
+
+Most DSLR and mirrorless cameras use a focal-plane shutter made of two curtains that travel across the sensor in sequence. At slow enough shutter speeds, the first curtain finishes opening and there's a brief window before the second curtain starts closing — during that window the entire sensor is exposed at once. A flash has to fire during exactly that fully-open instant for the whole frame to receive even light. Push the shutter speed high enough, though, and the second curtain starts following before the first one finishes opening, so that fully-open window disappears entirely. The speed where this window vanishes is the sync speed, typically 1/200s to 1/250s on most full-frame cameras.
+
+## The black band you get past sync speed
+
+Shoot at 1/500s when your sync speed is 1/250s, and only a narrow slit between the two curtains ever travels across the sensor. Since a standard flash fires once, in an instant, light only reaches the sensor wherever that slit happens to be at that moment — everywhere else stays covered by the curtain, leaving a black band across part of the frame. The faster you go past sync speed, the narrower the slit, so the band grows too: at 1/500s you'll typically see 40-50% of the frame cut off, and past 1/1000s it can eat more than 70%.
+
+## Getting around it with High-Speed Sync — and the cost
+
+If you need to shoot faster than sync speed, High-Speed Sync (HSS, called FP flash on Canon) is the workaround. Instead of one big pop, the flash fires dozens of low-power pulses in rapid succession for the entire time the curtain gap is crossing the sensor, so light reaches the slit no matter where it is. The trade-off is that the same total flash output gets spread across far more time, which cuts effective power noticeably — going from your max sync speed to 1/1000s in HSS typically costs around 2 stops of usable output, meaning you'll need to move closer to the subject or open the aperture to compensate.
+
+## A real-world midday fill-flash calculation
+
+Under the Sunny 16 rule, a clear day at ISO 100 calls for f/16 at 1/100s. Open up to f/2.8 for a shallower depth of field, and that's a 5-stop jump from f/16, so you'd need a shutter speed 5 stops faster — around 1/3200s — to keep the same exposure. If your camera's sync speed tops out at 1/250s, that's roughly 3.7 stops slower than what you actually need, and shooting at 1/250s would badly blow out the background. Your options are an ND8 filter (3 stops of light reduction) to bring the exposure back within sync speed, or switching to HSS and shooting at the full 1/3200s. The filter keeps your flash at full power but adds a piece of glass to carry; HSS skips the filter but costs you the power hit described above.
+
+## Front-curtain vs. rear-curtain sync
+
+Sync mode also determines whether the flash fires at the start of the exposure (front-curtain) or right before it ends (rear-curtain). Shoot a moving subject at a slow shutter with front-curtain sync, and the flash fires first while any light trail records afterward — so the trail ends up in front of the subject, making it look like it's moving backward. Rear-curtain sync fires the flash just before the exposure closes, so the trail trails naturally behind the subject instead. For scenes that combine motion blur with flash — a person lit against traffic light trails at night, for instance — rear-curtain sync is usually the more natural default.
+
+## Sync speed varies by camera
+
+Because sync speed depends on how fast the shutter curtains physically travel, it varies by model. Most full-frame DSLRs and mirrorless bodies land between 1/200s and 1/250s, though some higher-end bodies reach 1/320s. Medium-format bodies and lenses with a built-in leaf shutter work differently — the shutter opens and closes as a circular iris across the whole frame at once, so they can sync with flash at essentially any shutter speed. Always check your specific camera's rated sync speed in the manual or the flash menu rather than assuming another model's spec applies to yours.
+
+## A common mistake
+
+Radio triggers and older wireless remotes can introduce a small delay between when the camera fires the shutter and when the flash actually pops. Even if your camera's spec sheet says 1/250s, that latency can leave a thin black sliver along one edge of the frame at that exact speed. If you suspect trigger lag, dropping one or two clicks below your rated sync speed — 1/200s instead of 1/250s, say — usually clears it up.
+
+## Practical checklist
+
+- Check your specific camera's rated sync speed (typically 1/200-1/250s) in the manual.
+- Shooting faster than sync speed without HSS leaves a black band — turn on HSS if you need to go beyond it.
+- For midday outdoor fill flash at wide apertures, choose between an ND filter and HSS based on the situation.
+- HSS costs a meaningful amount of effective flash power — compensate with subject distance or aperture.
+- Default to rear-curtain sync for scenes mixing motion blur with flash.
+- If you see a black band with a radio trigger, shoot one or two clicks below your rated sync speed.
