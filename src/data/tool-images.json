@@ -10,5 +10,17 @@
       "imageCredit": "Thanhy Nguyen",
       "imageCreditUrl": "https://unsplash.com/@thanhy_99?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "exposure-stops-calculator": {
+    "left": {
+      "image": "/tools/images/exposure-stops-calculator-left.webp",
+      "imageCredit": "Denise Jans",
+      "imageCreditUrl": "https://unsplash.com/@dmjdenise?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/exposure-stops-calculator-right.webp",
+      "imageCredit": "Evgeniy Bezkorovayniy",
+      "imageCreditUrl": "https://unsplash.com/@korovay?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
