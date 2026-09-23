@@ -4,38 +4,9 @@ import { routing } from "@/i18n/routing";
 import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { AdZone } from "@/components/ad-zone";
-
-type ToolStatus = "live" | "comingSoon";
-
-type ToolEntry = {
-  slug: string;
-  status: ToolStatus;
-};
+import { FIELD_TOOLS, POST_SHOOT_TOOLS, type ToolEntry } from "@/lib/tools-roster";
 
 type ResolvedTool = ToolEntry & { name: string; description: string };
-
-/**
- * Tool roster for the /tools hub. New tools are built in the order agreed
- * with the user (photo-field calculators first, then post-shoot/pro tools);
- * each one flips from "comingSoon" to "live" once its own route ships.
- * Sections mirror the "use-case" grouping (field vs. post-shoot) already
- * agreed for exifnd.com's Guides categorization, per
- * claude/exiflens-tool-expansion-strategy-and-freeimgfix-benchmark.md.
- */
-const FIELD_TOOLS: ToolEntry[] = [
-  { slug: "dof-calculator", status: "live" },
-  { slug: "exposure-stops-calculator", status: "live" },
-  { slug: "timelapse-calculator", status: "live" },
-  { slug: "astrophotography-calculator", status: "live" },
-  { slug: "bracketing-calculator", status: "live" },
-];
-
-const POST_SHOOT_TOOLS: ToolEntry[] = [
-  { slug: "print-resolution-calculator", status: "live" },
-  { slug: "storage-calculator", status: "live" },
-  { slug: "exif-remover", status: "live" },
-  { slug: "crop-factor-calculator", status: "live" },
-];
 
 export async function generateMetadata({
   params,

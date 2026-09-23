@@ -13,11 +13,26 @@ import { getAllGuidesMeta } from "@/lib/guides";
  * crawlable text/link richness, and previously nothing on the homepage
  * pointed at the long-form guide content that already exists — see
  * `claude/adsense-rejection-response-and-contact-page-handoff.md`.
+ *
+ * The 3 guides shown are chosen at random on every request (this route is
+ * already dynamically rendered per-request, not statically generated), so
+ * repeat visitors see a different sample each time instead of always the
+ * same 3 most-recent guides — spreads discovery across the whole guide
+ * catalog rather than only ever spotlighting the newest posts.
  */
+function pickRandomGuides<T>(items: T[], count: number): T[] {
+  const pool = [...items];
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, count);
+}
+
 export async function HomeGuideHighlights({ locale }: { locale: string }) {
   const t = await getTranslations("Home");
   const tGuides = await getTranslations("Guides");
-  const guides = getAllGuidesMeta(locale as Locale).slice(0, 3);
+  const guides = pickRandomGuides(getAllGuidesMeta(locale as Locale), 3);
 
   if (guides.length === 0) return null;
 
