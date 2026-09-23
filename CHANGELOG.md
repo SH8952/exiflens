@@ -1,3 +1,14 @@
+## 2026-09-23 — 심도(DoF) 계산기 예시 이미지(좌/우) 실제 사진 적용
+
+- 배경: 앞선 작업(공통 "예시 이미지" 템플릿 + 개발자 이미지 관리 도구)에서 실제 사진은 Claude의 브릿지 셸이 `api.unsplash.com`에 접근할 수 없어 미적용 상태로 남아 있었음. 사용자가 로컬에서 직접 `npm run dev`를 실행한 뒤 "🛠 예시 이미지 관리 (DEV)" 패널로 좌(근거리 초점)/우(원거리 초점) 사진을 직접 검색·적용 완료.
+- **수정**:
+  - `public/tools/images/dof-calculator-left.webp`(신규) — 근거리 초점 예시 사진 (Mario Verduzco, Unsplash).
+  - `public/tools/images/dof-calculator-right.webp`(신규) — 원거리 초점 예시 사진 (Thanhy Nguyen, Unsplash).
+  - `src/data/tool-images.json` — `dof-calculator` 항목에 위 두 이미지 경로 및 저작자 정보 반영.
+- **커밋 시 유의**: 저장소에 이번 작업과 무관한 기존 변경(`CLAUDE.md`, `SEO_TASKS.md`, `automation/apply-seo-task.command`, `automation/publish-guide.command` 수정 및 일부 한글 파일명 삭제)이 함께 존재했으나, `git add -A`/`-u`를 쓰지 않고 이번 작업 대상 3개 파일만 명시적으로 `git add`하여 무관한 변경이 섞이지 않도록 함.
+- **커밋**: `afe6133` "feat(tools): apply DoF calculator example images"
+- **다음 단계**: push 후 로컬/실사이트에서 이미지 노출 최종 확인. 이어서 이미지에 나열된 순서대로 2번 도구(노출 삼각형/스탑 변환 계산기)로 진행.
+
 ## 2026-09-23 — 계산기 도구 페이지 공통 "예시 이미지" 템플릿 + 개발자 이미지 관리 도구 추가
 
 - 배경: 심도(DoF) 계산기 페이지를 로컬에서 확인하던 사용자가, "제목 → 부연설명 → 계산기" 구조 사이에 좌/우 예시 사진(근거리 초점 예 / 원거리 초점 예)을 추가해 시각적으로 이해를 돕고 싶다고 요청. 이미지 출처는 가이드 아티클에서 이미 쓰고 있는 언스플래시(Unsplash) 연동을 재사용하고, 가이드처럼 이미지 교체 기능도 함께 원함. 또한 이 패턴을 모든 계산기 도구 페이지에 공통 적용 가능한 템플릿으로 만들어달라는 요청.
