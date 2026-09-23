@@ -630,5 +630,59 @@
     ],
     "exampleLeftAlt": "Una cámara montada en un trípode al aire libre, preparada para horquillado de exposición",
     "exampleRightAlt": "Una foto fusionada en HDR combinando varias tomas con distinta exposición"
+  },
+  "PrintResolutionCalculator": {
+    "cardTitle": "Resolución de Impresión",
+    "photoSizeTitle": "Tamaño en Píxeles de la Foto",
+    "widthPx": "Ancho (px)",
+    "heightPx": "Alto (px)",
+    "dpiLabel": "Resolución de Impresión (DPI)",
+    "dpiOption": "{dpi} DPI",
+    "maxPrintSizeLabel": "Tamaño Máximo de Impresión",
+    "maxPrintSizeCmLabel": "Tamaño Máximo de Impresión (cm)",
+    "megapixelsLabel": "Resolución",
+    "invalidInput": "Ingresa valores positivos válidos para ancho, alto y DPI.",
+    "targetSizeTitle": "Verificar un Tamaño de Impresión",
+    "targetSizeLabel": "Tamaño de Impresión",
+    "photoGroupLabel": "Tamaños de Impresión Fotográfica",
+    "paperGroupLabel": "Tamaños de Papel Estándar",
+    "customOption": "Personalizado",
+    "unitLabel": "Unidad",
+    "unitIn": "in",
+    "unitCm": "cm",
+    "customWidth": "Ancho",
+    "customHeight": "Alto",
+    "requiredPixelsLabel": "Tamaño en Píxeles Requerido",
+    "requiredMegapixelsLabel": "Resolución Requerida",
+    "verdictSufficient": "✓ La resolución de tu foto es suficiente para este tamaño de impresión.",
+    "verdictInsufficient": "⚠ La resolución de tu foto no alcanza — consulta la guía de ampliación a continuación.",
+    "advancedTitle": "Avanzado — Guía de Ampliación (Upscaling)",
+    "upscaleFactorLabel": "Factor de Ampliación Necesario",
+    "upscaleSufficient": "No se necesita ampliación — tu resolución actual ya es suficiente.",
+    "upscaleMinor": "Solo se necesita una pequeña ampliación — un redimensionado normal debería imprimirse sin problemas a este nivel.",
+    "upscaleModerate": "Se necesita cierta ampliación — un upscaler con IA (como Topaz Gigapixel) puede dar buenos resultados en este rango.",
+    "upscaleMajor": "La diferencia es considerable — incluso con ampliación puede notarse pérdida de calidad. Considera imprimir en un tamaño menor o volver a fotografiar con mayor resolución si es posible.",
+    "pageTitle": "Calculadora de Resolución de Impresión / DPI",
+    "pageDescription": "Ingresa el tamaño en píxeles de tu foto y el DPI de impresión para calcular el tamaño máximo de impresión, o verifica si tu resolución alcanza para un tamaño de impresión específico.",
+    "aboutTitle": "Sobre esta calculadora",
+    "aboutBody": "La nitidez de una impresión depende de los puntos por pulgada (DPI): la misma foto se imprime más pequeña a un DPI más alto y más grande a uno más bajo. Esta calculadora usa las dimensiones en píxeles de tu foto para encontrar el tamaño máximo de impresión a un DPI elegido y, en sentido inverso, te permite elegir un tamaño de impresión objetivo (un tamaño de laboratorio fotográfico o un tamaño de papel estándar como A4) para ver el tamaño mínimo en píxeles que necesita y si tu foto actual lo cumple.",
+    "disclaimer": "300 DPI suele considerarse el estándar de 'calidad fotográfica', pero las impresiones grandes vistas a distancia (carteles, pancartas) a menudo se ven igual de nítidas a 150–200 DPI. La calidad real de impresión también depende del equipo y el papel del laboratorio.",
+    "faqTitle": "Preguntas Frecuentes",
+    "faq": [
+      {
+        "question": "¿De verdad necesito 300 DPI?",
+        "answer": "No siempre. 300 DPI es un estándar habitual para impresiones vistas de cerca (álbumes, fotos enmarcadas), pero los carteles o pancartas grandes vistos a distancia pueden verse igual de nítidos con unos 150 DPI. Cuanto mayor sea la distancia de visualización, menor DPI necesitas."
+      },
+      {
+        "question": "Si mi resolución es demasiado baja, ¿siempre debo volver a fotografiar?",
+        "answer": "No. Si la diferencia es pequeña (un factor de ampliación de 1.3x o menos en la sección avanzada), un redimensionado normal suele bastar, y un upscaler con IA es una buena opción más allá de eso. Volver a fotografiar o elegir un tamaño de impresión menor solo vale la pena recomendarlo cuando el factor supera aproximadamente 2x."
+      },
+      {
+        "question": "¿Cuál es la diferencia entre los tamaños de impresión fotográfica y tamaños de papel como A4?",
+        "answer": "Los tamaños de impresión fotográfica (4×6, 8×10, etc.) son los tamaños en pulgadas comunes en los laboratorios fotográficos, mientras que tamaños como A4/A3 son estándares ISO usados para impresión de oficina y general. Esta calculadora ofrece ambos como opciones predefinidas, además de una opción 'Personalizado' para cualquier otro tamaño."
+      }
+    ],
+    "exampleLeftAlt": "Una foto impresa siendo examinada de cerca para revisar su nitidez",
+    "exampleRightAlt": "Una impresora de gran formato produciendo una impresión fotográfica"
   }
 }

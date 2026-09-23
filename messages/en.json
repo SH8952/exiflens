@@ -630,5 +630,59 @@
     ],
     "exampleLeftAlt": "A camera mounted on a tripod outdoors, set up for exposure bracketing",
     "exampleRightAlt": "An HDR-blended photo combining several differently exposed frames"
+  },
+  "PrintResolutionCalculator": {
+    "cardTitle": "Print Resolution",
+    "photoSizeTitle": "Photo Pixel Size",
+    "widthPx": "Width (px)",
+    "heightPx": "Height (px)",
+    "dpiLabel": "Print Resolution (DPI)",
+    "dpiOption": "{dpi} DPI",
+    "maxPrintSizeLabel": "Max Print Size",
+    "maxPrintSizeCmLabel": "Max Print Size (cm)",
+    "megapixelsLabel": "Resolution",
+    "invalidInput": "Enter valid, positive numbers for width, height, and DPI.",
+    "targetSizeTitle": "Check a Target Print Size",
+    "targetSizeLabel": "Print Size",
+    "photoGroupLabel": "Photo Print Sizes",
+    "paperGroupLabel": "Standard Paper Sizes",
+    "customOption": "Custom",
+    "unitLabel": "Unit",
+    "unitIn": "in",
+    "unitCm": "cm",
+    "customWidth": "Width",
+    "customHeight": "Height",
+    "requiredPixelsLabel": "Required Pixel Size",
+    "requiredMegapixelsLabel": "Required Resolution",
+    "verdictSufficient": "✓ Your photo's resolution is enough for this print size.",
+    "verdictInsufficient": "⚠ Your photo's resolution falls short — see the upscaling guide below.",
+    "advancedTitle": "Advanced — Upscaling Guide",
+    "upscaleFactorLabel": "Upscale Factor Needed",
+    "upscaleSufficient": "No upscaling needed — your current resolution is already enough.",
+    "upscaleMinor": "Just a small enlargement is needed — ordinary resizing should print cleanly at this level.",
+    "upscaleModerate": "Some upscaling is needed — an AI upscaler (like Topaz Gigapixel) can give good results in this range.",
+    "upscaleMajor": "The shortfall is significant — even upscaling may show visible quality loss. Consider printing at a smaller size, or re-shooting at a higher resolution if possible.",
+    "pageTitle": "Print Resolution / DPI Calculator",
+    "pageDescription": "Enter your photo's pixel size and print DPI to find the maximum print size, or check whether your resolution is enough for a target print size.",
+    "aboutTitle": "About this calculator",
+    "aboutBody": "Print sharpness depends on dots per inch (DPI): the same photo prints smaller at a higher DPI and larger at a lower one. This calculator uses your photo's pixel dimensions to find the maximum size you can print at a chosen DPI — and, the other way around, lets you pick a target print size (a photo-lab size or a standard paper size like A4) to see the minimum pixel size it needs and whether your current photo measures up.",
+    "disclaimer": "300 DPI is commonly treated as the 'photo quality' benchmark, but large prints viewed from a distance (posters, banners) often look just as sharp at 150–200 DPI. Actual print quality also depends on the print shop's equipment and paper.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "Do I really need 300 DPI?",
+        "answer": "Not always. 300 DPI is a common benchmark for prints viewed up close (albums, framed photos), but large posters or banners viewed from a distance can look plenty sharp at around 150 DPI. The farther the viewing distance, the lower the DPI you need."
+      },
+      {
+        "question": "If my resolution is too low, do I always need to re-shoot?",
+        "answer": "No. If the shortfall is small (an upscale factor of 1.3x or less in the advanced section), ordinary resizing is often enough, and an AI upscaler is a solid option beyond that. Re-shooting or choosing a smaller print size is really only worth recommending once the factor passes about 2x."
+      },
+      {
+        "question": "What's the difference between photo print sizes and paper sizes like A4?",
+        "answer": "Photo print sizes (4×6, 8×10, etc.) are the inch-based sizes common at photo labs, while sizes like A4/A3 are ISO standard sizes used for office and general printing. This calculator offers both as presets, plus a 'Custom' option for anything else."
+      }
+    ],
+    "exampleLeftAlt": "A printed photo being examined closely for sharpness",
+    "exampleRightAlt": "A large-format printer producing a photo print"
   }
 }
