@@ -94,5 +94,17 @@
       "imageCredit": "James Jeremy Beckers",
       "imageCreditUrl": "https://unsplash.com/@jerrografie?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "exif-remover": {
+    "left": {
+      "image": "/tools/images/exif-remover-left.webp",
+      "imageCredit": "Kássio Silva",
+      "imageCreditUrl": "https://unsplash.com/@kassiosilva?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/exif-remover-right.webp",
+      "imageCredit": "Desola Lanre-Ologun",
+      "imageCreditUrl": "https://unsplash.com/@desola?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
