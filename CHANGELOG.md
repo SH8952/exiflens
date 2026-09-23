@@ -1,3 +1,16 @@
+## 2026-09-23 — /tools 3번 도구: 타임랩스 계산기 추가 (고급 옵션 포함)
+
+- 배경: 승인된 9개 도구 순서(3번)에 따라 진행. 사용자가 "기능마다 완성 후 또 작업하면 번거로우니 고급 옵션도 한 번에 포함해달라"고 요청 — 기본 계산(간격/촬영시간/총 장수 3항목 상호 계산 + 결과 영상 길이)에 고급 옵션 2가지(저장 공간 계산, 셔터 각도/모션 블러 지표)를 처음부터 함께 구현.
+- **신규**:
+  - `src/lib/timelapse-calculator.ts` — `calculateShootPlan`(간격/촬영시간/총 장수 중 2개를 알면 나머지 1개를 역산하는 3-way 솔버, `shotCount = duration / interval` 관계 기반), `calculateVideoDurationSeconds`(장수/fps → 영상 길이), `calculateStorageGb`(장수 × 장당 용량 → 총 저장 공간), `calculateShutterAngle`(셔터 스피드/간격 비율 → 셔터 각도·모션 블러 품질 판정: choppy/cinematic/smooth), 포맷터 함수들.
+  - `src/components/timelapse-calculator-card.tsx` — 촬영 계획(모드 선택 + 입력/읽기전용 필드), 결과 영상(fps 선택 + 영상 길이), 고급 옵션(저장 공간 계산 + 셔터 각도) 3개 섹션 카드 UI. 셔터 스피드 프리셋·포맷터는 노출 계산기(`src/lib/exposure-calculator.ts`)의 `SHUTTER_SPEED_STOPS_SECONDS`/`formatShutterSpeed`를 그대로 재사용(중복 구현 없이 DRY 유지).
+  - `src/app/[locale]/tools/timelapse-calculator/page.tsx` — 기존 계산기 페이지들과 동일한 구조(브레드크럼, WebApplication+FAQPage+BreadcrumbList JSON-LD, 설명 섹션, FAQ 3문항), 공통 `<ToolExampleImages>`/`<ToolImageDevPanel>` 템플릿 재사용(실제 예시 사진은 아직 미적용 — 사용자가 로컬에서 직접 선택 필요).
+  - `messages/{en,ko,ja,es}.json`에 `TimelapseCalculator` 네임스페이스 전체 번역 추가.
+- **수정**: `src/app/[locale]/tools/page.tsx`에서 `timelapse-calculator`를 `comingSoon` → `live`로 전환, `src/app/sitemap.ts`에 신규 경로 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류 0건), `npm run build`(exit code 0, 240+/240+ 페이지 정상 생성). 로컬 `npm run dev`(포트 3000) + `curl`로 `/ko/tools/timelapse-calculator`, `/en/tools/timelapse-calculator`, `/ko/tools` 모두 200 및 실제 렌더링 텍스트("타임랩스 계산기", "셔터 각도", "저장 공간 계산") 확인.
+- **커밋**: `b1a1dbb` "feat(tools): add Time-Lapse Calculator (with storage & shutter-angle options)"
+- **다음 단계**: push → 사용자가 로컬에서 이 도구의 좌/우 예시 사진 적용(권장 검색어: 좌="별 궤적이 담긴 야간 장노출", 우="빠르게 흐르는 구름 타임랩스") → 이후 4번 도구(별사진 NPF/500 rule 노출 계산기)로 순차 진행.
+
 ## 2026-09-23 — /tools 2번 도구: 노출 삼각형(Exposure Triangle) / 스탑 변환 계산기 추가
 
 - 배경: 승인된 9개 도구 순서(2번)에 따라 진행. 조리개·셔터 스피드·ISO 중 하나를 원하는 값으로 바꿨을 때, 밝기를 그대로 유지하려면 다른 한 값을 얼마나 조정해야 하는지 계산하는 "상반칙(reciprocity)" 기반 도구.
