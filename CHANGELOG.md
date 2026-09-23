@@ -1,3 +1,20 @@
+## 2026-09-23 — /tools 8번 도구: EXIF/메타데이터 일괄 제거 도구 추가 (전체 포맷 + 단일/일괄 + 고급 옵션)
+
+- 배경: 승인된 9개 도구 순서(8번)에 따라 진행. 사용자가 3가지 명시적 요구사항을 제시: (1) 한 장 단일 처리와 여러 장 일괄 처리 모두 지원, (2) 메타데이터가 저장되는 모든 포맷을 지원, (3) 고급 옵션 포함 — 이와 함께 "지금까지 새롭게 추가된 고급옵션 기능은 추후 유료로 전환될 수 있으므로, 가급적 모든 기능에 고급옵션이 필요하다"는 **제품 전략 방향(향후 모든 도구에 공통 적용)**을 전달받음. 작업 시작 전 기술적 리스크(HEIC/HEIF의 제한적인 브라우저 디코딩 지원, TIFF의 낮은 실사용 빈도, IPTC/XMP 범위의 모호성, 대량 파일 처리 시 성능)를 사용자에게 먼저 설명하고, JPEG/PNG/WebP 3개 포맷(웹에서 메타데이터를 저장하는 포맷 중 실사용 비중이 가장 높은 조합)으로 범위를 확정한 뒤 "현상태 백업 후 작업 진행해줘" 승인을 받아 진행.
+- **신규**:
+  - `src/lib/metadata-remover.ts` — 캔버스 재인코딩 방식(화질/색상 손실 발생) 대신, 원본 바이트를 직접 파싱해 메타데이터 영역만 잘라내는 **무손실 바이트 단위 제거 방식** 채택. `detectImageFormat`(매직 바이트로 JPEG/PNG/WebP 판별), `stripJpegSegments`(JPEG 마커 세그먼트를 순회하며 APP1/EXIF, APP13/IPTC, COM 세그먼트만 선택 제거, SOS 이후 압축 데이터는 그대로 보존), `stripPngChunks`(PNG 청크 구조를 순회하며 tEXt/zTXt/iTXt/eXIf/tIME 등 보조 청크만 제거), `stripWebpChunks`(WebP RIFF 서브청크 중 EXIF/XMP 청크 제거 + VP8X 청크의 존재 플래그 비트 초기화 + RIFF 전체 크기 필드 재계산), `removeGpsOnlyFromJpeg`(`piexifjs`로 GPS 태그만 선택 제거하는 고급 옵션용 부분 제거 함수 — 별도 XMP 블록에 GPS가 중복 저장된 경우까지는 다루지 못하는 한계를 UI 안내 문구에 명시).
+  - `src/types/piexifjs.d.ts` — 타입 정의가 없는 `piexifjs` 패키지용 앰비언트 모듈 선언.
+  - `src/components/exif-remover-card.tsx` — 파일 선택(단일/다중, 최대 20장) → 업로드 즉시 기존 `parseExifFile`로 카메라/GPS/촬영일 요약 표시 → "제거 실행" 시 각 파일을 순차 처리 → 완료된 파일 개별 다운로드 또는 2장 이상일 때 `jszip`으로 ZIP 일괄 다운로드. 고급 옵션: GPS 정보만 선택 제거(체크 시 EXIF 전체가 아닌 GPS 태그만 제거), IPTC 정보 포함 제거(기본 켜짐).
+  - `src/app/[locale]/tools/exif-remover/page.tsx` — 기존 계산기 페이지들과 동일한 구조(브레드크럼, WebApplication+FAQPage+BreadcrumbList JSON-LD, 설명 섹션, FAQ 3문항), 공통 `<ToolExampleImages>`/`<ToolImageDevPanel>` 템플릿 재사용(실제 예시 사진은 아직 미적용, 권장 검색어: "privacy data protection photo metadata camera").
+  - `messages/{en,ko,ja,es}.json`에 `ExifRemover` 네임스페이스 전체 번역 추가(이전 저장 용량 계산기 작업에서 발견한 점(.) 포함 평면 키 실수를 재발하지 않도록 사전 검증하여 작성).
+- **신규 의존성**: `piexifjs`(JPEG GPS 태그 부분 제거용), `jszip`(브라우저 내 ZIP 일괄 다운로드 생성용).
+- **수정**: `src/app/[locale]/tools/page.tsx`에서 `exif-remover`를 `comingSoon` → `live`로 전환, `src/app/sitemap.ts`에 신규 경로 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건 — 최초 `Blob` 생성부에서 `Uint8Array<ArrayBufferLike>` 타입 오류가 있었으나, 정확한 바이트 범위를 `ArrayBuffer`로 명시적으로 슬라이스하도록 수정해 해결), `npx eslint`(신규/수정 파일 전체 오류 0건), `npm run build`(exit code 0, 정상 생성). 로컬 `npm run dev`(자동 포트 3010) + `curl`로 4개 로케일(`/ko`, `/en`, `/es`, `/ja`) 모두 `/tools/exif-remover` 200 및 실제 렌더링 텍스트(한국어: "EXIF/메타데이터 일괄 제거 도구", 영어: "EXIF / Metadata Remover", 스페인어: "Eliminador de EXIF", 일본어: "EXIF/メタデータ一括削除ツール") 확인, `/ko/tools` 허브에서도 정상 노출(comingSoon 배지 아님) 확인. next-intl 관련 오류(MISSING_MESSAGE 등) 없음 확인.
+- **참고(별도 발견 사항, 이번 작업과 무관)**: `piexifjs`/`jszip` 설치 중 `npm audit`에서 기존에 존재하던 취약점 3건 발견(js-yaml/high — `gray-matter`가 내장한 구버전 경유, Next.js 16.0.0–16.3.2/critical — 인증 없이 원격 코드 실행 가능한 취약점, sharp <0.35.4/high — libheif 경유). 이번에 추가한 두 패키지와는 무관하며, `npm audit fix --force`는 Next.js를 현재 지정 범위 밖으로 올리게 되어 별도의 신중한 테스트 사이클이 필요하므로 이번 작업에서는 손대지 않고 사용자에게 별도 보고함.
+- **제품 전략 메모(향후 모든 도구 공통 적용)**: 사용자 지시 — "지금까지 새롭게 추가된 고급옵션 기능은 추후 유료로 전환될 수 있으므로, 가급적 모든 기능에 고급옵션이 필요하다." 특정 도구에 국한되지 않고 앞으로 추가/수정하는 모든 도구 기능에 기본적으로 적용해야 하는 상시 방향으로 기록.
+- **커밋**: `0a070d5` "feat: add EXIF/metadata remover tool (Tool #8)"
+- **다음 단계**: push → 사용자가 로컬에서 이 도구의 좌/우 예시 사진 적용 → 이후 9번 도구(센서 크기별 환산 화각 계산기)로 순차 진행(사전 계획 제시 및 명시적 진행 승인 필요).
+
 ## 2026-09-23 — /tools 7번 도구: 저장 용량 계산기 추가 (고급 옵션 포함)
 
 - 배경: 승인된 9개 도구 순서(7번)에 따라 진행. 사용자가 "고급 옵션도 처음부터 포함해서 한 번에 진행"을 요청 — 기본 계산(파일 형식 + 촬영 매수 → 총 저장 용량, 필요한 메모리카드 매수)에 고급 옵션(백업 벌 수 반영, 클라우드 업로드 시간 예상)을 처음부터 함께 구현.
