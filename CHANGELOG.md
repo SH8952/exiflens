@@ -1,3 +1,16 @@
+## 2026-09-23 — /tools 6번 도구: 인쇄 해상도 / DPI 계산기 추가 (고급 옵션 포함)
+
+- 배경: 승인된 9개 도구 순서(6번)에 따라 진행. 사용자가 "고급 옵션도 처음부터 포함해서 한 번에 진행"을 요청 — 기본 계산(사진 픽셀 크기 + DPI → 최대 인쇄 크기, 원하는 인쇄 크기 → 필요한 픽셀 크기 및 충분/부족 판정)에 고급 옵션(업스케일링 가이드)을 처음부터 함께 구현.
+- **신규**:
+  - `src/lib/print-resolution-calculator.ts` — `calculateMaxPrintSize`(픽셀 크기 + DPI → 인치/cm 최대 인쇄 크기), `calculateRequiredPixels`(원하는 인쇄 크기 + DPI → 필요한 픽셀 크기/화소수), `calculateUpscaleGuidance`(현재 대비 필요 픽셀의 면적비에서 선형 배율을 역산해 sufficient/minor/moderate/major 4단계로 분류), 사진 인화 크기 프리셋(4×6~20×30in) + ISO 표준 용지 프리셋(A4/A3/A2/A1, mm→inch 정확 환산) 상수, 포맷터 함수들.
+  - `src/components/print-resolution-calculator-card.tsx` — 사진 픽셀 크기/DPI 입력 + 최대 인쇄 크기 결과, 원하는 인쇄 크기 선택(사진 인화 크기·표준 용지 그룹 + 직접 입력 단위(in/cm) 전환) + 필요 픽셀 크기·충분/부족 판정, 고급 옵션(업스케일 배율 + 단계별 안내 문구).
+  - `src/app/[locale]/tools/print-resolution-calculator/page.tsx` — 기존 계산기 페이지들과 동일한 구조(브레드크럼, WebApplication+FAQPage+BreadcrumbList JSON-LD, 설명 섹션, FAQ 3문항), 공통 `<ToolExampleImages>`/`<ToolImageDevPanel>` 템플릿 재사용(실제 예시 사진은 아직 미적용).
+  - `messages/{en,ko,ja,es}.json`에 `PrintResolutionCalculator` 네임스페이스 전체 번역 추가.
+- **수정**: `src/app/[locale]/tools/page.tsx`에서 `print-resolution-calculator`를 `comingSoon` → `live`로 전환, `src/app/sitemap.ts`에 신규 경로 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류 0건), `npm run build`(exit code 0, 정상 생성). 로컬 `npm run dev` + `curl`로 4개 로케일(`/ko`, `/en`, `/es`, `/ja`) 모두 `/tools/print-resolution-calculator` 200 및 실제 렌더링 텍스트 확인, `/ko/tools` 허브에서도 정상 노출 확인. next-intl 관련 오류(MISSING_MESSAGE 등) 없음 확인.
+- **커밋**: `e83f967` "feat(tools): add Print Resolution / DPI Calculator with advanced options"
+- **다음 단계**: push → 사용자가 로컬에서 이 도구의 좌/우 예시 사진 적용 → 이후 7번 도구(저장 용량 계산기)로 순차 진행.
+
 ## 2026-09-23 — /tools 5번 도구: 브라케팅(HDR) 계산기 추가 (고급 옵션 포함)
 
 - 배경: 승인된 9개 도구 순서(5번)에 따라 진행. 사용자가 "고급 옵션도 처음부터 포함해서 한 번에 진행"을 요청 — 기본 브라케팅 계산(기준 노출 + 스텝 + 매수 → 프레임별 조리개/셔터스피드/ISO)에 고급 옵션 2가지(다이나믹 레인지 가이드, 예상 총 촬영 시간)를 처음부터 함께 구현.
