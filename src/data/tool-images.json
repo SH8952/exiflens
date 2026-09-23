@@ -70,5 +70,17 @@
       "imageCredit": "Bank Phrom",
       "imageCreditUrl": "https://unsplash.com/@bank_phrom?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "storage-calculator": {
+    "left": {
+      "image": "/tools/images/storage-calculator-left.webp",
+      "imageCredit": "Samsung Memory",
+      "imageCreditUrl": "https://unsplash.com/@samsungmemory?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/storage-calculator-right.webp",
+      "imageCredit": "Samsung Memory",
+      "imageCreditUrl": "https://unsplash.com/@samsungmemory?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
