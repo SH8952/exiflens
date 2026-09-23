@@ -24,7 +24,7 @@ type ResolvedTool = ToolEntry & { name: string; description: string };
  */
 const FIELD_TOOLS: ToolEntry[] = [
   { slug: "dof-calculator", status: "live" },
-  { slug: "exposure-stops-calculator", status: "comingSoon" },
+  { slug: "exposure-stops-calculator", status: "live" },
   { slug: "timelapse-calculator", status: "comingSoon" },
   { slug: "astrophotography-calculator", status: "comingSoon" },
   { slug: "bracketing-calculator", status: "comingSoon" },

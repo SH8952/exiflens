@@ -463,5 +463,42 @@
     ],
     "exampleLeftAlt": "Photo focused on a close subject with a shallow depth of field",
     "exampleRightAlt": "Photo focused on a distant subject with a deep depth of field"
+  },
+  "ExposureCalculator": {
+    "cardTitle": "Exposure Calculator",
+    "baselineTitle": "Current (correct) exposure",
+    "aperture": "Aperture (f-stop)",
+    "shutterSpeed": "Shutter Speed",
+    "iso": "ISO",
+    "changeLabel": "Change",
+    "newValueLabel": "New value",
+    "compensateLabel": "Compensate with",
+    "heldFixedLabel": "{param} stays the same",
+    "newValueForLabel": "New {param}",
+    "stopsChangedLabel": "Stop change",
+    "stopsUnit": "stops",
+    "invalidInput": "Enter valid, positive numbers for every field.",
+    "pageTitle": "Exposure Triangle / Stop Converter",
+    "pageDescription": "See the equivalent shutter speed, aperture, or ISO you need when you change one exposure setting, so your shot stays exactly as bright.",
+    "aboutTitle": "About this calculator",
+    "aboutBody": "Aperture, shutter speed, and ISO form the ‘exposure triangle’ — each one can be adjusted by a stop to let in twice (or half) as much light. This calculator starts from a baseline exposure you know is correctly exposed, lets you pick one setting to change for a creative reason (like a faster shutter speed to freeze motion, or a wider aperture for background blur), and calculates exactly how much to adjust a second setting so the final image stays just as bright — while the third setting stays untouched.",
+    "disclaimer": "Assumes ideal reciprocity between settings. Extremely long exposures can show reciprocity failure on some cameras/film, and this calculator does not account for that.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "What does ‘a stop’ mean?",
+        "answer": "One stop is a doubling or halving of the light reaching your sensor — one full click on most aperture, shutter speed, or ISO dials."
+      },
+      {
+        "question": "Why does the aperture calculation use a factor of 2?",
+        "answer": "Light passes through a lens opening, so it scales with area, not diameter — that’s why the f-number needs to change more than shutter speed or ISO to represent the same one-stop change."
+      },
+      {
+        "question": "Can I freeze motion without changing my exposure?",
+        "answer": "Yes — set ‘Change’ to Shutter Speed and pick a faster speed, then choose Aperture or ISO to compensate with, and the calculator gives you the exact value that keeps the same brightness."
+      }
+    ],
+    "exampleLeftAlt": "Freeze-motion photo made with a fast shutter speed",
+    "exampleRightAlt": "Motion-blur photo made with a slow shutter speed"
   }
 }

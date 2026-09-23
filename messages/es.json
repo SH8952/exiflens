@@ -463,5 +463,42 @@
     ],
     "exampleLeftAlt": "Foto enfocada en un sujeto cercano con poca profundidad de campo",
     "exampleRightAlt": "Foto enfocada en un sujeto lejano con gran profundidad de campo"
+  },
+  "ExposureCalculator": {
+    "cardTitle": "Calculadora de exposición",
+    "baselineTitle": "Exposición actual (correcta)",
+    "aperture": "Apertura (valor f)",
+    "shutterSpeed": "Velocidad de obturación",
+    "iso": "ISO",
+    "changeLabel": "Cambiar",
+    "newValueLabel": "Nuevo valor",
+    "compensateLabel": "Compensar con",
+    "heldFixedLabel": "{param} se mantiene igual",
+    "newValueForLabel": "Nuevo {param}",
+    "stopsChangedLabel": "Cambio en pasos",
+    "stopsUnit": "pasos",
+    "invalidInput": "Introduce valores positivos válidos en todos los campos.",
+    "pageTitle": "Triángulo de exposición / Conversor de pasos",
+    "pageDescription": "Descubre la velocidad de obturación, apertura o ISO equivalente al cambiar un ajuste de exposición, para que tu foto mantenga exactamente el mismo brillo.",
+    "aboutTitle": "Sobre esta calculadora",
+    "aboutBody": "La apertura, la velocidad de obturación y el ISO forman el ‘triángulo de exposición’: cada uno puede ajustarse un paso para dejar pasar el doble (o la mitad) de luz. Esta calculadora parte de una exposición base que ya sabes que es correcta, te permite elegir un ajuste para cambiarlo por motivos creativos (como una velocidad de obturación más rápida para congelar el movimiento, o una apertura más abierta para desenfocar el fondo), y calcula exactamente cuánto ajustar un segundo parámetro para que la imagen final mantenga el mismo brillo, mientras el tercer ajuste permanece intacto.",
+    "disclaimer": "Supone una reciprocidad ideal entre los ajustes. Exposiciones extremadamente largas pueden mostrar fallo de reciprocidad en algunas cámaras o películas, algo que esta calculadora no tiene en cuenta.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Qué significa ‘un paso’?",
+        "answer": "Un paso es una duplicación o reducción a la mitad de la luz que llega al sensor: un clic completo en la mayoría de los diales de apertura, velocidad de obturación o ISO."
+      },
+      {
+        "question": "¿Por qué la apertura usa un factor de 2 en el cálculo?",
+        "answer": "La luz pasa por la abertura del objetivo, así que varía según el área, no el diámetro. Por eso el valor f debe cambiar más que la velocidad de obturación o el ISO para representar el mismo cambio de un paso."
+      },
+      {
+        "question": "¿Puedo congelar el movimiento sin cambiar la exposición?",
+        "answer": "Sí. Elige ‘Cambiar’ como Velocidad de obturación y selecciona una velocidad más rápida, luego elige Apertura o ISO para compensar, y la calculadora te dará el valor exacto que mantiene el mismo brillo."
+      }
+    ],
+    "exampleLeftAlt": "Foto de movimiento congelado tomada con una velocidad de obturación rápida",
+    "exampleRightAlt": "Foto con desenfoque de movimiento tomada con una velocidad de obturación lenta"
   }
 }
