@@ -583,5 +583,52 @@
     ],
     "exampleLeftAlt": "Vía Láctea fotografiada con estrellas nítidas usando una exposición corta",
     "exampleRightAlt": "Foto del cielo nocturno mostrando estelas de estrellas por una exposición demasiado larga"
+  },
+  "BracketCalculator": {
+    "cardTitle": "Exposición en Horquillado",
+    "baselineTitle": "Exposición Base",
+    "aperture": "Apertura (f-stop)",
+    "shutterSpeed": "Velocidad de Obturación",
+    "iso": "ISO",
+    "bracketParamLabel": "Parámetro a Variar",
+    "stepLabel": "Tamaño del Paso",
+    "stepOption": "±{step} paso",
+    "frameCountLabel": "Número de Tomas",
+    "frameCountOption": "{count} tomas",
+    "resultsTitle": "Ajustes por Toma",
+    "baselineFrameTag": "base",
+    "invalidInput": "Ingresa valores positivos válidos en todos los campos.",
+    "advancedTitle": "Opciones Avanzadas",
+    "advancedSubtitle": "Consulta una guía de rango dinámico y el tiempo total de disparo estimado.",
+    "overheadLabel": "Tiempo Extra Estimado por Toma (seg)",
+    "totalShootingTimeLabel": "Tiempo Total de Disparo Estimado",
+    "totalSpreadLabel": "Rango Total de Brillo",
+    "totalSpreadValue": "±{stops} pasos",
+    "dynamicRangeTitle": "Guía de Rango Dinámico",
+    "dynamicRangeStandard": "Un rango estándar — la mayoría de las escenas se pueden capturar bien en una sola exposición, por lo que el horquillado aquí es opcional.",
+    "dynamicRangeHighContrast": "Una escena de alto contraste — este es el rango en el que la fusión HDR suele ayudar, como un cielo brillante frente a un primer plano en sombra.",
+    "dynamicRangeExtreme": "Un rango dinámico muy amplio — adecuado para escenas de contraste extremo, como siluetas a contraluz o una ventana brillante frente a un interior oscuro. Considera añadir más tomas.",
+    "pageTitle": "Calculadora de Horquillado (HDR)",
+    "pageDescription": "Ingresa una exposición base y un intervalo de pasos para calcular automáticamente la apertura, velocidad de obturación e ISO de cada toma de un horquillado HDR.",
+    "aboutTitle": "Sobre esta calculadora",
+    "aboutBody": "La fotografía HDR (Alto Rango Dinámico) captura la misma escena en varias exposiciones distintas y las combina, recuperando tanto las luces altas como las sombras que una sola exposición no puede retener a la vez. Esta calculadora parte de una exposición base (apertura, velocidad de obturación, ISO) y construye una serie de tomas ajustando uno de esos tres parámetros hacia arriba y hacia abajo según el intervalo de pasos elegido.",
+    "disclaimer": "El número de tomas y los tamaños de paso que admite la función de horquillado automático (AEB) de tu cámara varían según el modelo. Usa estos valores como referencia y confirma el rango real de tu cámara antes de disparar.",
+    "faqTitle": "Preguntas Frecuentes",
+    "faq": [
+      {
+        "question": "¿Cuántas tomas y con qué tamaño de paso debo hacer el horquillado?",
+        "answer": "Tres tomas a ±1 paso suelen ser suficientes para una escena normal. Para escenas de alto contraste, como contraluces o atardeceres, amplía el paso (±2 pasos) o añade más tomas (7 o 9) para cubrir un rango de brillo más amplio."
+      },
+      {
+        "question": "¿Debo variar la apertura, la velocidad de obturación o el ISO?",
+        "answer": "Para escenas estáticas con trípode (como paisajes), variar la velocidad de obturación es lo más común, ya que la profundidad de campo se mantiene igual en todas las tomas. Para fotos a pulso o escenas con movimiento, puede convenir variar el ISO en su lugar."
+      },
+      {
+        "question": "¿Por qué se muestra un tiempo total de disparo estimado?",
+        "answer": "El horquillado con exposiciones largas (por ejemplo, paisajes nocturnos) alarga el tiempo de cada toma, así que la secuencia completa puede tardar mucho más de lo esperado. Esto ayuda a planificar cuánto tiempo debe permanecer el trípode en posición, o cuánto puede cambiar la luz de la escena durante la secuencia."
+      }
+    ],
+    "exampleLeftAlt": "Una cámara montada en un trípode al aire libre, preparada para horquillado de exposición",
+    "exampleRightAlt": "Una foto fusionada en HDR combinando varias tomas con distinta exposición"
   }
 }

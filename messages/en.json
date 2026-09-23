@@ -583,5 +583,52 @@
     ],
     "exampleLeftAlt": "Milky Way photographed with pinpoint stars using a short exposure",
     "exampleRightAlt": "Night sky photo showing star trails from an overly long exposure"
+  },
+  "BracketCalculator": {
+    "cardTitle": "Bracket Exposure",
+    "baselineTitle": "Baseline Exposure",
+    "aperture": "Aperture (f-stop)",
+    "shutterSpeed": "Shutter Speed",
+    "iso": "ISO",
+    "bracketParamLabel": "Bracket This Parameter",
+    "stepLabel": "Step Size",
+    "stepOption": "±{step} stop",
+    "frameCountLabel": "Number of Frames",
+    "frameCountOption": "{count} frames",
+    "resultsTitle": "Settings Per Frame",
+    "baselineFrameTag": "baseline",
+    "invalidInput": "Enter valid, positive numbers for every field.",
+    "advancedTitle": "Advanced Options",
+    "advancedSubtitle": "See a dynamic-range guide and an estimated total shooting time.",
+    "overheadLabel": "Estimated Overhead Per Shot (sec)",
+    "totalShootingTimeLabel": "Estimated Total Shooting Time",
+    "totalSpreadLabel": "Total Brightness Range",
+    "totalSpreadValue": "±{stops} stops",
+    "dynamicRangeTitle": "Dynamic Range Guide",
+    "dynamicRangeStandard": "A standard range — most scenes can be captured well in a single exposure, so bracketing here is optional.",
+    "dynamicRangeHighContrast": "A high-contrast scene — this is the range where HDR blending typically helps, such as a bright sky against a shaded foreground.",
+    "dynamicRangeExtreme": "A very wide dynamic range — suited to extreme-contrast scenes like backlit silhouettes or a bright window against a dark interior. Consider adding more frames.",
+    "pageTitle": "Bracketing (HDR) Calculator",
+    "pageDescription": "Enter a baseline exposure and a stop interval to automatically calculate the aperture, shutter speed, and ISO for every frame of an HDR exposure bracket.",
+    "aboutTitle": "About this calculator",
+    "aboutBody": "HDR (High Dynamic Range) photography captures the same scene at several different exposures and blends them together, recovering both bright highlights and dark shadows that a single exposure can't hold at once. This calculator starts from a baseline exposure (aperture, shutter speed, ISO) and builds a bracket of frames by shifting one of those three parameters up and down by your chosen stop interval.",
+    "disclaimer": "The number of frames and step sizes your camera's actual auto-exposure bracketing (AEB) feature supports varies by model. Treat these values as a reference and check your camera's real settings range before shooting.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "How many frames and what step size should I bracket with?",
+        "answer": "Three frames at ±1 stop is often enough for an ordinary scene. For high-contrast scenes like backlighting or sunsets, widen the step (±2 stops) or add more frames (7 or 9) to cover a wider brightness range."
+      },
+      {
+        "question": "Should I bracket aperture, shutter speed, or ISO?",
+        "answer": "For static scenes on a tripod (like landscapes), shutter-speed bracketing is most common, since depth of field stays identical across frames. For handheld shots or scenes with movement, ISO bracketing can be worth considering instead."
+      },
+      {
+        "question": "Why does this show an estimated total shooting time?",
+        "answer": "Long-exposure bracketing (for example, night landscapes) stretches each frame's exposure time, so a full bracket can take much longer than expected. This helps you plan around how long a tripod needs to stay in position, or how much a scene's light might shift during the sequence."
+      }
+    ],
+    "exampleLeftAlt": "A camera mounted on a tripod outdoors, set up for exposure bracketing",
+    "exampleRightAlt": "An HDR-blended photo combining several differently exposed frames"
   }
 }

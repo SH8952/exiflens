@@ -24,6 +24,7 @@ const STATIC_PATHS = [
   "/tools/exposure-stops-calculator",
   "/tools/timelapse-calculator",
   "/tools/astrophotography-calculator",
+  "/tools/bracketing-calculator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

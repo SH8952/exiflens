@@ -27,7 +27,7 @@ const FIELD_TOOLS: ToolEntry[] = [
   { slug: "exposure-stops-calculator", status: "live" },
   { slug: "timelapse-calculator", status: "live" },
   { slug: "astrophotography-calculator", status: "live" },
-  { slug: "bracketing-calculator", status: "comingSoon" },
+  { slug: "bracketing-calculator", status: "live" },
 ];
 
 const POST_SHOOT_TOOLS: ToolEntry[] = [
