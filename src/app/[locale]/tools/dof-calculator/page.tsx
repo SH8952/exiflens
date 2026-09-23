@@ -4,6 +4,9 @@ import { routing } from "@/i18n/routing";
 import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { DofCalculatorCard } from "@/components/dof-calculator-card";
+import { ToolExampleImages } from "@/components/tools/tool-example-images";
+import { ToolImageDevPanel } from "@/components/dev/tool-image-dev-panel";
+import { getToolImages } from "@/lib/tool-images";
 import { AdZone } from "@/components/ad-zone";
 
 type FaqItem = { question: string; answer: string };
@@ -110,6 +113,12 @@ export default async function DofCalculatorPage({
         </p>
       </div>
 
+      <ToolExampleImages
+        slug="dof-calculator"
+        leftAlt={t("exampleLeftAlt")}
+        rightAlt={t("exampleRightAlt")}
+      />
+
       <DofCalculatorCard />
 
       <AdZone
@@ -148,6 +157,15 @@ export default async function DofCalculatorPage({
           </details>
         ))}
       </section>
+
+      {process.env.NODE_ENV === "development" ? (
+        <ToolImageDevPanel
+          slug="dof-calculator"
+          left={getToolImages("dof-calculator").left}
+          right={getToolImages("dof-calculator").right}
+          defaultQuery="macro photography shallow depth of field"
+        />
+      ) : null}
     </div>
   );
 }

@@ -460,6 +460,8 @@
         "question": "Is this exact for my camera?",
         "answer": "It's a close, industry-standard approximation. For critical work, treat the results as a starting point rather than an exact guarantee."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Photo focused on a close subject with a shallow depth of field",
+    "exampleRightAlt": "Photo focused on a distant subject with a deep depth of field"
   }
 }

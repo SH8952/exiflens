@@ -460,6 +460,8 @@
         "question": "¿Es exacto para mi cámara?",
         "answer": "Es una aproximación cercana y estándar en la industria. Para trabajos críticos, trata los resultados como punto de partida y no como una garantía exacta."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Foto enfocada en un sujeto cercano con poca profundidad de campo",
+    "exampleRightAlt": "Foto enfocada en un sujeto lejano con gran profundidad de campo"
   }
 }
