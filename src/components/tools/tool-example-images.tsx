@@ -16,6 +16,11 @@ type Props = {
  * developer image tool (`src/components/dev/tool-image-dev-panel.tsx`)
  * and stored per slug/position in `src/data/tool-images.json`.
  *
+ * The two-column layout applies at every viewport width, including
+ * mobile, so the pair always reads as a left/right comparison (images
+ * just scale down together) rather than stacking top/bottom on narrow
+ * screens.
+ *
  * Renders nothing if neither slot has an image yet, so adding this to a
  * new tool page is always safe before its photos are picked. If only one
  * side is set, that single photo is shown full-width instead of leaving
@@ -30,7 +35,7 @@ export function ToolExampleImages({ slug, leftAlt, rightAlt }: Props) {
   if (entries.length === 0) return null;
 
   return (
-    <div className={cn("grid gap-4", entries.length > 1 ? "sm:grid-cols-2" : "sm:grid-cols-1")}>
+    <div className={cn("grid gap-3 sm:gap-4", entries.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
       {entries.map((entry, i) => (
         <ExampleImage key={i} meta={entry.meta} alt={entry.alt} />
       ))}
@@ -46,7 +51,7 @@ function ExampleImage({ meta, alt }: { meta: ToolImageMeta; alt: string }) {
           src={meta.image}
           alt={alt}
           fill
-          sizes="(min-width: 640px) 50vw, 100vw"
+          sizes="(min-width: 640px) 50vw, 50vw"
           className="object-cover"
         />
       </div>
