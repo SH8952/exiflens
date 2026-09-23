@@ -25,6 +25,23 @@ export type CoupangProduct = {
 export class CoupangConfigError extends Error {}
 export class CoupangApiError extends Error {}
 
+/**
+ * Temporary kill-switch for outbound Coupang API calls, independent of
+ * whether credentials are configured. When COUPANG_API_DISABLED="true",
+ * searchCoupangProducts() short-circuits before making any network
+ * request, the same way a missing-credentials config error does (the
+ * route handler already treats CoupangConfigError as "hide the section
+ * quietly", so no extra handling is needed at the call site).
+ *
+ * Use this to pause calls while the account's hourly rate limit
+ * (10 requests/hour) is being shared across multiple dev sites being
+ * tested at the same time. Remove the env var (or set it to anything
+ * other than "true") in .env.local to resume.
+ */
+function isCoupangApiTemporarilyDisabled(): boolean {
+  return process.env.COUPANG_API_DISABLED === "true";
+}
+
 /** yyMMdd'T'HHmmss'Z' in UTC, as required by Coupang's CEA signature scheme. */
 function signedDate(now: Date): string {
   const pad = (n: number) => String(n).padStart(2, "0");
@@ -80,6 +97,12 @@ export async function searchCoupangProducts(
   keyword: string,
   limit = 5,
 ): Promise<CoupangProduct[]> {
+  if (isCoupangApiTemporarilyDisabled()) {
+    throw new CoupangConfigError(
+      "Coupang API calls are temporarily disabled (COUPANG_API_DISABLED=true)",
+    );
+  }
+
   const { accessKey, secretKey } = getCredentials();
   const subId = process.env.COUPANG_PARTNER_SUBID;
 
