@@ -1,0 +1,48 @@
+---
+title: "Usando la compensación de exposición (EV): cómo corregir los momentos en que el fotómetro se equivoca"
+description: "La cámara calcula la exposición y aun así la nieve sale de un gris apagado o un esmoquin negro se ve deslavado. Aquí explicamos la suposición del 18% gris detrás de estos errores y cuántos pasos hay que compensar en cada situación, con números reales."
+publishedAt: "2026-09-24"
+tags: ["compensacion-de-exposicion", "ev", "medicion"]
+category: "Fundamentos de cámara y exposición"
+image: "/guides/images/using-exposure-compensation.webp"
+imageCredit: "Mark Chan"
+imageCreditUrl: "https://unsplash.com/@markcjn?utm_source=ExifLens&utm_medium=referral"
+---
+
+Si alguna vez dejaste que el fotómetro de la cámara eligiera la exposición en una ladera nevada y el resultado fue un campo gris apagado en lugar de nieve blanca, eso no es un problema del sensor ni del objetivo: es el fotómetro haciendo exactamente lo que fue diseñado para hacer. Los fotómetros de luz reflejada promedian todo lo que hay en el encuadre y asumen que la escena equivale, en promedio, a un gris medio del 18%. Cuando la escena real es mucho más clara o más oscura que esa suposición, la exposición "correcta" que calcula el fotómetro resulta incorrecta para lo que realmente tienes delante. La compensación de exposición es el control que te permite anular esa suposición y decirle a la cámara que muestre la escena más clara o más oscura de lo que indica su propio cálculo.
+
+## Por qué el fotómetro se equivoca: la suposición del gris del 18%
+
+Ya sea en medición puntual, ponderada al centro o matricial/evaluativa, todo fotómetro de luz reflejada mide la luz que rebota de la escena hacia el objetivo, no la luz que realmente incide sobre el sujeto. Como no puede distinguir si esa luz reflejada viene de la nieve, de la piel o de una chaqueta negra, recurre a una única suposición: que todo lo medido promedia, más o menos, un gris del 18%, el tono que se usa como referencia de brillo medio típico. Esa suposición funciona bien en una escena exterior promedio con una mezcla de tonos, por eso la mayoría de las tomas diurnas no necesitan compensación. Pero se rompe en cuanto un solo tono domina el encuadre, porque el fotómetro sigue insistiendo en llevar ese tono dominante hacia el gris en lugar de reproducirlo tal como es.
+
+## Corregir escenas claras: nevados y vestidos blancos
+
+Si mides con matricial/evaluativa un paisaje cubierto de nieve, el fotómetro intenta llevar todo ese blanco hacia un gris medio, así que la foto sale oscura y apagada. Para que la nieve vuelva a verse blanca de verdad, normalmente hace falta una compensación positiva de +1 a +2 pasos. Si el fotómetro sugiere f/8, 1/500s, ISO 200 para la escena, +1 paso lleva el obturador a 1/250s (o el diafragma a f/5.6) para dejar entrar el doble de luz, y +2 pasos te llevan a 1/125s o f/4. Un vestido de novia blanco que llena la mayor parte del encuadre se comporta igual, y suele necesitar entre +1 y +1.5 pasos por la misma razón.
+
+## Corregir escenas oscuras: esmóquines y fondos de escenario
+
+Ocurre lo contrario cuando los tonos oscuros dominan el encuadre: un esmoquin negro, un fondo de escenario oscuro, una mascota negra que llena la toma. El fotómetro intenta aclarar todo ese tono oscuro hacia un gris medio, así que la foto sale más clara y deslavada de lo que debería. Compensar alrededor de -1 paso suele devolver el negro real. Un error común en bodas es dejar la compensación de +1 paso usada para el vestido de la novia y arrastrarla directamente a las fotos del esmoquin del novio, que entonces salen sobreexpuestas: las dos escenas necesitan compensación en direcciones opuestas.
+
+## El modo de medición cambia cuánta compensación necesitas
+
+La medición matricial/evaluativa, que promedia todo el encuadre, es la que produce los valores grandes de compensación de arriba. Medir puntualmente sobre un tono medio —la piel bajo una iluminación típica, por ejemplo— ya está cerca de lo correcto, así que necesita poca o ninguna compensación adicional. En cambio, si mides puntualmente un tono extremo, como una camisa blanca o una chaqueta negra, vas a necesitar aún más compensación que con matricial. Aplicar el mismo valor de compensación por costumbre, sin fijarte en qué modo de medición está activo, es una manera rápida de obtener resultados inconsistentes cada vez que cambia la escena.
+
+## Verificar la compensación con el histograma
+
+Ajustar un valor de compensación no es el último paso: hay que revisar el histograma justo después de la toma para ver si se corta contra alguna de las paredes. Si +2 pasos en la escena nevada empujan el histograma contra la pared derecha, ya perdiste toda la textura de la nieve, y bajar a unos +1.3 pasos suele recuperarla. Si -1 paso en la foto del esmoquin amontona los datos contra la pared izquierda, perdiste detalle en las sombras, y suavizar a unos -0.7 pasos lo recupera. Revisar el histograma después de cada toma compensada, no solo confiar en la vista previa de la pantalla, es lo que realmente confirma si el valor elegido fue el correcto.
+
+## La confusión común: "la compensación de exposición no funciona en modo Manual"
+
+En modo Manual completo, con el diafragma, la velocidad de obturación y el ISO fijados a mano, girar el dial de compensación de exposición no cambia en nada el brillo real de la foto, solo mueve la aguja del fotómetro, lo que lleva a mucha gente a concluir que el dial está roto en modo M. No lo está: activa el ISO automático junto con el modo Manual y el dial de compensación vuelve a funcionar, esta vez empujando hacia arriba o hacia abajo el ISO que elige la cámara. Si quieres fijar tú mismo el diafragma y la velocidad de obturación y aun así usar el dial de compensación, ISO automático en modo Manual es la combinación que lo permite.
+
+## Usar una calculadora para ver exactamente qué significa un paso
+
+Si un número como +1.7 EV o -2/3 de paso no se traduce de forma intuitiva en un cambio de velocidad de obturación o de apertura, la calculadora de exposición de ExifLens (/tools/exposure-stops-calculator) te deja introducir una velocidad de obturación de partida y una cantidad de pasos para ver el valor resultante exacto. Para el ejemplo de la nieve, introducir una velocidad de partida de 1/500s con +2 pasos confirma el objetivo de 1/125s antes incluso de empezar a disparar.
+
+## Lista de verificación en el terreno
+
+- Si el blanco domina el encuadre (nieve, un vestido blanco, una pared blanca), suele hacer falta entre +1 y +2 pasos de compensación positiva.
+- Si el negro domina el encuadre (un esmoquin, un fondo oscuro), suele hacer falta alrededor de -1 paso de compensación negativa.
+- Medir puntualmente un tono extremo necesita más compensación que medir matricial/evaluativa la misma escena.
+- Revisa ambos extremos del histograma después de cada toma compensada, no solo la vista previa de la pantalla.
+- Si el dial de compensación parece no hacer nada en modo Manual, comprueba si el ISO automático está desactivado.
