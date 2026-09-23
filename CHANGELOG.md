@@ -1,3 +1,16 @@
+## 2026-09-23 — /tools 5번 도구: 브라케팅(HDR) 계산기 추가 (고급 옵션 포함)
+
+- 배경: 승인된 9개 도구 순서(5번)에 따라 진행. 사용자가 "고급 옵션도 처음부터 포함해서 한 번에 진행"을 요청 — 기본 브라케팅 계산(기준 노출 + 스텝 + 매수 → 프레임별 조리개/셔터스피드/ISO)에 고급 옵션 2가지(다이나믹 레인지 가이드, 예상 총 촬영 시간)를 처음부터 함께 구현.
+- **신규**:
+  - `src/lib/bracket-calculator.ts` — `calculateBracketPlan`(기준 조리개·셔터스피드·ISO + 브라케팅 대상 파라미터 + 스텝(스탑) + 매수를 입력받아, 대상 파라미터만 표준 EV 브라케팅 컨벤션(+EV=더 밝은 프레임)에 따라 위아래로 조정한 프레임 목록을 생성 — 셔터/ISO는 스탑당 2배, 조리개는 스탑당 √2배이되 밝아지는 방향이 반대(조리개 값 감소)임을 반영), 다이나믹 레인지 가이드(총 EV 범위를 standard/highContrast/extreme 3단계로 분류하는 임계값 로직), `formatStepStops`/`formatStopsOffset`/`formatShootingTimeSeconds` 포맷터. 노출 계산기(`src/lib/exposure-calculator.ts`)의 스탑 프리셋·포맷터를 그대로 재사용(중복 구현 없음).
+  - `src/components/bracket-calculator-card.tsx` — 기준 노출 입력(조리개/셔터스피드/ISO) + 브라케팅 대상 파라미터/스텝/매수 선택 + 프레임별 결과 리스트(대상 파라미터만 강조 표시) + 고급 옵션 섹션(샷당 오버헤드 입력, 예상 총 촬영 시간, 총 밝기 범위, 다이나믹 레인지 가이드 문구).
+  - `src/app/[locale]/tools/bracketing-calculator/page.tsx` — 기존 계산기 페이지들과 동일한 구조(브레드크럼, WebApplication+FAQPage+BreadcrumbList JSON-LD, 설명 섹션, FAQ 3문항), 공통 `<ToolExampleImages>`/`<ToolImageDevPanel>` 템플릿 재사용(실제 예시 사진은 아직 미적용).
+  - `messages/{en,ko,ja,es}.json`에 `BracketCalculator` 네임스페이스 전체 번역 추가.
+- **수정**: `src/app/[locale]/tools/page.tsx`에서 `bracketing-calculator`를 `comingSoon` → `live`로 전환, `src/app/sitemap.ts`에 신규 경로 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류 0건), `npm run build`(exit code 0, 정상 생성). 로컬 `npm run dev` + `curl`로 4개 로케일(`/ko`, `/en`, `/es`, `/ja`) 모두 `/tools/bracketing-calculator` 200 및 실제 렌더링 텍스트(각 언어별 카드 제목) 확인, `/ko/tools` 허브에서도 "브라케팅(HDR) 계산기"가 정상 노출(comingSoon 배지 아님) 확인. next-intl 관련 오류(MISSING_MESSAGE 등) 없음 확인.
+- **커밋**: `09261a0` "feat(tools): add Bracketing (HDR) Calculator with advanced options"
+- **다음 단계**: push → 사용자가 로컬에서 이 도구의 좌/우 예시 사진 적용 → 이후 6번 도구(인쇄 해상도/DPI 계산기)로 순차 진행.
+
 ## 2026-09-23 — 쿠팡(Coupang) API 임시 중단 킬스위치 추가
 
 - 배경: ExifLens와 FlyDroneMap 두 개발 사이트를 동시에 테스트하면서 쿠팡 파트너스 Open API의 시간당 호출 제한(10회/시간)을 초과함. 사용자 요청에 따라 ExifLens에서만(FlyDroneMap은 해당 프로젝트 대화방에서 별도 조치, firelic은 현재 미작업) 쿠팡 API 호출을 임시로 중단하고, 기능 추가는 계속 진행.
