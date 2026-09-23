@@ -1,1 +1,14 @@
-{}
+{
+  "dof-calculator": {
+    "left": {
+      "image": "/tools/images/dof-calculator-left.webp",
+      "imageCredit": "Mario Verduzco",
+      "imageCreditUrl": "https://unsplash.com/@mario?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/dof-calculator-right.webp",
+      "imageCredit": "Thanhy Nguyen",
+      "imageCreditUrl": "https://unsplash.com/@thanhy_99?utm_source=ExifLens&utm_medium=referral"
+    }
+  }
+}
