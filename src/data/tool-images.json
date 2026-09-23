@@ -22,5 +22,17 @@
       "imageCredit": "Evgeniy Bezkorovayniy",
       "imageCreditUrl": "https://unsplash.com/@korovay?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "timelapse-calculator": {
+    "left": {
+      "image": "/tools/images/timelapse-calculator-left.webp",
+      "imageCredit": "Levi Lei",
+      "imageCreditUrl": "https://unsplash.com/@levilei?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/timelapse-calculator-right.webp",
+      "imageCredit": "Ryunosuke Kikuno",
+      "imageCreditUrl": "https://unsplash.com/@ryunosuke_kikuno?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
