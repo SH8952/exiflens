@@ -98,13 +98,13 @@
   "exif-remover": {
     "left": {
       "image": "/tools/images/exif-remover-left.webp",
-      "imageCredit": "Kássio Silva",
-      "imageCreditUrl": "https://unsplash.com/@kassiosilva?utm_source=ExifLens&utm_medium=referral"
+      "imageCredit": "Desola Lanre-Ologun",
+      "imageCreditUrl": "https://unsplash.com/@desola?utm_source=ExifLens&utm_medium=referral"
     },
     "right": {
       "image": "/tools/images/exif-remover-right.webp",
-      "imageCredit": "Desola Lanre-Ologun",
-      "imageCreditUrl": "https://unsplash.com/@desola?utm_source=ExifLens&utm_medium=referral"
+      "imageCredit": "Jamie Street",
+      "imageCreditUrl": "https://unsplash.com/@jamie452?utm_source=ExifLens&utm_medium=referral"
     }
   }
 }
