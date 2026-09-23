@@ -518,6 +518,15 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-24 — 가이드 아티클 자동 발행: 노출 보정(EV) 활용법 + 백버튼 포커스 설정법 (예약 작업, 1일 2건)
+
+- 신규 가이드 2건을 각각 4개 언어(en/ja/ko/es)로 독립적으로 작성해 발행.
+- 1건: "노출 보정(EV) 활용법"(order 29, slug: using-exposure-compensation) — 반사식 노출계가 18% 회색을 가정해 노출을 계산하는 원리, 눈밭·흰 웨딩드레스처럼 밝은 장면에서 +1~+2스톱, 턱시도·어두운 배경처럼 어두운 장면에서 -1스톱 안팎으로 보정해야 하는 이유와 실제 셔터스피드 수치 예시, 측광 모드별로 필요한 보정량이 달라지는 이유, 히스토그램으로 보정값을 검증하는 법, M 모드에서 보정 다이얼이 안 먹는다는 흔한 오해(Auto ISO 필요)까지 정리. ExifLens 노출 계산기(/tools/exposure-stops-calculator)로 스탑 값을 직접 확인하도록 자연스럽게 연결.
+- 2건: "백버튼 포커스 설정법"(order 30, slug: back-button-focus-explained) — 셔터 반누름이 초점과 촬영을 동시에 처리해 생기는 문제, 초점을 AF-ON 등 뒷면 버튼으로 옮기는 설정 방법, 장애물을 통과하는 움직이는 피사체·삼각대 재구도 같은 실전 시나리오, 흔한 실수(뒷면 버튼을 누르지 않고 촬영), AF-C와 결합해 쓰는 법까지 정리. 초점 모드 비교 가이드(/guides/focus-modes-af-s-vs-af-c-vs-mf)로 연결되는 내부 링크 포함.
+- 카테고리: 두 주제 모두 기존 "카메라 기초 & 노출"(Camera Basics & Exposure / カメラ基礎と露出 / Fundamentos de cámara y exposición) 카테고리를 재사용.
+- automation/guide-topics-queue.json 갱신: order 29, 30 두 항목 모두 published: true, publishedDate: "2026-09-24"(KST 기준)로 반영. 총 130개 주제 중 미발행 100개 남음(경고 기준 10개보다 충분히 여유 있음).
+- 대표 이미지(image/imageCredit/imageCreditUrl)는 이번 자동 발행 단계에서는 첨부하지 않음 — automation/publish-guide.command 실행 시 attach-guide-image.py가 Unsplash에서 자동으로 가져와 4개 언어 mdx에 삽입함(기존 동작 방식과 동일). 발행 패키지에는 두 슬러그의 mdx 파일을 순서대로 넣었으므로, publish-guide.command를 두 번 실행(더블클릭)하면 각 실행이 guide-*-en.mdx 중 하나씩을 처리하며 두 건 모두 정상적으로 커밋·이미지 첨부됨.
+
 ## 2026-09-23 — 가이드 아티클 자동 발행: 스튜디오 조명 기초 (예약 작업)
 
 - 신규 가이드 "스튜디오 조명 기초"(order 28, slug: studio-lighting-basics, 4개 언어: en/ja/ko/es) 발행. 키/필/백라이트 3점 조명의 역할 분담부터, 역제곱 법칙으로 조명 거리 변화에 따른 노출 변화를 계산하는 법(1m→2m 시 광량 1/4·약 2스톱 언더, 1m→50cm 시 광량 4배·약 2스톱 오버), 라이트 비율(1:1 평면적인 뷰티 룩 vs 4:1 예시 f/11·f/5.6의 드라마틱한 인물)로 입체감을 조절하는 계산, 소프트박스와 엄브렐러의 광질·그림자 경계 차이, 피사체-배경 간 1.5~2m 이격으로 실루엣 분리하는 법, 조명 각도 실수(너구리 눈 효과)와 캐치라이트 확인 습관까지 실전 체크리스트로 정리.

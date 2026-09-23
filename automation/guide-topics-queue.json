@@ -258,8 +258,8 @@
       "slug": "using-exposure-compensation",
       "titleKo": "노출 보정(EV) 활용법",
       "titleEn": "Using Exposure Compensation",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-09-24",
       "mirrored": false
     },
     {
@@ -267,8 +267,8 @@
       "slug": "back-button-focus-explained",
       "titleKo": "백버튼 포커스 설정법",
       "titleEn": "Back-Button Focus Explained",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-09-24",
       "mirrored": false
     },
     {
