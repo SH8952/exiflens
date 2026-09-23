@@ -34,5 +34,17 @@
       "imageCredit": "Ryunosuke Kikuno",
       "imageCreditUrl": "https://unsplash.com/@ryunosuke_kikuno?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "astrophotography-calculator": {
+    "left": {
+      "image": "/tools/images/astrophotography-calculator-left.webp",
+      "imageCredit": "Greg Rakozy",
+      "imageCreditUrl": "https://unsplash.com/@grakozy?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/astrophotography-calculator-right.webp",
+      "imageCredit": "Lucas Davies",
+      "imageCreditUrl": "https://unsplash.com/@lucas_davies?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
