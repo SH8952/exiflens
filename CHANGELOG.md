@@ -1,3 +1,16 @@
+## 2026-09-23 — /tools 9번 도구(마지막 도구): 센서 크기별 환산 화각 계산기 추가 (고급 옵션 + 심도 정밀 진단 포함)
+
+- 배경: 승인된 9개 도구 순서 중 마지막(9번)에 따라 진행. 사전에 기본 계산(센서 크기별 크롭 팩터, 35mm 환산 초점거리, 화각)과 고급 옵션 2가지(다른 센서와의 비교 환산, 피사계 심도 정밀 진단)를 계획으로 제시했고, 심도 정밀 진단의 범위(안내 문구 수준 vs 정밀 계산)에 대해 먼저 확인을 구한 뒤 "고급옵션 정밀진단까지 포함해서 작업 진행 해줘" 승인을 받아 진행.
+- **신규**:
+  - `src/lib/crop-factor-calculator.ts` — 센서 프리셋(풀프레임, APS-C 캐논(1.6배)와 APS-C 니콘/소니/후지(1.5배)를 별도 옵션으로 구분, 마이크로포서드, 1인치, 미디엄포맷, 직접 입력) + `calculateCropFactor`(센서 대각선과 풀프레임 대각선(약 43.3mm)의 비율로 계산 — 제조사 공식 크롭 팩터 값과 거의 동일), `calculateEquivalentFocalLengthMm`(실제 초점거리 × 크롭 팩터), `calculateFovDegrees`(2·atan(센서 크기/2f)의 표준 화각 공식), `calculateComparableFocalLengthMm`(35mm 환산 초점거리를 비교 대상 센서의 크롭 팩터로 나눠 동일 화각을 만드는 초점거리 역산), `calculateEquivalentAperture`(화각을 맞춘 상태에서 심도·배경흐림은 조리개 숫자가 아닌 실제 렌즈 구경(입사동 지름)에 좌우된다는 사진학적 "환산(equivalence)" 원리에 따라, 두 센서의 크롭 팩터 비율만큼 f값을 환산), `calculateCircleOfConfusionMm`(센서 대각선/1500 근사치, 심도 정밀 진단용).
+  - `src/components/crop-factor-calculator-card.tsx` — 센서 선택(프리셋 + 직접 입력 폭/높이) + 실제 초점거리 입력 → 크롭 팩터·35mm 환산 초점거리·수평/수직 화각 결과. 고급 옵션: (1) 비교할 센서 선택 → 동일 화각을 만드는 환산 초점거리, (2) 심도 정밀 진단 — 조리개·촬영 거리 입력 → 기존 심도(DoF) 계산기(`dof-calculator.ts`)의 과초점거리/근거리·원거리 한계/총 심도 범위 공식을 그대로 재사용(중복 구현 없이 DRY 유지)해 실제 피사계 심도를 계산하고, 비교 센서 기준 환산 조리개값(심도·배경흐림 비교용 참고치)을 함께 안내.
+  - `src/app/[locale]/tools/crop-factor-calculator/page.tsx` — 기존 계산기 페이지들과 동일한 구조(브레드크럼, WebApplication+FAQPage+BreadcrumbList JSON-LD, 설명 섹션, FAQ 3문항), 공통 `<ToolExampleImages>`/`<ToolImageDevPanel>` 템플릿 재사용(실제 예시 사진은 아직 미적용, 권장 검색어: "camera lens sensor comparison mirrorless dslr").
+  - `messages/{en,ko,ja,es}.json`에 `CropFactorCalculator` 네임스페이스 전체 번역 추가(기존 `ToolsHub.tools.crop-factor-calculator`의 이름/설명 문구를 그대로 페이지 타이틀/설명에 재사용해 일관성 유지).
+- **수정**: `src/app/[locale]/tools/page.tsx`에서 `crop-factor-calculator`를 `comingSoon` → `live`로 전환(승인된 9개 도구 전체가 이제 모두 `live` 상태), `src/app/sitemap.ts`에 신규 경로 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류 0건), `npm run build`(exit code 0, 정상 생성). 로컬 `npm run dev`(자동 포트 3010) + `curl`로 4개 로케일(`/ko`, `/en`, `/es`, `/ja`) 모두 `/tools/crop-factor-calculator` 200 및 실제 렌더링 텍스트 확인, `/ko/tools` 허브에서도 정상 노출(comingSoon 배지 아님) 확인. 계산 결과 수치도 직접 검증(기본값 APS-C 센서(23.5×15.6mm) + 초점거리 50mm → 크롭 팩터 1.53×, 환산 초점거리 77mm로 렌더링된 것을 확인 — 손으로 계산한 예상값과 일치). next-intl 관련 오류(MISSING_MESSAGE 등) 없음 확인.
+- **커밋**: `5d3da4b` "feat: add crop factor / equivalent focal length calculator (Tool #9)"
+- **다음 단계**: push → 사용자가 로컬에서 이 도구의 좌/우 예시 사진 적용. 이번 도구로 최초 승인된 9개 도구 순서가 모두 완료되었으며, 이후 신규 도구/기능은 별도 계획 제시 및 승인 절차를 거쳐 진행 예정.
+
 ## 2026-09-23 — /tools 8번 도구: EXIF/메타데이터 일괄 제거 도구 추가 (전체 포맷 + 단일/일괄 + 고급 옵션)
 
 - 배경: 승인된 9개 도구 순서(8번)에 따라 진행. 사용자가 3가지 명시적 요구사항을 제시: (1) 한 장 단일 처리와 여러 장 일괄 처리 모두 지원, (2) 메타데이터가 저장되는 모든 포맷을 지원, (3) 고급 옵션 포함 — 이와 함께 "지금까지 새롭게 추가된 고급옵션 기능은 추후 유료로 전환될 수 있으므로, 가급적 모든 기능에 고급옵션이 필요하다"는 **제품 전략 방향(향후 모든 도구에 공통 적용)**을 전달받음. 작업 시작 전 기술적 리스크(HEIC/HEIF의 제한적인 브라우저 디코딩 지원, TIFF의 낮은 실사용 빈도, IPTC/XMP 범위의 모호성, 대량 파일 처리 시 성능)를 사용자에게 먼저 설명하고, JPEG/PNG/WebP 3개 포맷(웹에서 메타데이터를 저장하는 포맷 중 실사용 비중이 가장 높은 조합)으로 범위를 확정한 뒤 "현상태 백업 후 작업 진행해줘" 승인을 받아 진행.
