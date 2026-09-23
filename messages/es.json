@@ -735,5 +735,53 @@
     ],
     "exampleLeftAlt": "Varias tarjetas de memoria de cámara colocadas juntas",
     "exampleRightAlt": "Fotos siendo respaldadas en un disco duro externo"
+  },
+  "ExifRemover": {
+    "cardTitle": "Eliminar Metadatos",
+    "privacyNote": "Esta herramienta nunca sube tus fotos a un servidor — todo ocurre en tu navegador. Tus archivos nunca salen de tu dispositivo.",
+    "uploadLabel": "Subir Fotos (hasta 20)",
+    "formatNote": "Formatos compatibles: JPEG, PNG, WebP. HEIC (formato predeterminado de iPhone) y TIFF aún no son compatibles.",
+    "advancedTitle": "Opciones Avanzadas",
+    "gpsOnlyLabel": "Eliminar solo la ubicación GPS (mantener el resto del EXIF)",
+    "gpsOnlyHint": "Solo JPEG. Algunos archivos también guardan las coordenadas GPS en XMP — para garantizar la eliminación completa de la ubicación, desactiva esto y usa la eliminación completa.",
+    "removeIptcLabel": "También eliminar metadatos IPTC/Photoshop (derechos de autor, descripciones, palabras clave, etc.)",
+    "removeIptcHint": "Activado por defecto. Desactívalo si quieres conservar la información de derechos de autor en la foto.",
+    "processButton": "Eliminar Metadatos ({count})",
+    "processingButton": "Procesando...",
+    "downloadZipButton": "Descargar Todo como ZIP ({count})",
+    "zippingButton": "Comprimiendo...",
+    "downloadOne": "Descargar",
+    "removeFile": "Quitar",
+    "noCameraInfo": "Sin datos de cámara",
+    "gpsPresent": "Con GPS",
+    "gpsAbsent": "Sin GPS",
+    "statusAnalyzing": "Analizando...",
+    "statusReady": "Listo",
+    "statusProcessing": "Procesando...",
+    "statusDone": "Hecho",
+    "statusUnsupported": "Formato no compatible",
+    "statusError": "Error",
+    "pageTitle": "Eliminador de EXIF / Metadatos",
+    "pageDescription": "Elimina de forma segura el EXIF, la ubicación GPS y los metadatos IPTC de tus fotos directamente en tu navegador. Procesa varios archivos a la vez y descárgalos como ZIP.",
+    "aboutTitle": "Sobre esta herramienta",
+    "aboutBody": "Las fotos suelen llevar metadatos EXIF ocultos: modelo de cámara, configuración de disparo, fecha y hora de la toma, y a veces incluso la ubicación GPS exacta donde se tomó la foto. Eliminar esto antes de compartir una foto en línea evita que se filtre información personal no deseada. Esta herramienta elimina solo las secciones de metadatos a nivel de bytes sin volver a comprimir los datos de píxeles de la imagen, por lo que no hay ninguna pérdida de calidad. Todo se ejecuta en tu navegador — tus fotos nunca se envían a un servidor.",
+    "disclaimer": "HEIC (formato predeterminado de fotos de iPhone) y TIFF aún no son compatibles de forma fiable con las APIs estándar del navegador, por lo que no están incluidos. Conviértelos primero a JPEG (desde la configuración de tu teléfono o cámara) si necesitas usar esta herramienta con ellos.",
+    "faqTitle": "Preguntas Frecuentes",
+    "faq": [
+      {
+        "question": "¿De verdad mis fotos nunca se suben a ningún lado?",
+        "answer": "Correcto. Todo se ejecuta como JavaScript dentro de tu propio navegador — lee y reconstruye el archivo localmente sin ninguna solicitud de red. Puedes verificarlo tú mismo en la pestaña de Red de las herramientas de desarrollador de tu navegador."
+      },
+      {
+        "question": "¿Eliminar los metadatos reduce la calidad de la foto?",
+        "answer": "No. Esta herramienta no vuelve a comprimir la imagen en absoluto — solo recorta los rangos de bytes donde se almacenan los metadatos, dejando los datos de píxeles originales completamente intactos."
+      },
+      {
+        "question": "Quiero eliminar solo los datos de GPS pero mantener la información de la cámara.",
+        "answer": "Activa la casilla 'Eliminar solo la ubicación GPS' en Opciones Avanzadas — para archivos JPEG, esto elimina solo las coordenadas GPS mientras deja intactos el modelo de cámara, el objetivo y la configuración de disparo."
+      }
+    ],
+    "exampleLeftAlt": "Un panel de metadatos de una foto mostrando la configuración de la cámara y la ubicación GPS",
+    "exampleRightAlt": "Un archivo de foto limpio con todos los metadatos eliminados"
   }
 }

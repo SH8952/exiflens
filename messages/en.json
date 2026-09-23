@@ -735,5 +735,53 @@
     ],
     "exampleLeftAlt": "Several camera memory cards laid out together",
     "exampleRightAlt": "Photos being backed up to an external hard drive"
+  },
+  "ExifRemover": {
+    "cardTitle": "Remove Metadata",
+    "privacyNote": "This tool never uploads your photos to a server — everything happens in your browser. Your files never leave your device.",
+    "uploadLabel": "Upload Photos (up to 20)",
+    "formatNote": "Supported formats: JPEG, PNG, WebP. HEIC (iPhone's default format) and TIFF aren't supported yet.",
+    "advancedTitle": "Advanced Options",
+    "gpsOnlyLabel": "Remove GPS location only (keep the rest of EXIF)",
+    "gpsOnlyHint": "JPEG only. Some files also mirror GPS coordinates into XMP — for guaranteed complete location removal, turn this off and use full removal instead.",
+    "removeIptcLabel": "Also remove IPTC/Photoshop metadata (copyright, captions, keywords, etc.)",
+    "removeIptcHint": "On by default. Turn this off if you want to keep copyright info attached to the photo.",
+    "processButton": "Remove Metadata ({count})",
+    "processingButton": "Processing...",
+    "downloadZipButton": "Download All as ZIP ({count})",
+    "zippingButton": "Zipping...",
+    "downloadOne": "Download",
+    "removeFile": "Remove",
+    "noCameraInfo": "No camera info",
+    "gpsPresent": "Has GPS",
+    "gpsAbsent": "No GPS",
+    "statusAnalyzing": "Analyzing...",
+    "statusReady": "Ready",
+    "statusProcessing": "Processing...",
+    "statusDone": "Done",
+    "statusUnsupported": "Unsupported format",
+    "statusError": "Error",
+    "pageTitle": "EXIF / Metadata Remover",
+    "pageDescription": "Safely strip EXIF, GPS location, and IPTC metadata from your photos right in your browser. Process multiple files at once and download them as a ZIP.",
+    "aboutTitle": "About this tool",
+    "aboutBody": "Photos often carry hidden EXIF metadata — camera model, shooting settings, the date and time taken, and sometimes even the exact GPS location where the photo was captured. Stripping this before sharing a photo online prevents unwanted personal information from leaking out. This tool removes only the metadata sections at the byte level without re-compressing the image's pixel data, so there's zero quality loss. Everything runs in your browser — your photos are never sent to a server.",
+    "disclaimer": "HEIC (iPhone's default photo format) and TIFF aren't reliably supported by standard browser APIs yet, so they're not included. Convert those to JPEG first (from your phone or camera's settings) if you need to use this tool on them.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "Are my photos really never uploaded anywhere?",
+        "answer": "Correct. Everything runs as JavaScript inside your own browser — it reads and rebuilds the file locally with no network request involved. You can verify this yourself in your browser's developer tools Network tab."
+      },
+      {
+        "question": "Does removing metadata reduce photo quality?",
+        "answer": "No. This tool doesn't re-compress the image at all — it only cuts out the byte ranges where metadata is stored, leaving the original pixel data completely untouched."
+      },
+      {
+        "question": "I want to remove just the GPS data but keep the camera info.",
+        "answer": "Turn on the 'Remove GPS location only' checkbox in Advanced Options — for JPEG files, this strips just the GPS coordinates while leaving camera model, lens, and shooting settings intact."
+      }
+    ],
+    "exampleLeftAlt": "A photo's metadata panel showing camera settings and GPS location",
+    "exampleRightAlt": "A clean photo file with all metadata stripped out"
   }
 }

@@ -33,7 +33,7 @@ const FIELD_TOOLS: ToolEntry[] = [
 const POST_SHOOT_TOOLS: ToolEntry[] = [
   { slug: "print-resolution-calculator", status: "live" },
   { slug: "storage-calculator", status: "live" },
-  { slug: "exif-remover", status: "comingSoon" },
+  { slug: "exif-remover", status: "live" },
   { slug: "crop-factor-calculator", status: "comingSoon" },
 ];
 

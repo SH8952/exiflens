@@ -735,5 +735,53 @@
     ],
     "exampleLeftAlt": "카메라 메모리카드 여러 장이 놓여 있는 모습",
     "exampleRightAlt": "외장 하드디스크에 사진을 백업하고 있는 모습"
+  },
+  "ExifRemover": {
+    "cardTitle": "메타데이터 제거",
+    "privacyNote": "이 도구는 사진을 서버로 전송하지 않고 브라우저 안에서만 처리합니다. 파일이 외부로 나가지 않습니다.",
+    "uploadLabel": "사진 업로드 (최대 20장)",
+    "formatNote": "지원 형식: JPEG, PNG, WebP. HEIC(아이폰 기본 형식)와 TIFF는 아직 지원하지 않습니다.",
+    "advancedTitle": "고급 옵션",
+    "gpsOnlyLabel": "GPS 위치정보만 제거 (나머지 EXIF 정보는 유지)",
+    "gpsOnlyHint": "JPEG에만 적용됩니다. 일부 파일은 GPS 좌표가 XMP에도 별도로 저장되어 있을 수 있어, 완전한 위치정보 삭제를 원하시면 이 옵션을 끄고 전체 삭제를 사용하세요.",
+    "removeIptcLabel": "IPTC/포토샵 메타데이터도 함께 제거 (저작권, 캡션, 키워드 등)",
+    "removeIptcHint": "기본적으로 켜져 있습니다. 저작권 정보를 사진에 남겨두고 싶으시면 꺼주세요.",
+    "processButton": "메타데이터 제거 ({count}장)",
+    "processingButton": "처리 중...",
+    "downloadZipButton": "전체 ZIP 다운로드 ({count}장)",
+    "zippingButton": "압축 중...",
+    "downloadOne": "다운로드",
+    "removeFile": "제거",
+    "noCameraInfo": "카메라 정보 없음",
+    "gpsPresent": "GPS 있음",
+    "gpsAbsent": "GPS 없음",
+    "statusAnalyzing": "분석 중...",
+    "statusReady": "대기 중",
+    "statusProcessing": "처리 중...",
+    "statusDone": "완료",
+    "statusUnsupported": "지원하지 않는 형식",
+    "statusError": "오류",
+    "pageTitle": "EXIF/메타데이터 일괄 제거 도구",
+    "pageDescription": "사진의 EXIF, GPS 위치정보, IPTC 메타데이터를 브라우저에서 안전하게 제거하세요. 여러 장을 한 번에 처리하고 ZIP으로 받을 수 있습니다.",
+    "aboutTitle": "이 도구에 대해",
+    "aboutBody": "사진에는 카메라 기종, 촬영 설정, 촬영 일시, 그리고 촬영 위치(GPS 좌표)까지 담긴 EXIF 메타데이터가 숨어 있는 경우가 많습니다. 온라인에 사진을 올리기 전에 이런 정보를 제거하면 원치 않는 개인정보 노출을 막을 수 있습니다. 이 도구는 이미지 픽셀 데이터를 다시 압축하지 않고 메타데이터 영역만 바이트 단위로 제거하기 때문에 화질 저하가 전혀 없습니다. 모든 처리는 브라우저 안에서만 이루어지며, 사진 파일이 서버로 전송되지 않습니다.",
+    "disclaimer": "HEIC(아이폰 기본 사진 형식)와 TIFF는 브라우저 표준 기능만으로는 안정적으로 처리하기 어려워 아직 지원하지 않습니다. 해당 형식은 아이폰/카메라 설정에서 JPEG로 변환 후 이용해주세요.",
+    "faqTitle": "자주 묻는 질문",
+    "faq": [
+      {
+        "question": "정말로 사진이 서버에 업로드되지 않나요?",
+        "answer": "네. 모든 처리는 사용자의 브라우저 안에서 자바스크립트로 이루어지며, 네트워크 요청 없이 파일을 직접 읽고 다시 만들어냅니다. 개발자 도구의 네트워크 탭에서 직접 확인하실 수도 있습니다."
+      },
+      {
+        "question": "메타데이터를 제거하면 사진 화질이 떨어지나요?",
+        "answer": "아니요. 이 도구는 이미지를 다시 압축하지 않고, 메타데이터가 저장된 영역만 바이트 단위로 잘라내기 때문에 원본 픽셀 데이터는 전혀 손상되지 않습니다."
+      },
+      {
+        "question": "GPS만 제거하고 카메라 정보는 남기고 싶어요.",
+        "answer": "고급 옵션의 'GPS 위치정보만 제거' 체크박스를 켜면 JPEG 파일에서 GPS 좌표만 삭제하고 카메라 기종, 렌즈, 촬영 설정 등 나머지 EXIF 정보는 그대로 유지됩니다."
+      }
+    ],
+    "exampleLeftAlt": "카메라 설정과 GPS 위치정보가 표시된 사진 메타데이터 화면",
+    "exampleRightAlt": "메타데이터가 모두 제거된 깨끗한 사진 파일"
   }
 }
