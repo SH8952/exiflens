@@ -1,3 +1,16 @@
+## 2026-09-23 — /tools 7번 도구: 저장 용량 계산기 추가 (고급 옵션 포함)
+
+- 배경: 승인된 9개 도구 순서(7번)에 따라 진행. 사용자가 "고급 옵션도 처음부터 포함해서 한 번에 진행"을 요청 — 기본 계산(파일 형식 + 촬영 매수 → 총 저장 용량, 필요한 메모리카드 매수)에 고급 옵션(백업 벌 수 반영, 클라우드 업로드 시간 예상)을 처음부터 함께 구현.
+- **신규**:
+  - `src/lib/storage-calculator.ts` — `calculateTotalShots`(직접 입력 또는 일수 기준(일일 매수×일수) 두 가지 방식으로 총 촬영 매수 산출), `calculateStoragePlan`(파일 크기×매수×(1+백업 벌 수)로 총 용량 계산 + 메모리카드 매수 역산), `calculateUploadTimeSeconds`(총 용량/업로드 속도로 예상 업로드 시간 추정), 파일 형식 프리셋(JPEG 압축/RAW 압축/RAW 무압축, 대표 MB/장 값) + 메모리카드 용량 프리셋(64GB~2TB), 포맷터 함수들.
+  - `src/components/storage-calculator-card.tsx` — 파일 형식 선택(프리셋+직접 입력) + 촬영 매수 입력 방식 전환(직접 입력/일수 기준) + 메모리카드 용량 선택 + 결과(총 매수, 필요 용량, 필요 카드 매수), 고급 옵션(추가 백업 벌 수 + 백업 제외 원본 용량 비교 표시, 인터넷 업로드 속도 입력 + 예상 클라우드 업로드 시간).
+  - `src/app/[locale]/tools/storage-calculator/page.tsx` — 기존 계산기 페이지들과 동일한 구조(브레드크럼, WebApplication+FAQPage+BreadcrumbList JSON-LD, 설명 섹션, FAQ 3문항), 공통 `<ToolExampleImages>`/`<ToolImageDevPanel>` 템플릿 재사용(실제 예시 사진은 아직 미적용).
+  - `messages/{en,ko,ja,es}.json`에 `StorageCalculator` 네임스페이스 전체 번역 추가(파일 형식 옵션은 `formatOption.<id>` 중첩 구조로 구성).
+- **수정**: `src/app/[locale]/tools/page.tsx`에서 `storage-calculator`를 `comingSoon` → `live`로 전환, `src/app/sitemap.ts`에 신규 경로 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류 0건), `npm run build`(exit code 0, 정상 생성 — 빌드 전 `.next` 캐시 삭제 권한이 세션 초기화로 재요청 필요했으며, 재승인 후 정상 진행). 로컬 `npm run dev`(자동 포트 3010) + `curl`로 4개 로케일(`/ko`, `/en`, `/es`, `/ja`) 모두 `/tools/storage-calculator` 200 및 실제 렌더링 텍스트 확인, `/ko/tools` 허브에서도 정상 노출 확인. next-intl 관련 오류(MISSING_MESSAGE 등) 없음 확인. (참고: `formatOption.<id>` 번역 키를 처음에 점(.) 포함 평면 키로 잘못 생성했다가, next-intl의 점 표기 중첩 경로 규칙에 맞춰 중첩 객체 구조로 즉시 수정함.)
+- **커밋**: `bb60d00` "feat(tools): add Storage Space Calculator with advanced options"
+- **다음 단계**: push → 사용자가 로컬에서 이 도구의 좌/우 예시 사진 적용 → 이후 8번 도구(EXIF 일괄 제거 도구)로 순차 진행.
+
 ## 2026-09-23 — 로컬 dev 서버 포트 3010으로 고정 (3개 프로젝트 공통 포트 충돌 방지)
 
 - 배경: exiflens/flydronemap/firelic 3개 형제 프로젝트가 모두 `next dev` 기본 포트(3000)를 그대로 사용해, 동시에 여러 프로젝트의 dev 서버를 띄우면 나중에 실행한 쪽이 자동으로 3001/3002 등으로 밀려나 "어느 터미널이 어느 프로젝트인지" 혼동되는 문제가 반복 확인됨(flydronemap 2026-09-23 "사이트 전체 점검" 항목에서도 이 문제로 확인이 꼬인 사례 발생). "💼 프로젝트 공통 작업" 대화방에서 3개 프로젝트에 동일 패턴으로 일괄 적용.
