@@ -684,5 +684,56 @@
     ],
     "exampleLeftAlt": "인화된 사진을 확대해 화질을 확인하는 모습",
     "exampleRightAlt": "대형 프린터로 사진을 인쇄하고 있는 모습"
+  },
+  "StorageCalculator": {
+    "cardTitle": "저장 용량 계산",
+    "formatLabel": "파일 형식",
+    "formatOption": {
+      "jpeg": "JPEG (압축, 약 {mb}MB/장)",
+      "raw-compressed": "RAW (압축, 약 {mb}MB/장)",
+      "raw-uncompressed": "RAW (무압축, 약 {mb}MB/장)",
+      "custom": "직접 입력"
+    },
+    "customFileSizeLabel": "장당 파일 크기 (MB)",
+    "shotCountModeLabel": "촬영 매수 입력 방식",
+    "shotCountModeDirect": "직접 입력",
+    "shotCountModeDaily": "일수 기준 (일일 매수 × 일수)",
+    "shotCountLabel": "촬영 매수",
+    "dailyShotCountLabel": "일일 예상 촬영 매수",
+    "daysLabel": "촬영 일수",
+    "cardSizeLabel": "메모리카드 용량",
+    "totalShotsLabel": "총 촬영 매수",
+    "requiredStorageLabel": "필요한 저장 용량",
+    "cardsNeededLabel": "필요한 메모리카드 매수",
+    "cardsNeededValue": "{count}장",
+    "invalidInput": "모든 항목에 올바른 양수 값을 입력해주세요.",
+    "advancedTitle": "고급 옵션",
+    "backupCopiesLabel": "추가 백업 벌 수",
+    "backupCopiesHint": "원본 포함 총 {total}벌 저장 기준으로 계산됩니다.",
+    "originalStorageLabel": "백업 제외 원본 용량",
+    "uploadSpeedLabel": "인터넷 업로드 속도 (Mbps)",
+    "uploadTimeLabel": "예상 클라우드 업로드 시간",
+    "pageTitle": "저장 용량 계산기",
+    "pageDescription": "RAW/JPEG 파일 크기와 촬영 매수로 필요한 저장 공간과 메모리카드 매수를 계산하고, 백업 벌 수와 클라우드 업로드 시간까지 함께 확인하세요.",
+    "aboutTitle": "이 계산기에 대해",
+    "aboutBody": "촬영 전에 필요한 저장 공간을 미리 계산해두면 메모리카드나 외장 SSD가 부족해 촬영 중간에 곤란해지는 상황을 막을 수 있습니다. 이 계산기는 파일 형식(JPEG/RAW 압축/RAW 무압축)과 촬영 매수를 기준으로 총 저장 용량과 필요한 메모리카드 매수를 계산합니다. 여행이나 프로젝트처럼 여러 날에 걸쳐 촬영하는 경우, 하루 평균 촬영 매수와 일수만 입력하면 전체 매수를 자동으로 계산할 수도 있습니다.",
+    "disclaimer": "파일 크기는 카메라 기종, 화소수, 압축 방식, 촬영 장면(디테일이 많을수록 RAW/JPEG 모두 용량이 커짐)에 따라 실제와 차이가 날 수 있습니다. 여유 있게 계획하려면 계산된 용량에 10~20% 정도를 더해서 준비하는 것을 권장합니다.",
+    "faqTitle": "자주 묻는 질문",
+    "faq": [
+      {
+        "question": "RAW와 JPEG 중 무엇을 기준으로 계산해야 하나요?",
+        "answer": "나중에 후보정을 많이 할 계획이라면 RAW를, 바로 사용할 결과물이 필요하다면 JPEG를 기준으로 계산하세요. 두 형식을 동시에 저장하는 카메라라면 두 파일 크기를 더한 값을 '직접 입력'으로 넣어 계산할 수 있습니다."
+      },
+      {
+        "question": "백업은 몇 벌 정도 해두는 것이 좋나요?",
+        "answer": "흔히 권장되는 방식은 원본 포함 최소 2~3벌(예: 카메라 원본 + 외장하드 + 클라우드)입니다. 고급 옵션의 '추가 백업 벌 수'에 1을 입력하면 원본 포함 총 2벌 기준으로 필요한 용량을 계산해줍니다."
+      },
+      {
+        "question": "클라우드 업로드 시간은 왜 실제보다 다를 수 있나요?",
+        "answer": "이 계산기는 입력한 업로드 속도가 계속 유지된다고 가정한 이론적인 추정치입니다. 실제로는 네트워크 혼잡, Wi-Fi 상태, 클라우드 서비스의 처리 속도 등에 따라 더 오래 걸릴 수 있습니다."
+      }
+    ],
+    "exampleLeftAlt": "카메라 메모리카드 여러 장이 놓여 있는 모습",
+    "exampleRightAlt": "외장 하드디스크에 사진을 백업하고 있는 모습"
   }
 }

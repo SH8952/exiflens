@@ -684,5 +684,56 @@
     ],
     "exampleLeftAlt": "プリントされた写真を近くで確認している様子",
     "exampleRightAlt": "大判プリンターで写真を印刷している様子"
+  },
+  "StorageCalculator": {
+    "cardTitle": "保存容量",
+    "formatLabel": "ファイル形式",
+    "formatOption": {
+      "jpeg": "JPEG(圧縮、約{mb}MB/枚)",
+      "raw-compressed": "RAW(圧縮、約{mb}MB/枚)",
+      "raw-uncompressed": "RAW(非圧縮、約{mb}MB/枚)",
+      "custom": "カスタム入力"
+    },
+    "customFileSizeLabel": "1枚あたりのファイルサイズ (MB)",
+    "shotCountModeLabel": "撮影枚数の入力方法",
+    "shotCountModeDirect": "直接入力",
+    "shotCountModeDaily": "日数基準(1日の枚数 × 日数)",
+    "shotCountLabel": "撮影枚数",
+    "dailyShotCountLabel": "1日の想定撮影枚数",
+    "daysLabel": "撮影日数",
+    "cardSizeLabel": "メモリーカード容量",
+    "totalShotsLabel": "総撮影枚数",
+    "requiredStorageLabel": "必要な保存容量",
+    "cardsNeededLabel": "必要なメモリーカード枚数",
+    "cardsNeededValue": "{count}枚",
+    "invalidInput": "すべての項目に正しい正の数値を入力してください。",
+    "advancedTitle": "詳細オプション",
+    "backupCopiesLabel": "追加バックアップ数",
+    "backupCopiesHint": "オリジナルを含めて合計{total}部保存する前提で計算されます。",
+    "originalStorageLabel": "バックアップを除いたオリジナル容量",
+    "uploadSpeedLabel": "インターネットアップロード速度 (Mbps)",
+    "uploadTimeLabel": "推定クラウドアップロード時間",
+    "pageTitle": "保存容量計算機",
+    "pageDescription": "RAW/JPEGのファイルサイズと撮影枚数から必要な保存容量とメモリーカードの枚数を計算し、バックアップ数やクラウドアップロード時間も確認できます。",
+    "aboutTitle": "この計算機について",
+    "aboutBody": "撮影前に必要な保存容量を計算しておくことで、撮影中にメモリーカードやドライブ容量が足りなくなるトラブルを防げます。この計算機はファイル形式(JPEG・RAW圧縮・RAW非圧縮)と撮影枚数から、必要な総保存容量と必要なメモリーカード枚数を計算します。旅行や複数日にわたるプロジェクトの場合は、1日あたりの想定撮影枚数と日数を入力するだけで、総枚数を自動計算することもできます。",
+    "disclaimer": "実際のファイルサイズはカメラ機種、画素数、圧縮方式、被写体の詳細さ(複雑なシーンほどRAW・JPEGともに容量が大きくなる)によって変わることがあります。余裕を持って準備するため、計算された容量に10〜20%ほど上乗せして用意することをおすすめします。",
+    "faqTitle": "よくある質問",
+    "faq": [
+      {
+        "question": "RAWとJPEGのどちらを基準に計算すればよいですか?",
+        "answer": "後で本格的に現像・編集する予定ならRAWを、すぐに使える仕上がりが必要ならJPEGを基準に計算してください。両方同時に保存するカメラの場合は、2つのファイルサイズを合計した値を「カスタム入力」で入力して計算できます。"
+      },
+      {
+        "question": "バックアップは何部くらい用意すればよいですか?",
+        "answer": "一般的にはオリジナルを含めて最低2〜3部(例:カメラ本体のオリジナル+外付けドライブ+クラウド)が推奨されます。詳細オプションの「追加バックアップ数」に1を入力すると、オリジナルを含めて合計2部を保存する前提の容量が計算されます。"
+      },
+      {
+        "question": "クラウドアップロード時間が実際と異なるのはなぜですか?",
+        "answer": "この計算機は入力したアップロード速度がずっと維持されると仮定した理論上の推定値です。実際にはネットワークの混雑状況、Wi-Fiの状態、クラウドサービス側の処理速度などにより、より時間がかかることがあります。"
+      }
+    ],
+    "exampleLeftAlt": "複数のカメラ用メモリーカードが並べられている様子",
+    "exampleRightAlt": "外付けハードディスクに写真をバックアップしている様子"
   }
 }

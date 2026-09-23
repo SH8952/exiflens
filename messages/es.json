@@ -684,5 +684,56 @@
     ],
     "exampleLeftAlt": "Una foto impresa siendo examinada de cerca para revisar su nitidez",
     "exampleRightAlt": "Una impresora de gran formato produciendo una impresión fotográfica"
+  },
+  "StorageCalculator": {
+    "cardTitle": "Espacio de Almacenamiento",
+    "formatLabel": "Formato de Archivo",
+    "formatOption": {
+      "jpeg": "JPEG (comprimido, ~{mb}MB/foto)",
+      "raw-compressed": "RAW (comprimido, ~{mb}MB/foto)",
+      "raw-uncompressed": "RAW (sin comprimir, ~{mb}MB/foto)",
+      "custom": "Personalizado"
+    },
+    "customFileSizeLabel": "Tamaño de Archivo por Foto (MB)",
+    "shotCountModeLabel": "Cómo Ingresar el Número de Fotos",
+    "shotCountModeDirect": "Ingresar Directamente",
+    "shotCountModeDaily": "Según Duración del Viaje (fotos diarias × días)",
+    "shotCountLabel": "Número de Fotos",
+    "dailyShotCountLabel": "Fotos Esperadas por Día",
+    "daysLabel": "Número de Días",
+    "cardSizeLabel": "Capacidad de la Tarjeta de Memoria",
+    "totalShotsLabel": "Total de Fotos",
+    "requiredStorageLabel": "Almacenamiento Necesario",
+    "cardsNeededLabel": "Tarjetas de Memoria Necesarias",
+    "cardsNeededValue": "{count} tarjeta(s)",
+    "invalidInput": "Ingresa valores positivos válidos en todos los campos.",
+    "advancedTitle": "Opciones Avanzadas",
+    "backupCopiesLabel": "Copias de Respaldo Adicionales",
+    "backupCopiesHint": "Calculado para {total} copias totales, incluyendo el original.",
+    "originalStorageLabel": "Almacenamiento Original (sin respaldos)",
+    "uploadSpeedLabel": "Velocidad de Subida a Internet (Mbps)",
+    "uploadTimeLabel": "Tiempo Estimado de Subida a la Nube",
+    "pageTitle": "Calculadora de Espacio de Almacenamiento",
+    "pageDescription": "Calcula el espacio de almacenamiento y el número de tarjetas de memoria que necesitarás según tu formato de archivo y número de fotos, además de copias de respaldo y el tiempo estimado de subida a la nube.",
+    "aboutTitle": "Sobre esta calculadora",
+    "aboutBody": "Calcular tus necesidades de almacenamiento antes de una sesión te ayuda a evitar quedarte sin tarjetas de memoria o espacio en disco a mitad del trabajo. Esta calculadora usa tu formato de archivo (JPEG, RAW comprimido o RAW sin comprimir) y el número de fotos para calcular el almacenamiento total necesario y cuántas tarjetas de memoria requiere. Para viajes o proyectos de varios días, puedes ingresar un promedio de fotos diarias y el número de días en su lugar, y se calculará el total de fotos por ti.",
+    "disclaimer": "El tamaño real de los archivos varía según el modelo de cámara, la resolución, la compresión y el detalle de la escena (las escenas más complejas producen archivos más grandes tanto en RAW como en JPEG). Para tener un margen de seguridad, considera planificar un 10–20% más de almacenamiento que la cifra calculada.",
+    "faqTitle": "Preguntas Frecuentes",
+    "faq": [
+      {
+        "question": "¿Debo calcular en base a RAW o JPEG?",
+        "answer": "Usa RAW si planeas editar mucho después, o JPEG si necesitas resultados listos para usar de inmediato. Si tu cámara guarda ambos formatos a la vez, suma los dos tamaños de archivo e ingresa ese total con la opción 'Personalizado'."
+      },
+      {
+        "question": "¿Cuántas copias de respaldo debo mantener?",
+        "answer": "Una regla común es tener al menos 2–3 copias totales incluyendo el original (por ejemplo: original de la cámara + disco externo + nube). Ingresar 1 en el campo avanzado 'Copias de Respaldo Adicionales' calcula el almacenamiento para 2 copias totales incluyendo el original."
+      },
+      {
+        "question": "¿Por qué el tiempo real de subida puede diferir de la estimación?",
+        "answer": "Esta calculadora asume que la velocidad de subida ingresada se mantiene constante todo el tiempo, lo cual es una estimación teórica. En la práctica, las subidas suelen tardar más debido a la congestión de red, las condiciones del Wi-Fi o la velocidad de procesamiento del propio servicio en la nube."
+      }
+    ],
+    "exampleLeftAlt": "Varias tarjetas de memoria de cámara colocadas juntas",
+    "exampleRightAlt": "Fotos siendo respaldadas en un disco duro externo"
   }
 }

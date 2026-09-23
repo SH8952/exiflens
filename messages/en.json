@@ -684,5 +684,56 @@
     ],
     "exampleLeftAlt": "A printed photo being examined closely for sharpness",
     "exampleRightAlt": "A large-format printer producing a photo print"
+  },
+  "StorageCalculator": {
+    "cardTitle": "Storage Space",
+    "formatLabel": "File Format",
+    "formatOption": {
+      "jpeg": "JPEG (compressed, ~{mb}MB/shot)",
+      "raw-compressed": "RAW (compressed, ~{mb}MB/shot)",
+      "raw-uncompressed": "RAW (uncompressed, ~{mb}MB/shot)",
+      "custom": "Custom"
+    },
+    "customFileSizeLabel": "File Size Per Shot (MB)",
+    "shotCountModeLabel": "How to Enter Shot Count",
+    "shotCountModeDirect": "Enter Directly",
+    "shotCountModeDaily": "By Trip Length (daily shots × days)",
+    "shotCountLabel": "Number of Shots",
+    "dailyShotCountLabel": "Expected Shots Per Day",
+    "daysLabel": "Number of Days",
+    "cardSizeLabel": "Memory Card Size",
+    "totalShotsLabel": "Total Shots",
+    "requiredStorageLabel": "Storage Needed",
+    "cardsNeededLabel": "Memory Cards Needed",
+    "cardsNeededValue": "{count} card(s)",
+    "invalidInput": "Enter valid, positive numbers for every field.",
+    "advancedTitle": "Advanced Options",
+    "backupCopiesLabel": "Extra Backup Copies",
+    "backupCopiesHint": "Calculated for {total} total copies, including the original.",
+    "originalStorageLabel": "Original Storage (excluding backups)",
+    "uploadSpeedLabel": "Internet Upload Speed (Mbps)",
+    "uploadTimeLabel": "Estimated Cloud Upload Time",
+    "pageTitle": "Storage Space Calculator",
+    "pageDescription": "Calculate the storage space and number of memory cards you'll need from your file format and shot count, plus backup copies and estimated cloud upload time.",
+    "aboutTitle": "About this calculator",
+    "aboutBody": "Working out your storage needs before a shoot helps you avoid running out of memory cards or drive space partway through. This calculator uses your file format (JPEG, compressed RAW, or uncompressed RAW) and shot count to find the total storage needed and how many memory cards that takes. For multi-day trips or projects, you can enter an average daily shot count and number of days instead, and it'll work out the total shot count for you.",
+    "disclaimer": "Actual file sizes vary by camera model, resolution, compression, and scene detail (busier scenes produce larger files in both RAW and JPEG). For a safety margin, consider planning for 10–20% more storage than the calculated figure.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "Should I calculate based on RAW or JPEG?",
+        "answer": "Use RAW if you plan to do significant editing afterward, or JPEG if you need ready-to-use results right away. If your camera saves both formats at once, add the two file sizes together and enter that total with the 'Custom' option."
+      },
+      {
+        "question": "How many backup copies should I keep?",
+        "answer": "A common rule of thumb is at least 2–3 total copies including the original (for example: camera original + external drive + cloud). Entering 1 in the advanced 'Extra Backup Copies' field calculates storage for 2 total copies including the original."
+      },
+      {
+        "question": "Why might the real upload time differ from the estimate?",
+        "answer": "This calculator assumes your entered upload speed holds steady the whole time, which is a theoretical estimate. Real-world uploads often take longer due to network congestion, Wi-Fi conditions, or the cloud service's own processing speed."
+      }
+    ],
+    "exampleLeftAlt": "Several camera memory cards laid out together",
+    "exampleRightAlt": "Photos being backed up to an external hard drive"
   }
 }
