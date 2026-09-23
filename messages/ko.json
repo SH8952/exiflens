@@ -355,7 +355,8 @@
   },
   "Faq": {
     "title": "자주 묻는 질문",
-    "subtitle": "ExifLens 이용 중 자주 묻는 질문을 모았습니다."
+    "subtitle": "ExifLens 이용 중 자주 묻는 질문을 모았습니다.",
+    "generalSectionTitle": "일반"
   },
   "Contact": {
     "title": "ExifLens 문의하기",

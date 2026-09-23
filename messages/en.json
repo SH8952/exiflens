@@ -355,7 +355,8 @@
   },
   "Faq": {
     "title": "Frequently Asked Questions",
-    "subtitle": "Answers to common questions about using ExifLens."
+    "subtitle": "Answers to common questions about using ExifLens.",
+    "generalSectionTitle": "General"
   },
   "Contact": {
     "title": "Contact ExifLens",
