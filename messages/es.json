@@ -548,5 +548,40 @@
     ],
     "exampleLeftAlt": "Fotograma de time-lapse nocturno de larga exposición con estelas de estrellas",
     "exampleRightAlt": "Nubes en rápido movimiento captadas en una secuencia de time-lapse"
+  },
+  "AstroCalculator": {
+    "cardTitle": "Cálculo de exposición estelar",
+    "focalLength": "Distancia focal (mm)",
+    "aperture": "Apertura (valor f)",
+    "sensor": "Tamaño de sensor",
+    "megapixels": "Resolución de la cámara",
+    "megapixelOption": "~{mp}MP ({models})",
+    "rule500": "Regla del 500",
+    "ruleNpf": "Regla NPF",
+    "npfStricterNote": "Aquí la regla NPF da un tiempo de exposición más corto (más conservador) — en sensores de alta resolución, las estelas de las estrellas se vuelven visibles antes de lo que sugiere la simple regla del 500.",
+    "npfLooserNote": "Aquí la regla NPF da un tiempo de exposición más largo — en sensores de menor resolución, los píxeles son lo bastante grandes como para permitir algo más de exposición sin problema.",
+    "invalidInput": "Introduce valores positivos válidos en todos los campos.",
+    "pageTitle": "Calculadora de exposición para astrofotografía",
+    "pageDescription": "Descubre la velocidad de obturación más larga antes de que las estrellas empiecen a dejar estelas, usando tanto la sencilla regla del 500 como la más precisa regla NPF, todo en tu navegador.",
+    "aboutTitle": "Sobre esta calculadora",
+    "aboutBody": "Como la Tierra gira, una exposición demasiado larga hace que las estrellas se vean como pequeñas estelas en vez de puntos nítidos. La clásica ‘regla del 500’ (500 ÷ distancia focal equivalente a full frame) da una estimación rápida y sencilla. La ‘regla NPF’ es más precisa, especialmente en los sensores de alta resolución actuales, porque también tiene en cuenta tu apertura y el tamaño real de píxel de tu cámara: los píxeles más pequeños muestran estelas antes de lo que contempla la regla del 500.",
+    "disclaimer": "Ambas reglas son estimaciones bajo el criterio de ‘sin estelas visibles a tamaño de visualización normal’. Ampliar mucho la imagen, hacer impresiones muy grandes o usar teleobjetivos inusualmente largos puede requerir una exposición más corta que la que sugiere cualquiera de las dos reglas.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Por qué la regla del 500 y la regla NPF dan resultados distintos?",
+        "answer": "La regla del 500 solo tiene en cuenta la distancia focal y el factor de recorte. La regla NPF también considera tu apertura y el tamaño de píxel de tu cámara, por lo que dos cámaras con la misma distancia focal pero distinta resolución obtienen resultados NPF diferentes."
+      },
+      {
+        "question": "¿En qué regla debería confiar más?",
+        "answer": "En general se considera que la regla NPF es más precisa, especialmente en cámaras modernas de alta resolución, ya que los píxeles más pequeños hacen visibles las estelas con tiempos de exposición más cortos de lo que asume la simple regla del 500."
+      },
+      {
+        "question": "No sé el número exacto de megapíxeles de mi cámara, ¿qué hago?",
+        "answer": "Elige el preset de resolución más cercano al número real de megapíxeles de tu cámara; los modelos de ejemplo indicados pueden ayudarte a identificarlo."
+      }
+    ],
+    "exampleLeftAlt": "Vía Láctea fotografiada con estrellas nítidas usando una exposición corta",
+    "exampleRightAlt": "Foto del cielo nocturno mostrando estelas de estrellas por una exposición demasiado larga"
   }
 }

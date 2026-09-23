@@ -548,5 +548,40 @@
     ],
     "exampleLeftAlt": "Long-exposure night sky timelapse frame with star trails",
     "exampleRightAlt": "Fast-moving clouds captured across a timelapse sequence"
+  },
+  "AstroCalculator": {
+    "cardTitle": "Star Exposure",
+    "focalLength": "Focal Length (mm)",
+    "aperture": "Aperture (f-stop)",
+    "sensor": "Sensor Size",
+    "megapixels": "Camera Resolution",
+    "megapixelOption": "~{mp}MP ({models})",
+    "rule500": "500 Rule",
+    "ruleNpf": "NPF Rule",
+    "npfStricterNote": "The NPF rule gives a shorter (more conservative) exposure time here — on high-resolution sensors, star trails become visible sooner than the simple 500 rule suggests.",
+    "npfLooserNote": "The NPF rule gives a longer exposure time here — on lower-resolution sensors, pixels are large enough that a bit more exposure is still safe.",
+    "invalidInput": "Enter valid, positive numbers for every field.",
+    "pageTitle": "Astrophotography Exposure Calculator",
+    "pageDescription": "Get the longest shutter speed before stars start trailing, using both the simple 500 rule and the more accurate NPF rule — entirely in your browser.",
+    "aboutTitle": "About this calculator",
+    "aboutBody": "Because the earth rotates, any exposure that’s too long will render stars as short trails instead of sharp points. The classic ‘500 rule’ (500 ÷ full-frame-equivalent focal length) is a quick, simple estimate. The ‘NPF rule’ is more accurate, especially on today’s high-resolution sensors, because it also factors in your aperture and your camera’s actual pixel pitch — smaller pixels reveal trailing sooner than the 500 rule accounts for.",
+    "disclaimer": "Both rules are estimates for a ‘no visible trailing at normal viewing size’ standard — extreme pixel-peeping, very large prints, or unusually long lenses may need a shorter exposure than either rule suggests.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "Why do the 500 rule and NPF rule give different answers?",
+        "answer": "The 500 rule only considers focal length and crop factor. The NPF rule also accounts for your aperture and your camera’s pixel pitch, which is why two cameras with the same focal length but different resolutions get different NPF results."
+      },
+      {
+        "question": "Which rule should I trust more?",
+        "answer": "The NPF rule is generally considered more accurate, especially on modern high-megapixel cameras, since smaller pixels make star trailing visible at shorter exposure times than the simple 500 rule assumes."
+      },
+      {
+        "question": "I don’t know my camera’s exact megapixel count — what do I do?",
+        "answer": "Pick the resolution preset closest to your camera’s actual megapixel count; the listed example models can help you match it."
+      }
+    ],
+    "exampleLeftAlt": "Milky Way photographed with pinpoint stars using a short exposure",
+    "exampleRightAlt": "Night sky photo showing star trails from an overly long exposure"
   }
 }
