@@ -1,3 +1,20 @@
+## 2026-09-23 — 계산기 도구 페이지 공통 "예시 이미지" 템플릿 + 개발자 이미지 관리 도구 추가
+
+- 배경: 심도(DoF) 계산기 페이지를 로컬에서 확인하던 사용자가, "제목 → 부연설명 → 계산기" 구조 사이에 좌/우 예시 사진(근거리 초점 예 / 원거리 초점 예)을 추가해 시각적으로 이해를 돕고 싶다고 요청. 이미지 출처는 가이드 아티클에서 이미 쓰고 있는 언스플래시(Unsplash) 연동을 재사용하고, 가이드처럼 이미지 교체 기능도 함께 원함. 또한 이 패턴을 모든 계산기 도구 페이지에 공통 적용 가능한 템플릿으로 만들어달라는 요청.
+- **수정/신규**:
+  - `src/data/tool-images.json`(신규) — slug + 위치(left/right) 기준으로 이미지 경로·저작자 정보 저장. 가이드와 달리 도구 페이지는 mdx가 없고 언어 무관하게 사진 1장을 공유하므로 언어별 frontmatter 대신 단일 JSON 파일 채택.
+  - `src/lib/tool-images.ts`(신규) — `getToolImages(slug)` 로더. 이미지가 아직 없는 슬롯은 `undefined`로 안전하게 반환.
+  - `src/components/tools/tool-example-images.tsx`(신규) — 모든 계산기 도구 페이지가 공통으로 쓰는 `<ToolExampleImages>` 템플릿. 좌/우 중 있는 것만 렌더링, 둘 다 없으면 아무것도 렌더링하지 않아 이미지 미설정 상태에서도 안전.
+  - `src/lib/dev/tool-image-tool.ts`(신규) — 기존 가이드 이미지 도구(`guide-image-tool.ts`)의 Unsplash 검색 함수(`searchGuideImageCandidates`)를 그대로 재사용, 적용/업로드 로직만 도구 전용(slug+slot 저장)으로 신규 구현.
+  - `src/app/api/dev/tool-image-apply/route.ts`, `src/app/api/dev/tool-image-upload/route.ts`(신규) — 가이드 이미지 도구와 동일하게 `NODE_ENV !== "development"`면 403 반환. 검색은 기존 `/api/dev/guide-image-search`를 그대로 재사용(신규 라우트 불필요).
+  - `src/components/dev/tool-image-dev-panel.tsx`(신규) — 가이드 이미지 관리 패널과 동일한 UX(플로팅 패널, Unsplash 검색+선택 또는 직접 업로드)에 "왼쪽/오른쪽" 슬롯 선택 토글 추가. 모든 도구 페이지가 slug만 바꿔 재사용하는 공통 컴포넌트.
+  - `src/app/[locale]/tools/dof-calculator/page.tsx` — `<ToolExampleImages slug="dof-calculator" .../>`를 부연설명과 계산기 카드 사이에 배치, 개발 모드 전용 `<ToolImageDevPanel>` 연결.
+  - `messages/{en,ko,ja,es}.json`의 `DofCalculator` 네임스페이스에 `exampleLeftAlt`/`exampleRightAlt`(근거리/원거리 초점 예시 alt 텍스트) 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류·경고 0건), `npm run build`(`distDir`를 `.next-verify`로 임시 지정해 검증 — 236/236 페이지 정상 생성, `/api/dev/tool-image-apply`·`/api/dev/tool-image-upload` 라우트 정상 포함, exit code 0). 로컬 `npm run dev`로 `/en/tools/dof-calculator` 개발 모드 렌더링 확인 — "🛠 예시 이미지 관리 (DEV)" 플로팅 버튼 정상 노출, 이미지 미설정 상태에서도 페이지 정상 동작(크래시 없음).
+- **알려진 제약(실제 사진 미적용 상태)**: 이 브릿지 환경(Claude의 원격 셸)은 조직 아웃바운드 정책상 `api.unsplash.com` 등 임의 외부 호스트로 나가는 요청이 차단되어 있어(`EAI_AGAIN`), Claude가 직접 Unsplash 검색·다운로드를 자동 수행할 수 없음(가이드 자동 발행 스크립트의 alibaba/coupang API 호출이 이 환경에서 항상 실패하는 것과 동일한 원인). 따라서 `dof-calculator`의 실제 좌/우 사진은 아직 비어 있는 상태 — 사용자가 실제 컴퓨터에서 직접 `npm run dev`를 실행한 뒤(Claude의 브릿지 셸이 아니라 사용자 본인이 직접 실행해야 정상적으로 인터넷에 연결됨), 페이지 우측 하단의 "🛠 예시 이미지 관리 (DEV)" 패널로 검색·선택해 채워야 함.
+- **커밋**: `c47ca5e` "feat(tools): add shared example-image template + dev image tool for calculator pages"
+- **다음 단계**: 사용자가 로컬에서 직접 `npm run dev`로 개발 서버를 띄운 뒤 심도 계산기 페이지의 이미지 관리 패널로 좌(근거리 초점)/우(원거리 초점) 사진을 선택·적용 → push. 이후 새로 만드는 도구 페이지들도 `<ToolExampleImages>` + `<ToolImageDevPanel>`을 동일하게 재사용.
+
 ## 2026-09-22 — /tools 허브 신설 및 심도(DoF)/과초점거리 계산기 추가 (기능 확장 1단계)
 
 - 배경: 애드센스 심사와 별개로 exifnd.com에 카메라/사진 카테고리 신규 도구를 추가하는 확장 전략 논의(`claude/exiflens-tool-expansion-strategy-and-freeimgfix-benchmark.md`, 2026-09-21) 및 사용자가 제시한 9개 도구 후보 이미지(2026-09-22)를 바탕으로, 하위 경로(subpath) 확장 방식과 이미지에 나열된 순서(심도 → 노출 스탑 → 타임랩스 → 별사진 → 브라케팅 → 인쇄해상도 → 저장용량 → EXIF제거 → 크롭팩터)대로 진행하기로 사용자 승인.
