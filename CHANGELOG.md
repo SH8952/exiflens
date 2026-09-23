@@ -1,3 +1,17 @@
+## 2026-09-23 — /tools 2번 도구: 노출 삼각형(Exposure Triangle) / 스탑 변환 계산기 추가
+
+- 배경: 승인된 9개 도구 순서(2번)에 따라 진행. 조리개·셔터 스피드·ISO 중 하나를 원하는 값으로 바꿨을 때, 밝기를 그대로 유지하려면 다른 한 값을 얼마나 조정해야 하는지 계산하는 "상반칙(reciprocity)" 기반 도구.
+- **신규**:
+  - `src/lib/exposure-calculator.ts` — 조리개/셔터스피드/ISO 각각의 빛 기여도를 공통 log2("스탑") 척도로 환산(`조리개는 -2*log2(N)`, `셔터·ISO는 log2(value)`)해 기준 노출값을 그대로 유지하는 보정값을 역산. 표준 풀스탑 프리셋(조리개/셔터/ISO) 및 표시 포맷터 포함.
+  - `src/components/exposure-calculator-card.tsx` — 기준 노출(조리개/셔터/ISO) 입력 + "변경할 값"/"보정할 값" 선택 UI + 실시간 결과 카드. DoF 계산기와 동일한 shadcn Select/Input 컴포넌트 재사용.
+  - `src/app/[locale]/tools/exposure-stops-calculator/page.tsx` — DoF 계산기 페이지와 동일한 구조(브레드크럼, WebApplication+FAQPage+BreadcrumbList JSON-LD, 설명 섹션, FAQ 3문항), 공통 `<ToolExampleImages>`/`<ToolImageDevPanel>` 템플릿 재사용(실제 예시 사진은 아직 미적용 — 사용자가 로컬에서 직접 선택 필요, DoF 계산기와 동일한 절차).
+  - `messages/{en,ko,ja,es}.json`에 `ExposureCalculator` 네임스페이스 전체 번역 추가.
+- **수정**: `src/app/[locale]/tools/page.tsx`에서 `exposure-stops-calculator`를 `comingSoon` → `live`로 전환, `src/app/sitemap.ts`에 신규 경로 추가.
+- **버그 수정(작업 중 발견)**: `compensateParam`을 `useEffect` 안에서 `setState`하는 방식으로 최초 작성했으나 `eslint`(`react-hooks/set-state-in-effect`)에서 캐스케이딩 렌더 위험을 지적 — 렌더링 중 파생값으로 계산하는 방식으로 리팩터링해 해결.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류 0건 — 위 버그 수정 후), `npm run build`(exit code 0, 240/240 페이지 정상 생성 — 이번엔 `.next` 폴더가 정상이라 `distDir` 임시 우회 없이 바로 성공. 알리익스프레스/쿠팡 API 호출 실패는 기존과 동일한 샌드박스 네트워크 제한). 로컬 `npm run dev`(포트 3000) + `curl`로 `/ko/tools/exposure-stops-calculator`, `/en/tools/exposure-stops-calculator`, `/ko/tools` 모두 200 및 실제 렌더링 텍스트("노출 삼각형 / 스탑 변환 계산기", "스탑 변화량") 확인.
+- **커밋**: `0ef8c20` "feat(tools): add Exposure Triangle / Stop Converter calculator"
+- **다음 단계**: push → 사용자가 로컬에서 이 도구의 좌/우 예시 사진 적용(권장 검색어: 좌="빠른 셔터로 정지된 동작", 우="느린 셔터로 흐려진 동작") → 이후 3번 도구(타임랩스 계산기)로 순차 진행.
+
 ## 2026-09-23 — 심도(DoF) 계산기 예시 이미지(좌/우) 실제 사진 적용
 
 - 배경: 앞선 작업(공통 "예시 이미지" 템플릿 + 개발자 이미지 관리 도구)에서 실제 사진은 Claude의 브릿지 셸이 `api.unsplash.com`에 접근할 수 없어 미적용 상태로 남아 있었음. 사용자가 로컬에서 직접 `npm run dev`를 실행한 뒤 "🛠 예시 이미지 관리 (DEV)" 패널로 좌(근거리 초점)/우(원거리 초점) 사진을 직접 검색·적용 완료.
