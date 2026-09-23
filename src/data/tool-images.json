@@ -58,5 +58,17 @@
       "imageCredit": "Jonny Gios",
       "imageCreditUrl": "https://unsplash.com/@supergios?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "print-resolution-calculator": {
+    "left": {
+      "image": "/tools/images/print-resolution-calculator-left.webp",
+      "imageCredit": "Jakub Żerdzicki",
+      "imageCreditUrl": "https://unsplash.com/@jakubzerdzicki?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/print-resolution-calculator-right.webp",
+      "imageCredit": "Bank Phrom",
+      "imageCreditUrl": "https://unsplash.com/@bank_phrom?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
