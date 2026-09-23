@@ -1,3 +1,16 @@
+## 2026-09-23 — /tools 4번 도구: 별사진(천체) 노출 계산기 추가 (500 법칙 + NPF 법칙, 화소수 프리셋)
+
+- 배경: 승인된 9개 도구 순서(4번)에 따라 진행. 사용자가 NPF 법칙에 필요한 카메라 화소수 입력을, 자유 입력 대신 실제 최근 미러리스 카메라 화소수를 조사해 대표 모델명과 함께 표기한 프리셋으로 선택하도록 요청 — 웹 검색으로 확인한 실제 화소수(24.2/33/45/51.4/61MP)를 대표값으로 사용.
+- **신규**:
+  - `src/lib/astro-calculator.ts` — 센서 프리셋(실제 물리 폭 mm, 크롭팩터, 종횡비), 화소수 프리셋(대표 모델명 포함: Canon R6 Mark II·Sony A7 III·Nikon Z6III=24MP대, Sony A7 IV·Canon R6 Mark III=33MP대, Canon R5 Mark II·Nikon Z8/Z9=45MP대, Fuji GFX50S II=50MP대, Sony A7R V/VI=61MP대), `calculateHorizontalPixels`/`calculatePixelPitchMicrons`(화소수+센서 물리 크기 → 픽셀 피치 역산), `calculate500Rule`(500 ÷ 풀프레임 환산 초점거리), `calculateNpfRule`(`t = (35N + 30p) / f`, 조리개·픽셀 피치 반영 정밀 공식).
+  - `src/components/astro-calculator-card.tsx` — 초점거리/조리개/센서 크기/화소수 프리셋 입력 + 500 법칙과 NPF 법칙 결과 비교, 어느 쪽이 더 보수적인지 설명 문구 표시.
+  - `src/app/[locale]/tools/astrophotography-calculator/page.tsx` — 기존 계산기 페이지들과 동일한 구조, 공통 `<ToolExampleImages>`/`<ToolImageDevPanel>` 템플릿 재사용(실제 예시 사진은 아직 미적용).
+  - `messages/{en,ko,ja,es}.json`에 `AstroCalculator` 네임스페이스 전체 번역 추가 — 화소수 표기는 로케일별로 다르게(한국어/일본어는 "약 2,400만 화소대", 영어/스페인어는 "~24MP") 표시되도록 `megapixelOption` 문자열에 `{man}`/`{mp}` 두 플레이스홀더를 함께 준비하고 각 로케일이 필요한 것만 사용.
+- **수정**: `src/app/[locale]/tools/page.tsx`에서 `astrophotography-calculator`를 `comingSoon` → `live`로 전환, `src/app/sitemap.ts`에 신규 경로 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류 0건), `npm run build`(exit code 0, 정상 생성). 로컬 `npm run dev`(포트 3000) + `curl`로 `/ko/tools/astrophotography-calculator`, `/en/tools/astrophotography-calculator`, `/ko/tools` 모두 200 및 실제 렌더링 텍스트("별사진(천체) 노출 계산기", "NPF 법칙") 확인.
+- **커밋**: `fc83410` "feat(tools): add Astrophotography Exposure Calculator (500 & NPF rules)"
+- **다음 단계**: push → 사용자가 로컬에서 이 도구의 좌/우 예시 사진 적용(권장 검색어: 좌="짧은 노출로 별이 점으로 찍힌 은하수", 우="긴 노출로 별 궤적이 생긴 야간 사진") → 이후 5번 도구(브라케팅/HDR 계산기)로 순차 진행.
+
 ## 2026-09-23 — /tools 3번 도구: 타임랩스 계산기 추가 (고급 옵션 포함)
 
 - 배경: 승인된 9개 도구 순서(3번)에 따라 진행. 사용자가 "기능마다 완성 후 또 작업하면 번거로우니 고급 옵션도 한 번에 포함해달라"고 요청 — 기본 계산(간격/촬영시간/총 장수 3항목 상호 계산 + 결과 영상 길이)에 고급 옵션 2가지(저장 공간 계산, 셔터 각도/모션 블러 지표)를 처음부터 함께 구현.
