@@ -1,3 +1,18 @@
+## 2026-09-23 — 메인 페이지: 가이드 랜덤 노출 + 사진 도구 전체 미리보기 섹션 추가
+
+- 배경: 사용자가 두 가지를 요청. (1) 메인 페이지 하단 "가이드 살펴보기"가 접속할 때마다 다르게 노출되었으면 좋겠다. (2) `/tools`에 확장된 도구 기능들을 PC에서 상단 메뉴를 클릭하지 않는 사용자도 알 수 있도록 메인 페이지에 미리보기/요약으로 노출해달라 — "오늘 작업한 도구만"이 아니라 "너가 작업한 확장된 모든 기능(tools에 추가된 기능들)" 전체를 노출하는 것으로 범위를 확인받음. 추가로 "구글이 크롤링할 때 메인 페이지를 보고 사이트 가치를 판단하는 것 같다"는 이유로, 단순 기능 홍보뿐 아니라 홈페이지 자체의 크롤링 가능한 텍스트/링크를 늘려 "내용이 알찬 사이트"임을 어필하려는 목적도 함께 전달받음(기존 `home-guide-highlights.tsx`가 애드센스 재심사 대응으로 추가됐던 것과 동일한 맥락). 작업 전 범위 확정(오늘 5개 도구 vs 전체 9개 도구)과 리스크(홈페이지 스크롤 길이 증가)를 먼저 확인받은 뒤 "진행해줘" 승인을 받아 진행.
+- **신규**:
+  - `src/lib/tools-roster.ts` — 기존 `/tools` 허브 페이지(`tools/page.tsx`)에 하드코딩돼 있던 `FIELD_TOOLS`/`POST_SHOOT_TOOLS` 도구 목록(slug + live/comingSoon 상태)을 별도 파일로 분리해 단일 소스로 관리. `/tools` 허브와 이번에 추가한 메인 페이지 도구 미리보기 섹션이 동일한 목록을 참조하므로, 앞으로 새 도구가 이 목록에 한 번만 추가되면 두 곳 모두에 자동으로 반영됨(중복 관리 불필요). `getLiveTools()`로 `live` 상태 도구만 필터링해서 제공.
+  - `src/components/home-tools-highlights.tsx` — 현재 `live` 상태인 도구 9개 전체(기존 4개 + 오늘 추가된 5개)를 이름 + 실제 한 줄 설명(기존 `ToolsHub` 번역 데이터 재사용) 카드로 나열하고 각 도구 페이지로 링크. 서버 컴포넌트로 구현해 자바스크립트 실행 없이도 구글봇이 텍스트와 내부 링크 9개를 그대로 크롤링할 수 있도록 구성. 하단에 `/tools` 전체 보기 링크도 포함.
+  - `messages/{en,ko,ja,es}.json`의 `Home` 네임스페이스에 `toolsHighlightsTitle`/`toolsHighlightsSubtitle`/`toolsHighlightsCta` 3개 키 추가(기존 `guideHighlights*` 키와 같은 톤으로 작성).
+- **수정**:
+  - `src/components/home-guide-highlights.tsx` — 기존에는 전체 가이드 중 앞 3개(`.slice(0, 3)`)를 고정 노출했으나, Fisher-Yates 셔플로 매 요청마다 무작위 3개를 뽑도록 변경. 홈페이지는 이미 동적 렌더링(정적 생성 아님)이라 실제로 접속할 때마다 다른 조합이 노출됨.
+  - `src/app/[locale]/tools/page.tsx` — 도구 목록을 자체 하드코딩 대신 `src/lib/tools-roster.ts`에서 import하도록 리팩터링(동작은 동일, 중복 제거).
+  - `src/app/[locale]/page.tsx` — `<HomeGuideHighlights>` 섹션 바로 아래에 `<HomeToolsHighlights>` 섹션 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(신규/수정 파일 전체 오류 0건), `npm run build`(exit code 0, 정상 생성). 로컬 `npm run dev`(자동 포트 3010) + `curl`로 4개 로케일(`/ko`, `/en`, `/es`, `/ja`) 홈페이지에서 새 섹션 타이틀 렌더링 확인, `/ko` 홈페이지 HTML에서 9개 도구 링크(`/ko/tools/<slug>`)가 모두 정확히 1개씩 존재함을 확인. 가이드 랜덤 노출은 같은 로케일로 2회 연속 요청해 서로 다른 가이드 3개 조합이 나오는 것을 직접 확인(1차: color-space-srgb-vs-adobe-rgb 외 2건, 2차: graduated-nd-filter-guide 외 2건 — 서로 다름). next-intl 관련 오류(MISSING_MESSAGE 등) 없음 확인(로그에 나타난 `gear-recommendation-ssr` 관련 오류는 기존에 의도적으로 비활성화해 둔 쿠팡 API 킬스위치로 인한 것으로 이번 작업과 무관).
+- **커밋**: `3214091` "feat(home): randomize guide highlights and surface all live tools"
+- **다음 단계**: push → 실제 배포 사이트에서 새로고침 시 가이드 조합이 바뀌는지, 홈페이지 하단에 9개 도구 카드가 잘 보이는지 육안 확인 권장.
+
 ## 2026-09-23 — /tools 9번 도구(마지막 도구): 센서 크기별 환산 화각 계산기 추가 (고급 옵션 + 심도 정밀 진단 포함)
 
 - 배경: 승인된 9개 도구 순서 중 마지막(9번)에 따라 진행. 사전에 기본 계산(센서 크기별 크롭 팩터, 35mm 환산 초점거리, 화각)과 고급 옵션 2가지(다른 센서와의 비교 환산, 피사계 심도 정밀 진단)를 계획으로 제시했고, 심도 정밀 진단의 범위(안내 문구 수준 vs 정밀 계산)에 대해 먼저 확인을 구한 뒤 "고급옵션 정밀진단까지 포함해서 작업 진행 해줘" 승인을 받아 진행.
