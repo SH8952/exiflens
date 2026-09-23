@@ -13,7 +13,7 @@
 4. `npx tsc --noEmit`, `npx eslint <변경파일>`, `npm run build`(클라우드 환경은 정상 빌드 가능)로 검증한다. UI에 영향이 있는 항목은 `npm run start`로 띄운 뒤 Playwright(헤드리스 크로미움, `/opt/pw-browsers/chromium`)로 실제 렌더링까지 확인한다.
 5. 검증이 끝나면: (a) `CHANGELOG.md` 최상단에 개발 이력 항목을 추가하고, (b) 이 파일(SEO_TASKS.md)에서 오늘 완료한 항목의 체크박스를 `- [x]`로 바꾸고 완료 날짜를 한 줄 덧붙인다.
 6. 오늘 변경/추가된 모든 파일(코드, CHANGELOG.md, SEO_TASKS.md 포함)을 **저장소 루트 기준 상대경로를 그대로 유지한 zip 파일 하나**(`seo-task-payload.zip`)로 묶는다. zip 안에는 반드시 `commit-message.txt`(커밋 메시지 전문, 이 파일의 항목 설명을 근거로 작성) 파일도 최상위에 함께 포함한다.
-7. 이 zip 파일 하나만 `SendUserFile`로 채팅에 첨부한다. 그리고 반드시 다음 안내를 최종 보고에 포함한다: "첨부된 seo-task-payload.zip을 저장소의 automation 폴더(`~/Desktop/애드센스 제휴 마케팅/exiflens/automation/`)에 넣으신 뒤, 그 안에 이미 설치되어 있는 `apply-seo-task.command`를 더블클릭하시면 백업 → 적용 → 커밋 → push까지 맥에서 자동으로 완료됩니다."
+7. 이 zip 파일 하나만 `SendUserFile`로 채팅에 첨부한다. 그리고 반드시 다음 안내를 최종 보고에 포함한다: "첨부된 seo-task-payload.zip을 저장소의 automation 폴더(`~/Desktop/AdSense Affiliate Marketing/exiflens/automation/`)에 넣으신 뒤, 그 안에 이미 설치되어 있는 `apply-seo-task.command`를 더블클릭하시면 백업 → 적용 → 커밋 → push까지 맥에서 자동으로 완료됩니다."
 8. **git push는 이 클라우드 세션에서 절대 시도하지 않는다.** push는 항상 사용자 맥의 `apply-seo-task.command`가 수행한다.
 9. 광고 코드(GA4/AdSense 관련 스크립트, ads.txt 등)는 어떤 항목에서도 건드리지 않는다. 애드센스 심사가 진행 중이므로 안전을 최우선으로 하고, 조금이라도 애매하거나 위험해 보이면 해당 항목을 건너뛰고 이유를 CHANGELOG와 최종 보고에 남긴 뒤, 체크박스는 미완료로 남겨 다음 실행에 재시도되게 한다.
 10. clone이 실패하거나(저장소 접근 불가) 예상치 못한 오류가 나면, 무리해서 진행하지 말고 실패 사실만 최종 보고에 남기고 종료한다(다음 날 재시도).

@@ -7,7 +7,7 @@
 # publish-guide.command(가이드 자동 발행용)와 별개로 동작하며, SEO_TASKS.md의
 # 각 일차 작업(임의 파일 여러 개를 건드리는 변경)을 zip 하나로 받아 적용합니다.
 
-REPO="$HOME/Desktop/애드센스 제휴 마케팅/exiflens"
+REPO="$HOME/Desktop/AdSense Affiliate Marketing/exiflens"
 SCRIPT_NAME="apply-seo-task.command"
 SCRIPT_PATH="$REPO/automation/$SCRIPT_NAME"
 
