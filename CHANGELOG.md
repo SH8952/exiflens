@@ -1,3 +1,12 @@
+## 2026-09-23 — 쿠팡(Coupang) API 임시 중단 킬스위치 추가
+
+- 배경: ExifLens와 FlyDroneMap 두 개발 사이트를 동시에 테스트하면서 쿠팡 파트너스 Open API의 시간당 호출 제한(10회/시간)을 초과함. 사용자 요청에 따라 ExifLens에서만(FlyDroneMap은 해당 프로젝트 대화방에서 별도 조치, firelic은 현재 미작업) 쿠팡 API 호출을 임시로 중단하고, 기능 추가는 계속 진행.
+- **수정**: `src/lib/coupang.ts` — `COUPANG_API_DISABLED` 환경변수가 `"true"`일 때 `searchCoupangProducts()`가 실제 네트워크 요청 전에 `CoupangConfigError`를 던지도록 킬스위치 추가. 기존에 자격증명 누락 시 처리하던 경로를 그대로 재사용하므로 `/api/coupang/search` 라우트나 UI 쪽은 수정 불필요(해당 섹션이 조용히 숨겨짐).
+- **문서화**: `.env.example`에 `COUPANG_API_DISABLED` 항목 추가(주석 포함). 실제 활성화는 커밋되지 않는 `.env.local`에서 `COUPANG_API_DISABLED=true`로 설정.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint`(오류 0건), `npm run build`(exit code 0). 로컬 `npm run dev` + `curl http://localhost:3000/api/coupang/search` → `HTTP 200`, `{"products":[]}` 즉시 반환(응답 시간 18ms, 실제 쿠팡 서버 호출 없음, 에러 로그 없음) 확인.
+- **커밋**: `447b3e8` "feat(coupang): add temporary kill-switch for outbound API calls"
+- **재개 방법**: 사용자가 "쿠팡 API 다시 켜줘"라고 요청하면, `.env.local`의 `COUPANG_API_DISABLED=true`를 제거(또는 다른 값으로 변경)하여 재개.
+
 ## 2026-09-23 — /tools 4번 도구: 별사진(천체) 노출 계산기 추가 (500 법칙 + NPF 법칙, 화소수 프리셋)
 
 - 배경: 승인된 9개 도구 순서(4번)에 따라 진행. 사용자가 NPF 법칙에 필요한 카메라 화소수 입력을, 자유 입력 대신 실제 최근 미러리스 카메라 화소수를 조사해 대표 모델명과 함께 표기한 프리셋으로 선택하도록 요청 — 웹 검색으로 확인한 실제 화소수(24.2/33/45/51.4/61MP)를 대표값으로 사용.
