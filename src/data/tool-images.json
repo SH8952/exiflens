@@ -82,5 +82,17 @@
       "imageCredit": "Samsung Memory",
       "imageCreditUrl": "https://unsplash.com/@samsungmemory?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "crop-factor-calculator": {
+    "left": {
+      "image": "/tools/images/crop-factor-calculator-left.webp",
+      "imageCredit": "Alexander Andrews",
+      "imageCreditUrl": "https://unsplash.com/@alex_andrews?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/crop-factor-calculator-right.webp",
+      "imageCredit": "James Jeremy Beckers",
+      "imageCreditUrl": "https://unsplash.com/@jerrografie?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
