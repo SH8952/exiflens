@@ -46,5 +46,17 @@
       "imageCredit": "Lucas Davies",
       "imageCreditUrl": "https://unsplash.com/@lucas_davies?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "bracketing-calculator": {
+    "left": {
+      "image": "/tools/images/bracketing-calculator-left.webp",
+      "imageCredit": "David Weedall",
+      "imageCreditUrl": "https://unsplash.com/@oceanhearted?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/bracketing-calculator-right.webp",
+      "imageCredit": "Jonny Gios",
+      "imageCreditUrl": "https://unsplash.com/@supergios?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
