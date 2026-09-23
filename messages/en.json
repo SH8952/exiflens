@@ -783,5 +783,54 @@
     ],
     "exampleLeftAlt": "A photo's metadata panel showing camera settings and GPS location",
     "exampleRightAlt": "A clean photo file with all metadata stripped out"
+  },
+  "CropFactorCalculator": {
+    "cardTitle": "Crop Factor / Equivalent Focal Length Calculator",
+    "sensorLabel": "My camera sensor",
+    "customOption": "Custom",
+    "customWidth": "Sensor width (mm)",
+    "customHeight": "Sensor height (mm)",
+    "focalLengthLabel": "Actual focal length (mm)",
+    "cropFactorLabel": "Crop factor",
+    "equivalentFocalLengthLabel": "35mm (full-frame) equivalent focal length",
+    "horizontalFovLabel": "Horizontal field of view",
+    "verticalFovLabel": "Vertical field of view",
+    "invalidInput": "Please check your inputs.",
+    "advancedTitle": "Advanced options",
+    "compareSensorLabel": "Compare against sensor",
+    "compareSensorHint": "Calculates the focal length that produces the same field of view on the selected sensor.",
+    "comparableFocalLengthLabel": "Equivalent focal length on {sensor}",
+    "dofDiagnosisTitle": "Precise depth-of-field diagnosis",
+    "dofDiagnosisHint": "Calculates the actual depth of field for the sensor, focal length, aperture, and subject distance you entered.",
+    "apertureLabel": "Aperture (f)",
+    "subjectDistanceLabel": "Subject distance (m)",
+    "hyperfocalLabel": "Hyperfocal distance",
+    "nearLimitLabel": "Near limit",
+    "farLimitLabel": "Far limit",
+    "infinity": "Infinity",
+    "totalDofLabel": "Total depth of field",
+    "equivalentApertureNote": "On {sensor}, this looks roughly like {aperture} for depth of field / background blur.",
+    "pageTitle": "Crop Factor / Focal Length Converter",
+    "pageDescription": "Convert a focal length between full-frame, APS-C, and Micro Four Thirds equivalents.",
+    "aboutTitle": "About this tool",
+    "aboutBody": "The same lens shows a different field of view depending on your camera's sensor size. This tool calculates the 35mm (full-frame) equivalent focal length and field of view based on your sensor's crop factor, and also shows the focal length that would produce the same field of view on a different sensor system. The advanced options add the actual depth of field (hyperfocal distance, near/far limits) plus a reference aperture that would look similarly deep on another sensor.",
+    "disclaimer": "Results are approximations based on standard formulas and may differ somewhat from real-world lens distortion or manufacturer-published specifications.",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "How is the crop factor calculated?",
+        "answer": "It's the ratio between the sensor's diagonal length and a full-frame (36×24mm) sensor's diagonal (about 43.3mm). This closely matches the crop factors manufacturers officially quote (e.g. 1.5x for APS-C, 2.0x for Micro Four Thirds)."
+      },
+      {
+        "question": "What does the 'precise depth-of-field diagnosis' advanced option show?",
+        "answer": "It calculates the actual hyperfocal distance, near/far limits, and total depth of field for the sensor, focal length, aperture, and subject distance you entered. The circle-of-confusion value used is a standard approximation based on the sensor diagonal, so real-world results can vary with print size and viewing distance."
+      },
+      {
+        "question": "Why is the 'equivalent aperture' different when compared to another sensor?",
+        "answer": "Depth of field and background blur are governed by the lens's actual physical aperture diameter, not the f-number alone. When the field of view is matched across different sensor sizes, the f-number that produces the same apparent depth of field scales with the ratio of the two sensors' crop factors."
+      }
+    ],
+    "exampleLeftAlt": "The same lens framed on a full-frame camera",
+    "exampleRightAlt": "The same lens framed on a crop-sensor camera, showing a narrower field of view"
   }
 }

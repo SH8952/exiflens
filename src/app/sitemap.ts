@@ -28,6 +28,7 @@ const STATIC_PATHS = [
   "/tools/print-resolution-calculator",
   "/tools/storage-calculator",
   "/tools/exif-remover",
+  "/tools/crop-factor-calculator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

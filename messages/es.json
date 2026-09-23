@@ -783,5 +783,54 @@
     ],
     "exampleLeftAlt": "Un panel de metadatos de una foto mostrando la configuración de la cámara y la ubicación GPS",
     "exampleRightAlt": "Un archivo de foto limpio con todos los metadatos eliminados"
+  },
+  "CropFactorCalculator": {
+    "cardTitle": "Calculadora de factor de recorte / distancia focal equivalente",
+    "sensorLabel": "Mi sensor de cámara",
+    "customOption": "Personalizado",
+    "customWidth": "Ancho del sensor (mm)",
+    "customHeight": "Alto del sensor (mm)",
+    "focalLengthLabel": "Distancia focal real (mm)",
+    "cropFactorLabel": "Factor de recorte",
+    "equivalentFocalLengthLabel": "Distancia focal equivalente en 35mm (fotograma completo)",
+    "horizontalFovLabel": "Campo de visión horizontal",
+    "verticalFovLabel": "Campo de visión vertical",
+    "invalidInput": "Por favor revisa los valores introducidos.",
+    "advancedTitle": "Opciones avanzadas",
+    "compareSensorLabel": "Comparar con sensor",
+    "compareSensorHint": "Calcula la distancia focal que produce el mismo campo de visión en el sensor seleccionado.",
+    "comparableFocalLengthLabel": "Distancia focal equivalente en {sensor}",
+    "dofDiagnosisTitle": "Diagnóstico preciso de profundidad de campo",
+    "dofDiagnosisHint": "Calcula la profundidad de campo real según el sensor, la distancia focal, la apertura y la distancia al sujeto que ingresaste.",
+    "apertureLabel": "Apertura (f)",
+    "subjectDistanceLabel": "Distancia al sujeto (m)",
+    "hyperfocalLabel": "Distancia hiperfocal",
+    "nearLimitLabel": "Límite cercano",
+    "farLimitLabel": "Límite lejano",
+    "infinity": "Infinito",
+    "totalDofLabel": "Profundidad de campo total",
+    "equivalentApertureNote": "En {sensor}, esto se ve aproximadamente como {aperture} en cuanto a profundidad de campo / desenfoque de fondo.",
+    "pageTitle": "Conversor de factor de recorte / distancia focal",
+    "pageDescription": "Convierte una distancia focal entre equivalentes de fotograma completo, APS-C y Micro Cuatro Tercios.",
+    "aboutTitle": "Sobre esta herramienta",
+    "aboutBody": "El mismo objetivo muestra un campo de visión diferente según el tamaño del sensor de tu cámara. Esta herramienta calcula la distancia focal equivalente en 35mm (fotograma completo) y el campo de visión según el factor de recorte de tu sensor, y también muestra la distancia focal que produciría el mismo campo de visión en otro sistema de sensor. Las opciones avanzadas añaden la profundidad de campo real (distancia hiperfocal, límites cercano/lejano) junto con una apertura de referencia que se vería con una profundidad similar en otro sensor.",
+    "disclaimer": "Los resultados son aproximaciones basadas en fórmulas estándar y pueden diferir algo de la distorsión real del objetivo o de las especificaciones publicadas por el fabricante.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Cómo se calcula el factor de recorte?",
+        "answer": "Es la relación entre la diagonal del sensor y la diagonal de un sensor de fotograma completo (36×24mm, unos 43.3mm). Esto coincide de cerca con los factores de recorte que los fabricantes indican oficialmente (por ejemplo, 1.5x para APS-C, 2.0x para Micro Cuatro Tercios)."
+      },
+      {
+        "question": "¿Qué muestra la opción avanzada de 'diagnóstico preciso de profundidad de campo'?",
+        "answer": "Calcula la distancia hiperfocal real, los límites cercano/lejano y la profundidad de campo total según el sensor, la distancia focal, la apertura y la distancia al sujeto que ingresaste. El valor del círculo de confusión utilizado es una aproximación estándar basada en la diagonal del sensor, por lo que los resultados reales pueden variar según el tamaño de impresión y la distancia de visualización."
+      },
+      {
+        "question": "¿Por qué la 'apertura equivalente' es diferente al comparar con otro sensor?",
+        "answer": "La profundidad de campo y el desenfoque de fondo dependen del diámetro físico real de la apertura del objetivo, no solo del número f. Cuando el campo de visión coincide entre distintos tamaños de sensor, el número f que produce la misma profundidad de campo aparente escala con la relación entre los factores de recorte de ambos sensores."
+      }
+    ],
+    "exampleLeftAlt": "El mismo objetivo encuadrado en una cámara de fotograma completo",
+    "exampleRightAlt": "El mismo objetivo encuadrado en una cámara de sensor recortado, mostrando un campo de visión más estrecho"
   }
 }

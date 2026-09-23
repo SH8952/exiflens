@@ -783,5 +783,54 @@
     ],
     "exampleLeftAlt": "카메라 설정과 GPS 위치정보가 표시된 사진 메타데이터 화면",
     "exampleRightAlt": "메타데이터가 모두 제거된 깨끗한 사진 파일"
+  },
+  "CropFactorCalculator": {
+    "cardTitle": "센서 크기별 환산 화각 계산기",
+    "sensorLabel": "내 카메라 센서",
+    "customOption": "직접 입력",
+    "customWidth": "센서 폭 (mm)",
+    "customHeight": "센서 높이 (mm)",
+    "focalLengthLabel": "실제 초점거리 (mm)",
+    "cropFactorLabel": "크롭 팩터",
+    "equivalentFocalLengthLabel": "35mm(풀프레임) 환산 초점거리",
+    "horizontalFovLabel": "수평 화각",
+    "verticalFovLabel": "수직 화각",
+    "invalidInput": "값을 확인해주세요.",
+    "advancedTitle": "고급 옵션",
+    "compareSensorLabel": "비교할 센서",
+    "compareSensorHint": "선택한 센서에서 동일한 화각을 만드는 초점거리를 계산합니다.",
+    "comparableFocalLengthLabel": "{sensor} 환산 초점거리",
+    "dofDiagnosisTitle": "심도(피사계 심도) 정밀 진단",
+    "dofDiagnosisHint": "입력한 센서·초점거리·조리개·촬영 거리를 기준으로 실제 피사계 심도를 계산합니다.",
+    "apertureLabel": "조리개 (f)",
+    "subjectDistanceLabel": "촬영 거리 (m)",
+    "hyperfocalLabel": "과초점 거리",
+    "nearLimitLabel": "근거리 한계",
+    "farLimitLabel": "원거리 한계",
+    "infinity": "무한대",
+    "totalDofLabel": "총 심도 범위",
+    "equivalentApertureNote": "{sensor} 기준으로는 약 {aperture}와 비슷한 심도(배경 흐림)로 보입니다.",
+    "pageTitle": "센서 크기별 환산 화각 계산기",
+    "pageDescription": "풀프레임·APS-C·마이크로포서드 간 동일 화각의 초점거리를 환산합니다.",
+    "aboutTitle": "이 도구에 대하여",
+    "aboutBody": "카메라 센서 크기에 따라 같은 렌즈라도 실제로 보이는 화각(촬영 범위)이 달라집니다. 이 도구는 센서 크기(크롭 팩터)를 기준으로 35mm(풀프레임) 환산 초점거리와 화각을 계산하고, 다른 센서 시스템으로 옮겼을 때 동일한 화각을 만드는 초점거리도 함께 보여줍니다. 고급 옵션에서는 실제 피사계 심도(과초점 거리, 근/원거리 한계)와 함께, 다른 센서에서 비슷한 심도로 보이는 조리개값도 참고용으로 안내합니다.",
+    "disclaimer": "계산 결과는 일반적인 공식에 기반한 근사치이며, 실제 렌즈의 왜곡이나 제조사 발표 사양과는 다소 차이가 있을 수 있습니다.",
+    "faqTitle": "자주 묻는 질문",
+    "faq": [
+      {
+        "question": "크롭 팩터는 어떻게 계산되나요?",
+        "answer": "센서의 대각선 길이를 기준으로, 풀프레임(36×24mm) 센서의 대각선(약 43.3mm)과의 비율로 계산됩니다. 제조사가 공식적으로 발표하는 크롭 팩터 값(예: APS-C 1.5배, 마이크로포서드 2.0배)과 거의 동일합니다."
+      },
+      {
+        "question": "고급 옵션의 '심도 정밀 진단'은 무엇을 보여주나요?",
+        "answer": "입력한 센서·초점거리·조리개·촬영 거리를 기준으로 과초점 거리, 근거리/원거리 한계, 총 심도 범위를 실제 값으로 계산합니다. 원형 착란원(CoC) 값은 센서 대각선을 기준으로 한 일반적인 근사치를 사용하므로, 정밀한 인화/뷰잉 조건에 따라 체감 결과는 달라질 수 있습니다."
+      },
+      {
+        "question": "다른 센서와 비교했을 때의 '환산 조리개'는 왜 다른가요?",
+        "answer": "심도와 배경 흐림은 조리개 숫자(f값)가 아니라 실제 렌즈 구경(입사동 지름)에 좌우됩니다. 화각을 맞춘 상태에서 센서 크기가 다르면, 같은 심도로 보이기 위한 f값도 크롭 팩터 비율만큼 달라집니다."
+      }
+    ],
+    "exampleLeftAlt": "풀프레임 카메라로 촬영한 동일 렌즈의 화각",
+    "exampleRightAlt": "크롭 센서 카메라로 촬영한 동일 렌즈의 좁아진 화각"
   }
 }
