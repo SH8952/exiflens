@@ -500,5 +500,53 @@
     ],
     "exampleLeftAlt": "Freeze-motion photo made with a fast shutter speed",
     "exampleRightAlt": "Motion-blur photo made with a slow shutter speed"
+  },
+  "TimelapseCalculator": {
+    "shootPlanTitle": "Shoot Plan",
+    "modeLabel": "Calculate from",
+    "modeIntervalAndDuration": "Interval + Total Shoot Time",
+    "modeIntervalAndShots": "Interval + Total Shots",
+    "modeDurationAndShots": "Total Shoot Time + Total Shots",
+    "intervalSeconds": "Interval (seconds)",
+    "durationMinutes": "Total Shoot Time (minutes)",
+    "shotCount": "Total Shots",
+    "invalidInput": "Enter valid, positive numbers for the fields above.",
+    "outputVideoTitle": "Output Video",
+    "fps": "Frame Rate (fps)",
+    "totalShots": "Total Shots",
+    "videoDuration": "Video Duration",
+    "advancedTitle": "Advanced Options",
+    "advancedSubtitle": "Optional — estimate storage needs and preview how smooth the motion will look.",
+    "storageTitle": "Storage Estimate",
+    "fileSizeMb": "File Size per Shot (MB)",
+    "totalStorage": "Total Storage Needed",
+    "shutterAngleTitle": "Shutter Angle / Motion Blur",
+    "shutterSpeed": "Shutter Speed",
+    "exposureRatio": "Exposure Ratio",
+    "qualityChoppy": "Low ratio — frames will look sharp but the played-back motion may appear choppy or strobe-like.",
+    "qualityCinematic": "Around the classic 180° shutter angle — a natural, cinematic amount of motion blur.",
+    "qualitySmooth": "High ratio — frames will show heavy motion blur, producing very smooth (sometimes dreamy) motion.",
+    "pageTitle": "Time-Lapse Calculator",
+    "pageDescription": "Work out your shooting interval, total frames, and shoot duration from your target video length, then estimate storage needs and motion blur — all in your browser.",
+    "aboutTitle": "About this calculator",
+    "aboutBody": "A time-lapse shoot has three linked numbers: how often you trigger the shutter (interval), how long you shoot for, and how many frames you end up with — knowing any two gives you the third. This calculator also converts your frame count into a final video length at your chosen frame rate, estimates how much storage the shoot will need, and shows the ‘shutter angle’ — the ratio between your shutter speed and interval — which determines whether the played-back motion looks smooth and cinematic or sharp and strobe-like.",
+    "disclaimer": "Estimates only. Actual file sizes vary by camera, format, and compression settings, and ‘ideal’ motion blur is a matter of creative taste.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "How do I pick a good interval?",
+        "answer": "It depends on how fast your subject moves — clouds and sunsets often work well around 3–10 seconds, while very slow scenes (construction, plant growth) may use minutes between shots. Start with the video duration you want and let this calculator work backward from there."
+      },
+      {
+        "question": "Why does my video length come out shorter than I expected?",
+        "answer": "Video duration depends on both your total shots and your chosen frame rate — the same number of shots plays back faster (and shorter) at 60fps than at 24fps."
+      },
+      {
+        "question": "What is a 180° shutter angle and why does it matter?",
+        "answer": "It’s the traditional film-industry standard where your shutter speed is exactly half your frame interval, producing motion blur that looks natural to viewers. This calculator’s shutter angle result tells you how close your settings are to that look."
+      }
+    ],
+    "exampleLeftAlt": "Long-exposure night sky timelapse frame with star trails",
+    "exampleRightAlt": "Fast-moving clouds captured across a timelapse sequence"
   }
 }

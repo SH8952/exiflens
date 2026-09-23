@@ -500,5 +500,53 @@
     ],
     "exampleLeftAlt": "Foto de movimiento congelado tomada con una velocidad de obturación rápida",
     "exampleRightAlt": "Foto con desenfoque de movimiento tomada con una velocidad de obturación lenta"
+  },
+  "TimelapseCalculator": {
+    "shootPlanTitle": "Plan de disparo",
+    "modeLabel": "Calcular a partir de",
+    "modeIntervalAndDuration": "Intervalo + Tiempo total de disparo",
+    "modeIntervalAndShots": "Intervalo + Total de disparos",
+    "modeDurationAndShots": "Tiempo total de disparo + Total de disparos",
+    "intervalSeconds": "Intervalo (segundos)",
+    "durationMinutes": "Tiempo total de disparo (minutos)",
+    "shotCount": "Total de disparos",
+    "invalidInput": "Introduce valores positivos válidos en los campos anteriores.",
+    "outputVideoTitle": "Vídeo final",
+    "fps": "Fotogramas por segundo (fps)",
+    "totalShots": "Total de disparos",
+    "videoDuration": "Duración del vídeo",
+    "advancedTitle": "Opciones avanzadas",
+    "advancedSubtitle": "Opcional: calcula el almacenamiento necesario y previsualiza cuán suave se verá el movimiento.",
+    "storageTitle": "Estimación de almacenamiento",
+    "fileSizeMb": "Tamaño de archivo por disparo (MB)",
+    "totalStorage": "Almacenamiento total necesario",
+    "shutterAngleTitle": "Ángulo de obturación / Desenfoque de movimiento",
+    "shutterSpeed": "Velocidad de obturación",
+    "exposureRatio": "Relación de exposición",
+    "qualityChoppy": "Relación baja: los fotogramas se verán nítidos, pero el movimiento reproducido puede parecer entrecortado o como un efecto estroboscópico.",
+    "qualityCinematic": "Cerca del clásico ángulo de obturación de 180° — una cantidad natural y cinematográfica de desenfoque de movimiento.",
+    "qualitySmooth": "Relación alta: los fotogramas mostrarán mucho desenfoque de movimiento, dando un movimiento muy suave (a veces onírico).",
+    "pageTitle": "Calculadora de time-lapse",
+    "pageDescription": "Calcula el intervalo de disparo, el número total de fotogramas y el tiempo de disparo a partir de la duración deseada del vídeo, y estima el almacenamiento necesario y el desenfoque de movimiento, todo en tu navegador.",
+    "aboutTitle": "Sobre esta calculadora",
+    "aboutBody": "Una sesión de time-lapse tiene tres valores relacionados: cada cuánto disparas el obturador (intervalo), cuánto tiempo dura la sesión y cuántos fotogramas obtienes al final; conociendo dos de ellos se calcula el tercero. Esta calculadora también convierte el número de fotogramas en la duración final del vídeo según la velocidad de fotogramas elegida, estima cuánto almacenamiento necesitará la sesión y muestra el ‘ángulo de obturación’ —la relación entre tu velocidad de obturación y el intervalo— que determina si el movimiento reproducido se ve suave y cinematográfico o nítido y estroboscópico.",
+    "disclaimer": "Solo son estimaciones. El tamaño real de los archivos varía según la cámara, el formato y la configuración de compresión, y el desenfoque de movimiento ‘ideal’ es una cuestión de gusto creativo.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Cómo elijo un buen intervalo?",
+        "answer": "Depende de la velocidad con la que se mueva tu sujeto: las nubes y los atardeceres suelen funcionar bien entre 3 y 10 segundos, mientras que las escenas muy lentas (obras, crecimiento de plantas) pueden necesitar intervalos de varios minutos. Empieza por la duración de vídeo que quieras y deja que esta calculadora trabaje hacia atrás."
+      },
+      {
+        "question": "¿Por qué mi vídeo sale más corto de lo esperado?",
+        "answer": "La duración del vídeo depende tanto del total de disparos como de la velocidad de fotogramas elegida: el mismo número de disparos se reproduce más rápido (y más corto) a 60fps que a 24fps."
+      },
+      {
+        "question": "¿Qué es un ángulo de obturación de 180° y por qué importa?",
+        "answer": "Es el estándar tradicional de la industria cinematográfica donde la velocidad de obturación es exactamente la mitad del intervalo entre fotogramas, lo que produce un desenfoque de movimiento que resulta natural a la vista. El resultado del ángulo de obturación de esta calculadora te indica cuán cerca están tus ajustes de ese aspecto."
+      }
+    ],
+    "exampleLeftAlt": "Fotograma de time-lapse nocturno de larga exposición con estelas de estrellas",
+    "exampleRightAlt": "Nubes en rápido movimiento captadas en una secuencia de time-lapse"
   }
 }

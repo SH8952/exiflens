@@ -22,6 +22,7 @@ const STATIC_PATHS = [
   "/tools",
   "/tools/dof-calculator",
   "/tools/exposure-stops-calculator",
+  "/tools/timelapse-calculator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
