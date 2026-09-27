@@ -179,7 +179,9 @@ export function AliexpressGearCards({
           );
         })}
       </div>
-      <p className="text-xs text-muted-foreground">{t("gearDisclosure")}</p>
+      <p className="text-xs text-muted-foreground">
+        {locale === "ko" ? t("gearDisclosureAliexpress") : t("gearDisclosure")}
+      </p>
 
       {IS_DEV ? (
         <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-lg border border-border bg-background p-3 shadow-lg">
