@@ -9,6 +9,7 @@ import { CrossLinkFlyDroneMap } from "@/components/cross-link/cross-link-flydron
 import { HomeUsageSection } from "@/components/home-usage-section";
 import { HomeGuideHighlights } from "@/components/home-guide-highlights";
 import { HomeToolsHighlights } from "@/components/home-tools-highlights";
+import { HomeFaqHighlights } from "@/components/home-faq-highlights";
 
 export default async function HomePage({
   params,
@@ -66,11 +67,14 @@ export default async function HomePage({
       {/* Section 5: crawlable usage text (AdSense/SEO checklist item 2). FAQ now lives on its own /faq page. */}
       <HomeUsageSection />
 
-      {/* Section 6: guide article highlights — homepage text/link richness for AdSense re-review. Picks 3 guides at random on every request. */}
+      {/* Section 6: guide article highlights — homepage text/link richness for AdSense re-review. Picks 6 guides at random on every request. */}
       <HomeGuideHighlights locale={locale} />
 
       {/* Section 7: photo tool highlights — surfaces every live /tools calculator on the homepage itself, so desktop visitors who never open the header's tools menu still discover them; also adds more crawlable text/internal links for SEO. */}
       <HomeToolsHighlights />
+
+      {/* Section 8: FAQ highlights — placed right after the tool highlights since the FAQ pool includes tool-specific questions, so it reads naturally as "more about what you just saw". Picks 5 Q&A items at random (site-level + every live tool's FAQ) with their own FAQPage JSON-LD. */}
+      <HomeFaqHighlights />
     </div>
   );
 }
