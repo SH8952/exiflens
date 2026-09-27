@@ -1,0 +1,40 @@
+---
+title: "Using the DoF Calculator for Front-to-Back Landscape Sharpness"
+description: "Focusing at infinity throws away half your usable depth of field, and stopping down past a certain aperture costs you sharpness instead of gaining it. Here's how to use hyperfocal distance and a depth of field calculator to get a landscape sharp from the foreground rock to the horizon."
+publishedAt: "2026-09-25"
+tags: ["dof-calculator", "landscape-photography", "hyperfocal-distance"]
+category: "Camera Basics & Exposure"
+image: "/guides/images/dof-calculator-landscape-sharpness.webp"
+imageCredit: "Sumudu Mohottige"
+imageCreditUrl: "https://unsplash.com/@stm_2790?utm_source=ExifLens&utm_medium=referral"
+---
+
+Focus a wide-angle landscape shot at infinity, expecting maximum sharpness across the frame, and the foreground rock a meter from the lens still comes out visibly soft. That's not a lens flaw — it's a focusing mistake that throws away roughly half the depth of field the aperture is actually capable of delivering.
+
+## Why focusing at infinity wastes depth of field
+
+Every lens and aperture combination has a hyperfocal distance: the closest focus point that still keeps the horizon acceptably sharp. Focus exactly at that distance and everything from about half the hyperfocal distance out to infinity lands in focus. Focus at infinity instead, and the near edge of the in-focus zone moves all the way out to the full hyperfocal distance itself — meaning the entire zone between half that distance and the full distance, which would have been sharp, is thrown away for no benefit, since infinity was already sharp either way.
+
+## The numbers, at a typical landscape setup
+
+A 24mm lens at f/11 on full-frame has a hyperfocal distance of about 1.77m. Focus there, and everything from about 0.89m to infinity is acceptably sharp — comfortably covering a foreground rock or plant close to the lens. Focus at infinity with the same lens and aperture instead, and only things past 1.77m stay sharp, leaving anything nearer than that soft, including that same foreground rock.
+
+## Aperture changes the hyperfocal distance more than intuition suggests
+
+Stopping down does pull the hyperfocal distance closer, but the relationship isn't linear — it's roughly inverse to the f-number. The same 24mm lens has a hyperfocal distance of about 2.42m at f/8, drops to about 1.77m at f/11, and reaches about 1.22m at f/16. Going from f/8 to f/16 — two stops — nearly doubles how close your near-focus point can be, which is a bigger practical change than most photographers expect from "just stopping down a bit more."
+
+## The mistake of stopping down too far
+
+It's tempting to keep closing the aperture to push the hyperfocal distance even closer, but every lens has a point — typically somewhere around f/11 to f/16 on full-frame, often earlier on smaller sensors — past which diffraction starts softening the whole image, foreground and horizon alike. Gaining a few centimeters of near-focus margin at f/22 isn't worth it if the entire frame loses resolution to diffraction; see [our guide to diffraction and optimal aperture](/guides/diffraction-and-optimal-aperture) for where that limit typically falls on your format.
+
+## Using the calculator in the field
+
+ExifLens's Depth of Field (DoF) & Hyperfocal Distance Calculator (/tools/dof-calculator) takes your sensor, focal length, and aperture and returns the hyperfocal distance directly, along with the near and far limits at whatever subject distance you enter. Rather than memorizing hyperfocal tables for every lens and aperture combination, check the number in the field, focus at (or just past) that distance — using a manual distance marker, back-button focus and recompose, or focusing on an object you estimate to be at that distance — and trust that both the foreground and the horizon will land inside the sharp zone. For the underlying formula and more worked examples, see [our hyperfocal distance guide](/guides/hyperfocal-distance-explained).
+
+## Field checklist
+
+- Focusing at infinity discards the near half of your available depth of field — focus at the hyperfocal distance instead.
+- Recalculate the hyperfocal distance for every aperture change; the relationship isn't linear, and two stops can nearly double your margin.
+- Don't stop down past your format's diffraction limit chasing a slightly closer near-focus point — you'll lose more sharpness than you gain.
+- A wider lens has a much closer hyperfocal distance than a longer one at the same aperture — recheck the number after a lens change.
+- Use a real foreground element (a rock, plant, or trail) at or beyond the calculated near limit to confirm focus before firing.

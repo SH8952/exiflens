@@ -1,0 +1,40 @@
+---
+title: "Usando la calculadora de DoF para lograr nitidez de primer plano a horizonte en paisajes"
+description: "Enfocar al infinito desecha la mitad de tu profundidad de campo utilizable, y cerrar el diafragma más allá de cierto punto cuesta nitidez en vez de ganarla. Así se usa la distancia hiperfocal y una calculadora de profundidad de campo para lograr un paisaje nítido desde la roca en primer plano hasta el horizonte."
+publishedAt: "2026-09-25"
+tags: ["calculadora-dof", "fotografía de paisaje", "distancia hiperfocal"]
+category: "Fundamentos de cámara y exposición"
+image: "/guides/images/dof-calculator-landscape-sharpness.webp"
+imageCredit: "Sumudu Mohottige"
+imageCreditUrl: "https://unsplash.com/@stm_2790?utm_source=ExifLens&utm_medium=referral"
+---
+
+Enfocas un paisaje gran angular al infinito esperando la máxima nitidez en todo el encuadre, y la roca en primer plano a un metro del objetivo sigue saliendo visiblemente borrosa. Eso no es un defecto del objetivo — es un error de enfoque que desecha aproximadamente la mitad de la profundidad de campo que esa apertura es realmente capaz de dar.
+
+## Por qué enfocar al infinito desperdicia profundidad de campo
+
+Cada combinación de objetivo y apertura tiene una distancia hiperfocal: el punto de enfoque más cercano que aún mantiene el horizonte aceptablemente nítido. Enfoca exactamente a esa distancia y todo desde aproximadamente la mitad de la distancia hiperfocal hasta el infinito queda enfocado. Enfoca al infinito en cambio, y el borde cercano de la zona enfocada se desplaza hasta la distancia hiperfocal completa — es decir, toda la zona entre la mitad de esa distancia y la distancia completa, que habría estado nítida, se pierde sin ningún beneficio, ya que el infinito estaba nítido de todos modos.
+
+## Los números, en un montaje de paisaje típico
+
+Un objetivo de 24mm a f/11 en full-frame tiene una distancia hiperfocal de unos 1.77m. Enfoca ahí, y todo desde unos 0.89m hasta el infinito queda aceptablemente nítido — cubriendo cómodamente una roca o planta en primer plano cerca del objetivo. Enfoca al infinito en cambio, con el mismo objetivo y apertura, y solo lo que está más allá de 1.77m se mantiene nítido, dejando borroso todo lo más cercano, incluida esa misma roca en primer plano.
+
+## La apertura cambia la distancia hiperfocal más de lo que la intuición sugiere
+
+Cerrar el diafragma sí acerca la distancia hiperfocal, pero la relación no es lineal — es aproximadamente inversa al número f. El mismo objetivo de 24mm tiene una distancia hiperfocal de unos 2.42m a f/8, baja a unos 1.77m a f/11, y llega a unos 1.22m a f/16. Pasar de f/8 a f/16 — dos pasos — casi duplica lo cerca que puede estar tu punto de enfoque cercano, un cambio práctico mayor de lo que la mayoría de fotógrafos esperaría de "cerrar un poco más el diafragma".
+
+## El error de cerrar demasiado el diafragma
+
+Es tentador seguir cerrando el diafragma para acercar aún más la distancia hiperfocal, pero cada objetivo tiene un punto — típicamente entre f/11 y f/16 en full-frame, a menudo antes en sensores más pequeños — a partir del cual la difracción empieza a suavizar toda la imagen, tanto el primer plano como el horizonte. Ganar unos centímetros de margen de enfoque cercano a f/22 no compensa si todo el encuadre pierde resolución por difracción; consulta [nuestra guía sobre difracción y apertura óptima](/guides/diffraction-and-optimal-aperture) para saber dónde suele caer ese límite en tu formato.
+
+## Usar la calculadora en el campo
+
+La Calculadora de profundidad de campo (DoF) y distancia hiperfocal de ExifLens (/tools/dof-calculator) toma tu sensor, distancia focal y apertura, y devuelve la distancia hiperfocal directamente, junto con los límites cercano y lejano a la distancia de sujeto que introduzcas. En lugar de memorizar tablas hiperfocales para cada combinación de objetivo y apertura, comprueba el número en el campo, enfoca a esa distancia (o justo más allá) — usando una marca de distancia manual, enfoque por botón trasero y recomposición, o enfocando un objeto que calcules que está a esa distancia — y confía en que tanto el primer plano como el horizonte quedarán dentro de la zona nítida. Para la fórmula completa y más ejemplos, consulta [nuestra guía de distancia hiperfocal](/guides/hyperfocal-distance-explained).
+
+## Lista de verificación de campo
+
+- Enfocar al infinito descarta la mitad cercana de tu profundidad de campo disponible — enfoca a la distancia hiperfocal en su lugar.
+- Recalcula la distancia hiperfocal en cada cambio de apertura; la relación no es lineal, y dos pasos pueden casi duplicar tu margen.
+- No cierres el diafragma más allá del límite de difracción de tu formato solo para acercar un poco más el punto de enfoque cercano — perderás más nitidez de la que ganas.
+- Un objetivo más ancho tiene una distancia hiperfocal mucho más cercana que uno más largo a la misma apertura — vuelve a comprobar el número tras cambiar de objetivo.
+- Usa un elemento real de primer plano (una roca, una planta, un sendero) en o más allá del límite cercano calculado para confirmar el enfoque antes de disparar.

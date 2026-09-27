@@ -276,8 +276,8 @@
       "slug": "dof-calculator-portrait-background-blur",
       "titleKo": "심도 계산기로 인물사진 배경 흐림 정확히 맞추는 법",
       "titleEn": "Using the DoF Calculator to Nail Portrait Background Blur",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-09-25",
       "mirrored": false
     },
     {
@@ -285,8 +285,8 @@
       "slug": "dof-calculator-landscape-sharpness",
       "titleKo": "심도 계산기로 풍경사진 전체 초점 맞추는 법",
       "titleEn": "Using the DoF Calculator for Front-to-Back Landscape Sharpness",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-09-25",
       "mirrored": false
     },
     {
@@ -294,8 +294,8 @@
       "slug": "exposure-calculator-night-photography",
       "titleKo": "노출 계산기로 야간 사진 셔터스피드 빠르게 정하는 법",
       "titleEn": "Using the Exposure Calculator for Fast Night Photography Settings",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-09-26",
       "mirrored": false
     },
     {
@@ -303,8 +303,8 @@
       "slug": "exposure-calculator-nd-filter-long-exposure",
       "titleKo": "ND필터 장노출 계산기로 셔터스피드 역산하는 법",
       "titleEn": "Reverse-Calculating Shutter Speed with the ND Filter Long Exposure Calculator",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-09-26",
       "mirrored": false
     },
     {
@@ -312,8 +312,8 @@
       "slug": "timelapse-calculator-interval-shooting",
       "titleKo": "타임랩스 계산기로 촬영 간격과 총 촬영시간 계산하는 법",
       "titleEn": "Calculating Interval and Total Shoot Time with the Timelapse Calculator",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-09-27",
       "mirrored": false
     },
     {
@@ -321,8 +321,8 @@
       "slug": "timelapse-calculator-storage-planning",
       "titleKo": "타임랩스 계산기로 필요한 저장공간 미리 확인하는 법",
       "titleEn": "Planning Storage Needs with the Timelapse Calculator",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-09-27",
       "mirrored": false
     },
     {
