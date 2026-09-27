@@ -1,0 +1,40 @@
+---
+title: "Calculating Interval and Total Shoot Time with the Timelapse Calculator"
+description: "Interval, shot count, total shoot duration, and final video length are all locked to each other by one reciprocal formula — get one number wrong in the field and the other three go with it. Here's how to plan a timelapse shoot so the math works out before you start."
+publishedAt: "2026-09-27"
+tags: ["timelapse-calculator", "timelapse", "intervalometer"]
+category: "Photography Genres"
+image: "/guides/images/timelapse-calculator-interval-shooting.webp"
+imageCredit: "Djim Loic"
+imageCreditUrl: "https://unsplash.com/@loic?utm_source=ExifLens&utm_medium=referral"
+---
+
+Set an intervalometer to a round number like "every 10 seconds" without doing the math first, and it's easy to end up with a timelapse that's either far too short for the effort put in, or one that runs out of shots — and battery — long before the scene finishes changing. All four quantities that define a timelapse shoot are tied together by a single relationship, which means getting one wrong throws off the rest.
+
+## The one formula behind every timelapse plan
+
+Shot count equals total shoot duration divided by interval — that's the entire relationship, but it means any two of interval, duration, and shot count determine the third automatically. Decide your interval and how long you're shooting, and the shot count is fixed. Decide how many shots you want and your interval, and the shoot duration is fixed. Trying to hit a specific number of shots, a specific total shoot time, and a specific interval all at once, chosen independently, usually doesn't add up — one of the three has to be allowed to fall out of the other two.
+
+## Working from the final video, backward to the interval
+
+The most common planning direction starts from the video you want, not the shoot: pick a frame rate and a target clip length, multiply them for the shot count you need, then divide your available shoot time by that shot count to get your interval. A 10-second clip at 24fps needs 240 frames. If you've budgeted 2 hours (7,200 seconds) at that location, 7,200 divided by 240 gives an interval of 30 seconds — set the intervalometer to that, and shooting for the full 2 hours produces exactly the clip length you planned.
+
+## Working from a fixed interval instead
+
+Sometimes the interval is fixed by the subject rather than chosen freely — fast-moving clouds look best around a 5-second interval, for instance. With the interval fixed, get a 15-second clip at 30fps by working out you need 450 shots, then multiplying by the 5-second interval for a 2,250-second (37.5-minute) shoot. If that shoot window doesn't fit the light you have available — clouds that will have moved past in 20 minutes — the fix has to come from the video side: a shorter final clip, a lower frame rate, or an interval you didn't originally want.
+
+## A common mistake: mismatched units
+
+The formula itself is simple, but mixing up seconds and minutes anywhere in it produces a shoot that's off by a factor of 60. Planning "one shot every half a minute for two hours" and typing 30 into a field expecting seconds — getting 30 seconds instead of 30 minutes — silently multiplies your intended shot count by 60 and your storage use along with it. Running the actual numbers through a calculator rather than doing the division by hand removes that entire category of mistake.
+
+## Using the calculator to lock in a plan before shooting
+
+ExifLens's Time-Lapse Calculator (/tools/timelapse-calculator) takes any two of interval, total duration, and shot count, and solves for the third, plus the resulting video length at your chosen frame rate. It also checks the ratio between your shutter speed and your interval — a fast shutter relative to the interval (say, 1/50s at a 5-second interval, under 1% of the interval) plays back with a choppy, strobe-like look, while a shutter speed closer to a third of the interval gives a smoother, more cinematic motion blur between frames. Working out the interval and shot count first, then checking that ratio, means you walk up to the tripod with a full plan instead of guessing at the dial.
+
+## Field checklist
+
+- Decide the final video length and frame rate first, then let the calculator solve for interval and shot count — not the other way around.
+- Double-check units (seconds vs. minutes) any time you enter a duration or interval — a units mistake changes shot count by a factor of 60.
+- If a fixed interval and a fixed shoot window don't produce the video length you want, change the video plan, not the math.
+- Check the shutter-speed-to-interval ratio if the subject moves quickly (clouds, traffic) — a very fast shutter relative to the interval plays back as strobing.
+- Confirm shot count against your battery and card capacity before starting a shoot longer than an hour.
