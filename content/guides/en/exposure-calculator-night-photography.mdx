@@ -1,0 +1,36 @@
+---
+title: "Using the Exposure Calculator for Fast Night Photography Settings"
+description: "A meter reading that works on a tripod often falls apart the moment you change one setting — a smaller aperture, a faster shutter, or shooting handheld. Here's how to use an exposure calculator to work out the trade-off in seconds instead of trial-and-error shots."
+publishedAt: "2026-09-26"
+tags: ["exposure-calculator", "night-photography", "long-exposure"]
+category: "Camera Basics & Exposure"
+image: "/guides/images/exposure-calculator-night-photography.webp"
+imageCredit: "Axel Baillat"
+imageCreditUrl: "https://unsplash.com/@ascallen?utm_source=ExifLens&utm_medium=referral"
+---
+
+A cityscape at night meters out to a workable exposure on a tripod, and then the moment you close the aperture for more depth of field, or try the same shot handheld, the whole calculation has to be redone from scratch. Night exposures sit close to the edge of what's physically possible with a given lens and sensor, which makes the trade-offs between aperture, shutter speed, and ISO much less forgiving than they are in daylight.
+
+## Why night exposure math matters more than in daylight
+
+In daylight, moving a stop or two between aperture, shutter, and ISO rarely pushes any of the three outside a comfortable range. At night, the starting shutter speed is already measured in seconds, and the available light is thin enough that a "small" change — say, stopping down two stops for more depth of field — can push the required compensation into shutter speeds measured in minutes or ISO values well past what a sensor can use cleanly. Doing that math in your head under time pressure, with a queue of tourists walking through your frame, is where mistakes happen.
+
+## A concrete example: trading shutter speed for depth of field
+
+Say a cityscape meters at f/2.8, 30 seconds, ISO 1600 on a tripod, and you want more depth of field for a shot with a lit building in the foreground and skyline behind it. Closing down to f/8 costs just over 3 stops of light. Compensating with shutter speed alone stretches the exposure to about 245 seconds — over 4 minutes, which is workable on a tripod but adds meaningful time to every frame, including in-camera long-exposure noise reduction that can double it again. Compensating with ISO instead gets you to roughly ISO 13,000, trading a longer wait for more visible noise. Seeing both numbers before you shoot lets you actually choose the trade-off instead of discovering it exposure by exposure.
+
+## Where the math shows handheld night shots reach a real limit
+
+Say that same f/2.8, 30-second, ISO 1600 exposure is your accurate reading for the scene, and you want to shoot handheld instead, which needs something closer to 1/60s to avoid camera shake. That's about 10.8 stops faster than 30 seconds, which means compensating with ISO alone would require roughly ISO 2,880,000 — a value no consumer sensor reaches. Even maxing out a typical camera's native ISO ceiling around 102,400 still leaves you about 4.8 stops short of the light that 30-second exposure was collecting. That gap is the calculator confirming what your instinct might resist: at this brightness level, no ISO setting makes that scene handholdable at 1/60s. The honest options are a tripod, a much faster lens, added light, or accepting visible motion blur.
+
+## Using the calculator to check before you shoot
+
+ExifLens's Exposure Triangle / Stop Converter (/tools/exposure-stops-calculator) takes your metered baseline — aperture, shutter speed, and ISO — plus the one setting you want to change, and tells you exactly what the other setting needs to become to hold the same exposure. Before adjusting for depth of field, motion, or noise level in the field, run the numbers once: if the required shutter speed or ISO comes back outside a range your gear can actually handle, that's the signal to change plan — a faster lens, a different composition, or accepting the original settings — rather than finding out after several wasted long exposures.
+
+## Field checklist
+
+- Recheck the full exposure trade-off after every aperture change at night; a "small" stop-down can mean minutes of extra shutter time.
+- Compare the ISO-compensation option against the shutter-compensation option before committing — one is usually far more practical than the other for a given shot.
+- If a required ISO comes back above roughly 25,600–51,200 on your camera, expect visibly reduced detail and plan noise reduction into your workflow.
+- Handheld night shots have a hard physical limit — if the calculator asks for an ISO your sensor doesn't reach, a tripod isn't optional.
+- Factor in long-exposure noise reduction time (often equal to the exposure itself) when planning how many shots you can realistically get before the light changes.
