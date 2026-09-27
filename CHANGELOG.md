@@ -1,3 +1,27 @@
+## 2026-09-27
+
+### 홈페이지 가이드 하이라이트 3개 → 6개로 확대
+
+**배경**
+- 사용자가 exifnd.com 홈페이지의 "가이드 살펴보기" 섹션이 3개 카드만 노출되는 것을 확인, 구글봇이 크롤링 시 페이지에 콘텐츠가 부족해 보이지 않도록 6개로 늘리자고 제안.
+- 이 섹션(`src/components/home-guide-highlights.tsx`)은 원래 AdSense 재심사 대응 목적으로 추가된 것으로("심사봇이 홈페이지 자체의 크롤링 가능한 텍스트/링크 풍부함을 평가함"), 이번 변경은 같은 방향의 자연스러운 확장.
+
+**변경 내용**
+- `pickRandomGuides(getAllGuidesMeta(locale as Locale), 3)` → `..., 6)`으로 변경 (커밋 3ec09d1).
+- 그리드가 `sm:grid-cols-3`(3열)이라 6개를 넣어도 레이아웃 코드 변경 없이 자동으로 2줄(3+3)로 배치됨.
+- 코드 상단 주석의 "3 guides" 표현도 "6 guides"로 함께 수정.
+
+**검증**
+- 언어별(en/es/ja/ko) 발행된 가이드가 각 52개씩 있어 6개 무작위 노출에 콘텐츠 부족 문제 없음을 확인.
+- `npx tsc --noEmit`, `npx eslint` 통과.
+- `npm run build` 성공 (AliExpress API 관련 네트워크 경고는 이번 변경과 무관한 기존 이슈).
+- 로컬 `npm run dev`(포트 3010) + curl로 `/ko` 홈페이지 응답 확인 — 서로 다른 6개 가이드 슬러그 링크가 정상 노출됨을 확인.
+
+**다음 단계**
+- 배포 후 GSC에서 홈페이지 관련 크롤링/색인 지표에 변화가 있는지 1~2주 정도 관찰 권장.
+
+---
+
 ## 2026-09-27 — SEO: 루트 경로 자동 리디렉션을 언어 협상 방식에서 고정 방식으로 변경
 
 - 배경: 사용자가 공유한 Google Search Console 스크린샷과 외부 SEO 감사 보고서를 계기로, 루트 도메인(`https://exifnd.com/`)이 "리디렉션이 포함된 페이지"로 색인되지 않는 문제를 함께 진단. 코드 확인 결과 hreflang/canonical(`src/lib/seo.ts`의 `languageAlternates()`)은 이미 올바르게 구현되어 있었고, sitemap도 루트 도메인을 등록하지 않는 등 대부분의 지적 사항은 실제로 문제가 아니었음. 다만 `src/i18n/routing.ts`의 next-intl 라우팅 설정이 기본값(`localeDetection`이 켜져 있음)이라, 언어 경로 없이 접속(`/`, `/guides/<slug>` 등)했을 때 방문자의 브라우저 Accept-Language 헤더에 따라 리디렉션되는 언어가 달라지는 구조였음(사용자가 직접 `https://exifnd.com/guides/macro-photography-basics`에 접속했을 때 브라우저 언어 설정에 따라 `/ko`로 리디렉션되는 것을 확인해 재현). 구글은 이런 콘텐츠 협상(content negotiation) 기반 자동 리디렉션을 권장하지 않으며, 리디렉션 목적지가 방문자/봇마다 달라지면 색인 처리가 비일관적일 수 있음.
