@@ -1,3 +1,26 @@
+## 2026-09-27 — 쿠팡 API 장애 시 알리익스프레스 임시 대체 노출 기능 추가
+
+**배경**
+- 사용자 요청: 쿠팡 API 호출이 시간당 하드캡 등으로 일시 중단되어 한국어 페이지에 상품이 표시되지 않는 시간 동안, 완전히 빈 화면 대신 알리익스프레스 상품을 임시로 보여줄 수 있는지 문의.
+- 초기 검토 시 "알리익스프레스 로케일 매핑에 ko가 없어 불가능하다"고 잘못 답변했으나, 사용자 지적으로 재확인한 결과 알리익스프레스 오픈 API 자체는 `target_language=KO`/`target_currency=KRW`를 정식 지원하며, 매핑 누락은 API 한계가 아니라 "한국어 방문자는 항상 쿠팡으로만 라우팅되어 이 경로가 쓰인 적이 없었다"는 기존 설계상 이유였음. 답변 오류를 인정하고 정정.
+
+**변경 사항**
+- `src/app/api/aliexpress/search/route.ts`의 `LOCALE_TO_ALIEXPRESS`에 `ko: { currency: "KRW", language: "KO" }` 추가.
+- `src/components/coupang-gear-cards.tsx`: 쿠팡 결과가 "empty"/"error" 상태가 되면 기존의 단순 안내 문구 대신 `<AliexpressGearCards />`를 렌더링하도록 변경. 이 컴포넌트는 쿠팡 provider(항상 한국어/한국 지역 컨텍스트)에서만 쓰이므로, `AliexpressGearCards`가 자체 `useLocale()`로 감지한 "ko"가 그대로 적용되어 KRW/한국어 상품이 노출됨.
+- `src/components/aliexpress-gear-cards.tsx`: 한국어 로케일일 때는 기존 `gearDisclosure`(쿠팡 파트너스 명시 문구) 대신 알리익스프레스를 정확히 명시하는 새 문구(`gearDisclosureAliexpress`)를 사용하도록 분기 — 표시광고 고지가 실제 노출 중인 제휴 프로그램과 다르게 표기되는 것을 방지(법적/신뢰성 리스크로 판단해 자체적으로 추가).
+- `messages/ko.json`: `gearDisclosureAliexpress` 키 신규 추가("이 사이트는 알리익스프레스 어필리에이트 프로그램에 참여하고 있으며...").
+- `src/lib/aliexpress.ts`: 쿠팡(`src/lib/coupang.ts`)과 동일한 패턴의 Redis 기반 실제 결과 캐싱(6시간 TTL) + API 에러 시 15분 쿨다운 캐싱을 추가. 기존에는 Next.js의 `fetch(..., { next: { revalidate: 21600 } })`에만 의존하고 있었는데, 이는 쿠팡 쪽에서 이미 프로덕션에서 동작하지 않는 것으로 확인된 것과 동일한 패턴이라, 새로 호출 빈도가 늘어나는 이번 기능에서 같은 문제를 반복하지 않도록 선제적으로 안전조치를 적용.
+
+**검증**
+- `npx tsc --noEmit`, `npx eslint <변경 파일>` 모두 통과.
+- `npm run build` 정상 완료.
+- 로컬 `npm run dev` + `curl`로 `/api/coupang/search`, `/api/aliexpress/search?locale=ko` 모두 정상 응답(런타임 크래시 없음) 확인.
+- 정직하게 밝히는 한계: 이 세션(클라우드 샌드박스)은 조직 네트워크 정책상 알리익스프레스 API 호스트(`api-sg.aliexpress.com`)에도 직접 접속이 차단되어 있어(기존에 확인된 exifnd.com, Upstash 차단과 동일한 종류의 제한), 로컬 검증 시 실제 API 호출은 `getaddrinfo EAI_AGAIN` 에러로 실패했음 — 다만 이 에러가 각 키워드별로 정상적으로 캐치되어 빈 배열로 우아하게 폴백되는 것은 확인했고(크래시 없음), 실제 알리익스프레스 응답/캐싱 동작 자체는 배포 후 실제 사이트에서 확인이 필요함.
+
+**다음 단계**
+- 배포 후 한국어 페이지에서 쿠팡 API가 일시적으로 막힌 상황을 재현(혹은 자연 발생 시)해, 알리익스프레스 상품이 정상적으로 대체 노출되는지, 그리고 문구가 알리익스프레스로 정확히 표기되는지 확인.
+- Upstash 대시보드에서 `exiflens:aliexpress:search:v1:*` 캐시 키가 생성되는지 확인.
+
 ## 2026-09-27 — 쿠팡 검색 API 시간당 호출 하드캡 추가 (2회 초과 재발 방지 강화)
 
 **배경**
