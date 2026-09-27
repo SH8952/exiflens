@@ -1,0 +1,36 @@
+---
+title: "Cómo calcular al revés la velocidad de obturación con la calculadora de filtro ND para exposición larga"
+description: "La mayoría de los cálculos de filtro ND van en una sola dirección: introduces la velocidad base y obtienes el tiempo de exposición larga. Hacerlo al revés — partir del tiempo de exposición deseado para obtener la velocidad base necesaria — es lo que realmente te evita disparos desperdiciados en el campo."
+publishedAt: "2026-09-26"
+tags: ["filtro-nd", "larga-exposicion", "calculadora-de-exposicion"]
+category: "Filtros ND y exposición larga"
+image: "/guides/images/exposure-calculator-nd-filter-long-exposure.webp"
+imageCredit: "Stephen"
+imageCreditUrl: "https://unsplash.com/@srkraakmo?utm_source=ExifLens&utm_medium=referral"
+---
+
+La forma habitual de usar una calculadora de filtro ND es sencilla: introduces tu velocidad de obturación sin filtro y el número de pasos del filtro, y te dice el tiempo de exposición resultante. La pregunta más útil en el campo suele ser la contraria — ya sabes el tiempo de exposición que quieres para el efecto que buscas, y necesitas saber cómo deben quedar los ajustes de tu cámara antes incluso de colocar el filtro.
+
+## Por qué el cálculo directo no basta por sí solo
+
+Un filtro de 6, 10 o 15 pasos solo multiplica la velocidad de obturación que le des — no puede acortar una exposición que ya es demasiado larga, y apilar un segundo filtro para oscurecer más suele costarte calidad de imagen por viñeteado y dominante de color. Si calculas hacia adelante después de colocar el filtro en el objetivo, y la exposición resultante sale de cuatro minutos en vez de los 30 segundos que querías, has perdido la toma, no solo el cálculo. Invertir el cálculo primero te dice si tu filtro y la luz disponible pueden realmente alcanzar el tiempo de exposición que planeas.
+
+## Ejemplo inverso: ajustar un look concreto de cascada
+
+Supón que quieres unos 2 segundos de exposición para difuminar el agua en movimiento en un trazo suave sin convertirla en una sábana blanca plana, y el único filtro ND en tu bolsa es un 6 pasos (ND64). Calculando hacia atrás, la velocidad de obturación base (sin filtro) que necesitas antes de colocar el filtro es 1/32s. Si tu lectura de luz ambiente en ese lugar está más cerca de 1/500s, vas 4 pasos demasiado rápido — la solución es cerrar la apertura, bajar al ISO base, o esperar a que haya un poco menos de luz, no colocar el filtro y esperar que funcione. Conocer la velocidad base objetivo de antemano te dice exactamente cuántos pasos te faltan antes de desperdiciar un fotograma averiguándolo.
+
+## Ejemplo inverso: detectar un desajuste entre filtro y luz
+
+Para una exposición de 30 segundos con trazos de nubes usando un filtro de 15 pasos (ND32000), la velocidad de obturación base que necesitarías es de unos 1/1092s — más rápida de lo que la mayoría de lecturas base en luz diurna te van a dar. Introduce en cambio una base más realista de 1/125s en ese mismo filtro de 15 pasos y la exposición resultante sale a unos 262 segundos, bastante más de 4 minutos, no los 30 segundos previstos. Invertir el cálculo primero muestra que ese filtro es simplemente demasiado fuerte para esa luz y ese tiempo objetivo — cambiar a un filtro de 10 pasos (ND1000) en cambio lleva la velocidad base necesaria a unos 1/34s, algo que una apertura ligeramente más cerrada o un momento del día un poco más oscuro puede alcanzar de forma realista.
+
+## Usar la calculadora para planificar antes de colocar el filtro
+
+La Calculadora de filtro ND de ExifLens, en la página de inicio, calcula en ambas direcciones: introduce una velocidad de obturación base y la fuerza del filtro para ver el tiempo de exposición resultante, o trabaja los números al revés desde un tiempo de exposición objetivo para ver qué combinación de velocidad base y filtro te lleva hasta ahí. Este paso de planificación importa especialmente porque, una vez que un filtro de 10 pasos o más fuerte está colocado, normalmente no puedes componer ni medir la luz a través de un visor óptico o una pantalla sin espejo — el flujo de trabajo estándar es componer y medir primero, decidir después el filtro y los ajustes, y solo entonces colocarlo y disparar.
+
+## Lista de verificación de campo
+
+- Decide primero tu tiempo de exposición objetivo, y luego calcula hacia atrás la velocidad de obturación base que necesitas — no coloques el filtro y esperes que funcione.
+- Si la velocidad de obturación base necesaria es más rápida de lo que permite tu luz ambiente, cierra la apertura o baja el ISO antes de buscar un filtro más fuerte.
+- Un filtro demasiado fuerte para la luz disponible produce exposiciones varias veces más largas de lo previsto — comprueba el cálculo antes de comprometer varios minutos a un solo fotograma.
+- Llevar dos fuerzas de filtro (por ejemplo un 6 pasos y un 10 pasos) cubre un rango mucho más amplio de tiempos de exposición objetivo que un solo filtro fuerte.
+- Compón, enfoca y mide la luz antes de colocar un filtro de 10 pasos o más fuerte — generalmente no podrás hacer nada de eso a través del visor una vez puesto.
