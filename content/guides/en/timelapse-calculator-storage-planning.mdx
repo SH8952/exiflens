@@ -1,0 +1,40 @@
+---
+title: "Planning Storage Needs with the Timelapse Calculator"
+description: "A single timelapse shoot can produce thousands of frames, and RAW versus JPEG changes the storage math by a factor of three. Here's how to work out card capacity before an overnight shoot, not after it fills up at 3am."
+publishedAt: "2026-09-27"
+tags: ["timelapse-calculator", "storage-planning", "memory-cards"]
+category: "Photography Genres"
+image: "/guides/images/timelapse-calculator-storage-planning.webp"
+imageCredit: "İsmail Enes Ayhan"
+imageCreditUrl: "https://unsplash.com/@ismailenesayhan?utm_source=ExifLens&utm_medium=referral"
+---
+
+An 8-hour overnight timelapse sounds like a manageable single card until the shot count is actually worked out: at a 20-second interval, that's 1,440 individual frames, each one a full RAW file. Multiply file size by shot count and the total can run past what a single card holds — a discovery that's far better made in advance than at 3am when the card fills up and the sequence stops mid-shoot.
+
+## Why shot count grows faster than intuition suggests
+
+Total shots is duration divided by interval, and both numbers tend to be larger for timelapses than for ordinary shooting: intervals are often measured in single-digit seconds, and durations in hours. An 8-hour star trail session at a 20-second interval produces 1,440 frames; a 12-hour cloud timelapse at a 10-second interval produces 4,320. Neither number is obvious from "I'm shooting for a while at a short interval" without actually multiplying it out, which is exactly why storage runs out unexpectedly more often on timelapses than on any other kind of shoot.
+
+## RAW vs. JPEG changes the total by roughly 3x
+
+File size per frame is the other half of the equation, and RAW files from a modern full-frame sensor typically run 25–45MB each, compared to roughly 8–15MB for a JPEG at the same resolution. That difference compounds directly with shot count: the 1,440-frame overnight sequence above needs about 49GB in RAW (at roughly 35MB per file) versus about 17GB in JPEG (at roughly 12MB per file) — nearly three times the storage for the same shoot, before any other setting changes. RAW keeps more room to fix exposure and white balance in post, which matters more for a scene with big brightness swings (sunset into night) than for a static subject like slow-moving clouds in even light.
+
+## A concrete planning example
+
+The 12-hour, 10-second-interval cloud timelapse above comes out to roughly 127GB in RAW — more than a 64GB card can hold, and tight even on a 128GB card once other files on it are counted. Working that out before the shoot means one of three fixes gets chosen deliberately: shoot JPEG instead of RAW for a scene that doesn't need the extra dynamic range, lengthen the interval if the cloud motion can tolerate it, or bring a larger card. Any of those is a reasonable choice — the problem is only when none of them gets chosen because the total was never calculated.
+
+## Storage is only half the constraint
+
+Working out card capacity doesn't cover everything a long timelapse burns through — battery life is the other hard limit, and a camera drawing power for 8 or 12 hours straight generally needs a battery grip, a dummy-battery AC adapter, or a USB power bank rather than relying on a single battery. A short interval also pushes closer to a card's sustained write speed, and a slower card can start dropping frames or stalling mid-buffer well before it's actually full — worth testing at your planned interval before an overnight shoot, not during one.
+
+## Using the calculator to check before you commit a card
+
+ExifLens's Time-Lapse Calculator (/tools/timelapse-calculator) takes your planned shot count (or interval and duration, which determine it) along with an estimated file size per photo, and returns the total storage needed directly — no manual multiplication required. Running the numbers before an overnight or multi-hour shoot means choosing RAW vs. JPEG, adjusting the interval, or picking a card size becomes a decision made at home with options, rather than one forced in the field when storage runs out.
+
+## Field checklist
+
+- Multiply interval and duration into an actual shot count before estimating storage — the total is usually larger than it feels.
+- RAW typically needs about 3x the storage of JPEG for the same shot count — decide which you need based on how much post-processing latitude the scene requires.
+- Leave real headroom on the card (not just enough to exactly fit the estimate) for a metadata overhead and any format variance between shots.
+- Check your card's sustained write speed against your interval — a short interval on a slow card can drop frames before it's technically full.
+- Plan external power for anything past a couple of hours; running out of battery ends the sequence as abruptly as running out of storage.

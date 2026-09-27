@@ -1,0 +1,40 @@
+---
+title: "Planificando las necesidades de almacenamiento con la calculadora de time-lapse"
+description: "Una sola sesión de time-lapse puede generar miles de fotogramas, y elegir entre RAW y JPEG cambia el cálculo de almacenamiento por un factor de tres. Así se calcula la capacidad de tarjeta necesaria antes de un rodaje nocturno, no después, cuando se llena a las 3 de la madrugada."
+publishedAt: "2026-09-27"
+tags: ["calculadora-de-timelapse", "planificación de almacenamiento", "tarjetas-de-memoria"]
+category: "Guías por género fotográfico"
+image: "/guides/images/timelapse-calculator-storage-planning.webp"
+imageCredit: "İsmail Enes Ayhan"
+imageCreditUrl: "https://unsplash.com/@ismailenesayhan?utm_source=ExifLens&utm_medium=referral"
+---
+
+Un time-lapse nocturno de 8 horas suena manejable hasta que realmente calculas el número de tomas: con un intervalo de 20 segundos, son 1.440 fotogramas individuales, cada uno un archivo RAW completo. Multiplica el tamaño de archivo por el número de tomas y el total puede superar lo que cabe en una sola tarjeta — un descubrimiento mucho mejor hecho de antemano que a las 3 de la madrugada, cuando la tarjeta se llena y la secuencia se detiene a mitad de camino.
+
+## Por qué el número de tomas crece más rápido de lo que parece
+
+El número total de tomas es la duración dividida entre el intervalo, y ambos números tienden a ser mayores en los time-lapses que en el disparo habitual: los intervalos se miden a menudo en segundos de un solo dígito, y las duraciones en horas. Una sesión de estelas de estrellas de 8 horas con un intervalo de 20 segundos produce 1.440 fotogramas; un time-lapse de nubes de 12 horas con un intervalo de 10 segundos produce 4.320. Ninguno de los dos números es evidente a partir de "voy a rodar un rato con un intervalo corto" sin multiplicarlo realmente, que es exactamente por qué el almacenamiento se agota de forma inesperada más a menudo en los time-lapses que en cualquier otro tipo de rodaje.
+
+## RAW frente a JPEG cambia el total en aproximadamente 3 veces
+
+El tamaño de archivo por fotograma es la otra mitad de la ecuación, y los archivos RAW de un sensor full-frame moderno suelen pesar entre 25 y 45MB cada uno, frente a aproximadamente 8–15MB para un JPEG a la misma resolución. Esa diferencia se multiplica directamente con el número de tomas: la secuencia nocturna de 1.440 fotogramas de arriba necesita unos 49GB en RAW (a unos 35MB por archivo) frente a unos 17GB en JPEG (a unos 12MB por archivo) — casi el triple de almacenamiento para el mismo rodaje, sin cambiar ningún otro ajuste. El RAW deja más margen para corregir exposición y balance de blancos en la posproducción, algo que importa más en una escena con grandes variaciones de brillo (del atardecer a la noche) que en un sujeto estático como nubes moviéndose lentamente con luz uniforme.
+
+## Un ejemplo concreto de planificación
+
+El time-lapse de nubes de 12 horas con intervalo de 10 segundos de arriba sale a unos 127GB en RAW — más de lo que cabe en una tarjeta de 64GB, y ajustado incluso en una de 128GB una vez contados otros archivos. Calcular esto antes del rodaje permite elegir deliberadamente una de tres soluciones: disparar en JPEG en vez de RAW para una escena que no necesita ese rango dinámico extra, alargar el intervalo si el movimiento de las nubes lo permite, o llevar una tarjeta más grande. Cualquiera de las tres es una elección razonable — el problema aparece solo cuando ninguna se elige porque el total nunca se calculó.
+
+## El almacenamiento es solo la mitad de la limitación
+
+Calcular la capacidad de la tarjeta no cubre todo lo que consume un time-lapse largo — la duración de la batería es el otro límite físico real, y una cámara que consume energía sin parar durante 8 o 12 horas generalmente necesita un grip de batería, un adaptador de corriente con batería falsa, o un banco de energía USB, en vez de depender de una sola batería. Un intervalo corto también acerca más al límite de velocidad de escritura sostenida de una tarjeta, y una tarjeta más lenta puede empezar a perder fotogramas o bloquearse por el búfer mucho antes de estar realmente llena — vale la pena probarlo al intervalo planeado antes de un rodaje nocturno, no durante uno.
+
+## Usar la calculadora para comprobar antes de comprometer una tarjeta
+
+La Calculadora de time-lapse de ExifLens (/tools/timelapse-calculator) toma tu número de tomas planeado (o el intervalo y la duración, que lo determinan) junto con un tamaño de archivo estimado por foto, y devuelve directamente el almacenamiento total necesario — sin necesidad de multiplicar a mano. Calcular los números antes de un rodaje nocturno o de varias horas convierte elegir entre RAW y JPEG, ajustar el intervalo, o escoger el tamaño de tarjeta en una decisión tomada en casa con opciones, en vez de una forzada en el campo cuando el almacenamiento se agota.
+
+## Lista de verificación de campo
+
+- Multiplica el intervalo y la duración para obtener un número de tomas real antes de estimar el almacenamiento — el total suele ser mayor de lo que parece.
+- El RAW normalmente necesita unas 3 veces el almacenamiento del JPEG para el mismo número de tomas — decide según cuánto margen de posproducción necesita la escena.
+- Deja un margen real en la tarjeta (no solo lo justo para el cálculo) para la sobrecarga de metadatos y cualquier variación de tamaño entre fotogramas.
+- Comprueba la velocidad de escritura sostenida de tu tarjeta frente a tu intervalo — una tarjeta lenta con un intervalo corto puede perder fotogramas antes de estar técnicamente llena.
+- Planifica alimentación externa para cualquier rodaje de más de un par de horas; quedarse sin batería termina la secuencia tan abruptamente como quedarse sin almacenamiento.
