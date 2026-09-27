@@ -14,4 +14,12 @@ export const routing = defineRouting({
   locales,
   defaultLocale: "en",
   localePrefix: "always",
+  // SEO: don't auto-redirect "/" based on the visitor's Accept-Language
+  // header. Google explicitly advises against content-negotiation-based
+  // redirects for locale selection, since the redirect target then varies
+  // per visitor/bot instead of being a single deterministic URL. With this
+  // off, "/" always redirects to defaultLocale ("en") for everyone,
+  // including Googlebot; the in-site language switcher (which links to
+  // locale-prefixed URLs directly) is unaffected.
+  localeDetection: false,
 });
