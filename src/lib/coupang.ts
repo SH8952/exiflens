@@ -42,6 +42,83 @@ function isCoupangApiTemporarilyDisabled(): boolean {
   return process.env.COUPANG_API_DISABLED === "true";
 }
 
+// ---------------------------------------------------------------------------
+// Real (Redis-backed) result cache.
+//
+// 2026-09-27: the comment that used to live here claimed Next.js's
+// `fetch(..., { next: { revalidate } })` cache made every keyword "cached
+// for 6 hours, so repeat visits cost no extra API calls" — that turned out
+// to be false in production. Vercel's runtime logs showed the exact same
+// rate-limit error on nearly every single request within a 15-minute
+// window, meaning every page view was making 9 fresh outbound calls to
+// Coupang (6 ND-filter keywords + 3 accessory keywords), which blows
+// through the 10-requests/hour account limit almost immediately — and this
+// account's 10 req/hour limit is *shared* with FlyDroneMap (same
+// COUPANG_ACCESS_KEY), so the real combined budget is even tighter. Coupang
+// had already flagged the account for exceeding the limit twice; a third
+// strike gets Partners access restricted, so this needed a real fix, not
+// just a bigger `revalidate` number.
+//
+// This now caches successful results in the shared Upstash Redis instance
+// (same one src/lib/visitor-counter.ts uses) with an explicit TTL, keyed
+// per project (so ExifLens and FlyDroneMap never share or overwrite each
+// other's cached productUrl — those URLs are tagged with a project-specific
+// subId, so mixing them would misattribute affiliate credit). This works
+// regardless of serverless cold starts or however Next.js's own fetch cache
+// behaves, because it's a real read/write to a persistent store instead of
+// an in-process/framework-level cache.
+//
+// On any API error (including a rate-limit rejection), a short-lived empty
+// result is cached too, so a failing keyword doesn't get hit again on every
+// subsequent request for the next 15 minutes — this is the circuit breaker
+// that actually stops the hammering once the account is already over
+// budget for the hour, instead of retrying forever.
+// ---------------------------------------------------------------------------
+
+const KV_URL = process.env.KV_REST_API_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN;
+
+const PROJECT = "exiflens";
+const CACHE_PREFIX = `${PROJECT}:coupang:search:v1:`;
+const CACHE_TTL_SECONDS = 60 * 60 * 6; // 6 hours — matches the old (broken) fetch-cache intent
+const ERROR_COOLDOWN_SECONDS = 60 * 15; // 15 minutes — circuit breaker after any API error
+
+async function getCachedProducts(cacheKey: string): Promise<CoupangProduct[] | null> {
+  if (!KV_URL || !KV_TOKEN) return null;
+  try {
+    const res = await fetch(`${KV_URL}/get/${encodeURIComponent(cacheKey)}`, {
+      headers: { Authorization: `Bearer ${KV_TOKEN}` },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { result: string | null };
+    if (!data.result) return null;
+    return JSON.parse(data.result) as CoupangProduct[];
+  } catch {
+    return null;
+  }
+}
+
+async function setCachedProducts(
+  cacheKey: string,
+  products: CoupangProduct[],
+  ttlSeconds: number,
+): Promise<void> {
+  if (!KV_URL || !KV_TOKEN) return;
+  try {
+    const value = encodeURIComponent(JSON.stringify(products));
+    await fetch(
+      `${KV_URL}/set/${encodeURIComponent(cacheKey)}/${value}/EX/${ttlSeconds}`,
+      {
+        headers: { Authorization: `Bearer ${KV_TOKEN}` },
+        cache: "no-store",
+      },
+    );
+  } catch {
+    // Best-effort — a cache-write failure shouldn't break the response.
+  }
+}
+
 /** yyMMdd'T'HHmmss'Z' in UTC, as required by Coupang's CEA signature scheme. */
 function signedDate(now: Date): string {
   const pad = (n: number) => String(n).padStart(2, "0");
@@ -84,9 +161,10 @@ function getCredentials() {
 
 /**
  * Searches Coupang products by keyword. The Open API's rate limit is a
- * strict 10 requests/hour per account, so callers MUST cache results
- * (the /api/coupang/search route does this via Next.js's fetch cache) —
- * never call this directly from a per-request/per-user code path.
+ * strict 10 requests/hour per account — shared with FlyDroneMap, which uses
+ * the same COUPANG_ACCESS_KEY — so real results are cached in Redis (see
+ * above) for CACHE_TTL_SECONDS, and callers must never rely on this being
+ * cheap to call repeatedly without that cache in front of it.
  *
  * When COUPANG_PARTNER_SUBID is set, it is sent as the `subId` request
  * parameter so Coupang tags every returned productUrl with it — this is
@@ -103,12 +181,18 @@ export async function searchCoupangProducts(
     );
   }
 
+  const clampedLimit = Math.min(Math.max(limit, 1), 10);
+  const cacheKey = `${CACHE_PREFIX}${keyword}:${clampedLimit}`;
+
+  const cached = await getCachedProducts(cacheKey);
+  if (cached) return cached;
+
   const { accessKey, secretKey } = getCredentials();
   const subId = process.env.COUPANG_PARTNER_SUBID;
 
   const params: Record<string, string> = {
     keyword,
-    limit: String(Math.min(Math.max(limit, 1), 10)),
+    limit: String(clampedLimit),
   };
   if (subId) {
     params.subId = subId;
@@ -129,13 +213,12 @@ export async function searchCoupangProducts(
       Authorization: authorization,
       "Content-Type": "application/json;charset=UTF-8",
     },
-    // Cache for 6 hours at the fetch layer too, as a second safety net
-    // alongside the route handler's own cache.
-    next: { revalidate: 21600 },
+    cache: "no-store",
   });
 
   if (!response.ok) {
     const body = await response.text().catch(() => "");
+    await setCachedProducts(cacheKey, [], ERROR_COOLDOWN_SECONDS);
     throw new CoupangApiError(
       `Coupang API responded with ${response.status}: ${body.slice(0, 300)}`,
     );
@@ -148,8 +231,11 @@ export async function searchCoupangProducts(
   };
 
   if (json.rCode && json.rCode !== "0") {
+    await setCachedProducts(cacheKey, [], ERROR_COOLDOWN_SECONDS);
     throw new CoupangApiError(json.rMessage || `Coupang API error ${json.rCode}`);
   }
 
-  return json.data?.productData ?? [];
+  const products = json.data?.productData ?? [];
+  await setCachedProducts(cacheKey, products, CACHE_TTL_SECONDS);
+  return products;
 }
