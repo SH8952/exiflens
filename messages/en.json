@@ -443,6 +443,10 @@
       "advanced-dof-diffraction-calculator": {
         "name": "Advanced DoF & Diffraction Calculator",
         "description": "Find your sensor's diffraction-limited aperture and the resulting depth of field, side by side."
+      },
+      "camera-fov-calculator": {
+        "name": "Camera Field of View Calculator",
+        "description": "See the horizontal, vertical, and diagonal angle of view your lens captures, in degrees, at any focal length."
       }
     }
   },
@@ -963,6 +967,40 @@
       {
         "question": "Should I avoid diffraction-limited apertures entirely?",
         "answer": "Not necessarily — depth of field is often more important to the final image than the small amount of softening near the diffraction limit. It matters most when you need maximum resolved detail, such as large prints or heavy crops."
+      }
+    ]
+  },
+  "CameraFovCalculator": {
+    "cardTitle": "Camera Field of View",
+    "sensorLabel": "Sensor Size",
+    "customOption": "Custom",
+    "customWidth": "Width (mm)",
+    "customHeight": "Height (mm)",
+    "focalLengthLabel": "Focal Length (mm)",
+    "horizontalFovLabel": "Horizontal FOV",
+    "verticalFovLabel": "Vertical FOV",
+    "diagonalFovLabel": "Diagonal FOV",
+    "invalidInput": "Enter a valid sensor size and focal length.",
+    "tableTitle": "Field of View by Focal Length",
+    "tableSubtitle": "Horizontal, vertical, and diagonal field of view at common focal lengths, for your selected sensor size.",
+    "pageTitle": "Camera Field of View Calculator",
+    "pageDescription": "See the horizontal, vertical, and diagonal angle of view your lens captures on your sensor — in degrees, at any focal length.",
+    "aboutTitle": "About field of view",
+    "aboutBody": "Field of view (FOV) is the angle of the scene your lens actually captures, measured in degrees, and it depends on both the focal length and your sensor's physical size. This calculator uses the standard trigonometric formula (FOV = 2 x arctan(sensor dimension / (2 x focal length))) applied separately to your sensor's width, height, and diagonal. It's the same math behind our crop-factor calculator's field-of-view figures, on its own page for anyone who wants the angle of view directly — useful for planning shots where you need to know how wide a lens will frame a scene (surveying, videography, architectural photography) without needing the crop-factor/equivalent-focal-length context as well.",
+    "disclaimer": "Calculated from the sensor's physical dimensions and focal length only — it doesn't account for lens distortion or the small field-of-view reduction some lenses show at their closest focus distance.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "What's the difference between this and the crop-factor calculator?",
+        "answer": "They use the same underlying formula, but this page is built around the field-of-view angle itself (useful when you need to know exactly how wide a shot will be), while the crop-factor calculator is built around comparing equivalent focal lengths and apertures across sensor sizes."
+      },
+      {
+        "question": "Why are there three FOV values — horizontal, vertical, and diagonal?",
+        "answer": "Horizontal and vertical FOV describe how wide and how tall the frame is, using the sensor's width and height respectively. Diagonal FOV (using the sensor's diagonal measurement) is the single number most commonly quoted for a lens's overall angle of view, since it doesn't depend on whether the camera is held horizontally or vertically."
+      },
+      {
+        "question": "Can I use this for a specific camera model instead of a general sensor size?",
+        "answer": "Yes — select \"Custom\" under Sensor Size and enter your camera's exact sensor width and height in millimeters, which you can usually find in its manufacturer specifications."
       }
     ]
   }

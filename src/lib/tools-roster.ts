@@ -35,6 +35,7 @@ export const FIELD_TOOLS: ToolEntry[] = [
   { slug: "dof-hyperfocal-table", status: "live", faqNamespace: "DofHyperfocalTable" },
   { slug: "sunny-16-calculator", status: "live", faqNamespace: "Sunny16Calculator" },
   { slug: "advanced-dof-diffraction-calculator", status: "live", faqNamespace: "AdvancedDofDiffractionCalculator" },
+  { slug: "camera-fov-calculator", status: "live", faqNamespace: "CameraFovCalculator" },
 ];
 
 export const POST_SHOOT_TOOLS: ToolEntry[] = [

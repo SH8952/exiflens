@@ -443,6 +443,10 @@
       "advanced-dof-diffraction-calculator": {
         "name": "Calculadora avanzada de DoF y difracción",
         "description": "Encuentra el diafragma limitado por difracción de tu sensor y la profundidad de campo resultante, juntos."
+      },
+      "camera-fov-calculator": {
+        "name": "Calculadora de campo de visión",
+        "description": "Consulta el ángulo de visión horizontal, vertical y diagonal que captura tu objetivo, en grados."
       }
     }
   },
@@ -963,6 +967,40 @@
       {
         "question": "¿Debo evitar por completo los diafragmas limitados por difracción?",
         "answer": "No necesariamente — la profundidad de campo suele ser más importante para la imagen final que el ligero suavizado cerca del límite de difracción. Importa más cuando necesitas el máximo detalle resuelto, como impresiones grandes o recortes intensos."
+      }
+    ]
+  },
+  "CameraFovCalculator": {
+    "cardTitle": "Campo de visión de la cámara",
+    "sensorLabel": "Tamaño del sensor",
+    "customOption": "Personalizado",
+    "customWidth": "Ancho (mm)",
+    "customHeight": "Alto (mm)",
+    "focalLengthLabel": "Distancia focal (mm)",
+    "horizontalFovLabel": "Campo de visión horizontal",
+    "verticalFovLabel": "Campo de visión vertical",
+    "diagonalFovLabel": "Campo de visión diagonal",
+    "invalidInput": "Introduce un tamaño de sensor y una distancia focal válidos.",
+    "tableTitle": "Campo de visión por distancia focal",
+    "tableSubtitle": "Campo de visión horizontal, vertical y diagonal en distancias focales habituales, para el tamaño de sensor que elijas.",
+    "pageTitle": "Calculadora de campo de visión de la cámara",
+    "pageDescription": "Consulta el ángulo de visión horizontal, vertical y diagonal que captura tu objetivo en tu sensor — en grados, con cualquier distancia focal.",
+    "aboutTitle": "Sobre el campo de visión",
+    "aboutBody": "El campo de visión (FOV) es el ángulo de la escena que tu objetivo captura realmente, medido en grados, y depende tanto de la distancia focal como del tamaño físico de tu sensor. Esta calculadora usa la fórmula trigonométrica estándar (FOV = 2 x arctan(dimensión del sensor / (2 x distancia focal))) aplicada por separado al ancho, alto y diagonal de tu sensor. Es la misma matemática que hay detrás de las cifras de campo de visión de nuestra calculadora de factor de recorte, en su propia página para quien quiera el ángulo de visión directamente — útil para planificar tomas donde necesitas saber qué tan ancho enmarcará la escena un objetivo (topografía, vídeo, fotografía de arquitectura) sin necesitar también el contexto de factor de recorte o distancia focal equivalente.",
+    "disclaimer": "Calculado solo a partir de las dimensiones físicas del sensor y la distancia focal — no tiene en cuenta la distorsión del objetivo ni la pequeña reducción de campo de visión que algunos objetivos muestran en su distancia mínima de enfoque.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿En qué se diferencia de la calculadora de factor de recorte?",
+        "answer": "Usan la misma fórmula subyacente, pero esta página está pensada para el ángulo de campo de visión en sí (útil cuando necesitas saber exactamente qué tan ancha será una toma), mientras que la calculadora de factor de recorte está pensada para comparar distancias focales y diafragmas equivalentes entre tamaños de sensor."
+      },
+      {
+        "question": "¿Por qué hay tres valores de FOV: horizontal, vertical y diagonal?",
+        "answer": "El FOV horizontal y vertical describen el ancho y el alto del encuadre, usando respectivamente el ancho y el alto del sensor. El FOV diagonal (usando la medida diagonal del sensor) es el número único que más se suele citar para el ángulo de visión general de un objetivo, ya que no depende de si sostienes la cámara en horizontal o en vertical."
+      },
+      {
+        "question": "¿Puedo usar esto para un modelo de cámara concreto en vez de un tamaño de sensor genérico?",
+        "answer": "Sí — elige \"Personalizado\" en Tamaño del sensor e introduce el ancho y el alto exactos del sensor de tu cámara en milímetros, que normalmente encontrarás en las especificaciones del fabricante."
       }
     ]
   }
