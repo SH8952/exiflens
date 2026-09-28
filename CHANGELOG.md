@@ -1,3 +1,34 @@
+## 2026-09-28 — 플래시 가이드넘버 계산기 신규 추가 (SEO 콘텐츠 갭 대응 4단계 1번)
+
+**배경**
+- `claude/exiflens-seo-gap-analysis.md`의 갭 #6("Flash Sync Speed", "Studio Lighting" 가이드는 있으나 이를 뒷받침하는 계산기가 없는 콘텐츠-도구 불일치) 및 `claude/exiflens-seo-gap-risk-ordered-work-plan.md` 4단계(순서: 6→1→15) 첫 항목 실행.
+- 착수 전 사용자에게 4단계 진행 방향 확인: 원래 계획서상 4단계는 플래시 계산기(항목 6) → 셔터카운트 체커(항목 1) → 셔터카운트 보조 콘텐츠(항목 15) 순이었으나, 셔터카운트 체커 항목을 먼저 조사한 결과 원래 갭 리포트의 전제("ExifLens EXIF 엔진 재사용 가능")가 실제로는 성립하지 않음을 확인(자세한 조사 내용은 아래 "셔터카운트 조사 결과" 참고). 사용자 결정에 따라 셔터카운트 항목은 일단 보류하고, 플래시 계산기만 먼저 진행.
+- 플래시 가이드넘버 공식 자체는 위키피디아 등 공개 자료로 재검증: GN = 조리개값 × 거리(ISO 100 기준), ISO가 다르면 가이드넘버는 ISO 비율의 제곱근에 비례해 스케일링됨(예: ISO 200에서 약 41% 증가) — 외부 데이터 의존 없는 표준 공식으로 확인.
+
+**변경 사항**
+- 신규 도구 페이지 `/tools/flash-guide-number-calculator` 추가 — 플래시 매뉴얼에 적힌 가이드넘버(ISO 100 기준)와 촬영 ISO를 입력하면, 조리개값 기준 최대 도달 거리 또는 거리 기준 필요 조리개값을 계산.
+- 신규 라이브러리 `src/lib/flash-guide-number-calculator.ts` 추가: `calculateGuideNumberAtIso()`(ISO 스케일링), `calculateApertureFromGuideNumber()`, `calculateDistanceFromGuideNumber()`, 미터/피트 단위 변환. 조리개값·ISO 프리셋 목록과 포맷 함수는 기존 `exposure-calculator.ts`의 `APERTURE_STOPS`/`ISO_STOPS`/`formatAperture`/`formatIso`를 그대로 재사용.
+- 신규 컴포넌트: `src/components/flash-guide-number-calculator-card.tsx`.
+- `src/lib/tools-roster.ts`에 `flash-guide-number-calculator`를 `status: "live"`로 등록.
+- `messages/{en,ko,ja,es}.json`에 `FlashGuideNumberCalculator` 번역 네임스페이스 및 `ToolsHub.tools` 항목 추가.
+- 갭 #8 규칙에 따라 신규 가이드 1편 × 4개 언어(`content/guides/{locale}/flash-guide-number-calculator-guide.mdx`) 추가, 기존 `flash-sync-speed-explained`/`studio-lighting-basics` 가이드와 상호 링크.
+
+**검증**
+- `npx tsc --noEmit`, `npx eslint`(신규/변경 파일 대상) 모두 통과, 에러 없음.
+- 공식을 수기로 재계산해 대조: GN 30(m), ISO 100, f/8 기준 최대 도달 거리 3.75m(=30÷8) — 공식 수기 계산과 정확히 일치.
+- 로컬 `npm run dev`(포트 3010) + `curl`로 4개 언어(en/ko/ja/es) × 신규 도구 페이지, 신규 가이드 페이지, `/tools` 허브, `/faq`, `/guides` 인덱스, 홈페이지 총 24개 경로 모두 200 OK 확인.
+- `/tools` 허브에 신규 슬러그 노출, `/faq`에 신규 도구 FAQ 제목 집계, `/guides` 인덱스에 신규 가이드 노출을 각각 확인.
+- dev 서버 로그의 에러는 기존에 알려진 외부 제휴 API(AliExpress/Coupang) 호출 실패뿐이며 신규 코드 관련 런타임 에러는 없음.
+- 작업 전 `src/lib`, `src/components`, `src/app/[locale]/tools`, `messages`, `content/guides`를 `_backups/backup_20260928_041411_flash-guide-number-calculator/`에 백업.
+
+**셔터카운트 조사 결과 (이번 작업 범위 밖, 기록용)**
+- 현재 사용 중인 EXIF 라이브러리 `exifreader`(v4.44.0)는 메이커노트 중 Canon·Pentax만 파싱하며, 그마저도 셔터카운트/이미지카운트 필드 자체를 지원하지 않음(소스 코드 확인 완료). 대안 검토한 `exifr` 라이브러리도 동일하게 미지원.
+- 외부 조사 결과: Nikon/Sony/Fujifilm/Pentax는 EXIF 메이커노트에 셔터카운트 값이 존재하나 최소 Nikon은 암호화되어 있어 시리얼 넘버 기반 복호화 알고리즘이 필요(ExifTool이 수년간 리버스엔지니어링해 유지보수 중인 영역, Perl로만 완전 구현되어 있고 지속적으로 기종별 예외가 추가됨). Canon·Olympus·Panasonic은 EXIF/RAW 파일 자체에 셔터카운트를 기록하지 않아 웹 업로드 방식으로는 원천적으로 지원 불가.
+- 즉 이 기능은 (1) 서버사이드에서 ExifTool류 외부 바이너리를 호출하거나 (2) 일부 브랜드만 자체 복호화 로직을 새로 구현하는 두 갈래 중 하나가 필요하며, 둘 다 기존의 클라이언트사이드 완결형·프라이버시 지향 아키텍처에서 벗어나는 방향 전환임. 사용자와 상의 후 이번 4단계 범위에서는 보류하기로 결정.
+
+**다음 단계**
+- 4단계 1번(플래시 계산기) 완료. 셔터카운트 체커(항목 1)는 보류 상태 — 아키텍처 방향(서버사이드 도입 여부 등)에 대한 별도 논의 후 재검토 예정. 사용자 확인에 따라 5단계(골든아워/블루아워 계산기) 또는 6단계(외부활동)로 순서를 조정해 진행할 수 있음.
+
 ## 2026-09-28 — Camera Field of View(화각) 계산기 신규 추가 (SEO 콘텐츠 갭 대응 3단계 2번, 3단계 완료)
 
 **배경**
