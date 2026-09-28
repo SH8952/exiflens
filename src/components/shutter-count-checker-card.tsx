@@ -134,6 +134,7 @@ export function ShutterCountCheckerCard() {
           <li>{t("supportCanon")}</li>
           <li>{t("supportOthers")}</li>
         </ul>
+        <p className="mt-2 text-muted-foreground/80">{t("supportCanonNote")}</p>
       </div>
     </div>
   );

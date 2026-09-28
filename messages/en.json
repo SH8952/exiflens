@@ -1061,22 +1061,22 @@
     "shutterCountLabel": "Shutter Count",
     "resetButton": "Check another file",
     "supportTableTitle": "Supported cameras",
-    "supportNikon": "Nikon (NEF / in-camera JPEG): supported for most DSLR and mirrorless bodies.",
-    "supportOthers": "Sony, Fujifilm, Olympus, Panasonic, Pentax: not yet supported — we're working on adding them.",
+    "supportNikon": "Nikon - NEF / in-camera JPEG (most DSLR and mirrorless bodies)",
+    "supportOthers": "Sony, Fujifilm, Olympus, Panasonic, Pentax - not yet supported",
     "pageTitle": "Shutter Count Checker",
     "pageDescription": "Find out how many shutter actuations your camera has recorded, directly from a NEF, CR3, or JPEG file — entirely in your browser. Currently supports Nikon and select Canon EOS R bodies, with more brands on the way.",
     "aboutTitle": "About shutter count",
-    "aboutBody": "Every camera's shutter (or, on many mirrorless bodies, the sensor's exposure count) is rated for a certain number of actuations before it's likely to need servicing. Manufacturers embed this running total in the file's metadata on many models, hidden inside a manufacturer-specific block called the MakerNote that ordinary EXIF viewers don't parse. This tool reads that value directly out of the file's raw bytes — for Nikon cameras, which store it as a documented, unencrypted field — so you can check a used camera's shutter count yourself before buying it, or keep an eye on your own body's wear over time. It never sends your photo anywhere; everything happens in your browser.",
+    "aboutBody": "Every camera's shutter (or, on many mirrorless bodies, the sensor's exposure count) is rated for a certain number of actuations before it's likely to need servicing. Manufacturers embed this running total in the file's metadata on many models, hidden inside a manufacturer-specific block that ordinary EXIF viewers don't parse. This tool reads that value directly out of the file's raw bytes: for Nikon cameras, from a documented, unencrypted field in the MakerNote; for Canon EOS R5, R6, R6 Mark II, R8, and R50 (CR3 files), from a publicly documented location inside the camera's CR3 container. This lets you check a used camera's shutter count yourself before buying it, or keep an eye on your own body's wear over time. It never sends your photo anywhere; everything happens in your browser.",
     "disclaimer": "Shutter count support depends on the camera manufacturer and model. Some older or lower-end bodies never record this value at all, regardless of which tool you use. Canon EOS R5/R6 support is based on published camera data rather than verified against every individual unit and firmware version — if a count looks wrong, please let us know.",
     "faqTitle": "Frequently Asked Questions",
     "faq": [
       {
-        "question": "Why does this only support Nikon right now?",
-        "answer": "Nikon documents this field (ShutterCount) as a plain, unencrypted number inside its MakerNote block, which we've independently verified against real camera files. Other manufacturers either don't store an equivalent value in the file at all, or store it in a way that varies by model and needs separate work per camera — we're expanding brand support gradually."
+        "question": "Why does this only support Nikon and a few Canon models right now?",
+        "answer": "Nikon documents this field (ShutterCount) as a plain, unencrypted number inside its MakerNote block, which we've independently verified against real camera files. Canon publishes the storage location for a handful of recent EOS R bodies — the R5, R6, R6 Mark II, R8, and R50 — so we support those too. Other manufacturers (Sony, Fujifilm, Olympus, Panasonic, Pentax) either don't store an equivalent value in the file at all, or store it in a way that varies by model and needs separate work per camera — we're expanding brand support gradually."
       },
       {
         "question": "Does this support Canon cameras?",
-        "answer": "Only the EOS R5 and EOS R6 so far. Unlike Nikon, Canon stores this value at a different byte location for nearly every camera model, and a publicly documented location currently exists only for those two bodies. Every other Canon camera, including newer EOS R models, isn't mapped yet — we'll add more as documented locations become available."
+        "answer": "Yes, for a handful of models. Currently supported: the EOS R5, EOS R6, EOS R6 Mark II, EOS R8, and EOS R50 (CR3 files only). Unlike Nikon, Canon stores this value at a different byte location for nearly every camera model, and a publicly documented location currently exists only for those five bodies. Every other Canon camera, old or new, isn't mapped yet — we'll add more as documented locations become available."
       },
       {
         "question": "Does this work with JPEG files, or only RAW?",
@@ -1087,6 +1087,7 @@
         "answer": "No. The file is read and parsed entirely in your browser using JavaScript — it's never sent to any server, matching how every other tool on ExifLens handles your files."
       }
     ],
-    "supportCanon": "Canon (CR3 only): supported for the EOS R5 and EOS R6 — every other Canon body, old or new, isn't mapped yet."
+    "supportCanon": "Canon - EOS R5, EOS R6, EOS R6 Mark II, EOS R8, EOS R50 (CR3 files only)",
+    "supportCanonNote": "Every other Canon body, old or new, isn't supported yet — we'll add more as they're documented."
   }
 }
