@@ -14,9 +14,13 @@ Nuestro [Comprobador de disparos del obturador](/tools/shutter-count-checker) le
 
 Los campos EXIF habituales (apertura, velocidad de obturación, ISO, objetivo) están estandarizados en todas las marcas de cámaras, por eso cualquier visor EXIF puede leerlos. El conteo de disparos no forma parte de ese conjunto estándar: cada fabricante lo guarda (o no) dentro de un bloque propio llamado MakerNote, y la estructura exacta de esos bytes varía según la marca y, a menudo, según la generación del modelo. Por eso tantas herramientas de "visor EXIF" te muestran todo menos este dato en concreto: solo interpretan los campos estandarizados, no los específicos de cada fabricante.
 
-## Por qué empezamos por Nikon
+## Por qué empezamos por Nikon — y ahora también con dos cuerpos Canon
 
-Nikon documenta su campo `ShutterCount` como un número de 32 bits sin cifrar dentro de su bloque MakerNote, un detalle confirmado por varias fuentes independientes y públicas, no solo por las herramientas del propio fabricante. Verificamos nuestra implementación con archivos reales de cámaras Nikon y coincide exactamente. Con otros fabricantes el panorama es más variado: algunos guardan un valor equivalente pero de una forma que cambia según la generación del modelo y requiere un trabajo de mapeo independiente, y algunos cuerpos antiguos o de gama básica no registran este valor en absoluto, sea cual sea la herramienta que se use. Tratamos el soporte de Nikon como el punto de partida, no como la meta, e iremos ampliando la compatibilidad con otras marcas.
+Nikon documenta su campo `ShutterCount` como un número de 32 bits sin cifrar dentro de su bloque MakerNote, un detalle confirmado por varias fuentes independientes y públicas, no solo por las herramientas del propio fabricante. Verificamos nuestra implementación con archivos reales de cámaras Nikon y coincide exactamente.
+
+Con Canon la situación es muy distinta: no existe una fórmula única. Canon guarda este valor en una posición de byte diferente dentro de un bloque binario propio de cada familia de cámaras, y esa posición debe descubrirse y publicarse individualmente antes de que cualquier herramienta —la nuestra incluida— pueda leerla. Por ahora, esa posición solo está documentada públicamente para la EOS R5 y la EOS R6, así que son los únicos dos cuerpos Canon compatibles con esta herramienta (solo archivos CR3). El resto de cámaras Canon, incluidos los modelos EOS R más recientes, siguen apareciendo como no compatibles, no porque sea imposible para siempre, sino porque todavía nadie ha publicado dónde vive ese valor en esos modelos. Si usas uno de los dos cuerpos Canon compatibles, ten en cuenta que este soporte se basa en datos publicados y no se ha verificado con cada unidad individual ni con cada versión de firmware.
+
+Sony, Fujifilm, Olympus, Panasonic y Pentax van por detrás por motivos distintos en cada caso: algunos guardan un valor equivalente que cambia según la generación del modelo y el firmware, y otros directamente nunca lo escriben en el archivo. Seguimos ampliando la cobertura en lugar de tratar esta lista como definitiva.
 
 ## Cómo usarlo antes de comprar
 

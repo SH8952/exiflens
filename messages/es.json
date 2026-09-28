@@ -1054,7 +1054,7 @@
     "cardTitle": "Comprobador de disparos del obturador",
     "privacyNote": "Tu archivo se analiza por completo en el navegador; nunca se sube a ningún servidor.",
     "uploadLabel": "Sube un archivo NEF o JPEG",
-    "uploadHint": "Arrastra aquí un archivo RAW de Nikon (.NEF) o un JPEG tomado directamente por la cámara, o haz clic para elegir uno desde tu ordenador.",
+    "uploadHint": "Arrastra aquí un archivo RAW de Nikon (.NEF), un archivo RAW de Canon (.CR3) o un JPEG tomado directamente por la cámara, o haz clic para elegir uno desde tu ordenador.",
     "genericError": "No se pudo leer este archivo. Prueba con otra foto que salga directamente de la cámara (no una captura de pantalla ni una copia editada).",
     "fileLabel": "Archivo",
     "cameraLabel": "Cámara",
@@ -1062,17 +1062,21 @@
     "resetButton": "Comprobar otro archivo",
     "supportTableTitle": "Cámaras compatibles",
     "supportNikon": "Nikon (NEF / JPEG de cámara): compatible con la mayoría de cuerpos DSLR y sin espejo.",
-    "supportOthers": "Canon, Sony, Fujifilm, Olympus, Panasonic, Pentax: aún no compatibles; estamos trabajando para añadirlos.",
+    "supportOthers": "Sony, Fujifilm, Olympus, Panasonic, Pentax: aún no compatibles; estamos trabajando para añadirlos.",
     "pageTitle": "Comprobador de disparos del obturador",
     "pageDescription": "Descubre cuántos disparos ha registrado el obturador de tu cámara Nikon directamente desde un archivo NEF o JPEG, todo desde el navegador.",
     "aboutTitle": "Sobre el conteo de disparos del obturador",
     "aboutBody": "El obturador de cualquier cámara (o, en muchos cuerpos sin espejo, el contador de exposiciones del sensor) tiene una vida útil estimada en cierto número de disparos antes de que probablemente necesite revisión. Los fabricantes guardan este total acumulado en los metadatos del archivo, oculto dentro de un bloque específico del fabricante llamado MakerNote que los visores EXIF habituales no interpretan. Esta herramienta lee ese valor directamente de los bytes originales del archivo; en el caso de las cámaras Nikon, porque ese dato se guarda sin cifrar en un campo documentado. Así puedes comprobar tú mismo el conteo de disparos de una cámara de segunda mano antes de comprarla, o llevar un seguimiento del desgaste de la tuya. Tu foto nunca se envía a ningún sitio; todo el proceso ocurre en el navegador.",
-    "disclaimer": "La compatibilidad con el conteo de disparos depende del fabricante y el modelo de la cámara. Algunos cuerpos antiguos o de gama básica nunca registran este valor, sea cual sea la herramienta que uses.",
+    "disclaimer": "La compatibilidad con el conteo de disparos depende del fabricante y el modelo de la cámara. Algunos cuerpos antiguos o de gama básica nunca registran este valor, sea cual sea la herramienta que uses. La compatibilidad con la Canon EOS R5/R6 se basa en datos publicados, no en pruebas verificadas con cada unidad y versión de firmware; si un conteo parece incorrecto, avísanos.",
     "faqTitle": "Preguntas frecuentes",
     "faq": [
       {
         "question": "¿Por qué solo es compatible con Nikon por ahora?",
         "answer": "Nikon documenta este valor (ShutterCount) como un número sin cifrar dentro de su bloque MakerNote, algo que hemos verificado de forma independiente con archivos reales de cámara. Otros fabricantes o no guardan un valor equivalente en el archivo, o lo hacen de una forma que varía según el modelo y requiere trabajo aparte para cada cámara. Iremos ampliando la compatibilidad con otras marcas de forma progresiva."
+      },
+      {
+        "question": "¿Es compatible con cámaras Canon?",
+        "answer": "Por ahora, solo con la EOS R5 y la EOS R6. A diferencia de Nikon, Canon guarda este valor en una posición de byte distinta para casi cada modelo de cámara, y actualmente solo existe una ubicación documentada públicamente para estos dos cuerpos. El resto de cámaras Canon, incluidos los modelos EOS R más recientes, todavía no están mapeadas; iremos añadiendo más a medida que se documenten sus ubicaciones."
       },
       {
         "question": "¿Funciona con archivos JPEG o solo con RAW?",
@@ -1082,6 +1086,7 @@
         "question": "¿Se sube mi foto a algún sitio?",
         "answer": "No. El archivo se lee y analiza por completo en tu navegador mediante JavaScript; nunca se envía a ningún servidor, igual que el resto de herramientas de ExifLens."
       }
-    ]
+    ],
+    "supportCanon": "Canon (solo CR3): compatible con la EOS R5 y la EOS R6; el resto de cuerpos Canon, antiguos o nuevos, aún no están mapeados."
   }
 }

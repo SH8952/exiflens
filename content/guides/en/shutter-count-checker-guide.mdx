@@ -14,9 +14,13 @@ Our [Shutter Count Checker](/tools/shutter-count-checker) reads this value direc
 
 Ordinary EXIF fields (aperture, shutter speed, ISO, lens) are standardized across every camera brand, which is why any EXIF viewer can read them. Shutter count isn't part of that standard set — each manufacturer stores it (or doesn't) inside a proprietary block called the MakerNote, and the exact byte layout differs by brand and often by model generation. That's why so many "EXIF viewer" tools show you everything except this one number: they only parse the standardized fields, not the manufacturer-specific ones.
 
-## Why Nikon first
+## Why Nikon first — and now two Canon bodies
 
-Nikon documents its `ShutterCount` field as a plain, unencrypted 32-bit number inside its MakerNote — a detail confirmed by multiple independent, publicly documented sources, not just Nikon's own tools. We verified our implementation against real Nikon camera files and it matches exactly. Other manufacturers are a mixed picture: some store an equivalent value in a way that varies by model generation and needs separate work to map correctly, and some older or entry-level bodies never record it at all, on any brand, regardless of which tool you use. We're expanding brand coverage from here rather than treating Nikon as the finish line.
+Nikon documents its `ShutterCount` field as a plain, unencrypted 32-bit number inside its MakerNote — a detail confirmed by multiple independent, publicly documented sources, not just Nikon's own tools. We verified our implementation against real Nikon camera files and it matches exactly.
+
+Canon is a very different story: there's no single formula. Canon stores this value at a different byte offset inside a per-model binary block for practically every camera family, and each offset has to be individually discovered and published before any tool — ours included — can read it. As of this writing, that offset is only publicly documented for the EOS R5 and EOS R6, so those are the only two Canon bodies this tool currently supports (CR3 files only). Every other Canon camera, including newer EOS R models, still shows as unsupported — not because it can't ever be done, but because nobody has published where the value lives in those models yet. If you shoot one of the two supported Canon bodies, note that this support is based on published camera data rather than tested against every individual unit and firmware version.
+
+Sony, Fujifilm, Olympus, Panasonic, and Pentax are further behind for different reasons in each case — some store an equivalent value in a way that shifts by model generation and firmware, some genuinely never write it to the file at all. We're continuing to expand coverage rather than treating this list as final.
 
 ## Using it before you buy
 

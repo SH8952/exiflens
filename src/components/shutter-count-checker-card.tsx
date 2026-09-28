@@ -131,6 +131,7 @@ export function ShutterCountCheckerCard() {
         <p className="mb-2 font-semibold text-foreground">{t("supportTableTitle")}</p>
         <ul className="flex flex-col gap-1">
           <li>{t("supportNikon")}</li>
+          <li>{t("supportCanon")}</li>
           <li>{t("supportOthers")}</li>
         </ul>
       </div>

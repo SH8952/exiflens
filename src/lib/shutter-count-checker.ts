@@ -11,11 +11,18 @@
  * `metadata(true)` directly: no field in the returned `nikon`/`canon`/
  * `fuji`/`sony` blocks corresponds to lifetime shutter actuations).
  *
- * So this module parses the file's raw TIFF/Exif byte structure itself,
- * scoped to Nikon in this first version — the one brand where the exact
- * on-disk layout is unambiguous and independently confirmed (see below).
+ * So this module parses the file's raw TIFF/Exif (and, for Canon CR3, the
+ * ISO-BMFF container) byte structure itself. Two brands are supported so
+ * far, each independently verified before shipping — see the two doc
+ * comments below (Nikon, then Canon) for exactly what was confirmed and
+ * how. Every other brand returns `{ supported: false }` with an honest
+ * explanation; see `content/guides/<locale>/shutter-count-checker-guide.mdx`
+ * for the roadmap shown to users, and the brand-by-brand research notes in
+ * CHANGELOG.md (2026-09-28 entries) for why each of those is harder than it
+ * looks and isn't a simple next step.
  *
- * Nikon MakerNote ("Type 3") structure, per multiple independent public
+ * --- Nikon ---
+ * MakerNote ("Type 3") structure, per multiple independent public
  * references (ozhiker.com's Nikon MakerNote spec; the MIT-licensed
  * evanoberholster/imagemeta Go library's Nikon parser; exiftool.org's public
  * Nikon tag table — none of which is exiftool's own source code, only the
@@ -41,15 +48,48 @@
  * Nikon fields (lens data etc.), not that this field's own value is itself
  * encrypted. Reading it needs no decryption.
  *
- * Verified end-to-end (2026-09-28): running this exact algorithm against the
- * exiftool project's own public Nikon.nef test file returns 3619, which
- * matches `exiftool -ShutterCount` on the same file exactly.
+ * Verified end-to-end (2026-09-28): running this exact algorithm against
+ * exiftool's own public Nikon.nef AND NikonD70.jpg test files returns 3619
+ * and 526 respectively, matching `exiftool -ShutterCount` on the same files
+ * exactly.
+ *
+ * --- Canon (CR3 / EOS R mirrorless only) ---
+ * Unlike Nikon, Canon has no single formula: `ShutterCount` sits at a
+ * different fixed byte offset inside a per-model opaque binary block
+ * (`CameraInfo`) for every camera family, and that offset has to be
+ * reverse-engineered and published separately for each one. As of this
+ * writing that offset is only publicly documented for the EOS R5 and EOS
+ * R6 (both use the same offset, 0x0AF1, per exiftool's public Canon tag
+ * table, itself citing an independent forum-verified report — forum
+ * threads #15210/#15579). Every other Canon body — the R6 Mark II, R7,
+ * R10, R50, R3, R8, R1, R5 Mark II, and every CR2-era DSLR — has no known
+ * offset published anywhere yet, so this deliberately stays scoped to
+ * exactly `/\bEOS R[56]$/` and returns the same honest "not supported yet"
+ * result as any other unmapped Canon body, old or new.
+ *
+ * CR3 isn't TIFF at all — it's an ISO-BMFF (MP4-family) container. Canon
+ * wraps the classic TIFF-structured Exif/MakerNote data (the same data a
+ * CR2/JPEG carries directly) inside four sequential boxes named CMT1–CMT4,
+ * nested inside one outer `uuid` box (identified by the fixed extension id
+ * `85c0b687-820f-11e0-8111-f4ce462b6a48`) that itself lives inside `moov`.
+ * CMT1 is a self-contained IFD0 (Make/Model, etc.); CMT3 is a
+ * self-contained MakerNote IFD (Canon's classic tag 0x000d `CameraInfo`
+ * blob lives directly in it, with no Exif-pointer indirection needed).
+ * Verified 2026-09-28 by walking exiftool's own public CanonRaw.cr3 test
+ * file byte-for-byte: CMT1–CMT4 are exactly where the box sizes say they
+ * are, and CMT3's payload starts with a valid "II*\0" TIFF header whose
+ * IFD0 entries are the ordinary Canon MakerNote tags. That confirms the
+ * container-extraction mechanism end-to-end. What could NOT be verified
+ * end-to-end (no real EOS R5/R6 file was available to test against) is the
+ * final 0x0AF1 offset itself — that one fact is taken from exiftool's
+ * public tag documentation rather than independently re-derived, unlike
+ * every other fact this module relies on.
  */
 
 export type ShutterCountBrand = "nikon" | "canon" | "sony" | "fujifilm" | "olympus" | "panasonic" | "pentax" | "unknown";
 
 export type ShutterCountResult =
-  | { supported: true; brand: "nikon"; shutterCount: number; cameraModel: string | null }
+  | { supported: true; brand: "nikon" | "canon"; shutterCount: number; cameraModel: string | null }
   | { supported: false; brand: ShutterCountBrand; cameraModel: string | null; reason: string };
 
 export class ShutterCountParseError extends Error {}
@@ -106,6 +146,18 @@ function readAsciiValue(view: DataView, entry: IfdEntry, base: number, littleEnd
   return new TextDecoder("latin1").decode(bytes.subarray(0, end)).trim();
 }
 
+/** Returns the blob's (offset, length) in the view for an offset-type IFD entry (e.g. a MakerNote or CameraInfo tag). */
+function readBlobLocation(
+  view: DataView,
+  entry: IfdEntry,
+  base: number,
+  littleEndian: boolean,
+): { offset: number; length: number } {
+  const length = (TYPE_SIZES[entry.type] ?? 1) * entry.numValues;
+  const offset = length <= 4 ? entry.valueFieldOffset : base + view.getUint32(entry.valueFieldOffset, littleEndian);
+  return { offset, length };
+}
+
 /** Locates the start of TIFF-structured Exif data inside a JPEG (APP1 "Exif\0\0" segment). */
 function findJpegExifTiffOffset(view: DataView): number | null {
   if (view.getUint16(0) !== 0xffd8) return null; // not a JPEG
@@ -138,17 +190,156 @@ function brandFromMake(make: string | null): ShutterCountBrand {
   return "unknown";
 }
 
+type UnsupportedResult = Extract<ShutterCountResult, { supported: false }>;
+
+function unsupported(
+  brand: ShutterCountBrand,
+  cameraModel: string | null,
+  reason: string,
+): UnsupportedResult {
+  return { supported: false, brand, cameraModel, reason };
+}
+
+// ---------------------------------------------------------------------------
+// ISO-BMFF (MP4-family) box walking — needed only for Canon CR3.
+// ---------------------------------------------------------------------------
+
+type Box = { type: string; start: number; payloadStart: number; end: number };
+
+/** Walks the immediate child boxes of `[start, end)` in standard ISO-BMFF [size(4)][type(4)][payload] form. */
+function readChildBoxes(view: DataView, start: number, end: number): Box[] {
+  const boxes: Box[] = [];
+  let pos = start;
+  while (pos + 8 <= end) {
+    let size = view.getUint32(pos, false); // ISO-BMFF box sizes are always big-endian
+    const type = new TextDecoder("latin1").decode(
+      new Uint8Array(view.buffer, view.byteOffset + pos + 4, 4),
+    );
+    let payloadStart = pos + 8;
+    if (size === 1) {
+      // 64-bit "largesize" extension
+      const hi = view.getUint32(pos + 8, false);
+      const lo = view.getUint32(pos + 12, false);
+      size = hi * 2 ** 32 + lo;
+      payloadStart = pos + 16;
+    } else if (size === 0) {
+      size = end - pos; // box extends to the end of its parent
+    }
+    if (size < 8 || pos + size > end) break;
+    boxes.push({ type, start: pos, payloadStart, end: pos + size });
+    pos += size;
+  }
+  return boxes;
+}
+
+function findChildBox(view: DataView, start: number, end: number, type: string): Box | undefined {
+  return readChildBoxes(view, start, end).find((b) => b.type === type);
+}
+
+/** The fixed 16-byte extension id Canon uses for its CR3 metadata `uuid` box (verified against a real CR3 file, 2026-09-28). */
+const CANON_CR3_UUID_HEX = "85c0b687820f11e08111f4ce462b6a48";
+
+function findCanonCr3InfoBoxes(view: DataView): { cmt1: Box; cmt3: Box } | null {
+  const ftypBox = findChildBox(view, 0, view.byteLength, "ftyp");
+  if (!ftypBox) return null;
+  const topBoxes = readChildBoxes(view, 0, view.byteLength);
+  const moov = topBoxes.find((b) => b.type === "moov");
+  if (!moov) return null;
+  const moovChildren = readChildBoxes(view, moov.payloadStart, moov.end);
+  const infoUuid = moovChildren.find((b) => {
+    if (b.type !== "uuid") return false;
+    const ext = new Uint8Array(view.buffer, view.byteOffset + b.payloadStart, 16);
+    const hex = Array.from(ext, (byte) => byte.toString(16).padStart(2, "0")).join("");
+    return hex === CANON_CR3_UUID_HEX;
+  });
+  if (!infoUuid) return null;
+  // The uuid box's payload is [16-byte extension id][sequential child boxes: CNCV, CCTP, CTBO, CMT1..CMT4, THMB].
+  const innerStart = infoUuid.payloadStart + 16;
+  const innerChildren = readChildBoxes(view, innerStart, infoUuid.end);
+  const cmt1 = innerChildren.find((b) => b.type === "CMT1");
+  const cmt3 = innerChildren.find((b) => b.type === "CMT3");
+  if (!cmt1 || !cmt3) return null;
+  return { cmt1, cmt3 };
+}
+
+/** Reads Make/Model out of a self-contained mini-TIFF (used for CR3's CMT1 box, which is exactly IFD0). */
+function readMakeModelFromMiniTiff(
+  view: DataView,
+  tiffStart: number,
+): { make: string | null; model: string | null } | null {
+  if (tiffStart + 8 > view.byteLength) return null;
+  const bom = String.fromCharCode(view.getUint8(tiffStart), view.getUint8(tiffStart + 1));
+  if (bom !== "II" && bom !== "MM") return null;
+  const littleEndian = bom === "II";
+  const ifdOffset = tiffStart + view.getUint32(tiffStart + 4, littleEndian);
+  const ifd = readIfdEntries(view, ifdOffset, littleEndian);
+  const makeEntry = findEntry(ifd, 0x010f);
+  const modelEntry = findEntry(ifd, 0x0110);
+  return {
+    make: makeEntry ? readAsciiValue(view, makeEntry, tiffStart, littleEndian) : null,
+    model: modelEntry ? readAsciiValue(view, modelEntry, tiffStart, littleEndian) : null,
+  };
+}
+
+/** Canon body families with a publicly documented `CameraInfo` ShutterCount byte offset (see module doc comment). */
+const CANON_CAMERA_INFO_SHUTTER_COUNT: { modelPattern: RegExp; byteOffset: number }[] = [
+  { modelPattern: /\bEOS R[56]$/, byteOffset: 0x0af1 },
+];
+
+function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
+  const boxes = findCanonCr3InfoBoxes(view);
+  if (!boxes) {
+    return unsupported("canon", null, "이 CR3 파일의 구조를 인식할 수 없습니다.");
+  }
+  const idInfo = readMakeModelFromMiniTiff(view, boxes.cmt1.payloadStart);
+  const cameraModel = idInfo?.model ?? null;
+
+  const mnBom = String.fromCharCode(
+    view.getUint8(boxes.cmt3.payloadStart),
+    view.getUint8(boxes.cmt3.payloadStart + 1),
+  );
+  if (mnBom !== "II" && mnBom !== "MM") {
+    return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
+  }
+  const mnLE = mnBom === "II";
+  const mnIfdOffset = boxes.cmt3.payloadStart + view.getUint32(boxes.cmt3.payloadStart + 4, mnLE);
+  const makerNoteIfd = readIfdEntries(view, mnIfdOffset, mnLE);
+
+  const cameraInfoEntry = findEntry(makerNoteIfd, 0x000d);
+  const mapping = CANON_CAMERA_INFO_SHUTTER_COUNT.find((m) => cameraModel && m.modelPattern.test(cameraModel));
+  if (!cameraInfoEntry || !mapping) {
+    return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
+  }
+
+  const blob = readBlobLocation(view, cameraInfoEntry, boxes.cmt3.payloadStart, mnLE);
+  if (mapping.byteOffset + 4 > blob.length) {
+    return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
+  }
+  const shutterCount = view.getUint32(blob.offset + mapping.byteOffset, mnLE);
+  return { supported: true, brand: "canon", shutterCount, cameraModel };
+}
+
 /**
- * Reads the shutter/actuation count from a Nikon NEF or in-camera JPEG file,
- * entirely client-side (the file's bytes never leave the browser). Every
- * other brand currently returns `{ supported: false }` with an honest
- * explanation — see the module doc comment for why, and
- * `content/guides/<locale>/shutter-count-checker-guide.mdx` for the full supported-
- * brand roadmap shown to users.
+ * Reads the shutter/actuation count from a supported camera file, entirely
+ * client-side (the file's bytes never leave the browser). Supported today:
+ * Nikon (NEF / in-camera JPEG) and Canon EOS R5/R6 (CR3 only). Every other
+ * brand or model returns `{ supported: false }` with an honest explanation
+ * — see the module doc comment for why, and
+ * `content/guides/<locale>/shutter-count-checker-guide.mdx` for the full
+ * supported-brand roadmap shown to users.
  */
 export async function checkShutterCount(file: File): Promise<ShutterCountResult> {
   const buffer = await file.arrayBuffer();
   const view = new DataView(buffer);
+
+  // Canon CR3 is an ISO-BMFF container, not a bare TIFF/JPEG — handled by an
+  // entirely separate path before the generic TIFF sniff below.
+  if (view.byteLength >= 12) {
+    const type = new TextDecoder("latin1").decode(new Uint8Array(buffer, 4, 4));
+    if (type === "ftyp") {
+      return parseCanonCr3ShutterCount(view);
+    }
+  }
 
   let tiffStart: number;
   if (view.byteLength >= 2 && view.getUint16(0) === 0xffd8) {
@@ -184,63 +375,36 @@ export async function checkShutterCount(file: File): Promise<ShutterCountResult>
   const brand = brandFromMake(make);
 
   if (brand !== "nikon") {
-    return {
-      supported: false,
+    return unsupported(
       brand,
       cameraModel,
-      reason:
-        brand === "unknown"
-          ? "카메라 제조사를 확인할 수 없습니다."
-          : "이 브랜드는 아직 지원되지 않습니다.",
-    };
+      brand === "unknown" ? "카메라 제조사를 확인할 수 없습니다." : "이 브랜드는 아직 지원되지 않습니다.",
+    );
   }
 
   const exifPtrEntry = findEntry(ifd0, 0x8769);
   if (!exifPtrEntry) {
-    return {
-      supported: false,
-      brand,
-      cameraModel,
-      reason: "이 파일에서 Exif 서브 IFD를 찾을 수 없습니다.",
-    };
+    return unsupported(brand, cameraModel, "이 파일에서 Exif 서브 IFD를 찾을 수 없습니다.");
   }
   const exifIfdOffset = tiffStart + readOffsetValue(view, exifPtrEntry, outerLE);
   const exifIfd = readIfdEntries(view, exifIfdOffset, outerLE);
 
   const makerNoteEntry = findEntry(exifIfd, 0x927c);
   if (!makerNoteEntry) {
-    return {
-      supported: false,
-      brand,
-      cameraModel,
-      reason: "이 파일에는 MakerNote(제조사 확장 메타데이터)가 없습니다.",
-    };
+    return unsupported(brand, cameraModel, "이 파일에는 MakerNote(제조사 확장 메타데이터)가 없습니다.");
   }
-  const mnSize = (TYPE_SIZES[makerNoteEntry.type] ?? 1) * makerNoteEntry.numValues;
-  const makerNoteOffset =
-    mnSize <= 4
-      ? tiffStart + makerNoteEntry.valueFieldOffset - tiffStart // inline (rare/unused for MakerNote, kept for completeness)
-      : tiffStart + view.getUint32(makerNoteEntry.valueFieldOffset, outerLE);
+  const makerNoteBlob = readBlobLocation(view, makerNoteEntry, tiffStart, outerLE);
+  const makerNoteOffset = makerNoteBlob.offset;
 
   if (makerNoteOffset + 10 > view.byteLength) {
-    return {
-      supported: false,
-      brand,
-      cameraModel,
-      reason: "MakerNote 데이터가 손상되었거나 잘려 있습니다.",
-    };
+    return unsupported(brand, cameraModel, "MakerNote 데이터가 손상되었거나 잘려 있습니다.");
   }
 
   const sig = new TextDecoder("latin1").decode(
     new Uint8Array(view.buffer, view.byteOffset + makerNoteOffset, 6),
   );
   if (!sig.startsWith("Nikon")) {
-    return {
-      supported: false,
-      brand,
-      cameraModel,
-      reason: "이 니콘 모델의 MakerNote 구조가 아직 지원되지 않습니다.",
-    };
+    return unsupported(brand, cameraModel, "이 니콘 모델의 MakerNote 구조가 아직 지원되지 않습니다.");
   }
 
   // 6-byte "Nikon\0" + 2-byte version + 2-byte unknown = 10 bytes, then a
@@ -248,12 +412,7 @@ export async function checkShutterCount(file: File): Promise<ShutterCountResult>
   const innerBase = makerNoteOffset + 10;
   const innerBom = String.fromCharCode(view.getUint8(innerBase), view.getUint8(innerBase + 1));
   if (innerBom !== "II" && innerBom !== "MM") {
-    return {
-      supported: false,
-      brand,
-      cameraModel,
-      reason: "이 니콘 모델의 MakerNote 구조가 아직 지원되지 않습니다.",
-    };
+    return unsupported(brand, cameraModel, "이 니콘 모델의 MakerNote 구조가 아직 지원되지 않습니다.");
   }
   const innerLE = innerBom === "II";
   const innerIfdOffset = innerBase + view.getUint32(innerBase + 4, innerLE);
@@ -261,12 +420,7 @@ export async function checkShutterCount(file: File): Promise<ShutterCountResult>
 
   const shutterCountEntry = findEntry(innerIfd, 0x00a7);
   if (!shutterCountEntry) {
-    return {
-      supported: false,
-      brand,
-      cameraModel,
-      reason: "이 파일에서 셔터카운트 값을 찾을 수 없습니다.",
-    };
+    return unsupported(brand, cameraModel, "이 파일에서 셔터카운트 값을 찾을 수 없습니다.");
   }
 
   const shutterCount = readUintValue(view, shutterCountEntry, innerBase, innerLE);
@@ -274,5 +428,5 @@ export async function checkShutterCount(file: File): Promise<ShutterCountResult>
 }
 
 /** File extensions/MIME types this checker's UI accepts. */
-export const SHUTTER_COUNT_ACCEPTED_EXTENSIONS = [".nef", ".jpg", ".jpeg"];
-export const SHUTTER_COUNT_FILE_ACCEPT = "image/jpeg,.nef";
+export const SHUTTER_COUNT_ACCEPTED_EXTENSIONS = [".nef", ".jpg", ".jpeg", ".cr3"];
+export const SHUTTER_COUNT_FILE_ACCEPT = "image/jpeg,.nef,.cr3";
