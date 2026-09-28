@@ -1,3 +1,32 @@
+## 2026-09-28 — 고급 심도 & 회절(CoC+Diffraction) 계산기 신규 추가 (SEO 콘텐츠 갭 대응 3단계 1번)
+
+**배경**
+- `claude/exiflens-seo-gap-analysis.md`의 갭 #3(PhotoPills "Advanced DoF" 계층에 해당하는 Circle of Confusion + Diffraction 계산기 부재) 및 `claude/exiflens-seo-gap-risk-ordered-work-plan.md` 3단계 5번 항목 실행.
+- 착수 전 기존 코드 확인: `dof-calculator.ts`에 이미 회절 한계 계산 로직은 없었으나, 센서별 착란원(CoC) 값과 표준 심도 공식은 이미 검증되어 있어 그대로 재사용.
+- 별도로 `crop-factor-calculator.ts`에 화각(FOV) 계산 로직이 이미 존재함을 확인 — 3단계 2번(Camera FOV 계산기) 착수 시 재사용도(리스크)가 계획서 예상보다 더 높다는 점을 미리 파악해둠(다음 항목에 적용 예정).
+
+**변경 사항**
+- `src/lib/dof-calculator.ts`에 회절 관련 함수 추가: `calculateAiryDiskDiameterMm()`, `calculateDiffractionLimitedAperture()`, `calculateDiffraction()`, `formatAperture()`, `formatMicrons()`. 레일리 기준 근사식(에어리 디스크 지름 ≈ 2.44 × 파장 × f값, 기준 파장 550nm — 대부분의 온라인 회절 계산기가 쓰는 표준 관례)을 사용해, 이미 있던 센서별 착란원 값으로 회절 한계 조리개값을 역산.
+- 신규 도구 페이지 `/tools/advanced-dof-diffraction-calculator` 추가 — 회절 한계 조리개값·에어리 디스크 지름과, 선택한 조리개값·촬영 거리 기준 심도(하이퍼포컬/근접·원경 한계/전체 심도)를 함께 표시. 심도 계산은 기존 `calculateDof()`를 그대로 재사용.
+- 신규 컴포넌트: `src/components/advanced-dof-diffraction-card.tsx`.
+- `src/lib/tools-roster.ts`에 `advanced-dof-diffraction-calculator`를 `status: "live"`로 등록.
+- `messages/{en,ko,ja,es}.json`에 `AdvancedDofDiffractionCalculator` 번역 네임스페이스 및 `ToolsHub.tools` 항목 추가.
+- 갭 #8(신규 도구마다 "how to use" 가이드 세트 발행) 규칙에 따라 신규 가이드 1편 × 4개 언어(`content/guides/{locale}/advanced-dof-diffraction-calculator-guide.mdx`) 추가. 계산기가 사용하는 센서 크기 기반(착란원 기반) 회절 한계는 화소수를 반영하지 않는 경험칙이라는 점을 명시하고, 기존 화소 크기(픽셀 피치) 기반 가이드 `diffraction-and-optimal-aperture`와 상호 링크해 두 관점이 서로 모순되지 않고 보완적으로 읽히도록 함(사실관계 정확성 검증 차원).
+
+**검증**
+- `npx tsc --noEmit`, `npx eslint`(신규/변경 파일 대상) 모두 통과, 에러 없음.
+- 공식 자체를 수기로 재계산해 대조: 풀프레임·50mm·f/2.8·촬영거리 5m 기준으로 회절 한계 f/22.4(레일리 근사식 계산과 일치), 에어리 디스크 지름 3.8µm, 하이퍼포컬 29.8m, 근접 한계 4.29m, 원경 한계 6.00m, 전체 심도 1.71m — 모두 공식 수기 계산과 정확히 일치함을 확인.
+- 로컬 `npm run dev`(포트 3010) + `curl`로 4개 언어(en/ko/ja/es) × 신규 도구 페이지, 신규 가이드 페이지, `/tools` 허브, `/faq`, `/guides` 인덱스, 홈페이지 총 24개 경로 모두 200 OK 확인.
+- `/tools` 허브에 신규 슬러그 노출, `/faq`에 신규 도구 FAQ 제목 집계, `/guides` 인덱스에 신규 가이드 노출을 각각 확인.
+- dev 서버 로그의 에러는 기존에 알려진 외부 제휴 API(AliExpress/Coupang) 호출 실패뿐이며 신규 코드 관련 런타임 에러는 없음.
+- 작업 전 `src/lib`, `src/components`, `src/app/[locale]/tools`, `messages`, `content/guides`를 `_backups/backup_20260928_023013_advanced-dof-diffraction/`에 백업.
+
+**참고 사항**
+- 2단계(DoF Table/Hyperfocal Table, Sunny 16 계산기)에서는 공통 규칙(갭 #8, 신규 도구마다 가이드 세트 발행)이 누락되었음을 이번에 재확인 — 추후 여유가 될 때 두 도구용 "how to use" 가이드를 소급 보완하는 것을 검토 권장(이번 작업의 범위에는 포함하지 않음).
+
+**다음 단계**
+- 3단계 1번(CoC+회절 계산기) 완료. 3단계 2번(Camera FOV 계산기)으로 진행 예정 — 기존 `crop-factor-calculator.ts`의 화각 계산 로직을 재사용하는 방식으로 착수.
+
 ## 2026-09-28 — DoF/하이퍼포컬 표 페이지 & 써니 16 계산기 신규 추가 (SEO 콘텐츠 갭 대응 2단계)
 
 **배경**
