@@ -646,6 +646,13 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-28
+
+- 새 가이드 2건 발행 (2 new guides published):
+  - "별사진 계산기로 NPF 룰 기반 노출값 정하는 법" / "Setting Exposure with the Astro Calculator's NPF Rule" (슬러그: astro-calculator-npf-rule)
+  - "별사진 계산기로 은하수 촬영 시간대 미리 계획하기" / "Planning Milky Way Shoot Timing with the Astro Calculator" (슬러그: astro-calculator-milky-way-planning)
+  - 4개 언어(en/ja/ko/es) 전부 작성, 카테고리: 장르별 촬영 가이드 / Photography Genres
+
 ## 2026-09-27 — "타임랩스 계산기로 촬영 간격과 총 촬영시간 계산하는 법", "타임랩스 계산기로 필요한 저장공간 미리 확인하는 법" 가이드 자동 발행 (주간 한도 복구 후 캐치업)
 
 - 타임랩스 계산기(/tools/timelapse-calculator) 활용법 2편. 간격·촬영매수·총 촬영시간이 하나의 반비례 공식으로 묶여 있음을 실제 수치(24fps 10초 클립=240프레임, 2시간 예산이면 30초 간격 등)로 설명하고, RAW/JPEG 파일 크기 차이(약 3배)로 8~12시간 촬영 시 필요한 저장공간(예: 1,440장 RAW≈49GB)을 미리 계산하는 방법을 다룸.
