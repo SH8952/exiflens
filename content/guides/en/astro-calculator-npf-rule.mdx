@@ -1,0 +1,40 @@
+---
+title: "Setting Exposure with the Astro Calculator's NPF Rule"
+description: "The 500 rule judges star trailing by focal length alone, and that's far too generous on today's high-resolution cameras. Here's how the NPF rule — which factors in aperture and pixel pitch — and ExifLens's astrophotography calculator get you an exposure time that actually holds up at 100%."
+publishedAt: "2026-09-28"
+tags: ["npf-rule", "astrophotography-calculator", "long-exposure"]
+category: "Photography Genres"
+image: "/guides/images/astro-calculator-npf-rule.webp"
+imageCredit: "Greg Rakozy"
+imageCreditUrl: "https://unsplash.com/@grakozy?utm_source=ExifLens&utm_medium=referral"
+---
+
+The classic way to find the longest shutter speed before stars turn into trails is the 500 rule: divide 500 by your focal length. It's simple enough that it's still everywhere, but it's a rule of thumb built around the low-resolution sensors of the 1990s and early 2000s, and applying it unchanged to a 45–61-megapixel body today hands you a much more generous number than the sensor can actually back up.
+
+## The variable the 500 rule ignores: pixel pitch
+
+The 500 rule only takes focal length (and crop factor) as input. But whether star trailing is actually visible depends on how many pixels that trail's length crosses on the sensor, and that comes down to the physical size of each pixel — its pixel pitch. At the same 24mm focal length and the same exposure time, a higher-resolution sensor with tighter pixel pitch spreads that same trail across more pixels, so it shows up far more clearly at 100%. The 500 rule has no way to account for that difference.
+
+## The NPF rule: aperture and pixel pitch together
+
+Proposed by French astrophotographer Frédéric Michaud and popularized by PhotoPills, the NPF rule factors in the aperture (N) and the pixel pitch (p, in micrometers) together, calculating the maximum exposure time as (35 × N + 30 × p) ÷ f, where f is the lens's actual focal length rather than a crop-equivalent one. Stopping down further, or moving to a sensor with tighter pixel pitch (higher resolution), both shorten the resulting maximum exposure time.
+
+## Same lens, different body: what the numbers actually say
+
+Take a full-frame 24mm lens at f/2.8. The 500 rule gives one answer regardless of which body it's mounted on: 500 ÷ 24 ≈ 20.8 seconds. Run the NPF rule with each body's actual pixel pitch instead, and the answer changes sharply. On a roughly 24-megapixel body (pixel pitch about 6.0µm), it comes out to about 11.5 seconds; on a roughly 61-megapixel body (pixel pitch about 3.76µm), about 8.8 seconds. Same lens, same aperture, and the gap between 20.8 seconds and 8.8 seconds is more than double — trust the 500 rule's number on a high-resolution body and you'll come home with visibly trailed stars.
+
+## What to actually enter into the calculator
+
+ExifLens's Astrophotography Calculator (/tools/astrophotography-calculator) works out pixel pitch automatically once you pick a sensor format (full-frame, APS-C, Micro Four Thirds, and so on) and a megapixel preset, so there's no need to go hunting for a micrometer spec yourself. Enter your lens's actual focal length and the aperture you plan to shoot at, and it shows the 500 rule and NPF rule results side by side, so you know on the spot which number to trust.
+
+## The common mistake: reusing an old body's number on a new one
+
+It's common to keep using a memorized number like "20 seconds" after upgrading to a higher-resolution body. Trailing that was invisible on the older, lower-resolution sensor becomes obvious on the new one, especially once you print large or crop to 100% for a social post. Any time you change bodies, recalculate the exposure time — don't carry the old number over.
+
+## Field checklist
+
+- The 500 rule only looks at focal length; the NPF rule also factors in aperture and pixel pitch — it's normal for the two to disagree.
+- Pixel pitch is set by sensor size and resolution, so the higher the megapixel count, the shorter your safe maximum exposure gets.
+- Pick a sensor format and megapixel preset in the calculator and pixel pitch is worked out for you — no need to look up the spec yourself.
+- Bought a new body, or switched to a lens with a different crop factor? Recalculate — don't reuse a number you memorized before.
+- Planning to print large or view at 100%, rely on the NPF rule's number over the 500 rule's.

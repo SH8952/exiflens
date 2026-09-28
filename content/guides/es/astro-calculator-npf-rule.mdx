@@ -1,0 +1,40 @@
+---
+title: "Cómo fijar la exposición con la regla NPF de la calculadora de astrofotografía"
+description: "La regla de 500 juzga el desenfoque de las estrellas solo por la distancia focal, y eso resulta demasiado permisivo en las cámaras de alta resolución actuales. Así se usa la regla NPF — que tiene en cuenta la apertura y el paso de píxel — junto con la calculadora de astrofotografía de ExifLens para obtener un tiempo de exposición que realmente aguante al 100%."
+publishedAt: "2026-09-28"
+tags: ["regla-npf", "calculadora-de-astrofotografia", "larga-exposicion"]
+category: "Guías por género fotográfico"
+image: "/guides/images/astro-calculator-npf-rule.webp"
+imageCredit: "Greg Rakozy"
+imageCreditUrl: "https://unsplash.com/@grakozy?utm_source=ExifLens&utm_medium=referral"
+---
+
+La forma clásica de calcular la velocidad de obturación más larga antes de que las estrellas empiecen a alargarse es la regla de 500: dividir 500 entre la distancia focal. Es tan simple que sigue siendo omnipresente, pero es una regla empírica pensada para los sensores de baja resolución de los años 90 y principios de los 2000, y aplicarla sin cambios a un cuerpo actual de 45 a 61 megapíxeles da un número mucho más permisivo del que el sensor realmente puede sostener.
+
+## La variable que la regla de 500 ignora: el paso de píxel
+
+La regla de 500 solo toma como entrada la distancia focal (y el factor de recorte). Pero que el desenfoque de las estrellas resulte visible o no depende de cuántos píxeles abarca ese trazo sobre el sensor, y eso depende del tamaño físico de cada píxel, es decir, su paso de píxel. Con la misma distancia focal de 24mm y el mismo tiempo de exposición, un sensor de mayor resolución con un paso de píxel más ajustado reparte ese mismo trazo entre más píxeles, por lo que se nota mucho más al verlo al 100%. La regla de 500 no tiene forma de reflejar esa diferencia.
+
+## La regla NPF: apertura y paso de píxel juntos
+
+Propuesta por el astrofotógrafo francés Frédéric Michaud y popularizada por PhotoPills, la regla NPF combina la apertura (N) y el paso de píxel (p, en micrómetros), calculando el tiempo máximo de exposición como (35 × N + 30 × p) ÷ f, donde f es la distancia focal real del objetivo, no un equivalente de recorte. Cerrar más el diafragma, o pasar a un sensor con paso de píxel más ajustado (mayor resolución), acortan el tiempo máximo resultante.
+
+## Mismo objetivo, distinto cuerpo: lo que dicen los números
+
+Tomemos un objetivo de 24mm en formato completo a f/2.8. La regla de 500 da una sola respuesta sin importar el cuerpo: 500 ÷ 24 ≈ 20,8 segundos. Al calcular con la regla NPF usando el paso de píxel real de cada cuerpo, el resultado cambia notablemente. En un cuerpo de unos 24 megapíxeles (paso de píxel de unos 6,0µm) da alrededor de 11,5 segundos; en uno de unos 61 megapíxeles (paso de píxel de unos 3,76µm), alrededor de 8,8 segundos. Mismo objetivo, misma apertura, y la diferencia entre 20,8 y 8,8 segundos es más del doble — confiar en el número de la regla de 500 en un cuerpo de alta resolución te deja con estrellas visiblemente alargadas.
+
+## Qué introducir realmente en la calculadora
+
+La calculadora de astrofotografía de ExifLens (/tools/astrophotography-calculator) calcula el paso de píxel automáticamente en cuanto eliges un formato de sensor (formato completo, APS-C, Micro Cuatro Tercios, etc.) y un preajuste de megapíxeles, así que no hace falta buscar la especificación en micrómetros por tu cuenta. Solo hay que introducir la distancia focal real del objetivo y la apertura con la que se va a disparar, y muestra los resultados de la regla de 500 y de la regla NPF uno junto al otro, para saber al instante en cuál confiar.
+
+## El error habitual: reutilizar el número de un cuerpo antiguo en uno nuevo
+
+Es común seguir usando un número memorizado como "20 segundos" después de pasar a un cuerpo de mayor resolución. El desenfoque que era invisible en el sensor antiguo, de menor resolución, se hace evidente en el nuevo, sobre todo al imprimir en grande o recortar al 100% para redes sociales. Cada vez que cambies de cuerpo, recalcula el tiempo de exposición — no arrastres el número anterior.
+
+## Lista de verificación de campo
+
+- La regla de 500 solo mira la distancia focal; la regla NPF también tiene en cuenta la apertura y el paso de píxel — es normal que ambas no coincidan.
+- El paso de píxel depende del tamaño del sensor y la resolución, así que a mayor número de megapíxeles, más corto es tu tiempo máximo de exposición seguro.
+- Elige un formato de sensor y un preajuste de megapíxeles en la calculadora y el paso de píxel se calcula solo — no hace falta buscar la especificación.
+- ¿Compraste un cuerpo nuevo o cambiaste a un objetivo con otro factor de recorte? Recalcula — no reutilices un número memorizado antes.
+- Si vas a imprimir en grande o a ver la imagen al 100%, confía en el número de la regla NPF antes que en el de la regla de 500.
