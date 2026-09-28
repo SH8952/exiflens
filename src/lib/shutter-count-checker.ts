@@ -58,14 +58,21 @@
  * different fixed byte offset inside a per-model opaque binary block
  * (`CameraInfo`) for every camera family, and that offset has to be
  * reverse-engineered and published separately for each one. As of this
- * writing that offset is only publicly documented for the EOS R5 and EOS
- * R6 (both use the same offset, 0x0AF1, per exiftool's public Canon tag
- * table, itself citing an independent forum-verified report — forum
- * threads #15210/#15579). Every other Canon body — the R6 Mark II, R7,
- * R10, R50, R3, R8, R1, R5 Mark II, and every CR2-era DSLR — has no known
- * offset published anywhere yet, so this deliberately stays scoped to
- * exactly `/\bEOS R[56]$/` and returns the same honest "not supported yet"
- * result as any other unmapped Canon body, old or new.
+ * writing that offset is publicly documented for:
+ *   - EOS R5 and EOS R6 — same offset, 0x0AF1 (exiftool's public Canon tag
+ *     table, citing forum threads #15210/#15579).
+ *   - EOS R6 Mark II, EOS R8, and EOS R50 — same offset, 0x0D29 (exiftool's
+ *     public Canon tag table, citing forum contributor AgostonKapitany).
+ *     These three share one offset in the same upstream record, so
+ *     supporting R6 Mark II (the model actually requested) means R8/R50
+ *     come along for free from the identical, equally-documented mapping —
+ *     not a separate guess on our part.
+ * Every other Canon body — the R7, R10, R3, R1, R5 Mark II, R6 Mark III,
+ * and every CR2-era DSLR — has no known offset published anywhere yet
+ * (checked directly against exiftool's current (13.59) Canon tag table,
+ * not just the older locally-installed 12.76), so those still return the
+ * same honest "not supported yet" result as any other unmapped Canon body,
+ * old or new.
  *
  * CR3 isn't TIFF at all — it's an ISO-BMFF (MP4-family) container. Canon
  * wraps the classic TIFF-structured Exif/MakerNote data (the same data a
@@ -284,6 +291,10 @@ function readMakeModelFromMiniTiff(
 /** Canon body families with a publicly documented `CameraInfo` ShutterCount byte offset (see module doc comment). */
 const CANON_CAMERA_INFO_SHUTTER_COUNT: { modelPattern: RegExp; byteOffset: number }[] = [
   { modelPattern: /\bEOS R[56]$/, byteOffset: 0x0af1 },
+  // Model tag's raw internal string for these three bodies is "R6m2", not
+  // the marketing name "R6 Mark II" — matches exiftool's own condition
+  // exactly, since that's what actually appears in real files' Model tag.
+  { modelPattern: /\bEOS (R6m2|R8|R50)$/, byteOffset: 0x0d29 },
 ];
 
 function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
@@ -322,8 +333,9 @@ function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
 /**
  * Reads the shutter/actuation count from a supported camera file, entirely
  * client-side (the file's bytes never leave the browser). Supported today:
- * Nikon (NEF / in-camera JPEG) and Canon EOS R5/R6 (CR3 only). Every other
- * brand or model returns `{ supported: false }` with an honest explanation
+ * Nikon (NEF / in-camera JPEG) and Canon EOS R5, R6, R6 Mark II, R8, and R50
+ * (CR3 only). Every other brand or model returns `{ supported: false }` with
+ * an honest explanation
  * — see the module doc comment for why, and
  * `content/guides/<locale>/shutter-count-checker-guide.mdx` for the full
  * supported-brand roadmap shown to users.

@@ -454,7 +454,7 @@
       },
       "shutter-count-checker": {
         "name": "Comprobador de disparos del obturador",
-        "description": "Comprueba cuántos disparos ha registrado el obturador de tu cámara Nikon desde un archivo NEF o JPEG."
+        "description": "Comprueba cuántos disparos ha registrado el obturador de tu cámara desde un archivo NEF, CR3 o JPEG."
       }
     }
   },
@@ -1064,7 +1064,7 @@
     "supportNikon": "Nikon (NEF / JPEG de cámara): compatible con la mayoría de cuerpos DSLR y sin espejo.",
     "supportOthers": "Sony, Fujifilm, Olympus, Panasonic, Pentax: aún no compatibles; estamos trabajando para añadirlos.",
     "pageTitle": "Comprobador de disparos del obturador",
-    "pageDescription": "Descubre cuántos disparos ha registrado el obturador de tu cámara Nikon directamente desde un archivo NEF o JPEG, todo desde el navegador.",
+    "pageDescription": "Descubre cuántos disparos ha registrado el obturador de tu cámara directamente desde un archivo NEF, CR3 o JPEG, todo desde el navegador. Actualmente compatible con Nikon y algunos cuerpos Canon EOS R, con más marcas en camino.",
     "aboutTitle": "Sobre el conteo de disparos del obturador",
     "aboutBody": "El obturador de cualquier cámara (o, en muchos cuerpos sin espejo, el contador de exposiciones del sensor) tiene una vida útil estimada en cierto número de disparos antes de que probablemente necesite revisión. Los fabricantes guardan este total acumulado en los metadatos del archivo, oculto dentro de un bloque específico del fabricante llamado MakerNote que los visores EXIF habituales no interpretan. Esta herramienta lee ese valor directamente de los bytes originales del archivo; en el caso de las cámaras Nikon, porque ese dato se guarda sin cifrar en un campo documentado. Así puedes comprobar tú mismo el conteo de disparos de una cámara de segunda mano antes de comprarla, o llevar un seguimiento del desgaste de la tuya. Tu foto nunca se envía a ningún sitio; todo el proceso ocurre en el navegador.",
     "disclaimer": "La compatibilidad con el conteo de disparos depende del fabricante y el modelo de la cámara. Algunos cuerpos antiguos o de gama básica nunca registran este valor, sea cual sea la herramienta que uses. La compatibilidad con la Canon EOS R5/R6 se basa en datos publicados, no en pruebas verificadas con cada unidad y versión de firmware; si un conteo parece incorrecto, avísanos.",

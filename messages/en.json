@@ -454,7 +454,7 @@
       },
       "shutter-count-checker": {
         "name": "Shutter Count Checker",
-        "description": "Check how many shutter actuations your Nikon camera has recorded, straight from a NEF or JPEG file."
+        "description": "Check how many shutter actuations your camera has recorded, straight from a NEF, CR3, or JPEG file."
       }
     }
   },
@@ -1064,7 +1064,7 @@
     "supportNikon": "Nikon (NEF / in-camera JPEG): supported for most DSLR and mirrorless bodies.",
     "supportOthers": "Sony, Fujifilm, Olympus, Panasonic, Pentax: not yet supported — we're working on adding them.",
     "pageTitle": "Shutter Count Checker",
-    "pageDescription": "Find out how many shutter actuations your Nikon camera has recorded, directly from a NEF or JPEG file — entirely in your browser.",
+    "pageDescription": "Find out how many shutter actuations your camera has recorded, directly from a NEF, CR3, or JPEG file — entirely in your browser. Currently supports Nikon and select Canon EOS R bodies, with more brands on the way.",
     "aboutTitle": "About shutter count",
     "aboutBody": "Every camera's shutter (or, on many mirrorless bodies, the sensor's exposure count) is rated for a certain number of actuations before it's likely to need servicing. Manufacturers embed this running total in the file's metadata on many models, hidden inside a manufacturer-specific block called the MakerNote that ordinary EXIF viewers don't parse. This tool reads that value directly out of the file's raw bytes — for Nikon cameras, which store it as a documented, unencrypted field — so you can check a used camera's shutter count yourself before buying it, or keep an eye on your own body's wear over time. It never sends your photo anywhere; everything happens in your browser.",
     "disclaimer": "Shutter count support depends on the camera manufacturer and model. Some older or lower-end bodies never record this value at all, regardless of which tool you use. Canon EOS R5/R6 support is based on published camera data rather than verified against every individual unit and firmware version — if a count looks wrong, please let us know.",
