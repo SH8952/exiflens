@@ -451,6 +451,10 @@
       "flash-guide-number-calculator": {
         "name": "Flash Guide Number Calculator",
         "description": "Find your flash's maximum distance for a given aperture, or the aperture needed at a given distance."
+      },
+      "shutter-count-checker": {
+        "name": "Shutter Count Checker",
+        "description": "Check how many shutter actuations your Nikon camera has recorded, straight from a NEF or JPEG file."
       }
     }
   },
@@ -1043,6 +1047,40 @@
       {
         "question": "Does this account for bounce flash or light modifiers?",
         "answer": "No — guide numbers assume direct, undiffused flash in open conditions. Bouncing the flash off a ceiling or wall, or adding a diffuser/softbox, reduces the effective light reaching your subject, so you'll typically need a wider aperture or closer distance than this calculator suggests."
+      }
+    ]
+  },
+  "ShutterCountChecker": {
+    "cardTitle": "Shutter Count Checker",
+    "privacyNote": "Your file is read entirely in your browser — it's never uploaded to any server.",
+    "uploadLabel": "Upload a NEF or JPEG file",
+    "uploadHint": "Drop a Nikon RAW (.NEF) file or an in-camera JPEG here, or click to choose one from your computer.",
+    "genericError": "Couldn't read this file. Try a different photo straight from the camera (not a screenshot or edited copy).",
+    "fileLabel": "File",
+    "cameraLabel": "Camera",
+    "shutterCountLabel": "Shutter Count",
+    "resetButton": "Check another file",
+    "supportTableTitle": "Supported cameras",
+    "supportNikon": "Nikon (NEF / in-camera JPEG): supported for most DSLR and mirrorless bodies.",
+    "supportOthers": "Canon, Sony, Fujifilm, Olympus, Panasonic, Pentax: not yet supported — we're working on adding them.",
+    "pageTitle": "Shutter Count Checker",
+    "pageDescription": "Find out how many shutter actuations your Nikon camera has recorded, directly from a NEF or JPEG file — entirely in your browser.",
+    "aboutTitle": "About shutter count",
+    "aboutBody": "Every camera's shutter (or, on many mirrorless bodies, the sensor's exposure count) is rated for a certain number of actuations before it's likely to need servicing. Manufacturers embed this running total in the file's metadata on many models, hidden inside a manufacturer-specific block called the MakerNote that ordinary EXIF viewers don't parse. This tool reads that value directly out of the file's raw bytes — for Nikon cameras, which store it as a documented, unencrypted field — so you can check a used camera's shutter count yourself before buying it, or keep an eye on your own body's wear over time. It never sends your photo anywhere; everything happens in your browser.",
+    "disclaimer": "Shutter count support depends on the camera manufacturer and model. Some older or lower-end bodies never record this value at all, regardless of which tool you use.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "Why does this only support Nikon right now?",
+        "answer": "Nikon documents this field (ShutterCount) as a plain, unencrypted number inside its MakerNote block, which we've independently verified against real camera files. Other manufacturers either don't store an equivalent value in the file at all, or store it in a way that varies by model and needs separate work per camera — we're expanding brand support gradually."
+      },
+      {
+        "question": "Does this work with JPEG files, or only RAW?",
+        "answer": "Both. In-camera JPEGs carry the same MakerNote data as NEF files, as long as they haven't been re-saved or edited by another program (which typically strips or rewrites this metadata)."
+      },
+      {
+        "question": "Is my photo uploaded anywhere?",
+        "answer": "No. The file is read and parsed entirely in your browser using JavaScript — it's never sent to any server, matching how every other tool on ExifLens handles your files."
       }
     ]
   }

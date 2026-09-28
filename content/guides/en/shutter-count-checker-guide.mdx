@@ -1,0 +1,23 @@
+---
+title: "Shutter Count Explained: How to Check It Before Buying a Used Camera"
+description: "A camera's shutter count is the single best clue to how much life is left in a used body. Here's what it actually measures and how our free checker reads it straight from your file."
+publishedAt: "2026-09-28"
+tags: ["shutter-count", "nikon", "used-camera-buying"]
+category: "Gear & Accessories"
+---
+
+When you're buying a used camera, the seller's word on "barely used" only goes so far. The shutter count — the total number of times the shutter has fired over the camera's life — is the closest thing photography has to an odometer reading. Most shutter mechanisms are rated for a certain number of actuations (often 100,000–400,000 depending on the body's class) before wear makes servicing more likely, so a body with a low count relative to its rated life is a meaningfully safer buy than one that's already deep into its expected lifespan.
+
+Our [Shutter Count Checker](/tools/shutter-count-checker) reads this value directly out of a NEF or JPEG file, entirely in your browser — no upload, no account, nothing leaves your device.
+
+## Where this number actually lives
+
+Ordinary EXIF fields (aperture, shutter speed, ISO, lens) are standardized across every camera brand, which is why any EXIF viewer can read them. Shutter count isn't part of that standard set — each manufacturer stores it (or doesn't) inside a proprietary block called the MakerNote, and the exact byte layout differs by brand and often by model generation. That's why so many "EXIF viewer" tools show you everything except this one number: they only parse the standardized fields, not the manufacturer-specific ones.
+
+## Why Nikon first
+
+Nikon documents its `ShutterCount` field as a plain, unencrypted 32-bit number inside its MakerNote — a detail confirmed by multiple independent, publicly documented sources, not just Nikon's own tools. We verified our implementation against real Nikon camera files and it matches exactly. Other manufacturers are a mixed picture: some store an equivalent value in a way that varies by model generation and needs separate work to map correctly, and some older or entry-level bodies never record it at all, on any brand, regardless of which tool you use. We're expanding brand coverage from here rather than treating Nikon as the finish line.
+
+## Using it before you buy
+
+If you're buying secondhand, ask the seller for a straight-out-of-camera JPEG or NEF (not a screenshot, and not a file that's been re-saved by editing software, which typically strips this metadata) and run it through the checker yourself. Compare the count against the body's rated shutter life for its class, and weigh that alongside the visible cosmetic condition — the two together tell you far more than either one alone.

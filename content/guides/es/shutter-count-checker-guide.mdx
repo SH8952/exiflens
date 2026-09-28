@@ -1,0 +1,23 @@
+---
+title: "Qué es el conteo de disparos del obturador y por qué comprobarlo antes de comprar una cámara de segunda mano"
+description: "El conteo de disparos del obturador es la mejor pista sobre cuánta vida útil le queda a una cámara de segunda mano. Te explicamos qué mide realmente y cómo nuestro comprobador gratuito lee este valor directamente del archivo."
+publishedAt: "2026-09-28"
+tags: ["conteo-disparos", "nikon", "compra-camara-segunda-mano"]
+category: "Equipo y accesorios"
+---
+
+Al comprar una cámara de segunda mano, la palabra del vendedor de que está "casi sin usar" solo llega hasta cierto punto. El conteo de disparos del obturador —el número total de veces que el obturador se ha activado a lo largo de la vida de la cámara— es lo más parecido a un cuentakilómetros que existe en fotografía. La mayoría de los mecanismos de obturador tienen una vida útil estimada de entre 100.000 y 400.000 disparos, según la categoría del cuerpo, a partir de la cual es más probable que necesite revisión. Por eso, un cuerpo con un conteo bajo respecto a su vida útil estimada es una compra bastante más segura que uno que ya está cerca del límite.
+
+Nuestro [Comprobador de disparos del obturador](/tools/shutter-count-checker) lee este valor directamente de un archivo NEF o JPEG, todo en tu navegador: sin subir nada, sin crear una cuenta, sin que ningún dato salga de tu dispositivo.
+
+## Dónde vive realmente este dato
+
+Los campos EXIF habituales (apertura, velocidad de obturación, ISO, objetivo) están estandarizados en todas las marcas de cámaras, por eso cualquier visor EXIF puede leerlos. El conteo de disparos no forma parte de ese conjunto estándar: cada fabricante lo guarda (o no) dentro de un bloque propio llamado MakerNote, y la estructura exacta de esos bytes varía según la marca y, a menudo, según la generación del modelo. Por eso tantas herramientas de "visor EXIF" te muestran todo menos este dato en concreto: solo interpretan los campos estandarizados, no los específicos de cada fabricante.
+
+## Por qué empezamos por Nikon
+
+Nikon documenta su campo `ShutterCount` como un número de 32 bits sin cifrar dentro de su bloque MakerNote, un detalle confirmado por varias fuentes independientes y públicas, no solo por las herramientas del propio fabricante. Verificamos nuestra implementación con archivos reales de cámaras Nikon y coincide exactamente. Con otros fabricantes el panorama es más variado: algunos guardan un valor equivalente pero de una forma que cambia según la generación del modelo y requiere un trabajo de mapeo independiente, y algunos cuerpos antiguos o de gama básica no registran este valor en absoluto, sea cual sea la herramienta que se use. Tratamos el soporte de Nikon como el punto de partida, no como la meta, e iremos ampliando la compatibilidad con otras marcas.
+
+## Cómo usarlo antes de comprar
+
+Si compras de segunda mano, pide al vendedor un archivo JPEG o NEF que salga directamente de la cámara (no una captura de pantalla, ni un archivo que se haya vuelto a guardar con un programa de edición, algo que normalmente elimina estos metadatos), y compruébalo tú mismo con la herramienta. Compara el conteo con la vida útil estimada del obturador para esa categoría de cuerpo, y valóralo junto con el estado estético visible: juntos dan mucha más información que cualquiera de los dos por separado.

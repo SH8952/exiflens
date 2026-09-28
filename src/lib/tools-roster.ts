@@ -44,6 +44,7 @@ export const POST_SHOOT_TOOLS: ToolEntry[] = [
   { slug: "storage-calculator", status: "live", faqNamespace: "StorageCalculator" },
   { slug: "exif-remover", status: "live", faqNamespace: "ExifRemover" },
   { slug: "crop-factor-calculator", status: "live", faqNamespace: "CropFactorCalculator" },
+  { slug: "shutter-count-checker", status: "live", faqNamespace: "ShutterCountChecker" },
 ];
 
 /** All tools, field tools first, in the order the /tools hub itself lists them. */
