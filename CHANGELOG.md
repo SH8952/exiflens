@@ -1,3 +1,30 @@
+## 2026-09-28 — 매크로 사진 심화 가이드 2편 신규 추가 (SEO 콘텐츠 갭 대응 1단계)
+
+**배경**
+- `claude/exiflens-seo-gap-analysis.md`(경쟁사 역산 SEO 갭 분석) 및 `claude/exiflens-seo-gap-risk-ordered-work-plan.md`(리스크 낮은 순 작업계획서)의 1단계 1번 항목 실행.
+- 경쟁 사이트(PhotoPills 등)는 매크로 전용 심화 계산기/콘텐츠를 별도로 갖출 만큼 세분화된 니치인데, ExifLens는 매크로 기초(`macro-photography-basics`)와 포커스 스태킹(`focus-stacking-for-macro-photography`) 가이드만 있고 광학 심화(회절/심도) 콘텐츠가 얕다는 갭을 보완.
+- 사전에 발견한 사실: ExifLens에는 이미 매일 자동으로 새 가이드를 발행하는 예약 작업 시스템(`automation/guide-topics-queue.json` + `publish-guide.command`)이 별도로 존재하며, 130개 주제가 큐에 등록돼 있음(대기 순번이 많이 밀려 있음). 이번 2개 주제는 그 자동 발행 큐를 거치지 않고, 사용자 승인에 따라 지금 바로 수동으로 4개 언어 MDX를 작성해 즉시 반영하는 방식으로 진행함 — 자동화 큐와는 별개 경로이므로, 추후 큐에 동일/유사 주제가 추가되지 않도록 주의 필요.
+
+**변경 사항**
+- 신규 가이드 2편 × 4개 언어(en/ko/ja/es) = 총 8개 MDX 파일 추가(`content/guides/{locale}/`):
+  - `macro-photography-diffraction-explained` — 배율이 올라갈수록 유효 조리개(effective aperture = 표시 f값 × (1+배율))가 커져, 매크로 촬영에서는 일반 촬영 거리보다 회절 한계가 2~3스톱 일찍 찾아온다는 내용. 기존 `diffraction-and-optimal-aperture`, `focus-stacking-for-macro-photography` 가이드와 상호 링크.
+  - `macro-depth-of-field-vs-standard-dof` — 표준 심도 공식(하이퍼포컬 기반)은 촬영거리≫초점거리를 전제하는데, 1:1 근접 배율에서는 이 전제가 깨져 심도가 거리 대신 배율·조리개에 좌우되고, 앞/뒤 심도 비율도 3:7에서 거의 5:5로 뒤바뀐다는 내용. 기존 `understanding-depth-of-field`, `macro-photography-basics`, `macro-photography-diffraction-explained` 가이드와 상호 링크.
+  - 두 가이드 모두 `category` 필드는 로케일별 기존 매크로 가이드와 동일한 문자열로 맞춤(en: "Photography Genres", ko: "장르별 촬영 가이드", ja: "ジャンル別撮影ガイド", es: "Guías por género fotográfico") — `/guides` 인덱스 페이지의 카테고리 그룹핑에 정상 편입되도록 함.
+  - `tags` 필드도 기존 관련 가이드의 표기 관례(영문 kebab-case, 스페인어 악센트/공백 제거, "diafragma" 대신 "apertura" 태그 사용)에 맞춰 통일.
+  - 신규 이미지(`image`/`imageCredit`)는 첨부하지 않음 — 기존 이미지 첨부는 별도 자동화 도구(Unsplash 검색/적용, `automation/attach-guide-image.py` 등)를 거치는데, 이번엔 그 경로를 타지 않고 수동으로 작성했기 때문. `image` 필드는 optional이라 렌더링에는 문제 없음. 필요 시 추후 이미지 첨부 자동화 도구로 보완 가능.
+  - `src/lib/guides.ts`의 `getGuideSlugs()`는 디렉터리 내 `.mdx` 파일을 자동 탐지하는 구조라 별도 등록/설정 변경 없이 새 가이드가 바로 인식됨.
+
+**검증**
+- 로컬 `npm run dev`(포트 3010) + `curl`로 8개 신규 가이드 페이지(4개 언어 × 2편) 및 `/guides` 인덱스 페이지(4개 언어) 모두 200 OK 확인, dev 서버 로그에 런타임 에러 없음.
+- `/en/guides` 인덱스 페이지 HTML에 신규 슬러그 2개가 실제로 링크로 노출되는 것을 확인.
+- 코드(.ts/.tsx) 변경이 없는 콘텐츠 전용 작업이라 `npx tsc --noEmit`/`npx eslint`/`npm run build` 전체 실행은 생략 — 대신 dev 서버 실행 자체가 성공했고 8개 신규 라우트가 모두 정상 렌더링된 것으로 회귀 여부를 확인함.
+- 작업 전 `content/guides/` 전체를 `_backups/backup_20260928_014833_macro-diffraction-dof-guides/`에 백업.
+
+**다음 단계**
+- 리스크 낮은 순 작업계획서의 1단계 2번("무료 대안" 비교 콘텐츠) 진행.
+- 필요 시 이 2개 가이드에도 Unsplash 이미지 자동 첨부 도구를 적용해 히어로 이미지 보강.
+- 자동 발행 큐(`guide-topics-queue.json`)에 이번 2개와 유사한 매크로 광학 심화 주제가 중복 등록되지 않도록 향후 큐 관리 시 주의.
+
 ## 2026-09-27 — 쿠팡 API 장애 시 알리익스프레스 임시 대체 노출 기능 추가
 
 **배경**
