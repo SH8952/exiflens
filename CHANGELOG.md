@@ -1,3 +1,28 @@
+## 2026-09-28 — 셔터카운트 체커 신규 추가, 니콘 우선 지원 (SEO 콘텐츠 갭 대응 4단계 2번, 이전 보류 항목 재검토 후 구현)
+
+**배경**
+- `claude/exiflens-seo-gap-analysis.md` 갭 #1/#15 및 `claude/exiflens-seo-gap-risk-ordered-work-plan.md` 4단계 항목. 직전 작업(플래시 계산기, 같은 날짜 커밋)에서는 "서버사이드 전환 또는 브랜드별 복호화 로직 신규 구현이 필요해 기존 아키텍처를 벗어난다"는 이유로 보류했었음.
+- 사용자 요청으로 경쟁 사이트(shuttercount.app 등)의 실제 구현 방식을 재조사한 결과, 업계 표준은 100% 클라이언트 사이드(서버 업로드 없음) 방식이며 기존 ExifLens 아키텍처를 벗어날 필요가 없다는 것을 확인. 이전 "니콘 셔터카운트는 암호화되어 있다"는 판단도 부정확했음 — exiftool 공개 태그 문서 재확인 결과, 암호화되는 것은 셔터카운트 값을 키로 사용하는 다른 필드들이며, 셔터카운트 자체는 평문 32비트 정수로 저장되어 있음을 확인.
+- 구현 착수 전 실측 검증: 현재 RAW 파싱에 쓰이는 `libraw-wasm`이 셔터카운트를 노출하는지 exiftool 프로젝트의 공개 테스트 샘플(Nikon.nef/CanonRaw.cr2/CanonRaw.cr3/FujiFilm.raf/Sony ARW)로 직접 확인 — 어떤 브랜드에서도 신뢰 가능한 셔터카운트 필드가 노출되지 않음을 확인. 따라서 기존 라이브러리(exifreader, libraw-wasm) 모두에 의존하지 않는 별도의 저수준 MakerNote 파서를 새로 작성하기로 결정.
+
+**변경 사항**
+- 신규 라이브러리 `src/lib/shutter-count-checker.ts`: 파일의 TIFF/Exif 바이트 구조를 직접 파싱해 니콘 MakerNote 내부의 ShutterCount(태그 0x00A7)를 읽어내는 클라이언트 사이드 파서. JPEG(APP1 Exif 세그먼트)와 NEF(TIFF 컨테이너) 양쪽 모두 지원.
+- 니콘 MakerNote의 "내부 TIFF 헤더" 오프셋 규칙(제조사 시그니처 이후 10바이트 지점부터 시작하는 새 TIFF 헤더, 그 헤더 자신을 기준으로 한 상대 오프셋)은 exiftool.org 공개 태그 문서 및 MIT 라이선스 독립 오픈소스 구현(evanoberholster/imagemeta)으로 교차 확인 후 새로 구현 — exiftool 소스 코드를 참고하거나 복제하지 않음.
+- 캐논/소니/후지필름/올림푸스/파나소닉/펜탁스는 이번 버전에서 미지원으로 정직하게 안내(카드 UI에 지원 브랜드 표시, 미지원 시 에러 없이 "아직 지원되지 않습니다" 메시지로 처리) — 확장 로드맵은 신규 가이드 문서에 안내.
+- 신규 도구 페이지 `/tools/shutter-count-checker`, 신규 컴포넌트 `src/components/shutter-count-checker-card.tsx`.
+- `src/lib/tools-roster.ts`에 `shutter-count-checker`를 `status: "live"`로 등록(POST_SHOOT_TOOLS).
+- `messages/{en,ko,ja,es}.json`에 `ShutterCountChecker` 번역 네임스페이스 및 `ToolsHub.tools` 항목 추가.
+- 갭 #8 규칙에 따라 신규 가이드 1편 × 4개 언어(`content/guides/{locale}/shutter-count-checker-guide.mdx`, 카테고리 "장비 & 액세서리") 추가 — 셔터카운트의 의미, 저장 위치(MakerNote), 니콘 우선 지원 이유, 중고 카메라 구매 시 활용법을 다룸.
+
+**검증**
+- 별도 조사 환경에서 exiftool 프로젝트의 공개 테스트 샘플(Nikon.nef, NikonD70.jpg)로 파서를 직접 실행해 `exiftool -ShutterCount` 값과 대조: 두 파일 모두 정확히 일치(3619, 526). 니콘 구형 기종(E775, MakerNote 구조가 다른 세대)과 캐논 CR2 파일도 함께 실행해, 미지원 케이스에서 크래시 없이 "미지원" 메시지로 정상적으로 처리되는 것을 확인.
+- `npx tsc --noEmit`, `npx eslint`(신규 파일 대상) 모두 통과, 에러 없음.
+- 로컬 `npm run dev`(포트 3010) + `curl`로 신규 도구 페이지(en/ko), 신규 가이드 페이지, `/tools` 허브, `/faq` 페이지 모두 200 OK 및 신규 텍스트 노출 확인.
+- 작업 전 `src/lib`, `src/components`, `src/app/[locale]/tools`, `messages`, `content/guides`를 `_backups/backup_20260928_045943_shutter-count-checker/`에 백업.
+
+**다음 단계**
+- 4단계 항목1(셔터카운트 체커, 니콘) 완료. 셔터카운트 보조 콘텐츠(항목15)는 이번 가이드 1편으로 일부 충족 — 추가 콘텐츠 필요 여부는 다음 논의에서 결정. 5단계(골든아워/블루아워 계산기)는 여전히 보류 상태.
+
 ## 2026-09-28 — 플래시 가이드넘버 계산기 신규 추가 (SEO 콘텐츠 갭 대응 4단계 1번)
 
 **배경**
