@@ -1,3 +1,30 @@
+## 2026-09-28 — "무료 대안" 비교 콘텐츠 2편 신규 추가 (SEO 콘텐츠 갭 대응 1단계 2번, 경쟁사명 직접 언급)
+
+**배경**
+- `claude/exiflens-seo-gap-analysis.md`의 갭 #10("무료 대안" 비교 콘텐츠 신설) 및 `claude/exiflens-seo-gap-risk-ordered-work-plan.md` 1단계 2번 항목 실행.
+- 진행 전 사용자와 "경쟁사명을 제목에 직접 노출할지" 여부를 논의: 상표의 지시적 공정사용(nominative fair use)에 해당해 법적 문제는 크지 않으나, (1) 로고/스크린샷 미사용, (2) 제휴 관계 오인 방지 문구 명시, (3) 검증 안 된 가격·폄하성 주장 배제, (4) 정보의 시점 명시라는 안전장치를 전제로 사용자가 "경쟁사명 직접 노출" 방식으로 승인.
+
+**변경 사항**
+- 신규 가이드 2편 × 4개 언어(en/ko/ja/es) = 총 8개 MDX 파일 추가(`content/guides/{locale}/`):
+  - `free-alternative-to-photopills-exposure-calculators` — PhotoPills(유료 모바일 앱)와 ExifLens 무료 웹 계산기가 겹치는 부분(심도/노출삼각형/하이퍼포컬/브라케팅/아스트로 NPF/타임랩스)과, ExifLens가 다루지 않는 PhotoPills 고유 영역(AR 플래닝, 지도 기반 계획, Advanced DoF 등)을 사실 기반으로 대등하게 서술.
+  - `free-nd-filter-calculator-alternative-to-shootcalc` — ShootCalc.com(소형 무료 웹 ND 계산기)과 ExifLens ND 계산기의 기능(순방향/역방향, 필터 스태킹)이 동일함을 인정하고, ShootCalc에만 있는 셔터카운트체커 등 차이점도 숨기지 않고 명시.
+  - 두 가이드 모두 본문 상단에 "안내 사항(Disclosure)" 섹션을 넣어 (a) 언급된 경쟁 서비스는 별도 회사 제품이며 ExifLens와 제휴·후원 관계가 없다는 점, (b) 상표는 각 소유자에게 귀속된다는 점, (c) 언급된 가격·기능 정보는 작성 시점(2026년 9월) 기준이며 변경될 수 있으니 공식 사이트에서 재확인을 권한다는 점을 명시.
+  - 콘텐츠 전체에서 경쟁사에 대한 근거 없는 폄하 표현 없이, ExifLens가 못 하는 부분(PhotoPills의 AR 플래닝, ShootCalc의 셔터카운트체커)도 그대로 인정하는 대등한 비교 톤으로 작성 — 객관적 사실 비교만 다룸.
+  - 로고·스크린샷 등 경쟁사 저작물은 전혀 사용하지 않고 텍스트 언급만 포함.
+  - `category`는 새 카테고리("Tools & Alternatives" / "도구 비교/대안" / "ツール比較・代替" / "Herramientas y alternativas")로 신설 — 기존 가이드 카테고리와 겹치지 않도록 구분.
+
+**검증**
+- 로컬 `npm run dev`(포트 3010) + `curl`로 8개 신규 가이드 페이지(4개 언어 × 2편) 및 `/guides` 인덱스 페이지(4개 언어) 모두 200 OK 확인, dev 서버 로그에 런타임 에러 없음.
+- 코드(.ts/.tsx) 변경 없는 콘텐츠 전용 작업이라 tsc/eslint/build 전체 실행은 생략, dev 서버 렌더링 확인으로 회귀 여부 검증.
+- 작업 전 `content/guides/` 전체를 `_backups/backup_20260928_020618_free-alternative-guides/`에 백업.
+
+**리스크 및 후속 확인 필요 사항**
+- 이 콘텐츠는 경쟁사명을 직접 언급하는 콘텐츠이므로, 배포 후 애드센스 정책 위반 신고나 경쟁사 측 이의 제기가 없는지 주기적으로 확인 권장.
+- 여기 언급된 PhotoPills/ShootCalc의 가격·기능 정보는 시점 기준(2026년 9월)이라 추후 실제와 달라질 수 있음 — 분기 단위로 사실관계 재검토 권장.
+
+**다음 단계**
+- 1단계 완료. 2단계(DoF Table/Hyperfocal Table 페이지 분리, Sunny 16 계산기)로 진행 예정.
+
 ## 2026-09-28 — 매크로 사진 심화 가이드 2편 신규 추가 (SEO 콘텐츠 갭 대응 1단계)
 
 **배경**
