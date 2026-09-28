@@ -439,6 +439,10 @@
       "sunny-16-calculator": {
         "name": "Sunny 16 Calculator",
         "description": "Estimate exposure without a light meter using the classic Sunny 16 rule and its overcast/shade variants."
+      },
+      "advanced-dof-diffraction-calculator": {
+        "name": "Advanced DoF & Diffraction Calculator",
+        "description": "Find your sensor's diffraction-limited aperture and the resulting depth of field, side by side."
       }
     }
   },
@@ -919,6 +923,46 @@
       {
         "question": "What if I want a specific shutter speed instead of a specific aperture?",
         "answer": "Pick the aperture that gives you a shutter speed close to what you want — since the underlying math is stop-for-stop, you can also work backward from a target shutter speed using our exposure triangle calculator."
+      }
+    ]
+  },
+  "AdvancedDofDiffractionCalculator": {
+    "cardTitle": "Advanced DoF & Diffraction",
+    "focalLength": "Focal Length (mm)",
+    "sensor": "Sensor Size",
+    "customSensor": "Custom",
+    "customCocLabel": "Circle of Confusion (mm)",
+    "aperture": "Aperture (f-stop)",
+    "subjectDistance": "Subject Distance (m)",
+    "diffractionTitle": "Diffraction",
+    "diffractionLimitedAperture": "Diffraction-Limited Aperture",
+    "airyDiskDiameter": "Airy Disk Diameter (at current aperture)",
+    "diffractionWarning": "At {aperture}, diffraction has started to soften fine detail for this sensor size. This becomes more visible the further past the diffraction-limited aperture you go.",
+    "diffractionOk": "At {aperture}, you're within this sensor's diffraction limit — diffraction isn't yet the main factor softening detail.",
+    "dofTitle": "Depth of Field",
+    "hyperfocal": "Hyperfocal Distance",
+    "nearLimit": "Near Focus Limit",
+    "farLimit": "Far Focus Limit",
+    "totalDof": "Total Depth of Field",
+    "infinity": "Infinity",
+    "pageTitle": "Advanced DoF & Diffraction Calculator",
+    "pageDescription": "Find your sensor's diffraction-limited aperture and see the resulting depth of field together — the same circle-of-confusion math behind our standard DoF calculator, extended with diffraction.",
+    "aboutTitle": "About this calculator",
+    "aboutBody": "Every lens is sharpest wide open in terms of diffraction, and gets softer past a certain aperture as the diffraction pattern (the \"Airy disk\") grows larger than the circle of confusion your sensor size can resolve. This calculator finds that diffraction-limited aperture for your sensor, using the standard Rayleigh-criterion approximation (Airy disk diameter ≈ 2.44 × wavelength × f-number, with a 550nm reference wavelength), and shows the classic hyperfocal-based depth of field for your chosen aperture and subject distance side by side — so you can weigh \"more depth of field\" against \"more diffraction softening\" for the same shot.",
+    "disclaimer": "An approximation using a fixed reference wavelength and standard circle-of-confusion values — real-world sharpness also depends on your specific lens, sensor resolution, and how the image is viewed or printed.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "What does \"diffraction-limited aperture\" mean?",
+        "answer": "It's the narrowest aperture (smallest f-number) past which diffraction becomes the main thing softening fine detail in a photo, for a given sensor size. Stopping down further still deepens depth of field, but at the cost of increasingly visible softening."
+      },
+      {
+        "question": "Why is the diffraction-limited aperture different for each sensor size?",
+        "answer": "It depends on the circle of confusion, which is based on sensor size (via the same values our DoF calculator uses) — a smaller sensor has a smaller circle of confusion, so diffraction becomes visible at a wider aperture (a lower f-number) than on a larger sensor."
+      },
+      {
+        "question": "Should I avoid diffraction-limited apertures entirely?",
+        "answer": "Not necessarily — depth of field is often more important to the final image than the small amount of softening near the diffraction limit. It matters most when you need maximum resolved detail, such as large prints or heavy crops."
       }
     ]
   }

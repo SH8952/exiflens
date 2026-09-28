@@ -1,0 +1,30 @@
+---
+title: "Cómo encontrar el diafragma limitado por difracción de tu cámara (y por qué no es toda la historia)"
+description: "Nuestra calculadora avanzada de DoF y difracción muestra el diafragma en el que la difracción empieza a suavizar el detalle para tu tamaño de sensor, junto con la profundidad de campo resultante. Así se leen ambos números juntos."
+publishedAt: "2026-09-28"
+tags: ["difraccion", "profundidad-de-campo", "circulo-de-confusion", "diafragma"]
+category: "Fundamentos de cámara y exposición"
+---
+
+Cerrar el diafragma para ganar profundidad de campo siempre trae una contrapartida: a partir de cierto diafragma, la difracción empieza a suavizar el detalle fino. Nuestra [calculadora avanzada de DoF y difracción](/tools/advanced-dof-diffraction-calculator) pone un número exacto a dónde empieza esa contrapartida para tu sensor, y lo muestra junto a la profundidad de campo que obtendrías con el diafragma y la distancia al sujeto que elijas — así puedes decidir si esa profundidad extra vale la pena.
+
+## Qué hace la calculadora
+
+Introduce tu distancia focal, tamaño de sensor, diafragma y distancia al sujeto. Por detrás, calcula dos cosas usando los mismos valores de círculo de confusión (CoC) que nuestra [calculadora de DoF](/tools/dof-calculator) estándar usa para tu sensor:
+
+- **Diafragma limitado por difracción** — el diafragma más cerrado antes de que el patrón de difracción (el "disco de Airy") se vuelva más grande que el círculo de confusión de tu sensor, usando la aproximación estándar del criterio de Rayleigh (diámetro del disco de Airy ≈ 2.44 × longitud de onda × número f, con una longitud de onda de referencia de 550nm — la misma convención que usan la mayoría de calculadoras de difracción en línea).
+- **Profundidad de campo** — los clásicos límites de enfoque cercano/lejano basados en la distancia hiperfocal, para el diafragma y la distancia al sujeto que realmente elijas, usando exactamente la misma fórmula que nuestra calculadora de DoF estándar.
+
+Ver ambos juntos es la idea central: una profundidad de campo mayor gracias a un diafragma más cerrado solo es una ganancia neta si el suavizado por difracción que introduce es lo bastante pequeño como para no importar en el uso que le darás a la foto.
+
+## Esto es una regla general según el tamaño del sensor, no una cifra específica por megapíxeles
+
+Vale la pena precisar qué te dice esta calculadora (y qué no). El diafragma limitado por difracción que se muestra aquí se basa en el círculo de confusión de tu sensor — un valor estándar de referencia ligado al tamaño del sensor, el mismo que se usa en todas nuestras herramientas de DoF. No tiene en cuenta la resolución específica de tu cámara (el número de megapíxeles).
+
+En la práctica, un cuerpo full frame de 45 megapíxeles y uno de 12 megapíxeles comparten el mismo diafragma limitado por difracción basado en el círculo de confusión según esta calculadora, pero el cuerpo de mayor resolución en realidad empezará a mostrar suavizado por difracción algo antes a nivel de píxel real, porque sus píxeles más pequeños resuelven antes el desenfoque de la difracción. Si quieres la imagen más precisa, que tenga en cuenta la resolución — considerando el tamaño de píxel real de tu cámara —, consulta nuestra guía complementaria sobre [difracción y diafragma óptimo](/guides/diffraction-and-optimal-aperture), que aborda esa misma pregunta desde el tamaño de píxel.
+
+Usadas juntas, ambas te dan un buen rango: el número de esta calculadora como base según el tamaño de sensor, y la guía de tamaño de píxel para una respuesta más precisa una vez que conoces los megapíxeles de tu cámara.
+
+## Una forma rápida de leer el resultado
+
+Si el diafragma que elegiste está en el valor mostrado del diafragma limitado por difracción o antes de él (más abierto), la difracción todavía no es el factor principal que limita tu nitidez — otros factores (precisión del enfoque, calidad del objetivo, trepidación de la cámara) importan más. Pasado ese punto, el número de "diámetro del disco de Airy" de la calculadora indica aproximadamente cuánto ha crecido el círculo de desenfoque en relación con el círculo de confusión de tu sensor; cuanto más supere ese ratio 1.0×, más visible se vuelve el suavizado, especialmente en impresiones grandes o recortes intensos.

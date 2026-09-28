@@ -1,0 +1,30 @@
+---
+title: "Finding Your Camera's Diffraction-Limited Aperture (and Why It's Not the Whole Story)"
+description: "Our Advanced DoF & Diffraction calculator shows the aperture where diffraction starts to soften detail for your sensor size, alongside the resulting depth of field. Here's how to read both numbers together."
+publishedAt: "2026-09-28"
+tags: ["diffraction", "depth-of-field", "circle-of-confusion", "aperture"]
+category: "Camera Basics & Exposure"
+---
+
+Stopping down for more depth of field always comes with a trade-off: past a certain aperture, diffraction starts softening fine detail. Our [Advanced DoF & Diffraction calculator](/tools/advanced-dof-diffraction-calculator) puts a number on exactly where that trade-off kicks in for your sensor, and shows it next to the depth of field you'd get at your chosen aperture and subject distance — so you can decide whether the extra depth is worth it.
+
+## What the calculator is doing
+
+Enter your focal length, sensor size, aperture, and subject distance. Behind the scenes, it calculates two things using the same circle-of-confusion (CoC) values our standard [DoF calculator](/tools/dof-calculator) uses for your sensor:
+
+- **Diffraction-limited aperture** — the narrowest aperture before the diffraction pattern (the "Airy disk") grows larger than your sensor's circle of confusion, using the standard Rayleigh-criterion approximation (Airy disk diameter ≈ 2.44 × wavelength × f-number, with a 550nm reference wavelength — the same convention most online diffraction calculators use).
+- **Depth of field** — the classic hyperfocal-based near/far focus limits for the aperture and subject distance you actually chose, using the exact same formula as our standard DoF calculator.
+
+Seeing both together is the point: a deeper depth of field from a smaller aperture is only a net win if the diffraction softening it introduces is small enough not to matter for how you'll use the photo.
+
+## This is a sensor-size rule of thumb, not a megapixel-specific number
+
+It's worth being precise about what this calculator is (and isn't) telling you. The diffraction-limited aperture here is based on your sensor's circle of confusion — a standard rule-of-thumb value tied to sensor size, the same one used throughout our DoF tools. It doesn't take your camera's specific resolution (megapixel count) into account.
+
+In practice, a 45-megapixel full-frame body and a 12-megapixel full-frame body share the same circle-of-confusion-based diffraction-limited aperture from this calculator, but the higher-resolution body will actually start showing diffraction softening a bit earlier in real-world pixel-level detail, because its smaller pixels resolve finer diffraction blur sooner. If you want the more precise, resolution-aware picture — factoring in your camera's actual pixel pitch — see our companion guide on [diffraction and optimal aperture](/guides/diffraction-and-optimal-aperture), which walks through that pixel-pitch-based version of the same question.
+
+Used together, the two give you a good range: this calculator's number as a sensor-size baseline, and the pixel-pitch guide for a sharper answer once you know your camera's megapixel count.
+
+## A quick way to read the result
+
+If your chosen aperture is at or before the diffraction-limited aperture shown, diffraction isn't yet the main factor limiting your sharpness — other things (focus accuracy, lens quality, camera shake) matter more. Past that point, the calculator's "Airy disk diameter" number tells you roughly how much larger the blur circle has grown relative to your sensor's circle of confusion; the further past 1.0× that ratio grows, the more visible the softening becomes, especially in large prints or heavy crops.

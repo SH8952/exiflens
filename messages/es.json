@@ -439,6 +439,10 @@
       "sunny-16-calculator": {
         "name": "Calculadora Sunny 16",
         "description": "Estima la exposición sin fotómetro usando la clásica regla Sunny 16 y sus variantes para nublado/sombra."
+      },
+      "advanced-dof-diffraction-calculator": {
+        "name": "Calculadora avanzada de DoF y difracción",
+        "description": "Encuentra el diafragma limitado por difracción de tu sensor y la profundidad de campo resultante, juntos."
       }
     }
   },
@@ -919,6 +923,46 @@
       {
         "question": "¿Y si quiero una velocidad de obturación concreta en vez de un diafragma concreto?",
         "answer": "Elige el diafragma que te dé una velocidad de obturación cercana a la que quieres — como la aritmética de base es la misma por pasos, también puedes partir de una velocidad de obturación objetivo con nuestra calculadora del triángulo de exposición."
+      }
+    ]
+  },
+  "AdvancedDofDiffractionCalculator": {
+    "cardTitle": "DoF avanzada y difracción",
+    "focalLength": "Distancia focal (mm)",
+    "sensor": "Tamaño del sensor",
+    "customSensor": "Personalizado",
+    "customCocLabel": "Círculo de confusión (mm)",
+    "aperture": "Diafragma (número f)",
+    "subjectDistance": "Distancia al sujeto (m)",
+    "diffractionTitle": "Difracción",
+    "diffractionLimitedAperture": "Diafragma limitado por difracción",
+    "airyDiskDiameter": "Diámetro del disco de Airy (al diafragma actual)",
+    "diffractionWarning": "En {aperture}, la difracción ya ha empezado a suavizar el detalle fino para este tamaño de sensor. Esto se vuelve más visible cuanto más te alejes del diafragma limitado por difracción.",
+    "diffractionOk": "En {aperture}, estás dentro del límite de difracción de este sensor — la difracción aún no es el factor principal que suaviza el detalle.",
+    "dofTitle": "Profundidad de campo",
+    "hyperfocal": "Distancia hiperfocal",
+    "nearLimit": "Límite de enfoque cercano",
+    "farLimit": "Límite de enfoque lejano",
+    "totalDof": "Profundidad de campo total",
+    "infinity": "Infinito",
+    "pageTitle": "Calculadora avanzada de DoF y difracción",
+    "pageDescription": "Encuentra el diafragma limitado por difracción de tu sensor y consulta al mismo tiempo la profundidad de campo resultante — la misma matemática del círculo de confusión de nuestra calculadora de DoF estándar, ampliada con la difracción.",
+    "aboutTitle": "Sobre esta calculadora",
+    "aboutBody": "Todo objetivo es más nítido, en términos de difracción, con el diafragma abierto, y se suaviza a partir de cierto diafragma cuando el patrón de difracción (el \"disco de Airy\") se vuelve más grande que el círculo de confusión que tu tamaño de sensor puede resolver. Esta calculadora halla ese diafragma limitado por difracción para tu sensor, usando la aproximación estándar del criterio de Rayleigh (diámetro del disco de Airy ≈ 2.44 × longitud de onda × número f, con una longitud de onda de referencia de 550nm), y muestra a la vez la clásica profundidad de campo basada en la distancia hiperfocal para el diafragma y la distancia al sujeto que elijas — así puedes sopesar \"más profundidad de campo\" frente a \"más suavizado por difracción\" para la misma toma.",
+    "disclaimer": "Una aproximación que usa una longitud de onda de referencia fija y valores estándar de círculo de confusión — la nitidez real también depende de tu objetivo concreto, la resolución del sensor y cómo se vea o imprima la imagen.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Qué significa \"diafragma limitado por difracción\"?",
+        "answer": "Es el diafragma más cerrado (número f más alto) a partir del cual la difracción pasa a ser el principal factor que suaviza el detalle fino de una foto, para un tamaño de sensor dado. Cerrar aún más el diafragma sigue aumentando la profundidad de campo, pero a costa de un suavizado cada vez más visible."
+      },
+      {
+        "question": "¿Por qué el diafragma limitado por difracción es distinto en cada tamaño de sensor?",
+        "answer": "Depende del círculo de confusión, que se basa en el tamaño del sensor (con los mismos valores que usa nuestra calculadora de DoF) — un sensor más pequeño tiene un círculo de confusión menor, así que la difracción se vuelve visible con un diafragma más abierto (un número f más bajo) que en un sensor más grande."
+      },
+      {
+        "question": "¿Debo evitar por completo los diafragmas limitados por difracción?",
+        "answer": "No necesariamente — la profundidad de campo suele ser más importante para la imagen final que el ligero suavizado cerca del límite de difracción. Importa más cuando necesitas el máximo detalle resuelto, como impresiones grandes o recortes intensos."
       }
     ]
   }

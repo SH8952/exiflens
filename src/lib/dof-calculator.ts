@@ -132,3 +132,96 @@ export function formatDistanceMeters(meters: number): string {
   if (meters >= 10) return `${meters.toFixed(1)}m`;
   return `${meters.toFixed(2)}m`;
 }
+
+/**
+ * Diffraction math (Rayleigh-criterion approximation, standard photographic
+ * convention — the same one PhotoPills' "Advanced DoF" layer and most
+ * online diffraction calculators use):
+ *
+ *   Airy disk diameter (mm) = 2.44 x wavelength(mm) x N
+ *
+ * Diffraction becomes visible once the Airy disk grows past the circle of
+ * confusion for the sensor/viewing-size combination in use. Solving the
+ * same formula for N at the point where the Airy disk equals the CoC gives
+ * the "diffraction-limited aperture" for that sensor:
+ *
+ *   N_diffraction-limited = CoC(mm) / (2.44 x wavelength(mm))
+ *
+ * Wavelength defaults to ~550nm (green light, the middle of the visible
+ * spectrum) — the same reference wavelength used by Cambridge in Colour
+ * and most other diffraction-limit calculators.
+ */
+export const DEFAULT_WAVELENGTH_MM = 0.00055;
+
+export function calculateAiryDiskDiameterMm(
+  aperture: number,
+  wavelengthMm: number = DEFAULT_WAVELENGTH_MM,
+): number | null {
+  if (
+    !Number.isFinite(aperture) ||
+    aperture <= 0 ||
+    !Number.isFinite(wavelengthMm) ||
+    wavelengthMm <= 0
+  ) {
+    return null;
+  }
+  return 2.44 * wavelengthMm * aperture;
+}
+
+export function calculateDiffractionLimitedAperture(
+  circleOfConfusionMm: number,
+  wavelengthMm: number = DEFAULT_WAVELENGTH_MM,
+): number | null {
+  if (
+    !Number.isFinite(circleOfConfusionMm) ||
+    circleOfConfusionMm <= 0 ||
+    !Number.isFinite(wavelengthMm) ||
+    wavelengthMm <= 0
+  ) {
+    return null;
+  }
+  return circleOfConfusionMm / (2.44 * wavelengthMm);
+}
+
+export type DiffractionResult = {
+  airyDiskDiameterMm: number;
+  diffractionLimitedAperture: number;
+  isDiffractionLimited: boolean;
+  /** Airy disk diameter as a multiple of the circle of confusion (1.0 = right at the limit). */
+  softeningRatio: number;
+};
+
+export function calculateDiffraction(
+  aperture: number,
+  circleOfConfusionMm: number,
+  wavelengthMm: number = DEFAULT_WAVELENGTH_MM,
+): DiffractionResult | null {
+  const airyDiskDiameterMm = calculateAiryDiskDiameterMm(aperture, wavelengthMm);
+  const diffractionLimitedAperture = calculateDiffractionLimitedAperture(
+    circleOfConfusionMm,
+    wavelengthMm,
+  );
+  if (
+    airyDiskDiameterMm === null ||
+    diffractionLimitedAperture === null ||
+    !Number.isFinite(circleOfConfusionMm) ||
+    circleOfConfusionMm <= 0
+  ) {
+    return null;
+  }
+  const softeningRatio = airyDiskDiameterMm / circleOfConfusionMm;
+  return {
+    airyDiskDiameterMm,
+    diffractionLimitedAperture,
+    isDiffractionLimited: softeningRatio > 1,
+    softeningRatio,
+  };
+}
+
+export function formatAperture(aperture: number): string {
+  return `f/${aperture.toFixed(1)}`;
+}
+
+export function formatMicrons(mm: number): string {
+  return `${(mm * 1000).toFixed(1)}µm`;
+}
