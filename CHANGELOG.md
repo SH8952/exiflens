@@ -1,3 +1,28 @@
+## 2026-09-28 — DoF/하이퍼포컬 표 페이지 & 써니 16 계산기 신규 추가 (SEO 콘텐츠 갭 대응 2단계)
+
+**배경**
+- `claude/exiflens-seo-gap-analysis.md`의 갭 #4(하이퍼포컬/심도 "표" 형태 페이지 부재) 및 갭 #2(써니 16 계산기 부재), `claude/exiflens-seo-gap-risk-ordered-work-plan.md` 2단계 실행.
+- 두 도구 모두 기존 라이브러리 함수를 그대로 재사용하는 "재사용 로직" 단계로 분류되어 신규 공식/신규 계산 로직 추가 없이 진행.
+
+**변경 사항**
+- 신규 도구 페이지 2개 추가:
+  - `/tools/dof-hyperfocal-table` — 기존 `src/lib/dof-calculator.ts`의 `calculateDof()`를 그대로 재사용. 모든 표준 조리개값(f/1.4~f/22)에 대한 하이퍼포컬 디스턴스 표와, 여러 촬영 거리(0.5m~100m)에 대한 근접/원경 초점 한계·전체 심도 표를 함께 제공. 하이퍼포컬 디스턴스는 촬영 거리와 무관하다는 공식 특성을 활용해 임의의 placeholder 거리값으로 계산.
+  - `/tools/sunny-16-calculator` — 기존 `src/lib/exposure-calculator.ts`의 `calculateExposureCompensation()`을 2단계 스톱 변환(조리개→ISO 순)으로 재사용. 표준 "써니 16 룰"과 그 변형(써니 11/8/5.6/4, 각각 약간 흐림/흐림/매우 흐림/그늘·일몰 조건)을 프리셋으로 제공하고, 사용자가 선택한 ISO·조리개에 맞춰 추천 셔터스피드를 계산.
+  - 신규 컴포넌트: `src/components/dof-hyperfocal-table-card.tsx`, `src/components/sunny16-calculator-card.tsx`.
+  - 신규 페이지: `src/app/[locale]/tools/dof-hyperfocal-table/page.tsx`, `src/app/[locale]/tools/sunny-16-calculator/page.tsx` — 기존 도구 페이지와 동일한 패턴(canonical/hreflang 메타데이터, breadcrumb·WebApplication·FAQPage JSON-LD, 안내/면책 섹션, FAQ 아코디언, `generateStaticParams()`). 예시 이미지(`ToolExampleImages`)는 신규 이미지 에셋이 필요해 이번엔 의도적으로 제외.
+  - `src/lib/tools-roster.ts`의 `FIELD_TOOLS`에 두 도구를 `status: "live"`로 등록 → `/tools` 허브, 홈페이지 도구 하이라이트, `/faq` 페이지 FAQ 집계에 자동 반영.
+  - `messages/{en,ko,ja,es}.json`에 `DofHyperfocalTable`, `Sunny16Calculator` 번역 네임스페이스 및 `ToolsHub.tools` 항목 추가.
+
+**검증**
+- `npx tsc --noEmit`, `npx eslint`(신규/변경 파일 대상) 모두 통과, 에러 없음.
+- 로컬 `npm run dev`(포트 3010) + `curl`로 4개 언어(en/ko/ja/es) × 신규 페이지 2개, `/tools` 허브, `/faq`, 홈페이지 총 20개 경로 모두 200 OK 확인.
+- `/tools` 허브에 두 신규 슬러그(`dof-hyperfocal-table`, `sunny-16-calculator`) 노출 확인, `/faq` 페이지에 두 도구의 FAQ 제목이 집계되어 노출됨을 확인, 홈페이지 도구 하이라이트에도 두 도구가 포함됨을 확인.
+- dev 서버 로그의 에러는 기존에 알려진 것과 동일한 외부 제휴 API 호출 실패(AliExpress/Coupang, 샌드박스 네트워크 제한에 의한 것으로 이번 작업과 무관)뿐이며, 신규 코드 관련 런타임 에러는 없음.
+- 작업 전 `src/lib`, `src/components`, `src/app/[locale]/tools`, `messages`를 `_backups/backup_20260928_021218_dof-table-sunny16-calculators/`에 백업.
+
+**다음 단계**
+- 2단계 완료. 3단계(CoC+회절 계산기, Camera FOV 계산기)로 진행 예정.
+
 ## 2026-09-28 — "무료 대안" 비교 콘텐츠 2편 신규 추가 (SEO 콘텐츠 갭 대응 1단계 2번, 경쟁사명 직접 언급)
 
 **배경**
