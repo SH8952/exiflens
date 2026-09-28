@@ -431,6 +431,14 @@
       "crop-factor-calculator": {
         "name": "Conversor de factor de recorte / distancia focal",
         "description": "Convierte una distancia focal entre equivalentes de fotograma completo, APS-C y Micro Cuatro Tercios."
+      },
+      "dof-hyperfocal-table": {
+        "name": "Tablas de DoF e hiperfocal",
+        "description": "Consulta la distancia hiperfocal y la profundidad de campo en cada diafragma estándar y distancia al sujeto, en forma de tabla."
+      },
+      "sunny-16-calculator": {
+        "name": "Calculadora Sunny 16",
+        "description": "Estima la exposición sin fotómetro usando la clásica regla Sunny 16 y sus variantes para nublado/sombra."
       }
     }
   },
@@ -839,5 +847,79 @@
     ],
     "exampleLeftAlt": "El mismo objetivo encuadrado en una cámara de fotograma completo",
     "exampleRightAlt": "El mismo objetivo encuadrado en una cámara de sensor recortado, mostrando un campo de visión más estrecho"
+  },
+  "DofHyperfocalTable": {
+    "cardTitle": "Tablas de profundidad de campo e hiperfocal",
+    "focalLength": "Distancia focal (mm)",
+    "sensor": "Tamaño del sensor",
+    "customSensor": "Personalizado",
+    "customCocLabel": "Círculo de confusión (mm)",
+    "hyperfocalTableTitle": "Tabla de distancia hiperfocal",
+    "hyperfocalTableSubtitle": "La distancia hiperfocal en cada diafragma estándar, para tu distancia focal y sensor.",
+    "aperture": "Diafragma (número f)",
+    "hyperfocal": "Distancia hiperfocal",
+    "dofTableTitle": "Tabla de profundidad de campo",
+    "dofTableSubtitle": "Límites de enfoque cercano/lejano y profundidad de campo total en varias distancias al sujeto, con el diafragma que elijas.",
+    "subjectDistance": "Distancia al sujeto",
+    "nearLimit": "Límite de enfoque cercano",
+    "farLimit": "Límite de enfoque lejano",
+    "totalDof": "Profundidad de campo total",
+    "infinity": "Infinito",
+    "pageTitle": "Tablas de profundidad de campo y distancia hiperfocal",
+    "pageDescription": "Consulta la distancia hiperfocal en cada diafragma estándar, y los límites de enfoque cercano/lejano en varias distancias al sujeto, todo en una tabla — según tu distancia focal y tamaño de sensor.",
+    "aboutTitle": "Sobre estas tablas",
+    "aboutBody": "Esta página usa exactamente las mismas fórmulas de distancia hiperfocal y profundidad de campo que nuestra calculadora de valor único, pero organizadas en tablas para que puedas comparar todos los diafragmas estándar o distancias al sujeto de un vistazo, en vez de introducir un valor cada vez. La tabla hiperfocal solo depende de la distancia focal, el diafragma y el tamaño del sensor; la tabla de profundidad de campo también usa el diafragma que elijas arriba.",
+    "disclaimer": "Solo a título de referencia. La nitidez real puede variar según tu objetivo concreto y cómo se vea o imprima la imagen final.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿En qué se diferencia de la calculadora de profundidad de campo de valor único?",
+        "answer": "Usa exactamente las mismas fórmulas, pero muestra la distancia hiperfocal de cada diafragma estándar, y los límites cercano/lejano de cada distancia preestablecida, en forma de tabla en vez de un resultado a la vez."
+      },
+      {
+        "question": "¿Por qué la tabla hiperfocal no necesita una distancia al sujeto?",
+        "answer": "La distancia hiperfocal depende solo de la distancia focal, el diafragma y el tamaño del sensor (mediante el círculo de confusión), no de a qué distancia esté tu sujeto."
+      },
+      {
+        "question": "¿Puedo usar un tamaño de sensor personalizado?",
+        "answer": "Sí — elige \"Personalizado\" en Tamaño del sensor e introduce tu propio valor de círculo de confusión en milímetros."
+      }
+    ]
+  },
+  "Sunny16Calculator": {
+    "cardTitle": "Exposición Sunny 16",
+    "lightingCondition": "Condición de luz",
+    "conditions": {
+      "sunnyBright": "Sol brillante, sombras marcadas (Sunny 16)",
+      "slightOvercast": "Ligeramente nublado, sombras suaves (Sunny 11)",
+      "overcast": "Nublado, sin sombras (Sunny 8)",
+      "heavyOvercast": "Muy nublado (Sunny 5.6)",
+      "openShade": "Sombra abierta / atardecer (Sunny 4)"
+    },
+    "iso": "ISO",
+    "aperture": "Diafragma (número f)",
+    "recommendedShutter": "Velocidad de obturación recomendada",
+    "baselineNote": "Basado en el valor de referencia {aperture} de esta condición de luz a ISO 100, ajustado a tu ISO y diafragma elegidos.",
+    "invalidInput": "Elige una condición de luz, ISO y diafragma válidos.",
+    "pageTitle": "Calculadora de exposición Sunny 16",
+    "pageDescription": "Estima una exposición correcta sin fotómetro, usando la clásica regla Sunny 16 y sus variantes para nublado/sombra — solo elige tu condición de luz, ISO y diafragma.",
+    "aboutTitle": "Sobre la regla Sunny 16",
+    "aboutBody": "La regla Sunny 16 es un truco fotográfico de décadas de antigüedad: en un día muy soleado, ajustar el diafragma a f/16 y la velocidad de obturación a aproximadamente 1/ISO da una foto correctamente expuesta. Sus variantes menos conocidas extienden la misma idea a condiciones nubladas o de sombra con diafragmas más abiertos (f/11, f/8, f/5.6, f/4). Esta calculadora aplica la misma aritmética de pasos que usa nuestra calculadora del triángulo de exposición para ajustar el valor de referencia al ISO y diafragma con los que realmente quieras disparar.",
+    "disclaimer": "Una estimación para condiciones típicas de luz diurna al aire libre — comprueba siempre el fotómetro de tu cámara o haz una foto de prueba cuando sea importante.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Sigue teniendo sentido la regla Sunny 16 con fotómetros modernos?",
+        "answer": "Es útil sobre todo como comprobación rápida, para cámaras de película con exposición manual sin fotómetro funcional, o como punto de partida rápido antes de ajustar con más precisión."
+      },
+      {
+        "question": "¿Por qué las variantes nubladas usan diafragmas distintos?",
+        "answer": "Cada paso de diafragma corresponde aproximadamente a una condición de luz que deja pasar la mitad de luz que la anterior, así que la regla abre el diafragma un paso por cada condición para mantener una velocidad de obturación razonable."
+      },
+      {
+        "question": "¿Y si quiero una velocidad de obturación concreta en vez de un diafragma concreto?",
+        "answer": "Elige el diafragma que te dé una velocidad de obturación cercana a la que quieres — como la aritmética de base es la misma por pasos, también puedes partir de una velocidad de obturación objetivo con nuestra calculadora del triángulo de exposición."
+      }
+    ]
   }
 }

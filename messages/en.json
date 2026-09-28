@@ -431,6 +431,14 @@
       "crop-factor-calculator": {
         "name": "Crop Factor / Focal Length Converter",
         "description": "Convert a focal length between full-frame, APS-C, and Micro Four Thirds equivalents."
+      },
+      "dof-hyperfocal-table": {
+        "name": "DoF & Hyperfocal Table",
+        "description": "See hyperfocal distance and depth of field at every standard aperture and subject distance, in table form."
+      },
+      "sunny-16-calculator": {
+        "name": "Sunny 16 Calculator",
+        "description": "Estimate exposure without a light meter using the classic Sunny 16 rule and its overcast/shade variants."
       }
     }
   },
@@ -839,5 +847,79 @@
     ],
     "exampleLeftAlt": "The same lens framed on a full-frame camera",
     "exampleRightAlt": "The same lens framed on a crop-sensor camera, showing a narrower field of view"
+  },
+  "DofHyperfocalTable": {
+    "cardTitle": "Depth of Field & Hyperfocal Tables",
+    "focalLength": "Focal Length (mm)",
+    "sensor": "Sensor Size",
+    "customSensor": "Custom",
+    "customCocLabel": "Circle of Confusion (mm)",
+    "hyperfocalTableTitle": "Hyperfocal Distance Table",
+    "hyperfocalTableSubtitle": "Hyperfocal distance at every standard aperture, for your focal length and sensor.",
+    "aperture": "Aperture (f-stop)",
+    "hyperfocal": "Hyperfocal Distance",
+    "dofTableTitle": "Depth of Field Table",
+    "dofTableSubtitle": "Near/far focus limits and total depth of field across a range of subject distances, at your chosen aperture.",
+    "subjectDistance": "Subject Distance",
+    "nearLimit": "Near Focus Limit",
+    "farLimit": "Far Focus Limit",
+    "totalDof": "Total Depth of Field",
+    "infinity": "Infinity",
+    "pageTitle": "Depth of Field & Hyperfocal Distance Tables",
+    "pageDescription": "See hyperfocal distance across every standard aperture, and near/far focus limits across a range of subject distances, in one table — for your focal length and sensor size.",
+    "aboutTitle": "About these tables",
+    "aboutBody": "This page shows the same hyperfocal-distance and depth-of-field formulas used by our single-value DoF calculator, laid out as tables so you can compare every standard aperture or subject distance at a glance instead of entering one value at a time. The hyperfocal table only depends on focal length, aperture, and sensor size; the depth-of-field table also uses the aperture you select above.",
+    "disclaimer": "For reference only. Real-world sharpness can vary with your specific lens and how the final image is viewed or printed.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "How is this different from the single-value DoF calculator?",
+        "answer": "It uses the exact same formulas, but shows every standard aperture's hyperfocal distance, and every preset subject distance's near/far limits, in table form instead of one result at a time."
+      },
+      {
+        "question": "Why doesn't the hyperfocal table need a subject distance?",
+        "answer": "Hyperfocal distance depends only on focal length, aperture, and sensor size (via the circle of confusion) — not on how far away your subject is."
+      },
+      {
+        "question": "Can I use a custom sensor size?",
+        "answer": "Yes — choose \"Custom\" under Sensor Size and enter your own circle of confusion value in millimeters."
+      }
+    ]
+  },
+  "Sunny16Calculator": {
+    "cardTitle": "Sunny 16 Exposure",
+    "lightingCondition": "Lighting Condition",
+    "conditions": {
+      "sunnyBright": "Bright sun, sharp shadows (Sunny 16)",
+      "slightOvercast": "Slight overcast, soft shadows (Sunny 11)",
+      "overcast": "Overcast, no shadows (Sunny 8)",
+      "heavyOvercast": "Heavy overcast (Sunny 5.6)",
+      "openShade": "Open shade / sunset (Sunny 4)"
+    },
+    "iso": "ISO",
+    "aperture": "Aperture (f-stop)",
+    "recommendedShutter": "Recommended Shutter Speed",
+    "baselineNote": "Based on the {aperture} baseline for this lighting condition at ISO 100, adjusted for your chosen ISO and aperture.",
+    "invalidInput": "Choose a valid lighting condition, ISO, and aperture.",
+    "pageTitle": "Sunny 16 Exposure Calculator",
+    "pageDescription": "Estimate a correct exposure without a light meter, using the classic Sunny 16 rule and its overcast/shade variants — just pick your lighting condition, ISO, and aperture.",
+    "aboutTitle": "About the Sunny 16 rule",
+    "aboutBody": "The Sunny 16 rule is a decades-old rule of thumb: on a bright sunny day, setting your aperture to f/16 and your shutter speed to roughly 1/ISO gives a correctly exposed photo. Its lesser-known variants extend the same idea to overcast and shaded conditions at wider apertures (f/11, f/8, f/5.6, f/4). This calculator applies the same stop-for-stop math our exposure triangle calculator uses to adjust the baseline for whatever ISO and aperture you actually want to shoot at.",
+    "disclaimer": "An estimate for typical outdoor daylight conditions — always check your camera's meter or a test shot when it matters.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "Does the Sunny 16 rule still matter with modern light meters?",
+        "answer": "It's mainly useful as a sanity check, for manual-exposure film cameras without a working meter, or when you want a fast starting point before fine-tuning."
+      },
+      {
+        "question": "Why do the overcast variants use different apertures?",
+        "answer": "Each stop of the aperture roughly corresponds to a lighting condition letting in about half as much light as the one before it, so the rule widens the aperture by one stop per condition to keep the same shutter speed reasonable."
+      },
+      {
+        "question": "What if I want a specific shutter speed instead of a specific aperture?",
+        "answer": "Pick the aperture that gives you a shutter speed close to what you want — since the underlying math is stop-for-stop, you can also work backward from a target shutter speed using our exposure triangle calculator."
+      }
+    ]
   }
 }

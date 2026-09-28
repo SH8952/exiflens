@@ -32,6 +32,8 @@ export const FIELD_TOOLS: ToolEntry[] = [
   { slug: "timelapse-calculator", status: "live", faqNamespace: "TimelapseCalculator" },
   { slug: "astrophotography-calculator", status: "live", faqNamespace: "AstroCalculator" },
   { slug: "bracketing-calculator", status: "live", faqNamespace: "BracketCalculator" },
+  { slug: "dof-hyperfocal-table", status: "live", faqNamespace: "DofHyperfocalTable" },
+  { slug: "sunny-16-calculator", status: "live", faqNamespace: "Sunny16Calculator" },
 ];
 
 export const POST_SHOOT_TOOLS: ToolEntry[] = [
