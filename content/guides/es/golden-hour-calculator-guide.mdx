@@ -1,0 +1,34 @@
+---
+title: "Hora dorada y hora azul: ¿cuándo son exactamente? (con el cálculo)"
+description: "Qué significan realmente la hora dorada y la hora azul, y cómo calcular los intervalos exactos para cualquier fecha y ubicación."
+publishedAt: "2026-09-28"
+tags: ["hora dorada", "hora azul", "amanecer atardecer"]
+category: "Fundamentos de cámara y exposición"
+---
+
+"Dispara durante la hora dorada" es un consejo habitual, pero el momento exacto en que ocurre donde estés hoy cambia mucho según la estación y tu latitud. Nuestra [Calculadora de hora dorada y hora azul](/tools/golden-hour-calculator) calcula estos intervalos directamente en tu navegador a partir de una fecha y una ubicación — sin cuenta, sin enviar datos de ubicación a ningún sitio.
+
+## Qué son realmente la hora dorada y la hora azul
+
+Ambos términos describen la luz cuando el sol está cerca del horizonte, pero cubren franjas distintas.
+
+- **Hora dorada**: la altitud del sol está entre aproximadamente -0,83° (amanecer/atardecer) y +6° sobre el horizonte. La luz llega en un ángulo bajo, con colores cálidos y sombras suaves.
+- **Hora azul**: la altitud del sol está entre aproximadamente -6° y -0,83°. El sol ya no es visible, pero el cielo aún conserva un breve tono azul intenso.
+
+Cada día tiene cuatro de estos intervalos: hora azul de la mañana → hora dorada de la mañana → (mediodía) → hora dorada de la tarde → hora azul de la tarde.
+
+## Cómo funciona el cálculo
+
+Calcular esto con precisión requiere fórmulas astronómicas que ubican la posición del sol al segundo. Nuestra calculadora usa para ello la biblioteca de código abierto `suncalc` (licencia BSD, basada en los algoritmos astronómicos de Jean Meeus), ampliamente utilizada y verificada. A partir de la fecha y las coordenadas que elijas, calcula el momento exacto en que el sol cruza cada uno de esos umbrales de altitud y los muestra como el inicio y el fin de los cuatro intervalos.
+
+Puedes completar tu ubicación con el botón "Usar mi ubicación" (el aviso de permiso de ubicación estándar del navegador) o escribir la latitud/longitud directamente. En cualquier caso, todo el cálculo ocurre en tu navegador; tu ubicación nunca se envía a un servidor.
+
+## Una nota importante sobre las zonas horarias
+
+Nuestra calculadora tiene un diseño ligero sin base de datos de zonas horarias: muestra las horas calculadas en **la zona horaria actual de este dispositivo (navegador)**. Esto es exactamente correcto cuando usas "Usar mi ubicación" para consultar tu entorno inmediato, ya que la zona horaria de tu dispositivo coincide con la del lugar que consultas.
+
+Pero si estás planificando un viaje y escribes las coordenadas de una ciudad en una zona horaria completamente distinta, las horas mostradas no son la hora local de esa ciudad, sino el momento equivalente en la zona horaria en la que está configurado este dispositivo. Por ejemplo, consultar las coordenadas de París desde un dispositivo configurado con la hora de Seúl mostrará "el momento equivalente en hora de Seúl", no "la hora local de París". Ten esto en cuenta al planificar otra región y suma o resta tú mismo la diferencia horaria si lo necesitas.
+
+## Cómo aprovecharlo en tus fotos
+
+Las fotos de amanecer y atardecer, la luz suave para retratos y los paisajes urbanos de la hora azul donde el cielo aún conserva color son difíciles de recrear fuera de estos intervalos. Introduce el lugar y la fecha de tu sesión el día antes y sabrás exactamente cuándo estar en posición, en lugar de improvisar sobre el terreno.

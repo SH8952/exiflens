@@ -34,6 +34,7 @@ export const FIELD_TOOLS: ToolEntry[] = [
   { slug: "bracketing-calculator", status: "live", faqNamespace: "BracketCalculator" },
   { slug: "dof-hyperfocal-table", status: "live", faqNamespace: "DofHyperfocalTable" },
   { slug: "sunny-16-calculator", status: "live", faqNamespace: "Sunny16Calculator" },
+  { slug: "golden-hour-calculator", status: "live", faqNamespace: "GoldenHourCalculator" },
   { slug: "advanced-dof-diffraction-calculator", status: "live", faqNamespace: "AdvancedDofDiffractionCalculator" },
   { slug: "camera-fov-calculator", status: "live", faqNamespace: "CameraFovCalculator" },
   { slug: "flash-guide-number-calculator", status: "live", faqNamespace: "FlashGuideNumberCalculator" },

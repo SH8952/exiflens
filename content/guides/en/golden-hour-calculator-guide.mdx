@@ -1,0 +1,34 @@
+---
+title: "Golden Hour and Blue Hour: When Exactly Are They? (With the Math)"
+description: "What golden hour and blue hour actually mean, and how to calculate the exact windows for any date and location."
+publishedAt: "2026-09-28"
+tags: ["golden hour", "blue hour", "sunrise sunset"]
+category: "Camera Basics & Exposure"
+---
+
+"Shoot during golden hour" is common advice, but exactly when that window falls where you are today shifts a lot with the season and your latitude. Our [Golden Hour & Blue Hour Calculator](/tools/golden-hour-calculator) works out these windows right in your browser from just a date and location — no account, no location data sent anywhere.
+
+## What golden hour and blue hour actually are
+
+Both terms describe light when the sun is near the horizon, but they cover different bands.
+
+- **Golden hour**: the sun's altitude is between about -0.83° (sunrise/sunset) and +6° above the horizon. Light arrives at a low angle, giving warm color and soft shadows.
+- **Blue hour**: the sun's altitude is between about -6° and -0.83°. The sun itself is already out of sight, but the sky still holds a brief, deep blue glow.
+
+Each day has four of these windows: morning blue hour → morning golden hour → (midday) → evening golden hour → evening blue hour.
+
+## How the calculation works
+
+Getting this right requires astronomical formulas that pin down the sun's position to the second. Our calculator uses the well-established open-source library `suncalc` (BSD-licensed, built on Jean Meeus's astronomical algorithms) for this. From your chosen date and coordinates, it works out the exact moments the sun crosses each of those altitude boundaries and shows them as the start and end of all four windows.
+
+You can fill in your location with the "Use my location" button (a standard browser location prompt) or type latitude/longitude directly. Either way, every calculation happens in your browser — your location is never sent to a server.
+
+## An important note on time zones
+
+Our calculator uses a lightweight design with no time-zone database: it shows the computed times in **this device's (browser's) own current time zone**. That's exactly right when you use "Use my location" to check your immediate surroundings, since your device's time zone matches the location you're checking.
+
+But if you're planning ahead for a trip and type in coordinates for a city in a completely different time zone, the times shown are not that city's local time — they're the equivalent time in whatever time zone this device is currently set to. For example, checking Paris's coordinates from a device set to Seoul time will show "the equivalent moment in Seoul time," not "Paris local time." Keep that in mind when planning for another region, and add or subtract the time difference yourself if needed.
+
+## Putting this to use
+
+Sunrise and sunset shots, soft portrait lighting, and blue-hour cityscapes where the sky still holds color are all hard to recreate outside these windows. Punch in your shoot location and date the day before, and you'll know exactly when to be in position instead of guessing on location.

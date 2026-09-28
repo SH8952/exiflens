@@ -455,6 +455,10 @@
       "shutter-count-checker": {
         "name": "Shutter Count Checker",
         "description": "Check how many shutter actuations your camera has recorded, straight from a NEF, CR3, or JPEG file."
+      },
+      "golden-hour-calculator": {
+        "name": "Golden Hour & Blue Hour Calculator",
+        "description": "Check today's golden hour and blue hour windows from just a date and location."
       }
     }
   },
@@ -1089,5 +1093,47 @@
     ],
     "supportCanon": "Canon - EOS R5, EOS R6, EOS R6 Mark II, EOS R8, EOS R50 (CR3 files only)",
     "supportCanonNote": "Every other Canon body, old or new, isn't supported yet — we'll add more as they're documented."
+  },
+  "GoldenHourCalculator": {
+    "cardTitle": "Golden Hour & Blue Hour Calculator",
+    "dateLabel": "Date",
+    "locationLabel": "Location (latitude, longitude)",
+    "latitudePlaceholder": "Latitude (e.g. 37.4563)",
+    "longitudePlaceholder": "Longitude (e.g. 126.7052)",
+    "useMyLocation": "Use my location",
+    "locationDenied": "Location permission was denied. Please enter latitude/longitude manually.",
+    "locationUnsupported": "This browser doesn't support location lookup. Please enter latitude/longitude manually.",
+    "enterLocationPrompt": "Enter a location, or tap \"Use my location.\"",
+    "polarDayNote": "At this date and location, the sun never sets (midnight sun) — golden hour and blue hour don't occur.",
+    "polarNightNote": "At this date and location, the sun never rises (polar night) — golden hour and blue hour don't occur.",
+    "morningBlueHour": "Morning blue hour",
+    "morningGoldenHour": "Morning golden hour",
+    "eveningGoldenHour": "Evening golden hour",
+    "eveningBlueHour": "Evening blue hour",
+    "timezoneNote": "Times are shown in this device's current time zone. This is accurate when you use \"Use my location,\" but if you manually enter coordinates for a different region, the times shown reflect this device's time zone, not the local time where you're checking.",
+    "pageTitle": "Golden Hour & Blue Hour Calculator",
+    "pageDescription": "Enter a date and location to see today's morning and evening golden hour and blue hour windows — every calculation runs right here in your browser.",
+    "aboutTitle": "About golden hour and blue hour",
+    "aboutBody": "Golden hour is the period shortly after sunrise and before sunset when the sun sits low on the horizon, giving warm, soft light. Blue hour is the brief window just after sunset (or just before sunrise) when the sky takes on a deep blue tone. This calculator uses your date and location to compute the exact time ranges where the sun's altitude falls in each of these bands — in order: morning blue hour, morning golden hour, evening golden hour, evening blue hour. Your location is only used for this calculation in your browser; it's never sent to a server.",
+    "disclaimer": "These times are based purely on the sun's geometric position — the actual color and softness of the light you experience still depends on weather, atmospheric conditions, and local terrain. As noted above, displayed times follow this device's own time zone, so keep that in mind when checking a different region ahead of a trip.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "Exactly when are golden hour and blue hour?",
+        "answer": "Golden hour runs while the sun's altitude is between about -0.83° and +6° above the horizon; blue hour runs between about -6° and -0.83°. Both the length and timing of each window vary by date and location."
+      },
+      {
+        "question": "Why do the times look wrong when I enter coordinates for another region?",
+        "answer": "This calculator is a lightweight design that doesn't use a time-zone database — it displays the computed times in this device's (browser's) own current time zone. That's accurate for your immediate surroundings when you use \"Use my location,\" but if you manually enter coordinates for a completely different time zone, the times shown reflect this device's time zone rather than the local time at that location."
+      },
+      {
+        "question": "Is my location sent to a server?",
+        "answer": "No. Your latitude and longitude are only used for the calculation in your browser — they're never sent or stored anywhere. The \"Use my location\" button simply uses your browser's standard location permission prompt."
+      },
+      {
+        "question": "Do I have to grant location permission to use this?",
+        "answer": "No — you can enter latitude and longitude manually and use the calculator without granting location permission at all."
+      }
+    ]
   }
 }

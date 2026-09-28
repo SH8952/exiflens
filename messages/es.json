@@ -455,6 +455,10 @@
       "shutter-count-checker": {
         "name": "Comprobador de disparos del obturador",
         "description": "Comprueba cuántos disparos ha registrado el obturador de tu cámara desde un archivo NEF, CR3 o JPEG."
+      },
+      "golden-hour-calculator": {
+        "name": "Calculadora de hora dorada y hora azul",
+        "description": "Consulta los intervalos de hora dorada y hora azul de hoy solo con una fecha y una ubicación."
       }
     }
   },
@@ -1089,5 +1093,47 @@
     ],
     "supportCanon": "Canon - EOS R5, EOS R6, EOS R6 Mark II, EOS R8, EOS R50 (solo archivos CR3)",
     "supportCanonNote": "El resto de cuerpos Canon, antiguos o nuevos, todavía no son compatibles; iremos añadiendo más a medida que se documenten."
+  },
+  "GoldenHourCalculator": {
+    "cardTitle": "Calculadora de hora dorada y hora azul",
+    "dateLabel": "Fecha",
+    "locationLabel": "Ubicación (latitud, longitud)",
+    "latitudePlaceholder": "Latitud (p. ej. 37.4563)",
+    "longitudePlaceholder": "Longitud (p. ej. 126.7052)",
+    "useMyLocation": "Usar mi ubicación",
+    "locationDenied": "Se denegó el permiso de ubicación. Introduce la latitud/longitud manualmente.",
+    "locationUnsupported": "Este navegador no admite la localización. Introduce la latitud/longitud manualmente.",
+    "enterLocationPrompt": "Introduce una ubicación o pulsa \"Usar mi ubicación\".",
+    "polarDayNote": "En esta fecha y ubicación, el sol no se pone en todo el día (sol de medianoche) — no hay hora dorada ni hora azul.",
+    "polarNightNote": "En esta fecha y ubicación, el sol no sale en todo el día (noche polar) — no hay hora dorada ni hora azul.",
+    "morningBlueHour": "Hora azul de la mañana",
+    "morningGoldenHour": "Hora dorada de la mañana",
+    "eveningGoldenHour": "Hora dorada de la tarde",
+    "eveningBlueHour": "Hora azul de la tarde",
+    "timezoneNote": "Las horas se muestran en la zona horaria actual de este dispositivo. Esto es preciso cuando usas \"Usar mi ubicación\", pero si introduces manualmente coordenadas de otra región, las horas mostradas reflejan la zona horaria de este dispositivo, no la hora local del lugar que consultas.",
+    "pageTitle": "Calculadora de hora dorada y hora azul",
+    "pageDescription": "Introduce una fecha y una ubicación para ver los intervalos de hora dorada y hora azul de esta mañana y esta tarde — todo el cálculo se hace en tu navegador.",
+    "aboutTitle": "Sobre la hora dorada y la hora azul",
+    "aboutBody": "La hora dorada es el período justo después del amanecer y antes del atardecer, cuando el sol está bajo en el horizonte y produce una luz cálida y suave. La hora azul es el breve intervalo justo después del atardecer (o justo antes del amanecer) en el que el cielo adquiere un tono azul profundo. Esta calculadora usa tu fecha y ubicación para calcular los intervalos exactos en los que la altitud del sol cae en cada una de estas franjas — en este orden: hora azul de la mañana, hora dorada de la mañana, hora dorada de la tarde y hora azul de la tarde. Tu ubicación solo se usa para este cálculo en tu navegador; nunca se envía a ningún servidor.",
+    "disclaimer": "Estas horas se basan únicamente en la posición geométrica del sol; el color y la suavidad reales de la luz que percibas dependen también del clima, las condiciones atmosféricas y el terreno local. Como se indica arriba, las horas mostradas siguen la zona horaria de este dispositivo, así que ten esto en cuenta al consultar con antelación otra región, por ejemplo antes de un viaje.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Cuándo son exactamente la hora dorada y la hora azul?",
+        "answer": "La hora dorada ocurre mientras la altitud del sol está entre aproximadamente -0,83° y +6° sobre el horizonte; la hora azul, entre aproximadamente -6° y -0,83°. Tanto la duración como el horario de cada intervalo varían según la fecha y la ubicación."
+      },
+      {
+        "question": "¿Por qué las horas parecen incorrectas si introduzco coordenadas de otra región?",
+        "answer": "Esta calculadora tiene un diseño ligero que no usa una base de datos de zonas horarias: muestra las horas calculadas en la zona horaria actual de este dispositivo (navegador). Eso es preciso para tu entorno inmediato cuando usas \"Usar mi ubicación\", pero si introduces manualmente coordenadas de una zona horaria completamente distinta, las horas mostradas reflejan la zona horaria de este dispositivo, no la hora local de ese lugar."
+      },
+      {
+        "question": "¿Se envía mi ubicación a un servidor?",
+        "answer": "No. Tu latitud y longitud solo se usan para el cálculo en tu navegador; nunca se envían ni se guardan en ningún sitio. El botón \"Usar mi ubicación\" simplemente utiliza el aviso de permiso de ubicación estándar de tu navegador."
+      },
+      {
+        "question": "¿Tengo que conceder permiso de ubicación para usar esto?",
+        "answer": "No — puedes introducir la latitud y la longitud manualmente y usar la calculadora sin conceder ningún permiso de ubicación."
+      }
+    ]
   }
 }
