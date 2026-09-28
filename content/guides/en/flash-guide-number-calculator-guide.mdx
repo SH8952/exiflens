@@ -1,0 +1,22 @@
+---
+title: "Guide Number Math: How to Set Manual Flash Power Without Guessing"
+description: "Your flash's manual lists a guide number, but turning that into \"what aperture do I need at this distance\" takes a formula. Here's how our Flash Guide Number calculator does that math for you."
+publishedAt: "2026-09-28"
+tags: ["flash", "guide-number", "manual-flash"]
+category: "Lighting & Flash"
+---
+
+Every manual flash ships with a guide number (GN) in its spec sheet — a single figure meant to tell you how far the flash can properly light a subject at a given aperture. The problem is turning that one number into a usable setting on location. Our [Flash Guide Number calculator](/tools/flash-guide-number-calculator) does the arithmetic for you: enter your flash's rated guide number, your shooting ISO, and either your aperture or your subject distance, and it solves for the other one.
+
+## The formula behind it
+
+Guide number math is simple once you have the number: **Guide Number = f-stop x distance**, measured by the manufacturer at a reference ISO (almost always ISO 100) and, for zoom-head flashes, at a specific zoom setting. Rearranged, that gives you exactly what you need on set:
+
+- **f-stop = Guide Number / distance** — the aperture needed to properly expose a subject at a known distance.
+- **distance = Guide Number / f-stop** — the farthest a subject can be while staying properly lit at a chosen aperture.
+
+If you're shooting at a different ISO than the flash's rated ISO 100, guide numbers scale with the square root of the ISO ratio rather than linearly — our calculator adjusts for this automatically, the same relationship covered on Wikipedia's guide number article and used in every manufacturer's published GN chart.
+
+## What this doesn't account for
+
+Guide numbers describe direct, undiffused flash under open, non-reflective conditions — this is a starting point for manual flash exposure, not a guarantee. Bouncing the flash off a ceiling or wall, adding a softbox or diffuser, or shooting in a small reflective room will all change how much usable light actually reaches your subject, usually meaning you'll want a wider aperture or a closer working distance than the calculator suggests. It's also worth pairing this with our [Flash Sync Speed](/guides/flash-sync-speed-explained) guide if you're combining flash with fast shutter speeds, and our [Studio Lighting Basics](/guides/studio-lighting-basics) guide if you're balancing multiple lights rather than a single on-camera flash.

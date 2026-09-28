@@ -447,6 +447,10 @@
       "camera-fov-calculator": {
         "name": "Calculadora de campo de visión",
         "description": "Consulta el ángulo de visión horizontal, vertical y diagonal que captura tu objetivo, en grados."
+      },
+      "flash-guide-number-calculator": {
+        "name": "Calculadora del número guía del flash",
+        "description": "Encuentra la distancia máxima de tu flash para un diafragma dado, o el diafragma necesario a una distancia dada."
       }
     }
   },
@@ -1001,6 +1005,44 @@
       {
         "question": "¿Puedo usar esto para un modelo de cámara concreto en vez de un tamaño de sensor genérico?",
         "answer": "Sí — elige \"Personalizado\" en Tamaño del sensor e introduce el ancho y el alto exactos del sensor de tu cámara en milímetros, que normalmente encontrarás en las especificaciones del fabricante."
+      }
+    ]
+  },
+  "FlashGuideNumberCalculator": {
+    "cardTitle": "Número guía del flash",
+    "guideNumberLabel": "Número guía del flash (a ISO 100)",
+    "guideNumberHint": "Consulta el manual o la ficha técnica de tu flash para ver su número guía publicado — la mayoría lo indican a ISO 100 para una posición de zoom concreta (habitualmente 35mm o 50mm).",
+    "unitLabel": "Unidad",
+    "unitMeters": "Metros",
+    "unitFeet": "Pies",
+    "isoLabel": "ISO",
+    "solveForLabel": "Calcular",
+    "solveForDistance": "Distancia máxima del flash (según el diafragma)",
+    "solveForAperture": "Diafragma necesario (según la distancia)",
+    "apertureLabel": "Diafragma (número f)",
+    "distanceLabel": "Distancia al sujeto",
+    "adjustedGuideNumberLabel": "Número guía a {iso}",
+    "maxDistanceLabel": "Distancia máxima del flash",
+    "requiredApertureLabel": "Diafragma necesario",
+    "invalidInput": "Introduce un número guía e ISO válidos.",
+    "pageTitle": "Calculadora del número guía del flash",
+    "pageDescription": "Calcula a qué distancia tu flash iluminará correctamente a un sujeto con un diafragma determinado, o qué diafragma usar a una distancia determinada, usando el número guía publicado de tu flash.",
+    "aboutTitle": "Sobre el número guía",
+    "aboutBody": "El número guía (GN) de un flash es la forma clásica en que los fabricantes califican la potencia del flash manual: Número guía = diafragma x distancia, a un ISO de referencia indicado (casi siempre ISO 100) y, en flashes con cabezal de zoom, a una posición de zoom indicada. Reordenando esa fórmula puedes obtener el valor que necesites: la distancia máxima a la que un diafragma dado expondrá correctamente, o el diafragma necesario a una distancia dada. Los números guía también varían con la sensibilidad según la raíz cuadrada del ratio de ISO, así que esta calculadora ajusta el número guía nominal de tu flash al ISO con el que realmente estás disparando antes de hacer los cálculos de distancia/diafragma. Combínala con nuestra calculadora del triángulo de exposición si también necesitas calcular cómo interactúan la luz ambiente y la exposición del flash.",
+    "disclaimer": "Los números guía son valores publicados por el fabricante, medidos en condiciones controladas — los resultados reales varían según la reflectividad de la sala, el tamaño del sujeto, la posición de zoom del flash y el uso de difusores o modificadores.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Dónde encuentro el número guía de mi flash?",
+        "answer": "Está en el manual del flash o en la ficha técnica del fabricante, normalmente indicado a ISO 100 para una posición de zoom concreta (a menudo equivalente a 35mm o 50mm). Si tu flash tiene cabezal de zoom, el número guía cambia en cada posición de zoom — usa el valor correspondiente a la posición con la que realmente estás disparando."
+      },
+      {
+        "question": "¿Por qué cambia el número guía con el ISO?",
+        "answer": "Un ISO más alto hace que el sensor sea más sensible a la misma cantidad de luz, lo que equivale a aumentar el alcance efectivo del flash — pero solo según la raíz cuadrada del ratio de ISO, no de forma proporcional. Duplicar el ISO aumenta el número guía (y la distancia) utilizable en aproximadamente un 41%, no un 100%."
+      },
+      {
+        "question": "¿Esto tiene en cuenta el flash rebotado o los modificadores de luz?",
+        "answer": "No — los números guía asumen un flash directo y sin difuminar en condiciones abiertas. Rebotar el flash en un techo o pared, o añadir un difusor o softbox, reduce la luz efectiva que llega a tu sujeto, así que normalmente necesitarás un diafragma más abierto o una distancia menor que la que sugiere esta calculadora."
       }
     ]
   }

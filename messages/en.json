@@ -447,6 +447,10 @@
       "camera-fov-calculator": {
         "name": "Camera Field of View Calculator",
         "description": "See the horizontal, vertical, and diagonal angle of view your lens captures, in degrees, at any focal length."
+      },
+      "flash-guide-number-calculator": {
+        "name": "Flash Guide Number Calculator",
+        "description": "Find your flash's maximum distance for a given aperture, or the aperture needed at a given distance."
       }
     }
   },
@@ -1001,6 +1005,44 @@
       {
         "question": "Can I use this for a specific camera model instead of a general sensor size?",
         "answer": "Yes — select \"Custom\" under Sensor Size and enter your camera's exact sensor width and height in millimeters, which you can usually find in its manufacturer specifications."
+      }
+    ]
+  },
+  "FlashGuideNumberCalculator": {
+    "cardTitle": "Flash Guide Number",
+    "guideNumberLabel": "Flash Guide Number (at ISO 100)",
+    "guideNumberHint": "Check your flash's manual or spec sheet for its published guide number — most list it at ISO 100 for a specific zoom head setting (commonly 35mm or 50mm).",
+    "unitLabel": "Unit",
+    "unitMeters": "Meters",
+    "unitFeet": "Feet",
+    "isoLabel": "ISO",
+    "solveForLabel": "Calculate",
+    "solveForDistance": "Maximum flash distance (from aperture)",
+    "solveForAperture": "Required aperture (from distance)",
+    "apertureLabel": "Aperture (f-stop)",
+    "distanceLabel": "Subject Distance",
+    "adjustedGuideNumberLabel": "Guide Number at {iso}",
+    "maxDistanceLabel": "Maximum Flash Distance",
+    "requiredApertureLabel": "Required Aperture",
+    "invalidInput": "Enter a valid guide number and ISO.",
+    "pageTitle": "Flash Guide Number Calculator",
+    "pageDescription": "Work out how far your flash can properly light a subject at a given aperture, or which aperture to use at a given distance — using your flash's published guide number.",
+    "aboutTitle": "About guide numbers",
+    "aboutBody": "A flash's guide number (GN) is the classic way manufacturers rate manual flash output: Guide Number = f-stop x distance, at a stated reference ISO (almost always ISO 100) and, for zoom-head flashes, a stated zoom setting. Rearranging that formula lets you solve for whichever value you need — the farthest distance a given aperture will properly expose, or the aperture required at a given distance. Guide numbers also scale with sensitivity as the square root of the ISO ratio, so this calculator adjusts your flash's rated guide number to whatever ISO you're actually shooting at before doing the distance/aperture math. Pair this with our exposure triangle calculator if you also need to work out how ambient light and flash exposure interact.",
+    "disclaimer": "Guide numbers are manufacturer-published ratings measured under controlled conditions — real-world results vary with room reflectivity, subject size, flash zoom setting, and diffusers or modifiers.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "Where do I find my flash's guide number?",
+        "answer": "It's in the flash's manual or manufacturer spec sheet, usually listed at ISO 100 for a specific zoom head position (often 35mm or 50mm equivalent). If your flash has a zoom head, the guide number changes at each zoom setting — use the value for whatever zoom position you're actually shooting at."
+      },
+      {
+        "question": "Why does the guide number change with ISO?",
+        "answer": "A higher ISO makes the sensor more sensitive to the same amount of light, which is equivalent to boosting the flash's effective reach — but only by the square root of the ISO ratio, not proportionally. Doubling ISO increases the usable guide number (and distance) by about 41%, not 100%."
+      },
+      {
+        "question": "Does this account for bounce flash or light modifiers?",
+        "answer": "No — guide numbers assume direct, undiffused flash in open conditions. Bouncing the flash off a ceiling or wall, or adding a diffuser/softbox, reduces the effective light reaching your subject, so you'll typically need a wider aperture or closer distance than this calculator suggests."
       }
     ]
   }
