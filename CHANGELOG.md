@@ -1,3 +1,31 @@
+## 2026-09-28 — Camera Field of View(화각) 계산기 신규 추가 (SEO 콘텐츠 갭 대응 3단계 2번, 3단계 완료)
+
+**배경**
+- `claude/exiflens-seo-gap-analysis.md`의 갭 #7(Camera Field of View 계산기 부재) 및 `claude/exiflens-seo-gap-risk-ordered-work-plan.md` 3단계 6번 항목 실행.
+- 착수 전 확인: 이전 작업(3단계 1번, CoC+회절 계산기) 진행 중 `crop-factor-calculator.ts`에 화각(수평/수직) 계산 함수(`calculateFovDegrees`, `formatFovDegrees`)가 이미 존재하고 `crop-factor-calculator-card.tsx`에서 부가 정보로 노출되고 있음을 미리 확인해둠 — 이번 항목은 계획서 예상보다 재사용 비중이 더 높은 순수 재사용 작업으로 확정.
+
+**변경 사항**
+- 신규 도구 페이지 `/tools/camera-fov-calculator` 추가 — 센서 크기(프리셋 + 직접 입력)와 초점거리를 입력하면 수평/수직/대각선 화각을 함께 표시. 계산 로직은 100% 재사용(`crop-factor-calculator.ts`의 `calculateFovDegrees`, `calculateDiagonalMm`, `formatFovDegrees`를 그대로 사용, 신규 계산 함수 추가 없음).
+- 크롭팩터 계산기와의 검색 의도 차이(화각 자체가 목적 vs 크롭팩터/환산 초점거리 비교가 목적)를 유지하기 위해 대각선 화각과, 자주 쓰는 초점거리(14~300mm) 구간의 수평·수직·대각선 화각 비교 표를 추가해 카니벌라이제이션 없이 차별화.
+- 신규 컴포넌트: `src/components/camera-fov-calculator-card.tsx`.
+- `src/lib/tools-roster.ts`에 `camera-fov-calculator`를 `status: "live"`로 등록.
+- `messages/{en,ko,ja,es}.json`에 `CameraFovCalculator` 번역 네임스페이스 및 `ToolsHub.tools` 항목 추가.
+- 갭 #8(신규 도구마다 "how to use" 가이드 세트 발행) 규칙에 따라 신규 가이드 1편 × 4개 언어(`content/guides/{locale}/camera-field-of-view-calculator-guide.mdx`) 추가, 기존 `sensor-size-and-crop-factor-explained` 가이드 및 크롭팩터 계산기와 상호 링크.
+
+**검증**
+- `npx tsc --noEmit`, `npx eslint`(신규/변경 파일 대상) 모두 통과, 에러 없음.
+- 공식을 수기로 재계산해 대조: APS-C(23.5×15.6mm)·50mm 기준 수평 화각 26.4°, 수직 화각 17.7°, 대각선 화각 31.5° — 삼각함수 공식 수기 계산과 정확히 일치. 비교표의 14mm 행(수평 80.0°)도 일치 확인.
+- 로컬 `npm run dev`(포트 3010) + `curl`로 4개 언어(en/ko/ja/es) × 신규 도구 페이지, 신규 가이드 페이지, `/tools` 허브, `/faq`, `/guides` 인덱스, 홈페이지 총 24개 경로 모두 200 OK 확인.
+- `/tools` 허브에 신규 슬러그 노출, `/faq`에 신규 도구 FAQ 제목 집계, `/guides` 인덱스에 신규 가이드 노출을 각각 확인.
+- dev 서버 로그의 에러는 기존에 알려진 외부 제휴 API(AliExpress/Coupang) 호출 실패뿐이며 신규 코드 관련 런타임 에러는 없음.
+- 작업 전 `src/lib`, `src/components`, `src/app/[locale]/tools`, `messages`, `content/guides`를 `_backups/backup_20260928_024013_camera-fov-calculator/`에 백업.
+
+**3단계 완료 요약**
+- 3단계(CoC+회절 계산기, Camera FOV 계산기) 두 항목 모두 완료. 두 항목 모두 신규 계산 로직 없이(회절 항목은 검증된 표준 공식만 추가) 기존 코드를 재사용하는 저위험 작업으로 마무리됨.
+
+**다음 단계**
+- 4단계(플래시 가이드넘버/플래시 노출 계산기, 셔터 카운트 체커, 셔터카운트 보조 콘텐츠)로 진행 예정 — 신규 독립 계산기 단계로, 특히 셔터 카운트 체커는 카메라 제조사별 메이커노트 파싱 편차가 있어 착수 전 리스크를 다시 짚어볼 필요.
+
 ## 2026-09-28 — 고급 심도 & 회절(CoC+Diffraction) 계산기 신규 추가 (SEO 콘텐츠 갭 대응 3단계 1번)
 
 **배경**
