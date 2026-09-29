@@ -1,0 +1,44 @@
+---
+title: "Setting HDR Exposure Stop Intervals with the Bracketing Calculator"
+description: "Don't guess how many frames or how wide a stop interval a scene needs. Here's how to use the bracketing calculator to match frame count and step size to a scene's actual dynamic range, and preview total shooting time before you commit."
+publishedAt: "2026-09-29"
+tags: ["bracketing", "HDR", "exposure calculator"]
+category: "Camera Basics & Exposure"
+image: "/guides/images/bracketing-calculator-hdr-stops.webp"
+imageCredit: "Pavł Polø"
+imageCreditUrl: "https://unsplash.com/@pavlpolo_official?utm_source=ExifLens&utm_medium=referral"
+---
+
+If you've ever guessed "three frames should cover this" on location, only to find highlights or shadows still clipped once you got home to merge them, the problem usually isn't shooting skill — it's planning. Our [Bracketing calculator](/tools/bracketing-calculator) takes your baseline aperture, shutter speed, and ISO along with a chosen step size and frame count, and returns the exact exposure for every frame, the total stop spread, which dynamic-range band that spread falls into (standard, high-contrast, or extreme), and the total shooting time once per-shot overhead is added.
+
+## What the calculator actually does
+
+Pick the parameter you want to bracket (aperture, shutter speed, or ISO), a step size (1/3, 1/2, 1, or 2 stops), and a frame count (3, 5, 7, or 9 — only odd numbers are offered so the baseline exposure always sits dead center). The calculator then builds a symmetric list of frames around that baseline. Choose a 1/125s baseline shutter speed with a 1-stop step and 5 frames, for example, and it returns 1/500s, 1/250s, 1/125s, 1/60s, and 1/30s, with a total spread of (5-1)×1 = 4 stops. That spread is automatically classified as standard (under 4 stops), high-contrast (4–8 stops), or extreme (8+ stops), so you can tell at a glance whether your current setup actually covers the scene without metering it manually multiple times.
+
+## Which parameter you should actually bracket
+
+The calculator lets you bracket aperture, shutter speed, or ISO, but shutter speed is the right choice in nearly every case. Changing aperture shifts depth of field from frame to frame, which misaligns edges when you merge; changing ISO shifts the noise pattern per frame, which keeps merge software from blending tones smoothly. Bracketing shutter speed alone keeps depth of field and noise characteristics identical across every frame, so unless you have a specific reason not to, leave the bracket parameter set to shutter speed and hold aperture and ISO at their baseline values.
+
+## Matching step size and frame count to the scene
+
+An ordinary backlit portrait with a modest brightness gap will usually land in the "standard" band, and 3 frames at a 2-stop step (4 stops total) is already enough. A scene the calculator classifies as "high-contrast" — a sunset sky next to a dim foreground, say — is a good candidate for 5 frames at a 1-stop step (4 stops total, but with finer tonal gradation). For a genuinely extreme scene, like a backlit window in an otherwise dark room, try 9 frames at a 1-stop step (8 stops total) or 5 frames at a 2-stop step (also 8 stops total, fewer frames but coarser tonal transitions and a higher banding risk). The point of running the numbers first is to catch the common mistake of setting the step too narrow (1/3 stop, say) and ending up with more frames but no real increase in covered range.
+
+## Why the total shooting time matters just as much
+
+The calculator adds up every frame's exposure time and adds per-shot overhead (1.5 seconds by default, roughly what most mirrorless and DSLR bodies need to clear the buffer and re-cock the shutter) to give you a total shooting time. A 1-second baseline shutter speed with a 1-stop, 5-frame bracket produces exposures of 0.25s, 0.5s, 1s, 2s, and 4s — 7.75 seconds combined — plus 5 × 1.5 = 7.5 seconds of overhead, for roughly 15.3 seconds total. In a scene where something keeps changing within that window — light trails at night, drifting clouds — that total directly determines how consistent your merged result will look, so it's worth checking before you start shooting.
+
+## The mistake of assuming more and wider is always better
+
+It's common to see photographers default to 9 frames at a 2-stop step (16 stops total) out of habit, even on a scene the calculator flags as "standard." That wastes shooting time and storage, and it drags exposures far outside what the scene actually needs into the merge, which often produces harsher, less natural tone mapping rather than a better result. Check the dynamic-range classification the calculator gives you first, start with the minimum frame count and step that band suggests, and only add more after reviewing the actual output.
+
+## What to watch for with moving subjects
+
+The calculator only knows exposure values and timing — it has no idea what's moving in your frame. Leaves, people, or water that shift position between frames raise the risk of ghosting (the same object appearing doubled and semi-transparent) as total shooting time grows. If the combination you land on runs past roughly 10 seconds and the scene has a lot of motion in it, either trim the frame count or tighten the step to shorten that window, or consider shooting a single RAW frame and recovering highlights and shadows with sliders instead — it's often the more natural-looking result.
+
+## Practical checklist
+
+- Before shooting, enter your baseline aperture, shutter speed, and ISO into the calculator to see the dynamic-range classification first.
+- Unless you have a specific reason otherwise, keep the bracket parameter set to shutter speed.
+- Start with the minimum frame count and step size that classification suggests, and only increase after reviewing results.
+- Check the calculator's total shooting time and weigh it against how much motion is in the scene.
+- Use a tripod, and shoot RAW whenever possible to preserve as much tonal information as you can.

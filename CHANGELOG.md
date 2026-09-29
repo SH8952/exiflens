@@ -934,6 +934,11 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-29
+
+- 새 가이드 발행: "브라케팅 계산기로 HDR 노출 스탑 간격 정하는 법" (Setting HDR Exposure Stop Intervals with the Bracketing Calculator) — en/ja/ko/es 4개 언어
+- 새 가이드 발행: "인쇄해상도 계산기로 대형 포스터 인화 전 확인할 것" (What to Check Before Printing a Large Poster with the Print Resolution Calculator) — en/ja/ko/es 4개 언어
+
 ## 2026-09-28
 
 - 새 가이드 2건 발행 (2 new guides published):

@@ -1,0 +1,44 @@
+---
+title: "Cómo fijar los intervalos de stop HDR con la calculadora de bracketing"
+description: "No adivines cuántos fotogramas ni con qué intervalo de stops necesita una escena. Así se usa la calculadora de bracketing para ajustar el número de fotogramas y el paso al rango dinámico real de la escena, y ver el tiempo total de disparo antes de empezar."
+publishedAt: "2026-09-29"
+tags: ["bracketing", "HDR", "calculadora de exposición"]
+category: "Fundamentos de cámara y exposición"
+image: "/guides/images/bracketing-calculator-hdr-stops.webp"
+imageCredit: "Pavł Polø"
+imageCreditUrl: "https://unsplash.com/@pavlpolo_official?utm_source=ExifLens&utm_medium=referral"
+---
+
+Si alguna vez calculaste a ojo que "con tres fotogramas bastará" en el momento de disparar, y al llegar a casa a fusionarlos las luces o las sombras seguían quemadas, el problema no suele ser la técnica de disparo, sino la planificación previa. Nuestra [calculadora de bracketing](/tools/bracketing-calculator) toma tu diafragma, velocidad de obturación e ISO base junto con el tamaño de paso y el número de fotogramas que elijas, y devuelve la exposición exacta de cada fotograma, el rango total en stops, en qué banda de rango dinámico cae ese rango (estándar, alto contraste o extremo) y el tiempo total de disparo sumando el margen entre tomas.
+
+## Qué hace exactamente la calculadora
+
+Elige el parámetro que quieres variar (diafragma, velocidad de obturación o ISO), un tamaño de paso (1/3, 1/2, 1 o 2 stops) y un número de fotogramas (3, 5, 7 o 9 — solo se ofrecen números impares para que la exposición base quede siempre justo en el centro). La calculadora arma entonces una lista simétrica de fotogramas alrededor de esa base. Si eliges una velocidad base de 1/125s con un paso de 1 stop y 5 fotogramas, por ejemplo, obtienes 1/500s, 1/250s, 1/125s, 1/60s y 1/30s, con un rango total de (5-1)×1 = 4 stops. Ese rango se clasifica automáticamente como estándar (menos de 4 stops), alto contraste (4–8 stops) o extremo (8+ stops), así que puedes saber de un vistazo si tu ajuste actual cubre realmente la escena sin tener que medir la luz varias veces a mano.
+
+## Qué parámetro conviene variar realmente
+
+La calculadora te deja variar diafragma, velocidad de obturación o ISO, pero la velocidad de obturación es la opción correcta en casi todos los casos. Cambiar el diafragma desplaza la profundidad de campo de un fotograma a otro, lo que desalinea los bordes al fusionar; cambiar el ISO desplaza el patrón de ruido en cada fotograma, lo que impide que el software de fusión mezcle los tonos con suavidad. Variar solo la velocidad de obturación mantiene la profundidad de campo y las características de ruido idénticas en todos los fotogramas, así que, salvo que tengas una razón concreta para lo contrario, deja el parámetro de bracketing en velocidad de obturación y mantén el diafragma y el ISO en sus valores base.
+
+## Ajustar el tamaño de paso y el número de fotogramas a la escena
+
+Un retrato a contraluz normal, con una diferencia de brillo moderada, suele caer en la banda "estándar", y con 3 fotogramas a un paso de 2 stops (4 stops en total) ya es suficiente. Una escena que la calculadora clasifique como "alto contraste" — un cielo de atardecer junto a un primer plano oscuro, por ejemplo — es buena candidata para 5 fotogramas a un paso de 1 stop (4 stops en total, pero con una gradación tonal más fina). Para una escena verdaderamente extrema, como una ventana a contraluz en una habitación oscura, prueba con 9 fotogramas a un paso de 1 stop (8 stops en total) o 5 fotogramas a un paso de 2 stops (también 8 stops en total, menos fotogramas pero transiciones tonales más bruscas y mayor riesgo de bandas). La idea de calcular esto antes de disparar es evitar el error habitual de dejar el paso demasiado estrecho (1/3 de stop, por ejemplo) y terminar con más fotogramas pero sin ampliar realmente el rango cubierto.
+
+## Por qué el tiempo total de disparo importa tanto como el resto
+
+La calculadora suma el tiempo de exposición de cada fotograma y añade el margen entre tomas (1,5 segundos por defecto, lo que tardan la mayoría de cuerpos mirrorless y réflex en vaciar el buffer y rearmar el obturador) para darte un tiempo total de disparo. Una velocidad base de 1 segundo con un paso de 1 stop y 5 fotogramas produce exposiciones de 0,25s, 0,5s, 1s, 2s y 4s — 7,75 segundos combinados — más 5 × 1,5 = 7,5 segundos de margen, unos 15,3 segundos en total. En una escena donde algo sigue cambiando dentro de esa ventana de tiempo — estelas de luz nocturnas, nubes que se desplazan — ese total determina directamente cuán coherente se verá el resultado fusionado, así que conviene revisarlo antes de empezar a disparar.
+
+## El error de asumir que más fotogramas y más amplitud siempre es mejor
+
+Es habitual ver a fotógrafos que por costumbre disparan 9 fotogramas a un paso de 2 stops (16 stops en total), incluso en una escena que la calculadora marca como "estándar". Eso solo desperdicia tiempo de disparo y espacio de almacenamiento, y arrastra a la fusión exposiciones muy alejadas de lo que la escena realmente necesita, lo que a menudo produce un mapeo tonal más duro y menos natural en vez de un mejor resultado. Revisa primero la clasificación de rango dinámico que te da la calculadora, empieza con el número mínimo de fotogramas y el paso que sugiere esa banda, y solo añade más después de revisar el resultado real.
+
+## Qué vigilar cuando hay sujetos en movimiento
+
+La calculadora solo conoce los valores de exposición y los tiempos: no tiene idea de qué se mueve dentro de tu encuadre. Hojas, personas o agua que cambian de posición entre fotogramas aumentan el riesgo de fantasmas (el mismo objeto apareciendo duplicado y semitransparente) cuanto mayor sea el tiempo total de disparo. Si la combinación que obtienes supera aproximadamente los 10 segundos y la escena tiene mucho movimiento, reduce el número de fotogramas o estrecha el paso para acortar esa ventana, o considera disparar un único fotograma RAW y recuperar luces y sombras con los deslizadores — a menudo el resultado se ve más natural.
+
+## Checklist práctico
+
+- Antes de disparar, introduce tu diafragma, velocidad de obturación e ISO base en la calculadora para ver primero la clasificación de rango dinámico.
+- Salvo que tengas una razón concreta para lo contrario, mantén el parámetro de bracketing en velocidad de obturación.
+- Empieza con el número mínimo de fotogramas y el tamaño de paso que sugiere esa clasificación, y solo auméntalos tras revisar los resultados.
+- Comprueba el tiempo total de disparo que da la calculadora y compáralo con cuánto movimiento hay en la escena.
+- Usa trípode y dispara en RAW siempre que puedas para conservar la mayor información tonal posible.
