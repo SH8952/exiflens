@@ -1,0 +1,40 @@
+---
+title: "Qué revisar antes de imprimir un póster grande con la calculadora de resolución de impresión"
+description: "No adivines si una foto tiene píxeles suficientes para un póster grande, ni qué DPI usar como referencia. Así se usa la calculadora de resolución de impresión para saber el tamaño máximo seguro y si necesitarás escalar la imagen."
+publishedAt: "2026-09-29"
+tags: ["resolución de impresión", "impresión de pósteres", "DPI"]
+category: "Impresión y salida"
+image: "/guides/images/print-resolution-calculator-poster.webp"
+imageCredit: "Bank Phrom"
+imageCreditUrl: "https://unsplash.com/@bank_phrom?utm_source=ExifLens&utm_medium=referral"
+---
+
+Si alguna vez mandaste a imprimir como póster grande una foto tomada con una cámara de 24MP y la imprenta te devolvió un aviso vago de que "la resolución podría ser insuficiente", es porque ese criterio no es nada obvio. Nuestra [calculadora de resolución de impresión](/tools/print-resolution-calculator) toma las dimensiones en píxeles de tu foto y un DPI objetivo y calcula el tamaño máximo al que puedes imprimir, o funciona al revés: introduces el tamaño de impresión que quieres y te dice cuántos píxeles necesitas y cuánto habría que escalar tu foto actual.
+
+## Las dos cosas que resuelve la calculadora
+
+La calculadora funciona en ambas direcciones. Introduce el ancho y alto en píxeles de tu foto junto con un DPI objetivo (se ofrecen los ajustes preestablecidos 150/200/300/600) y te muestra el tamaño máximo, en pulgadas y centímetros, al que puedes imprimir manteniendo ese DPI. Una foto de 6000×4000px (24MP) se puede imprimir hasta 20×13,3in (unos 50,8×33,9cm) a 300 DPI, o hasta 40×26,7in (unos 101,6×67,7cm) a 150 DPI. Al revés, elige primero el tamaño de impresión que quieres —un preajuste como 4×6, 8×10 o 20×30, o tus propias medidas— y la calculadora resuelve hacia atrás para decirte cuántos píxeles y megapíxeles necesita esa combinación de tamaño y DPI.
+
+## El DPI no siempre es 300: depende de la distancia de visión
+
+Una foto de carnet que se mira a pocos centímetros de la cara sí necesita 300 DPI de verdad, pero un póster grande colgado en una pared y visto desde varios metros se ve prácticamente igual a 150 DPI. Por eso la calculadora ofrece un ajuste de 150 DPI además del de 300. Si calculas un póster de 20×30in a 300 DPI necesitarías 6000×9000px (54MP), muy por encima de lo que entrega una cámara de 24MP. Si calculas el mismo tamaño a 150 DPI en cambio, solo necesitas 3000×4500px (13,5MP), algo que una cámara de 24MP cubre con holgura y sin recortar nada. Decidir desde qué distancia se va a ver realmente la impresión, antes de introducir un tamaño objetivo, es el primer paso.
+
+## Cómo leer la guía de escalado
+
+Cuando tu número de píxeles se queda corto para el tamaño de impresión objetivo, la calculadora muestra un factor de escalado junto con una etiqueta de cuatro niveles: suficiente, menor, moderado o grave. Ese factor indica cuánto hay que ampliar cada lado: hasta aproximadamente 1,3x es prácticamente invisible con un remuestreo normal, entre 1,3x y 2x es donde un escalador de IA dedicado empieza a superar claramente al remuestreo simple, y por encima de 2x la pérdida de calidad es difícil de ocultar del todo con cualquier método, así que lo más seguro es volver a fotografiar o elegir un tamaño de impresión menor. El ejemplo anterior de 20×30in a 300 DPI (54MP necesarios, 24MP disponibles) da una relación de área de 54/24 = 2,25, cuya raíz cuadrada equivale a un escalado de aproximadamente 1,5x, situándose en el nivel "moderado", que un escalador de IA suele resolver sin problemas.
+
+## Comprueba cuánto te cuesta recortar en realidad
+
+Es habitual recortar una foto por composición antes de enviarla a imprimir como póster, pero cortar cada lado a la mitad deja solo el 25% de los píxeles originales. Una foto de 24MP recortada así se queda en unos 6MP, lo que puede convertir un tamaño de impresión que parecía holgado en uno que de repente necesita escalado. Conviene acostumbrarse a volver a introducir en la calculadora las dimensiones en píxeles que quedarán después del recorte mientras aún estás componiendo la toma, en lugar de descubrir el faltante cuando el archivo ya está en la imprenta.
+
+## El error que conviene evitar
+
+El error más común es mirar la cifra de megapíxeles de la ficha técnica de la cámara y asumir que "eso debería bastar" sin comprobar nada más. Dos fotos tomadas ambas a 24MP pueden necesitar cantidades de resolución muy distintas según la relación de aspecto —imprimir un póster casi cuadrado a partir de un sensor 3:2 ya descarta píxeles útiles antes de que entre en juego el recorte— y sumarle encima un recorte de composición puede dejarte con bastante menos de lo que sugiere la ficha técnica. También vale la pena probar el ajuste de 200 DPI para materiales con textura como el lienzo, ya que muchas imprentas lo usan como referencia real en vez de 300.
+
+## Checklist práctico
+
+- Decide primero la distancia de visión: las impresiones de cerca necesitan 300–600 DPI, mientras que los pósteres grandes vistos a distancia se ven bien con 150–200 DPI.
+- Introduce el tamaño de impresión y el DPI objetivo en la calculadora antes de disparar o exportar, para ver de antemano los megapíxeles necesarios.
+- Si hace falta escalar, comprueba si el factor está por debajo de 1,3x o por encima de 2x antes de decidir el método.
+- Si piensas recortar por composición, vuelve a introducir las dimensiones en píxeles esperadas tras el recorte para revisar de nuevo.
+- Para materiales de impresión con textura como el lienzo, compara también con el ajuste de 200 DPI además del de 300.
