@@ -934,6 +934,15 @@
 
 # 개발 이력 (Development History)
 
+## 2026-09-30 — 가이드 아티클 자동 발행: 웨딩앨범 인쇄해상도 확인법 + 여행 촬영 메모리카드 계획법 (예약 작업, 1일 2건)
+
+- 신규 가이드 2건을 각각 4개 언어(en/ja/ko/es)로 독립적으로 작성해 발행.
+- 1건: "인쇄해상도 계산기로 웨딩앨범 인화 해상도 확인하는 법"(order 41, slug: print-resolution-calculator-album) — 포스터 인화와 달리 앨범은 한 번에 수십 장을 같은 기준으로 통과시켜야 한다는 점, 스프레드(양면 펼침) 사진은 페이지 1장이 아니라 펼침 전체 치수로 계산해야 한다는 흔한 실수(12×12인치 앨범 예시로 4000px 크롭본이 스프레드 전체에서는 약 1.8배 업스케일이 필요해지는 구체적 계산 포함), 정사각형 크롭이 3:2 센서 사진의 픽셀을 얼마나 깎아먹는지, 인쇄소 블리드(재단 여유분) 0.125~0.25인치를 트림 사이즈에 더해 계산해야 하는 이유까지 정리. 기존에 발행된 포스터 인화 가이드(print-resolution-calculator-poster)와 겹치지 않도록 앨범 특유의 스프레드/블리드/정사각 크롭 이슈에 집중.
+- 2건: "저장용량 계산기로 여행 촬영 메모리카드 분량 계획하기"(order 42, slug: storage-calculator-trip-planning) — 저장용량 계산기의 일별 촬영 모드(하루 평균 매수 × 여행 일수)로 총 촬영 매수를 미리 확인하는 법, RAW/JPEG 선택에 따른 용량 차이(약 3배, 300장×7일 기준 RAW 63GB vs JPEG 17GB 구체 예시), 백업 사본까지 포함한 총 용량 계산(백업 1벌 추가 시 63GB→126GB), 같은 총 용량이라도 카드를 여러 장으로 나눠 담는 것이 분실·손상 위험을 줄이는 이유, 숙소 와이파이 업로드 속도(10Mbps 예시로 63GB 업로드 약 14시간) 확인까지 정리. 기존에 발행된 타임랩스 저장공간 가이드(timelapse-calculator-storage-planning)와 겹치지 않도록 다일(多日) 여행 계획·백업 전략·카드 분산에 집중.
+- 카테고리: 1건은 기존 "인쇄 & 출력"(Printing & Output / 印刷と出力 / Impresión y salida), 2건은 기존 "장르별 촬영 가이드"(Photography Genres / ジャンル別撮影ガイド / Guías por género fotográfico) 카테고리를 각각 재사용.
+- automation/guide-topics-queue.json 갱신: order 41, 42 두 항목 모두 published: true, publishedDate: "2026-09-30"(KST 기준)로 반영. 총 130개 주제 중 미발행 88개 남음(경고 기준 10개보다 충분히 여유 있음).
+- 대표 이미지(image/imageCredit/imageCreditUrl)는 이번 자동 발행 단계에서는 첨부하지 않음 — automation/publish-guide.command 실행 시 attach-guide-image.py가 Unsplash에서 자동으로 가져와 4개 언어 mdx에 삽입함(기존 동작 방식과 동일). 발행 패키지에는 두 슬러그의 mdx 파일을 순서대로 넣었으므로, publish-guide.command를 두 번 실행(더블클릭)하면 각 실행이 guide-*-en.mdx 중 하나씩을 처리하며 두 건 모두 정상적으로 커밋·이미지 첨부됨.
+
 ## 2026-09-29
 
 - 새 가이드 발행: "브라케팅 계산기로 HDR 노출 스탑 간격 정하는 법" (Setting HDR Exposure Stop Intervals with the Bracketing Calculator) — en/ja/ko/es 4개 언어
