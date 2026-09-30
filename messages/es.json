@@ -904,7 +904,9 @@
         "question": "¿Puedo usar un tamaño de sensor personalizado?",
         "answer": "Sí — elige \"Personalizado\" en Tamaño del sensor e introduce tu propio valor de círculo de confusión en milímetros."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Foto de paisaje enfocada a la distancia hiperfocal, nítida desde el primer plano hasta el infinito",
+    "exampleRightAlt": "Foto de paisaje enfocada demasiado cerca, dejando el fondo lejano desenfocado"
   },
   "Sunny16Calculator": {
     "cardTitle": "Exposición Sunny 16",
@@ -940,7 +942,9 @@
         "question": "¿Y si quiero una velocidad de obturación concreta en vez de un diafragma concreto?",
         "answer": "Elige el diafragma que te dé una velocidad de obturación cercana a la que quieres — como la aritmética de base es la misma por pasos, también puedes partir de una velocidad de obturación objetivo con nuestra calculadora del triángulo de exposición."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Foto tomada al aire libre bajo luz solar directa y brillante",
+    "exampleRightAlt": "Foto tomada al aire libre bajo un cielo nublado"
   },
   "AdvancedDofDiffractionCalculator": {
     "cardTitle": "DoF avanzada y difracción",
@@ -980,7 +984,9 @@
         "question": "¿Debo evitar por completo los diafragmas limitados por difracción?",
         "answer": "No necesariamente — la profundidad de campo suele ser más importante para la imagen final que el ligero suavizado cerca del límite de difracción. Importa más cuando necesitas el máximo detalle resuelto, como impresiones grandes o recortes intensos."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Foto tomada con una apertura amplia, nítida y con poca profundidad de campo",
+    "exampleRightAlt": "Foto tomada con una apertura muy cerrada, suavizada por la difracción en toda la imagen"
   },
   "CameraFovCalculator": {
     "cardTitle": "Campo de visión de la cámara",
@@ -1014,7 +1020,9 @@
         "question": "¿Puedo usar esto para un modelo de cámara concreto en vez de un tamaño de sensor genérico?",
         "answer": "Sí — elige \"Personalizado\" en Tamaño del sensor e introduce el ancho y el alto exactos del sensor de tu cámara en milímetros, que normalmente encontrarás en las especificaciones del fabricante."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Foto tomada con un objetivo gran angular que muestra un campo de visión amplio",
+    "exampleRightAlt": "Foto tomada con un teleobjetivo que muestra un campo de visión estrecho y acercado"
   },
   "FlashGuideNumberCalculator": {
     "cardTitle": "Número guía del flash",
@@ -1052,7 +1060,9 @@
         "question": "¿Esto tiene en cuenta el flash rebotado o los modificadores de luz?",
         "answer": "No — los números guía asumen un flash directo y sin difuminar en condiciones abiertas. Rebotar el flash en un techo o pared, o añadir un difusor o softbox, reduce la luz efectiva que llega a tu sujeto, así que normalmente necesitarás un diafragma más abierto o una distancia menor que la que sugiere esta calculadora."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Foto tomada cerca del flash, iluminada de forma brillante y uniforme",
+    "exampleRightAlt": "Foto tomada lejos del flash, que aparece oscura y subexpuesta"
   },
   "ShutterCountChecker": {
     "cardTitle": "Comprobador de disparos del obturador",
@@ -1092,7 +1102,9 @@
       }
     ],
     "supportCanon": "Canon - EOS R5, EOS R6, EOS R6 Mark II, EOS R8, EOS R50 (solo archivos CR3)",
-    "supportCanonNote": "El resto de cuerpos Canon, antiguos o nuevos, todavía no son compatibles; iremos añadiendo más a medida que se documenten."
+    "supportCanonNote": "El resto de cuerpos Canon, antiguos o nuevos, todavía no son compatibles; iremos añadiendo más a medida que se documenten.",
+    "exampleLeftAlt": "Foto de primer plano del mecanismo del obturador de una cámara",
+    "exampleRightAlt": "Foto de una cámara DSLR usada siendo inspeccionada antes de comprarla"
   },
   "GoldenHourCalculator": {
     "cardTitle": "Calculadora de hora dorada y hora azul",
@@ -1134,7 +1146,9 @@
         "question": "¿Tengo que conceder permiso de ubicación para usar esto?",
         "answer": "No — puedes introducir la latitud y la longitud manualmente y usar la calculadora sin conceder ningún permiso de ubicación."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Foto de paisaje tomada durante la hora dorada, con luz cálida y suave",
+    "exampleRightAlt": "Foto de paisaje tomada durante la hora azul, con luz fría y tenue"
   },
   "Share": {
     "deviceShare": "Compartir con el dispositivo",

@@ -5,6 +5,10 @@ import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/
 import { Link } from "@/i18n/navigation";
 import { FlashGuideNumberCalculatorCard } from "@/components/flash-guide-number-calculator-card";
 import { AdZone } from "@/components/ad-zone";
+import { ShareButton } from "@/components/share-button";
+import { ToolExampleImages } from "@/components/tools/tool-example-images";
+import { ToolImageDevPanel } from "@/components/dev/tool-image-dev-panel";
+import { getToolImages } from "@/lib/tool-images";
 
 type FaqItem = { question: string; answer: string };
 
@@ -110,6 +114,12 @@ export default async function FlashGuideNumberCalculatorPage({
         </p>
       </div>
 
+      <ToolExampleImages
+        slug="flash-guide-number-calculator"
+        leftAlt={t("exampleLeftAlt")}
+        rightAlt={t("exampleRightAlt")}
+      />
+
       <FlashGuideNumberCalculatorCard />
 
       <AdZone
@@ -120,9 +130,16 @@ export default async function FlashGuideNumberCalculatorPage({
       />
 
       <section className="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
-        <h2 className="text-base font-semibold text-foreground">
-          {t("aboutTitle")}
-        </h2>
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="text-base font-semibold text-foreground">
+            {t("aboutTitle")}
+          </h2>
+          <ShareButton
+            title={t("pageTitle")}
+            text={t("pageDescription")}
+            url={`${SITE_URL}/${locale}/tools/flash-guide-number-calculator`}
+          />
+        </div>
         <p>{t("aboutBody")}</p>
         <p className="text-xs">{t("disclaimer")}</p>
       </section>
@@ -148,6 +165,15 @@ export default async function FlashGuideNumberCalculatorPage({
           </details>
         ))}
       </section>
+
+      {process.env.NODE_ENV === "development" ? (
+        <ToolImageDevPanel
+          slug="flash-guide-number-calculator"
+          left={getToolImages("flash-guide-number-calculator").left}
+          right={getToolImages("flash-guide-number-calculator").right}
+          defaultQuery="on-camera flash portrait photography"
+        />
+      ) : null}
     </div>
   );
 }

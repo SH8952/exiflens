@@ -8,6 +8,7 @@ import { ToolExampleImages } from "@/components/tools/tool-example-images";
 import { ToolImageDevPanel } from "@/components/dev/tool-image-dev-panel";
 import { getToolImages } from "@/lib/tool-images";
 import { AdZone } from "@/components/ad-zone";
+import { ShareButton } from "@/components/share-button";
 
 type FaqItem = { question: string; answer: string };
 
@@ -129,9 +130,16 @@ export default async function CropFactorCalculatorPage({
       />
 
       <section className="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
-        <h2 className="text-base font-semibold text-foreground">
-          {t("aboutTitle")}
-        </h2>
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="text-base font-semibold text-foreground">
+            {t("aboutTitle")}
+          </h2>
+          <ShareButton
+            title={t("pageTitle")}
+            text={t("pageDescription")}
+            url={`${SITE_URL}/${locale}/tools/crop-factor-calculator`}
+          />
+        </div>
         <p>{t("aboutBody")}</p>
         <p className="text-xs">{t("disclaimer")}</p>
       </section>

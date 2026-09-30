@@ -1,6 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { webApplicationJsonLd, SITE_URL } from "@/lib/seo";
-import { ShareButton } from "@/components/share-button";
+import { webApplicationJsonLd } from "@/lib/seo";
 import { AdZone } from "@/components/ad-zone";
 import { ExifUploader } from "@/components/exif-uploader";
 import { ExifPanel } from "@/components/exif-panel";
@@ -37,11 +36,6 @@ export default async function HomePage({
         <p className="mx-auto max-w-2xl text-muted-foreground">
           {t("subtitle")}
         </p>
-        <ShareButton
-          title={t("title")}
-          text={t("subtitle")}
-          url={`${SITE_URL}/${locale}`}
-        />
       </div>
 
       {/* Section 1: Image Dropzone */}

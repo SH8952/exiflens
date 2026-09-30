@@ -904,7 +904,9 @@
         "question": "Can I use a custom sensor size?",
         "answer": "Yes — choose \"Custom\" under Sensor Size and enter your own circle of confusion value in millimeters."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Landscape photo focused at the hyperfocal distance, sharp from the foreground to infinity",
+    "exampleRightAlt": "Landscape photo focused too close, leaving the distant background out of focus"
   },
   "Sunny16Calculator": {
     "cardTitle": "Sunny 16 Exposure",
@@ -940,7 +942,9 @@
         "question": "What if I want a specific shutter speed instead of a specific aperture?",
         "answer": "Pick the aperture that gives you a shutter speed close to what you want — since the underlying math is stop-for-stop, you can also work backward from a target shutter speed using our exposure triangle calculator."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Photo taken outdoors in bright, direct sunlight",
+    "exampleRightAlt": "Photo taken outdoors under overcast, cloudy skies"
   },
   "AdvancedDofDiffractionCalculator": {
     "cardTitle": "Advanced DoF & Diffraction",
@@ -980,7 +984,9 @@
         "question": "Should I avoid diffraction-limited apertures entirely?",
         "answer": "Not necessarily — depth of field is often more important to the final image than the small amount of softening near the diffraction limit. It matters most when you need maximum resolved detail, such as large prints or heavy crops."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Photo shot at a wide aperture with sharp detail and shallow depth of field",
+    "exampleRightAlt": "Photo shot at a very narrow aperture, softened by diffraction across the whole frame"
   },
   "CameraFovCalculator": {
     "cardTitle": "Camera Field of View",
@@ -1014,7 +1020,9 @@
         "question": "Can I use this for a specific camera model instead of a general sensor size?",
         "answer": "Yes — select \"Custom\" under Sensor Size and enter your camera's exact sensor width and height in millimeters, which you can usually find in its manufacturer specifications."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Photo taken with a wide-angle lens showing a broad field of view",
+    "exampleRightAlt": "Photo taken with a telephoto lens showing a narrow, zoomed-in field of view"
   },
   "FlashGuideNumberCalculator": {
     "cardTitle": "Flash Guide Number",
@@ -1052,7 +1060,9 @@
         "question": "Does this account for bounce flash or light modifiers?",
         "answer": "No — guide numbers assume direct, undiffused flash in open conditions. Bouncing the flash off a ceiling or wall, or adding a diffuser/softbox, reduces the effective light reaching your subject, so you'll typically need a wider aperture or closer distance than this calculator suggests."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Photo taken close to the flash, evenly and brightly lit",
+    "exampleRightAlt": "Photo taken far from the flash, appearing dim and underexposed"
   },
   "ShutterCountChecker": {
     "cardTitle": "Shutter Count Checker",
@@ -1092,7 +1102,9 @@
       }
     ],
     "supportCanon": "Canon - EOS R5, EOS R6, EOS R6 Mark II, EOS R8, EOS R50 (CR3 files only)",
-    "supportCanonNote": "Every other Canon body, old or new, isn't supported yet — we'll add more as they're documented."
+    "supportCanonNote": "Every other Canon body, old or new, isn't supported yet — we'll add more as they're documented.",
+    "exampleLeftAlt": "Close-up photo of a camera's shutter mechanism",
+    "exampleRightAlt": "Photo of a used DSLR camera body being inspected before purchase"
   },
   "GoldenHourCalculator": {
     "cardTitle": "Golden Hour & Blue Hour Calculator",
@@ -1134,7 +1146,9 @@
         "question": "Do I have to grant location permission to use this?",
         "answer": "No — you can enter latitude and longitude manually and use the calculator without granting location permission at all."
       }
-    ]
+    ],
+    "exampleLeftAlt": "Landscape photo taken during golden hour with warm, soft light",
+    "exampleRightAlt": "Landscape photo taken during blue hour with cool, dim light"
   },
   "Share": {
     "deviceShare": "Share via device",

@@ -1,3 +1,23 @@
+## 2026-09-30 — 공유하기 버튼 위치 조정 + 도구 페이지 16개 전체 확대 + 신규 도구 7개 예시 이미지 기능 추가
+
+**배경**
+- 사용자가 실제 배포 후 화면을 직접 확인하며 3가지 후속 수정을 요청: (1) 홈페이지 공유하기 버튼 위치를 상단에서 푸터로 이동, (2) 계산기 도구 페이지 16개 전체에 공유하기 버튼이 없는 문제 해결, (3) 최근에 추가된 도구 7개에 "개발자용 예시 이미지 관리" 기능이 빠져 있어 이미지를 추가할 수 없는 문제 해결.
+- 각 항목을 코드로 먼저 확인(정확한 파일 목록·기존 패턴 조사)한 뒤 사용자에게 재확인 질문(특히 공용 푸터 컴포넌트 특성상 "홈페이지에만 노출 vs 전체 페이지 노출" 범위 확인)을 거쳐 승인("모두 그대로 진행해줘") 후 착수.
+
+**변경 사항**
+- `src/components/site-footer.tsx`: 클라이언트 컴포넌트로 전환, `usePathname()`으로 홈페이지(`/`) 여부를 판별해 홈페이지에서만 "문의하기" 링크와 RSS 아이콘 사이에 공유하기 버튼(`variant="ghost"`)을 노출. 다른 모든 페이지의 푸터는 기존과 동일.
+- `src/app/[locale]/page.tsx`: 상단(부연설명 아래)에 있던 공유하기 버튼 제거(푸터로 이동했으므로 중복 제거).
+- 도구 페이지 16개(`dof-calculator`, `golden-hour-calculator`, `shutter-count-checker` 등 사이트에 구현된 전체 계산기) 전부에 "이 계산기에 대해" 제목 옆(같은 줄 오른쪽)에 공유하기 버튼 신규 추가.
+- 그중 최근에 추가되어 예시 이미지 기능이 없던 7개 도구(`advanced-dof-diffraction-calculator`, `camera-fov-calculator`, `dof-hyperfocal-table`, `flash-guide-number-calculator`, `golden-hour-calculator`, `shutter-count-checker`, `sunny-16-calculator`)에 기존 9개 도구와 동일한 방식으로 `ToolExampleImages`(예시 이미지 2장 표시) + `ToolImageDevPanel`(로컬 개발 서버 전용 이미지 검색/적용 도구)을 추가. 4개 언어(en/ko/ja/es) 메시지에 각 도구별 `exampleLeftAlt`/`exampleRightAlt` 신규 작성(총 56개 키).
+
+**검증**
+- `npx tsc --noEmit`, `npx eslint` 통과.
+- 로컬 dev 서버(port 3010)에서 홈페이지·도구 페이지 전체(신규 7개 포함) curl 스모크 테스트로 200 응답 확인. 홈페이지 푸터에는 공유하기 버튼이 노출되고, 도구 페이지(`dof-calculator` 등) 푸터에는 노출되지 않는 것을 응답 HTML로 직접 확인(의도한 "홈페이지 전용" 범위가 코드대로 동작함을 확인). 신규 7개 도구 페이지에서 "예시 이미지 관리 (DEV)" 버튼이 정상적으로 뜨는 것도 확인.
+
+**남은 과제**
+- 이번 작업(exifnd.com)에 이어 flydronemap.com / firelic.com 이식은 계획서(`claude/social-share-feature-plan.md`)에 따라 계속 다음 단계로 진행 예정.
+- 신규 7개 도구는 예시 이미지가 아직 비어 있는 상태(코드는 준비됐지만 실제 사진은 미선택) — 사용자가 로컬 개발 서버에서 "예시 이미지 관리 (DEV)" 버튼으로 직접 선택해야 함(기존 9개 도구와 동일한 절차).
+
 ## 2026-09-30 — 사이트 공통 "공유하기" 기능 신규 추가 (exifnd.com 파일럿)
 
 **배경**
