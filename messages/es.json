@@ -1135,5 +1135,12 @@
         "answer": "No — puedes introducir la latitud y la longitud manualmente y usar la calculadora sin conceder ningún permiso de ubicación."
       }
     ]
+  },
+  "Share": {
+    "deviceShare": "Compartir con el dispositivo",
+    "button": "Compartir",
+    "copyLink": "Copiar enlace",
+    "copied": "Copiado",
+    "viewOnWeb": "Ver en la web"
   }
 }

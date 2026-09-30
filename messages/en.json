@@ -1135,5 +1135,12 @@
         "answer": "No — you can enter latitude and longitude manually and use the calculator without granting location permission at all."
       }
     ]
+  },
+  "Share": {
+    "deviceShare": "Share via device",
+    "button": "Share",
+    "copyLink": "Copy link",
+    "copied": "Copied",
+    "viewOnWeb": "View on web"
   }
 }

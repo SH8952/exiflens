@@ -26,6 +26,9 @@ import { useCountdownTimer } from "@/hooks/use-countdown-timer";
 import { useExifStore } from "@/store/exif-store";
 import { useNdCalculatorStore } from "@/store/nd-calculator-store";
 import { cn } from "@/lib/utils";
+import { useRouter, usePathname } from "next/navigation";
+import { SITE_URL } from "@/lib/seo";
+import { ShareButton } from "@/components/share-button";
 
 export function NdCalculatorCard() {
   const t = useTranslations("Home");
@@ -54,6 +57,61 @@ export function NdCalculatorCard() {
     }
   }, [exifStatus, exifData, autoFillFromExif]);
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const hydratedFromUrl = React.useRef(false);
+
+  // One-time hydration from the URL on first mount, so a shared link
+  // ("share this exact result") reproduces the same calculator state for
+  // whoever opens it. Reads window.location directly (rather than
+  // useSearchParams) so this stays a plain client-only effect and the
+  // home page keeps being statically generated.
+  React.useEffect(() => {
+    if (hydratedFromUrl.current) return;
+    hydratedFromUrl.current = true;
+
+    const params = new URLSearchParams(window.location.search);
+
+    const paramBase = params.get("nd_b");
+    if (paramBase) {
+      const seconds = Number(paramBase);
+      if (Number.isFinite(seconds) && seconds > 0) setBaseSeconds(seconds);
+    }
+
+    const paramFilter = params.get("nd_f");
+    if (paramFilter && ND_FILTERS.some((filter) => filter.id === paramFilter)) {
+      setFilterId(paramFilter as typeof filterId);
+    }
+
+    const paramCustom = params.get("nd_c");
+    if (paramCustom) {
+      const stopsValue = Number(paramCustom);
+      if (Number.isFinite(stopsValue)) {
+        setCustomStops(
+          Math.min(MAX_CUSTOM_STOPS, Math.max(MIN_CUSTOM_STOPS, stopsValue)),
+        );
+      }
+    }
+    // Intentionally runs once on mount only — see hydratedFromUrl guard above.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Keep the URL in sync with the calculator inputs (debounced) so the
+  // share button always points at a link that reproduces this exact
+  // result. Uses replace (not push) so adjusting a dropdown doesn't spam
+  // the browser back-button history.
+  React.useEffect(() => {
+    const params = new URLSearchParams();
+    params.set("nd_b", String(baseSeconds));
+    params.set("nd_f", filterId);
+    if (filterId === "custom") params.set("nd_c", String(customStops));
+
+    const id = window.setTimeout(() => {
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }, 500);
+    return () => window.clearTimeout(id);
+  }, [baseSeconds, filterId, customStops, pathname, router]);
+
   const baseOptions = React.useMemo(() => {
     const presets = BASE_SHUTTER_SPEEDS_SECONDS;
     const isPreset = presets.some(
@@ -71,14 +129,27 @@ export function NdCalculatorCard() {
   const newShutterSeconds = calculateExposureSeconds(baseSeconds, stops);
   const canUseTimer = newShutterSeconds >= 1;
 
+  const shareUrl = React.useMemo(() => {
+    const params = new URLSearchParams();
+    params.set("nd_b", String(baseSeconds));
+    params.set("nd_f", filterId);
+    if (filterId === "custom") params.set("nd_c", String(customStops));
+    return `${SITE_URL}${pathname}?${params.toString()}`;
+  }, [baseSeconds, filterId, customStops, pathname]);
+
+  const shareText = `${formatShutterSpeed(baseSeconds)} \u2192 ${formatExposureDuration(newShutterSeconds)} (${selectedFilter.label})`;
+
   const { status: timerStatus, remainingSeconds, start, reset } =
     useCountdownTimer(newShutterSeconds);
 
   return (
     <div className="rounded-xl border border-border bg-card p-5">
-      <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-        {t("ndSectionTitle")}
-      </h2>
+      <div className="mb-4 flex items-center justify-between gap-2">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          {t("ndSectionTitle")}
+        </h2>
+        <ShareButton title={t("ndSectionTitle")} text={shareText} url={shareUrl} />
+      </div>
       <div className="flex flex-col gap-3 text-sm">
         <label className="flex flex-col gap-1.5">
           <span className="text-muted-foreground">{t("baseShutter")}</span>
