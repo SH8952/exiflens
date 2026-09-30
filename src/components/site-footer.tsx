@@ -43,6 +43,7 @@ export function SiteFooter() {
               url={`${SITE_URL}/${locale}`}
               variant="ghost"
               size="sm"
+              menuPlacement="top"
             />
           ) : null}
           <a
