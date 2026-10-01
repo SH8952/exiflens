@@ -1,0 +1,40 @@
+---
+title: "Cómo comparar el tamaño de archivo RAW y JPEG con la calculadora de almacenamiento"
+description: "Todo el mundo sabe que el RAW ocupa más espacio que el JPEG, pero pocas personas calculan cuánto más exactamente, ni cómo esa diferencia cambia cuántas fotos entran en una tarjeta. Esto es lo que revelan los formatos preestablecidos y la entrada personalizada de la calculadora de almacenamiento al multiplicarlos por una sesión real."
+publishedAt: "2026-10-01"
+tags: ["calculadora de almacenamiento", "tamaño de archivo RAW", "compresión JPEG"]
+category: "Almacenamiento y copias de seguridad"
+image: "/guides/images/storage-calculator-raw-vs-jpeg.webp"
+imageCredit: "Maksym Kaharlytskyi"
+imageCreditUrl: "https://unsplash.com/@qwitka?utm_source=ExifLens&utm_medium=referral"
+---
+
+Saber que el RAW ocupa más espacio que el JPEG no es lo mismo que saber cuánto más, ni lo que esa diferencia significa para cuántas fotos entran realmente en una tarjeta. El campo de formato de la [calculadora de almacenamiento](/tools/storage-calculator) permite elegir entre JPEG, RAW comprimido, RAW sin comprimir o un valor personalizado, y al multiplicar el tamaño base de cada preajuste (unos 8MB para JPEG, 30MB para RAW comprimido, 65MB para RAW sin comprimir) por un número real de disparos, la diferencia resulta mayor de lo que parece a simple vista.
+
+## Por qué el RAW comprimido y el sin comprimir difieren en más del doble
+
+El JPEG es un formato con pérdida que descarta deliberadamente detalles que el ojo apenas nota, lo que le permite bajar a unos 8MB por disparo — pero esos datos descartados no se pueden recuperar. El RAW comprimido conserva todo lo que capturó el sensor y solo aplica compresión sin pérdida, quedando en unos 30MB — más que el JPEG, pero sin perder nada. El RAW sin comprimir registra la misma información del sensor sin ningún paso de compresión, por lo que sube hasta unos 65MB — la misma información que el RAW comprimido, solo que sin pasar por un algoritmo de compresión. Es una diferencia de método de almacenamiento, no de calidad de imagen.
+
+## Lo que muestra en números una boda real de 2.000 fotos
+
+Suponiendo una sesión de boda típica de unas 2.000 fotos e introduciéndola en la calculadora: el JPEG necesita unos 16GB, el RAW comprimido unos 60GB y el RAW sin comprimir unos 130GB. Frente a una sola tarjeta de 128GB, el JPEG deja mucho margen, el RAW comprimido casi la llena por completo, y el RAW sin comprimir ni siquiera cabe en una sola tarjeta para el día completo (128GB ÷ 65MB ≈ 1.969 disparos). Hacer este cálculo antes de decidir el formato evita quedarte cambiando tarjetas a mitad de la sesión y perder momentos.
+
+## También afecta al búfer y a la velocidad de escritura de la tarjeta
+
+Un archivo más grande llena el búfer interno de la cámara más rápido. Los archivos RAW sin comprimir son más del doble de tamaño que el RAW comprimido, así que con la misma capacidad de búfer, el disparo continuo lo llena en aproximadamente la mitad de fotos, provocando antes la ralentización. En géneros donde las rachas importan — deportes, fauna salvaje — el tamaño de archivo y la velocidad de escritura de la tarjeta (UHS-II y similares) hay que considerarlos juntos.
+
+## Usa el campo personalizado para calcular RAW+JPEG simultáneo
+
+Muchas cámaras pueden guardar RAW y JPEG a la vez, y el almacenamiento que necesitas en ese caso es simplemente la suma de ambos tamaños. Introduce 38MB (30MB de RAW comprimido + 8MB de JPEG) en el campo personalizado de la calculadora para obtener un total preciso de esta combinación, que no está entre los preajustes. Es la cifra que debes usar si quieres tener RAW para editar y un JPEG listo para compartir de la misma sesión, sin subestimar el espacio de tarjeta que realmente necesitas.
+
+## Cómo decidir qué formato conviene a la sesión
+
+Si ajustas con frecuencia la exposición o el balance de blancos en la posproducción, el RAW es la opción correcta. Si haces eventos o deportes de alto volumen que hay que entregar rápido con poca edición, el JPEG es más realista. Para sesiones que mezclan ambas necesidades, puedes disparar en RAW solo en los momentos que importan y en JPEG el resto, o guardar RAW+JPEG juntos y borrar después los RAW que no llegues a editar. En cualquier caso, comprobar antes en la calculadora el número de disparos previsto y el tamaño por formato permite planificar tarjetas y copias de seguridad con cifras reales en vez de una estimación.
+
+## Lista de comprobación práctica
+
+- Comprueba primero en la calculadora el tamaño por disparo de JPEG, RAW comprimido y RAW sin comprimir.
+- Introduce tu número de disparos previsto para comparar el almacenamiento total y las tarjetas necesarias entre formatos.
+- Si haces muchas rachas de disparo continuo, recuerda que los archivos más grandes llenan el búfer — y provocan la ralentización — antes.
+- Si disparas en RAW+JPEG a la vez, usa el campo personalizado sumando ambos tamaños para un total preciso.
+- Decide de antemano RAW, JPEG o una combinación según cuánto vayas a editar y cuántos disparos esperas.

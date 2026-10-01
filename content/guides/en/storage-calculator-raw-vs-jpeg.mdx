@@ -1,0 +1,40 @@
+---
+title: "Comparing RAW vs JPEG File Sizes with the Storage Calculator"
+description: "Everyone knows RAW takes more space than JPEG, but few people run the actual numbers to see how much more — or how that gap changes how many shots fit on a card. Here's what the storage calculator's format presets and custom input reveal once you multiply them by a real shoot."
+publishedAt: "2026-10-01"
+tags: ["storage calculator", "RAW file size", "JPEG compression"]
+category: "Storage & Backup"
+image: "/guides/images/storage-calculator-raw-vs-jpeg.webp"
+imageCredit: "Maksym Kaharlytskyi"
+imageCreditUrl: "https://unsplash.com/@qwitka?utm_source=ExifLens&utm_medium=referral"
+---
+
+Knowing that RAW takes up more room than JPEG isn't the same as knowing how much more, or what that gap means for how many shots actually fit on a card. The [Storage calculator](/tools/storage-calculator)'s format field lets you pick JPEG, compressed RAW, uncompressed RAW, or a custom value, and multiplying each preset's baseline size (about 8MB for JPEG, 30MB for compressed RAW, 65MB for uncompressed RAW) by a real shot count shows a gap that's bigger than it feels.
+
+## Why compressed and uncompressed RAW differ by more than double
+
+JPEG is a lossy format that deliberately throws away detail the eye barely notices, which is how it gets down to about 8MB per shot — but that discarded data can never be recovered. Compressed RAW keeps every bit of what the sensor captured and only applies lossless compression on top, landing around 30MB — bigger than JPEG, but with nothing thrown away. Uncompressed RAW records the same sensor data with no compression step at all, which is why it climbs to roughly 65MB — the same information as compressed RAW, just stored without running it through a compression algorithm. That's a difference in storage method, not image quality.
+
+## What a real 2,000-shot wedding day looks like in numbers
+
+Assume a typical wedding shoot of around 2,000 frames and run it through the calculator: JPEG needs about 16GB, compressed RAW about 60GB, and uncompressed RAW about 130GB. Against a single 128GB card, JPEG leaves plenty of room, compressed RAW nearly fills the card, and uncompressed RAW can't even hold the full day on one card (128GB ÷ 65MB ≈ 1,969 shots). Running this math before deciding on a format avoids getting caught swapping cards mid-shoot and missing moments.
+
+## It also affects your buffer and card write speed
+
+A larger file size fills your camera's internal buffer faster. Uncompressed RAW files are more than double the size of compressed RAW, so with the same buffer capacity, continuous shooting fills it in roughly half as many frames, triggering the slowdown sooner. For genres where bursts matter — sports, wildlife — file size and card write speed (UHS-II and similar) need to be weighed together.
+
+## Use the custom field to model RAW+JPEG simultaneous capture
+
+Many cameras can save RAW and JPEG together, and the storage you need in that case is simply the two sizes added together. Enter 38MB (30MB compressed RAW + 8MB JPEG) into the calculator's custom field to get an accurate total for this combination, which isn't one of the built-in presets. That's the number to use if you want RAW for editing and a ready-to-share JPEG from the same shoot without underestimating the card space it actually needs.
+
+## How to decide which format is right for the shoot
+
+If you regularly adjust exposure or white balance in post, RAW is the right call. If you're shooting high-volume events or sports that need to go out fast with little editing, JPEG is more realistic. For shoots that mix both needs, you can shoot RAW only for the frames that matter and JPEG for the rest, or save RAW+JPEG together and delete the RAW files you don't end up editing. Either way, checking expected shot count and format size in the calculator first means cards and backups get planned with real numbers instead of a guess.
+
+## Practical checklist
+
+- Check the per-shot size for JPEG, compressed RAW, and uncompressed RAW in the calculator before committing to a format.
+- Enter your expected shot count to compare total storage and card count across formats.
+- If you shoot a lot of continuous bursts, remember that larger files fill your buffer — and trigger slowdown — sooner.
+- If you shoot RAW+JPEG together, use the custom field with both sizes added for an accurate total.
+- Decide RAW, JPEG, or a mix ahead of time based on how much you'll edit and how many shots you expect.
