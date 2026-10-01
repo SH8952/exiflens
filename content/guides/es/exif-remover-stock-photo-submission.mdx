@@ -1,0 +1,40 @@
+---
+title: "Cómo usar el eliminador de EXIF antes de enviar fotos a bancos de imágenes"
+description: "Las guías de Adobe Stock y Shutterstock detallan los estándares de calidad y la propiedad intelectual, pero no dicen nada sobre si las coordenadas GPS o los metadatos de cámara incrustados llegan intactos al archivo que descarga el comprador. Por eso la eliminación selectiva, y no la total, es el hábito más seguro para archivos de contribuidor."
+publishedAt: "2026-10-02"
+tags: ["eliminador de EXIF", "banco de imágenes", "privacidad de metadatos"]
+category: "EXIF y compartir"
+image: "/guides/images/exif-remover-stock-photo-submission.webp"
+imageCredit: "William Bayreuther"
+imageCreditUrl: "https://unsplash.com/@wbayreuther?utm_source=ExifLens&utm_medium=referral"
+---
+
+Las guías para contribuidores de agencias como Adobe Stock y Shutterstock explican con bastante detalle los estándares técnicos de calidad y los requisitos de propiedad intelectual, pero ninguna de las dos documenta qué pasa con los metadatos ya incrustados en el archivo una vez aceptado. Ese silencio significa que decidir qué se queda y qué se elimina del archivo depende de ti antes de subirlo, no de algo que el proceso de revisión de la plataforma resuelva por ti. El [eliminador de EXIF](/tools/exif-remover) procesa los archivos enteramente en tu navegador, y en el caso de envíos a bancos de imágenes, qué campos elijas eliminar importa más que en una publicación casual en redes sociales.
+
+## Las coordenadas GPS son el riesgo más delicado en trabajo de stock con ubicación
+
+Una sesión de estilo de vida en la cocina de alguien, un set de interiores inmobiliarios o una serie de viajes sobre un "mercado local" incrustan todos coordenadas GPS precisas a pocos metros, suficiente para identificar una casa o un negocio concreto, no solo una ciudad. A diferencia de un monumento público, se trata a menudo de direcciones privadas que el propietario, el cliente o el comercio nunca aceptó que quedaran vinculadas a un archivo que ahora se distribuye a compradores desconocidos. Pasar el lote por la opción "Eliminar solo ubicación GPS" de la herramienta antes de la sesión de envío quita solo las coordenadas sin tocar el resto del archivo.
+
+## Conserva el copyright y los datos de leyenda — aquí es donde el stock se diferencia de las redes sociales
+
+Para una publicación en redes sociales, eliminarlo todo suele estar bien. Para un envío a un banco de imágenes, no lo está: el aviso de copyright IPTC y la leyenda que incrustaste son lo que vincula un posible conflicto de licencia contigo como creador original, y la mayoría de agencias conservan los campos IPTC que aporta el contribuidor en lugar de sobrescribirlos. Desactivar "Eliminar solo ubicación GPS" para pasar a la eliminación total borraría esto junto con la ubicación, así que dejar ese interruptor activado y evitar la eliminación total es la decisión más importante en este caso concreto.
+
+## Prepara el lote de envío en tandas, no archivo por archivo
+
+Un set de 60 fotos de viaje no necesita pasar por la herramienta una por una: se pueden procesar hasta 20 archivos juntos y descargarlos como un único ZIP, así que un set de 60 fotos son tres tandas antes incluso de abrir el portal de contribuidor. Hacer esta pasada antes de subir las fotos significa que todo el lote llega a la cola de envío con el mismo tratamiento de metadatos, en lugar de descubrir unos cuantos archivos sueltos sin procesar más adelante.
+
+## Eliminar metadatos aquí no añade riesgo de rechazo técnico
+
+Cuando una agencia rechaza por motivos técnicos, revisa enfoque, ruido y artefactos de compresión, y una herramienta que recomprime el JPEG mientras elimina metadatos puede introducir justo esos artefactos en un archivo que antes estaba limpio. Esta herramienta solo recorta la región de metadatos byte a byte y nunca toca los datos de píxeles, así que pasar todos los archivos por ella antes del envío no añade ningún riesgo extra a la revisión técnica.
+
+## Las exportaciones en HEIC necesitan convertirse primero
+
+ProRAW y HEIC, los formatos de captura predeterminados en muchos teléfonos, todavía no son compatibles, así que los archivos en cualquiera de los dos formatos aparecen como no reconocidos. Cambiar el formato de captura de la cámara a JPEG, o volver a exportar con la opción "Más compatible" antes del lote, evita descubrir este problema a mitad de la preparación del envío, cuando ya llevas una docena de archivos procesados.
+
+## Lista de verificación práctica
+
+- Usa "Eliminar solo ubicación GPS" para envíos a bancos de imágenes, no la eliminación total, para que sobrevivan el copyright y la leyenda IPTC.
+- Trata la eliminación de metadatos como tu propia responsabilidad; las guías publicadas para contribuidores no documentan si ocurre automáticamente.
+- Procesa hasta 20 archivos a la vez en lote y descárgalos como un único ZIP antes de una sesión de envío.
+- Pasa la herramienta antes de subir, no después de un rechazo, ya que no recomprime y no afecta a la revisión técnica.
+- Convierte primero a JPEG las capturas en HEIC o ProRAW si la herramienta las muestra como no compatibles.

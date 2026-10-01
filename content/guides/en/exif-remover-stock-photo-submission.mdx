@@ -1,0 +1,40 @@
+---
+title: "Using the EXIF Remover Before Stock Photo Submission"
+description: "Adobe Stock and Shutterstock's published guidelines focus on image quality and IP ownership and say nothing about whether embedded GPS coordinates or camera metadata survive into a buyer's download. Here's why selective removal — not full removal — is the safer habit for contributor files."
+publishedAt: "2026-10-02"
+tags: ["EXIF remover", "stock photography", "metadata privacy"]
+category: "EXIF & Sharing"
+image: "/guides/images/exif-remover-stock-photo-submission.webp"
+imageCredit: "William Bayreuther"
+imageCreditUrl: "https://unsplash.com/@wbayreuther?utm_source=ExifLens&utm_medium=referral"
+---
+
+Most contributor guidelines from agencies like Adobe Stock and Shutterstock walk through technical quality standards and intellectual property ownership in detail, but neither publishes anything about what happens to the metadata already embedded in your file once it's accepted. That silence means the decision of what stays in the file is yours to make before upload, not something the platform's review process takes care of for you. The [EXIF Remover](/tools/exif-remover) processes files entirely in your browser, and for stock submissions specifically, which fields you choose to strip matters more than it does for a casual social post.
+
+## GPS coordinates are the sharper risk in location-based stock work
+
+A lifestyle shoot in someone's kitchen, a real estate interior set, or a "local market" travel series all embed GPS coordinates precise to within a few meters — accurate enough to identify a specific house or business, not just a city. Unlike a public landmark, these are often private addresses that a homeowner, client, or business never agreed to have attached to a file now being distributed to unknown buyers. Running a batch through the tool's "Remove GPS location only" option before your submission session strips just the coordinates without touching the rest of the file.
+
+## Keep the copyright and caption data — this is where stock differs from social media
+
+For a social media upload, stripping everything is usually fine. For a stock submission, it isn't: your embedded IPTC copyright notice and caption are what ties a license-tracking dispute back to you as the original creator, and most agencies preserve contributor-supplied IPTC fields rather than overwriting them. Turning off "Remove GPS location only" would wipe that out along with the location data, so leaving that toggle on and skipping full removal is the one decision that matters most for this specific use case.
+
+## Prep a submission batch in passes, not one file at a time
+
+A 60-image travel set doesn't need to go through the tool one photo at a time — up to 20 files can be processed together and downloaded as a single ZIP, so a 60-image set is three batches rather than sixty individual uploads before you even open the contributor portal. Running this pass before uploading means every file in the batch reaches the submission queue with the same metadata treatment, instead of catching a few stragglers after the fact.
+
+## Stripping metadata here doesn't add a technical-rejection risk
+
+Agencies that reject submissions for technical reasons are checking focus, noise, and compression artifacts — and a tool that recompresses your JPEG while removing metadata can introduce exactly those artifacts into a file that was otherwise clean. This tool only trims the metadata region byte by byte and never touches the pixel data, so running every file through it before submission doesn't put technical approval at any added risk.
+
+## HEIC exports need converting first
+
+ProRAW and HEIC, the default capture formats on many phones, aren't supported yet — files in either format show up as unrecognized. Switching the camera's capture format to JPEG, or re-exporting through "Most Compatible" before the batch, avoids finding this out mid-submission-prep when you're already a dozen files in.
+
+## Practical checklist
+
+- Use "Remove GPS location only" for stock submissions — not full removal — so copyright and caption IPTC data survive.
+- Treat metadata removal as your own responsibility; published contributor guidelines don't document whether it happens automatically.
+- Batch up to 20 files at a time and download them as one ZIP before a submission session.
+- Run the tool before uploading, not after a rejection, since it doesn't recompress and won't affect technical review.
+- Convert HEIC/ProRAW captures to JPEG first if the tool shows them as unsupported.
