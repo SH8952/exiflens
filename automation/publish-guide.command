@@ -5,6 +5,9 @@
 # 이 스크립트를 계속 재사용하시면 매번 보안 경고 없이 실행됩니다.
 # 2026-09-08: 예약 작업이 결과물 6개 파일을 zip 1개로 묶어 전달하도록 변경됨에 따라,
 # 이 폴더에 zip 파일이 있으면 먼저 자동으로 압축을 풀고 진행하도록 수정.
+# 2026-10-02: 하루 2건(이상) 발행 체제에 맞춰, zip 안에 guide-*-en.mdx가 여러 개
+# 있으면 전부 반복 처리하도록 수정 (기존에는 ls ... | head -n1 로 1건만 처리해
+# 나머지 콘텐츠가 조용히 누락되는 문제가 있었음 - 2026-10-02 원인분석에서 확인).
 
 REPO="$HOME/Desktop/AdSense Affiliate Marketing/exiflens"
 SCRIPT_NAME="publish-guide.command"
@@ -90,9 +93,13 @@ if [ "$ZIP_COUNT" -gt 0 ]; then
 fi
 
 # --- 2. 발행할 콘텐츠가 있는지 확인 (스크립트와 같은 폴더에서 탐색) ---
-EN_FILE=$(ls guide-*-en.mdx 2>/dev/null | head -n1)
+# 2026-10-02: 1건만 집어오던 것을, 폴더 안의 guide-*-en.mdx 전부를 모아
+# 반복 처리하도록 변경 (하루 2건 이상 발행 시 누락 방지).
+shopt -s nullglob
+EN_FILES=(guide-*-en.mdx)
+shopt -u nullglob
 
-if [ -z "$EN_FILE" ]; then
+if [ "${#EN_FILES[@]}" -eq 0 ]; then
   if [ "$CURRENT_PATH" != "$SCRIPT_PATH" ]; then
     echo "오늘은 발행할 콘텐츠 파일이 없어 설치만 진행했습니다."
   else
@@ -104,26 +111,16 @@ if [ -z "$EN_FILE" ]; then
   exit 0
 fi
 
-SLUG="${EN_FILE#guide-}"
-SLUG="${SLUG%-en.mdx}"
+SLUGS=()
+for EN_FILE in "${EN_FILES[@]}"; do
+  SLUG="${EN_FILE#guide-}"
+  SLUG="${SLUG%-en.mdx}"
+  SLUGS+=("$SLUG")
+done
 
-TITLE=$(python3 -c "
-import json
-try:
-    q = json.load(open('new-queue.json', encoding='utf-8'))
-    topics = q['topics'] if isinstance(q, dict) and 'topics' in q else q
-    for item in topics:
-        if item.get('slug') == '$SLUG':
-            print(item.get('titleKo', ''))
-            break
-except Exception:
-    pass
-" 2>/dev/null)
-TITLE="${TITLE:-$SLUG}"
+echo "=== ExifLens 가이드 자동 발행: 오늘 ${#SLUGS[@]}건 처리 (${SLUGS[*]}) ==="
 
-echo "=== ExifLens 가이드 자동 발행: $TITLE ==="
-
-# --- 3. 작업 전 백업 (always-backup-before-work 규칙) ---
+# --- 3. 작업 전 백업 (always-backup-before-work 규칙, 이번 실행 전체에 1회만) ---
 BACKUP_DIR="$REPO/_backups/exiflens_backup_$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$REPO/_backups"
 echo "백업 생성 중: $BACKUP_DIR"
@@ -133,18 +130,64 @@ else
   cp -r "$REPO" "$BACKUP_DIR"
 fi
 
-# --- 4. 콘텐츠 반영 ---
-cp "guide-${SLUG}-en.mdx" "$REPO/content/guides/en/${SLUG}.mdx"
-cp "guide-${SLUG}-ja.mdx" "$REPO/content/guides/ja/${SLUG}.mdx"
-cp "guide-${SLUG}-ko.mdx" "$REPO/content/guides/ko/${SLUG}.mdx"
-cp "guide-${SLUG}-es.mdx" "$REPO/content/guides/es/${SLUG}.mdx"
+# --- 3.5. 큐 파일 반영 (오늘 처리할 전체 항목이 이미 반영된 상태로 전달됨, 1회만) ---
 cp "new-queue.json" "$REPO/automation/guide-topics-queue.json"
 
-# --- 4.5. 디스커버 노출 대비 대표 이미지 자동 첨부 (Unsplash) ---
-# 실패해도(네트워크 오류, API 키 없음 등) 발행 자체는 계속 진행됨 - 스크립트 내부에서 처리
-python3 "$REPO/automation/attach-guide-image.py" "$REPO" "$SLUG"
+cd "$REPO"
+[ -f .git/index.lock ] && rm -f .git/index.lock
+[ -f .git/HEAD.lock ] && rm -f .git/HEAD.lock
 
-python3 -c "
+FAILED_SLUGS=()
+
+for SLUG in "${SLUGS[@]}"; do
+  echo ""
+  echo "--- 처리 중: $SLUG ---"
+
+  # 이번 건에 필요한 4개 언어 파일이 모두 있는지 먼저 확인 (하나라도 없으면 이 건은 건너뜀)
+  MISSING=0
+  for LOCALE in en ja ko es; do
+    if [ ! -f "$SCRIPT_DIR/guide-${SLUG}-${LOCALE}.mdx" ]; then
+      echo "경고: guide-${SLUG}-${LOCALE}.mdx 가 없습니다. 이 건은 건너뜁니다."
+      MISSING=1
+    fi
+  done
+  if [ "$MISSING" -eq 1 ]; then
+    FAILED_SLUGS+=("$SLUG")
+    continue
+  fi
+
+  TITLE=$(python3 -c "
+import json
+try:
+    q = json.load(open('$SCRIPT_DIR/new-queue.json', encoding='utf-8'))
+    topics = q['topics'] if isinstance(q, dict) and 'topics' in q else q
+    for item in topics:
+        if item.get('slug') == '$SLUG':
+            print(item.get('titleKo', ''))
+            break
+except Exception:
+    pass
+" 2>/dev/null)
+  TITLE="${TITLE:-$SLUG}"
+
+  # --- 콘텐츠 반영 ---
+  cp "$SCRIPT_DIR/guide-${SLUG}-en.mdx" "$REPO/content/guides/en/${SLUG}.mdx"
+  cp "$SCRIPT_DIR/guide-${SLUG}-ja.mdx" "$REPO/content/guides/ja/${SLUG}.mdx"
+  cp "$SCRIPT_DIR/guide-${SLUG}-ko.mdx" "$REPO/content/guides/ko/${SLUG}.mdx"
+  cp "$SCRIPT_DIR/guide-${SLUG}-es.mdx" "$REPO/content/guides/es/${SLUG}.mdx"
+
+  # --- 디스커버 노출 대비 대표 이미지 자동 첨부 (Unsplash) ---
+  # 실패해도(네트워크 오류, API 키 없음 등) 발행 자체는 계속 진행됨 - 스크립트 내부에서 처리
+  python3 "$REPO/automation/attach-guide-image.py" "$REPO" "$SLUG"
+
+  IMAGE_PATH="public/guides/images/${SLUG}.webp"
+  git add "content/guides/en/${SLUG}.mdx" "content/guides/ja/${SLUG}.mdx" "content/guides/ko/${SLUG}.mdx" "content/guides/es/${SLUG}.mdx"
+  [ -f "$REPO/$IMAGE_PATH" ] && git add "$IMAGE_PATH"
+
+  # CHANGELOG는 오늘 처리하는 전체 건이 한 스니펫(changelog-snippet.txt)에 모두
+  # 들어있는 구조이므로, 여러 건을 반복 처리해도 중복 삽입되지 않도록 아래에서
+  # "이미 포함돼 있으면 건너뜀" 처리됨 (기존 로직과 동일, idempotent).
+  python3 -c "
 import pathlib
 repo = pathlib.Path('$REPO')
 changelog = repo / 'CHANGELOG.md'
@@ -157,21 +200,30 @@ if snippet_path.exists():
         content = content.replace(anchor, anchor + snippet + '\n', 1)
         changelog.write_text(content, encoding='utf-8')
 "
+  git add CHANGELOG.md automation/guide-topics-queue.json
 
-cd "$REPO"
-[ -f .git/index.lock ] && rm -f .git/index.lock
-[ -f .git/HEAD.lock ] && rm -f .git/HEAD.lock
-IMAGE_PATH="public/guides/images/${SLUG}.webp"
-git add "content/guides/en/${SLUG}.mdx" "content/guides/ja/${SLUG}.mdx" "content/guides/ko/${SLUG}.mdx" "content/guides/es/${SLUG}.mdx" automation/guide-topics-queue.json CHANGELOG.md
-[ -f "$IMAGE_PATH" ] && git add "$IMAGE_PATH"
-git commit -m "feat: 가이드 아티클 추가 - ${TITLE} (자동 발행)"
+  if ! git diff --cached --quiet; then
+    git commit -m "feat: 가이드 아티클 추가 - ${TITLE} (자동 발행)"
+  else
+    echo "경고: $SLUG 에 대해 커밋할 변경사항이 없습니다 (이미 반영된 상태일 수 있음)."
+  fi
+done
+
+echo ""
+echo "=== 전체 커밋 push 중... ==="
 git push origin main
 
 # --- 5. 정리 (스크립트 자신은 삭제하지 않음) ---
-rm -f "$SCRIPT_DIR/guide-${SLUG}-en.mdx" "$SCRIPT_DIR/guide-${SLUG}-ja.mdx" "$SCRIPT_DIR/guide-${SLUG}-ko.mdx" "$SCRIPT_DIR/guide-${SLUG}-es.mdx" "$SCRIPT_DIR/new-queue.json" "$SCRIPT_DIR/changelog-snippet.txt"
+for SLUG in "${SLUGS[@]}"; do
+  rm -f "$SCRIPT_DIR/guide-${SLUG}-en.mdx" "$SCRIPT_DIR/guide-${SLUG}-ja.mdx" "$SCRIPT_DIR/guide-${SLUG}-ko.mdx" "$SCRIPT_DIR/guide-${SLUG}-es.mdx"
+done
+rm -f "$SCRIPT_DIR/new-queue.json" "$SCRIPT_DIR/changelog-snippet.txt"
 
 echo ""
-echo "발행 완료: $TITLE"
+echo "발행 완료: ${#SLUGS[@]}건 (${SLUGS[*]})"
+if [ "${#FAILED_SLUGS[@]}" -gt 0 ]; then
+  echo "건너뛴 건 (언어별 mdx 파일 누락): ${FAILED_SLUGS[*]}"
+fi
 echo "백업 위치: $BACKUP_DIR"
 echo "3초 후 이 창이 닫힙니다."
 sleep 3
