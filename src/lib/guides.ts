@@ -125,7 +125,12 @@ export async function compileGuide(
 
   const { default: Content } = await evaluate(content, {
     ...runtime,
-    remarkPlugins: [remarkGfm],
+    // singleTilde: false — 본문에서 "~"를 범위 표기(예: "f/11~f/16", "ISO 100~200")로
+    // 자주 쓰는데, remark-gfm 기본값(singleTilde: true)은 "~" 하나만 있어도 취소선으로
+    // 해석해 같은 문단의 두 "~" 사이가 통째로 취소선이 되고 "~" 문자도 사라지는
+    // 버그가 있었음(2026-10-02 확인). "~~"(더블 틸드)로만 취소선을 인식하도록 제한.
+    // flydronemap은 2026-09-28에 동일하게 수정함. 이 옵션을 제거하지 말 것.
+    remarkPlugins: [[remarkGfm, { singleTilde: false }]],
     rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
   });
 

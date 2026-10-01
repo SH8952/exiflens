@@ -1,3 +1,18 @@
+## 2026-10-02 — 가이드 글 취소선 오표시 버그 수정 (물결표 `~` 범위 표기)
+
+**배경**
+- 사용자가 exifnd.com 가이드(`/ko/guides/night-cityscape-photography-settings`) 스크린샷에서 문장 중간이 취소선으로 표시되고 숫자가 붙어 보이는 것(예: "f/11f/16", "ISO 1003200")을 발견. 3개 사이트 전체 점검 요청.
+- 원인: `src/lib/guides.ts`가 `remark-gfm`을 옵션 없이 사용 → 기본값 `singleTilde: true`라서 `~` 하나만 있어도 취소선 기호로 해석. 본문에서 범위를 "f/11~f/16", "15~20초"처럼 `~`로 쓰면 같은 문단의 `~` 두 개가 짝이 되어 그 사이가 통째로 취소선이 되고 `~` 문자도 화면에서 사라짐. 원문 단어는 삭제된 적 없음.
+- 점검(실제 remark-gfm으로 전체 가이드 MDX 파싱): exiflens 33개 글(ko 24, ja 9) 63곳, firelic 18개 글(ko 17, ja 1) 25곳, flydronemap 14개 글 19곳(flydronemap은 9/28에 이미 같은 수정 적용). `~~` 취소선을 의도적으로 쓴 글은 0건. 상세는 프로젝트 문서 `claude/guide-strikethrough-tilde-bug-audit-2026-10-02.md`.
+
+**변경 사항**
+- `src/lib/guides.ts`: `remarkPlugins: [remarkGfm]` → `[[remarkGfm, { singleTilde: false }]]`. 이제 `~~`(더블 틸드)만 취소선으로 인식. 콘텐츠 파일은 수정하지 않음. 새로 발행되는 글(자동 발행 포함)에서도 재발하지 않음.
+
+**검증**
+- `npx tsc --noEmit`, `npx eslint src/lib/guides.ts` 통과.
+- 실제 MDX→HTML 렌더링(@mdx-js/mdx, 프로젝트 의존성 그대로)으로 전체 284개 가이드 파일을 확인: `<del>` 0건, 화면에 보이는 `~` 개수가 원문과 모두 일치(영향 글에서 "f/11~f/16"처럼 정상 표시), 렌더 오류 0건.
+- 이 환경에서는 브라우저 화면 확인은 못 함 → **배포 후 exifnd.com/ko/guides/night-cityscape-photography-settings 에서 취소선이 사라졌는지 확인 필요.**
+
 ## 2026-10-02 — 방문자 카운터 봇 판별 목록에 누락된 봇 추가
 
 **배경**
