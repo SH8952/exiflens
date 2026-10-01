@@ -18,9 +18,13 @@ const LOCAL_HOSTNAMES = new Set(["localhost", "127.0.0.1", "[::1]", "::1"]);
 // filters this same traffic out via its own built-in bot list, which is why
 // GA4's numbers and this counter's numbers diverged. Matched case-insensitively
 // against the raw User-Agent string; a generic "bot|crawler|spider" fallback
-// catches anything not explicitly named below.
+// catches anything not explicitly named below. The tail of the list covers
+// crawlers/tools whose UA has no "bot" in it: AdSense (Mediapartners-Google),
+// Search Console URL inspection, headless Chrome, Lighthouse/PageSpeed, and
+// Daum's crawler (Daumoa). Never match a bare "daum": the Daum mobile app's
+// in-app browser UA contains "DaumApps/<ver>" and those are real users.
 const BOT_UA_PATTERN =
-  /bot|crawler|spider|slurp|googlebot|bingbot|yeti|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|linkedinbot|applebot|ahrefsbot|semrushbot|mj12bot|dotbot|petalbot|gptbot|chatgpt-user|ccbot|claudebot|claude-web|anthropic-ai|perplexitybot|google-extended|bytespider|archive\.org_bot/i;
+  /bot|crawler|spider|slurp|googlebot|bingbot|yeti|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|linkedinbot|applebot|ahrefsbot|semrushbot|mj12bot|dotbot|petalbot|gptbot|chatgpt-user|ccbot|claudebot|claude-web|anthropic-ai|perplexitybot|google-extended|bytespider|archive\.org_bot|mediapartners-google|google-inspectiontool|headlesschrome|lighthouse|daumoa|daum\/\d/i;
 
 function isBotRequest(request: NextRequest): boolean {
   const ua = request.headers.get("user-agent") ?? "";

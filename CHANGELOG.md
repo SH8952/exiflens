@@ -1,3 +1,15 @@
+## 2026-10-02 — 방문자 카운터 봇 판별 목록에 누락된 봇 추가
+
+**배경**
+- 3개 사이트에 봇 카운터를 공통 적용(flydronemap·firelic 이식)하면서 접속 정보(User-Agent) 시험을 해 보니, 접속 정보에 `bot` 문구가 없는 일부 크롤러·도구가 사람으로 집계될 수 있음을 확인함.
+
+**변경 사항**
+- `src/app/api/visitor-count/route.ts`: `BOT_UA_PATTERN`에 `Mediapartners-Google`(애드센스 크롤러), `Google-InspectionTool`(서치콘솔 URL 검사), `HeadlessChrome`, `Lighthouse`(PageSpeed), 다음 검색 로봇 `Daumoa`(및 `daum/숫자` 형식)를 추가. 나머지 로직·응답 형식은 변경 없음.
+- 다음 앱 안에서 열린 페이지의 접속 정보에는 `DaumApps/<버전>`이 들어 있어 실제 사용자이므로, `daum` 단독 패턴은 넣지 않음(시험으로 DaumApps는 사람, Daumoa는 봇으로 분류됨을 확인).
+
+**검증**
+- `npx tsc --noEmit`, `npx eslint` 통과. 사람 8종·봇 9종 접속 정보 단위 시험 전부 통과. 이전 집계 값은 소급해서 분리되지 않음.
+
 ## 2026-09-30 — 푸터 공유 메뉴를 위로 열기 + 가이드 "더보기" 펼침 상태 뒤로가기 유지
 
 **배경**
