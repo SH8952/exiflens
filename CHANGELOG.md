@@ -1009,6 +1009,15 @@
 
 # 개발 이력 (Development History)
 
+## 2026-10-01 — 가이드 아티클 자동 발행: RAW/JPEG 용량 비교법 + EXIF 제거 도구 SNS 프라이버시 활용법 (예약 작업, 1일 2건)
+
+- 신규 가이드 2건을 각각 4개 언어(en/ja/ko/es)로 독립적으로 작성해 발행.
+- 1건: "저장용량 계산기로 RAW와 JPEG 용량 차이 비교하는 법"(order 43, slug: storage-calculator-raw-vs-jpeg) — 계산기의 형식 프리셋 실제 기준값(JPEG 8MB/RAW 압축 30MB/RAW 무압축 65MB)을 근거로, 압축·무압축 RAW의 용량 차이가 화질이 아니라 압축 알고리즘 적용 여부에서 온다는 점을 설명. 웨딩 촬영 2,000장 예시로 형식별 총 용량(16GB/60GB/130GB)과 128GB 카드 한 장으로 무압축 RAW는 하루 분량도 못 담는다는 구체적 계산 포함. 연속 촬영 시 파일 크기가 버퍼 소진 속도에 미치는 영향, RAW+JPEG 동시 저장 시 '직접 입력' 필드로 정확히 계산하는 법(38MB)까지 다룸. 기존에 발행된 여행용 저장공간 가이드(storage-calculator-trip-planning)와 겹치지 않도록 형식 선택 자체의 기술적 원리와 연속 촬영 버퍼 이슈에 집중. 카테고리는 기존에 없어 새로 신설: "저장 & 백업"(Storage & Backup / 保存とバックアップ / Almacenamiento y copias de seguridad).
+- 2건: "EXIF 제거 도구로 SNS 업로드 전 위치정보 지우는 법"(order 44, slug: exif-remover-social-media-privacy) — 실제 도구 옵션(GPS만 제거 vs 전체 제거, JPEG 한정 적용과 XMP 별도 저장 caveat, IPTC/저작권 정보 유지 옵션, 최대 20장 일괄 처리+ZIP 다운로드, 메타데이터 영역만 바이트 단위로 제거해 화질 손상이 없는 원리, HEIC/TIFF 미지원과 JPEG 변환 필요성)을 중심으로 실전 가이드 작성. 기존에 발행된 GPS 프라이버시 개념 가이드(gps-data-in-photos-privacy)와 겹치지 않도록 중고거래·부동산 매물 사진처럼 플랫폼이 메타데이터를 자동 제거하지 않는 구체적 위험 상황과 도구 옵션 활용법에 집중. 카테고리: 기존 "EXIF 활용 & 공유"(EXIF & Sharing / EXIF活用と共有 / EXIF y compartir) 재사용.
+- automation/guide-topics-queue.json 갱신: order 43, 44 두 항목 모두 published: true, publishedDate: "2026-10-01"(KST 기준)로 반영. 총 130개 주제 중 미발행 86개 남음(경고 기준 10개보다 충분히 여유 있음).
+- 대표 이미지(image/imageCredit/imageCreditUrl)는 이번 자동 발행 단계에서는 첨부하지 않음 — automation/publish-guide.command 실행 시 attach-guide-image.py가 Unsplash에서 자동으로 가져와 4개 언어 mdx에 삽입함(기존 동작 방식과 동일). 발행 패키지에는 두 슬러그의 mdx 파일을 함께 넣었으므로, publish-guide.command를 두 번 실행(더블클릭)하면 각 실행이 guide-*-en.mdx 중 하나씩을 처리하며 두 건 모두 정상적으로 커밋·이미지 첨부됨(첫 실행 후 창이 닫히면 남은 두 번째 주제 파일이 automation 폴더에 그대로 남아 있으므로 다시 더블클릭).
+- 빌드 검증: 클론 저장소에서 `npm run build` 성공(396개 페이지 생성, 컴파일 성공). 추가로 실제 사이트가 가이드 렌더링에 쓰는 MDX 컴파일 파이프라인(@mdx-js/mdx evaluate + gray-matter, remark-gfm, rehype-slug/autolink)으로 신규 8개 mdx 파일 전체를 직접 컴파일 테스트해 프런트매터·본문 파싱 오류가 없음을 확인(가이드 상세 페이지가 동적 라우트라 빌드 시 프리렌더되지 않는 점을 감안한 별도 검증).
+
 ## 2026-09-30 — 가이드 아티클 자동 발행: 웨딩앨범 인쇄해상도 확인법 + 여행 촬영 메모리카드 계획법 (예약 작업, 1일 2건)
 
 - 신규 가이드 2건을 각각 4개 언어(en/ja/ko/es)로 독립적으로 작성해 발행.

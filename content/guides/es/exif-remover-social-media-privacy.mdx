@@ -1,0 +1,40 @@
+---
+title: "Cómo eliminar los datos de ubicación antes de subir fotos a redes sociales con el eliminador de EXIF"
+description: "Instagram y plataformas similares eliminan el GPS automáticamente al subir una foto, pero los anuncios de compraventa, los blogs personales y los archivos adjuntos de correo suelen transmitir el archivo original tal cual. Así se usan correctamente las opciones de «solo GPS» y «eliminación completa» del eliminador de EXIF según la situación."
+publishedAt: "2026-10-01"
+tags: ["eliminador de EXIF", "privacidad en redes sociales", "eliminación de GPS"]
+category: "EXIF y compartir"
+image: "/guides/images/exif-remover-social-media-privacy.webp"
+imageCredit: "Mariia Berezovsky"
+imageCreditUrl: "https://unsplash.com/@mariiaberezovsky?utm_source=ExifLens&utm_medium=referral"
+---
+
+Acostumbrarse a plataformas como Instagram o WhatsApp, que eliminan automáticamente los metadatos al subir una foto, hace fácil suponer que cualquier subida es igual de segura. Publicar una foto directamente en una app de compraventa, adjuntar un archivo en un blog personal o en un portafolio, o enviar una foto por correo, transmite el archivo original con sus coordenadas GPS intactas. Nuestro [eliminador de EXIF](/tools/exif-remover) está pensado exactamente para estas situaciones — procesa las fotos por completo en el navegador sin enviarlas a ningún servidor —, pero obtener el resultado que realmente se busca depende de entender sus opciones.
+
+## Eliminar solo el GPS o todo depende de la situación
+
+Activar «Eliminar solo la ubicación GPS» en las opciones avanzadas borra únicamente las coordenadas y conserva el resto de los datos EXIF: modelo de cámara, objetivo y ajustes de disparo. Esto es útil para quienes quieren mantener visible la información de la toma en un portafolio por credibilidad, pero sin la ubicación. Sin embargo, esta opción solo se aplica a JPEG, y algunos archivos guardan una copia adicional de las coordenadas GPS en los datos XMP, que esta opción puede no eliminar. Si necesitas que la ubicación desaparezca con total seguridad, usa la eliminación completa en lugar de solo GPS.
+
+## Hay que tener especial cuidado con anuncios de compraventa y fotos inmobiliarias
+
+Publicar la foto de un objeto tomada dentro de casa en una app de compraventa, o entregar tal cual las fotos de un anuncio inmobiliario, significa que las coordenadas GPS incrustadas señalan la dirección exacta de esa vivienda. Estas plataformas suelen tener una verificación de identidad poco estricta y, en algunos casos, exponen el archivo original directamente, lo que aumenta el riesgo. Desactivar los servicios de ubicación en la app de la cámara antes de disparar es el hábito más seguro, pero para fotos ya tomadas, pasar una eliminación completa justo antes de subirlas cubre el mismo hueco.
+
+## Procesa hasta 20 fotos a la vez y descárgalas todas en un ZIP
+
+Antes de publicar un lote de fotos de viaje en un blog, no hace falta procesarlas una por una: se pueden subir y procesar hasta 20 archivos juntos, y descargarlos después en un único ZIP. La opción de eliminar metadatos IPTC/Photoshop viene activada por defecto; desactivarla mantiene la información de derechos de autor y los títulos mientras la ubicación sigue eliminándose, lo cual es útil si quieres distribuir las fotos conservando el crédito.
+
+## Por qué no hay pérdida de calidad
+
+Exportar una foto desde un programa de edición para quitar los metadatos a veces degrada ligeramente la calidad porque la imagen se recomprime en el proceso. Esta herramienta nunca recomprime la imagen: solo recorta byte a byte la zona donde se guardan los metadatos, dejando los datos de píxeles originales completamente intactos. Eso significa que la ubicación se elimina sin ningún compromiso de calidad.
+
+## Las fotos tomadas en HEIC deben convertirse antes a JPEG
+
+El HEIC (el formato predeterminado del iPhone) y el TIFF todavía no se pueden procesar de forma fiable solo con las capacidades estándar del navegador, así que no están soportados. Una foto de iPhone subida tal cual aparecerá como «formato no soportado» — cambia el formato de captura a JPEG en los ajustes de la cámara, o usa la opción «Más compatible» (conversión a JPEG) al compartir, antes de subirla a la herramienta.
+
+## Lista de comprobación práctica
+
+- Comprueba primero si el destino elimina los metadatos automáticamente — los anuncios de compraventa, blogs y adjuntos de correo normalmente no lo hacen.
+- Usa la eliminación completa, no solo GPS, cuando necesites que la ubicación desaparezca con total seguridad.
+- Desactiva la eliminación de IPTC si quieres conservar los derechos de autor y los títulos mientras se elimina la ubicación.
+- Para lotes como fotos de viaje, procesa hasta 20 archivos a la vez y descárgalos en un ZIP.
+- Convierte primero a JPEG las fotos HEIC del iPhone antes de subirlas a la herramienta.

@@ -384,8 +384,8 @@
       "slug": "storage-calculator-raw-vs-jpeg",
       "titleKo": "저장용량 계산기로 RAW와 JPEG 용량 차이 비교하는 법",
       "titleEn": "Comparing RAW vs JPEG File Sizes with the Storage Calculator",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-10-01",
       "mirrored": false
     },
     {
@@ -393,8 +393,8 @@
       "slug": "exif-remover-social-media-privacy",
       "titleKo": "EXIF 제거 도구로 SNS 업로드 전 위치정보 지우는 법",
       "titleEn": "Removing GPS Data Before Social Media Uploads with the EXIF Remover",
-      "published": false,
-      "publishedDate": null,
+      "published": true,
+      "publishedDate": "2026-10-01",
       "mirrored": false
     },
     {

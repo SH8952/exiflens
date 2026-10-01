@@ -1,0 +1,40 @@
+---
+title: "Removing GPS Data Before Social Media Uploads with the EXIF Remover"
+description: "Instagram and similar platforms strip GPS automatically on upload, but marketplace listings, personal blogs, and email attachments usually pass the original file straight through. Here's how to use the EXIF Remover's GPS-only and full-removal options correctly depending on the situation."
+publishedAt: "2026-10-01"
+tags: ["EXIF remover", "social media privacy", "GPS removal"]
+category: "EXIF & Sharing"
+image: "/guides/images/exif-remover-social-media-privacy.webp"
+imageCredit: "Mariia Berezovsky"
+imageCreditUrl: "https://unsplash.com/@mariiaberezovsky?utm_source=ExifLens&utm_medium=referral"
+---
+
+Getting used to platforms like Instagram or WhatsApp that automatically strip metadata on upload makes it easy to assume every upload is safe the same way. Posting a photo directly on a marketplace app, attaching a file to a personal blog or portfolio site, or emailing a photo all pass the original file through with its GPS coordinates intact. Our [EXIF Remover](/tools/exif-remover) is built for exactly these situations — it processes photos entirely in your browser without sending them to a server — but getting the result you actually want depends on understanding its options.
+
+## Whether to remove only GPS or everything depends on the situation
+
+Turning on "Remove GPS location only" in the advanced options strips just the coordinates while keeping the rest of the EXIF data — camera model, lens, and shooting settings. That's useful for photographers who want to keep shooting info visible in a portfolio for credibility while dropping location. But this option only applies to JPEG, and some files store a separate copy of GPS coordinates in the XMP data, which this option may not remove. If you need location data gone with certainty, use full removal instead of GPS-only.
+
+## Be especially careful with marketplace listings and real estate photos
+
+Posting a photo of an item taken inside your home on a resale app, or passing along real estate listing photos as-is, means the embedded GPS coordinates point to an exact home address. These platforms often have loose identity verification and sometimes expose the original file directly, which raises the stakes. Turning off location services for your camera app before shooting is the safest habit, but for photos already taken, running a full removal pass right before uploading closes the same gap.
+
+## Batch process up to 20 photos and download them all as a ZIP
+
+Before posting a batch of travel photos to a blog, there's no need to process them one at a time — up to 20 files can be uploaded and processed together, then downloaded as a single ZIP. The IPTC/Photoshop metadata removal option is on by default; turning it off keeps copyright info and captions in place while location data still gets removed, which is useful if you want to distribute photos with credit intact.
+
+## Why there's no quality loss
+
+Exporting a photo from editing software to strip metadata can sometimes degrade quality slightly because the image gets recompressed in the process. This tool never recompresses the image — it only trims the metadata region byte by byte, leaving the original pixel data completely untouched. That means location data comes off without any quality trade-off.
+
+## Photos shot in HEIC need to be converted to JPEG first
+
+HEIC (the iPhone's default photo format) and TIFF aren't reliably handled with standard browser capabilities yet, so they're not supported. An iPhone photo uploaded as-is will show as an unsupported format — switch the camera's capture format to JPEG, or use the "Most Compatible" (JPEG conversion) option when sharing, before uploading to the tool.
+
+## Practical checklist
+
+- Check whether the destination automatically strips metadata — marketplace listings, blogs, and email attachments usually don't.
+- Use full removal rather than GPS-only when you need location data gone with certainty.
+- Turn off IPTC removal if you want to keep copyright info and captions while still stripping location.
+- For batches like travel photos, process up to 20 files at once and download them as a ZIP.
+- Convert iPhone HEIC photos to JPEG first before uploading them to the tool.
