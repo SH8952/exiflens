@@ -407,11 +407,13 @@
           "items": [
             {
               "name": "Canon EOS R5 Mark II",
-              "note": "風景、ポートレート、都市の撮影"
+              "note": "風景、ポートレート、都市の撮影",
+              "date": "2025年7月"
             },
             {
               "name": "Canon EOS R7",
-              "note": "月やマクロなど、1.6倍クロップでより大きく写したいとき(RF-S18-150mm F3.5-6.3 IS STMのレンズキット)"
+              "note": "月やマクロなど、1.6倍クロップでより大きく写したいとき(RF-S18-150mm F3.5-6.3 IS STMのレンズキット)",
+              "date": "2024年4月"
             }
           ]
         },
@@ -420,27 +422,33 @@
           "items": [
             {
               "name": "RF15-35mm F2.8 L IS USM",
-              "note": "広角ズーム"
+              "note": "広角ズーム",
+              "date": "2024年9月"
             },
             {
               "name": "RF24-70mm F2.8 L IS USM",
-              "note": "標準ズーム"
+              "note": "標準ズーム",
+              "date": "2024年6月"
             },
             {
               "name": "RF70-200mm F2.8 L IS USM",
-              "note": "望遠ズーム"
+              "note": "望遠ズーム",
+              "date": "2024"
             },
             {
               "name": "RF35mm F1.4 L VCM",
-              "note": "単焦点"
+              "note": "単焦点",
+              "date": "2025年7月"
             },
             {
               "name": "RF50mm F1.4 L VCM",
-              "note": "単焦点"
+              "note": "単焦点",
+              "date": "2025年7月"
             },
             {
               "name": "RF100mm F2.8 L MACRO IS USM",
-              "note": "マクロ"
+              "note": "マクロ",
+              "date": "2025年7月"
             }
           ]
         },
@@ -449,11 +457,13 @@
           "items": [
             {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
-              "note": "新品で購入、Canon EF-EOS Rアダプターで使用"
+              "note": "新品で購入、Canon EF-EOS Rアダプターで使用",
+              "date": "2024"
             },
             {
               "name": "Sigma 30mm F1.4 DC HSM | Art",
-              "note": "中古で購入、Canon EF-EOS Rアダプターで使用"
+              "note": "中古で購入、Canon EF-EOS Rアダプターで使用",
+              "date": "2024"
             }
           ]
         },
@@ -462,15 +472,18 @@
           "items": [
             {
               "name": "DJI Air 3S",
-              "note": "ドローン"
+              "note": "ドローン",
+              "date": "2024年10月"
             },
             {
               "name": "DJI Osmo Pocket 3",
-              "note": "ポケットサイズのジンバルカメラ"
+              "note": "ポケットサイズのジンバルカメラ",
+              "date": "2024年10月"
             },
             {
               "name": "DJI Osmo Action 4 Adventure Combo",
-              "note": "アクションカメラ"
+              "note": "アクションカメラ",
+              "date": "2024"
             }
           ]
         },
@@ -478,23 +491,36 @@
           "name": "アクセサリー",
           "items": [
             {
+              "name": "Canon マウントアダプター EF-EOS R",
+              "note": "シグマのEFマウントレンズをRシリーズのボディに装着",
+              "date": "2024年4月"
+            },
+            {
               "name": "heipi 三脚",
-              "note": ""
+              "note": "",
+              "date": "2024"
             },
             {
               "name": "HOYA 82mm UV・CPL・NDフィルターキット",
-              "note": ""
+              "note": "",
+              "date": "2024"
             },
             {
               "name": "カメラ用ドライキャビネット",
-              "note": ""
+              "note": "",
+              "date": "2024"
             }
           ]
         }
       ],
       "previousHeading": "これまでに使った機材",
       "previous": "Canon EOS 800D、EF-S 18-55mmレンズキット、Canon EF 40mm f/2.8 STM(2024年4月に売却)、DJI Mini 3 Pro(友人に贈呈)",
-      "cropLabel": "1.6倍クロップの画角が気になる方はクロップファクター計算機へ"
+      "cropLabel": "1.6倍クロップの画角が気になる方はクロップファクター計算機へ",
+      "columns": {
+        "name": "機材",
+        "use": "用途",
+        "purchased": "購入時期"
+      }
     }
   },
   "Disclosure": {

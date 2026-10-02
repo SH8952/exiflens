@@ -407,11 +407,13 @@
           "items": [
             {
               "name": "Canon EOS R5 Mark II",
-              "note": "paisajes, retratos y fotografía urbana"
+              "note": "paisajes, retratos y fotografía urbana",
+              "date": "julio de 2025"
             },
             {
               "name": "Canon EOS R7",
-              "note": "la luna, macro y cualquier situación que necesite más alcance con el recorte de 1,6x (objetivo del kit RF-S18-150mm F3.5-6.3 IS STM)"
+              "note": "la luna, macro y cualquier situación que necesite más alcance con el recorte de 1,6x (objetivo del kit RF-S18-150mm F3.5-6.3 IS STM)",
+              "date": "abril de 2024"
             }
           ]
         },
@@ -420,27 +422,33 @@
           "items": [
             {
               "name": "RF15-35mm F2.8 L IS USM",
-              "note": "zoom gran angular"
+              "note": "zoom gran angular",
+              "date": "septiembre de 2024"
             },
             {
               "name": "RF24-70mm F2.8 L IS USM",
-              "note": "zoom estándar"
+              "note": "zoom estándar",
+              "date": "junio de 2024"
             },
             {
               "name": "RF70-200mm F2.8 L IS USM",
-              "note": "zoom teleobjetivo"
+              "note": "zoom teleobjetivo",
+              "date": "2024"
             },
             {
               "name": "RF35mm F1.4 L VCM",
-              "note": "objetivo fijo"
+              "note": "objetivo fijo",
+              "date": "julio de 2025"
             },
             {
               "name": "RF50mm F1.4 L VCM",
-              "note": "objetivo fijo"
+              "note": "objetivo fijo",
+              "date": "julio de 2025"
             },
             {
               "name": "RF100mm F2.8 L MACRO IS USM",
-              "note": "macro"
+              "note": "macro",
+              "date": "julio de 2025"
             }
           ]
         },
@@ -449,11 +457,13 @@
           "items": [
             {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
-              "note": "comprado nuevo, con adaptador Canon EF-EOS R"
+              "note": "comprado nuevo, con adaptador Canon EF-EOS R",
+              "date": "2024"
             },
             {
               "name": "Sigma 30mm F1.4 DC HSM | Art",
-              "note": "comprado de segunda mano, con adaptador Canon EF-EOS R"
+              "note": "comprado de segunda mano, con adaptador Canon EF-EOS R",
+              "date": "2024"
             }
           ]
         },
@@ -462,15 +472,18 @@
           "items": [
             {
               "name": "DJI Air 3S",
-              "note": "dron"
+              "note": "dron",
+              "date": "octubre de 2024"
             },
             {
               "name": "DJI Osmo Pocket 3",
-              "note": "cámara con estabilizador de bolsillo"
+              "note": "cámara con estabilizador de bolsillo",
+              "date": "octubre de 2024"
             },
             {
               "name": "DJI Osmo Action 4 Adventure Combo",
-              "note": "cámara de acción"
+              "note": "cámara de acción",
+              "date": "2024"
             }
           ]
         },
@@ -478,23 +491,36 @@
           "name": "Accesorios",
           "items": [
             {
+              "name": "Canon Mount Adapter EF-EOS R",
+              "note": "permite montar los objetivos Sigma de montura EF en los cuerpos R",
+              "date": "abril de 2024"
+            },
+            {
               "name": "Trípode heipi",
-              "note": ""
+              "note": "",
+              "date": "2024"
             },
             {
               "name": "Kit de filtros HOYA de 82mm (UV, CPL y ND)",
-              "note": ""
+              "note": "",
+              "date": "2024"
             },
             {
               "name": "Vitrina deshumidificadora para cámara",
-              "note": ""
+              "note": "",
+              "date": "2024"
             }
           ]
         }
       ],
       "previousHeading": "Equipo anterior",
       "previous": "Canon EOS 800D, objetivo del kit EF-S 18-55mm, Canon EF 40mm f/2.8 STM (vendido en abril de 2024), DJI Mini 3 Pro (regalado a un amigo)",
-      "cropLabel": "¿Curiosidad por el recorte de 1,6x? Prueba la calculadora de factor de recorte"
+      "cropLabel": "¿Curiosidad por el recorte de 1,6x? Prueba la calculadora de factor de recorte",
+      "columns": {
+        "name": "Equipo",
+        "use": "Uso",
+        "purchased": "Compra"
+      }
     }
   },
   "Disclosure": {

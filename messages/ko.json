@@ -408,11 +408,13 @@
           "items": [
             {
               "name": "Canon EOS R5 Mark II",
-              "note": "풍경, 인물, 도심 촬영"
+              "note": "풍경, 인물, 도심 촬영",
+              "date": "2025년 7월"
             },
             {
               "name": "Canon EOS R7",
-              "note": "달, 매크로처럼 1.6배 크롭으로 더 확대가 필요할 때 (RF-S18-150mm F3.5-6.3 IS STM 렌즈킷)"
+              "note": "달, 매크로처럼 1.6배 크롭으로 더 확대가 필요할 때 (RF-S18-150mm F3.5-6.3 IS STM 렌즈킷)",
+              "date": "2024년 4월"
             }
           ]
         },
@@ -421,27 +423,33 @@
           "items": [
             {
               "name": "RF15-35mm F2.8 L IS USM",
-              "note": "광각 줌"
+              "note": "광각 줌",
+              "date": "2024년 9월"
             },
             {
               "name": "RF24-70mm F2.8 L IS USM",
-              "note": "표준 줌"
+              "note": "표준 줌",
+              "date": "2024년 6월"
             },
             {
               "name": "RF70-200mm F2.8 L IS USM",
-              "note": "망원 줌"
+              "note": "망원 줌",
+              "date": "2024"
             },
             {
               "name": "RF35mm F1.4 L VCM",
-              "note": "단렌즈"
+              "note": "단렌즈",
+              "date": "2025년 7월"
             },
             {
               "name": "RF50mm F1.4 L VCM",
-              "note": "단렌즈"
+              "note": "단렌즈",
+              "date": "2025년 7월"
             },
             {
               "name": "RF100mm F2.8 L MACRO IS USM",
-              "note": "매크로"
+              "note": "매크로",
+              "date": "2025년 7월"
             }
           ]
         },
@@ -450,11 +458,13 @@
           "items": [
             {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
-              "note": "새 제품으로 구입, Canon EF-EOS R 어댑터 사용"
+              "note": "새 제품으로 구입, Canon EF-EOS R 어댑터 사용",
+              "date": "2024"
             },
             {
               "name": "Sigma 30mm F1.4 DC HSM | Art",
-              "note": "중고로 구입, Canon EF-EOS R 어댑터 사용"
+              "note": "중고로 구입, Canon EF-EOS R 어댑터 사용",
+              "date": "2024"
             }
           ]
         },
@@ -463,15 +473,18 @@
           "items": [
             {
               "name": "DJI Air 3S",
-              "note": "드론"
+              "note": "드론",
+              "date": "2024년 10월"
             },
             {
               "name": "DJI Osmo Pocket 3",
-              "note": "휴대용 짐벌 카메라"
+              "note": "휴대용 짐벌 카메라",
+              "date": "2024년 10월"
             },
             {
               "name": "DJI Osmo Action 4 Adventure Combo",
-              "note": "액션 카메라"
+              "note": "액션 카메라",
+              "date": "2024"
             }
           ]
         },
@@ -479,23 +492,36 @@
           "name": "액세서리",
           "items": [
             {
+              "name": "Canon Mount Adapter EF-EOS R",
+              "note": "시그마 EF 마운트 렌즈를 R 시리즈 바디에 장착",
+              "date": "2024년 4월"
+            },
+            {
               "name": "heipi 삼각대",
-              "note": ""
+              "note": "",
+              "date": "2024"
             },
             {
               "name": "HOYA 82mm UV, CPL, ND 필터킷",
-              "note": ""
+              "note": "",
+              "date": "2024"
             },
             {
               "name": "카메라 제습함",
-              "note": ""
+              "note": "",
+              "date": "2024"
             }
           ]
         }
       ],
       "previousHeading": "거쳐 간 장비",
       "previous": "Canon EOS 800D, EF-S 18-55mm 렌즈킷, Canon EF 40mm f/2.8 STM(2024년 4월 판매), DJI Mini 3 Pro(친구에게 선물)",
-      "cropLabel": "1.6배 크롭 화각이 궁금하다면 크롭팩터 계산기"
+      "cropLabel": "1.6배 크롭 화각이 궁금하다면 크롭팩터 계산기",
+      "columns": {
+        "name": "장비",
+        "use": "용도",
+        "purchased": "구입 시기"
+      }
     }
   },
   "Disclosure": {

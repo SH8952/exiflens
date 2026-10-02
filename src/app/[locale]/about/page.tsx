@@ -53,7 +53,11 @@ export default async function AboutPage({
   const gear = t.raw("gear") as {
     heading: string;
     intro: string;
-    groups: { name: string; items: { name: string; note: string }[] }[];
+    columns: { name: string; use: string; purchased: string };
+    groups: {
+      name: string;
+      items: { name: string; note: string; date: string }[];
+    }[];
     previousHeading: string;
     previous: string;
     cropLabel: string;
@@ -98,23 +102,48 @@ export default async function AboutPage({
             {gear.intro}
           </p>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6">
           {gear.groups.map((group) => (
-            <div key={group.name} className="flex flex-col gap-1.5">
+            <div key={group.name} className="flex flex-col gap-2">
               <h3 className="text-sm font-semibold">{group.name}</h3>
-              <ul className="flex flex-col gap-1">
-                {group.items.map((item) => (
-                  <li
-                    key={item.name}
-                    className="text-sm leading-relaxed text-muted-foreground"
-                  >
-                    <span className="font-medium text-foreground">
-                      {item.name}
-                    </span>
-                    {item.note ? ` — ${item.note}` : null}
-                  </li>
-                ))}
-              </ul>
+              <div className="overflow-x-auto rounded-lg border">
+                <table className="w-full min-w-[32rem] text-left text-sm">
+                  <thead className="bg-muted/50 text-xs text-muted-foreground">
+                    <tr>
+                      <th scope="col" className="px-3 py-2 font-medium">
+                        {gear.columns.name}
+                      </th>
+                      <th scope="col" className="px-3 py-2 font-medium">
+                        {gear.columns.use}
+                      </th>
+                      <th
+                        scope="col"
+                        className="whitespace-nowrap px-3 py-2 font-medium"
+                      >
+                        {gear.columns.purchased}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    {group.items.map((item) => (
+                      <tr key={item.name} className="align-top">
+                        <th
+                          scope="row"
+                          className="px-3 py-2 font-medium text-foreground"
+                        >
+                          {item.name}
+                        </th>
+                        <td className="px-3 py-2 text-muted-foreground">
+                          {item.note || "—"}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-2 text-muted-foreground">
+                          {item.date}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           ))}
         </div>

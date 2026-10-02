@@ -407,11 +407,13 @@
           "items": [
             {
               "name": "Canon EOS R5 Mark II",
-              "note": "landscapes, portraits and cityscapes"
+              "note": "landscapes, portraits and cityscapes",
+              "date": "July 2025"
             },
             {
               "name": "Canon EOS R7",
-              "note": "the moon, macro and anything that needs extra reach from the 1.6x crop (RF-S18-150mm F3.5-6.3 IS STM kit lens)"
+              "note": "the moon, macro and anything that needs extra reach from the 1.6x crop (RF-S18-150mm F3.5-6.3 IS STM kit lens)",
+              "date": "April 2024"
             }
           ]
         },
@@ -420,27 +422,33 @@
           "items": [
             {
               "name": "RF15-35mm F2.8 L IS USM",
-              "note": "wide-angle zoom"
+              "note": "wide-angle zoom",
+              "date": "September 2024"
             },
             {
               "name": "RF24-70mm F2.8 L IS USM",
-              "note": "standard zoom"
+              "note": "standard zoom",
+              "date": "June 2024"
             },
             {
               "name": "RF70-200mm F2.8 L IS USM",
-              "note": "telephoto zoom"
+              "note": "telephoto zoom",
+              "date": "2024"
             },
             {
               "name": "RF35mm F1.4 L VCM",
-              "note": "prime"
+              "note": "prime",
+              "date": "July 2025"
             },
             {
               "name": "RF50mm F1.4 L VCM",
-              "note": "prime"
+              "note": "prime",
+              "date": "July 2025"
             },
             {
               "name": "RF100mm F2.8 L MACRO IS USM",
-              "note": "macro"
+              "note": "macro",
+              "date": "July 2025"
             }
           ]
         },
@@ -449,11 +457,13 @@
           "items": [
             {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
-              "note": "bought new, used with a Canon EF-EOS R adapter"
+              "note": "bought new, used with a Canon EF-EOS R adapter",
+              "date": "2024"
             },
             {
               "name": "Sigma 30mm F1.4 DC HSM | Art",
-              "note": "bought used, used with a Canon EF-EOS R adapter"
+              "note": "bought used, used with a Canon EF-EOS R adapter",
+              "date": "2024"
             }
           ]
         },
@@ -462,15 +472,18 @@
           "items": [
             {
               "name": "DJI Air 3S",
-              "note": "drone"
+              "note": "drone",
+              "date": "October 2024"
             },
             {
               "name": "DJI Osmo Pocket 3",
-              "note": "pocket gimbal camera"
+              "note": "pocket gimbal camera",
+              "date": "October 2024"
             },
             {
               "name": "DJI Osmo Action 4 Adventure Combo",
-              "note": "action camera"
+              "note": "action camera",
+              "date": "2024"
             }
           ]
         },
@@ -478,23 +491,36 @@
           "name": "Accessories",
           "items": [
             {
+              "name": "Canon Mount Adapter EF-EOS R",
+              "note": "mounts the Sigma EF-mount lenses on the R bodies",
+              "date": "April 2024"
+            },
+            {
               "name": "heipi tripod",
-              "note": ""
+              "note": "",
+              "date": "2024"
             },
             {
               "name": "HOYA 82mm UV, CPL and ND filter kit",
-              "note": ""
+              "note": "",
+              "date": "2024"
             },
             {
               "name": "Camera dehumidifier cabinet",
-              "note": ""
+              "note": "",
+              "date": "2024"
             }
           ]
         }
       ],
       "previousHeading": "Gear that came before",
       "previous": "Canon EOS 800D, EF-S 18-55mm kit lens, Canon EF 40mm f/2.8 STM (sold in April 2024), DJI Mini 3 Pro (given to a friend)",
-      "cropLabel": "Curious about the 1.6x crop? Try the crop factor calculator"
+      "cropLabel": "Curious about the 1.6x crop? Try the crop factor calculator",
+      "columns": {
+        "name": "Gear",
+        "use": "Use",
+        "purchased": "Purchased"
+      }
     }
   },
   "Disclosure": {
