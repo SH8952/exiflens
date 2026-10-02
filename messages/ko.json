@@ -358,7 +358,7 @@
       ]
     },
     "story": {
-      "heading": "내가 사진을 시작하게 된 스토리",
+      "heading": "내가 사진을 시작하게 된 이야기",
       "intro": "처음부터 사진가였던 것은 아닙니다. 쇼핑몰 상품 촬영용 카메라가 어떻게 여행과 풍경, 영상 기록으로 이어졌는지, 장비가 바뀐 순서대로 적었습니다.",
       "steps": [
         {
@@ -375,11 +375,11 @@
         },
         {
           "period": "2024년 4월",
-          "body": "장비 욕심이 생겨 800D와 EF-S 18-55mm 렌즈킷, EF 40mm f/2.8 STM, 주변 액세서리를 중고로 팔고 Canon EOS R7(RF-S18-150mm F3.5-6.3 IS STM 렌즈킷)을 샀습니다. Canon EF-EOS R 마운트 어댑터로 시그마 렌즈를 계속 썼고, 본격적으로 활동하기 위해 카메라 제습함, heipi 삼각대, HOYA 82mm UV·CPL·ND 필터킷도 갖췄습니다."
+          "body": "장비 욕심이 생겨 800D와 EF-S 18-55mm 렌즈킷, EF 40mm f/2.8 STM, 주변 액세서리를 중고로 팔고 Canon EOS R7(RF-S18-150mm F3.5-6.3 IS STM 렌즈킷)을 샀습니다. Canon 컨트롤 링 마운트 어댑터 EF-EOS R 덕분에 시그마 렌즈를 계속 쓸 수 있었습니다."
         },
         {
-          "period": "2024년 6월~9월",
-          "body": "RF24-70mm F2.8 L IS USM을 시작으로 RF15-35mm F2.8 L IS USM, RF70-200mm F2.8 L IS USM까지 광각·표준·망원 줌 렌즈를 모두 갖췄습니다. 연습과 출사를 이어 갔고, 같은 해 DJI Osmo Action 4 어드벤처 콤보를 사서 8월 태국 여행에 가져갔습니다. 9월에는 두 번째 태국 여행(6박 7일)을 다녀왔습니다. DJI Mini 3 Pro 드론으로도 틈틈이 연습했습니다."
+          "period": "2024년 5월~9월",
+          "body": "5월에는 카메라 제습함과 heipi 삼각대를 들여 본격적으로 활동할 준비를 했고, 6월에는 RF24-70mm F2.8 L IS USM과 HOYA 82mm UV·CPL·ND 필터킷을 샀습니다. 7월에는 DJI Osmo Action 4 어드벤처 콤보를 사서 8월 태국 여행에 가져갔습니다. 9월에는 RF15-35mm F2.8 L IS USM을 들였고, 두 번째 태국 여행(6박 7일)을 다녀온 월말에 RF70-200mm F2.8 L IS USM까지 더해 광각·표준·망원 줌 렌즈를 모두 갖췄습니다. DJI Mini 3 Pro 드론으로도 틈틈이 연습했습니다."
         },
         {
           "period": "2024년 10월~12월",
@@ -415,8 +415,9 @@
             },
             {
               "name": "Canon EOS R7",
-              "note": "달, 매크로처럼 1.6배 크롭으로 더 확대가 필요할 때 (RF-S18-150mm F3.5-6.3 IS STM 렌즈킷)",
-              "date": "2024년 4월"
+              "note": "달, 매크로처럼 1.6배 크롭으로 더 확대가 필요할 때",
+              "date": "2024년 4월",
+              "sub": "RF-S18-150mm F3.5-6.3 IS STM 렌즈킷"
             }
           ]
         },
@@ -466,12 +467,12 @@
             {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
               "note": "새 제품으로 구입, Canon EF-EOS R 어댑터 사용",
-              "date": "2024"
+              "date": "2024년 3월"
             },
             {
               "name": "Sigma 30mm F1.4 DC HSM | Art",
               "note": "중고로 구입, Canon EF-EOS R 어댑터 사용",
-              "date": "2024"
+              "date": "2024년 3월"
             },
             {
               "name": "SIGMA USB DOCK for Canon EF",
@@ -907,7 +908,7 @@
         }
       ],
       "previousHeading": "거쳐 간 장비",
-      "previous": "Canon EOS 800D, EF-S 18-55mm 렌즈킷, Canon EF 40mm f/2.8 STM(2024년 4월 판매), DJI Mini 3 Pro(친구에게 선물)",
+      "previous": "Canon EOS 800D, EF-S 18-55mm 렌즈킷, Canon EF 40mm f/2.8 STM, DJI Mini 3 Pro",
       "cropLabel": "1.6배 크롭 화각이 궁금하다면 크롭팩터 계산기",
       "columns": {
         "name": "장비",

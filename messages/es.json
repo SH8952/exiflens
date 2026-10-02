@@ -374,11 +374,11 @@
         },
         {
           "period": "Abril de 2024",
-          "body": "Me entró la fiebre del equipo. Vendí la 800D con su objetivo del kit EF-S 18-55mm, el EF 40mm f/2.8 STM y varios accesorios, y compré una Canon EOS R7 con el objetivo del kit RF-S18-150mm F3.5-6.3 IS STM. Un adaptador de montura Canon EF-EOS R me permitió seguir usando los Sigma y, para trabajar más en serio, añadí una vitrina deshumidificadora, un trípode heipi y un kit de filtros HOYA de 82mm (UV, CPL y ND)."
+          "body": "Me entró la fiebre del equipo. Vendí la 800D con su objetivo del kit EF-S 18-55mm, el EF 40mm f/2.8 STM y varios accesorios, y compré una Canon EOS R7 con el objetivo del kit RF-S18-150mm F3.5-6.3 IS STM. Un adaptador de montura Canon con anillo de control EF-EOS R me permitió seguir usando los Sigma."
         },
         {
-          "period": "De junio a septiembre de 2024",
-          "body": "Empecé con el RF24-70mm F2.8 L IS USM y después sumé el RF15-35mm F2.8 L IS USM y el RF70-200mm F2.8 L IS USM, con lo que tuve zooms gran angular, estándar y teleobjetivo. Practiqué y salí a fotografiar siempre que pude, y ese año compré una DJI Osmo Action 4 Adventure Combo para mi viaje de agosto a Tailandia. En septiembre llegó un segundo viaje de seis noches a Tailandia, y también practicaba con un dron DJI Mini 3 Pro."
+          "period": "De mayo a septiembre de 2024",
+          "body": "En mayo incorporé una vitrina deshumidificadora y un trípode heipi para prepararme a fotografiar más en serio, y en junio compré el RF24-70mm F2.8 L IS USM y un kit de filtros HOYA de 82mm (UV, CPL y ND). En julio compré una DJI Osmo Action 4 Adventure Combo y la llevé a mi viaje de agosto a Tailandia. En septiembre llegó el RF15-35mm F2.8 L IS USM y, tras un segundo viaje de seis noches a Tailandia, el RF70-200mm F2.8 L IS USM a finales de mes, con lo que completé los zooms gran angular, estándar y teleobjetivo. También seguí practicando con un dron DJI Mini 3 Pro."
         },
         {
           "period": "De octubre a diciembre de 2024",
@@ -414,8 +414,9 @@
             },
             {
               "name": "Canon EOS R7",
-              "note": "la luna, macro y cualquier situación que necesite más alcance con el recorte de 1,6x (objetivo del kit RF-S18-150mm F3.5-6.3 IS STM)",
-              "date": "abril de 2024"
+              "note": "la luna, macro y cualquier situación que necesite más alcance con el recorte de 1,6x",
+              "date": "abril de 2024",
+              "sub": "Objetivo del kit RF-S18-150mm F3.5-6.3 IS STM"
             }
           ]
         },
@@ -465,12 +466,12 @@
             {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
               "note": "comprado nuevo, con adaptador Canon EF-EOS R",
-              "date": "2024"
+              "date": "marzo de 2024"
             },
             {
               "name": "Sigma 30mm F1.4 DC HSM | Art",
               "note": "comprado de segunda mano, con adaptador Canon EF-EOS R",
-              "date": "2024"
+              "date": "marzo de 2024"
             },
             {
               "name": "SIGMA USB DOCK for Canon EF",
@@ -906,7 +907,7 @@
         }
       ],
       "previousHeading": "Equipo anterior",
-      "previous": "Canon EOS 800D, objetivo del kit EF-S 18-55mm, Canon EF 40mm f/2.8 STM (vendido en abril de 2024), DJI Mini 3 Pro (regalado a un amigo)",
+      "previous": "Canon EOS 800D, objetivo del kit EF-S 18-55mm, Canon EF 40mm f/2.8 STM, DJI Mini 3 Pro",
       "cropLabel": "¿Curiosidad por el recorte de 1,6x? Prueba la calculadora de factor de recorte",
       "columns": {
         "name": "Equipo",

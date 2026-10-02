@@ -374,11 +374,11 @@
         },
         {
           "period": "2024年4月",
-          "body": "機材への欲が出て、800DとEF-S 18-55mmのレンズキット、EF 40mm f/2.8 STM、周辺アクセサリーを中古で売り、Canon EOS R7(RF-S18-150mm F3.5-6.3 IS STMのレンズキット)を購入しました。Canon EF-EOS Rマウントアダプターを使ってシグマのレンズも引き続き使い、本格的に活動するためにカメラ用ドライキャビネット、heipiの三脚、HOYAの82mm UV・CPL・NDフィルターキットも揃えました。"
+          "body": "機材への欲が出て、800DとEF-S 18-55mmのレンズキット、EF 40mm f/2.8 STM、周辺アクセサリーを中古で売り、Canon EOS R7(RF-S18-150mm F3.5-6.3 IS STMのレンズキット)を購入しました。Canon コントロールリング マウントアダプター EF-EOS Rのおかげで、シグマのレンズも引き続き使えました。"
         },
         {
-          "period": "2024年6月〜9月",
-          "body": "RF24-70mm F2.8 L IS USMを皮切りに、RF15-35mm F2.8 L IS USMとRF70-200mm F2.8 L IS USMを加え、広角・標準・望遠のズームがそろいました。練習と撮影に出かける日々を続け、同じ年にDJI Osmo Action 4 アドベンチャーコンボを購入して8月のタイ旅行に持っていきました。9月には2回目のタイ旅行(6泊7日)へ。DJI Mini 3 Proのドローンでも練習していました。"
+          "period": "2024年5月〜9月",
+          "body": "5月にはカメラ用ドライキャビネットとheipiの三脚を迎えて本格的に活動する準備を整え、6月にはRF24-70mm F2.8 L IS USMとHOYAの82mm UV・CPL・NDフィルターキットを購入しました。7月にはDJI Osmo Action 4 アドベンチャーコンボを買い、8月のタイ旅行に持っていきました。9月にはRF15-35mm F2.8 L IS USMを迎え、2回目のタイ旅行(6泊7日)から戻った月末にRF70-200mm F2.8 L IS USMを加えて、広角・標準・望遠のズームがそろいました。DJI Mini 3 Proのドローンでも練習していました。"
         },
         {
           "period": "2024年10月〜12月",
@@ -414,8 +414,9 @@
             },
             {
               "name": "Canon EOS R7",
-              "note": "月やマクロなど、1.6倍クロップでより大きく写したいとき(RF-S18-150mm F3.5-6.3 IS STMのレンズキット)",
-              "date": "2024年4月"
+              "note": "月やマクロなど、1.6倍クロップでより大きく写したいとき",
+              "date": "2024年4月",
+              "sub": "RF-S18-150mm F3.5-6.3 IS STM レンズキット"
             }
           ]
         },
@@ -465,12 +466,12 @@
             {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
               "note": "新品で購入、Canon EF-EOS Rアダプターで使用",
-              "date": "2024"
+              "date": "2024年3月"
             },
             {
               "name": "Sigma 30mm F1.4 DC HSM | Art",
               "note": "中古で購入、Canon EF-EOS Rアダプターで使用",
-              "date": "2024"
+              "date": "2024年3月"
             },
             {
               "name": "SIGMA USB DOCK for Canon EF",
@@ -906,7 +907,7 @@
         }
       ],
       "previousHeading": "これまでに使った機材",
-      "previous": "Canon EOS 800D、EF-S 18-55mmレンズキット、Canon EF 40mm f/2.8 STM(2024年4月に売却)、DJI Mini 3 Pro(友人に贈呈)",
+      "previous": "Canon EOS 800D、EF-S 18-55mmレンズキット、Canon EF 40mm f/2.8 STM、DJI Mini 3 Pro",
       "cropLabel": "1.6倍クロップの画角が気になる方はクロップファクター計算機へ",
       "columns": {
         "name": "機材",

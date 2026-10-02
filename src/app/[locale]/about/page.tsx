@@ -58,7 +58,7 @@ export default async function AboutPage({
     columns: { name: string; use: string; purchased: string };
     groups: {
       name: string;
-      items: { name: string; note: string; date: string }[];
+      items: { name: string; sub?: string; note: string; date: string }[];
     }[];
     previousHeading: string;
     previous: string;
@@ -150,6 +150,11 @@ export default async function AboutPage({
                           className="px-3 py-2 font-medium text-foreground"
                         >
                           {item.name}
+                          {item.sub ? (
+                            <span className="mt-0.5 block text-xs font-normal text-muted-foreground">
+                              {item.sub}
+                            </span>
+                          ) : null}
                         </th>
                         <td className="px-3 py-2 text-muted-foreground">
                           {item.note || "—"}

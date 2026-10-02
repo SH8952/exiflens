@@ -374,11 +374,11 @@
         },
         {
           "period": "April 2024",
-          "body": "Gear fever set in. I sold the 800D with its EF-S 18-55mm kit lens, the EF 40mm f/2.8 STM and some accessories, and bought a Canon EOS R7 with the RF-S18-150mm F3.5-6.3 IS STM kit lens. A Canon EF-EOS R mount adapter let me keep using the Sigma lenses, and to work more seriously I added a camera dehumidifier cabinet, a heipi tripod and a HOYA 82mm UV, CPL and ND filter kit."
+          "body": "Gear fever set in. I sold the 800D with its EF-S 18-55mm kit lens, the EF 40mm f/2.8 STM and some accessories, and bought a Canon EOS R7 with the RF-S18-150mm F3.5-6.3 IS STM kit lens. A Canon Control Ring Mount Adapter EF-EOS R let me keep using the Sigma lenses."
         },
         {
-          "period": "June to September 2024",
-          "body": "I started with the RF24-70mm F2.8 L IS USM, then added the RF15-35mm F2.8 L IS USM and RF70-200mm F2.8 L IS USM, which gave me wide, standard and telephoto zooms. I practiced and went out shooting as often as I could, and that year I bought a DJI Osmo Action 4 Adventure Combo for my August trip to Thailand. September brought a second six-night Thailand trip, and I was also practicing with a DJI Mini 3 Pro drone."
+          "period": "May to September 2024",
+          "body": "In May I added a camera dehumidifier cabinet and a heipi tripod to get ready to shoot more seriously, and in June I bought the RF24-70mm F2.8 L IS USM and a HOYA 82mm UV, CPL and ND filter kit. In July I bought a DJI Osmo Action 4 Adventure Combo and took it on my August trip to Thailand. September brought the RF15-35mm F2.8 L IS USM and, after a second six-night Thailand trip, the RF70-200mm F2.8 L IS USM at the end of the month, which completed my wide, standard and telephoto zooms. I also kept practicing with a DJI Mini 3 Pro drone."
         },
         {
           "period": "October to December 2024",
@@ -414,8 +414,9 @@
             },
             {
               "name": "Canon EOS R7",
-              "note": "the moon, macro and anything that needs extra reach from the 1.6x crop (RF-S18-150mm F3.5-6.3 IS STM kit lens)",
-              "date": "April 2024"
+              "note": "the moon, macro and anything that needs extra reach from the 1.6x crop",
+              "date": "April 2024",
+              "sub": "RF-S18-150mm F3.5-6.3 IS STM kit lens"
             }
           ]
         },
@@ -465,12 +466,12 @@
             {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
               "note": "bought new, used with a Canon EF-EOS R adapter",
-              "date": "2024"
+              "date": "March 2024"
             },
             {
               "name": "Sigma 30mm F1.4 DC HSM | Art",
               "note": "bought used, used with a Canon EF-EOS R adapter",
-              "date": "2024"
+              "date": "March 2024"
             },
             {
               "name": "SIGMA USB DOCK for Canon EF",
@@ -906,7 +907,7 @@
         }
       ],
       "previousHeading": "Gear that came before",
-      "previous": "Canon EOS 800D, EF-S 18-55mm kit lens, Canon EF 40mm f/2.8 STM (sold in April 2024), DJI Mini 3 Pro (given to a friend)",
+      "previous": "Canon EOS 800D, EF-S 18-55mm kit lens, Canon EF 40mm f/2.8 STM, DJI Mini 3 Pro",
       "cropLabel": "Curious about the 1.6x crop? Try the crop factor calculator",
       "columns": {
         "name": "Gear",
