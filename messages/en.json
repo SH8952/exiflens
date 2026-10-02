@@ -355,6 +355,146 @@
           "alt": "Setting sun framed inside the arch of a large sculpture"
         }
       ]
+    },
+    "story": {
+      "heading": "How I Got Into Photography",
+      "intro": "I did not start out as a photographer. This is how a camera bought for shop product photos turned into travel, landscape and video work, told in the order the gear changed.",
+      "steps": [
+        {
+          "period": "2018",
+          "body": "I bought my first camera, a Canon EOS 800D, together with a Canon EF 40mm f/2.8 STM prime lens, for my online shop. I only shot product photos, so the camera saw little use, and when the business closed it drifted out of my hands."
+        },
+        {
+          "period": "February 2024",
+          "body": "On my first trip abroad, a visit to Tokyo with a friend, I caught the photography bug and pulled the old 800D back out."
+        },
+        {
+          "period": "March 2024",
+          "body": "I took the camera on my own to Tokyo. My life with a camera started after that trip. Back home I kept practicing with a Sigma 18-35mm F1.8 DC HSM | Art (bought new) and a Sigma 30mm F1.4 DC HSM | Art (bought used)."
+        },
+        {
+          "period": "April 2024",
+          "body": "Gear fever set in. I sold the 800D with its EF-S 18-55mm kit lens, the EF 40mm f/2.8 STM and some accessories, and bought a Canon EOS R7 with the RF-S18-150mm F3.5-6.3 IS STM kit lens. A Canon EF-EOS R mount adapter let me keep using the Sigma lenses, and to work more seriously I added a camera dehumidifier cabinet, a heipi tripod and a HOYA 82mm UV, CPL and ND filter kit."
+        },
+        {
+          "period": "June to September 2024",
+          "body": "I started with the RF24-70mm F2.8 L IS USM, then added the RF15-35mm F2.8 L IS USM and RF70-200mm F2.8 L IS USM, which gave me wide, standard and telephoto zooms. I practiced and went out shooting as often as I could, and that year I bought a DJI Osmo Action 4 Adventure Combo for my August trip to Thailand. September brought a second six-night Thailand trip, and I was also practicing with a DJI Mini 3 Pro drone."
+        },
+        {
+          "period": "October to December 2024",
+          "body": "I bought a DJI Air 3S and a DJI Osmo Pocket 3, and gave my Mini 3 Pro to a friend. My first month-long stay in Thailand was spent renting a motorbike and photographing all sorts of places. Many people asked to see my camera and video gear, and many asked me to take their photo."
+        },
+        {
+          "period": "April to May 2025",
+          "body": "A second month in Thailand. The country is much bigger than Korea, so there was always somewhere new to explore."
+        },
+        {
+          "period": "July 2025",
+          "body": "I added the Canon EOS R5 Mark II body, plus the RF100mm F2.8 L MACRO IS USM, RF35mm F1.4 L VCM and RF50mm F1.4 L VCM."
+        },
+        {
+          "period": "August to September 2025",
+          "body": "A third month-long stay in Thailand."
+        }
+      ]
+    },
+    "gear": {
+      "heading": "My Gear",
+      "intro": "I alternate between two camera bodies depending on what I am shooting. More accessories will be added to this list over time.",
+      "groups": [
+        {
+          "name": "Camera bodies",
+          "items": [
+            {
+              "name": "Canon EOS R5 Mark II",
+              "note": "landscapes, portraits and cityscapes"
+            },
+            {
+              "name": "Canon EOS R7",
+              "note": "the moon, macro and anything that needs extra reach from the 1.6x crop (RF-S18-150mm F3.5-6.3 IS STM kit lens)"
+            }
+          ]
+        },
+        {
+          "name": "RF lenses",
+          "items": [
+            {
+              "name": "RF15-35mm F2.8 L IS USM",
+              "note": "wide-angle zoom"
+            },
+            {
+              "name": "RF24-70mm F2.8 L IS USM",
+              "note": "standard zoom"
+            },
+            {
+              "name": "RF70-200mm F2.8 L IS USM",
+              "note": "telephoto zoom"
+            },
+            {
+              "name": "RF35mm F1.4 L VCM",
+              "note": "prime"
+            },
+            {
+              "name": "RF50mm F1.4 L VCM",
+              "note": "prime"
+            },
+            {
+              "name": "RF100mm F2.8 L MACRO IS USM",
+              "note": "macro"
+            }
+          ]
+        },
+        {
+          "name": "Adapted lenses",
+          "items": [
+            {
+              "name": "Sigma 18-35mm F1.8 DC HSM | Art",
+              "note": "bought new, used with a Canon EF-EOS R adapter"
+            },
+            {
+              "name": "Sigma 30mm F1.4 DC HSM | Art",
+              "note": "bought used, used with a Canon EF-EOS R adapter"
+            }
+          ]
+        },
+        {
+          "name": "Video and aerial",
+          "items": [
+            {
+              "name": "DJI Air 3S",
+              "note": "drone"
+            },
+            {
+              "name": "DJI Osmo Pocket 3",
+              "note": "pocket gimbal camera"
+            },
+            {
+              "name": "DJI Osmo Action 4 Adventure Combo",
+              "note": "action camera"
+            }
+          ]
+        },
+        {
+          "name": "Accessories",
+          "items": [
+            {
+              "name": "heipi tripod",
+              "note": ""
+            },
+            {
+              "name": "HOYA 82mm UV, CPL and ND filter kit",
+              "note": ""
+            },
+            {
+              "name": "Camera dehumidifier cabinet",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "previousHeading": "Gear that came before",
+      "previous": "Canon EOS 800D, EF-S 18-55mm kit lens, Canon EF 40mm f/2.8 STM (sold in April 2024), DJI Mini 3 Pro (given to a friend)",
+      "cropLabel": "Curious about the 1.6x crop? Try the crop factor calculator"
     }
   },
   "Disclosure": {

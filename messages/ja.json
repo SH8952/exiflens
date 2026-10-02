@@ -355,6 +355,146 @@
           "alt": "大きな彫刻のアーチの中に収まった夕日"
         }
       ]
+    },
+    "story": {
+      "heading": "写真を始めたきっかけ",
+      "intro": "最初から写真家だったわけではありません。ネットショップの商品撮影用だったカメラが、旅や風景、映像の記録へとつながっていった流れを、機材が変わった順に書きました。",
+      "steps": [
+        {
+          "period": "2018年",
+          "body": "ネットショップを始めるために、初めてCanon EOS 800Dと単焦点のCanon EF 40mm f/2.8 STMを購入しました。商品撮影にしか使わず出番は多くなく、事業をやめると自然にカメラから遠ざかりました。"
+        },
+        {
+          "period": "2024年2月",
+          "body": "初めての海外旅行で友人と東京を訪れたことで、写真への気持ちが強くなりました。しまっていた800Dをもう一度手に取りました。"
+        },
+        {
+          "period": "2024年3月",
+          "body": "今度は一人で東京へ出かけ、カメラを持っていきました。この旅をきっかけに、カメラのある生活が始まりました。帰国後はSigma 18-35mm F1.8 DC HSM | Art(新品)とSigma 30mm F1.4 DC HSM | Art(中古)で撮影の練習を続けました。"
+        },
+        {
+          "period": "2024年4月",
+          "body": "機材への欲が出て、800DとEF-S 18-55mmのレンズキット、EF 40mm f/2.8 STM、周辺アクセサリーを中古で売り、Canon EOS R7(RF-S18-150mm F3.5-6.3 IS STMのレンズキット)を購入しました。Canon EF-EOS Rマウントアダプターを使ってシグマのレンズも引き続き使い、本格的に活動するためにカメラ用ドライキャビネット、heipiの三脚、HOYAの82mm UV・CPL・NDフィルターキットも揃えました。"
+        },
+        {
+          "period": "2024年6月〜9月",
+          "body": "RF24-70mm F2.8 L IS USMを皮切りに、RF15-35mm F2.8 L IS USMとRF70-200mm F2.8 L IS USMを加え、広角・標準・望遠のズームがそろいました。練習と撮影に出かける日々を続け、同じ年にDJI Osmo Action 4 アドベンチャーコンボを購入して8月のタイ旅行に持っていきました。9月には2回目のタイ旅行(6泊7日)へ。DJI Mini 3 Proのドローンでも練習していました。"
+        },
+        {
+          "period": "2024年10月〜12月",
+          "body": "DJI Air 3SとDJI Osmo Pocket 3を購入し、使っていたMini 3 Proは友人に贈りました。初めてのタイ長期滞在では、バイクを借りてさまざまな場所を巡って記録しました。カメラや映像機材を見せてほしいという外国の方も、写真を撮ってほしいと頼んでくる方も大勢いました。"
+        },
+        {
+          "period": "2025年4月〜5月",
+          "body": "2回目のタイ長期滞在。タイは韓国より国土が広く、本当にいろいろな場所を旅することができました。"
+        },
+        {
+          "period": "2025年7月",
+          "body": "Canon EOS R5 Mark IIのボディに加えて、RF100mm F2.8 L MACRO IS USM、RF35mm F1.4 L VCM、RF50mm F1.4 L VCMを迎えました。"
+        },
+        {
+          "period": "2025年8月〜9月",
+          "body": "3回目のタイ長期滞在をしました。"
+        }
+      ]
+    },
+    "gear": {
+      "heading": "使用機材",
+      "intro": "撮影の目的に合わせて、2台のボディを使い分けています。リストにない周辺アクセサリーも、今後追加していく予定です。",
+      "groups": [
+        {
+          "name": "カメラボディ",
+          "items": [
+            {
+              "name": "Canon EOS R5 Mark II",
+              "note": "風景、ポートレート、都市の撮影"
+            },
+            {
+              "name": "Canon EOS R7",
+              "note": "月やマクロなど、1.6倍クロップでより大きく写したいとき(RF-S18-150mm F3.5-6.3 IS STMのレンズキット)"
+            }
+          ]
+        },
+        {
+          "name": "RFレンズ",
+          "items": [
+            {
+              "name": "RF15-35mm F2.8 L IS USM",
+              "note": "広角ズーム"
+            },
+            {
+              "name": "RF24-70mm F2.8 L IS USM",
+              "note": "標準ズーム"
+            },
+            {
+              "name": "RF70-200mm F2.8 L IS USM",
+              "note": "望遠ズーム"
+            },
+            {
+              "name": "RF35mm F1.4 L VCM",
+              "note": "単焦点"
+            },
+            {
+              "name": "RF50mm F1.4 L VCM",
+              "note": "単焦点"
+            },
+            {
+              "name": "RF100mm F2.8 L MACRO IS USM",
+              "note": "マクロ"
+            }
+          ]
+        },
+        {
+          "name": "アダプター経由のレンズ",
+          "items": [
+            {
+              "name": "Sigma 18-35mm F1.8 DC HSM | Art",
+              "note": "新品で購入、Canon EF-EOS Rアダプターで使用"
+            },
+            {
+              "name": "Sigma 30mm F1.4 DC HSM | Art",
+              "note": "中古で購入、Canon EF-EOS Rアダプターで使用"
+            }
+          ]
+        },
+        {
+          "name": "映像とドローン",
+          "items": [
+            {
+              "name": "DJI Air 3S",
+              "note": "ドローン"
+            },
+            {
+              "name": "DJI Osmo Pocket 3",
+              "note": "ポケットサイズのジンバルカメラ"
+            },
+            {
+              "name": "DJI Osmo Action 4 Adventure Combo",
+              "note": "アクションカメラ"
+            }
+          ]
+        },
+        {
+          "name": "アクセサリー",
+          "items": [
+            {
+              "name": "heipi 三脚",
+              "note": ""
+            },
+            {
+              "name": "HOYA 82mm UV・CPL・NDフィルターキット",
+              "note": ""
+            },
+            {
+              "name": "カメラ用ドライキャビネット",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "previousHeading": "これまでに使った機材",
+      "previous": "Canon EOS 800D、EF-S 18-55mmレンズキット、Canon EF 40mm f/2.8 STM(2024年4月に売却)、DJI Mini 3 Pro(友人に贈呈)",
+      "cropLabel": "1.6倍クロップの画角が気になる方はクロップファクター計算機へ"
     }
   },
   "Disclosure": {

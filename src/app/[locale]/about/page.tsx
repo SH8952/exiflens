@@ -45,9 +45,95 @@ export default async function AboutPage({
     linkLabel: string;
     items: { file: string; caption: string; alt: string }[];
   };
+  const story = t.raw("story") as {
+    heading: string;
+    intro: string;
+    steps: { period: string; body: string }[];
+  };
+  const gear = t.raw("gear") as {
+    heading: string;
+    intro: string;
+    groups: { name: string; items: { name: string; note: string }[] }[];
+    previousHeading: string;
+    previous: string;
+    cropLabel: string;
+  };
+  const allSections = t.raw("sections") as {
+    heading: string;
+    body: string[];
+  }[];
+  // 마지막 섹션(문의)은 스토리·장비·갤러리 뒤에 표시한다.
+  const contact = allSections[allSections.length - 1];
+  const mainSections = allSections.slice(0, -1);
 
   return (
-    <LegalPage title={t("title")} sections={t.raw("sections")}>
+    <LegalPage title={t("title")} sections={mainSections}>
+      <section className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-lg font-semibold tracking-tight">
+            {story.heading}
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {story.intro}
+          </p>
+        </div>
+        <ol className="flex flex-col gap-4 border-l pl-4">
+          {story.steps.map((step) => (
+            <li key={step.period} className="flex flex-col gap-1">
+              <h3 className="text-sm font-semibold">{step.period}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {step.body}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-lg font-semibold tracking-tight">
+            {gear.heading}
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {gear.intro}
+          </p>
+        </div>
+        <div className="flex flex-col gap-4">
+          {gear.groups.map((group) => (
+            <div key={group.name} className="flex flex-col gap-1.5">
+              <h3 className="text-sm font-semibold">{group.name}</h3>
+              <ul className="flex flex-col gap-1">
+                {group.items.map((item) => (
+                  <li
+                    key={item.name}
+                    className="text-sm leading-relaxed text-muted-foreground"
+                  >
+                    <span className="font-medium text-foreground">
+                      {item.name}
+                    </span>
+                    {item.note ? ` — ${item.note}` : null}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          <span className="font-semibold text-foreground">
+            {gear.previousHeading}:
+          </span>{" "}
+          {gear.previous}
+        </p>
+        <p className="text-sm">
+          <Link
+            href="/tools/crop-factor-calculator"
+            className="font-medium underline underline-offset-4"
+          >
+            {gear.cropLabel}
+          </Link>
+        </p>
+      </section>
+
       <section className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold tracking-tight">
@@ -85,6 +171,17 @@ export default async function AboutPage({
             {gallery.linkLabel}
           </Link>
         </p>
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold tracking-tight">
+          {contact.heading}
+        </h2>
+        {contact.body.map((paragraph, i) => (
+          <p key={i} className="text-sm leading-relaxed text-muted-foreground">
+            {paragraph}
+          </p>
+        ))}
       </section>
     </LegalPage>
   );

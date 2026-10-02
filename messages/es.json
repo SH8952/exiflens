@@ -355,6 +355,146 @@
           "alt": "Sol poniente enmarcado en el arco de una gran escultura"
         }
       ]
+    },
+    "story": {
+      "heading": "Cómo empecé en la fotografía",
+      "intro": "No empecé como fotógrafo. Así es como una cámara comprada para fotografiar productos de una tienda acabó llevándome a viajes, paisajes y vídeo, contado en el orden en que fue cambiando el equipo.",
+      "steps": [
+        {
+          "period": "2018",
+          "body": "Compré mi primera cámara, una Canon EOS 800D, junto con un objetivo fijo Canon EF 40mm f/2.8 STM, para mi tienda online. Solo hacía fotos de producto, así que apenas la usaba, y al cerrar el negocio fue quedando olvidada."
+        },
+        {
+          "period": "Febrero de 2024",
+          "body": "En mi primer viaje al extranjero, a Tokio con un amigo, me entró el gusanillo de la fotografía y volví a sacar la vieja 800D."
+        },
+        {
+          "period": "Marzo de 2024",
+          "body": "Viajé solo a Tokio con la cámara. Mi vida con una cámara empezó después de ese viaje. De vuelta en casa seguí practicando con un Sigma 18-35mm F1.8 DC HSM | Art (comprado nuevo) y un Sigma 30mm F1.4 DC HSM | Art (comprado de segunda mano)."
+        },
+        {
+          "period": "Abril de 2024",
+          "body": "Me entró la fiebre del equipo. Vendí la 800D con su objetivo del kit EF-S 18-55mm, el EF 40mm f/2.8 STM y varios accesorios, y compré una Canon EOS R7 con el objetivo del kit RF-S18-150mm F3.5-6.3 IS STM. Un adaptador de montura Canon EF-EOS R me permitió seguir usando los Sigma y, para trabajar más en serio, añadí una vitrina deshumidificadora, un trípode heipi y un kit de filtros HOYA de 82mm (UV, CPL y ND)."
+        },
+        {
+          "period": "De junio a septiembre de 2024",
+          "body": "Empecé con el RF24-70mm F2.8 L IS USM y después sumé el RF15-35mm F2.8 L IS USM y el RF70-200mm F2.8 L IS USM, con lo que tuve zooms gran angular, estándar y teleobjetivo. Practiqué y salí a fotografiar siempre que pude, y ese año compré una DJI Osmo Action 4 Adventure Combo para mi viaje de agosto a Tailandia. En septiembre llegó un segundo viaje de seis noches a Tailandia, y también practicaba con un dron DJI Mini 3 Pro."
+        },
+        {
+          "period": "De octubre a diciembre de 2024",
+          "body": "Compré un DJI Air 3S y una DJI Osmo Pocket 3, y regalé mi Mini 3 Pro a un amigo. Mi primera estancia de un mes en Tailandia la pasé alquilando una moto y fotografiando todo tipo de lugares. Mucha gente me pidió ver mi cámara y mi equipo de vídeo, y mucha otra me pidió que le hiciera una foto."
+        },
+        {
+          "period": "De abril a mayo de 2025",
+          "body": "Un segundo mes en Tailandia. El país es mucho más grande que Corea, así que siempre había un lugar nuevo que explorar."
+        },
+        {
+          "period": "Julio de 2025",
+          "body": "Incorporé el cuerpo Canon EOS R5 Mark II, además de los RF100mm F2.8 L MACRO IS USM, RF35mm F1.4 L VCM y RF50mm F1.4 L VCM."
+        },
+        {
+          "period": "De agosto a septiembre de 2025",
+          "body": "Una tercera estancia de un mes en Tailandia."
+        }
+      ]
+    },
+    "gear": {
+      "heading": "Mi equipo",
+      "intro": "Alterno dos cuerpos de cámara según lo que vaya a fotografiar. Iré añadiendo más accesorios a esta lista con el tiempo.",
+      "groups": [
+        {
+          "name": "Cuerpos de cámara",
+          "items": [
+            {
+              "name": "Canon EOS R5 Mark II",
+              "note": "paisajes, retratos y fotografía urbana"
+            },
+            {
+              "name": "Canon EOS R7",
+              "note": "la luna, macro y cualquier situación que necesite más alcance con el recorte de 1,6x (objetivo del kit RF-S18-150mm F3.5-6.3 IS STM)"
+            }
+          ]
+        },
+        {
+          "name": "Objetivos RF",
+          "items": [
+            {
+              "name": "RF15-35mm F2.8 L IS USM",
+              "note": "zoom gran angular"
+            },
+            {
+              "name": "RF24-70mm F2.8 L IS USM",
+              "note": "zoom estándar"
+            },
+            {
+              "name": "RF70-200mm F2.8 L IS USM",
+              "note": "zoom teleobjetivo"
+            },
+            {
+              "name": "RF35mm F1.4 L VCM",
+              "note": "objetivo fijo"
+            },
+            {
+              "name": "RF50mm F1.4 L VCM",
+              "note": "objetivo fijo"
+            },
+            {
+              "name": "RF100mm F2.8 L MACRO IS USM",
+              "note": "macro"
+            }
+          ]
+        },
+        {
+          "name": "Objetivos con adaptador",
+          "items": [
+            {
+              "name": "Sigma 18-35mm F1.8 DC HSM | Art",
+              "note": "comprado nuevo, con adaptador Canon EF-EOS R"
+            },
+            {
+              "name": "Sigma 30mm F1.4 DC HSM | Art",
+              "note": "comprado de segunda mano, con adaptador Canon EF-EOS R"
+            }
+          ]
+        },
+        {
+          "name": "Vídeo y aéreo",
+          "items": [
+            {
+              "name": "DJI Air 3S",
+              "note": "dron"
+            },
+            {
+              "name": "DJI Osmo Pocket 3",
+              "note": "cámara con estabilizador de bolsillo"
+            },
+            {
+              "name": "DJI Osmo Action 4 Adventure Combo",
+              "note": "cámara de acción"
+            }
+          ]
+        },
+        {
+          "name": "Accesorios",
+          "items": [
+            {
+              "name": "Trípode heipi",
+              "note": ""
+            },
+            {
+              "name": "Kit de filtros HOYA de 82mm (UV, CPL y ND)",
+              "note": ""
+            },
+            {
+              "name": "Vitrina deshumidificadora para cámara",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "previousHeading": "Equipo anterior",
+      "previous": "Canon EOS 800D, objetivo del kit EF-S 18-55mm, Canon EF 40mm f/2.8 STM (vendido en abril de 2024), DJI Mini 3 Pro (regalado a un amigo)",
+      "cropLabel": "¿Curiosidad por el recorte de 1,6x? Prueba la calculadora de factor de recorte"
     }
   },
   "Disclosure": {
