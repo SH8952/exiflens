@@ -980,7 +980,9 @@
     "moreGuides": "가이드 더 보기 →",
     "writtenBy": "작성",
     "updatedOn": "{date} 업데이트",
-    "authorName": "Photographer SH"
+    "authorName": "Photographer SH",
+    "pageLabel": "{page}페이지",
+    "pagination": "블로그 페이지 이동"
   },
   "Faq": {
     "title": "자주 묻는 질문",

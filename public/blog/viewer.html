@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>사진 보기</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0a0a0a; overflow: hidden; }
+  #p { display: block; width: 100vw; height: 100vh; object-fit: contain; cursor: pointer; }
+</style>
+</head>
+<body>
+<img id="p" alt="" title="클릭하면 창이 닫힙니다" />
+<script>
+  // 블로그 사진 뷰어(2026-10-02): 클릭하면 창을 닫는다. 사이트 안의 사진만 보여준다.
+  var src = new URLSearchParams(location.search).get("src") || "";
+  var img = document.getElementById("p");
+  if (/^\/blog\/images\/[A-Za-z0-9._-]+\.(webp|jpg|jpeg|png)$/.test(src)) {
+    img.src = src;
+  }
+  function closeViewer() {
+    window.close();
+    // 스크립트로 연 창이 아니면 닫히지 않을 수 있다 → 이전 화면으로 돌아간다.
+    setTimeout(function () { if (!window.closed && history.length > 1) history.back(); }, 150);
+  }
+  img.addEventListener("click", closeViewer);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeViewer(); });
+</script>
+</body>
+</html>

@@ -37,8 +37,10 @@ export type BlogFrontmatter = {
   tags?: string[];
   /** 글 분류 라벨(자유 텍스트). 같은 분류의 글이 관련 글로 우선 노출된다. */
   category?: string;
-  /** /public 아래 대표 이미지 경로(선택). */
+  /** /public 아래 대표 이미지 경로(선택). 글 상세 페이지 맨 위에 크게 표시된다. */
   image?: string;
+  /** 목록 카드·공유 미리보기(og:image)용 썸네일 경로(선택, 3:2 권장). 글 상세 페이지 본문에는 표시되지 않는다. */
+  thumbnail?: string;
   imageCredit?: string;
   imageCreditUrl?: string;
 };
@@ -88,6 +90,23 @@ export function getAllBlogMeta(): BlogMeta[] {
     .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
 }
 
+/** 목록 한 페이지에 보여줄 글 수(PC 기준 4열 × 3줄). 넘으면 하단에 1, 2, 3… 페이지로 나뉜다. */
+export const BLOG_PAGE_SIZE = 12;
+
+export function getBlogPage(page: number): {
+  posts: BlogMeta[];
+  totalPages: number;
+  total: number;
+} {
+  const all = getAllBlogMeta();
+  const totalPages = Math.max(1, Math.ceil(all.length / BLOG_PAGE_SIZE));
+  return {
+    posts: all.slice((page - 1) * BLOG_PAGE_SIZE, page * BLOG_PAGE_SIZE),
+    totalPages,
+    total: all.length,
+  };
+}
+
 /** 같은 분류 글을 우선, 모자라면 최신 글로 채운다. */
 export function getRelatedBlogPosts(currentSlug: string, limit = 3): BlogMeta[] {
   const all = getAllBlogMeta().filter((p) => p.slug !== currentSlug);
@@ -101,7 +120,10 @@ export function getRelatedBlogPosts(currentSlug: string, limit = 3): BlogMeta[] 
 
 export async function compileBlogPost(
   slug: string,
-): Promise<{ Content: ComponentType; meta: BlogMeta } | null> {
+): Promise<{
+  Content: ComponentType<{ components?: Record<string, ComponentType<never>> }>;
+  meta: BlogMeta;
+} | null> {
   const filePath = path.join(blogDir(), `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
@@ -119,7 +141,9 @@ export async function compileBlogPost(
   });
 
   return {
-    Content: Content as ComponentType,
+    Content: Content as ComponentType<{
+      components?: Record<string, ComponentType<never>>;
+    }>,
     meta: {
       ...fm,
       slug,

@@ -18,6 +18,7 @@ import {
 } from "@/lib/blog";
 import { GuideToolCta } from "@/components/guide-tool-cta";
 import { ShareButton } from "@/components/share-button";
+import { BlogPhoto } from "@/components/blog-photo";
 
 export function generateStaticParams() {
   return getBlogSlugs().map((slug) => ({ locale: BLOG_LOCALE, slug }));
@@ -48,15 +49,20 @@ export async function generateMetadata({
       url,
       publishedTime: meta.publishedAt,
       modifiedTime: meta.updatedAt ?? meta.publishedAt,
-      images: meta.image
-        ? [{ url: `${SITE_URL}${meta.image}`, width: 1600, height: 900 }]
-        : undefined,
+      images: meta.thumbnail
+        ? [{ url: `${SITE_URL}${meta.thumbnail}`, width: 1200, height: 800 }]
+        : meta.image
+          ? [{ url: `${SITE_URL}${meta.image}`, width: 1600, height: 900 }]
+          : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,
-      images: meta.image ? [`${SITE_URL}${meta.image}`] : undefined,
+      images:
+        meta.thumbnail || meta.image
+          ? [`${SITE_URL}${meta.thumbnail ?? meta.image}`]
+          : undefined,
     },
   };
 }
@@ -190,7 +196,7 @@ export default async function BlogPostPage({
       ) : null}
 
       <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-a:text-primary">
-        <Content />
+        <Content components={{ BlogPhoto }} />
       </article>
 
       <GuideToolCta locale={locale} />

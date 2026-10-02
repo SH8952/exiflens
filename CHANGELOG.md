@@ -1,3 +1,14 @@
+## 2026-10-03 — 블로그 첫 글 추가: "야간 사진 촬영 빛 갈라짐 최적의 세팅 방법"
+
+- `content/blog/ko/night-photography-light-starburst-settings.mdx` 신규 (한국어 전용, 운영자 경험 + EXIF 5건 + 등가 노출표 + 회절 설명 + FAQ).
+- `public/blog/images/night-starburst-1~5.webp` 신규 (가로 1600px, 워터마크 유지, EXIF/GPS 미포함).
+- 블로그 글이 생겨 /ko/blog 목록의 noindex가 해제되고 sitemap·RSS에 글이 포함됨. 로컬(localhost) 검증 완료 — 푸시 전.
+- 2026-10-03 수정: 발행일 2026-10-01로 변경, EXIF 표 삭제 후 사진별 하단 캡션으로 전환, 사진 5장을 본문 중간(도입부·원리·노출표·팁 3번 뒤·팁 4번 뒤)에 분산 배치.
+- 2026-10-03 추가 수정: 사진 5장에 프레임 생성기 "클래식 다크" 테마(여백 2%, 사이트와 동일 렌더러) 적용. 본문용 1600px(`night-starburst-N.webp`) + 클릭 시 열리는 큰 이미지 3328px(`night-starburst-N-full.webp`), EXIF·GPS 미포함(재인코딩). 사진 1~3은 촬영 일시 표시, 4~5는 EXIF 날짜 없어 미표시. 사진 클릭 시 새 탭 원본 보기 + 캡션 안내문, 글 끝에 프레임 생성기(/ko/frame) 안내 섹션 추가.
+- 2026-10-03 목록·캡션 개선: (1) 사진 설명 5개를 EXIF 줄 + 안내 줄의 2줄 가운데 정렬로 변경. (2) 블로그 목록을 카드 4열 그리드(모바일 1 → sm 2 → lg 3 → xl 4, 컨테이너 max-w-7xl)로 변경하고 카드 상단에 썸네일 표시. (3) 프런트매터 `thumbnail` 필드 신설(목록 카드·og:image 전용, 글 상세 본문 상단에는 미표시), 첫 글 썸네일 = 정자 사진(프레임 없음, 1200×800 webp). (4) 12개 초과 시 하단 1, 2, 3 페이지 번호(`/ko/blog/page/N`, 1페이지는 `/ko/blog`; 글 12개 이하일 땐 번호·2페이지 주소 없음). 신규: `src/components/blog-list-view.tsx`, `src/app/[locale]/blog/page/[page]/page.tsx`, 번역키 `Blog.pageLabel/pagination`(4개 언어). 더미 글 13개로 페이지 나누기 검증 후 제거.
+- 2026-10-03 캡션 간격 수정: MDX가 여러 줄 JSX 안의 줄을 각각 문단(<p>)으로 감싸 두 줄 사이가 크게 벌어지던 문제 → 한 줄 JSX(`<p className="text-center italic">{...}<br />{...}</p>`)로 바꿔 일반 본문과 같은 줄 간격으로 표시.
+- 2026-10-03 사진 클릭 동작 변경: 클릭 시 프레임 없는 큰 사진(긴 변 3200px, 워터마크 유지, EXIF·GPS 미포함; 기존 `-full.webp` 파일 교체)을 사진 크기에 맞춘 팝업 창으로 열고, 팝업 안 사진을 다시 클릭(또는 Esc)하면 창이 닫힘. 팝업이 막히면 새 탭으로 폴백, 수정키/가운데 클릭은 브라우저 기본 동작. 신규: `src/components/blog-photo.tsx`(클라이언트 컴포넌트, MDX `<BlogPhoto …/>`), `public/blog/viewer.html`(noindex, `/blog/images/…` 경로만 허용). `blog.ts`의 Content 타입과 글 상세 페이지에 `components={{ BlogPhoto }}` 연결.
+
 ## 2026-10-02 — 블로그 영역(/ko/blog) 신설 + 상단 메뉴에 "블로그" 추가
 
 **배경**: 롱테일·에버그린 주제를 다룰 공간이 없었음(가이드는 정보 전달 전용). 글은 운영자가 네이버 블로그 자동화 프로그램에서 얻은 주제와 실제 경험 메모(2~3줄)를 주면, 그 경험을 중심으로 보강해 작성하는 방식으로 운영. 한국어 전용으로 시작(대량 발행 회피 + 색인 대기열 부담 방지).

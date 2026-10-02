@@ -979,7 +979,9 @@
     "moreGuides": "ガイドをもっと見る →",
     "writtenBy": "執筆",
     "updatedOn": "{date} 更新",
-    "authorName": "Photographer SH"
+    "authorName": "Photographer SH",
+    "pageLabel": "{page}ページ",
+    "pagination": "ブログのページ移動"
   },
   "Faq": {
     "title": "よくある質問",

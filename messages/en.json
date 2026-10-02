@@ -979,7 +979,9 @@
     "moreGuides": "More guides →",
     "writtenBy": "By",
     "updatedOn": "Updated {date}",
-    "authorName": "Photographer SH"
+    "authorName": "Photographer SH",
+    "pageLabel": "Page {page}",
+    "pagination": "Blog pagination"
   },
   "Faq": {
     "title": "Frequently Asked Questions",

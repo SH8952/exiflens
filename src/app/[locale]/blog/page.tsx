@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link, redirect } from "@/i18n/navigation";
-import {
-  SITE_URL,
-  breadcrumbJsonLd,
-  ogLocale,
-} from "@/lib/seo";
+import { redirect } from "@/i18n/navigation";
+import { SITE_URL, ogLocale } from "@/lib/seo";
+import { BlogListView } from "@/components/blog-list-view";
 import { BLOG_LOCALE, getAllBlogMeta, isBlogLocale } from "@/lib/blog";
 
 /**
@@ -54,65 +51,7 @@ export default async function BlogIndexPage({
     redirect({ href: "/blog", locale: BLOG_LOCALE });
   }
   setRequestLocale(locale);
-  const t = await getTranslations("Blog");
-  const tHome = await getTranslations("Home");
-  const posts = getAllBlogMeta();
-
-  const dateFormatter = new Intl.DateTimeFormat(locale, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
-  const breadcrumbs = breadcrumbJsonLd([
-    { name: tHome("title"), url: `${SITE_URL}/${locale}` },
-    { name: t("title"), url: `${SITE_URL}/${locale}/blog` },
-  ]);
-
-  return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-4 py-10">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
-      />
-      <div className="flex flex-col gap-2 text-center">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          {t("title")}
-        </h1>
-        <p className="mx-auto max-w-2xl text-muted-foreground">
-          {t("subtitle")}
-        </p>
-      </div>
-
-      {posts.length === 0 ? (
-        <p className="text-center text-sm text-muted-foreground">
-          {t("empty")}
-        </p>
-      ) : (
-        <ul className="flex flex-col gap-4">
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <Link
-                href={`/blog/${post.slug}`}
-                className="flex flex-col gap-1.5 rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/50"
-              >
-                <h2 className="text-lg font-semibold tracking-tight">
-                  {post.title}
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  {post.description}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {dateFormatter.format(new Date(post.publishedAt))} ·{" "}
-                  {t("readingTime", { minutes: post.readingMinutes })}
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
+  return <BlogListView locale={locale} page={1} />;
 }
 
 export function generateStaticParams() {
