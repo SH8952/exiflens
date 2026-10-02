@@ -7,7 +7,7 @@ import { routing } from "@/i18n/routing";
  */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "https://exiflens.com";
+  "https://exifnd.com";
 
 const LOCALE_TO_OG: Record<(typeof routing.locales)[number], string> = {
   en: "en_US",
