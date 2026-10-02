@@ -397,7 +397,9 @@
           "period": "2025년 8월~9월",
           "body": "세 번째 태국 한 달 살기를 다녀왔습니다."
         }
-      ]
+      ],
+      "expandLabel": "펼치기",
+      "collapseLabel": "접기"
     },
     "gear": {
       "heading": "사용 장비",
@@ -434,7 +436,7 @@
             {
               "name": "RF70-200mm F2.8 L IS USM",
               "note": "망원 줌",
-              "date": "2024"
+              "date": "2024년 9월"
             },
             {
               "name": "RF35mm F1.4 L VCM",
@@ -457,7 +459,7 @@
           "name": "어댑터로 쓰는 렌즈",
           "items": [
             {
-              "name": "Canon Mount Adapter EF-EOS R",
+              "name": "Canon Control Ring Mount Adapter EF-EOS R",
               "note": "시그마 EF 마운트 렌즈를 R 시리즈 바디에 장착",
               "date": "2024년 4월"
             },
@@ -535,6 +537,16 @@
               "name": "Drone LiPo Safe Battery Bag",
               "note": "배터리 보관용 안전 파우치",
               "date": "2025년 3월"
+            },
+            {
+              "name": "DJI RC Remote Controller Lanyard Neck Strap (white and black)",
+              "note": "조종기용 목걸이 스트랩 (화이트·블랙 2개)",
+              "date": "2024년 10월"
+            },
+            {
+              "name": "Freewell Drones Filter Kit 13 Pack for DJI Air 3S (FW-A3S-PRO)",
+              "note": "ND·PL·UV·LPR·글로우 미스트 1/4 등 13종 드론 필터 키트",
+              "date": "2025년 3월"
             }
           ]
         },
@@ -557,8 +569,8 @@
               "date": "2024년 10월"
             },
             {
-              "name": "Ulanzi accessory set for Osmo Pocket 3",
-              "note": "확장 액세서리 세트 (주문 화면에서 구성 확인 불가)",
+              "name": "Ulanzi PK-08 / PK-11 Arri Locating Base Mini Tripod Kit for Osmo Pocket 3 (Kit4)",
+              "note": "아리 로케이팅 베이스·미니 삼각대 키트",
               "date": "2024년 10월"
             },
             {
@@ -600,6 +612,21 @@
               "name": "Ulanzi MT-41 Vlog Mini Tripod",
               "note": "브이로그용 미니 삼각대",
               "date": "2024년 7월"
+            },
+            {
+              "name": "Ulanzi Magic Arm Cold Shoe Mount Adapter with Osmo Action 3 / 4 Magnetic Mount (CA22 / C071GBB1)",
+              "note": "콜드슈 마운트 어댑터, 1/4인치 나사",
+              "date": "2024년 10월"
+            },
+            {
+              "name": "Freewell ND/PL CPL Snow Mist 1/4 Mega 14 Pack for DJI Osmo Pocket 3",
+              "note": "ND·PL·CPL·스노우 미스트 1/4 등 14종 필터 키트",
+              "date": "2025년 3월"
+            },
+            {
+              "name": "Freewell Camera ND Filter Kit for DJI Osmo Action 5 Pro / 4 / 3 (FW-OA5-MEGA)",
+              "note": "CPL·ND·LPR·ND/PL·글로우 미스트 등 메가 키트",
+              "date": "2025년 3월"
             }
           ]
         },
@@ -665,6 +692,21 @@
               "name": "DSLR Lens Reflection-Blocking Hood Cover (70-90mm)",
               "note": "유리 반사를 막는 렌즈 후드 커버",
               "date": "2024년 7월"
+            },
+            {
+              "name": "Canon EW-60F Lens Hood (RF-S18-150mm)",
+              "note": "RF-S18-150mm 렌즈킷용 정품 후드",
+              "date": "2024년 4월"
+            },
+            {
+              "name": "Schneider B+W 67mm Filter",
+              "note": "RF 50mm F1.4 L VCM과 함께 구입",
+              "date": "2025년 7월"
+            },
+            {
+              "name": "Schneider B+W Filter",
+              "note": "RF 35mm F1.4 L VCM과 함께 구입",
+              "date": "2025년 7월"
             }
           ]
         },
@@ -760,6 +802,11 @@
               "name": "카메라 제습함 PLD-108L",
               "note": "",
               "date": "2024년 5월"
+            },
+            {
+              "name": "Canon LP-E6P Battery",
+              "note": "EOS R5 Mark II용 정품 배터리",
+              "date": "2025년 7월"
             }
           ]
         },
@@ -820,6 +867,11 @@
               "name": "SanDisk Extreme PRO SDXC UHS-I SDXXD 256GB",
               "note": "SD 카드",
               "date": "2024년 3월"
+            },
+            {
+              "name": "SanDisk Extreme PRO SD Card 128GB",
+              "note": "EOS R5 Mark II 구입 시 함께 구입한 SD 카드",
+              "date": "2025년 7월"
             }
           ]
         },

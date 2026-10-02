@@ -1,3 +1,11 @@
+## 2026-10-02 — About 스토리 접기/펼치기 + 장비 목록 보정(알리익스프레스 상세·G마켓·옥션)
+
+**변경 사항**
+- About "내가 사진을 시작하게 된 스토리"를 네이티브 `<details>`로 변경(기본 접힘, 펼치기/접기 라벨 4개 언어, JS 없음). 파일: `src/app/[locale]/about/page.tsx`, `messages/*.json`(story.expandLabel/collapseLabel).
+- 장비 보정(78행 → 88행): Freewell 3종 확정(Air 3S 13팩 FW-A3S-PRO, Osmo Pocket 3 메가 14팩, Osmo Action 5 Pro/4/3 FW-OA5-MEGA; 2025년 3월), Ulanzi PK-08/PK-11 아리 로케이팅 베이스 미니 삼각대 키트 정식명 반영, Ulanzi 콜드슈 마운트 어댑터(CA22), DJI RC 목걸이 스트랩 2종, Canon LP-E6P(2025년 7월), Canon EW-60F 후드(2024년 4월), Schneider B+W 필터 2종(2025년 7월), SanDisk Extreme PRO SD 128GB(2025년 7월), Canon 컨트롤 링 마운트 어댑터 EF-EOS R 정식명, RF70-200mm 구입 시기 2024년 9월 확정.
+
+**검증**: `tsc --noEmit` 통과, 로컬 4개 언어 200, 표 12개·장비 88행·details 1개(기본 접힘) 확인.
+
 ## 2026-10-02 — About 장비 표에 쿠팡 추가 구매 내역(2024년 3~6월) 반영
 
 **변경 사항**

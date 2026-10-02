@@ -396,7 +396,9 @@
           "period": "August to September 2025",
           "body": "A third month-long stay in Thailand."
         }
-      ]
+      ],
+      "expandLabel": "Show",
+      "collapseLabel": "Hide"
     },
     "gear": {
       "heading": "My Gear",
@@ -433,7 +435,7 @@
             {
               "name": "RF70-200mm F2.8 L IS USM",
               "note": "telephoto zoom",
-              "date": "2024"
+              "date": "September 2024"
             },
             {
               "name": "RF35mm F1.4 L VCM",
@@ -456,7 +458,7 @@
           "name": "Adapted lenses",
           "items": [
             {
-              "name": "Canon Mount Adapter EF-EOS R",
+              "name": "Canon Control Ring Mount Adapter EF-EOS R",
               "note": "mounts the Sigma EF-mount lenses on the R bodies",
               "date": "April 2024"
             },
@@ -534,6 +536,16 @@
               "name": "Drone LiPo Safe Battery Bag",
               "note": "safe storage pouch for batteries",
               "date": "March 2025"
+            },
+            {
+              "name": "DJI RC Remote Controller Lanyard Neck Strap (white and black)",
+              "note": "Neck strap for the remote controller (white and black)",
+              "date": "October 2024"
+            },
+            {
+              "name": "Freewell Drones Filter Kit 13 Pack for DJI Air 3S (FW-A3S-PRO)",
+              "note": "13-piece drone kit: ND, PL, UV, LPR, Glow Mist 1/4 and more",
+              "date": "March 2025"
             }
           ]
         },
@@ -556,8 +568,8 @@
               "date": "October 2024"
             },
             {
-              "name": "Ulanzi accessory set for Osmo Pocket 3",
-              "note": "expansion accessory set",
+              "name": "Ulanzi PK-08 / PK-11 Arri Locating Base Mini Tripod Kit for Osmo Pocket 3 (Kit4)",
+              "note": "Arri-style locating base and mini tripod kit",
               "date": "October 2024"
             },
             {
@@ -599,6 +611,21 @@
               "name": "Ulanzi MT-41 Vlog Mini Tripod",
               "note": "mini tripod for vlogging",
               "date": "July 2024"
+            },
+            {
+              "name": "Ulanzi Magic Arm Cold Shoe Mount Adapter with Osmo Action 3 / 4 Magnetic Mount (CA22 / C071GBB1)",
+              "note": "Cold shoe mount adapter with 1/4-inch thread",
+              "date": "October 2024"
+            },
+            {
+              "name": "Freewell ND/PL CPL Snow Mist 1/4 Mega 14 Pack for DJI Osmo Pocket 3",
+              "note": "14-piece kit: ND, PL, CPL, Snow Mist 1/4 and more",
+              "date": "March 2025"
+            },
+            {
+              "name": "Freewell Camera ND Filter Kit for DJI Osmo Action 5 Pro / 4 / 3 (FW-OA5-MEGA)",
+              "note": "Mega kit: CPL, ND, LPR, ND/PL, Glow Mist and more",
+              "date": "March 2025"
             }
           ]
         },
@@ -664,6 +691,21 @@
               "name": "DSLR Lens Reflection-Blocking Hood Cover (70-90mm)",
               "note": "hood cover that blocks glass reflections",
               "date": "July 2024"
+            },
+            {
+              "name": "Canon EW-60F Lens Hood (RF-S18-150mm)",
+              "note": "Genuine hood for the RF-S 18-150mm kit lens",
+              "date": "April 2024"
+            },
+            {
+              "name": "Schneider B+W 67mm Filter",
+              "note": "Bought together with the RF 50mm F1.4 L VCM",
+              "date": "July 2025"
+            },
+            {
+              "name": "Schneider B+W Filter",
+              "note": "Bought together with the RF 35mm F1.4 L VCM",
+              "date": "July 2025"
             }
           ]
         },
@@ -759,6 +801,11 @@
               "name": "Camera dehumidifier cabinet PLD-108L",
               "note": "",
               "date": "May 2024"
+            },
+            {
+              "name": "Canon LP-E6P Battery",
+              "note": "Genuine battery for the EOS R5 Mark II",
+              "date": "July 2025"
             }
           ]
         },
@@ -819,6 +866,11 @@
               "name": "SanDisk Extreme PRO SDXC UHS-I SDXXD 256GB",
               "note": "SD card",
               "date": "March 2024"
+            },
+            {
+              "name": "SanDisk Extreme PRO SD Card 128GB",
+              "note": "SD card bought together with the EOS R5 Mark II",
+              "date": "July 2025"
             }
           ]
         },

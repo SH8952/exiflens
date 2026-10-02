@@ -48,6 +48,8 @@ export default async function AboutPage({
   const story = t.raw("story") as {
     heading: string;
     intro: string;
+    expandLabel: string;
+    collapseLabel: string;
     steps: { period: string; body: string }[];
   };
   const gear = t.raw("gear") as {
@@ -72,25 +74,41 @@ export default async function AboutPage({
 
   return (
     <LegalPage title={t("title")} sections={mainSections}>
-      <section className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-semibold tracking-tight">
-            {story.heading}
-          </h2>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            {story.intro}
-          </p>
-        </div>
-        <ol className="flex flex-col gap-4 border-l pl-4">
-          {story.steps.map((step) => (
-            <li key={step.period} className="flex flex-col gap-1">
-              <h3 className="text-sm font-semibold">{step.period}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {step.body}
-              </p>
-            </li>
-          ))}
-        </ol>
+      <section>
+        <details className="group rounded-lg border">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 [&::-webkit-details-marker]:hidden">
+            <h2 className="text-lg font-semibold tracking-tight">
+              {story.heading}
+            </h2>
+            <span className="flex shrink-0 items-center gap-1 text-xs font-medium text-muted-foreground">
+              <span className="group-open:hidden">{story.expandLabel}</span>
+              <span className="hidden group-open:inline">
+                {story.collapseLabel}
+              </span>
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform group-open:rotate-180"
+              >
+                ▾
+              </span>
+            </span>
+          </summary>
+          <div className="flex flex-col gap-4 px-4 pb-4">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {story.intro}
+            </p>
+            <ol className="flex flex-col gap-4 border-l pl-4">
+              {story.steps.map((step) => (
+                <li key={step.period} className="flex flex-col gap-1">
+                  <h3 className="text-sm font-semibold">{step.period}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {step.body}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </details>
       </section>
 
       <section className="flex flex-col gap-4">

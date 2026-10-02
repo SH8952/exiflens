@@ -396,7 +396,9 @@
           "period": "2025年8月〜9月",
           "body": "3回目のタイ長期滞在をしました。"
         }
-      ]
+      ],
+      "expandLabel": "開く",
+      "collapseLabel": "閉じる"
     },
     "gear": {
       "heading": "使用機材",
@@ -433,7 +435,7 @@
             {
               "name": "RF70-200mm F2.8 L IS USM",
               "note": "望遠ズーム",
-              "date": "2024"
+              "date": "2024年9月"
             },
             {
               "name": "RF35mm F1.4 L VCM",
@@ -456,7 +458,7 @@
           "name": "アダプター経由のレンズ",
           "items": [
             {
-              "name": "Canon マウントアダプター EF-EOS R",
+              "name": "Canon Control Ring Mount Adapter EF-EOS R",
               "note": "シグマのEFマウントレンズをRシリーズのボディに装着",
               "date": "2024年4月"
             },
@@ -534,6 +536,16 @@
               "name": "Drone LiPo Safe Battery Bag",
               "note": "バッテリー保管用の安全バッグ",
               "date": "2025年3月"
+            },
+            {
+              "name": "DJI RC Remote Controller Lanyard Neck Strap (white and black)",
+              "note": "送信機用ネックストラップ(ホワイト・ブラック)",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Freewell Drones Filter Kit 13 Pack for DJI Air 3S (FW-A3S-PRO)",
+              "note": "ND・PL・UV・LPR・グローミスト1/4など13枚入りドローン用キット",
+              "date": "2025年3月"
             }
           ]
         },
@@ -556,8 +568,8 @@
               "date": "2024年10月"
             },
             {
-              "name": "Ulanzi accessory set for Osmo Pocket 3",
-              "note": "拡張アクセサリーセット",
+              "name": "Ulanzi PK-08 / PK-11 Arri Locating Base Mini Tripod Kit for Osmo Pocket 3 (Kit4)",
+              "note": "アリ互換ロケーティングベース・ミニ三脚キット",
               "date": "2024年10月"
             },
             {
@@ -599,6 +611,21 @@
               "name": "Ulanzi MT-41 Vlog Mini Tripod",
               "note": "Vlog用ミニ三脚",
               "date": "2024年7月"
+            },
+            {
+              "name": "Ulanzi Magic Arm Cold Shoe Mount Adapter with Osmo Action 3 / 4 Magnetic Mount (CA22 / C071GBB1)",
+              "note": "コールドシューマウントアダプター(1/4インチネジ)",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Freewell ND/PL CPL Snow Mist 1/4 Mega 14 Pack for DJI Osmo Pocket 3",
+              "note": "ND・PL・CPL・スノーミスト1/4など14枚入りキット",
+              "date": "2025年3月"
+            },
+            {
+              "name": "Freewell Camera ND Filter Kit for DJI Osmo Action 5 Pro / 4 / 3 (FW-OA5-MEGA)",
+              "note": "CPL・ND・LPR・ND/PL・グローミストなどのメガキット",
+              "date": "2025年3月"
             }
           ]
         },
@@ -664,6 +691,21 @@
               "name": "DSLR Lens Reflection-Blocking Hood Cover (70-90mm)",
               "note": "ガラスの映り込みを防ぐレンズフードカバー",
               "date": "2024年7月"
+            },
+            {
+              "name": "Canon EW-60F Lens Hood (RF-S18-150mm)",
+              "note": "RF-S18-150mmキットレンズ用純正フード",
+              "date": "2024年4月"
+            },
+            {
+              "name": "Schneider B+W 67mm Filter",
+              "note": "RF 50mm F1.4 L VCMと同時購入",
+              "date": "2025年7月"
+            },
+            {
+              "name": "Schneider B+W Filter",
+              "note": "RF 35mm F1.4 L VCMと同時購入",
+              "date": "2025年7月"
             }
           ]
         },
@@ -759,6 +801,11 @@
               "name": "カメラ用ドライキャビネット PLD-108L",
               "note": "",
               "date": "2024年5月"
+            },
+            {
+              "name": "Canon LP-E6P Battery",
+              "note": "EOS R5 Mark II用純正バッテリー",
+              "date": "2025年7月"
             }
           ]
         },
@@ -819,6 +866,11 @@
               "name": "SanDisk Extreme PRO SDXC UHS-I SDXXD 256GB",
               "note": "SDカード",
               "date": "2024年3月"
+            },
+            {
+              "name": "SanDisk Extreme PRO SD Card 128GB",
+              "note": "EOS R5 Mark II購入時に同時購入したSDカード",
+              "date": "2025年7月"
             }
           ]
         },
