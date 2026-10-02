@@ -47,9 +47,6 @@ export default async function HomePage({
         <NdCalculatorCard />
       </section>
 
-      {/* Section 4.5: cross-link to sister site (contextual, single link) */}
-      <CrossLinkFlyDroneMap locale={locale} />
-
       <AdZone
         id="mid-content"
         label="Ad"
@@ -73,7 +70,10 @@ export default async function HomePage({
       {/* Section 8: FAQ highlights — placed right after the tool highlights since the FAQ pool includes tool-specific questions, so it reads naturally as "more about what you just saw". Picks 5 Q&A items at random (site-level + every live tool's FAQ) with their own FAQPage JSON-LD. */}
       <HomeFaqHighlights />
 
-      {/* TEMPORARY (2026-10-02): gear recommendation (Coupang/AliExpress) moved to the very bottom of the home page while the AdSense review is pending. Once AdSense is approved, restore it to its original spot: right after the ND calculator section ("Section 2 & 3") and before <CrossLinkFlyDroneMap />. */}
+      {/* TEMPORARY (2026-10-02): the sister-site cross-link ("관련 도구" / Related tools → FlyDroneMap) was moved from right after the ND calculator section to here, between the FAQ highlights and the gear recommendation, while the AdSense review is pending. Once AdSense is approved, move it back to its original spot together with the gear recommendation: place <GearRecommendationSection /> and then <CrossLinkFlyDroneMap /> right after the ND calculator section ("Section 2 & 3") and before the <AdZone id="mid-content" />. */}
+      <CrossLinkFlyDroneMap locale={locale} />
+
+      {/* TEMPORARY (2026-10-02): gear recommendation (Coupang/AliExpress) moved to the very bottom of the home page while the AdSense review is pending. Original spot: right after the ND calculator section ("Section 2 & 3"), before the cross-link (see note above). */}
       <GearRecommendationSection locale={locale} />
     </div>
   );

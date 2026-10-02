@@ -58,7 +58,17 @@ function readRawSource(locale: Locale, slug: string): string {
   return fs.readFileSync(filePath, "utf8");
 }
 
-function estimateReadingMinutes(body: string): number {
+/**
+ * Reading time estimate. Space-delimited languages (en/es) use ~200 words per
+ * minute. Japanese has no spaces between words, so counting whitespace-split
+ * "words" collapsed every ja guide to 1 minute (2026-10-02 확인); ja and ko are
+ * therefore measured in non-whitespace characters at ~500 characters per minute.
+ */
+function estimateReadingMinutes(body: string, locale: Locale): number {
+  if (locale === "ja" || locale === "ko") {
+    const chars = body.replace(/\s/g, "").length;
+    return Math.max(1, Math.round(chars / 500));
+  }
   const words = body.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 200));
 }
@@ -73,7 +83,7 @@ export function getGuideMeta(locale: Locale, slug: string): GuideMeta | null {
   return {
     ...fm,
     slug,
-    readingMinutes: estimateReadingMinutes(content),
+    readingMinutes: estimateReadingMinutes(content, locale),
   };
 }
 
@@ -139,7 +149,7 @@ export async function compileGuide(
     meta: {
       ...fm,
       slug,
-      readingMinutes: estimateReadingMinutes(content),
+      readingMinutes: estimateReadingMinutes(content, locale),
     },
   };
 }
