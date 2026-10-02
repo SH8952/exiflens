@@ -1,3 +1,16 @@
+## 2026-10-02 — 사진 1(바다 장노출) 설명 오류 수정: 해 질 녘 → 일출
+
+**배경**
+- 사용자 확인: About 갤러리 첫 사진과 사진 가이드의 첫 번째 사진은 해 질 녘이 아니라 일출 사진.
+
+**변경 사항**
+- `messages/{en,ko,ja,es}.json` About.gallery 첫 항목의 캡션·alt를 일출 기준으로 수정.
+- `content/guides/{en,ko,ja,es}/six-frames-light-timing-and-composition.mdx`: description, 섹션 1 제목, 이미지 alt, 본문의 "dusk/해 질 녘/夕暮れ/anochecer"를 일출(sunrise/amanecer/日の出)로 수정하고 "해 주변 하늘이 아직 어두운 전경보다 훨씬 밝다"는 설명으로 맞춤.
+
+**검증**
+- 4개 언어 JSON 유효, 두 파일군에서 dusk/해 질 녘 계열 표현 잔여 0건, 물결표 0건.
+- 작업 전 백업: `_backups/exiflens_backup_20261002_022415_sunrise_fix`
+
 ## 2026-10-02 — 애드센스 재거절 대응 3단계: About 페이지 운영자 소개 + 사진 갤러리
 
 **배경**
