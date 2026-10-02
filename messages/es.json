@@ -963,7 +963,10 @@
     "relatedGuides": "Guías relacionadas",
     "otherCategory": "Otras guías",
     "ctaBannerText": "Descubre la distancia focal y los datos del objetivo ocultos en tu foto.",
-    "ctaBannerButton": "Analiza tu foto gratis"
+    "ctaBannerButton": "Analiza tu foto gratis",
+    "writtenBy": "Escrito por",
+    "updatedOn": "Actualizado el {date}",
+    "authorName": "Photographer SH"
   },
   "Faq": {
     "title": "Preguntas Frecuentes",

@@ -91,8 +91,9 @@ export default async function GuidePage({
     datePublished: meta.publishedAt,
     dateModified: meta.updatedAt ?? meta.publishedAt,
     author: {
-      "@type": "Organization",
-      name: "ExifLens",
+      "@type": "Person",
+      name: "Photographer SH",
+      url: `${SITE_URL}/${locale}/about`,
     },
     publisher: {
       "@type": "Organization",
@@ -132,8 +133,21 @@ export default async function GuidePage({
         </h1>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-sm text-muted-foreground">
-            {dateFormatter.format(new Date(meta.publishedAt))} ·{" "}
-            {t("readingTime", { minutes: meta.readingMinutes })}
+            {t("writtenBy")}{" "}
+            <Link
+              href="/about"
+              rel="author"
+              className="font-medium text-foreground hover:underline"
+            >
+              {t("authorName")}
+            </Link>{" "}
+            · {dateFormatter.format(new Date(meta.publishedAt))}
+            {meta.updatedAt && meta.updatedAt !== meta.publishedAt
+              ? ` · ${t("updatedOn", {
+                  date: dateFormatter.format(new Date(meta.updatedAt)),
+                })}`
+              : ""}{" "}
+            · {t("readingTime", { minutes: meta.readingMinutes })}
           </p>
           <ShareButton
             title={meta.title}

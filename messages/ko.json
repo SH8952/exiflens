@@ -964,7 +964,10 @@
     "relatedGuides": "관련 가이드",
     "otherCategory": "기타 가이드",
     "ctaBannerText": "사진 속에 숨어 있는 초점거리와 렌즈 정보를 지금 확인해보세요.",
-    "ctaBannerButton": "무료로 사진 분석하기"
+    "ctaBannerButton": "무료로 사진 분석하기",
+    "writtenBy": "작성",
+    "updatedOn": "{date} 업데이트",
+    "authorName": "Photographer SH"
   },
   "Faq": {
     "title": "자주 묻는 질문",

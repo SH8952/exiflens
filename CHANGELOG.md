@@ -1,3 +1,13 @@
+## 2026-10-02 — 가이드 작성자 표기(Photographer SH) + 보강한 가이드 12편 수정일 표시
+
+**변경 사항**
+- `src/app/[locale]/guides/[slug]/page.tsx`: 글머리에 "작성 Photographer SH(About 링크, `rel="author"`) · 게시일 · (수정일이 게시일과 다르면) 업데이트 날짜 · 읽는 시간" 표시. JSON-LD `Article.author`를 조직(ExifLens)에서 개인(`Person`: Photographer SH, About URL)으로 변경, `publisher`는 조직 유지.
+- `messages/{ko,en,ja,es}.json` `Guides`에 `writtenBy`, `updatedOn`, `authorName` 추가(작성/Written by/執筆/Escrito por).
+- 보강한 가이드 12편 × 4개 언어(48개 mdx)의 frontmatter에 `updatedAt: "2026-10-02"` 추가. 신규 글과 보강하지 않은 글은 수정일 없음.
+- 참고: `sitemap.ts`, `rss.xml`이 `updatedAt`을 사용하므로 해당 12편의 lastmod/RSS 날짜도 2026-10-02로 반영됨.
+
+**검증**: `tsc --noEmit` 통과. 로컬에서 보강 글(4개 언어)은 작성자+수정일 표시, 미보강 글은 수정일 없이 작성자만 표시, JSON-LD Person 확인, `<article>` 1개 유지. 백업: `_backups/exiflens_backup_*_byline`.
+
 ## 2026-10-02 — 홈 화면 제휴 상품(Gear Recommendations) 섹션을 최하단으로 임시 이동
 
 **변경 사항**

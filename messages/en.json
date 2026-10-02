@@ -963,7 +963,10 @@
     "relatedGuides": "Related Guides",
     "otherCategory": "Other Guides",
     "ctaBannerText": "Check the focal length and lens info hidden in your photo's EXIF data.",
-    "ctaBannerButton": "Analyze Your Photo Free"
+    "ctaBannerButton": "Analyze Your Photo Free",
+    "writtenBy": "Written by",
+    "updatedOn": "Updated {date}",
+    "authorName": "Photographer SH"
   },
   "Faq": {
     "title": "Frequently Asked Questions",
