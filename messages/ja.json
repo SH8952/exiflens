@@ -469,6 +469,11 @@
               "name": "Sigma 30mm F1.4 DC HSM | Art",
               "note": "中古で購入、Canon EF-EOS Rアダプターで使用",
               "date": "2024"
+            },
+            {
+              "name": "SIGMA USB DOCK for Canon EF",
+              "note": "ピント調整・ファームウェア更新用USBドック",
+              "date": "2024年3月"
             }
           ]
         },
@@ -477,18 +482,123 @@
           "items": [
             {
               "name": "DJI Air 3S",
-              "note": "ドローン",
+              "note": "ドローン(Fly More コンボ + DJI RC 2)",
               "date": "2024年10月"
             },
             {
               "name": "DJI Osmo Pocket 3",
-              "note": "ポケットサイズのジンバルカメラ",
+              "note": "ポケットサイズのジンバルカメラ(クリエイターコンボ)",
               "date": "2024年10月"
             },
             {
               "name": "DJI Osmo Action 4 Adventure Combo",
               "note": "アクションカメラ",
-              "date": "2024"
+              "date": "2024年7月"
+            }
+          ]
+        },
+        {
+          "name": "ドローン用アクセサリー",
+          "items": [
+            {
+              "name": "Sunnylife Carbon Propellers for DJI Air 3S / Air 3",
+              "note": "カーボンプロペラ",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Sunnylife Propeller Holder for DJI Air 3S / Air 3 (orange)",
+              "note": "プロペラホルダー",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Sunnylife Landing Gear for DJI Air 3 (orange)",
+              "note": "ランディングギア(脚)",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Sunnylife Silicone Cover for DJI RC 2",
+              "note": "送信機用シリコンケース",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Sunnylife Metal Control Sticks for DJI RC / RC 2 (red)",
+              "note": "メタルコントロールスティック",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Sunnylife Multi-Combo Case for DJI Air 3S / Air 3",
+              "note": "バッテリー7本を収納できるショルダー型ドローンバッグ",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Drone LiPo Safe Battery Bag",
+              "note": "バッテリー保管用の安全バッグ",
+              "date": "2025年3月"
+            }
+          ]
+        },
+        {
+          "name": "Osmo Pocket 3・アクションカメラ用アクセサリー",
+          "items": [
+            {
+              "name": "DJI Osmo Pocket 3 Magnetic ND Filter Set",
+              "note": "マグネット式NDフィルターセット",
+              "date": "2024年12月"
+            },
+            {
+              "name": "Freewell All-Day Quick-Swap ND/PL/CPL Filter Kit for Osmo Pocket 3 (8 Pack)",
+              "note": "クイックスワップ式 ND・PL・CPL フィルターキット",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Ulanzi PK-07 Gimbal Protector for Osmo Pocket 3",
+              "note": "ジンバル保護キャップケース",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Ulanzi accessory set for Osmo Pocket 3",
+              "note": "拡張アクセサリーセット",
+              "date": "2024年10月"
+            },
+            {
+              "name": "벤토사 Tempered-Glass Screen Protector Set for Osmo Pocket 3 (VTS-F-DO-PC)",
+              "note": "強化ガラス液晶保護フィルム 2種セット",
+              "date": "2024年10月"
+            },
+            {
+              "name": "SmallRig 4119B Cage for DJI Osmo Action 4 / 3",
+              "note": "アクションカメラ用ケージ",
+              "date": "2024年7月"
+            },
+            {
+              "name": "Space Shield Screen and Lens Protection Film for Osmo Action 4 / 3",
+              "note": "画面・レンズ保護フィルム 3種 x 2枚セット",
+              "date": "2024年7月"
+            },
+            {
+              "name": "DJI Osmo Action 4 Glass Lens Cover",
+              "note": "ガラスレンズカバー",
+              "date": "2024年7月"
+            },
+            {
+              "name": "Telesin Magnetic Action Camera Neck Mount 360-TANM",
+              "note": "マグネット式ネックマウント",
+              "date": "2024年7月"
+            },
+            {
+              "name": "Velcro Backpack Mount for GoPro-compatible Action Cameras",
+              "note": "面ファスナー式バックパックマウント",
+              "date": "2024年7月"
+            },
+            {
+              "name": "AMAGISN 360° Rotating Backpack Clip Mount (2 pcs)",
+              "note": "バックパッククリップ式360°回転マウント 2個",
+              "date": "2025年3月"
+            },
+            {
+              "name": "Ulanzi MT-41 Vlog Mini Tripod",
+              "note": "Vlog用ミニ三脚",
+              "date": "2024年7月"
             }
           ]
         },
@@ -508,12 +618,32 @@
           ]
         },
         {
-          "name": "フィルター",
+          "name": "フィルター・レンズアクセサリー",
           "items": [
             {
-              "name": "HOYA 82mm UV・CPL・NDフィルターキット",
+              "name": "HOYA DIGITAL FILTER KIT 82mm UV/CPL/ND",
               "note": "",
-              "date": "2024"
+              "date": "2024年6月"
+            },
+            {
+              "name": "HOYA DIGITAL FILTER KIT 72mm UV/CPL/ND",
+              "note": "",
+              "date": "2024年3月"
+            },
+            {
+              "name": "HOYA DIGITAL FILTER KIT 62mm UV/CPL/ND",
+              "note": "",
+              "date": "2024年3月"
+            },
+            {
+              "name": "Kenko AIR MC UV 72mm",
+              "note": "UV保護フィルター",
+              "date": "2024年3月"
+            },
+            {
+              "name": "Kenko AIR MC UV 55mm",
+              "note": "UV保護フィルター",
+              "date": "2024年4月"
             },
             {
               "name": "Benro Magic VND Filter System VF1",
@@ -524,6 +654,16 @@
               "name": "Nikon ARCREST II filter",
               "note": "2回に分けて購入",
               "date": "2024年9月 / 2024年10月"
+            },
+            {
+              "name": "Freewell Threaded Hybrid ND/CPL and Glow Mist 1/4 Filter Set (82mm)",
+              "note": "スレッド式ハイブリッド ND/CPL と Glow Mist 1/4 フィルターセット",
+              "date": "2025年3月"
+            },
+            {
+              "name": "DSLR Lens Reflection-Blocking Hood Cover (70-90mm)",
+              "note": "ガラスの映り込みを防ぐレンズフードカバー",
+              "date": "2024年7月"
             }
           ]
         },
@@ -531,9 +671,9 @@
           "name": "ストラップ・バッグ・サポート",
           "items": [
             {
-              "name": "heipi 三脚",
+              "name": "heipi 3-in-1 Travel Tripod W28",
               "note": "",
-              "date": "2024"
+              "date": "2024年5月"
             },
             {
               "name": "Peak Design Clutch Hand Strap",
@@ -574,6 +714,21 @@
               "name": "FALCAM RS4 MINI Quick Release Tripod Kit FC-RS4M",
               "note": "ワンタッチクイックリリース三脚キット",
               "date": "2025年8月"
+            },
+            {
+              "name": "Falcam F38 V2 Quick Release Kit (F38B3404)",
+              "note": "マルチホール クイックリリースキット",
+              "date": "2025年3月"
+            },
+            {
+              "name": "Ulanzi Falcam F38 Quick Release System Plate (Kit F38B3404)",
+              "note": "クイックリリースシステムプレート",
+              "date": "2025年3月"
+            },
+            {
+              "name": "PGYTECH Tech Pouch (P-CB-090) / Filter Organizer",
+              "note": "ポーチ/フィルターオーガナイザー",
+              "date": "2025年3月"
             }
           ]
         },
@@ -624,6 +779,46 @@
               "name": "TourBox Elite Plus",
               "note": "編集用Bluetoothコントローラー(iPad対応)",
               "date": "2025年11月"
+            },
+            {
+              "name": "Lexar Professional 1800x UHS-II SD Card 256GB",
+              "note": "SDカード",
+              "date": "2025年7月"
+            },
+            {
+              "name": "Novachips CFexpress Type B Card EXTREME 660GB",
+              "note": "CFexpress Type B メモリーカード",
+              "date": "2025年7月"
+            },
+            {
+              "name": "SanDisk Extreme PRO SD Card 256GB",
+              "note": "SDカード",
+              "date": "2024年12月"
+            },
+            {
+              "name": "SanDisk Extreme PRO microSD Card SDSQXCY 256GB",
+              "note": "microSDカード",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Lexar 4K 1066x UHS-I microSD Card 512GB",
+              "note": "microSDカード",
+              "date": "2024年7月"
+            },
+            {
+              "name": "SanDisk Extreme PRO Portable SSD E81 2TB",
+              "note": "ポータブルSSD(専用ケース付き)",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Lexar Professional USB-C Dual-Slot Reader LRW470U-RNHNG",
+              "note": "デュアルスロットカードリーダー",
+              "date": "2024年9月"
+            },
+            {
+              "name": "SanDisk Extreme PRO SDXC UHS-I SDXXD 256GB",
+              "note": "SDカード",
+              "date": "2024年3月"
             }
           ]
         },

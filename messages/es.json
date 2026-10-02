@@ -469,6 +469,11 @@
               "name": "Sigma 30mm F1.4 DC HSM | Art",
               "note": "comprado de segunda mano, con adaptador Canon EF-EOS R",
               "date": "2024"
+            },
+            {
+              "name": "SIGMA USB DOCK for Canon EF",
+              "note": "Base USB para ajuste de enfoque y actualización de firmware",
+              "date": "marzo de 2024"
             }
           ]
         },
@@ -477,18 +482,123 @@
           "items": [
             {
               "name": "DJI Air 3S",
-              "note": "dron",
+              "note": "dron (Fly More Combo con DJI RC 2)",
               "date": "octubre de 2024"
             },
             {
               "name": "DJI Osmo Pocket 3",
-              "note": "cámara con estabilizador de bolsillo",
+              "note": "cámara con estabilizador de bolsillo (Creator Combo)",
               "date": "octubre de 2024"
             },
             {
               "name": "DJI Osmo Action 4 Adventure Combo",
               "note": "cámara de acción",
-              "date": "2024"
+              "date": "julio de 2024"
+            }
+          ]
+        },
+        {
+          "name": "Accesorios para dron",
+          "items": [
+            {
+              "name": "Sunnylife Carbon Propellers for DJI Air 3S / Air 3",
+              "note": "hélices de carbono",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Sunnylife Propeller Holder for DJI Air 3S / Air 3 (orange)",
+              "note": "soporte para hélices",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Sunnylife Landing Gear for DJI Air 3 (orange)",
+              "note": "tren de aterrizaje extensible",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Sunnylife Silicone Cover for DJI RC 2",
+              "note": "funda de silicona para el mando",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Sunnylife Metal Control Sticks for DJI RC / RC 2 (red)",
+              "note": "palancas de control metálicas",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Sunnylife Multi-Combo Case for DJI Air 3S / Air 3",
+              "note": "bolsa de hombro para dron con espacio para siete baterías",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Drone LiPo Safe Battery Bag",
+              "note": "bolsa de seguridad para guardar baterías",
+              "date": "marzo de 2025"
+            }
+          ]
+        },
+        {
+          "name": "Accesorios para Osmo Pocket 3 y cámara de acción",
+          "items": [
+            {
+              "name": "DJI Osmo Pocket 3 Magnetic ND Filter Set",
+              "note": "juego de filtros ND magnéticos",
+              "date": "diciembre de 2024"
+            },
+            {
+              "name": "Freewell All-Day Quick-Swap ND/PL/CPL Filter Kit for Osmo Pocket 3 (8 Pack)",
+              "note": "kit de filtros ND, PL y CPL de cambio rápido",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Ulanzi PK-07 Gimbal Protector for Osmo Pocket 3",
+              "note": "carcasa protectora del estabilizador",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Ulanzi accessory set for Osmo Pocket 3",
+              "note": "set de accesorios de expansión",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "벤토사 Tempered-Glass Screen Protector Set for Osmo Pocket 3 (VTS-F-DO-PC)",
+              "note": "protector de pantalla de vidrio templado, set de dos tipos",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "SmallRig 4119B Cage for DJI Osmo Action 4 / 3",
+              "note": "jaula para cámara de acción",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "Space Shield Screen and Lens Protection Film for Osmo Action 4 / 3",
+              "note": "láminas para pantalla y objetivo, tres tipos x 2 unidades",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "DJI Osmo Action 4 Glass Lens Cover",
+              "note": "cubierta de cristal para el objetivo",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "Telesin Magnetic Action Camera Neck Mount 360-TANM",
+              "note": "soporte magnético de cuello",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "Velcro Backpack Mount for GoPro-compatible Action Cameras",
+              "note": "soporte de mochila con velcro",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "AMAGISN 360° Rotating Backpack Clip Mount (2 pcs)",
+              "note": "soporte giratorio de clip para mochila, 2 unidades",
+              "date": "marzo de 2025"
+            },
+            {
+              "name": "Ulanzi MT-41 Vlog Mini Tripod",
+              "note": "minitrípode para vlogs",
+              "date": "julio de 2024"
             }
           ]
         },
@@ -508,12 +618,32 @@
           ]
         },
         {
-          "name": "Filtros",
+          "name": "Filtros y accesorios para objetivos",
           "items": [
             {
-              "name": "Kit de filtros HOYA de 82mm (UV, CPL y ND)",
+              "name": "HOYA DIGITAL FILTER KIT 82mm UV/CPL/ND",
               "note": "",
-              "date": "2024"
+              "date": "junio de 2024"
+            },
+            {
+              "name": "HOYA DIGITAL FILTER KIT 72mm UV/CPL/ND",
+              "note": "",
+              "date": "marzo de 2024"
+            },
+            {
+              "name": "HOYA DIGITAL FILTER KIT 62mm UV/CPL/ND",
+              "note": "",
+              "date": "marzo de 2024"
+            },
+            {
+              "name": "Kenko AIR MC UV 72mm",
+              "note": "Filtro de protección UV",
+              "date": "marzo de 2024"
+            },
+            {
+              "name": "Kenko AIR MC UV 55mm",
+              "note": "Filtro de protección UV",
+              "date": "abril de 2024"
             },
             {
               "name": "Benro Magic VND Filter System VF1",
@@ -524,6 +654,16 @@
               "name": "Nikon ARCREST II filter",
               "note": "comprado en dos pedidos distintos",
               "date": "septiembre de 2024 / octubre de 2024"
+            },
+            {
+              "name": "Freewell Threaded Hybrid ND/CPL and Glow Mist 1/4 Filter Set (82mm)",
+              "note": "set de filtros roscados híbridos ND/CPL y Glow Mist 1/4",
+              "date": "marzo de 2025"
+            },
+            {
+              "name": "DSLR Lens Reflection-Blocking Hood Cover (70-90mm)",
+              "note": "cubierta de parasol que evita reflejos en el cristal",
+              "date": "julio de 2024"
             }
           ]
         },
@@ -531,9 +671,9 @@
           "name": "Correas, bolsas y soportes",
           "items": [
             {
-              "name": "Trípode heipi",
+              "name": "heipi 3-in-1 Travel Tripod W28",
               "note": "",
-              "date": "2024"
+              "date": "mayo de 2024"
             },
             {
               "name": "Peak Design Clutch Hand Strap",
@@ -574,6 +714,21 @@
               "name": "FALCAM RS4 MINI Quick Release Tripod Kit FC-RS4M",
               "note": "kit de trípode de liberación rápida de un toque",
               "date": "agosto de 2025"
+            },
+            {
+              "name": "Falcam F38 V2 Quick Release Kit (F38B3404)",
+              "note": "kit de liberación rápida multiorificio",
+              "date": "marzo de 2025"
+            },
+            {
+              "name": "Ulanzi Falcam F38 Quick Release System Plate (Kit F38B3404)",
+              "note": "placa del sistema de liberación rápida",
+              "date": "marzo de 2025"
+            },
+            {
+              "name": "PGYTECH Tech Pouch (P-CB-090) / Filter Organizer",
+              "note": "bolsa y organizador de filtros",
+              "date": "marzo de 2025"
             }
           ]
         },
@@ -624,6 +779,46 @@
               "name": "TourBox Elite Plus",
               "note": "controlador Bluetooth de edición (compatible con iPad)",
               "date": "noviembre de 2025"
+            },
+            {
+              "name": "Lexar Professional 1800x UHS-II SD Card 256GB",
+              "note": "tarjeta SD",
+              "date": "julio de 2025"
+            },
+            {
+              "name": "Novachips CFexpress Type B Card EXTREME 660GB",
+              "note": "tarjeta de memoria CFexpress Type B",
+              "date": "julio de 2025"
+            },
+            {
+              "name": "SanDisk Extreme PRO SD Card 256GB",
+              "note": "tarjeta SD",
+              "date": "diciembre de 2024"
+            },
+            {
+              "name": "SanDisk Extreme PRO microSD Card SDSQXCY 256GB",
+              "note": "tarjeta microSD",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Lexar 4K 1066x UHS-I microSD Card 512GB",
+              "note": "tarjeta microSD",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "SanDisk Extreme PRO Portable SSD E81 2TB",
+              "note": "SSD portátil con funda",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Lexar Professional USB-C Dual-Slot Reader LRW470U-RNHNG",
+              "note": "lector de tarjetas de doble ranura",
+              "date": "septiembre de 2024"
+            },
+            {
+              "name": "SanDisk Extreme PRO SDXC UHS-I SDXXD 256GB",
+              "note": "Tarjeta SD",
+              "date": "marzo de 2024"
             }
           ]
         },

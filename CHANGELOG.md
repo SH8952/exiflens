@@ -1,3 +1,26 @@
+## 2026-10-02 — About 장비 표에 쿠팡 추가 구매 내역(2024년 3~6월) 반영
+
+**변경 사항**
+- 쿠팡 추가 구매 내역을 `messages/{en,ko,ja,es}.json` About.gear 표에 반영(가격 비공개). 장비 72행 → 78행.
+- 신규 행: HOYA DIGITAL FILTER KIT 72mm·62mm(2024년 3월), Kenko AIR MC UV 72mm(2024년 3월)·55mm(2024년 4월), SIGMA USB DOCK for Canon(2024년 3월), SanDisk Extreme PRO SDXC UHS-I SDXXD 256GB(2024년 3월).
+- 기존 행 보정: HOYA 82mm 킷 → 정식 제품명·2024년 6월, heipi 삼각대 → "heipi 3-in-1 Travel Tripod W28"·2024년 5월.
+
+**검증**: `tsc --noEmit` 통과, 로컬 서버 4개 언어 모두 200, 표 12개·장비 78행 확인. 백업: `_backups/exiflens_backup_*_gear_additions3`.
+
+## 2026-10-02 — About 장비 표에 알리익스프레스·쿠팡 구매 내역 추가
+
+**변경 사항**
+- 사용자가 전달한 알리익스프레스·쿠팡 구매 내역(2024년 7월~2025년 7월)을 `messages/{en,ko,ja,es}.json` About.gear 표에 추가(가격 비공개, 모델명·용도·구입 시기(월)만 표기). 장비 41행 → 72행, 표 10개 → 12개.
+- 신규 그룹: 드론 액세서리(Sunnylife 6종, LiPo 안전 파우치), Osmo Pocket 3·액션캠 액세서리(12종). 기존 그룹에 추가: 필터→"필터·렌즈 액세서리"(Freewell 필터 세트, 렌즈 반사 방지 후드), 스트랩·가방·거치(Falcam F38 2종, PGYTECH 파우치), 편집·저장(Lexar/SanDisk/Novachips 카드 5종, SanDisk E81 SSD, Lexar USB-C 리더기).
+- 기존 행 보정: Osmo Action 4 어드벤처 콤보 구입 시기 2024년 → 2024년 7월, DJI Air 3S "플라이 모어 콤보 + RC 2", Osmo Pocket 3 "크리에이터 콤보" 표기.
+
+**제외·확인 필요**
+- Freewell 2025년 3월 17일 주문(필터 세트 3종 이미지, 제품명 미표시), 번호키 자물쇠(카메라 장비 아님)는 제외. Ulanzi 2024년 10월 19일 주문, PGYTECH 2025년 3월 26일 주문은 제품명이 화면에 일부만 보여 보수적으로 표기. 브랜드 표기(벤토사, Novachips 등)는 화면 기준 추정.
+
+**검증**
+- `npx tsc --noEmit` 통과, 로컬(localhost:3115)에서 4개 언어 `/about` 200·표 12개·행 84개(헤더 12 + 장비 72) 확인. 라이브 사이트 미사용.
+- 작업 전 백업: `_backups/exiflens_backup_20261002_045951_gear_additions2`
+
 ## 2026-10-02 — About 장비 표에 네이버 구매 내역 추가 (액세서리·조명·저장장치 등)
 
 **변경 사항**
