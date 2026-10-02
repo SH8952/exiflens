@@ -1,3 +1,19 @@
+## 2026-10-02 — 블로그 영역(/ko/blog) 신설 + 상단 메뉴에 "블로그" 추가
+
+**배경**: 롱테일·에버그린 주제를 다룰 공간이 없었음(가이드는 정보 전달 전용). 글은 운영자가 네이버 블로그 자동화 프로그램에서 얻은 주제와 실제 경험 메모(2~3줄)를 주면, 그 경험을 중심으로 보강해 작성하는 방식으로 운영. 한국어 전용으로 시작(대량 발행 회피 + 색인 대기열 부담 방지).
+
+**변경 사항**
+- `src/lib/blog.ts`(신규): `content/blog/ko/<slug>.mdx` 로더(메타/목록/관련 글/MDX 컴파일). 가이드와 동일하게 `singleTilde: false` 적용. `BLOG_LOCALES = ["ko"]` — 다른 언어를 추가하려면 여기와 해당 폴더만 늘리면 됨.
+- `src/app/[locale]/blog/page.tsx`, `[slug]/page.tsx`(신규): 목록·상세. `/en|ja|es/blog…` 직접 접근은 `/ko/blog…`로 307 리디렉션(중복 URL·빈 목록 방지). hreflang 대체 주소 없음, canonical은 `/ko/...`. 글이 0개인 동안 목록 페이지는 `noindex`. 글 상세는 `BlogPosting` JSON-LD(작성자 Photographer SH), 공유 버튼, 관련 글, 가이드 링크, 도구 CTA 포함.
+- `src/components/site-header.tsx`: 메뉴 순서 "소개 - 가이드 - FAQ - 블로그 - 도구 - 프레임 만들기 - 언어"(데스크톱·모바일). 모든 언어 화면에서 `/ko/blog`로 연결(라벨: 블로그 / Blog (KO) / ブログ(KO) / Blog (KO)). 메뉴가 늘어 sm~lg 구간에서 줄바꿈·넘침이 생겨 태그라인 표시를 `sm`→`lg`로 올리고 메뉴 간격을 `gap-3 lg:gap-4`로 조정.
+- `src/components/language-switcher.tsx`: 블로그 화면에서 언어를 바꾸면 해당 언어 홈(`/`)으로 이동(그대로 두면 `/ko/blog`로 되돌아가 언어를 못 바꾸는 것처럼 보임).
+- `src/app/sitemap.ts`, `src/app/rss.xml/route.ts`: 블로그 글(한국어)을 포함. 글이 0개일 때는 사이트맵에 목록 페이지도 넣지 않음.
+- `messages/{ko,en,ja,es}.json`: `Header.blogNav`, `Blog` 네임스페이스 추가.
+
+**검증**: `tsc --noEmit`·eslint 통과, `next build` 성공(임시 distDir, 이후 원복). 로컬에서 임시 글로 확인 후 삭제: 목록·상세 200, 존재하지 않는 글 404, en/ja 직접 접근 307→/ko, canonical·BlogPosting 확인, hreflang 없음, `f/11~f/16` 취소선 변환 없음, 사이트맵·RSS 반영, 글 0개일 때 noindex·사이트맵 제외. 헤더는 640~1280px에서 4개 언어 모두 가로 넘침 없음 확인. 백업: `_backups/exiflens_backup_*_blog`.
+
+**운영 메모**: 글은 `content/blog/ko/<slug>.mdx`(frontmatter: title, description, publishedAt, 선택 updatedAt·category·tags·image)로 추가. 첫 글을 올리면 목록 페이지 noindex와 사이트맵 제외가 자동 해제됨.
+
 ## 2026-10-02 — 홈 화면 "관련 도구"(FlyDroneMap 크로스링크) 하단 임시 이동
 
 **변경 사항**

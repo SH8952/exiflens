@@ -5,6 +5,7 @@
     "aboutNav": "サイトについて",
     "guidesNav": "ガイド",
     "faqNav": "FAQ",
+    "blogNav": "ブログ(KO)",
     "openMenu": "メニューを開く",
     "closeMenu": "メニューを閉じる",
     "toolsNav": "ツール"
@@ -964,6 +965,18 @@
     "otherCategory": "その他のガイド",
     "ctaBannerText": "写真に隠された焦点距離やレンズ情報を今すぐ確認しましょう。",
     "ctaBannerButton": "無料で写真を解析する",
+    "writtenBy": "執筆",
+    "updatedOn": "{date} 更新",
+    "authorName": "Photographer SH"
+  },
+  "Blog": {
+    "title": "ブログ",
+    "subtitle": "撮影現場での体験と設定値、計算の根拠をまとめた記事です(韓国語のみ)。",
+    "empty": "まだ記事がありません。近日公開予定です。",
+    "readingTime": "{minutes}分で読めます",
+    "backToBlog": "← ブログ一覧へ",
+    "relatedPosts": "関連記事",
+    "moreGuides": "ガイドをもっと見る →",
     "writtenBy": "執筆",
     "updatedOn": "{date} 更新",
     "authorName": "Photographer SH"

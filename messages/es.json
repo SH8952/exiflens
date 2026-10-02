@@ -5,6 +5,7 @@
     "aboutNav": "Sobre nosotros",
     "guidesNav": "Guías",
     "faqNav": "FAQ",
+    "blogNav": "Blog (KO)",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
     "toolsNav": "Herramientas"
@@ -964,6 +965,18 @@
     "otherCategory": "Otras guías",
     "ctaBannerText": "Descubre la distancia focal y los datos del objetivo ocultos en tu foto.",
     "ctaBannerButton": "Analiza tu foto gratis",
+    "writtenBy": "Escrito por",
+    "updatedOn": "Actualizado el {date}",
+    "authorName": "Photographer SH"
+  },
+  "Blog": {
+    "title": "Blog",
+    "subtitle": "Entradas que combinan notas de campo con ajustes y los cálculos detrás de ellos (solo en coreano).",
+    "empty": "Aún no hay entradas — próximamente.",
+    "readingTime": "{minutes} min de lectura",
+    "backToBlog": "← Volver al blog",
+    "relatedPosts": "Entradas relacionadas",
+    "moreGuides": "Más guías →",
     "writtenBy": "Escrito por",
     "updatedOn": "Actualizado el {date}",
     "authorName": "Photographer SH"

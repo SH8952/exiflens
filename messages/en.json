@@ -5,6 +5,7 @@
     "aboutNav": "About",
     "guidesNav": "Guides",
     "faqNav": "FAQ",
+    "blogNav": "Blog (KO)",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "toolsNav": "Tools"
@@ -965,6 +966,18 @@
     "ctaBannerText": "Check the focal length and lens info hidden in your photo's EXIF data.",
     "ctaBannerButton": "Analyze Your Photo Free",
     "writtenBy": "Written by",
+    "updatedOn": "Updated {date}",
+    "authorName": "Photographer SH"
+  },
+  "Blog": {
+    "title": "Blog",
+    "subtitle": "Posts that pair first-hand shooting notes with settings and the math behind them (Korean only).",
+    "empty": "No posts yet — coming soon.",
+    "readingTime": "{minutes} min read",
+    "backToBlog": "← Back to blog",
+    "relatedPosts": "Related posts",
+    "moreGuides": "More guides →",
+    "writtenBy": "By",
     "updatedOn": "Updated {date}",
     "authorName": "Photographer SH"
   },

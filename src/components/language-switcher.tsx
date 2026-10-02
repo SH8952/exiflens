@@ -20,7 +20,10 @@ export function LanguageSwitcher() {
     <Select
       value={locale}
       onValueChange={(next) => {
-        router.replace(pathname, { locale: next as Locale });
+        // 블로그는 한국어 전용이라 /en/blog 등은 /ko/blog 로 되돌아간다(언어를
+        // 못 바꾸는 것처럼 보임). 블로그 화면에서 언어를 바꾸면 해당 언어 홈으로 이동.
+        const target = pathname.startsWith("/blog") ? "/" : pathname;
+        router.replace(target, { locale: next as Locale });
       }}
     >
       <SelectTrigger size="sm" className="w-[84px]" aria-label="Language">

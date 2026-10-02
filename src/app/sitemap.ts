@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL, languageAlternates } from "@/lib/seo";
 import { getAllGuidesMeta } from "@/lib/guides";
+import { BLOG_LOCALE, getAllBlogMeta } from "@/lib/blog";
 
 /**
  * Every static route currently in the app, per Google AdSense/SEO checklist
@@ -62,5 +63,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...staticEntries, ...guideEntries];
+  // 블로그는 한국어 전용 — 번역본이 없으므로 hreflang 대체 주소(alternates)는 달지
+  // 않는다. 글이 하나도 없는 동안은 목록 페이지(noindex)도 사이트맵에서 뺀다.
+  const blogPosts = getAllBlogMeta();
+  const blogEntries =
+    blogPosts.length === 0
+      ? []
+      : [
+          {
+            url: `${SITE_URL}/${BLOG_LOCALE}/blog`,
+            lastModified: new Date(
+              blogPosts[0].updatedAt ?? blogPosts[0].publishedAt,
+            ),
+            changeFrequency: "weekly" as const,
+            priority: 0.7,
+          },
+          ...blogPosts.map((post) => ({
+            url: `${SITE_URL}/${BLOG_LOCALE}/blog/${post.slug}`,
+            lastModified: new Date(post.updatedAt ?? post.publishedAt),
+            changeFrequency: "monthly" as const,
+            priority: 0.6,
+          })),
+        ];
+
+  return [...staticEntries, ...guideEntries, ...blogEntries];
 }

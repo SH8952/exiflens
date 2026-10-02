@@ -1,6 +1,7 @@
 import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/seo";
 import { getAllGuidesMeta } from "@/lib/guides";
+import { BLOG_LOCALE, getAllBlogMeta } from "@/lib/blog";
 
 /**
  * Site-wide RSS 2.0 feed of guide articles across every locale, submitted to
@@ -36,6 +37,18 @@ export async function GET() {
       locale,
     })),
   );
+
+  // 블로그 글(한국어 전용)도 같은 피드에 포함한다.
+  for (const post of getAllBlogMeta()) {
+    allItems.push({
+      title: post.title,
+      description: post.description,
+      url: `${SITE_URL}/${BLOG_LOCALE}/blog/${post.slug}`,
+      date: new Date(post.updatedAt ?? post.publishedAt),
+      slug: post.slug,
+      locale: BLOG_LOCALE,
+    });
+  }
 
   allItems.sort((a, b) => b.date.getTime() - a.date.getTime());
 

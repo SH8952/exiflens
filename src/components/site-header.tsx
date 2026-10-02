@@ -41,14 +41,16 @@ export function SiteHeader() {
             <span className="text-lg font-semibold tracking-tight">
               ExifLens
             </span>
-            <span className="hidden text-xs text-muted-foreground sm:block">
+            {/* 2026-10-02: 블로그 메뉴가 늘어 sm~lg 구간에서 메뉴가 줄바꿈/넘침이 생겨
+                태그라인 표시를 sm → lg 로 올리고 메뉴 간격을 좁힘(gap-3 lg:gap-4). */}
+            <span className="hidden text-xs text-muted-foreground lg:block">
               {t("tagline")}
             </span>
           </span>
         </Link>
 
         {/* Desktop nav: full width is available, so every link stays on one line */}
-        <nav className="hidden items-center gap-4 sm:flex">
+        <nav className="hidden items-center gap-3 sm:flex lg:gap-4">
           <Link href="/about" className={navLinkClass}>
             {t("aboutNav")}
           </Link>
@@ -57,6 +59,10 @@ export function SiteHeader() {
           </Link>
           <Link href="/faq" className={navLinkClass}>
             {t("faqNav")}
+          </Link>
+          {/* 블로그는 한국어 전용(/ko/blog) — 모든 언어 화면에서 한국어 블로그로 연결 */}
+          <Link href="/blog" locale="ko" className={navLinkClass}>
+            {t("blogNav")}
           </Link>
           <Link href="/tools" className={navLinkClass}>
             {t("toolsNav")}
@@ -107,6 +113,14 @@ export function SiteHeader() {
             onClick={() => setMenuOpen(false)}
           >
             {t("faqNav")}
+          </Link>
+          <Link
+            href="/blog"
+            locale="ko"
+            className={`${navLinkClass} py-2.5`}
+            onClick={() => setMenuOpen(false)}
+          >
+            {t("blogNav")}
           </Link>
           <Link
             href="/tools"
