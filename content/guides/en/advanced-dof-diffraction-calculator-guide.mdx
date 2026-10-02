@@ -9,25 +9,72 @@ imageCredit: "Martin Castro"
 imageCreditUrl: "https://unsplash.com/@martin_castro?utm_source=ExifLens&utm_medium=referral"
 ---
 
-Stopping down for more depth of field always comes with a trade-off: past a certain aperture, diffraction starts softening fine detail. Our [Advanced DoF & Diffraction calculator](/tools/advanced-dof-diffraction-calculator) puts a number on exactly where that trade-off kicks in for your sensor, and shows it next to the depth of field you'd get at your chosen aperture and subject distance — so you can decide whether the extra depth is worth it.
+Stopping down for more depth of field always comes with a trade-off: past a certain aperture, diffraction starts softening fine detail. Our [Advanced DoF & Diffraction calculator](/tools/advanced-dof-diffraction-calculator) puts a number on exactly where that trade-off kicks in for your sensor, and shows it next to the depth of field you'd get at your chosen aperture and subject distance, so you can decide whether the extra depth is worth it.
 
 ## What the calculator is doing
 
 Enter your focal length, sensor size, aperture, and subject distance. Behind the scenes, it calculates two things using the same circle-of-confusion (CoC) values our standard [DoF calculator](/tools/dof-calculator) uses for your sensor:
 
-- **Diffraction-limited aperture** — the narrowest aperture before the diffraction pattern (the "Airy disk") grows larger than your sensor's circle of confusion, using the standard Rayleigh-criterion approximation (Airy disk diameter ≈ 2.44 × wavelength × f-number, with a 550nm reference wavelength — the same convention most online diffraction calculators use).
-- **Depth of field** — the classic hyperfocal-based near/far focus limits for the aperture and subject distance you actually chose, using the exact same formula as our standard DoF calculator.
+- **Diffraction-limited aperture**: the narrowest aperture before the diffraction pattern (the "Airy disk") grows larger than your sensor's circle of confusion, using the standard Rayleigh-criterion approximation (Airy disk diameter ≈ 2.44 × wavelength × f-number, with a 550nm reference wavelength, the same convention most online diffraction calculators use).
+- **Depth of field**: the classic hyperfocal-based near/far focus limits for the aperture and subject distance you actually chose, using the exact same formula as our standard DoF calculator.
 
 Seeing both together is the point: a deeper depth of field from a smaller aperture is only a net win if the diffraction softening it introduces is small enough not to matter for how you'll use the photo.
 
 ## This is a sensor-size rule of thumb, not a megapixel-specific number
 
-It's worth being precise about what this calculator is (and isn't) telling you. The diffraction-limited aperture here is based on your sensor's circle of confusion — a standard rule-of-thumb value tied to sensor size, the same one used throughout our DoF tools. It doesn't take your camera's specific resolution (megapixel count) into account.
+It's worth being precise about what this calculator is (and isn't) telling you. The diffraction-limited aperture here is based on your sensor's circle of confusion, a standard rule-of-thumb value tied to sensor size, the same one used throughout our DoF tools. It doesn't take your camera's specific resolution (megapixel count) into account.
 
-In practice, a 45-megapixel full-frame body and a 12-megapixel full-frame body share the same circle-of-confusion-based diffraction-limited aperture from this calculator, but the higher-resolution body will actually start showing diffraction softening a bit earlier in real-world pixel-level detail, because its smaller pixels resolve finer diffraction blur sooner. If you want the more precise, resolution-aware picture — factoring in your camera's actual pixel pitch — see our companion guide on [diffraction and optimal aperture](/guides/diffraction-and-optimal-aperture), which walks through that pixel-pitch-based version of the same question.
-
-Used together, the two give you a good range: this calculator's number as a sensor-size baseline, and the pixel-pitch guide for a sharper answer once you know your camera's megapixel count.
+In practice, a 45-megapixel full-frame body and a 12-megapixel full-frame body share the same circle-of-confusion-based diffraction-limited aperture from this calculator, but the higher-resolution body will start showing diffraction softening a bit earlier in real-world pixel-level detail, because its smaller pixels resolve finer diffraction blur sooner. Treat this calculator's number as a sensor-size baseline, then tighten it using your own pixel pitch, as the worked example below shows.
 
 ## A quick way to read the result
 
-If your chosen aperture is at or before the diffraction-limited aperture shown, diffraction isn't yet the main factor limiting your sharpness — other things (focus accuracy, lens quality, camera shake) matter more. Past that point, the calculator's "Airy disk diameter" number tells you roughly how much larger the blur circle has grown relative to your sensor's circle of confusion; the further past 1.0× that ratio grows, the more visible the softening becomes, especially in large prints or heavy crops.
+If your chosen aperture is at or before the diffraction-limited aperture shown, diffraction isn't yet the main factor limiting your sharpness. Other things (focus accuracy, lens quality, camera shake) matter more. Past that point, the calculator's "Airy disk diameter" number tells you roughly how much larger the blur circle has grown relative to your sensor's circle of confusion; the further past 1.0× that ratio grows, the more visible the softening becomes, especially in large prints or heavy crops.
+
+## Worked example 1: the Airy disk at common apertures
+
+With a 550nm wavelength (0.00055 mm), the Airy disk diameter is 2.44 × 0.00055 mm × N, which works out to about 1.342 micrometers for every stop number. So:
+
+- f/8: 1.342 × 8 = about 10.7 micrometers
+- f/11: 1.342 × 11 = about 14.8 micrometers
+- f/16: 1.342 × 16 = about 21.5 micrometers
+- f/22: 1.342 × 22 = about 29.5 micrometers
+
+A full-frame sensor uses a circle of confusion of 0.030 mm, or 30 micrometers. The two sizes match when N = 30 / 1.342, about 22.4, so on full frame the calculator's diffraction-limited aperture lands near f/22. For APS-C with a 0.020 mm circle (20 micrometers), N = 20 / 1.342, about 14.9, so roughly f/15. For Micro Four Thirds with 0.015 mm, N is about 11.2, so around f/11.
+
+## Worked example 2: tightening the answer with pixel pitch
+
+Take a 45-megapixel full-frame sensor, about 8,256 pixels across 36 mm. The pixel pitch is 36 / 8,256, about 4.36 micrometers. A common stricter rule says diffraction becomes visible at the pixel level once the Airy disk spans about two pixels, or 8.7 micrometers. That gives N = 8.7 / 1.342, about 6.5, so roughly f/6.5 to f/8. Now a 12-megapixel full-frame body, about 4,256 pixels across 36 mm, has a pitch near 8.46 micrometers; two pixels is 16.9 micrometers, so N is about 12.6. Same sensor size, same calculator baseline near f/22, yet the pixel-level thresholds differ by roughly a stop and a half or more. This two-pixel rule is only a convention, so use it as a guide, not a law.
+
+## Worked example 3: hyperfocal distance and what stopping down buys
+
+The standard formula is H = f² / (N × c) + f. For a 50mm lens on full frame (c = 0.03 mm) at f/8: 2,500 / 0.24 = 10,417 mm, plus 50 mm, so H is about 10.5 m. Focused there, everything from roughly 5.2 m to infinity is acceptably sharp. Stop down to f/16 and H becomes 2,500 / 0.48 = 5,208 mm plus 50 mm, about 5.26 m, with near focus around 2.6 m. We gained about 2.6 m of near sharpness, and the Airy disk went from about 10.7 to 21.5 micrometers, or from 0.36 to 0.72 of the circle of confusion. You can browse these distances in our [hyperfocal table](/tools/dof-hyperfocal-table), and the exposure cost of those two stops is easy to check with the [exposure stops calculator](/tools/exposure-stops-calculator): shutter time quadruples.
+
+## Common mistakes
+
+- **Treating the diffraction-limited aperture as a hard cliff.** Softening arrives gradually; one-third of a stop past the number is rarely a disaster.
+- **Chasing infinity sharpness with f/22 by default.** Often f/11 focused at the hyperfocal distance gives similar depth with far less softening.
+
+## Limits of the calculation
+
+The circle of confusion is a convention built on an assumed viewing size and eyesight, not a physical constant. The Airy formula assumes green light and an ideal lens; real lenses have their own sharpest aperture, usually a stop or two down from wide open, and some lenses are noticeably soft at the edges until f/8. And the depth of field figures describe acceptable sharpness, not a razor-edged zone. Use the numbers to choose a sensible range, then confirm on your own files.
+
+## Scenario walk-through: a foreground flower and a distant ridge
+
+We're on full frame with a 24mm lens and want a flower about 0.9 m away and the ridge at infinity both acceptable. We choose f/11. Hyperfocal is 24² / (11 × 0.03) + 24 = 576 / 0.33 + 24, about 1,770 mm, so 1.77 m. Focusing there puts near sharpness at about 0.89 m. The Airy disk at f/11 is about 14.8 micrometers, roughly half the 30 micrometer circle, so the calculator shows no concern. On a 45-megapixel body that disk spans about 3.4 pixels, so a pixel-peeper will see slight softening, but a normal print will not. If we pushed to f/16, near focus would improve only to about 0.6 m while the Airy disk reaches 0.72 of the circle, so we stay at f/11 and, if the flower must be closer, we would consider focus stacking instead.
+
+## Checklist before you stop down
+
+- Note your sensor size and look up the diffraction-limited aperture first.
+- Compute or look up the hyperfocal distance, then focus there instead of at infinity.
+- Check the [print resolution calculator](/tools/print-resolution-calculator) for your output size, then compare the Airy disk to the circle of confusion; stay under about 1.0×.
+- If you shoot a high-resolution body, subtract a stop or so from the baseline.
+
+## FAQ
+
+### Is f/22 always bad on full frame?
+
+Not always. It sits right at the baseline here, so softening is noticeable at 100 percent but may be acceptable when depth of field matters more than critical sharpness, such as small prints.
+
+### Why does my high-megapixel camera look softer at f/11 than my old one?
+
+Smaller pixels resolve the same diffraction blur in more detail. The blur is identical; the sensor is simply better at showing it.

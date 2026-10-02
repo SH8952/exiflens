@@ -9,22 +9,68 @@ imageCredit: "Wassim Chouak"
 imageCreditUrl: "https://unsplash.com/@ynwasso?utm_source=ExifLens&utm_medium=referral"
 ---
 
-Al comprar una cámara de segunda mano, la palabra del vendedor de que está "casi sin usar" solo llega hasta cierto punto. El conteo de disparos del obturador —el número total de veces que el obturador se ha activado a lo largo de la vida de la cámara— es lo más parecido a un cuentakilómetros que existe en fotografía. La mayoría de los mecanismos de obturador tienen una vida útil estimada de entre 100.000 y 400.000 disparos, según la categoría del cuerpo, a partir de la cual es más probable que necesite revisión. Por eso, un cuerpo con un conteo bajo respecto a su vida útil estimada es una compra bastante más segura que uno que ya está cerca del límite.
+Al comprar una cámara de segunda mano, la palabra del vendedor de que está "casi sin usar" solo llega hasta cierto punto. El conteo de disparos del obturador —el número total de veces que el obturador se ha activado a lo largo de la vida de la cámara— es lo más parecido a un cuentakilómetros que existe en fotografía. La mayoría de los mecanismos de obturador tienen una vida útil estimada (a menudo entre 100.000 y 400.000 disparos, según la gama del cuerpo) a partir de la cual el desgaste hace más probable una reparación, así que un cuerpo con un conteo bajo respecto a su vida nominal es una compra bastante más segura que otro que ya está muy avanzado en su vida esperada.
 
-Nuestro [Comprobador de disparos del obturador](/tools/shutter-count-checker) lee este valor directamente de un archivo NEF o JPEG, todo en tu navegador: sin subir nada, sin crear una cuenta, sin que ningún dato salga de tu dispositivo.
+Nuestro [comprobador de disparos del obturador](/tools/shutter-count-checker) lee este valor directamente de un archivo NEF o JPEG, por completo en tu navegador: sin subir nada, sin cuenta, y nada sale de tu dispositivo.
 
-## Dónde vive realmente este dato
+## Dónde está realmente este número
 
-Los campos EXIF habituales (apertura, velocidad de obturación, ISO, objetivo) están estandarizados en todas las marcas de cámaras, por eso cualquier visor EXIF puede leerlos. El conteo de disparos no forma parte de ese conjunto estándar: cada fabricante lo guarda (o no) dentro de un bloque propio llamado MakerNote, y la estructura exacta de esos bytes varía según la marca y, a menudo, según la generación del modelo. Por eso tantas herramientas de "visor EXIF" te muestran todo menos este dato en concreto: solo interpretan los campos estandarizados, no los específicos de cada fabricante.
+Los campos EXIF habituales (apertura, velocidad, ISO, objetivo) están estandarizados en todas las marcas, por eso cualquier visor EXIF puede leerlos. El conteo de disparos no forma parte de ese conjunto estándar: cada fabricante lo guarda (o no) dentro de un bloque propio llamado MakerNote, y la disposición exacta de los bytes cambia según la marca y, a menudo, según la generación del modelo. Por eso tantas herramientas muestran todo menos este número: solo interpretan los campos estándar, no los específicos del fabricante.
 
-## Por qué empezamos por Nikon — y ahora también con dos cuerpos Canon
+## Por qué primero Nikon, y ahora cinco cuerpos Canon
 
-Nikon documenta su campo `ShutterCount` como un número de 32 bits sin cifrar dentro de su bloque MakerNote, un detalle confirmado por varias fuentes independientes y públicas, no solo por las herramientas del propio fabricante. Verificamos nuestra implementación con archivos reales de cámaras Nikon y coincide exactamente.
+Nikon documenta su campo `ShutterCount` como un número de 32 bits sin cifrar dentro de su MakerNote, un dato confirmado por varias fuentes independientes y públicas, no solo por las herramientas de Nikon. Verificamos nuestra implementación con archivos reales de cámaras Nikon y coincide exactamente.
 
-Con Canon la situación es muy distinta: no existe una fórmula única. Canon guarda este valor en una posición de byte diferente dentro de un bloque binario propio de cada familia de cámaras, y esa posición debe descubrirse y publicarse individualmente antes de que cualquier herramienta —la nuestra incluida— pueda leerla. Por ahora, esa posición solo está documentada públicamente para la EOS R5, la EOS R6, la EOS R6 Mark II, la EOS R8 y la EOS R50, así que esos cinco cuerpos Canon (solo archivos CR3) son los compatibles con esta herramienta. El resto de cámaras Canon, incluidos los modelos EOS R más recientes, siguen apareciendo como no compatibles, no porque sea imposible para siempre, sino porque todavía nadie ha publicado dónde vive ese valor en esos modelos. Si usas uno de los dos cuerpos Canon compatibles, ten en cuenta que este soporte se basa en datos publicados y no se ha verificado con cada unidad individual ni con cada versión de firmware.
+Con Canon la historia es muy distinta: no existe una fórmula única. Canon guarda el valor en una posición distinta dentro de un bloque binario propio de cada modelo para prácticamente cada familia de cámaras, y cada posición debe descubrirse y publicarse individualmente antes de que cualquier herramienta, la nuestra incluida, pueda leerla. Al escribir esto, esa posición solo está documentada públicamente para las EOS R5, EOS R6, EOS R6 Mark II, EOS R8 y EOS R50, de modo que esos cinco cuerpos Canon (solo archivos CR3) son los que admite hoy la herramienta. Cualquier otra Canon, incluidos los modelos EOS R más recientes, aparece como no compatible: no porque sea imposible, sino porque nadie ha publicado todavía dónde está el valor en esos modelos. Si usas uno de los cuerpos Canon compatibles, ten en cuenta que ese soporte se basa en datos publicados y no se ha probado con cada unidad ni con cada versión de firmware.
 
-Sony, Fujifilm, Olympus, Panasonic y Pentax van por detrás por motivos distintos en cada caso: algunos guardan un valor equivalente que cambia según la generación del modelo y el firmware, y otros directamente nunca lo escriben en el archivo. Seguimos ampliando la cobertura en lugar de tratar esta lista como definitiva.
+Sony, Fujifilm, Olympus, Panasonic y Pentax van más atrasadas por razones distintas en cada caso: algunas guardan un valor equivalente de forma que cambia con la generación del modelo y el firmware, y otras sencillamente nunca lo escriben en el archivo. Seguimos ampliando la cobertura y no consideramos esta lista definitiva.
 
 ## Cómo usarlo antes de comprar
 
-Si compras de segunda mano, pide al vendedor un archivo JPEG o NEF que salga directamente de la cámara (no una captura de pantalla, ni un archivo que se haya vuelto a guardar con un programa de edición, algo que normalmente elimina estos metadatos), y compruébalo tú mismo con la herramienta. Compara el conteo con la vida útil estimada del obturador para esa categoría de cuerpo, y valóralo junto con el estado estético visible: juntos dan mucha más información que cualquiera de los dos por separado.
+Si compras de segunda mano, pide al vendedor un JPEG o NEF directo de cámara (no una captura de pantalla ni un archivo guardado de nuevo con un programa de edición, que normalmente elimina estos metadatos) y pásalo tú mismo por el comprobador. Compara el conteo con la vida nominal del obturador de esa gama y valóralo junto con el estado estético visible: ambos datos juntos dicen mucho más que cada uno por separado.
+
+## Ejemplo práctico: de un número a una decisión
+
+Un número suelto significa poco hasta que lo comparas con la cifra nominal. Supongamos un cuerpo de una gama que el fabricante califica en 200.000 disparos (consulta la cifra de tu modelo concreto, porque varía mucho) y que marca 45.000:
+
+- 45.000 entre 200.000 = 0,225, es decir, se ha usado alrededor del 22,5 por ciento de la vida nominal.
+- 200.000 menos 45.000 = 155.000 disparos que quedan sobre el papel.
+
+Ahora compara con otro cuerpo de la misma gama que marca 150.000: 150.000 entre 200.000 = 0,75, o sea, se ha usado el 75 por ciento y quedan solo 50.000. No tiene por qué estar averiado, ya que las cifras nominales no son garantías y muchos obturadores las superan, pero el precio debería reflejarlo y conviene que el vendedor ofrezca un plazo de devolución.
+
+También ayuda traducir el conteo a años. Si haces unas 12.000 fotos al año, 155.000 disparos restantes equivalen a unos 12,9 años de uso (155.000 entre 12.000). Un fotógrafo de bodas que entrega 4.000 fotos por evento en 25 eventos gasta 100.000 disparos en un solo año, así que el mismo cuerpo es una propuesta muy distinta para él. Piensa en tu propio volumen, no en el promedio.
+
+## Errores comunes
+
+- **Fiarse de una captura de pantalla o de una copia enviada por mensajería.** La mayoría de las apps de chat recomprimen la imagen y eliminan los metadatos, así que el número desaparece o no se puede verificar. Pide el archivo original.
+- **Usar una exportación editada.** Un JPEG guardado de nuevo desde un editor o exportado para web suele perder su MakerNote. Si el comprobador no encuentra nada, es un motivo para pedir otro archivo, no la prueba de que el conteo sea cero.
+- **Olvidar que el archivo registra el conteo en el momento de la captura.** Una foto que el vendedor hizo el año pasado muestra el conteo del año pasado. Pide una imagen nueva tomada ese mismo día.
+- **Comparar entre gamas.** Un cuerpo de entrada y uno profesional tienen cifras nominales distintas, así que 100.000 significa cosas diferentes en cada uno.
+
+## Cuándo el conteo no te dice mucho
+
+El conteo mide el desgaste del obturador mecánico, y nada más. Muchos cuerpos sin espejo pueden disparar con obturador totalmente electrónico, y en ese modo el obturador mecánico puede no moverse en absoluto, de modo que un cuerpo puede haber trabajado mucho con un conteo modesto. Del mismo modo, un número bajo no dice nada sobre polvo en el sensor, un anillo de montura desgastado, daños por líquidos o una batería cansada. Algunas marcas y modelos no escriben el valor en el archivo de una forma que nuestra herramienta pueda leer, así que "no compatible" solo significa que no podemos decírtelo, no que haya un problema. En esos casos, apóyate en una revisión física y en la política de devolución del vendedor.
+
+## Un escenario típico
+
+Imagina una compra habitual. Un comprador encuentra un cuerpo Nikon de segunda mano anunciado como "poco uso". Las fotos del anuncio son capturas de pantalla, así que pide un NEF original hecho esa misma mañana. Al pasarlo por el comprobador, marca 31.400, bastante por debajo de la cifra nominal del fabricante para esa gama y coherente con la descripción del vendedor. Después revisa la montura, prueba todos los botones, hace una foto de cielo despejado a f/16 para buscar manchas de polvo y solo entonces acuerda el precio. El conteo fue un dato más entre varios, que es justo como recomendamos usarlo.
+
+Si haces timelapses largos, recuerda que gastan disparos rápidamente: un clip de 30 segundos a 24 fotogramas por segundo son 720 fotos. Nuestra [calculadora de timelapse](/tools/timelapse-calculator) te dice cuántas tomas requiere un plan para que veas cuánto le cuesta a tu obturador.
+
+## Lista rápida
+
+- Pide un NEF, CR3 o JPEG original hecho hoy, nunca una captura de pantalla.
+- Pásalo por el [comprobador de disparos del obturador](/tools/shutter-count-checker).
+- Busca el rango nominal del fabricante para ese modelo exacto.
+- Divide el conteo entre la cifra nominal y piensa en tus fotos anuales.
+- Inspecciona el cuerpo en persona y, si puedes, conserva un plazo de devolución.
+
+## Preguntas frecuentes
+
+### ¿Un conteo alto significa que la cámara está a punto de fallar?
+
+No necesariamente. Las cifras nominales son objetivos conservadores y muchos obturadores siguen funcionando después. Pero el riesgo de reparación aumenta al acercarse a la cifra, así que un conteo alto es motivo para negociar el precio o desistir.
+
+### La herramienta dice que mi cámara no es compatible. ¿Es un problema?
+
+No. Significa que todavía no hay información publicada para leer el valor en los archivos de ese modelo, o que el valor no se escribe. No dice nada sobre el estado de la cámara.

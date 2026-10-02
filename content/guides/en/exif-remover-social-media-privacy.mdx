@@ -11,6 +11,8 @@ imageCreditUrl: "https://unsplash.com/@mariiaberezovsky?utm_source=ExifLens&utm_
 
 Getting used to platforms like Instagram or WhatsApp that automatically strip metadata on upload makes it easy to assume every upload is safe the same way. Posting a photo directly on a marketplace app, attaching a file to a personal blog or portfolio site, or emailing a photo all pass the original file through with its GPS coordinates intact. Our [EXIF Remover](/tools/exif-remover) is built for exactly these situations — it processes photos entirely in your browser without sending them to a server — but getting the result you actually want depends on understanding its options.
 
+Keep one caution in mind about the platforms too: many of them remove some metadata on upload, but behavior varies by platform, by upload method, and can change over time, so we treat it as a bonus and not a guarantee. The safest habit is to remove location yourself before sharing.
+
 ## Whether to remove only GPS or everything depends on the situation
 
 Turning on "Remove GPS location only" in the advanced options strips just the coordinates while keeping the rest of the EXIF data — camera model, lens, and shooting settings. That's useful for photographers who want to keep shooting info visible in a portfolio for credibility while dropping location. But this option only applies to JPEG, and some files store a separate copy of GPS coordinates in the XMP data, which this option may not remove. If you need location data gone with certainty, use full removal instead of GPS-only.
@@ -31,6 +33,30 @@ Exporting a photo from editing software to strip metadata can sometimes degrade 
 
 HEIC (the iPhone's default photo format) and TIFF aren't reliably handled with standard browser capabilities yet, so they're not supported. An iPhone photo uploaded as-is will show as an unsupported format — switch the camera's capture format to JPEG, or use the "Most Compatible" (JPEG conversion) option when sharing, before uploading to the tool.
 
+## How precise is the location, really?
+
+GPS coordinates are stored as numbers, and photos often carry several decimal places. One degree of latitude is about 111 kilometers, so 0.00001 degrees is about 1.1 meters (111,000 meters multiplied by 0.00001). A coordinate with five decimal places therefore points at a spot about the size of a doorway, not at a neighborhood. That is why a "private" photo taken at home can reveal exactly which house it came from.
+
+## Worked example: a 35-photo trip
+
+Say we come back from a trip with 35 JPEGs we want to put on a blog, and we'd like to keep camera and lens info but drop location. The tool takes 20 files at a time, so we process in two rounds: 20 plus 15 equals 35, and we get two ZIPs. Because GPS-only may leave an XMP copy behind in some files, we choose full removal for any photo taken at or near our home, and keep GPS-only for scenic shots from far away. IPTC removal stays off for the photos that carry our copyright line. Afterward, we open one result in a file-info viewer to confirm that no coordinates remain before publishing.
+
+## Common mistakes
+
+- **Assuming the platform will do it for you.** Behavior varies and can change, so remove it yourself.
+- **Using GPS-only on a photo that must be completely clean.** An XMP copy can survive. Use full removal for sensitive photos.
+- **Stripping the original and losing your archive.** Work on copies and keep the original with its metadata in your library, since the data is useful to you.
+- **Forgetting other metadata.** Beyond location, a file can carry device details, timestamps, and captions. Decide what you want to share.
+- **Cleaning only the photo you posted, not the one you emailed.** Each copy of the file travels on its own.
+
+## Limits: what this tool doesn't do
+
+Removing metadata does not change what the picture shows. A street sign, house number, a distinctive view from a window, or a reflection can reveal a place just as well as GPS. The tool also works on JPEG files, so HEIC or TIFF must be converted first, and it can't clean a file that has already been shared elsewhere. Note, too, that a full removal can discard the MakerNote block, which is where cameras keep details like shutter count. If you're sending a photo to a buyer so they can verify the shutter count with our [Shutter Count Checker](/tools/shutter-count-checker), send the unmodified original instead.
+
+## A practical scenario
+
+We're selling a camera lens on a marketplace. We shoot the photos on the kitchen table, so the coordinates point to our home. Before uploading, we run the files through the EXIF Remover with full removal, download the ZIP, and look at the results on screen to make sure the images look unchanged. We upload from the cleaned folder, not from the camera roll, so we never post the wrong version by accident.
+
 ## Practical checklist
 
 - Check whether the destination automatically strips metadata — marketplace listings, blogs, and email attachments usually don't.
@@ -38,3 +64,18 @@ HEIC (the iPhone's default photo format) and TIFF aren't reliably handled with s
 - Turn off IPTC removal if you want to keep copyright info and captions while still stripping location.
 - For batches like travel photos, process up to 20 files at once and download them as a ZIP.
 - Convert iPhone HEIC photos to JPEG first before uploading them to the tool.
+- Keep an unmodified original archived, and upload only the cleaned copy.
+
+## FAQ
+
+### Does removing EXIF reduce image quality?
+
+No. The tool trims the metadata region and leaves the pixel data untouched, so there is no recompression.
+
+### Is my photo uploaded to a server?
+
+No. Processing happens in your browser, so the file stays on your device.
+
+### Should I remove everything every time?
+
+Not necessarily. If you want to show camera settings in a portfolio, GPS-only can be a good fit for non-sensitive photos. For anything taken at home, use full removal.

@@ -9,25 +9,80 @@ imageCredit: "Martin Castro"
 imageCreditUrl: "https://unsplash.com/@martin_castro?utm_source=ExifLens&utm_medium=referral"
 ---
 
-Cerrar el diafragma para ganar profundidad de campo siempre trae una contrapartida: a partir de cierto diafragma, la difracción empieza a suavizar el detalle fino. Nuestra [calculadora avanzada de DoF y difracción](/tools/advanced-dof-diffraction-calculator) pone un número exacto a dónde empieza esa contrapartida para tu sensor, y lo muestra junto a la profundidad de campo que obtendrías con el diafragma y la distancia al sujeto que elijas — así puedes decidir si esa profundidad extra vale la pena.
+Cerrar el diafragma para ganar profundidad de campo siempre trae una contrapartida: a partir de cierto diafragma, la difracción empieza a suavizar el detalle fino. Nuestra [calculadora avanzada de DoF y difracción](/tools/advanced-dof-diffraction-calculator) pone un número exacto a dónde empieza esa contrapartida para tu sensor, y lo muestra junto a la profundidad de campo que obtendrías con el diafragma y la distancia al sujeto que elijas, así puedes decidir si esa profundidad extra vale la pena.
 
 ## Qué hace la calculadora
 
 Introduce tu distancia focal, tamaño de sensor, diafragma y distancia al sujeto. Por detrás, calcula dos cosas usando los mismos valores de círculo de confusión (CoC) que nuestra [calculadora de DoF](/tools/dof-calculator) estándar usa para tu sensor:
 
-- **Diafragma limitado por difracción** — el diafragma más cerrado antes de que el patrón de difracción (el "disco de Airy") se vuelva más grande que el círculo de confusión de tu sensor, usando la aproximación estándar del criterio de Rayleigh (diámetro del disco de Airy ≈ 2.44 × longitud de onda × número f, con una longitud de onda de referencia de 550nm — la misma convención que usan la mayoría de calculadoras de difracción en línea).
-- **Profundidad de campo** — los clásicos límites de enfoque cercano/lejano basados en la distancia hiperfocal, para el diafragma y la distancia al sujeto que realmente elijas, usando exactamente la misma fórmula que nuestra calculadora de DoF estándar.
+- **Diafragma limitado por difracción**: el diafragma más cerrado antes de que el patrón de difracción (el "disco de Airy") se vuelva más grande que el círculo de confusión de tu sensor, usando la aproximación estándar del criterio de Rayleigh (diámetro del disco de Airy ≈ 2.44 × longitud de onda × número f, con una longitud de onda de referencia de 550nm, la misma convención que usan la mayoría de calculadoras de difracción en línea).
+- **Profundidad de campo**: los clásicos límites de enfoque cercano/lejano basados en la distancia hiperfocal, para el diafragma y la distancia al sujeto que realmente elijas, usando exactamente la misma fórmula que nuestra calculadora de DoF estándar.
 
 Ver ambos juntos es la idea central: una profundidad de campo mayor gracias a un diafragma más cerrado solo es una ganancia neta si el suavizado por difracción que introduce es lo bastante pequeño como para no importar en el uso que le darás a la foto.
 
 ## Esto es una regla general según el tamaño del sensor, no una cifra específica por megapíxeles
 
-Vale la pena precisar qué te dice esta calculadora (y qué no). El diafragma limitado por difracción que se muestra aquí se basa en el círculo de confusión de tu sensor — un valor estándar de referencia ligado al tamaño del sensor, el mismo que se usa en todas nuestras herramientas de DoF. No tiene en cuenta la resolución específica de tu cámara (el número de megapíxeles).
+Vale la pena precisar qué te dice esta calculadora y qué no. El diafragma limitado por difracción que se muestra aquí se basa en el círculo de confusión de tu sensor, un valor estándar de referencia ligado al tamaño del sensor, el mismo que se usa en todas nuestras herramientas de DoF. No tiene en cuenta la resolución específica de tu cámara (el número de megapíxeles).
 
-En la práctica, un cuerpo full frame de 45 megapíxeles y uno de 12 megapíxeles comparten el mismo diafragma limitado por difracción basado en el círculo de confusión según esta calculadora, pero el cuerpo de mayor resolución en realidad empezará a mostrar suavizado por difracción algo antes a nivel de píxel real, porque sus píxeles más pequeños resuelven antes el desenfoque de la difracción. Si quieres la imagen más precisa, que tenga en cuenta la resolución — considerando el tamaño de píxel real de tu cámara —, consulta nuestra guía complementaria sobre [difracción y diafragma óptimo](/guides/diffraction-and-optimal-aperture), que aborda esa misma pregunta desde el tamaño de píxel.
-
-Usadas juntas, ambas te dan un buen rango: el número de esta calculadora como base según el tamaño de sensor, y la guía de tamaño de píxel para una respuesta más precisa una vez que conoces los megapíxeles de tu cámara.
+En la práctica, un cuerpo full frame de 45 megapíxeles y uno de 12 megapíxeles comparten el mismo diafragma limitado por difracción según esta calculadora, pero el de mayor resolución mostrará el suavizado algo antes a nivel de píxel real, porque sus píxeles más pequeños resuelven antes el desenfoque de la difracción. Toma el número de la calculadora como base según el tamaño del sensor y afínalo con el tamaño de píxel de tu cámara, como mostramos en los ejemplos siguientes.
 
 ## Una forma rápida de leer el resultado
 
-Si el diafragma que elegiste está en el valor mostrado del diafragma limitado por difracción o antes de él (más abierto), la difracción todavía no es el factor principal que limita tu nitidez — otros factores (precisión del enfoque, calidad del objetivo, trepidación de la cámara) importan más. Pasado ese punto, el número de "diámetro del disco de Airy" de la calculadora indica aproximadamente cuánto ha crecido el círculo de desenfoque en relación con el círculo de confusión de tu sensor; cuanto más supere ese ratio 1.0×, más visible se vuelve el suavizado, especialmente en impresiones grandes o recortes intensos.
+Si el diafragma que elegiste coincide con el valor mostrado o es más abierto, la difracción todavía no es el factor principal que limita tu nitidez: importan más la precisión del enfoque, la calidad del objetivo o la trepidación. Pasado ese punto, el número de "diámetro del disco de Airy" indica aproximadamente cuánto ha crecido el círculo de desenfoque en relación con el círculo de confusión de tu sensor; cuanto más supere ese ratio 1.0×, más visible se vuelve el suavizado, especialmente en copias grandes o recortes intensos.
+
+## Ejemplo con números 1: el disco de Airy en diafragmas habituales
+
+Con una longitud de onda de 550nm (0.00055 mm), el diámetro del disco de Airy es 2.44 × 0.00055 mm × N, es decir, unos 1.342 micrómetros por cada número f.
+
+- f/8: 1.342 × 8 = unos 10.7 micrómetros
+- f/11: 1.342 × 11 = unos 14.8 micrómetros
+- f/16: 1.342 × 16 = unos 21.5 micrómetros
+- f/22: 1.342 × 22 = unos 29.5 micrómetros
+
+En full frame el círculo de confusión es de 0.030 mm, o sea 30 micrómetros. Ambos tamaños coinciden cuando N = 30 / 1.342, unos 22.4, así que el diafragma limitado por difracción queda cerca de f/22. En APS-C (círculo de 0.020 mm), N = 20 / 1.342, unos 14.9, o sea aproximadamente f/15. En Micro Cuatro Tercios (0.015 mm), N sale cerca de 11.2, alrededor de f/11.
+
+## Ejemplo con números 2: afinar con el tamaño de píxel
+
+Un sensor full frame de 45 megapíxeles tiene unos 8,256 píxeles a lo largo de 36 mm, así que el paso de píxel es 36 / 8,256, unos 4.36 micrómetros. Una regla más estricta y habitual dice que la difracción se vuelve visible a nivel de píxel cuando el disco de Airy abarca unos dos píxeles, o sea 8.7 micrómetros. Eso da N = 8.7 / 1.342, unos 6.5, de modo que aproximadamente entre f/6.5 y f/8. En cambio, un full frame de 12 megapíxeles (unos 4,256 píxeles de ancho) tiene un paso de unos 8.46 micrómetros; dos píxeles son 16.9 micrómetros y N sale en unos 12.6. Mismo tamaño de sensor y misma base de la calculadora cerca de f/22, pero los umbrales a nivel de píxel difieren en más de un paso y medio. La regla de los dos píxeles es solo una convención: úsala como guía, no como ley.
+
+## Ejemplo con números 3: distancia hiperfocal y lo que se gana al cerrar
+
+La fórmula estándar es H = f² / (N × c) + f. Con un objetivo de 50mm en full frame (c = 0.03 mm) a f/8: 2,500 / 0.24 = 10,417 mm, más 50 mm, así que H es unos 10.5 m. Enfocando ahí, todo desde unos 5.2 m hasta el infinito queda aceptablemente nítido. Si cerramos a f/16, H pasa a 2,500 / 0.48 = 5,208 mm más 50 mm, unos 5.26 m, con un límite cercano de unos 2.6 m. Ganamos unos 2.6 m de nitidez cercana, pero el disco de Airy pasó de unos 10.7 a 21.5 micrómetros, es decir, de 0.36 a 0.72 veces el círculo de confusión. Puedes consultar estas distancias en nuestra [tabla hiperfocal](/tools/dof-hyperfocal-table), y el coste de exposición de esos dos pasos se comprueba con la [calculadora de pasos de exposición](/tools/exposure-stops-calculator): el tiempo de obturación se multiplica por cuatro.
+
+## Errores comunes
+
+- **Tratar el diafragma limitado por difracción como un precipicio.** El suavizado llega poco a poco; un tercio de paso más allá del número rara vez es un desastre.
+- **Comparar sensores solo por el diafragma.** El mismo número f da el mismo disco de Airy en cualquier sensor, pero un sensor pequeño necesita un desenfoque menor para verse nítido. Usa la [calculadora de factor de recorte](/tools/crop-factor-calculator) al trasladar ajustes entre formatos.
+- **Usar f/22 por costumbre para buscar nitidez hasta el infinito.** Muchas veces f/11 enfocado a la distancia hiperfocal da una profundidad parecida con mucho menos suavizado.
+- **Culpar a la difracción de todo.** El enfoque fallido, el movimiento y las aberraciones en los bordes son causas más frecuentes de fotos blandas.
+- **Ignorar el tamaño de salida.** Una imagen web oculta la difracción que una copia grande deja ver. Revisa la [calculadora de resolución de impresión](/tools/print-resolution-calculator) para el tamaño que buscas.
+
+## Límites del cálculo
+
+El círculo de confusión es una convención basada en un tamaño de visualización y una agudeza visual supuestos, no una constante física. La fórmula de Airy supone luz verde y un objetivo ideal; los objetivos reales tienen su propio diafragma más nítido, normalmente uno o dos pasos por debajo de la máxima apertura, y algunos son claramente blandos en los bordes hasta f/8. Además, las cifras de profundidad de campo describen una nitidez aceptable, no una zona con bordes afilados. Usa los números para elegir un rango razonable y confirma después con tus propios archivos.
+
+## Recorrido por un caso: una flor en primer plano y una cresta lejana
+
+Estamos en full frame con un 24mm y queremos que una flor a unos 0.9 m y la cresta en el infinito queden aceptables. Elegimos f/11. La hiperfocal es 24² / (11 × 0.03) + 24 = 576 / 0.33 + 24, unos 1,770 mm, es decir, 1.77 m. Al enfocar ahí, el límite cercano queda en unos 0.89 m. El disco de Airy a f/11 mide unos 14.8 micrómetros, aproximadamente la mitad del círculo de 30 micrómetros, así que la calculadora no muestra problema. En un cuerpo de 45 megapíxeles ese disco abarca unos 3.4 píxeles: quien mire al 100 por ciento notará un leve suavizado, pero en una copia normal no se verá. Si cerráramos a f/16, el límite cercano solo mejoraría a unos 0.6 m mientras el disco de Airy llega a 0.72 del círculo, así que nos quedamos en f/11 y, si la flor debe estar más cerca, consideraríamos el apilado de enfoque.
+
+## Lista de comprobación antes de cerrar el diafragma
+
+- Anota el tamaño de tu sensor y consulta primero el diafragma limitado por difracción.
+- Calcula o busca la distancia hiperfocal y enfoca ahí en lugar de en el infinito.
+- Compara el disco de Airy con el círculo de confusión y mantente por debajo de 1.0× aproximadamente.
+- Si usas un cuerpo de alta resolución, resta un paso más o menos a la base.
+- Revisa un fotograma de prueba al 100 por ciento antes de lanzarte a una serie.
+
+## Preguntas frecuentes
+
+### ¿Es f/22 siempre malo en full frame?
+
+No siempre. Queda justo en la base de esta calculadora, así que el suavizado se nota al 100 por ciento, pero puede ser aceptable cuando la profundidad de campo importa más que la nitidez crítica, por ejemplo en copias pequeñas.
+
+### ¿Por qué mi cámara de muchos megapíxeles se ve más blanda a f/11 que mi cámara anterior?
+
+Porque los píxeles más pequeños resuelven con más detalle el mismo desenfoque de difracción. El desenfoque es idéntico; el sensor simplemente lo muestra mejor.
+
+### ¿Cambia la distancia focal el diafragma limitado por difracción?
+
+No. El disco de Airy depende del número f y de la longitud de onda, no de la distancia focal. La focal cambia la profundidad de campo y la distancia hiperfocal, por eso la calculadora la necesita.

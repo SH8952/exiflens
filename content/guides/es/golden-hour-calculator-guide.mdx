@@ -9,29 +9,81 @@ imageCredit: "Martin Franco"
 imageCreditUrl: "https://unsplash.com/@martinfranco?utm_source=ExifLens&utm_medium=referral"
 ---
 
-"Dispara durante la hora dorada" es un consejo habitual, pero el momento exacto en que ocurre donde estés hoy cambia mucho según la estación y tu latitud. Nuestra [Calculadora de hora dorada y hora azul](/tools/golden-hour-calculator) calcula estos intervalos directamente en tu navegador a partir de una fecha y una ubicación — sin cuenta, sin enviar datos de ubicación a ningún sitio.
+"Fotografía durante la hora dorada" es un consejo muy repetido, pero la hora exacta en la que cae esa ventana donde estás hoy cambia mucho con la estación y con tu latitud. Nuestra [Calculadora de hora dorada y hora azul](/tools/golden-hour-calculator) calcula esas ventanas directamente en tu navegador a partir de una fecha y un lugar. No hace falta cuenta y no se envía ningún dato de ubicación a ningún sitio.
 
 ## Qué son realmente la hora dorada y la hora azul
 
 Ambos términos describen la luz cuando el sol está cerca del horizonte, pero cubren franjas distintas.
 
-- **Hora dorada**: la altitud del sol está entre aproximadamente -0,83° (amanecer/atardecer) y +6° sobre el horizonte. La luz llega en un ángulo bajo, con colores cálidos y sombras suaves.
-- **Hora azul**: la altitud del sol está entre aproximadamente -6° y -0,83°. El sol ya no es visible, pero el cielo aún conserva un breve tono azul intenso.
+- **Hora dorada**: la altura del sol está entre aproximadamente -0,83° (salida o puesta del sol) y +6° sobre el horizonte. La luz llega con un ángulo bajo y da un color cálido y sombras suaves.
+- **Hora azul**: la altura del sol está entre aproximadamente -6° y -0,83°. El sol ya no se ve, pero el cielo conserva un breve resplandor azul intenso.
 
-Cada día tiene cuatro de estos intervalos: hora azul de la mañana → hora dorada de la mañana → (mediodía) → hora dorada de la tarde → hora azul de la tarde.
+Cada día tiene cuatro de estas ventanas: hora azul de la mañana, hora dorada de la mañana, (mediodía), hora dorada de la tarde y hora azul de la tarde. A pesar del nombre, la "hora" casi nunca dura sesenta minutos, y el límite de +6° es una convención entre fotógrafos y no una frontera rígida, así que tomamos los bordes como una guía.
 
 ## Cómo funciona el cálculo
 
-Calcular esto con precisión requiere fórmulas astronómicas que ubican la posición del sol al segundo. Nuestra calculadora usa para ello la biblioteca de código abierto `suncalc` (licencia BSD, basada en los algoritmos astronómicos de Jean Meeus), ampliamente utilizada y verificada. A partir de la fecha y las coordenadas que elijas, calcula el momento exacto en que el sol cruza cada uno de esos umbrales de altitud y los muestra como el inicio y el fin de los cuatro intervalos.
+Hacerlo bien exige fórmulas astronómicas que fijen la posición del sol al segundo. Nuestra calculadora usa para ello la biblioteca de código abierto `suncalc` (licencia BSD, basada en los algoritmos astronómicos de Jean Meeus). A partir de la fecha y las coordenadas elegidas, calcula los momentos exactos en que el sol cruza cada límite de altura y los muestra como inicio y fin de las cuatro ventanas.
 
-Puedes completar tu ubicación con el botón "Usar mi ubicación" (el aviso de permiso de ubicación estándar del navegador) o escribir la latitud/longitud directamente. En cualquier caso, todo el cálculo ocurre en tu navegador; tu ubicación nunca se envía a un servidor.
+Puedes rellenar tu ubicación con el botón "Usar mi ubicación" (el aviso estándar del navegador) o escribir latitud y longitud a mano. En ambos casos todo el cálculo ocurre en tu navegador y tu ubicación nunca se envía a un servidor.
 
 ## Una nota importante sobre las zonas horarias
 
-Nuestra calculadora tiene un diseño ligero sin base de datos de zonas horarias: muestra las horas calculadas en **la zona horaria actual de este dispositivo (navegador)**. Esto es exactamente correcto cuando usas "Usar mi ubicación" para consultar tu entorno inmediato, ya que la zona horaria de tu dispositivo coincide con la del lugar que consultas.
+Nuestra calculadora tiene un diseño ligero, sin base de datos de zonas horarias: muestra las horas calculadas en la **zona horaria actual de este dispositivo (navegador)**. Eso es exactamente lo correcto cuando usas "Usar mi ubicación" para consultar tu entorno inmediato, porque la zona de tu dispositivo coincide con el lugar que consultas.
 
-Pero si estás planificando un viaje y escribes las coordenadas de una ciudad en una zona horaria completamente distinta, las horas mostradas no son la hora local de esa ciudad, sino el momento equivalente en la zona horaria en la que está configurado este dispositivo. Por ejemplo, consultar las coordenadas de París desde un dispositivo configurado con la hora de Seúl mostrará "el momento equivalente en hora de Seúl", no "la hora local de París". Ten esto en cuenta al planificar otra región y suma o resta tú mismo la diferencia horaria si lo necesitas.
+Pero si planificas un viaje y escribes las coordenadas de una ciudad en otra zona horaria, las horas mostradas no son la hora local de esa ciudad, sino el momento equivalente en la zona que tenga configurada el dispositivo. Por ejemplo, consultar las coordenadas de París desde un dispositivo con hora de Madrid en verano da casi la misma hora, pero desde uno con hora de Seúl mostrará "el momento equivalente en hora de Seúl", no "la hora local de París". Ten esto presente al planificar otra región y suma o resta tú mismo la diferencia horaria si hace falta.
 
-## Cómo aprovecharlo en tus fotos
+## Ejemplos con números: cuánto dura cada ventana
 
-Las fotos de amanecer y atardecer, la luz suave para retratos y los paisajes urbanos de la hora azul donde el cielo aún conserva color son difíciles de recrear fuera de estos intervalos. Introduce el lugar y la fecha de tu sesión el día antes y sabrás exactamente cuándo estar en posición, en lugar de improvisar sobre el terreno.
+Con aritmética sencilla podemos estimar la duración. Cerca de un equinoccio, la altura del sol cambia aproximadamente a 15 grados por hora multiplicados por el coseno de la latitud. La franja de la hora dorada abarca unos 6,83 grados (de -0,83 a +6) y la de la hora azul unos 5,17 grados (de -6 a -0,83). Es una estimación, porque la velocidad real varía con la estación, pero el patrón es fiable.
+
+- **En el ecuador** (coseno 1): el sol se mueve 15 grados por hora. La hora dorada dura 6,83 / 15 = 0,455 horas, unos 27 minutos. La hora azul, 5,17 / 15 = 0,345 horas, unos 21 minutos.
+- **A latitud 37,5** (más o menos Sevilla o San Francisco): el coseno es de unos 0,793, así que la velocidad es de unos 11,9 grados por hora. Hora dorada: 6,83 / 11,9, unos 34 minutos. Hora azul: 5,17 / 11,9, unos 26 minutos.
+- **A latitud 50** (más o menos Bruselas o Vancouver): coseno de unos 0,643 y velocidad de unos 9,64 grados por hora. Hora dorada de unos 42 minutos y hora azul de unos 32.
+- **A latitud 60**: coseno 0,5 y velocidad de 7,5 grados por hora. Hora dorada de unos 55 minutos y hora azul de unos 41.
+
+La lección: cuanto más lejos del ecuador, más largas y relajadas son estas ventanas. Cerca de los trópicos son breves y hay que estar en posición con antelación.
+
+## Un caso práctico paso a paso
+
+Supongamos que planeamos una puesta de sol en la costa para el próximo sábado.
+
+1. La víspera abrimos la [Calculadora de hora dorada y hora azul](/tools/golden-hour-calculator), introducimos las coordenadas de la playa y la fecha, y anotamos el inicio de la hora dorada de la tarde y la hora de la puesta de sol.
+2. Llegamos al menos 30 minutos antes de que empiece la hora dorada para explorar encuadres y montar el trípode.
+3. Durante la hora dorada fotografiamos la luz cálida y direccional sobre el primer plano. Cuando el sol cae, dejamos la cámara en su sitio para la hora azul, porque el cielo sigue rico mientras el primer plano se oscurece.
+4. Para los encuadres más oscuros de la hora azul nos apoyamos en el trípode y en velocidades lentas. Si queremos combinar un cielo claro con un primer plano oscuro, la [calculadora de bracketing](/tools/bracketing-calculator) nos ayuda a elegir los pasos de exposición y la [calculadora de pasos de exposición](/tools/exposure-stops-calculator) muestra qué significa un cambio concreto en pasos.
+
+## Errores comunes
+
+- **Fiarse a ciegas de la zona horaria.** Como se explicó, las coordenadas de otra ciudad dan horas en la zona de tu dispositivo, no en la suya.
+- **Llegar justo al inicio de la hora dorada.** El mejor color suele aparecer alrededor de la propia puesta y en los minutos posteriores, así que preparamos todo con tiempo en vez de ir con prisa.
+- **Ignorar el horizonte.** Montañas, edificios o árboles pueden tapar el sol mucho antes de la puesta calculada y acortar tu hora dorada real. La calculadora supone un horizonte plano y despejado.
+- **Olvidar el tiempo.** Una nube espesa aplana la luz. En cambio, un cielo parcialmente nublado suele dar el color más dramático.
+
+## Límites: cuándo los números no se aplican
+
+La calculadora da ventanas geométricas para un horizonte liso a nivel del mar. No conoce el relieve local, la calima, el humo ni las nubes. En regiones de latitud alta, en pleno verano, el sol puede no bajar lo suficiente para llegar a la franja de la hora azul, y en las regiones polares puede que no salga ni se ponga, así que algunas ventanas faltarán o serán larguísimas. Tomamos el resultado como un plan y lo confirmamos con nuestros ojos sobre el terreno.
+
+## Lista de comprobación antes de salir
+
+- Introduce la fecha y las coordenadas del lugar de la sesión, no las de tu casa.
+- Comprueba qué zona horaria tiene tu dispositivo y convierte si el lugar está en otra.
+- Anota el inicio de la hora dorada de la tarde, la puesta de sol y el final de la hora azul.
+- Planea llegar 30 minutos antes de que empiece la hora dorada.
+- Lleva un trípode para la hora azul.
+- Mira la línea del horizonte por si hay obstáculos.
+- Consulta la previsión de nubosidad.
+
+## Preguntas frecuentes
+
+**¿Dura de verdad una hora la hora dorada?**
+Rara vez. Como muestran los ejemplos, va de menos de media hora cerca del ecuador a casi una hora en latitudes altas, y cambia a lo largo del año.
+
+**¿Funciona la calculadora sin conexión?**
+El cálculo se ejecuta en tu navegador, así que una vez cargada la página no necesita contactar con ningún servidor para calcular las horas.
+
+**¿Por qué las horas difieren de la puesta de sol de mi app del tiempo?**
+Cada herramienta puede definir la puesta de forma algo distinta o aplicar correcciones atmosféricas. Diferencias de un minuto son normales y lo que importa es el plan, no el segundo exacto.
+
+## Cómo aprovecharlo
+
+Los amaneceres y atardeceres, la luz suave para retratos y los paisajes urbanos de hora azul con el cielo aún coloreado son difíciles de recrear fuera de estas ventanas. Introduce el lugar y la fecha de tu sesión el día anterior y sabrás exactamente cuándo estar en posición, en vez de adivinarlo sobre el terreno.

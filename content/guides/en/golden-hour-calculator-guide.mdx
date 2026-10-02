@@ -9,7 +9,7 @@ imageCredit: "Martin Franco"
 imageCreditUrl: "https://unsplash.com/@martinfranco?utm_source=ExifLens&utm_medium=referral"
 ---
 
-"Shoot during golden hour" is common advice, but exactly when that window falls where you are today shifts a lot with the season and your latitude. Our [Golden Hour & Blue Hour Calculator](/tools/golden-hour-calculator) works out these windows right in your browser from just a date and location — no account, no location data sent anywhere.
+"Shoot during golden hour" is common advice, but exactly when that window falls where you are today shifts a lot with the season and your latitude. Our [Golden Hour & Blue Hour Calculator](/tools/golden-hour-calculator) works out these windows right in your browser from just a date and location. There is no account, and no location data is sent anywhere.
 
 ## What golden hour and blue hour actually are
 
@@ -18,19 +18,71 @@ Both terms describe light when the sun is near the horizon, but they cover diffe
 - **Golden hour**: the sun's altitude is between about -0.83° (sunrise/sunset) and +6° above the horizon. Light arrives at a low angle, giving warm color and soft shadows.
 - **Blue hour**: the sun's altitude is between about -6° and -0.83°. The sun itself is already out of sight, but the sky still holds a brief, deep blue glow.
 
-Each day has four of these windows: morning blue hour → morning golden hour → (midday) → evening golden hour → evening blue hour.
+Each day has four of these windows: morning blue hour, morning golden hour, (midday), evening golden hour, evening blue hour. The "hour" is rarely sixty minutes, and the +6° edge is a convention rather than a hard boundary, so treat the edges as a guide.
 
 ## How the calculation works
 
 Getting this right requires astronomical formulas that pin down the sun's position to the second. Our calculator uses the well-established open-source library `suncalc` (BSD-licensed, built on Jean Meeus's astronomical algorithms) for this. From your chosen date and coordinates, it works out the exact moments the sun crosses each of those altitude boundaries and shows them as the start and end of all four windows.
 
-You can fill in your location with the "Use my location" button (a standard browser location prompt) or type latitude/longitude directly. Either way, every calculation happens in your browser — your location is never sent to a server.
+You can fill in your location with the "Use my location" button (a standard browser location prompt) or type latitude/longitude directly. Either way, every calculation happens in your browser, and your location is never sent to a server.
 
 ## An important note on time zones
 
 Our calculator uses a lightweight design with no time-zone database: it shows the computed times in **this device's (browser's) own current time zone**. That's exactly right when you use "Use my location" to check your immediate surroundings, since your device's time zone matches the location you're checking.
 
-But if you're planning ahead for a trip and type in coordinates for a city in a completely different time zone, the times shown are not that city's local time — they're the equivalent time in whatever time zone this device is currently set to. For example, checking Paris's coordinates from a device set to Seoul time will show "the equivalent moment in Seoul time," not "Paris local time." Keep that in mind when planning for another region, and add or subtract the time difference yourself if needed.
+But if you're planning ahead for a trip and type in coordinates for a city in a completely different time zone, the times shown are not that city's local time. They're the equivalent moment in whatever time zone this device is currently set to. For example, checking Paris's coordinates from a device set to Seoul time will show "the equivalent moment in Seoul time," not "Paris local time." Keep that in mind when planning for another region, and add or subtract the time difference yourself if needed.
+
+## Worked examples: how long is each window?
+
+We can estimate window length with simple arithmetic. Near an equinox the sun's altitude changes at roughly 15 degrees per hour multiplied by the cosine of your latitude. The golden hour band spans about 6.83 degrees (from -0.83 to +6) and the blue hour band about 5.17 degrees (from -6 to -0.83). This is a rough guide, since the real rate changes with the season, but the pattern is reliable.
+
+- **At the equator** (cosine of 0 is 1): the sun moves 15 degrees per hour. Golden hour is 6.83 / 15 = 0.455 hours, about 27 minutes. Blue hour is 5.17 / 15 = 0.345 hours, about 21 minutes.
+- **At latitude 37.5** (roughly Seoul or San Francisco): cosine is about 0.793, so the rate is about 11.9 degrees per hour. Golden hour is 6.83 / 11.9, about 34 minutes. Blue hour is 5.17 / 11.9, about 26 minutes.
+- **At latitude 50** (roughly Brussels or Vancouver): cosine is about 0.643, so the rate is about 9.64 degrees per hour. Golden hour is about 42 minutes and blue hour about 32 minutes.
+- **At latitude 60**: cosine is 0.5, so the rate is 7.5 degrees per hour. Golden hour is about 55 minutes and blue hour about 41 minutes.
+
+The lesson: the farther you are from the equator, the longer and more relaxed these windows become. Near the tropics they are brief, and you have to be in position early.
+
+## A practical scenario walk-through
+
+Say we plan a coastal sunset shoot for next Saturday.
+
+1. The evening before, we open the [Golden Hour & Blue Hour Calculator](/tools/golden-hour-calculator), enter the beach's coordinates and the date, and note the evening golden hour start and the sunset time.
+2. We arrive at least 30 minutes before golden hour starts to scout compositions and set up the tripod.
+3. During golden hour we shoot the warm, directional light on the foreground. Once the sun drops, we keep the camera in place for blue hour, because the sky is still rich while the foreground gets dim.
+4. For the darker blue hour frames we lean on a tripod and longer shutter speeds. If we want to blend bright sky and dark foreground, the [bracketing calculator](/tools/bracketing-calculator) helps us pick the exposure steps, and the [exposure stops calculator](/tools/exposure-stops-calculator) shows what a given change means in stops.
+
+## Common mistakes
+
+- **Trusting the time zone blindly.** As explained above, coordinates for another city give times in your device's zone, not theirs.
+- **Arriving at the start of golden hour.** The best color often comes right around sunset itself and in the minutes after, so we set up early rather than rush.
+- **Ignoring the horizon.** Mountains, buildings, or trees can hide the sun well before the calculated sunset, shortening your real golden hour. The calculator assumes a flat, clear horizon.
+- **Forgetting the weather.** Thick cloud flattens the light. A partly cloudy sky, on the other hand, often produces the most dramatic color.
+
+## Limits: when the numbers don't apply
+
+The calculator gives geometric windows for a smooth horizon at sea level. It does not know about local terrain, haze, smoke, or cloud. In high-latitude regions around midsummer the sun may never dip far enough below the horizon to reach the blue hour band, and in polar regions it may not rise or set at all, so some windows will be missing or very long. Treat the output as a plan, then confirm with your eyes on location.
+
+## Checklist before you go
+
+- Enter the correct date and coordinates for the location, not your home.
+- Check which time zone your device is set to, and convert if the place is elsewhere.
+- Note the evening golden hour start, sunset, and the end of blue hour.
+- Plan to arrive 30 minutes before golden hour starts.
+- Pack a tripod for blue hour.
+- Look at the horizon line for obstructions.
+- Check the weather forecast for cloud cover.
+
+## FAQ
+
+**Is golden hour really one hour?**
+Rarely. As the examples show, it ranges from under half an hour near the equator to nearly an hour at high latitudes, and it changes through the year.
+
+**Does the calculator work offline?**
+The calculation runs in your browser, so once the page has loaded, it does not need to contact a server to compute the times.
+
+**Why do the times differ from my weather app's sunset?**
+Different tools can define sunset slightly differently or include atmospheric corrections. Small differences of a minute or so are normal, and what matters is the plan, not the exact second.
 
 ## Putting this to use
 

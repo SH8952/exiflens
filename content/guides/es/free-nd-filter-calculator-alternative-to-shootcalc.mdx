@@ -9,27 +9,77 @@ imageCredit: "Kelly Sikkema"
 imageCreditUrl: "https://unsplash.com/@kellysikkema?utm_source=ExifLens&utm_medium=referral"
 ---
 
-Si has buscado una calculadora de exposición larga con filtro ND, puede que te hayas topado con ShootCalc.com — una pequeña calculadora web gratuita con modos de exposición directo e inverso, soporte para apilar filtros, y un puñado de calculadoras relacionadas. ExifLens tiene su propia calculadora de filtro ND gratuita integrada en la página de inicio, y merece la pena comparar ambas con honestidad en vez de asumir que una es simplemente "mejor".
+Si has buscado una calculadora de exposición larga con filtros ND, es posible que te hayas topado con ShootCalc.com: una calculadora web pequeña y gratuita con modos de exposición directo e inverso, compatibilidad con apilado de filtros y un puñado de calculadoras relacionadas. ExifLens tiene su propia calculadora gratuita de filtros ND integrada en la página de inicio, y vale la pena compararlas con honestidad en lugar de dar por hecho que una es simplemente "mejor".
 
-## Aviso
+## Divulgación
 
-Este artículo menciona a ShootCalc, un sitio web independiente sin relación con ExifLens. ExifLens no está afiliado ni respaldado por ShootCalc. Los datos de funciones mencionados aquí reflejan el sitio público de ShootCalc en el momento de escribir este artículo (septiembre de 2026) y pueden haber cambiado desde entonces — consulta shootcalc.com directamente para ver sus funciones actuales.
+Este artículo menciona a ShootCalc, un sitio web independiente sin relación con ExifLens. ExifLens no está afiliado a ShootCalc ni cuenta con su respaldo. Los detalles de funciones que se citan aquí reflejan el sitio público de ShootCalc en el momento de redactar este artículo (septiembre de 2026) y pueden haber cambiado desde entonces; consulta shootcalc.com directamente para ver su oferta actual.
 
 ## Lo que comparten ambas calculadoras
 
-Tanto ExifLens como ShootCalc ofrecen modo directo (introduces tu exposición base y la fuerza del filtro ND, y obtienes la velocidad de obturación de exposición larga resultante) y modo inverso (introduces la velocidad de obturación objetivo y obtienes la fuerza de filtro necesaria), además de soporte para apilar varios filtros ND. Uses el sitio que uses, la aritmética central del cálculo ND es la misma — es aritmética estándar de valores de exposición, algo que ninguno de los dos sitios posee en exclusiva.
+Tanto ExifLens como ShootCalc ofrecen un modo directo (introduces tu exposición base y la fuerza del filtro ND, y obtienes la velocidad de obturación de larga exposición resultante) y un modo inverso (introduces la velocidad de obturación deseada y obtienes la fuerza de filtro necesaria), además de apilado de varios filtros ND. Funcionalmente, la matemática central del ND es la misma en cualquiera de los dos sitios: es aritmética estándar de valores de exposición, no algo sobre lo que alguno tenga exclusividad.
 
-## En qué se diferencian
+## La matemática que hacen ambas
 
-La calculadora de filtro ND de ExifLens forma parte de un sitio más amplio con calculadoras relacionadas (exposición, profundidad de campo, timelapse, astro) y artículos guía sobre tipos de filtro ND, los riesgos de apilar filtros, y el uso de ND graduados, todo disponible en cuatro idiomas (inglés, coreano, japonés y español). El conjunto de calculadoras relacionadas de ShootCalc incluye su propia calculadora de profundidad de campo, de factor de recorte, y un verificador de contador de disparos del obturador, una herramienta que ExifLens no ofrece actualmente (un verificador de contador de disparos está en la hoja de ruta de ExifLens, pero aún no está publicado).
+Cada filtro ND se clasifica por la cantidad de luz que bloquea, y esa clasificación puede expresarse de tres maneras:
+
+- **Factor del filtro:** un ND8 deja pasar una octava parte de la luz, de modo que el tiempo de exposición se multiplica por 8.
+- **Pasos:** cada paso es una duplicación, así que un ND8 son 3 pasos (2 × 2 × 2 = 8), un ND64 son 6 pasos y un ND1000 son unos 10 pasos (2 elevado a 10 es 1024).
+- **Densidad óptica:** cada 0,3 de densidad es un paso, por lo que un filtro de 0,9 son 3 pasos y uno de 3,0 son unos 10.
+
+Como los pasos se suman y los factores se multiplican, apilar es fácil: el factor total es el producto de los factores individuales y los pasos totales son la suma.
+
+## Ejemplo resuelto 1: modo directo
+
+Tu fotómetro marca 1/125 s a f/8 e ISO 100 y colocas un ND64 (6 pasos) en el objetivo. La nueva velocidad es 64 / 125 = 0,512 s, es decir, medio segundo aproximadamente. Basta para suavizar un poco un arroyo pequeño, pero no para un agua sedosa; para eso necesitarías más pasos.
+
+## Ejemplo resuelto 2: apilado
+
+Tienes un ND8 (3 pasos) y un ND64 (6 pasos) y los apilas. El resultado son 3 + 6 = 9 pasos, o un factor de 8 × 64 = 512. Si la exposición sin filtro es de 1/30 s, la exposición con filtros es 512 / 30 = 17,1 s. Con cualquier calculadora deberías obtener la misma respuesta; si no, alguno de los datos se está interpretando de otra forma (confundir factor con pasos es la causa habitual).
+
+## Ejemplo resuelto 3: modo inverso
+
+En una mañana luminosa el fotómetro marca 1/8 s a f/11 e ISO 100 y quieres una exposición de 30 segundos para un mar sedoso. La relación es 30 / (1/8) = 240, y el logaritmo en base 2 de 240 es aproximadamente 7,9, así que necesitas unos 8 pasos: un ND256 o una combinación como ND64 + ND4 (6 + 2 = 8 pasos). Con 8 pasos la exposición es (1/8) × 256 = 32 s, suficientemente cerca de los 30 s buscados.
+
+## Un recorrido práctico: marina al amanecer
+
+Medimos 1/60 s a f/11 e ISO 100 y queremos una exposición de aproximadamente un minuto. La relación es 60 / (1/60) = 3600, unos 11,8 pasos. Un ND1000 de 10 pasos más un ND4 de 2 pasos dan 12 pasos, un factor de 4096, así que la exposición es 4096 / 60 = 68 s. Es más larga que los 30 s que ofrecen la mayoría de cámaras, así que pasamos al modo Bulb y medimos el tiempo con un disparador remoto o el temporizador de intervalos de la cámara. Orden práctico de trabajo: componemos y enfocamos primero sin el filtro, luego colocamos el filtro, pasamos a enfoque manual y hacemos la exposición. Para comparar cómo afecta un cambio a la exposición, nuestra [calculadora de pasos de exposición](/tools/exposure-stops-calculator) es una buena compañera, y nuestra [calculadora de bracketing](/tools/bracketing-calculator) ayuda cuando el cielo es mucho más brillante que el primer plano.
+
+## Errores frecuentes
+
+- **Confundir el factor del filtro con el número de pasos.** Un ND1000 no son 1000 pasos, sino unos 10.
+- **Medir con el filtro puesto.** Muchas cámaras no pueden medir a través de un ND denso. Mide primero sin él y aplica después la matemática.
+- **Olvidar tapar el visor.** En una réflex, puede entrar luz parásita por el ocular durante exposiciones muy largas.
+- **Ignorar las dominantes de color.** Algunos filtros tiñen la imagen. Disparar en RAW y corregir el balance de blancos suele resolverlo.
+- **Apilar demasiados con gran angular.** Varios filtros pueden provocar viñeteo.
+
+## Cuando una calculadora no basta
+
+Una calculadora ND supone que el brillo de la escena no cambia durante la exposición y que el sensor responde igual a un segundo que a una milésima. La luz puede cambiar a mitad de una exposición de un minuto, sobre todo al amanecer y al atardecer. Además, algunos filtros dejan pasar infrarrojos en densidades altas, lo que puede alterar los colores. Considera la velocidad calculada un punto de partida muy bueno, haz una toma de prueba y ajusta un tercio de paso si el histograma lo pide. Para secuencias temporizadas, como exposiciones largas repetidas durante una hora, nuestra [calculadora de timelapse](/tools/timelapse-calculator) cubre la planificación de intervalos.
+
+## Dónde difieren
+
+La calculadora de filtros ND de ExifLens está dentro de un sitio más amplio con calculadoras relacionadas (exposición, profundidad de campo, timelapse, astrofotografía) y artículos que tratan los tipos de filtros ND, los inconvenientes del apilado y el uso de ND graduados, todo disponible en cuatro idiomas (inglés, coreano, japonés y español). El conjunto de calculadoras relacionadas de ShootCalc incluye sus propias herramientas de profundidad de campo, factor de recorte y comprobador de disparos del obturador. ExifLens también ofrece su propio [comprobador de disparos del obturador](/tools/shutter-count-checker) junto con las demás calculadoras.
 
 ## Cuál usar
 
-Si necesitas específicamente un verificador de contador de disparos hoy mismo, el conjunto de herramientas relacionadas de ShootCalc cubre eso de una forma que ExifLens todavía no. Para el cálculo de exposición con filtro ND en sí, y si además quieres tenerlo junto a una biblioteca más amplia de guías y calculadoras de ajustes de cámara en tu propio idioma, la versión de ExifLens cubre el mismo terreno de forma gratuita.
+Para la matemática básica de exposición con filtros ND, cualquiera de las dos te lleva a la misma respuesta. Si la quieres junto a una biblioteca más amplia de guías y calculadoras de ajustes de cámara en tu propio idioma, la versión de ExifLens cubre lo mismo gratis, y ShootCalc sigue siendo una opción legítima si su diseño te resulta más cómodo.
 
 ## Lista de comprobación
 
-- Ambas calculadoras admiten modos de exposición ND directo/inverso y apilamiento de filtros — la aritmética de base es estándar y no exclusiva de ninguna de las dos.
+- Ambas calculadoras admiten los modos de exposición ND directo e inverso y el apilado de filtros; la matemática subyacente es estándar y no es exclusiva de ninguno de los sitios.
 - ExifLens combina su calculadora ND con una biblioteca más amplia de calculadoras y guías relacionadas en cuatro idiomas.
-- ShootCalc ofrece actualmente un verificador de contador de disparos que ExifLens todavía no tiene publicado.
-- Ambas son opciones gratuitas legítimas — elige según qué herramientas relacionadas necesites realmente junto al cálculo ND.
+- Ambos sitios ofrecen un comprobador de disparos entre sus herramientas relacionadas.
+- Cualquiera de las dos es una opción gratuita legítima: elige según las herramientas relacionadas que realmente necesites junto al cálculo ND.
+- Verifica siempre un cálculo a mano: los pasos se suman y los factores se multiplican.
+
+## Preguntas frecuentes
+
+### ¿Es precisa una calculadora ND con filtros de 10 pasos?
+La aritmética es exacta, pero la transmisión real del filtro puede diferir un poco de su etiqueta y la escena puede cambiar durante una exposición larga. Toma el resultado como punto de partida y compruébalo con una toma de prueba.
+
+### ¿Puedo mezclar marcas de filtros al apilar?
+Sí, a la matemática no le importa. En la práctica, mezclar puede añadir dominantes de color o reflejos, así que dispara en RAW y revisa las esquinas por si hay viñeteo.
+
+### ¿Cuál es la diferencia entre el modo directo y el inverso?
+El modo directo te dice la nueva velocidad de obturación con un filtro que ya tienes. El modo inverso te dice qué fuerza de filtro necesitas para la velocidad que quieres.

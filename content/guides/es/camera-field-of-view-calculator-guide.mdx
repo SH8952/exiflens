@@ -9,22 +9,79 @@ imageCredit: "David Herron"
 imageCreditUrl: "https://unsplash.com/@dj_david?utm_source=ExifLens&utm_medium=referral"
 ---
 
-Una distancia focal en milímetros no te dice qué tan ancha será realmente una toma hasta que sabes con qué sensor se combina — el mismo objetivo de 35mm encuadra una escena notablemente distinta en un cuerpo full frame que en uno Micro Cuatro Tercios. Nuestra [calculadora de campo de visión de la cámara](/tools/camera-fov-calculator) convierte la distancia focal y el tamaño del sensor directamente en un ángulo de visión en grados, que es la forma más universal de describir qué tan ancho ve realmente un objetivo.
+Una distancia focal en milímetros no te dice cuánto abarcará realmente una toma hasta que conoces el sensor con el que va emparejada: el mismo objetivo de 35 mm encuadra una escena claramente distinta en un cuerpo de fotograma completo que en uno Micro Cuatro Tercios. Nuestra [calculadora de campo de visión de cámara](/tools/camera-fov-calculator) convierte directamente la distancia focal y el tamaño del sensor en un ángulo de visión en grados, que es la forma más universal de describir cuánto ve realmente un objetivo.
 
 ## Cómo usarla
 
-Elige el tamaño de tu sensor (o introduce un ancho/alto personalizado para una cámara concreta), y luego introduce la distancia focal con la que planeas disparar. La calculadora devuelve tres valores:
+Elige el tamaño de tu sensor (o introduce el ancho y el alto personalizados de una cámara concreta) y luego la distancia focal con la que piensas disparar. La calculadora devuelve tres números:
 
-- **FOV horizontal** — qué tan ancho es el encuadre, según el ancho de tu sensor.
-- **FOV vertical** — qué tan alto es el encuadre, según el alto de tu sensor.
-- **FOV diagonal** — el número único que más se suele citar para el ángulo de visión general de un objetivo, basado en la medida diagonal del sensor, ya que no depende de si disparas en horizontal o en vertical.
+- **Campo de visión horizontal** — lo ancho que es el encuadre, según el ancho de tu sensor.
+- **Campo de visión vertical** — lo alto que es el encuadre, según el alto de tu sensor.
+- **Campo de visión diagonal** — la cifra única que más se cita para el ángulo de visión total de un objetivo, basada en la diagonal del sensor, ya que no depende de si disparas en horizontal o en vertical.
 
-Debajo, una tabla muestra esos mismos tres valores en distancias focales habituales (de 14mm a 300mm) para el sensor que elijas, para que puedas comparar varios objetivos o posiciones de zoom a la vez sin volver a introducir la distancia focal una por una.
+Debajo, una tabla muestra esos mismos tres valores para distancias focales habituales (de 14 mm a 300 mm) con el sensor elegido, de modo que puedes comparar varios objetivos o posiciones de zoom a la vez sin volver a introducir la distancia focal una por una.
 
-## Dónde es útil más allá de la fotografía
+## La fórmula, paso a paso
 
-El campo de visión en grados es el formato que se usa en campos fuera de la fotografía general donde "qué distancia focal es esa" no dice mucho por sí solo: topografía y cartografía, vídeo y trabajo con gimbal o dron, y fotografía de arquitectura o interiores, donde necesitas saber de antemano si un objetivo encuadrará toda una habitación o una fachada desde una distancia de disparo fija. Si ya sabes la distancia a tu sujeto, puedes combinar el ángulo de FOV con trigonometría básica para estimar qué tan ancha será el área que cubre el encuadre a esa distancia.
+Para un objetivo rectilíneo enfocado a distancia, el ángulo de visión es **FOV = 2 × arctan(dimensión del sensor / (2 × distancia focal))**. Se usa el ancho del sensor para el horizontal, el alto para el vertical y la diagonal para el diagonal. Un sensor de fotograma completo mide 36 × 24 mm, así que su diagonal es la raíz cuadrada de (36² + 24²) = raíz cuadrada de 1872, es decir, 43,27 mm.
+
+Para un objetivo de 50 mm en fotograma completo:
+
+- Horizontal: 2 × arctan(18 / 50) = 2 × arctan(0,36) = 2 × 19,8° = 39,6°
+- Vertical: 2 × arctan(12 / 50) = 2 × arctan(0,24) = 2 × 13,5° = 27,0°
+- Diagonal: 2 × arctan(21,63 / 50) = 2 × arctan(0,433) = 2 × 23,4° = 46,8°
+
+Esos 46,8° en diagonal son la cifra conocida de un objetivo "normal" en fotograma completo. Repetir el cálculo con otras distancias focales muestra lo rápido que se estrecha el ángulo (horizontal y luego diagonal): 24 mm da 73,7° y 84,1°, 35 mm da 54,4° y 63,4°, 85 mm da 23,9° y 28,6°, y 200 mm da 10,3° y 12,3°.
+
+## Mismo objetivo, distintos sensores
+
+Pon un objetivo de 35 mm en un cuerpo de fotograma completo y el ángulo horizontal es 2 × arctan(18 / 35) = 54,4°. Pon el mismo objetivo en un cuerpo APS-C con un sensor de 23,5 mm de ancho y pasa a ser 2 × arctan(11,75 / 35) = 37,1°. En un cuerpo Micro Cuatro Tercios (17,3 mm de ancho) se estrecha a 2 × arctan(8,65 / 35) = 27,8°. El objetivo no ha cambiado; el sensor recorta una porción menor del círculo de imagen. Esa es la relación que nuestra [calculadora de factor de recorte](/tools/crop-factor-calculator) expresa como distancia focal equivalente: en APS-C, con un factor de recorte de aproximadamente 1,5, un objetivo de 35 mm encuadra más o menos como uno de 52 mm en fotograma completo.
+
+## Dónde resulta útil más allá de la fotografía
+
+El campo de visión en grados es el formato que se usa en ámbitos ajenos a la fotografía general donde "qué distancia focal es esa" no significa mucho por sí solo: topografía y cartografía, videografía y trabajo con estabilizadores o drones, y fotografía de arquitectura o interiores, donde necesitas saber de antemano si un objetivo cabrá una sala entera o una fachada completa desde una distancia de disparo fija. Si ya conoces la distancia al sujeto, puedes combinar el ángulo de visión con trigonometría básica para estimar qué anchura de zona cubrirá el encuadre a esa distancia.
+
+## Ejemplo resuelto: ¿cuánto cabe en el encuadre?
+
+Cuando el sujeto está mucho más lejos que la distancia focal, el ancho cubierto es aproximadamente **distancia × ancho del sensor / distancia focal**. Dos casos rápidos en fotograma completo:
+
+- Un 24 mm a 4 m cubre 4 × 36 / 24 = 6,0 m de ancho, más o menos la pared de un salón pequeño.
+- La fachada de un edificio de 20 m de ancho fotografiada desde 30 m exige una distancia focal no superior a 30 × 36 / 20 = 54 mm. Un 50 mm cubre 30 × 36 / 50 = 21,6 m, lo que apenas cabe con muy poco margen, así que un 35 mm (30,9 m de cobertura) es la opción más segura.
+
+## Escenario práctico: planificar un panorama
+
+Queremos un panorama completo de 360 grados con un 24 mm en fotograma completo, sujetando la cámara en vertical. En vertical el lado de 24 mm del sensor queda en horizontal, así que el ángulo horizontal es 2 × arctan(12 / 24) = 53,1°. Si solapamos las tomas contiguas un 30 por ciento para el ensamblado, cada toma aporta el 70 por ciento de su ancho como cobertura nueva: 53,1 × 0,7 = 37,2°. Una vuelta completa necesita entonces 360 / 37,2 = 9,7, así que hacemos 10 tomas. Nuestra [calculadora de profundidad de campo](/tools/dof-calculator) es útil en la misma situación, para confirmar que la apertura elegida mantiene nítidos tanto los elementos cercanos como los lejanos.
+
+## Errores frecuentes
+
+- **Confundir la distancia focal equivalente con la real.** El campo de visión depende de la distancia focal real y del tamaño real del sensor. La etiqueta "equivalente a 35 mm" es un atajo para el mismo resultado, no un dato de entrada aparte.
+- **Comparar cifras diagonales con horizontales.** Un objetivo de 84° en diagonal cubre unos 74° en horizontal en fotograma completo.
+- **Olvidar la orientación.** Girar la cámara a vertical intercambia los ángulos horizontal y vertical.
+- **Suponer que la distancia focal marcada en un zoom es exacta.** Muchos zooms varían ligeramente en la práctica al enfocar de cerca.
+
+## Límites: cuándo no se aplica
+
+La fórmula describe objetivos rectilíneos, que mantienen rectas las líneas rectas. Los ojos de pez usan otras proyecciones, así que sus ángulos declarados no siguen esta ecuación. A distancias muy cortas, como en macro, la distancia focal efectiva cambia al extenderse el objetivo, y muchos objetivos muestran "focus breathing", que estrecha un poco el ángulo al enfocar más cerca. La fórmula de cobertura anterior también pierde precisión cuando el sujeto está a solo unas pocas distancias focales. Considera las cifras exactas para paisaje, arquitectura y toma general, y aproximadas para primeros planos.
 
 ## Cómo se relaciona con nuestra calculadora de factor de recorte
 
-Las cifras de campo de visión aquí usan exactamente la misma fórmula que las cifras de FOV que ya se muestran en nuestra [calculadora de factor de recorte](/tools/crop-factor-calculator) — esta página simplemente pone el ángulo de visión al frente como herramienta propia, con el FOV diagonal y la tabla comparativa por distancia focal añadidas, para quien quiera el ángulo de visión en sí en vez de una comparación de factor de recorte/distancia focal equivalente entre tamaños de sensor. Si lo que realmente necesitas es "cómo se vería el campo de visión de este objetivo en otro tamaño de sensor", la calculadora de factor de recorte es el mejor punto de partida; si solo quieres el ángulo para un objetivo y un sensor que ya conoces, esta página te lleva ahí en menos pasos.
+Las cifras de campo de visión de aquí usan exactamente la misma fórmula que las que ya muestra nuestra [calculadora de factor de recorte](/tools/crop-factor-calculator); esta página simplemente pone el ángulo de visión en primer plano como herramienta propia, con el campo de visión diagonal y la tabla comparativa de distancias focales añadidos, para quien quiere el ángulo de visión en sí y no una comparación de factor de recorte y distancia focal equivalente entre tamaños de sensor. Si lo que necesitas es "cómo se vería el campo de visión de este objetivo en otro tamaño de sensor", la calculadora de factor de recorte es mejor punto de partida; si solo quieres el ángulo de un objetivo y un sensor que ya conoces, esta página te lleva allí en menos pasos.
+
+## Lista de comprobación rápida
+
+- Elige el tamaño de sensor correcto o introduce su ancho y alto reales.
+- Introduce la distancia focal real con la que vas a disparar.
+- Decide qué ángulo necesitas: horizontal para el ancho del encuadre, vertical para retratos, diagonal para comparar objetivos.
+- Para un sujeto a distancia conocida, multiplica la distancia por el ancho del sensor y divide entre la distancia focal.
+- Deja margen, porque el encuadre real nunca es exacto.
+
+## Preguntas frecuentes
+
+### ¿Un campo de visión más amplio siempre significa una distancia focal más corta?
+En el mismo sensor, sí. Entre sensores distintos, no: un 24 mm en Micro Cuatro Tercios es más cerrado que un 24 mm en fotograma completo.
+
+### ¿Qué cifra de campo de visión debo usar para comparar objetivos?
+La diagonal, porque no cambia con la orientación y es la que citan los fabricantes.
+
+### ¿Por qué mis propias mediciones difieren un poco de la calculadora?
+El focus breathing, la corrección de distorsión del objetivo y el redondeo de las dimensiones del sensor pueden desplazar cada uno el resultado una fracción de grado.

@@ -21,10 +21,67 @@ Pick your sensor size (or enter custom width/height for a specific camera), then
 
 Below that, a table shows the same three values across common focal lengths (14mm through 300mm) for your selected sensor, so you can compare a handful of lenses or zoom positions at once without re-entering focal length one at a time.
 
+## The formula, step by step
+
+For a rectilinear lens focused at a distance, the angle of view is **FOV = 2 × arctan(sensor dimension / (2 × focal length))**. Use the sensor's width for horizontal, height for vertical, and diagonal for diagonal. A full-frame sensor measures 36 × 24 mm, so its diagonal is the square root of (36² + 24²) = the square root of 1872, or 43.27 mm.
+
+For a 50mm lens on full frame:
+
+- Horizontal: 2 × arctan(18 / 50) = 2 × arctan(0.36) = 2 × 19.8° = 39.6°
+- Vertical: 2 × arctan(12 / 50) = 2 × arctan(0.24) = 2 × 13.5° = 27.0°
+- Diagonal: 2 × arctan(21.63 / 50) = 2 × arctan(0.433) = 2 × 23.4° = 46.8°
+
+That 46.8° diagonal is the familiar figure for a "normal" lens on full frame. Repeating the math across focal lengths shows how fast the angle narrows (horizontal, then diagonal): 24mm gives 73.7° and 84.1°, 35mm gives 54.4° and 63.4°, 85mm gives 23.9° and 28.6°, and 200mm gives 10.3° and 12.3°.
+
+## Same lens, different sensors
+
+Put a 35mm lens on a full-frame body and the horizontal angle is 2 × arctan(18 / 35) = 54.4°. Put the same lens on an APS-C body with a 23.5 mm wide sensor and it becomes 2 × arctan(11.75 / 35) = 37.1°. On a Micro Four Thirds body (17.3 mm wide) it narrows to 2 × arctan(8.65 / 35) = 27.8°. The lens didn't change; the sensor crops a smaller piece of the image circle. That's the relationship our [crop-factor calculator](/tools/crop-factor-calculator) expresses as an equivalent focal length: on APS-C, with a crop factor of about 1.5, a 35mm lens frames roughly like a 52mm lens on full frame.
+
 ## Where this is useful beyond photography
 
 Field of view in degrees is the format used in fields outside general photography where "what focal length is that" doesn't mean much on its own — surveying and mapping, videography and gimbal/drone work, and architectural or interior photography where you need to know in advance whether a lens will fit a whole room or facade into frame from a fixed shooting distance. If you already know the distance to your subject, you can combine the FOV angle with basic trigonometry to estimate how wide an area the frame will cover at that distance.
 
+## Worked example: how much will fit in the frame?
+
+When the subject is much farther away than the focal length, the width covered is approximately **distance × sensor width / focal length**. Two quick cases on full frame:
+
+- A 24mm lens at 4 m covers 4 × 36 / 24 = 6.0 m of width, roughly a small living room wall.
+- A building facade 20 m wide shot from 30 m needs a focal length no longer than 30 × 36 / 20 = 54 mm. A 50mm lens covers 30 × 36 / 50 = 21.6 m, which just fits with very little margin, so a 35mm lens (30.9 m of coverage) is the safer choice.
+
+## Practical scenario: planning a panorama
+
+We want a full 360-degree panorama using a 24mm lens on full frame, with the camera held in portrait orientation. In portrait the sensor's 24 mm side runs horizontally, so the horizontal angle is 2 × arctan(12 / 24) = 53.1°. If we overlap neighbouring frames by 30 percent for stitching, each frame contributes 70 percent of its width as new coverage: 53.1 × 0.7 = 37.2°. A full circle then needs 360 / 37.2 = 9.7, so we shoot 10 frames. Our [Depth of Field calculator](/tools/dof-calculator) is useful in the same situation, to confirm that your chosen aperture keeps both near and far elements sharp.
+
+## Common mistakes
+
+- **Mixing up equivalent and actual focal length.** The FOV depends on the real focal length and the real sensor size. A "35mm equivalent" label is a shortcut for the same result, not a separate input.
+- **Comparing diagonal numbers to horizontal numbers.** A lens quoted at 84° diagonal covers about 74° horizontally on full frame.
+- **Forgetting the orientation.** Turning the camera to portrait swaps your horizontal and vertical angles.
+- **Assuming a zoom's labelled focal length is exact.** Many zooms shift slightly in practice when focusing close.
+
+## Limits: when this doesn't apply
+
+The formula describes rectilinear lenses, which keep straight lines straight. Fisheye lenses use different projections, so their stated angles don't follow this equation. At very close distances, such as macro work, the effective focal length changes as the lens extends, and many lenses show "focus breathing," which narrows the angle slightly as you focus nearer. The coverage formula above also becomes less accurate when the subject is only a few focal lengths away. Treat the figures as accurate for landscapes, architecture and general shooting, and as approximations for close-ups.
+
 ## How this relates to our crop-factor calculator
 
 The field of view figures here use the exact same formula as the FOV numbers already shown on our [crop-factor calculator](/tools/crop-factor-calculator) — this page simply puts the angle of view front and center as its own tool, with the diagonal FOV and the focal-length comparison table added, for anyone who wants the angle of view itself rather than a crop-factor/equivalent-focal-length comparison across sensor sizes. If what you actually need is "what would this lens's field of view look like on a different sensor size," the crop-factor calculator is the better starting point; if you just want the angle for a lens and sensor you already know, this page gets you there in fewer steps.
+
+## Quick checklist
+
+- Pick the correct sensor size, or enter its real width and height.
+- Enter the actual focal length you'll shoot at.
+- Decide which angle you need: horizontal for framing width, vertical for portrait shots, diagonal for comparing lenses.
+- For a subject at a known distance, multiply distance by sensor width and divide by focal length.
+- Leave a margin, because real framing is never exact.
+
+## FAQ
+
+### Is a wider field of view always a shorter focal length?
+On the same sensor, yes. Across different sensors, no: a 24mm lens on Micro Four Thirds is narrower than a 24mm lens on full frame.
+
+### Which FOV number should I use to compare lenses?
+The diagonal figure, because it doesn't change with orientation and is the one manufacturers quote.
+
+### Why do my own measurements differ slightly from the calculator?
+Focus breathing, lens distortion correction and rounding of sensor dimensions can each shift the result by a fraction of a degree.

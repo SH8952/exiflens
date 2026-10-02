@@ -21,15 +21,29 @@ A wide aperture (f/1.4–f/2.8) throws the background out of focus, isolating th
 
 Wider apertures also demand more precise focus — at f/1.4, the zone of sharpness can be thinner than the depth of a face, so a hair's width of front-to-back movement can throw the eyes soft.
 
+## A Worked Depth-of-Field Example
+
+Numbers make the trade-off concrete. On a full-frame camera with an 85mm lens and a subject 2 meters away (using the common 0.03 mm circle of confusion), the total zone of acceptable sharpness works out to roughly:
+
+- f/1.8: about 5.7 cm
+- f/2.8: about 8.9 cm
+- f/5.6: about 17.8 cm
+
+At f/1.8 that is barely the distance from the tip of the nose to the ears, so if the focus lands on an eyelash instead of the iris, one eye can look soft. Move in to 1.5 meters at f/1.4 and the zone shrinks to about 2.5 cm. You can check your own combinations with the [depth of field calculator](/tools/dof-calculator), and see how a lens behaves at its smallest apertures with the [advanced DoF and diffraction calculator](/tools/advanced-dof-diffraction-calculator).
+
 ## Focus: Keeping the Eyes Sharp
 
 The eyes are the one part of a portrait that has to be sharp, even when everything else is soft. Most modern cameras have an Eye-AF or Eye Detection mode built specifically for this — turn it on for portrait work and let the camera track the nearest eye automatically.
 
 Without Eye-AF, use a single focus point (not wide-area autofocus) placed directly on the near eye, and recompose only if your camera doesn't shift focus when you do. Continuous autofocus (AF-C / AI Servo) is safer than single-shot AF (AF-S / One Shot) if the subject is moving or shifting weight, even slightly, between shots.
 
+When the head is turned, always focus on the eye closest to the camera. The viewer reads that eye first, and if it is soft the whole frame feels out of focus.
+
 ## Shutter Speed: Freezing the Moment
 
 For a stationary subject, 1/125s is generally fast enough to eliminate both camera shake and minor subject movement (blinking, small shifts). For subjects in motion — kids, pets, candid moments — push to 1/250s or faster. Handheld with a longer lens, follow the reciprocal rule as a floor: shutter speed at least 1/(focal length) to avoid shake.
+
+On our 85mm example that floor is 1/85s, so 1/125s is the nearest standard setting. On a crop-sensor body with a 1.5x crop factor, the effective focal length is 127.5mm, so we would pick 1/160s or 1/200s. Use the [crop factor calculator](/tools/crop-factor-calculator) if you are unsure of your own multiplier.
 
 ## ISO: Adapting to the Light
 
@@ -39,6 +53,41 @@ Outdoors in daylight, ISO 100–200 keeps noise invisible. Move indoors or into 
 
 Focal lengths in the 50mm–135mm range (full-frame equivalent) are the traditional portrait sweet spot: close enough to work with, far enough back that facial features aren't distorted by perspective. Wider lenses (24–35mm) require getting physically close, which can exaggerate the nose and forehead — useful for environmental portraits, less flattering for tight headshots.
 
+## Scenario: Window-Light Portrait
+
+Suppose we place a subject beside a window on an overcast afternoon. A first test at f/4, 1/125s and ISO 800 looks right but flat, and we want more background separation. Opening from f/4 to f/2 gives two extra stops of light. To keep the same exposure we can lower ISO by two stops, from 800 to 400 to 200, and leave the shutter at 1/125s. The result is cleaner and has a softer background, at the cost of a thinner focus zone, so Eye-AF matters more. Turn the subject about 45 degrees toward the window and the light wraps across the face instead of flattening it.
+
+## Common Mistakes
+
+- **Shooting wide open by default.** f/1.4 is not automatically better; for a three-quarter view with the nose and ears both in the frame, f/2.8 often looks more natural.
+- **Focus and recompose at close range.** Swinging the camera moves the focal plane, which at f/1.8 can be enough to miss the eye.
+- **Ignoring the background.** A bright window or a busy street behind the head competes with the face, no matter how blurred it is.
+- **Letting Auto ISO run unchecked.** Set a maximum ISO and a minimum shutter speed so the camera cannot quietly drop to 1/30s.
+
+## When These Rules Don't Apply
+
+Everything above assumes natural, available light and a camera-to-subject distance of a meter or more. With studio strobes the shutter speed barely matters for freezing motion, because the flash duration does that job; the shutter only needs to stay at or below your camera's sync speed. If you are working out flash power, the [flash guide number calculator](/tools/flash-guide-number-calculator) helps. Creative work such as deliberate motion blur or high-key silhouettes also ignores the 1/125s guideline.
+
+## Quick Checklist
+
+- Eye-AF on, or a single point on the near eye
+- Aperture chosen for the number of people and the background
+- Shutter at least the reciprocal of focal length, faster for movement
+- ISO as low as the light allows, with a sensible Auto ISO ceiling
+- Background checked for bright spots and distractions
+- One test shot reviewed, with EXIF confirming the settings
+
 ## Putting It Together
 
 A reliable starting point for a single outdoor headshot: f/2, 1/250s, Eye-AF on a single point, ISO adjusted to whatever keeps that shutter speed and aperture — then check the EXIF data on your test shot to confirm the camera didn't quietly bump ISO higher than expected in changing light.
+
+## FAQ
+
+### What is the best aperture for portraits?
+There is no single answer, but f/2 to f/2.8 is a dependable range for one person, because it blurs the background while keeping both eyes acceptably sharp.
+
+### Do I need an expensive lens?
+No. A budget 50mm f/1.8 gives us the same blur and framing options as pricey primes. Faster glass mostly adds low-light ability and nicer rendering, not better composition.
+
+### Should I use flash or natural light?
+Start with natural light, since it teaches us to see direction and softness. Add flash when the light is too dim or too contrasty to shape with a reflector.

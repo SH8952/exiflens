@@ -1,3 +1,17 @@
+## 2026-10-02 — 애드센스 재거절 대응 2단계: 얕은 가이드 12편 보강 + 직접 촬영 사진 가이드 신규
+
+**배경**
+- 재거절 원인 중 (2) 얕은 분량 글 다수, (3) 운영자 고유 콘텐츠(E-E-A-T) 부족에 대한 조치. 발행량은 유지하고 기존 글을 보강하는 방향(사용자 결정).
+
+**변경 사항**
+- 얕은 가이드 12편을 en/ko/ja/es 4개 언어 모두 보강(영문 기준 약 340~600단어 → 1,000~1,300단어): flash-guide-number-calculator-guide, free-nd-filter-calculator-alternative-to-shootcalc, camera-field-of-view-calculator-guide, golden-hour-calculator-guide, free-alternative-to-photopills-exposure-calculators, advanced-dof-diffraction-calculator-guide, portrait-photography-camera-settings, understanding-metering-modes, shutter-count-checker-guide, how-to-read-a-histogram, sunrise-sunset-photography-camera-settings, exif-remover-social-media-privacy. 각 글에 계산 예시·흔한 실수·한계·시나리오·체크리스트·FAQ 추가, frontmatter 변경 없음.
+- 신규 가이드 `six-frames-light-timing-and-composition`(4개 언어): 운영자가 직접 촬영한 사진 6장(워터마크 Chronicle of Moments_SH)의 촬영 발상·기법 해설. 사진은 `public/guides/photos/`(webp 1600px)에 추가. 촬영 정보(EXIF)가 남아 있지 않아 설정값은 단정하지 않고 출발점 형태로 서술.
+
+**검증**
+- 변경 48개 + 신규 4개 MDX 모두 `@mdx-js/mdx` 컴파일 통과(singleTilde:false), 물결표(~) 잔여 0건(ja/ko 각 1곳 범위표기로 교체), frontmatter 원본과 동일, 내부 링크는 실제 존재하는 도구/가이드만 사용, `npx tsc --noEmit` 통과.
+- 작업 전 백업: `_backups/exiflens_backup_20261002_013243_guide_enrich`
+- 알려진 사항: 신규 가이드는 수동 추가분이라 발행 큐(guide-topics-queue.json)에는 없음.
+
 ## 2026-10-02 — 애드센스 재거절 대응 1단계: 도메인 표기 통일 (exiflens.com → exifnd.com)
 
 **배경**

@@ -13,13 +13,74 @@ Every manual flash ships with a guide number (GN) in its spec sheet — a single
 
 ## The formula behind it
 
-Guide number math is simple once you have the number: **Guide Number = f-stop x distance**, measured by the manufacturer at a reference ISO (almost always ISO 100) and, for zoom-head flashes, at a specific zoom setting. Rearranged, that gives you exactly what you need on set:
+Guide number math is simple once you have the number: **Guide Number = f-stop × distance**, measured by the manufacturer at a reference ISO (almost always ISO 100) and, for zoom-head flashes, at a specific zoom setting. Rearranged, that gives you exactly what you need on set:
 
 - **f-stop = Guide Number / distance** — the aperture needed to properly expose a subject at a known distance.
 - **distance = Guide Number / f-stop** — the farthest a subject can be while staying properly lit at a chosen aperture.
 
 If you're shooting at a different ISO than the flash's rated ISO 100, guide numbers scale with the square root of the ISO ratio rather than linearly — our calculator adjusts for this automatically, the same relationship covered on Wikipedia's guide number article and used in every manufacturer's published GN chart.
 
+## Worked example 1: aperture from distance
+
+Say your flash is rated GN 60 (metres, ISO 100, full power) and your subject stands 5 m away. The aperture is 60 / 5 = f/12. Since f/12 isn't a full-stop marking on most lenses, we would round to f/11, which lets in about a quarter stop more light than f/12, which is negligible in practice.
+
+Flip the question around: you want a shallow-ish f/5.6 for a softer background. The farthest the subject can stand is 60 / 5.6 = 10.7 m. Anything beyond that and the flash simply runs out of power at full output.
+
+## Worked example 2: what ISO does to the number
+
+A rated GN assumes ISO 100. Each time you double the ISO, you gain one stop of sensitivity, but because the guide number is built from distance and aperture (both linear measures), it grows by the square root of the ratio, about 1.41 per stop:
+
+- ISO 200: 60 × 1.41 = 84.9 effective GN
+- ISO 400: 60 × 2 = 120 effective GN
+- ISO 800: 60 × 2.83 = 169.7 effective GN
+
+At ISO 400 with the same subject 5 m away, the required aperture is 120 / 5 = f/24, which most lenses can't even reach. That is the signal to lower flash power instead of closing the aperture further, or to drop the ISO back down.
+
+## Worked example 3: dialing power down
+
+Full power is rarely what you want at close range. Every halving of flash power cuts the light by one stop, which multiplies the guide number by 0.707. For the same GN 60 flash:
+
+- 1/2 power: 60 × 0.707 = 42.4
+- 1/4 power: 30
+- 1/8 power: 21.2
+- 1/16 power: 15
+
+Suppose the subject is 3 m away at ISO 100 and we want f/8. The guide number we need is 8 × 3 = 24. At 1/8 power (GN 21.2) the aperture works out to 21.2 / 3 = f/7.1, and at 1/4 power (GN 30) it is 30 / 3 = f/10. Either is close enough to f/8 to dial in with a quick test frame and a glance at the histogram.
+
+## A practical scenario: fill flash outdoors
+
+We're shooting a portrait in bright sun at ISO 100 and a shutter speed of 1/200, which is within the sync speed of most cameras. The Sunny 16 rule suggests f/16 at 1/100; going to 1/200 costs a stop, so the matching ambient aperture is f/11 (you can check the equivalents with our [Sunny 16 calculator](/tools/sunny-16-calculator)). The subject is 2.5 m away, so the guide number we need is 11 × 2.5 = 27.5. A GN 60 flash at 1/4 power gives GN 30, or 30 / 2.5 = f/12. That is right in the neighbourhood, so we would start at 1/4 power and adjust a third of a stop either way. If we want the flash to dominate rather than just fill, we need more output, which means moving closer or taking less ambient exposure with a smaller aperture or faster shutter. For comparing exposure changes in stops, our [Exposure Stops calculator](/tools/exposure-stops-calculator) is handy.
+
+## Common mistakes
+
+- **Mixing units.** A GN quoted in feet is about 3.28 times larger than the same flash quoted in metres (60 m is roughly 197 ft). Use the distance unit that matches your GN.
+- **Ignoring the zoom setting.** The headline GN is usually measured at the longest zoom position. At a wide zoom the light spreads out and the real GN is lower.
+- **Forgetting that the number is for full power.** If you've dialed down to 1/8, use the reduced GN, not the headline figure.
+- **Trusting it for bounced light.** The formula assumes direct light travelling straight from flash to subject.
+- **Changing ISO without recalculating.** A quick ISO bump changes the effective GN by a factor of 1.41 per stop.
+
 ## What this doesn't account for
 
-Guide numbers describe direct, undiffused flash under open, non-reflective conditions — this is a starting point for manual flash exposure, not a guarantee. Bouncing the flash off a ceiling or wall, adding a softbox or diffuser, or shooting in a small reflective room will all change how much usable light actually reaches your subject, usually meaning you'll want a wider aperture or a closer working distance than the calculator suggests. It's also worth pairing this with our [Flash Sync Speed](/guides/flash-sync-speed-explained) guide if you're combining flash with fast shutter speeds, and our [Studio Lighting Basics](/guides/studio-lighting-basics) guide if you're balancing multiple lights rather than a single on-camera flash.
+Guide numbers describe direct, undiffused flash under open, non-reflective conditions — this is a starting point for manual flash exposure, not a guarantee. Bouncing the flash off a ceiling or wall, adding a softbox or diffuser, or shooting in a small reflective room will all change how much usable light actually reaches your subject, usually meaning you'll want a wider aperture or a closer working distance than the calculator suggests. As a starting point for bounce or modifiers, we assume a loss of a stop or two and then judge the result on the back of the camera. Depth of field also matters for the aperture you land on; our [Depth of Field calculator](/tools/dof-calculator) shows what a given f-stop does at your distance. It's also worth pairing this with our [Flash Sync Speed](/guides/flash-sync-speed-explained) guide if you're combining flash with fast shutter speeds, and our [Studio Lighting Basics](/guides/studio-lighting-basics) guide if you're balancing multiple lights rather than a single on-camera flash.
+
+## Quick checklist
+
+- Confirm whether your flash's GN is in metres or feet, and at which zoom position.
+- Set the flash to the power level you will really use and scale the GN accordingly.
+- Adjust the GN for your ISO (square root of the ratio to ISO 100).
+- Solve for aperture or distance, then round to the nearest practical f-stop.
+- Take a test frame, check the histogram, and correct by a third of a stop at a time.
+
+## FAQ
+
+### Is the guide number a measure of how powerful the flash is?
+Yes, in a practical sense. It combines aperture and distance into one figure, so a higher GN means the flash can light a subject farther away at the same aperture. Because it scales with the square root of light output, doubling the light only raises the GN by about 41 percent.
+
+### Why does my image look darker than the calculator predicts?
+Most often the flash was zoomed wider than the rated position, the subject was bounced or diffused, or the power was set lower than assumed. Recheck the zoom, the power setting, and whether anything is absorbing light between the flash and the subject.
+
+### Can I use the same GN with a different ISO?
+Yes. Start from the ISO 100 rating and multiply by the square root of your ISO divided by 100. At ISO 400, for example, the effective GN is double the rated one.
+
+### Does the calculator replace TTL?
+No. TTL measures the scene for you, while manual flash with the guide number gives repeatable, predictable results, which is why studio and off-camera shooters like it.

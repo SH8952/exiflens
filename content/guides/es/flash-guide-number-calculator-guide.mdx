@@ -9,17 +9,78 @@ imageCredit: "Tom Pumford"
 imageCreditUrl: "https://unsplash.com/@tompumford?utm_source=ExifLens&utm_medium=referral"
 ---
 
-Todo flash manual incluye un número guía (GN) en su ficha técnica — una sola cifra pensada para decirte a qué distancia el flash puede iluminar correctamente a un sujeto con un diafragma determinado. El problema es convertir ese único número en un ajuste utilizable durante la sesión. Nuestra [calculadora del número guía del flash](/tools/flash-guide-number-calculator) hace esa aritmética por ti: introduce el número guía nominal de tu flash, tu ISO de disparo, y el diafragma o la distancia al sujeto, y calcula el otro valor.
+Todo flash manual incluye en su ficha técnica un número guía (NG), una cifra pensada para indicar hasta qué distancia puede iluminar correctamente a un sujeto con una apertura determinada. El problema es convertir ese único número en un ajuste utilizable sobre el terreno. Nuestra [calculadora de número guía de flash](/tools/flash-guide-number-calculator) hace la aritmética por ti: introduce el número guía nominal de tu flash, tu ISO y la apertura o la distancia al sujeto, y calcula el otro valor.
 
-## La fórmula detrás de todo esto
+## La fórmula que hay detrás
 
-Las matemáticas del número guía son sencillas una vez tienes el número: **Número guía = diafragma x distancia**, medido por el fabricante a un ISO de referencia (casi siempre ISO 100) y, en flashes con cabezal de zoom, en una posición de zoom concreta. Reordenada, esa fórmula te da exactamente lo que necesitas en el set:
+El cálculo del número guía es sencillo cuando se conoce la cifra: **Número guía = número f × distancia**, medido por el fabricante a un ISO de referencia (casi siempre ISO 100) y, en los flashes con cabezal zoom, en una posición de zoom concreta. Despejando, obtienes justo lo que necesitas en el set:
 
-- **diafragma = Número guía / distancia** — el diafragma necesario para exponer correctamente a un sujeto a una distancia conocida.
-- **distancia = Número guía / diafragma** — la distancia máxima a la que un sujeto puede estar mientras sigue bien iluminado con el diafragma elegido.
+- **número f = número guía / distancia** — la apertura necesaria para exponer correctamente a un sujeto a una distancia conocida.
+- **distancia = número guía / número f** — la distancia máxima a la que puede estar el sujeto con una apertura elegida y seguir bien iluminado.
 
-Si disparas a un ISO distinto del ISO 100 de referencia del flash, los números guía cambian según la raíz cuadrada del ratio de ISO, no de forma lineal — nuestra calculadora lo ajusta automáticamente, la misma relación que aparece en el artículo de Wikipedia sobre el número guía y que usan todas las tablas de GN publicadas por los fabricantes.
+Si disparas con un ISO distinto del ISO 100 nominal del flash, el número guía escala con la raíz cuadrada de la relación de ISO y no de forma lineal. Nuestra calculadora lo ajusta automáticamente; es la misma relación que recoge el artículo de Wikipedia sobre el número guía y que usan las tablas de NG de todos los fabricantes.
+
+## Ejemplo resuelto 1: apertura a partir de la distancia
+
+Supongamos que tu flash tiene un NG 60 (metros, ISO 100, potencia máxima) y el sujeto está a 5 m. La apertura es 60 / 5 = f/12. Como f/12 no es una marca de paso completo en la mayoría de objetivos, redondeamos a f/11, que deja pasar aproximadamente un cuarto de paso más de luz que f/12, algo despreciable en la práctica.
+
+Ahora al revés: quieres f/5,6 para un fondo algo más suave. La distancia máxima del sujeto es 60 / 5,6 = 10,7 m. Más allá, el flash se queda sin potencia incluso a plena carga.
+
+## Ejemplo resuelto 2: qué hace el ISO con el número
+
+El NG nominal supone ISO 100. Cada vez que duplicas el ISO ganas un paso de sensibilidad, pero como el número guía se construye con distancia y apertura (ambas medidas lineales), crece con la raíz cuadrada de la relación, unas 1,41 veces por paso:
+
+- ISO 200: 60 × 1,41 = NG efectivo de 84,9
+- ISO 400: 60 × 2 = NG efectivo de 120
+- ISO 800: 60 × 2,83 = NG efectivo de 169,7
+
+A ISO 400 con el mismo sujeto a 5 m, la apertura necesaria es 120 / 5 = f/24, que la mayoría de objetivos ni siquiera alcanza. Es la señal para bajar la potencia del flash en lugar de cerrar más el diafragma, o para bajar el ISO.
+
+## Ejemplo resuelto 3: reducir la potencia
+
+La potencia máxima rara vez se necesita a corta distancia. Cada vez que reduces la potencia a la mitad, la luz baja un paso y el número guía se multiplica por 0,707. Para el mismo flash de NG 60:
+
+- 1/2 de potencia: 60 × 0,707 = 42,4
+- 1/4 de potencia: 30
+- 1/8 de potencia: 21,2
+- 1/16 de potencia: 15
+
+Imagina que el sujeto está a 3 m con ISO 100 y queremos f/8. El número guía necesario es 8 × 3 = 24. A 1/8 de potencia (NG 21,2) la apertura resulta 21,2 / 3 = f/7,1, y a 1/4 de potencia (NG 30) es 30 / 3 = f/10. Ambas están lo bastante cerca de f/8 como para ajustarlas con una foto de prueba y un vistazo al histograma.
+
+## Un escenario práctico: flash de relleno en exteriores
+
+Estamos retratando a pleno sol con ISO 100 y 1/200 s, dentro de la velocidad de sincronización de la mayoría de cámaras. La regla Sunny 16 sugiere f/16 a 1/100; pasar a 1/200 cuesta un paso, así que la apertura equivalente para la luz ambiente es f/11 (puedes comprobar las equivalencias con nuestra [calculadora Sunny 16](/tools/sunny-16-calculator)). El sujeto está a 2,5 m, de modo que el número guía necesario es 11 × 2,5 = 27,5. Un flash de NG 60 a 1/4 de potencia da NG 30, es decir, 30 / 2,5 = f/12, muy cerca de lo buscado. Empezaríamos a 1/4 y ajustaríamos un tercio de paso a cada lado. Si queremos que el flash domine y no solo rellene, necesitamos más salida, lo que implica acercarnos o reducir la exposición ambiente con un diafragma más cerrado o una velocidad más alta. Para comparar cambios de exposición en pasos, nuestra [calculadora de pasos de exposición](/tools/exposure-stops-calculator) resulta práctica.
+
+## Errores frecuentes
+
+- **Mezclar unidades.** Un NG en pies es unas 3,28 veces mayor que el mismo flash expresado en metros (60 m son aproximadamente 197 ft). Usa la unidad de distancia que corresponda a tu NG.
+- **Ignorar el zoom.** El NG de catálogo suele medirse en la posición de zoom más larga. Con zoom ancho la luz se dispersa y el NG real es menor.
+- **Olvidar que la cifra es a plena potencia.** Si has bajado a 1/8, usa el NG reducido, no el de catálogo.
+- **Fiarse de él con luz rebotada.** La fórmula supone luz directa que viaja en línea recta del flash al sujeto.
+- **Cambiar el ISO sin recalcular.** Subir un paso de ISO modifica el NG efectivo en un factor de 1,41.
 
 ## Lo que esto no tiene en cuenta
 
-Los números guía describen un flash directo y sin difuminar en condiciones abiertas y no reflectantes — esto es un punto de partida para la exposición con flash manual, no una garantía. Rebotar el flash en un techo o pared, añadir un softbox o difusor, o disparar en una habitación pequeña y reflectante cambiarán cuánta luz útil llega realmente a tu sujeto, así que normalmente querrás un diafragma más abierto o una distancia de trabajo más cercana de la que sugiere la calculadora. También vale la pena combinar esto con nuestra guía de [velocidad de sincronización del flash](/guides/flash-sync-speed-explained) si combinas flash con velocidades de obturación rápidas, y con nuestra guía de [fundamentos de iluminación de estudio](/guides/studio-lighting-basics) si estás equilibrando varias luces en vez de un solo flash de cámara.
+Los números guía describen un flash directo, sin difusión, en condiciones abiertas y poco reflectantes: es un punto de partida para la exposición con flash manual, no una garantía. Rebotar el flash en un techo o una pared, añadir una caja de luz o un difusor, o disparar en una habitación pequeña y reflectante cambiará la cantidad de luz útil que llega al sujeto, y normalmente querrás una apertura más abierta o una distancia de trabajo más corta de lo que sugiere la calculadora. Como punto de partida con rebote o modificadores, suponemos una pérdida de uno o dos pasos y luego juzgamos el resultado en la pantalla de la cámara. La profundidad de campo también influye en la apertura que elijas; nuestra [calculadora de profundidad de campo](/tools/dof-calculator) muestra qué efecto tiene cada número f a tu distancia. También conviene combinarlo con nuestra guía de [velocidad de sincronización del flash](/guides/flash-sync-speed-explained) si usas flash con velocidades de obturación altas, y con la de [fundamentos de iluminación de estudio](/guides/studio-lighting-basics) si equilibras varias luces en lugar de un solo flash en cámara.
+
+## Lista de comprobación rápida
+
+- Confirma si el NG de tu flash está en metros o en pies y en qué posición de zoom.
+- Ajusta el flash a la potencia que realmente vas a usar y escala el NG en consecuencia.
+- Corrige el NG según el ISO (raíz cuadrada de la relación con ISO 100).
+- Calcula la apertura o la distancia y redondea al número f práctico más cercano.
+- Haz una foto de prueba, revisa el histograma y corrige de un tercio de paso en un tercio.
+
+## Preguntas frecuentes
+
+### ¿El número guía indica la potencia del flash?
+En la práctica, sí. Combina apertura y distancia en una sola cifra, de modo que un NG mayor significa que el flash ilumina a un sujeto más lejano con la misma apertura. Como escala con la raíz cuadrada de la salida de luz, duplicar la luz solo aumenta el NG en un 41 por ciento aproximadamente.
+
+### ¿Por qué mi imagen sale más oscura de lo que predice la calculadora?
+Lo más habitual es que el flash estuviera con un zoom más ancho que el nominal, que la luz se rebotara o difundiera, o que la potencia fuera menor de la supuesta. Revisa el zoom, la potencia y si algo absorbe luz entre el flash y el sujeto.
+
+### ¿Puedo usar el mismo NG con otro ISO?
+Sí. Parte del valor nominal a ISO 100 y multiplícalo por la raíz cuadrada de tu ISO dividido entre 100. A ISO 400, por ejemplo, el NG efectivo es el doble del nominal.
+
+### ¿La calculadora sustituye al TTL?
+No. El TTL mide la escena por ti, mientras que el flash manual con número guía da resultados repetibles y predecibles, y por eso lo prefieren quienes trabajan en estudio o con flash fuera de cámara.

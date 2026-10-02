@@ -19,17 +19,67 @@ This article mentions ShootCalc, an independent website unrelated to ExifLens. E
 
 Both ExifLens and ShootCalc offer forward mode (enter your base exposure and ND filter strength, get the resulting long-exposure shutter speed) and reverse mode (enter your target shutter speed, get the filter strength needed), along with support for stacking multiple ND filters. Functionally, the core ND math is the same regardless of which site you use — it's standard exposure-value arithmetic, not something either site has an exclusive claim to.
 
+## The math both of them are doing
+
+Every ND filter is rated by how much light it blocks, and that rating can be written three ways:
+
+- **Filter factor:** ND8 means the filter passes one eighth of the light, so exposure time multiplies by 8.
+- **Stops:** each stop is a doubling, so ND8 is 3 stops (2 × 2 × 2 = 8), ND64 is 6 stops, and ND1000 is about 10 stops (2 to the tenth power is 1024).
+- **Optical density:** each 0.3 of density is one stop, so a 0.9 filter is 3 stops and a 3.0 filter is about 10.
+
+Because stops add while factors multiply, stacking is easy: the total factor is the product of the individual factors, and the total stops is the sum.
+
+## Worked example 1: forward mode
+
+Your meter says 1/125 s at f/8 and ISO 100, and you put an ND64 (6 stops) on the lens. The new shutter speed is 64 / 125 = 0.512 s, which is about half a second. That is enough to smooth a small stream a little, but not enough for silky water. For that you'd want more stops.
+
+## Worked example 2: stacking
+
+You own an ND8 (3 stops) and an ND64 (6 stops) and stack them. The result is 3 + 6 = 9 stops, or a factor of 8 × 64 = 512. If the unfiltered exposure is 1/30 s, the filtered exposure is 512 / 30 = 17.1 s. Whichever calculator you use, you should get the same answer; if you don't, one of the inputs is being read differently (factor versus stops is the usual culprit).
+
+## Worked example 3: reverse mode
+
+On a bright morning the meter reads 1/8 s at f/11 and ISO 100 and you want a 30-second exposure for a smooth sea. The ratio is 30 / (1/8) = 240, and the base-2 logarithm of 240 is about 7.9, so you need roughly 8 stops, which is an ND256 or a stack such as ND64 + ND4 (6 + 2 = 8 stops). At 8 stops the exposure is (1/8) × 256 = 32 s, which is close enough to the 30 s target.
+
+## A practical walk-through: sunrise seascape
+
+We meter 1/60 s at f/11 and ISO 100 and want an exposure of about a minute. The ratio is 60 / (1/60) = 3600, which is about 11.8 stops. A 10-stop ND1000 plus a 2-stop ND4 gives 12 stops, a factor of 4096, so the exposure is 4096 / 60 = 68 s. That is longer than the 30 s most cameras offer, so we switch to Bulb mode and time it with a remote release or the camera's interval timer. Practical order of operations: compose and focus first with the filter off, then attach the filter, switch to manual focus, and take the exposure. To compare how a given change affects exposure, our [Exposure Stops calculator](/tools/exposure-stops-calculator) is a good companion, and our [Bracketing calculator](/tools/bracketing-calculator) helps when the sky is much brighter than the foreground.
+
+## Common mistakes
+
+- **Confusing the filter factor with the number of stops.** An ND1000 is not 1000 stops; it is about 10.
+- **Metering with the filter on.** Many cameras can't meter through a dense ND. Meter first without it, then apply the math.
+- **Forgetting to cover the viewfinder.** On a DSLR, stray light can enter through the eyepiece during very long exposures.
+- **Ignoring colour casts.** Some filters tint the image. Shooting RAW and correcting white balance usually resolves it.
+- **Stacking too many at wide angles.** Several filters can cause vignetting.
+
+## When a calculator isn't enough
+
+An ND calculator assumes the scene's brightness doesn't change during the exposure and that the sensor responds the same way at one second as at one-thousandth. Light can change in the middle of a minute-long exposure, particularly at sunrise and sunset. Some filters also leak infrared at high densities, which can shift colours. Treat the calculated shutter speed as a very good starting point, take a test frame, and adjust by a third of a stop if the histogram asks for it. For timed sequences, such as long exposures repeated over an hour, our [Timelapse calculator](/tools/timelapse-calculator) covers the interval planning.
+
 ## Where the two differ
 
-ExifLens's ND filter calculator sits inside a larger site with related calculators (exposure, DoF, timelapse, astro) and guide articles covering ND filter types, filter stacking pitfalls, and graduated ND use, all available in four languages (English, Korean, Japanese, Spanish). ShootCalc's related-calculator set includes its own DoF, crop factor, and shutter-count-checker tools — a shutter count checker being something ExifLens doesn't currently offer (it's on ExifLens's own roadmap, but isn't live yet).
+ExifLens's ND filter calculator sits inside a larger site with related calculators (exposure, DoF, timelapse, astro) and guide articles covering ND filter types, filter stacking pitfalls, and graduated ND use, all available in four languages (English, Korean, Japanese, Spanish). ShootCalc's related-calculator set includes its own DoF, crop factor, and shutter-count-checker tools. ExifLens also offers its own [Shutter Count Checker](/tools/shutter-count-checker) alongside the other calculators.
 
 ## Which one to use
 
-If you specifically need a shutter count checker today, ShootCalc's related toolset covers that in a way ExifLens doesn't yet. For the core ND filter exposure math itself, and if you'd like it alongside a broader library of camera-setting guides and calculators in your own language, ExifLens's version covers the same ground for free.
+For the core ND filter exposure math itself, either one gets you to the same answer. If you'd like it alongside a broader library of camera-setting guides and calculators in your own language, ExifLens's version covers the same ground for free, and ShootCalc remains a legitimate option if its layout suits you better.
 
 ## Checklist
 
 - Both calculators support forward/reverse ND exposure modes and filter stacking — the underlying math is standard and not unique to either site.
 - ExifLens pairs its ND calculator with a wider library of related calculators and guides in four languages.
-- ShootCalc currently offers a shutter count checker that ExifLens doesn't yet have live.
+- Both sites offer a shutter count checker among their related tools.
 - Either is a legitimate free option — pick based on which related tools you actually need alongside the ND calculation.
+- Always cross-check one calculation by hand: stops add, factors multiply.
+
+## FAQ
+
+### Is an ND calculator accurate for 10-stop filters?
+The arithmetic is exact, but the filter's real transmission can differ slightly from its label, and the scene can change during a long exposure. Treat the result as a starting point and verify with a test shot.
+
+### Can I mix filter brands when stacking?
+Yes, the math doesn't care. In practice, mixing may add colour casts or reflections, so shoot RAW and check the corners for vignetting.
+
+### What's the difference between forward and reverse mode?
+Forward mode tells you the new shutter speed for a filter you own. Reverse mode tells you which filter strength you need for a shutter speed you want.

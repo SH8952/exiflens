@@ -9,7 +9,9 @@ imageCredit: "Mariia Berezovsky"
 imageCreditUrl: "https://unsplash.com/@mariiaberezovsky?utm_source=ExifLens&utm_medium=referral"
 ---
 
-Acostumbrarse a plataformas como Instagram o WhatsApp, que eliminan automáticamente los metadatos al subir una foto, hace fácil suponer que cualquier subida es igual de segura. Publicar una foto directamente en una app de compraventa, adjuntar un archivo en un blog personal o en un portafolio, o enviar una foto por correo, transmite el archivo original con sus coordenadas GPS intactas. Nuestro [eliminador de EXIF](/tools/exif-remover) está pensado exactamente para estas situaciones — procesa las fotos por completo en el navegador sin enviarlas a ningún servidor —, pero obtener el resultado que realmente se busca depende de entender sus opciones.
+Acostumbrarse a plataformas como Instagram o WhatsApp, que eliminan automáticamente los metadatos al subir una foto, hace fácil suponer que cualquier subida es igual de segura. Publicar una foto directamente en una app de compraventa, adjuntar un archivo en un blog personal o en un portafolio, o enviar una foto por correo, transmite el archivo original con sus coordenadas GPS intactas. Nuestro [eliminador de EXIF](/tools/exif-remover) está pensado exactamente para estas situaciones (procesa las fotos por completo en el navegador sin enviarlas a ningún servidor), pero obtener el resultado que realmente se busca depende de entender sus opciones.
+
+Conviene tener presente también una advertencia sobre las plataformas: muchas eliminan algunos metadatos al subir, pero el comportamiento varía según la plataforma y el método de subida, y puede cambiar con el tiempo, así que lo tratamos como un extra y no como una garantía. El hábito más seguro es eliminar la ubicación uno mismo antes de compartir.
 
 ## Eliminar solo el GPS o todo depende de la situación
 
@@ -29,12 +31,51 @@ Exportar una foto desde un programa de edición para quitar los metadatos a vece
 
 ## Las fotos tomadas en HEIC deben convertirse antes a JPEG
 
-El HEIC (el formato predeterminado del iPhone) y el TIFF todavía no se pueden procesar de forma fiable solo con las capacidades estándar del navegador, así que no están soportados. Una foto de iPhone subida tal cual aparecerá como «formato no soportado» — cambia el formato de captura a JPEG en los ajustes de la cámara, o usa la opción «Más compatible» (conversión a JPEG) al compartir, antes de subirla a la herramienta.
+El HEIC (el formato predeterminado del iPhone) y el TIFF todavía no se pueden procesar de forma fiable solo con las capacidades estándar del navegador, así que no están soportados. Una foto de iPhone subida tal cual aparecerá como «formato no soportado»: cambia el formato de captura a JPEG en los ajustes de la cámara, o usa la opción «Más compatible» (conversión a JPEG) al compartir, antes de subirla a la herramienta.
+
+## ¿Qué precisión tiene realmente la ubicación?
+
+Las coordenadas GPS se guardan como números, y las fotos suelen llevar varios decimales. Un grado de latitud equivale a unos 111 kilómetros, así que 0.00001 grados son unos 1.1 metros (111,000 metros por 0.00001). Una coordenada con cinco decimales señala, por tanto, un punto del tamaño de una puerta, no un barrio. Por eso una foto «privada» tomada en casa puede revelar exactamente de qué vivienda procede.
+
+## Ejemplo práctico: un viaje con 35 fotos
+
+Supongamos que volvemos de un viaje con 35 JPEG que queremos subir a un blog, y queremos conservar los datos de cámara y objetivo pero quitar la ubicación. La herramienta admite 20 archivos a la vez, así que procesamos en dos tandas: 20 más 15 son 35, y obtenemos dos ZIP. Como solo GPS puede dejar una copia en XMP en algunos archivos, elegimos eliminación completa para cualquier foto tomada en casa o cerca de ella, y dejamos solo GPS para los paisajes lejanos. La eliminación de IPTC sigue desactivada en las fotos que llevan nuestra línea de copyright. Después abrimos uno de los resultados en un visor de información de archivo para confirmar que no queda ninguna coordenada antes de publicar.
+
+## Errores comunes
+
+- **Suponer que la plataforma lo hará por ti.** El comportamiento varía y puede cambiar, así que elimínalo tú mismo.
+- **Usar solo GPS en una foto que debe quedar completamente limpia.** Puede sobrevivir una copia en XMP. Usa la eliminación completa en fotos sensibles.
+- **Limpiar el original y perder tu archivo.** Trabaja con copias y conserva el original con sus metadatos en tu biblioteca, porque esos datos te resultan útiles.
+- **Olvidar otros metadatos.** Además de la ubicación, un archivo puede llevar datos del dispositivo, marcas de tiempo y títulos. Decide qué quieres compartir.
+- **Limpiar solo la foto que publicaste y no la que enviaste por correo.** Cada copia del archivo circula por su cuenta.
+
+## Límites: lo que esta herramienta no hace
+
+Eliminar los metadatos no cambia lo que muestra la imagen. Un cartel de calle, el número de una casa, una vista característica desde una ventana o un reflejo pueden revelar un lugar tan bien como el GPS. La herramienta además trabaja con archivos JPEG, de modo que el HEIC o el TIFF deben convertirse antes, y no puede limpiar un archivo que ya se compartió en otro sitio. Ten en cuenta también que una eliminación completa puede descartar el bloque MakerNote, donde las cámaras guardan datos como el número de disparos. Si envías una foto a un comprador para que verifique el número de disparos con nuestro [verificador de disparos](/tools/shutter-count-checker), envía el original sin modificar.
+
+## Un escenario práctico
+
+Vamos a vender un objetivo en una plataforma de compraventa. Hicimos las fotos en la mesa de la cocina, así que las coordenadas señalan nuestra casa. Antes de subirlas, pasamos los archivos por el eliminador de EXIF con eliminación completa, descargamos el ZIP y revisamos en pantalla que las imágenes se vean sin cambios. Subimos desde la carpeta limpia, no desde el carrete de la cámara, para no publicar por accidente la versión equivocada.
 
 ## Lista de comprobación práctica
 
-- Comprueba primero si el destino elimina los metadatos automáticamente — los anuncios de compraventa, blogs y adjuntos de correo normalmente no lo hacen.
+- Comprueba primero si el destino elimina los metadatos automáticamente: los anuncios de compraventa, blogs y adjuntos de correo normalmente no lo hacen.
 - Usa la eliminación completa, no solo GPS, cuando necesites que la ubicación desaparezca con total seguridad.
 - Desactiva la eliminación de IPTC si quieres conservar los derechos de autor y los títulos mientras se elimina la ubicación.
 - Para lotes como fotos de viaje, procesa hasta 20 archivos a la vez y descárgalos en un ZIP.
 - Convierte primero a JPEG las fotos HEIC del iPhone antes de subirlas a la herramienta.
+- Guarda un original sin modificar en tu archivo y sube solo la copia limpia.
+
+## Preguntas frecuentes
+
+### ¿Eliminar el EXIF reduce la calidad de la imagen?
+
+No. La herramienta recorta la zona de metadatos y deja intactos los datos de píxeles, así que no hay recompresión.
+
+### ¿Se sube mi foto a un servidor?
+
+No. El procesamiento ocurre en tu navegador, así que el archivo se queda en tu dispositivo.
+
+### ¿Debo eliminar todo siempre?
+
+No necesariamente. Si quieres mostrar los ajustes de cámara en un portafolio, solo GPS puede encajar bien en fotos no sensibles. Para cualquier cosa tomada en casa, usa la eliminación completa.

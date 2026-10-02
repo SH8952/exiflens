@@ -9,23 +9,53 @@ imageCredit: "Jakub Żerdzicki"
 imageCreditUrl: "https://unsplash.com/@jakubzerdzicki?utm_source=ExifLens&utm_medium=referral"
 ---
 
-PhotoPills is one of the most established names in photography planning apps, known for its depth-of-field and exposure calculators, and especially its sun/moon/Milky Way planning tools with augmented-reality overlays. It's a paid, one-time-purchase mobile app for iOS and Android. If what you're looking for is specifically a free way to run core exposure and depth-of-field calculations in a browser — without installing an app or making a purchase — here's an honest look at where ExifLens overlaps with PhotoPills, and where it doesn't.
+PhotoPills is one of the most established names in photography planning apps, known for its depth-of-field and exposure calculators, and especially its sun/moon/Milky Way planning tools with augmented-reality overlays. It's a paid, one-time-purchase mobile app for iOS and Android. If what you're looking for is specifically a free way to run core exposure and depth-of-field calculations in a browser, without installing an app or making a purchase, here's an honest look at where ExifLens overlaps with PhotoPills, and where it doesn't.
 
 ## Disclosure
 
-This article mentions PhotoPills, a product of a separate company. ExifLens is not affiliated with, endorsed by, or sponsored by PhotoPills. "PhotoPills" is a trademark of its respective owner. Pricing and feature details referenced here reflect PhotoPills' public app store listing as of the time this article was written (September 2026) and may have changed since — check PhotoPills' own website or app store page for current details.
+This article mentions PhotoPills, a product of a separate company. ExifLens is not affiliated with, endorsed by, or sponsored by PhotoPills. "PhotoPills" is a trademark of its respective owner. Pricing and feature details referenced here reflect PhotoPills' public app store listing as of the time this article was written (September 2026) and may have changed since. Check PhotoPills' own website or app store page for current details.
 
 ## Where the two overlap
 
-ExifLens offers free, web-based calculators covering several of the same core categories PhotoPills is known for: depth of field, the exposure triangle, hyperfocal distance, bracketing/HDR exposure steps, astrophotography exposure via the NPF rule, and timelapse interval/storage planning. Because these run directly in a browser, there's nothing to install and no purchase required — useful if you want a quick calculation on a desktop, or on a phone you're not willing to install a paid app on.
+ExifLens offers free, web-based calculators covering several of the same core categories PhotoPills is known for: depth of field, the exposure triangle, hyperfocal distance, bracketing/HDR exposure steps, astrophotography exposure via the NPF rule, and timelapse interval/storage planning. Because these run directly in a browser, there's nothing to install and no purchase required. That's useful if you want a quick calculation on a desktop, or on a phone you're not willing to install a paid app on.
 
 ## Where PhotoPills goes further
 
 To be upfront about it: PhotoPills covers considerably more ground than a free web tool can reasonably match. Its augmented-reality sun, moon, and Milky Way direction planning, offline map-based shoot planning, and its own deeper feature layers (like Advanced DoF and Macro DoF) are built for a dedicated planning app and aren't something ExifLens's web calculators attempt to replace. If you regularly plan landscape or astro shoots around exact sun/moon positions at a specific location, PhotoPills' app-based approach is doing a job a browser calculator isn't designed for.
 
-## When the free web route makes sense
+## Worked examples with the free tools
 
-If your actual need is running a quick depth-of-field, exposure, or NPF-rule calculation — at your desk, without downloading anything, in whatever language you're comfortable in — ExifLens's calculators cover that without a purchase. It's not a wholesale replacement for PhotoPills' planning suite; it's a free option for the calculator-only part of that need.
+Here are five calculations we run all the time, with the arithmetic shown so you can check it by hand.
+
+- **Hyperfocal distance** with the [DoF calculator](/tools/dof-calculator) or the [hyperfocal table](/tools/dof-hyperfocal-table): on a full-frame camera with a 24 mm lens at f/8 and a circle of confusion of 0.03 mm, the hyperfocal distance is 24 x 24 / (8 x 0.03) + 24 = 576 / 0.24 + 24 = 2,400 + 24 = 2,424 mm, about 2.4 meters. Focus there and everything from roughly 1.2 meters to infinity is acceptably sharp.
+- **Long exposure with an ND filter** using the [exposure stops calculator](/tools/exposure-stops-calculator): a 10-stop filter multiplies exposure time by 2 to the power of 10, which is 1,024. A base exposure of 1/125 second becomes 1,024 / 125 = 8.2 seconds.
+- **Bracketing** with the [bracketing calculator](/tools/bracketing-calculator): three frames at 2 EV spacing around a 1/60 second middle exposure give 1/250, 1/60, and 1/15 second, since each 2 EV step is a factor of four in time.
+- **Timelapse** with the [timelapse calculator](/tools/timelapse-calculator): 240 frames played at 24 frames per second is 10 seconds of footage. Shot at a 5-second interval, that takes 240 x 5 = 1,200 seconds, or 20 minutes of shooting.
+- **Storage** with the [storage calculator](/tools/storage-calculator): those 240 frames at 25 MB per raw file need 240 x 25 = 6,000 MB, about 6 GB.
+
+For night sky work, the [astrophotography calculator](/tools/astrophotography-calculator) applies the NPF rule, and for planning light by time of day, the [golden hour calculator](/tools/golden-hour-calculator) gives sunrise, sunset, and blue hour windows from a date and location.
+
+## A practical scenario walk-through
+
+Imagine we are heading out for a waterfall shoot and want silky water in daylight.
+
+1. We check the light with the [Sunny 16 calculator](/tools/sunny-16-calculator) for a starting exposure.
+2. We decide how much we need to slow the shutter, then use the [exposure stops calculator](/tools/exposure-stops-calculator) to see how many stops of ND that equals.
+3. We check depth of field for the foreground rocks with the [DoF calculator](/tools/dof-calculator), and confirm any diffraction softness at small apertures with the [advanced DoF and diffraction calculator](/tools/advanced-dof-diffraction-calculator).
+4. We use the [camera FOV calculator](/tools/camera-fov-calculator) and the [crop factor calculator](/tools/crop-factor-calculator) to compare lens choices between bodies.
+
+All of this happens in a browser tab, with no installation. What we do not get here is an augmented-reality view of where the sun will be at the waterfall, so for that part of the plan we would use a map, a compass, or a dedicated planning app.
+
+## Common mistakes when comparing tools
+
+- **Comparing apples to oranges.** A calculator and a full planning app solve different problems. Judge each by the job you need done.
+- **Trusting any calculator's output without understanding the inputs.** The circle of confusion, the sensor size, and the focal length all change the answer. Always enter your real camera data.
+- **Assuming a free tool is a lesser tool.** For a single calculation, a free browser calculator can be just as accurate as an app.
+- **Assuming a paid app is overkill, or essential.** It depends on how often you plan shoots around exact celestial positions.
+
+## Limits: when ExifLens is not the right choice
+
+If you need live augmented-reality overlays, offline use in remote areas, or tight integration with a map of your exact shooting spot, a dedicated mobile planning app is the more suitable choice, and that applies to any app of this kind, not only one name. A browser calculator also depends on you entering correct values. It will not warn you if you mix up a crop sensor with a full-frame one.
 
 ## Checklist
 
@@ -33,3 +63,15 @@ If your actual need is running a quick depth-of-field, exposure, or NPF-rule cal
 - Core overlap: depth of field, exposure triangle, hyperfocal distance, bracketing, astro (NPF rule), timelapse.
 - PhotoPills' AR planning, map-based shoot planning, and advanced macro/DoF layers go beyond what a browser calculator does.
 - Choose based on what you actually need: a quick free calculation, or a full offline planning app.
+- Always verify your own camera's sensor size and settings before trusting any result.
+
+## FAQ
+
+**Can I use both?**
+Yes. Many photographers keep a browser calculator for quick checks at a desk and use a planning app in the field.
+
+**Do ExifLens calculators need an account?**
+No. They run in your browser without sign-up.
+
+**Is the hyperfocal result exact?**
+It is a standard formula and a convention for sharpness, so it is a practical guide. If you plan a large print, use a stricter circle of confusion.
