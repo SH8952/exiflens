@@ -456,6 +456,11 @@
           "name": "アダプター経由のレンズ",
           "items": [
             {
+              "name": "Canon マウントアダプター EF-EOS R",
+              "note": "シグマのEFマウントレンズをRシリーズのボディに装着",
+              "date": "2024年4月"
+            },
+            {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
               "note": "新品で購入、Canon EF-EOS Rアダプターで使用",
               "date": "2024"
@@ -488,27 +493,167 @@
           ]
         },
         {
-          "name": "アクセサリー",
+          "name": "照明",
           "items": [
             {
-              "name": "Canon マウントアダプター EF-EOS R",
-              "note": "シグマのEFマウントレンズをRシリーズのボディに装着",
-              "date": "2024年4月"
+              "name": "NEEWER Z2 Round-Head Camera Flash",
+              "note": "Z2 + ドームディフューザー + QPRO セット",
+              "date": "2025年12月"
             },
             {
-              "name": "heipi 三脚",
-              "note": "",
-              "date": "2024"
-            },
+              "name": "NEEWER Magnetic Accessory Kit CRM3",
+              "note": "フラッシュ用マグネット式アクセサリー",
+              "date": "2025年12月"
+            }
+          ]
+        },
+        {
+          "name": "フィルター",
+          "items": [
             {
               "name": "HOYA 82mm UV・CPL・NDフィルターキット",
               "note": "",
               "date": "2024"
             },
             {
-              "name": "カメラ用ドライキャビネット",
+              "name": "Benro Magic VND Filter System VF1",
+              "note": "可変NDフィルターシステム",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Nikon ARCREST II filter",
+              "note": "2回に分けて購入",
+              "date": "2024年9月 / 2024年10月"
+            }
+          ]
+        },
+        {
+          "name": "ストラップ・バッグ・サポート",
+          "items": [
+            {
+              "name": "heipi 三脚",
               "note": "",
               "date": "2024"
+            },
+            {
+              "name": "Peak Design Clutch Hand Strap",
+              "note": "カメラ用ハンドストラップ",
+              "date": "2024年4月"
+            },
+            {
+              "name": "Peak Design Slide Lite Strap",
+              "note": "カメラストラップ",
+              "date": "2024年4月"
+            },
+            {
+              "name": "FALCAM FC3142 Shoulder Strap Quick Release Kit V2 (F38)",
+              "note": "Peak Design ストラップ対応",
+              "date": "2024年4月"
+            },
+            {
+              "name": "DJI Osmo Action 4 Backpack Strap Mount",
+              "note": "アクションカメラ用バックパックストラップマウント",
+              "date": "2024年7月"
+            },
+            {
+              "name": "PhotoClam PC-CRF90-UP Lens Plate",
+              "note": "RF70-200mm F2.8 L IS USM 専用レンズプレート",
+              "date": "2024年10月"
+            },
+            {
+              "name": "Nomatic Peter McKinnon Camera Sling 8L",
+              "note": "カメラスリングバッグ",
+              "date": "2025年3月"
+            },
+            {
+              "name": "Peak Design Clutch Hand Strap (second order)",
+              "note": "カメラストラップなどを含む6点(追加注文)",
+              "date": "2025年7月"
+            },
+            {
+              "name": "FALCAM RS4 MINI Quick Release Tripod Kit FC-RS4M",
+              "note": "ワンタッチクイックリリース三脚キット",
+              "date": "2025年8月"
+            }
+          ]
+        },
+        {
+          "name": "電源とお手入れ",
+          "items": [
+            {
+              "name": "Glint DSLR Camera Cleaning Kit",
+              "note": "カメラ用クリーニングツール",
+              "date": "2024年3月"
+            },
+            {
+              "name": "Canon LP-E6NH Battery",
+              "note": "純正品(箱入り)",
+              "date": "2024年4月"
+            },
+            {
+              "name": "NITECORE UCN3 Dual Charger",
+              "note": "1m USB延長ケーブル付き",
+              "date": "2024年4月"
+            },
+            {
+              "name": "Clever 30000mAh PD PPS 140W Power Bank",
+              "note": "大容量モバイルバッテリー",
+              "date": "2024年7月"
+            },
+            {
+              "name": "カメラ用ドライキャビネット PLD-108L",
+              "note": "",
+              "date": "2024年5月"
+            }
+          ]
+        },
+        {
+          "name": "編集と保存",
+          "items": [
+            {
+              "name": "NEXT-TRUDI 5-in-1 Card Reader (USB 3.0 A/C)",
+              "note": "SDカードリーダー",
+              "date": "2024年4月"
+            },
+            {
+              "name": "SanDisk Extreme PRO Portable SSD E82 4TB",
+              "note": "USB4 ポータブルSSD",
+              "date": "2025年7月"
+            },
+            {
+              "name": "TourBox Elite Plus",
+              "note": "編集用Bluetoothコントローラー(iPad対応)",
+              "date": "2025年11月"
+            }
+          ]
+        },
+        {
+          "name": "保護フィルム",
+          "items": [
+            {
+              "name": "코엠스킨 (Coemskin) EOS R7 Fantasy Black Film",
+              "note": "カメラ保護フィルム",
+              "date": "2024年7月"
+            },
+            {
+              "name": "코엠스킨 (Coemskin) RF24-70mm Mamba Green Film",
+              "note": "レンズ保護フィルム",
+              "date": "2024年7月"
+            },
+            {
+              "name": "코엠스킨 (Coemskin) RF15-35mm Rich Grain Film",
+              "note": "レンズ保護フィルム",
+              "date": "2024年9月"
+            },
+            {
+              "name": "코엠스킨 (Coemskin) RF70-200mm Matte White Film",
+              "note": "レンズ保護フィルム",
+              "date": "2024年10月"
+            },
+            {
+              "name": "SKOKO EOS R7 Low-Reflection LCD Protector (2 pcs)",
+              "note": "液晶保護フィルム 2枚",
+              "date": "2024年4月"
             }
           ]
         }

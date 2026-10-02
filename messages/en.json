@@ -456,6 +456,11 @@
           "name": "Adapted lenses",
           "items": [
             {
+              "name": "Canon Mount Adapter EF-EOS R",
+              "note": "mounts the Sigma EF-mount lenses on the R bodies",
+              "date": "April 2024"
+            },
+            {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
               "note": "bought new, used with a Canon EF-EOS R adapter",
               "date": "2024"
@@ -488,27 +493,167 @@
           ]
         },
         {
-          "name": "Accessories",
+          "name": "Lighting",
           "items": [
             {
-              "name": "Canon Mount Adapter EF-EOS R",
-              "note": "mounts the Sigma EF-mount lenses on the R bodies",
-              "date": "April 2024"
+              "name": "NEEWER Z2 Round-Head Camera Flash",
+              "note": "Z2 + dome diffuser + QPRO set",
+              "date": "December 2025"
             },
             {
-              "name": "heipi tripod",
-              "note": "",
-              "date": "2024"
-            },
+              "name": "NEEWER Magnetic Accessory Kit CRM3",
+              "note": "magnetic accessories for the flash",
+              "date": "December 2025"
+            }
+          ]
+        },
+        {
+          "name": "Filters",
+          "items": [
             {
               "name": "HOYA 82mm UV, CPL and ND filter kit",
               "note": "",
               "date": "2024"
             },
             {
-              "name": "Camera dehumidifier cabinet",
+              "name": "Benro Magic VND Filter System VF1",
+              "note": "variable ND filter system",
+              "date": "October 2024"
+            },
+            {
+              "name": "Nikon ARCREST II filter",
+              "note": "bought in two separate orders",
+              "date": "September 2024 / October 2024"
+            }
+          ]
+        },
+        {
+          "name": "Straps, bags and supports",
+          "items": [
+            {
+              "name": "heipi tripod",
               "note": "",
               "date": "2024"
+            },
+            {
+              "name": "Peak Design Clutch Hand Strap",
+              "note": "camera hand strap",
+              "date": "April 2024"
+            },
+            {
+              "name": "Peak Design Slide Lite Strap",
+              "note": "camera strap",
+              "date": "April 2024"
+            },
+            {
+              "name": "FALCAM FC3142 Shoulder Strap Quick Release Kit V2 (F38)",
+              "note": "compatible with Peak Design straps",
+              "date": "April 2024"
+            },
+            {
+              "name": "DJI Osmo Action 4 Backpack Strap Mount",
+              "note": "backpack strap mount for the action camera",
+              "date": "July 2024"
+            },
+            {
+              "name": "PhotoClam PC-CRF90-UP Lens Plate",
+              "note": "lens plate for the RF70-200mm F2.8 L IS USM",
+              "date": "October 2024"
+            },
+            {
+              "name": "Nomatic Peter McKinnon Camera Sling 8L",
+              "note": "camera sling bag",
+              "date": "March 2025"
+            },
+            {
+              "name": "Peak Design Clutch Hand Strap (second order)",
+              "note": "an additional order of six items, including camera straps",
+              "date": "July 2025"
+            },
+            {
+              "name": "FALCAM RS4 MINI Quick Release Tripod Kit FC-RS4M",
+              "note": "one-touch quick-release tripod kit",
+              "date": "August 2025"
+            }
+          ]
+        },
+        {
+          "name": "Power and care",
+          "items": [
+            {
+              "name": "Glint DSLR Camera Cleaning Kit",
+              "note": "camera cleaning tools",
+              "date": "March 2024"
+            },
+            {
+              "name": "Canon LP-E6NH Battery",
+              "note": "genuine, boxed",
+              "date": "April 2024"
+            },
+            {
+              "name": "NITECORE UCN3 Dual Charger",
+              "note": "with a 1 m USB extension cable",
+              "date": "April 2024"
+            },
+            {
+              "name": "Clever 30000mAh PD PPS 140W Power Bank",
+              "note": "high-capacity power bank",
+              "date": "July 2024"
+            },
+            {
+              "name": "Camera dehumidifier cabinet PLD-108L",
+              "note": "",
+              "date": "May 2024"
+            }
+          ]
+        },
+        {
+          "name": "Editing and storage",
+          "items": [
+            {
+              "name": "NEXT-TRUDI 5-in-1 Card Reader (USB 3.0 A/C)",
+              "note": "SD card reader",
+              "date": "April 2024"
+            },
+            {
+              "name": "SanDisk Extreme PRO Portable SSD E82 4TB",
+              "note": "USB4 portable SSD",
+              "date": "July 2025"
+            },
+            {
+              "name": "TourBox Elite Plus",
+              "note": "Bluetooth editing controller (iPad supported)",
+              "date": "November 2025"
+            }
+          ]
+        },
+        {
+          "name": "Protective films",
+          "items": [
+            {
+              "name": "코엠스킨 (Coemskin) EOS R7 Fantasy Black Film",
+              "note": "camera protective film",
+              "date": "July 2024"
+            },
+            {
+              "name": "코엠스킨 (Coemskin) RF24-70mm Mamba Green Film",
+              "note": "lens protective film",
+              "date": "July 2024"
+            },
+            {
+              "name": "코엠스킨 (Coemskin) RF15-35mm Rich Grain Film",
+              "note": "lens protective film",
+              "date": "September 2024"
+            },
+            {
+              "name": "코엠스킨 (Coemskin) RF70-200mm Matte White Film",
+              "note": "lens protective film",
+              "date": "October 2024"
+            },
+            {
+              "name": "SKOKO EOS R7 Low-Reflection LCD Protector (2 pcs)",
+              "note": "LCD protective film, 2 pieces",
+              "date": "April 2024"
             }
           ]
         }

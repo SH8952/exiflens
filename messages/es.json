@@ -456,6 +456,11 @@
           "name": "Objetivos con adaptador",
           "items": [
             {
+              "name": "Canon Mount Adapter EF-EOS R",
+              "note": "permite montar los objetivos Sigma de montura EF en los cuerpos R",
+              "date": "abril de 2024"
+            },
+            {
               "name": "Sigma 18-35mm F1.8 DC HSM | Art",
               "note": "comprado nuevo, con adaptador Canon EF-EOS R",
               "date": "2024"
@@ -488,27 +493,167 @@
           ]
         },
         {
-          "name": "Accesorios",
+          "name": "Iluminación",
           "items": [
             {
-              "name": "Canon Mount Adapter EF-EOS R",
-              "note": "permite montar los objetivos Sigma de montura EF en los cuerpos R",
-              "date": "abril de 2024"
+              "name": "NEEWER Z2 Round-Head Camera Flash",
+              "note": "set Z2 + difusor de cúpula + QPRO",
+              "date": "diciembre de 2025"
             },
             {
-              "name": "Trípode heipi",
-              "note": "",
-              "date": "2024"
-            },
+              "name": "NEEWER Magnetic Accessory Kit CRM3",
+              "note": "accesorios magnéticos para el flash",
+              "date": "diciembre de 2025"
+            }
+          ]
+        },
+        {
+          "name": "Filtros",
+          "items": [
             {
               "name": "Kit de filtros HOYA de 82mm (UV, CPL y ND)",
               "note": "",
               "date": "2024"
             },
             {
-              "name": "Vitrina deshumidificadora para cámara",
+              "name": "Benro Magic VND Filter System VF1",
+              "note": "sistema de filtro ND variable",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Nikon ARCREST II filter",
+              "note": "comprado en dos pedidos distintos",
+              "date": "septiembre de 2024 / octubre de 2024"
+            }
+          ]
+        },
+        {
+          "name": "Correas, bolsas y soportes",
+          "items": [
+            {
+              "name": "Trípode heipi",
               "note": "",
               "date": "2024"
+            },
+            {
+              "name": "Peak Design Clutch Hand Strap",
+              "note": "correa de mano para cámara",
+              "date": "abril de 2024"
+            },
+            {
+              "name": "Peak Design Slide Lite Strap",
+              "note": "correa para cámara",
+              "date": "abril de 2024"
+            },
+            {
+              "name": "FALCAM FC3142 Shoulder Strap Quick Release Kit V2 (F38)",
+              "note": "compatible con las correas Peak Design",
+              "date": "abril de 2024"
+            },
+            {
+              "name": "DJI Osmo Action 4 Backpack Strap Mount",
+              "note": "soporte para correa de mochila de la cámara de acción",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "PhotoClam PC-CRF90-UP Lens Plate",
+              "note": "placa para el objetivo RF70-200mm F2.8 L IS USM",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "Nomatic Peter McKinnon Camera Sling 8L",
+              "note": "bolsa bandolera para cámara",
+              "date": "marzo de 2025"
+            },
+            {
+              "name": "Peak Design Clutch Hand Strap (second order)",
+              "note": "pedido adicional de seis artículos, con correas para cámara",
+              "date": "julio de 2025"
+            },
+            {
+              "name": "FALCAM RS4 MINI Quick Release Tripod Kit FC-RS4M",
+              "note": "kit de trípode de liberación rápida de un toque",
+              "date": "agosto de 2025"
+            }
+          ]
+        },
+        {
+          "name": "Energía y mantenimiento",
+          "items": [
+            {
+              "name": "Glint DSLR Camera Cleaning Kit",
+              "note": "herramientas de limpieza para cámara",
+              "date": "marzo de 2024"
+            },
+            {
+              "name": "Canon LP-E6NH Battery",
+              "note": "original, en caja",
+              "date": "abril de 2024"
+            },
+            {
+              "name": "NITECORE UCN3 Dual Charger",
+              "note": "con cable alargador USB de 1 m",
+              "date": "abril de 2024"
+            },
+            {
+              "name": "Clever 30000mAh PD PPS 140W Power Bank",
+              "note": "batería externa de gran capacidad",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "Vitrina deshumidificadora para cámara PLD-108L",
+              "note": "",
+              "date": "mayo de 2024"
+            }
+          ]
+        },
+        {
+          "name": "Edición y almacenamiento",
+          "items": [
+            {
+              "name": "NEXT-TRUDI 5-in-1 Card Reader (USB 3.0 A/C)",
+              "note": "lector de tarjetas SD",
+              "date": "abril de 2024"
+            },
+            {
+              "name": "SanDisk Extreme PRO Portable SSD E82 4TB",
+              "note": "SSD portátil USB4",
+              "date": "julio de 2025"
+            },
+            {
+              "name": "TourBox Elite Plus",
+              "note": "controlador Bluetooth de edición (compatible con iPad)",
+              "date": "noviembre de 2025"
+            }
+          ]
+        },
+        {
+          "name": "Láminas protectoras",
+          "items": [
+            {
+              "name": "코엠스킨 (Coemskin) EOS R7 Fantasy Black Film",
+              "note": "lámina protectora para la cámara",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "코엠스킨 (Coemskin) RF24-70mm Mamba Green Film",
+              "note": "lámina protectora para el objetivo",
+              "date": "julio de 2024"
+            },
+            {
+              "name": "코엠스킨 (Coemskin) RF15-35mm Rich Grain Film",
+              "note": "lámina protectora para el objetivo",
+              "date": "septiembre de 2024"
+            },
+            {
+              "name": "코엠스킨 (Coemskin) RF70-200mm Matte White Film",
+              "note": "lámina protectora para el objetivo",
+              "date": "octubre de 2024"
+            },
+            {
+              "name": "SKOKO EOS R7 Low-Reflection LCD Protector (2 pcs)",
+              "note": "protector de pantalla LCD, 2 unidades",
+              "date": "abril de 2024"
             }
           ]
         }
