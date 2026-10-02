@@ -1,3 +1,12 @@
+## 2026-10-02 — 홈 화면 제휴 상품(Gear Recommendations) 섹션을 최하단으로 임시 이동
+
+**변경 사항**
+- `src/app/[locale]/page.tsx`: `GearRecommendationSection`(쿠팡·알리 제휴)을 ND 계산기 다음 위치에서 페이지 맨 끝(FAQ 하이라이트 다음)으로 이동. 컴포넌트 내부는 변경 없음.
+- **임시 조치**: 애드센스 승인 전까지의 조치이며, 승인 후 원래 위치(ND 계산기 섹션 직후, `CrossLinkFlyDroneMap` 앞)로 복구 예정. 복구 방법은 코드 주석에 기록.
+- 도구 페이지의 제휴 섹션은 변경하지 않음.
+
+**검증**: `tsc --noEmit` 통과, 로컬 4개 언어 홈 200, 영어 홈 h2 순서에서 Gear Recommendations가 마지막임을 확인. 백업: `_backups/exiflens_backup_*_gear_to_bottom`.
+
 ## 2026-10-02 — 도구 페이지 16종 설명 보강 + `<article>` 태그 적용
 
 **변경 사항**

@@ -47,9 +47,6 @@ export default async function HomePage({
         <NdCalculatorCard />
       </section>
 
-      {/* Section 4: Gear recommendation */}
-      <GearRecommendationSection locale={locale} />
-
       {/* Section 4.5: cross-link to sister site (contextual, single link) */}
       <CrossLinkFlyDroneMap locale={locale} />
 
@@ -75,6 +72,9 @@ export default async function HomePage({
 
       {/* Section 8: FAQ highlights — placed right after the tool highlights since the FAQ pool includes tool-specific questions, so it reads naturally as "more about what you just saw". Picks 5 Q&A items at random (site-level + every live tool's FAQ) with their own FAQPage JSON-LD. */}
       <HomeFaqHighlights />
+
+      {/* TEMPORARY (2026-10-02): gear recommendation (Coupang/AliExpress) moved to the very bottom of the home page while the AdSense review is pending. Once AdSense is approved, restore it to its original spot: right after the ND calculator section ("Section 2 & 3") and before <CrossLinkFlyDroneMap />. */}
+      <GearRecommendationSection locale={locale} />
     </div>
   );
 }
