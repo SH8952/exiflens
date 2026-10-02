@@ -1106,7 +1106,58 @@
       }
     ],
     "exampleLeftAlt": "Foto enfocada en un sujeto cercano con poca profundidad de campo",
-    "exampleRightAlt": "Foto enfocada en un sujeto lejano con gran profundidad de campo"
+    "exampleRightAlt": "Foto enfocada en un sujeto lejano con gran profundidad de campo",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "La calculadora halla primero la distancia hiperfocal, H = f²/(N·c) + f, donde f es la distancia focal, N el número f y c el círculo de confusión que depende del tamaño del sensor. Para una distancia al sujeto s calcula después el límite cercano Dn = H·s/(H+(s−f)) y el límite lejano Df = H·s/(H−(s−f)); la diferencia es la profundidad de campo total.",
+          "Cuando la distancia al sujeto alcanza o supera la hiperfocal, el límite lejano se muestra como infinito. Introduce la distancia desde el sensor de la cámara (plano focal) hasta el sujeto."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "En formato completo (círculo de confusión 0,03 mm), un objetivo de 50 mm a f/1.8 enfocado a 2 m tiene una distancia hiperfocal de unos 46,3 m. La zona nítida va de unos 1,92 m a 2,09 m, una profundidad de campo total de solo unos 17 cm.",
+          "Un 85 mm a f/1.8 con un retrato a 3 m da aproximadamente de 2,94 m a 3,07 m (unos 13 cm). Por eso hay que colocar el enfoque con precisión en los ojos.",
+          "Un 24 mm a f/11 enfocado a 3 m tiene una hiperfocal de unos 1,77 m, así que el límite lejano es infinito y el cercano, de unos 1,12 m. Todo, de 1,12 m al infinito, queda nítido.",
+          "Con los mismos 50 mm, f/8 y 2 m, el formato completo da de unos 1,69 m a 2,46 m (unos 77 cm), mientras que Micro Cuatro Tercios (círculo de confusión 0,015 mm) da de unos 1,83 m a 2,21 m (unos 38 cm). El tamaño del sensor cambia el resultado."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "En paisaje, sirve para saber dónde enfocar para que una flor cercana y una montaña lejana salgan nítidas. En retrato, para valorar cuánto abrir el diafragma y lograr suficiente desenfoque de fondo. Antes de comprar un objetivo, también puedes comparar con números la profundidad de campo de f/1.4 y f/2.8 con el mismo ángulo de visión."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "El círculo de confusión es un valor de referencia según las condiciones de visualización. Si imprimes en grande o amplías mucho, la zona realmente nítida puede ser más estrecha que la calculada.",
+          "Cerrar demasiado el diafragma suaviza toda la imagen por difracción. Llegar a f/22 para ganar profundidad de campo no siempre compensa.",
+          "El cálculo supone que el enfoque cae exactamente donde apuntaste. Con poca profundidad de campo, pequeños errores de autoenfoque cambian mucho el resultado.",
+          "Elegir un tamaño de sensor que no coincide con tu cámara desplaza el resultado. En una cámara de sensor recortado, comprueba antes el tamaño del sensor.",
+          "Introduce la distancia focal real impresa en el objetivo, no una equivalente."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "understanding-depth-of-field",
+          "title": "Entendiendo la Profundidad de Campo: Apertura, Distancia Focal y Distancia"
+        },
+        {
+          "slug": "dof-calculator-landscape-sharpness",
+          "title": "Usando la calculadora de DoF para lograr nitidez de primer plano a horizonte en paisajes"
+        },
+        {
+          "slug": "dof-calculator-portrait-background-blur",
+          "title": "Usando la calculadora de DoF para lograr el desenfoque de fondo perfecto en retratos"
+        }
+      ]
+    }
   },
   "ExposureCalculator": {
     "cardTitle": "Calculadora de exposición",
@@ -1143,7 +1194,58 @@
       }
     ],
     "exampleLeftAlt": "Foto de movimiento congelado tomada con una velocidad de obturación rápida",
-    "exampleRightAlt": "Foto con desenfoque de movimiento tomada con una velocidad de obturación lenta"
+    "exampleRightAlt": "Foto con desenfoque de movimiento tomada con una velocidad de obturación lenta",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "La exposición es la suma del brillo que producen la apertura, la velocidad de obturación y el ISO. La calculadora convierte los tres a la misma unidad, el stop. Duplicar el tiempo de obturación o el ISO suma un stop, mientras que la apertura depende del área del orificio, por lo que es inversamente proporcional al cuadrado del número f. Por eso pasar de f/4 a f/2.8 suma un stop.",
+          "Eliges un ajuste que quieres cambiar y otro con el que compensar. El tercero se mantiene en su valor base, y la calculadora halla el valor de compensación que mantiene el mismo brillo total."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Desde una base de f/4, 1/125 s e ISO 400, subir la velocidad a 1/500 s para congelar el movimiento (2 stops) exige f/2 para compensar con la apertura, con el ISO fijo.",
+          "Desde la misma base, abrir a f/2 (2 stops) y compensar con la velocidad da 1/500 s. Coincide con el ejemplo anterior.",
+          "Desde la misma base, bajar el ISO a 100 (2 stops) manteniendo la apertura significa ralentizar el obturador a unos 1/31 s (aprox. 1/30 s) para el mismo brillo.",
+          "Desde f/8, 1/60 s e ISO 200, abrir a f/2.8 suma unos 3 stops, así que compensar con la velocidad con el ISO fijo da unos 1/490 s (aprox. 1/500 s)."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Es más útil cuando ya conoces una exposición correcta y quieres cambiar un ajuste por una razón creativa, como más desenfoque de fondo o congelar el movimiento, sin cambiar el brillo. También es una buena forma de entender la relación entre los tres ajustes mientras practicas el modo manual."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "Supone que tu exposición base ya es correcta. Si la base está desviada, el resultado se desvía en la misma medida.",
+          "Muchas cámaras usan pasos de 1/3 de stop, así que elige el ajuste disponible más cercano al valor calculado. Una pequeña diferencia suele no ser un problema.",
+          "En exposiciones muy largas, el fallo de reciprocidad puede oscurecer la imagen más de lo calculado, y esta calculadora no lo tiene en cuenta.",
+          "Cambiar la apertura cambia también la profundidad de campo, subir el ISO añade ruido y cambiar la velocidad modifica cómo se ve el movimiento. El mismo brillo no significa la misma foto.",
+          "No puedes elegir el mismo ajuste para el que cambias y para el que compensa."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "the-exposure-triangle-explained",
+          "title": "El triángulo de exposición explicado: por qué el mismo brillo puede verse completamente distinto"
+        },
+        {
+          "slug": "using-exposure-compensation",
+          "title": "Usando la compensación de exposición (EV): cómo corregir los momentos en que el fotómetro se equivoca"
+        },
+        {
+          "slug": "understanding-exif-iso-shutter-aperture",
+          "title": "Entendiendo los Datos EXIF: ISO, Velocidad de Obturación y Apertura Explicados"
+        }
+      ]
+    }
   },
   "TimelapseCalculator": {
     "shootPlanTitle": "Plan de disparo",
@@ -1191,7 +1293,58 @@
       }
     ],
     "exampleLeftAlt": "Fotograma de time-lapse nocturno de larga exposición con estelas de estrellas",
-    "exampleRightAlt": "Nubes en rápido movimiento captadas en una secuencia de time-lapse"
+    "exampleRightAlt": "Nubes en rápido movimiento captadas en una secuencia de time-lapse",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "El número de fotos es el tiempo de grabación dividido entre el intervalo. Conociendo dos de los tres valores se fija el tercero, y cuando introduces intervalo y duración el número de fotos se redondea hacia abajo. La duración del vídeo es el número de fotos dividido entre los fotogramas por segundo (fps), y el almacenamiento es número de fotos × tamaño de archivo por foto, dividido entre 1.024 para obtener GB.",
+          "El ángulo de obturación es tu velocidad de obturación dividida entre el intervalo. Una proporción del 100 % cuenta como 360°. Por debajo del 30 % se señala como entrecortado, del 30 al 70 % como una cantidad natural y cinematográfica, y por encima del 70 % como suave con mucho desenfoque de movimiento."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Con los valores predeterminados, un intervalo de 5 s durante 60 minutos da 720 fotos y, a 24 fps, el vídeo dura 30 s. A 25 MB por foto, el almacenamiento es de unos 17,58 GB.",
+          "Una puesta de sol de 3 horas con un intervalo de 8 s son 1.350 fotos. A 30 fps son 45 s de vídeo y unos 32,96 GB a 25 MB por foto.",
+          "Para hacer un vídeo de 10 s a 24 fps necesitas 240 fotogramas. Si disparas durante 30 minutos (1.800 s), ajusta el intervalo a 7,5 s.",
+          "Con un intervalo de 5 s y un obturador de 1/50 s, la proporción es solo del 0,4 %, lo que resulta entrecortado. Con un intervalo de 2 s y un obturador de 1 s, la proporción es del 50 % (180°), una cantidad cinematográfica."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Es más útil cuando decides primero la duración del vídeo y calculas hacia atrás las fotos, el intervalo y el almacenamiento necesarios. También ayuda a probar distintos intervalos en escenas que cambian a distinta velocidad, como nubes y puestas de sol."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "El intervalo tiene que ser mayor que el tiempo de exposición. Si es menor que tu velocidad de obturación, la cámara no puede seguir el ritmo.",
+          "La cámara también necesita tiempo para guardar cada foto, así que no ajustes el intervalo exactamente igual a la velocidad de obturación. Deja un margen.",
+          "Una escena que pasa de día a noche cambia mucho de brillo y, por tanto, también cambia la velocidad de obturación. Ten en cuenta que el ángulo de obturación se basa en una sola velocidad.",
+          "El almacenamiento es una estimación a partir del tamaño de archivo que introduces. Puede diferir de la realidad según la cámara y el formato.",
+          "Comprueba también que la batería y la tarjeta de memoria bastan para todo el tiempo de grabación."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "timelapse-calculator-interval-shooting",
+          "title": "Calculando el intervalo y el tiempo total de rodaje con la calculadora de time-lapse"
+        },
+        {
+          "slug": "timelapse-calculator-storage-planning",
+          "title": "Planificando las necesidades de almacenamiento con la calculadora de time-lapse"
+        },
+        {
+          "slug": "timelapse-camera-settings",
+          "title": "Ajustes de cámara para timelapse: del intervalómetro al rampeo de exposición"
+        }
+      ]
+    }
   },
   "AstroCalculator": {
     "cardTitle": "Cálculo de exposición estelar",
@@ -1226,7 +1379,58 @@
       }
     ],
     "exampleLeftAlt": "Vía Láctea fotografiada con estrellas nítidas usando una exposición corta",
-    "exampleRightAlt": "Foto del cielo nocturno mostrando estelas de estrellas por una exposición demasiado larga"
+    "exampleRightAlt": "Foto del cielo nocturno mostrando estelas de estrellas por una exposición demasiado larga",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "La regla del 500 da el tiempo de exposición en segundos como 500 ÷ (distancia focal × factor de recorte). La regla NPF usa (35 × número f + 30 × paso de píxel en μm) ÷ distancia focal, por lo que tiene en cuenta tu apertura y el tamaño real de los píxeles del sensor.",
+          "El paso de píxel es el ancho del sensor dividido entre el número de píxeles horizontales, y ese número sale de los megapíxeles y la relación de aspecto. Cuanto más se acerquen los ajustes de tamaño de sensor y resolución a tu cámara, más cercano a la realidad será el resultado."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Formato completo, 24 mm f/2.8, unos 45 MP (paso de píxel de unos 4,4 μm): la regla del 500 da unos 21 s y la NPF unos 9,6 s. Cuanta más resolución, mayor es la diferencia.",
+          "El mismo objetivo en un cuerpo de formato completo de unos 24,2 MP (unos 6,0 μm) alarga el resultado NPF a unos 12 s. Menos megapíxeles significan píxeles mayores, así que una exposición algo más larga sigue siendo segura.",
+          "Formato completo, 14 mm f/2.8, unos 61 MP (unos 3,8 μm): regla del 500 unos 36 s, NPF unos 15 s.",
+          "APS-C (recorte 1,5), 16 mm f/2.8, unos 33 MP (unos 3,3 μm): regla del 500 unos 21 s, NPF unos 12 s."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Antes de salir a fotografiar la Vía Láctea o las estrellas, calcula la exposición máxima para cada combinación de objetivo y cámara, y así no tendrás que hacer cuentas a oscuras en el lugar. Ver ambas reglas juntas también muestra cuál es más conservadora."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "Ambas reglas estiman si las estrellas se ven como puntos a un tamaño de visualización normal. Si imprimes en grande o miras al 100 %, dispara más corto.",
+          "Las estimaciones suponen un cielo cercano al ecuador celeste. Las estrellas cerca del polo celeste, como las próximas a la Polar, se mueven más despacio y admiten exposiciones más largas, mientras que las cercanas al ecuador celeste dejan estela más rápido.",
+          "En una cámara de sensor recortado, introduce la distancia focal real; el factor de recorte se aplica mediante el tamaño de sensor que elijas. Introducir una distancia focal equivalente lo cuenta dos veces.",
+          "Una exposición más corta recoge menos luz. Cómo compensarlo con una apertura más abierta y un ISO más alto es otra decisión distinta.",
+          "Si no conoces tus megapíxeles exactos, elige el ajuste más cercano. Una pequeña diferencia apenas cambia el resultado."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "astro-calculator-npf-rule",
+          "title": "Cómo fijar la exposición con la regla NPF de la calculadora de astrofotografía"
+        },
+        {
+          "slug": "astro-calculator-milky-way-planning",
+          "title": "Cómo planificar el momento para fotografiar la Vía Láctea con la calculadora de astrofotografía"
+        },
+        {
+          "slug": "astrophotography-camera-settings-night-sky",
+          "title": "Fundamentos de Astrofotografía: Ajustes de Cámara para Fotografiar el Cielo Nocturno"
+        }
+      ]
+    }
   },
   "BracketCalculator": {
     "cardTitle": "Exposición en Horquillado",
@@ -1273,7 +1477,58 @@
       }
     ],
     "exampleLeftAlt": "Una cámara montada en un trípode al aire libre, preparada para horquillado de exposición",
-    "exampleRightAlt": "Una foto fusionada en HDR combinando varias tomas con distinta exposición"
+    "exampleRightAlt": "Una foto fusionada en HDR combinando varias tomas con distinta exposición",
+    "sections": [
+      {
+        "heading": "Cómo se construye la lista de bracketing",
+        "body": [
+          "La calculadora coloca tu exposición base en el centro (0 EV) y añade fotogramas por encima y por debajo, separados por el paso que elijas. El número de fotogramas se limita a los impares 3, 5, 7 y 9 para que siempre exista un fotograma base, y los pasos son 1/3, 1/2, 1 o 2 stops.",
+          "Solo cambia uno de los tres parámetros (apertura, velocidad de obturación o ISO); los otros dos se mantienen en sus valores base. La velocidad de obturación y el ISO se duplican con cada stop, mientras que el número f cambia unas 1,41 veces (√2) por stop, pero en sentido contrario. Un fotograma más claro (+EV) usa una apertura más abierta, es decir, un número f menor."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Exposición base de 1/125 s, f/8 e ISO 100 con bracketing de velocidad de obturación, 5 fotogramas a ±1 stop: los fotogramas son de unos 1/500 s, 1/250 s, 1/125 s, 1/62 s y 1/31 s. El rango total de brillo es de 4 stops y, con 1,5 s de margen por disparo, el tiempo total estimado es de unos 7,6 s.",
+          "En una escena nocturna con una base de 4 s, el mismo bracketing de 5 fotogramas da 1 s, 2 s, 4 s, 8 s y 16 s. Solo las exposiciones suman 31 s y, con el margen, el trípode debe permanecer inmóvil unos 38,5 s.",
+          "Si haces el bracketing de la apertura desde f/8, el fotograma de +1 stop es de unos f/5,7 y el de -1 stop, de unos f/11."
+        ]
+      },
+      {
+        "heading": "Cómo leer la guía de rango dinámico",
+        "body": [
+          "Un rango total de brillo inferior a 4 stops se clasifica como \"estándar\": la mayoría de las escenas caben en una sola exposición, así que el bracketing es opcional. De 4 a menos de 8 stops es \"alto contraste\", el rango en el que la fusión HDR ayuda, por ejemplo con un cielo brillante sobre un primer plano en sombra. Con 8 stops o más es \"muy amplio\", para escenas como siluetas a contraluz o una ventana luminosa en una habitación oscura, donde conviene considerar más fotogramas.",
+          "Estas categorías son reglas generales. Lo que realmente cabe en una sola toma depende del sensor de tu cámara y de si disparas en RAW."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "En escenas estáticas, como un paisaje, el bracketing de velocidad de obturación es la opción más segura. Cambiar la apertura cambia la profundidad de campo entre fotogramas, y cambiar el ISO cambia el ruido.",
+          "Incluso con trípode, las hojas movidas por el viento o las personas en movimiento pueden dejar fantasmas al fusionar las tomas. Cuantos más fotogramas, mayor es el riesgo.",
+          "El bracketing automático de exposición (AEB) de tu cámara admite un número de fotogramas y pasos que depende del modelo. Considera los resultados como una referencia y comprueba el rango real de ajustes.",
+          "En exposiciones largas, el fotograma más largo puede superar la velocidad de obturación máxima de tu cámara. En ese caso considera el modo bulb o un paso menor.",
+          "El margen predeterminado de 1,5 s por disparo es una estimación habitual. Si tu cámara vacía el búfer despacio, aumenta tú mismo el valor."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "bracketing-calculator-hdr-stops",
+          "title": "Cómo fijar los intervalos de stop HDR con la calculadora de bracketing"
+        },
+        {
+          "slug": "exposure-bracketing-hdr-basics",
+          "title": "Bracketing de exposición y fundamentos de HDR: capturar lo que el sensor no puede en una sola toma"
+        },
+        {
+          "slug": "understanding-dynamic-range",
+          "title": "Qué es el rango dinámico: el margen de brillo que tu sensor realmente puede capturar"
+        }
+      ]
+    }
   },
   "PrintResolutionCalculator": {
     "cardTitle": "Resolución de Impresión",
@@ -1327,7 +1582,54 @@
       }
     ],
     "exampleLeftAlt": "Una foto impresa siendo examinada de cerca para revisar su nitidez",
-    "exampleRightAlt": "Una impresora de gran formato produciendo una impresión fotográfica"
+    "exampleRightAlt": "Una impresora de gran formato produciendo una impresión fotográfica",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "El tamaño máximo de impresión en pulgadas es el número de píxeles de tu foto dividido entre los DPI. El ancho y el alto se calculan por separado y se muestra también un valor en cm usando 2,54 cm por pulgada. Si ya tienes un tamaño de impresión objetivo, ancho y alto en pulgadas × DPI da los píxeles necesarios, y el producto de ambos son los megapíxeles requeridos.",
+          "El factor de ampliación de la sección avanzada es la raíz cuadrada de los megapíxeles requeridos divididos entre los megapíxeles actuales. Con 1 o menos no hace falta ampliar, hasta 1,3 es leve, hasta 2 es moderado y por encima de 2 es una carencia importante."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Una foto de 6000×4000 px (unos 24 MP) se puede imprimir hasta unas 20,0×13,3 pulgadas (unos 50,8×33,9 cm) a 300 DPI, o unas 40,0×26,7 pulgadas a 150 DPI.",
+          "Una impresión de 8×10 pulgadas a 300 DPI necesita 2.400×3.000 px (7,2 MP), y un A4 (8,27×11,69 pulgadas) necesita unos 2.480×3.508 px (8,7 MP). Una foto de 24 MP tiene margen de sobra.",
+          "16×20 pulgadas necesita 4.800×6.000 px (28,8 MP), un factor de ampliación de unos 1,10 para una foto de 24 MP, y un A2 necesita unos 4.961×7.016 px (34,8 MP), unos 1,20. Ambos son leves, así que basta un reescalado normal.",
+          "20×30 pulgadas necesita 6.000×9.000 px (54 MP), unos 1,5, y un A1 necesita unos 7.016×9.933 px (69,7 MP), unos 1,7. En este rango un escalador con IA puede ayudar."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Úsala antes de encargar una impresión enmarcada, un álbum o un póster, para comprobar que la resolución de tu foto es suficiente. También es útil cuando te preguntas hasta qué tamaño puedes imprimir, o al elegir una cámara y estimar los megapíxeles que necesita un tamaño de impresión."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "300 DPI es la referencia para impresiones que se miran de cerca. Los pósteres y lonas grandes vistos de lejos suelen verse nítidos a 150-200 DPI.",
+          "Si recortaste la foto, introduce el tamaño en píxeles tras el recorte. Introducir el tamaño original de la cámara indicará que puedes imprimir más grande de lo real.",
+          "En tamaños de impresión con otra relación de aspecto (por ejemplo, una foto 3:2 impresa en 4:5), los bordes se recortan, así que la composición real puede diferir del resultado calculado.",
+          "Quedarse corto de píxeles no siempre implica volver a disparar. Con 1,3× o menos, un reescalado normal suele bastar.",
+          "La calidad real de impresión también depende del equipo y el papel de la imprenta."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "print-resolution-calculator-album",
+          "title": "Cómo comprobar la resolución de impresión de un álbum de boda con la calculadora"
+        },
+        {
+          "slug": "print-resolution-calculator-poster",
+          "title": "Qué revisar antes de imprimir un póster grande con la calculadora de resolución de impresión"
+        }
+      ]
+    }
   },
   "StorageCalculator": {
     "cardTitle": "Espacio de Almacenamiento",
@@ -1378,7 +1680,58 @@
       }
     ],
     "exampleLeftAlt": "Varias tarjetas de memoria de cámara colocadas juntas",
-    "exampleRightAlt": "Fotos siendo respaldadas en un disco duro externo"
+    "exampleRightAlt": "Fotos siendo respaldadas en un disco duro externo",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "La cuenta es sencilla. El almacenamiento original en GB es el tamaño de archivo por foto (MB) × número de fotos ÷ 1.000, y el total es el original × (1 + copias de seguridad adicionales). Las tarjetas necesarias son el total dividido entre la capacidad de la tarjeta, redondeado hacia arriba. Usar 1 GB = 1.000 MB coincide con cómo etiquetan la capacidad los fabricantes.",
+          "Los tamaños predeterminados suponen una cámara de formato completo o APS-C de 24 a 45 MP: unos 8 MB para JPEG, 30 MB para RAW comprimido y 65 MB para RAW sin comprimir. Los tamaños reales dependen del sensor y de la escena, así que usa \"Personalizado\" si conoces el tamaño real."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Disparar 300 fotos al día durante 5 días son 1.500 fotos. En RAW comprimido (30 MB), el original ocupa 45 GB; con una copia de seguridad adicional necesitas 90 GB, que cubre una tarjeta de 128 GB.",
+          "Las mismas 1.500 fotos en JPEG (8 MB) suman 12 GB, o 24 GB con copia. Solo cambiar el formato reduce el espacio a aproximadamente una cuarta parte.",
+          "En RAW sin comprimir (65 MB) el original ocupa 97,5 GB y 195 GB con copia, lo que requiere dos tarjetas de 128 GB.",
+          "Subir 90 GB (con copia incluida) a 100 Mbps tarda en teoría unas 2 horas (7.200 s). Con 195 GB son unas 4 horas y 20 minutos."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Úsala antes de un viaje para decidir cuántas tarjetas llevar, para elegir el tamaño de un SSD externo o para estimar el espacio antes de una sesión que genera cientos de fotos de una vez, como un timelapse. El modo de fotos diarias encaja en viajes y proyectos donde disparas una cantidad parecida cada día."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "Si tu cámara guarda RAW y JPEG a la vez, suma ambos tamaños e introduce el total en \"Personalizado\". Calcular solo un formato puede dejarte corto.",
+          "El espacio utilizable es algo menor que la capacidad etiquetada, y llenar una tarjeta hasta el borde es arriesgado. Como indica la página, prevé entre un 10 y un 20 % más que la cifra calculada.",
+          "Las copias de seguridad son copias adicionales al original. Introducir 1 calcula para 2 copias en total, incluido el original.",
+          "El tiempo de subida es un valor teórico que supone que la velocidad indicada se mantiene. En la práctica puede tardar más según la red.",
+          "El vídeo no está incluido. Si también grabas vídeo, suma su espacio por separado."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "storage-calculator-trip-planning",
+          "title": "Cómo planificar la tarjeta de memoria para un viaje con la calculadora de almacenamiento"
+        },
+        {
+          "slug": "storage-calculator-raw-vs-jpeg",
+          "title": "Cómo comparar el tamaño de archivo RAW y JPEG con la calculadora de almacenamiento"
+        },
+        {
+          "slug": "raw-vs-jpeg-which-should-you-shoot",
+          "title": "RAW vs. JPEG: ¿Cuál Deberías Usar?"
+        }
+      ]
+    }
   },
   "ExifRemover": {
     "cardTitle": "Eliminar Metadatos",
@@ -1426,7 +1779,58 @@
       }
     ],
     "exampleLeftAlt": "Un panel de metadatos de una foto mostrando la configuración de la cámara y la ubicación GPS",
-    "exampleRightAlt": "Un archivo de foto limpio con todos los metadatos eliminados"
+    "exampleRightAlt": "Un archivo de foto limpio con todos los metadatos eliminados",
+    "sections": [
+      {
+        "heading": "Qué se elimina y cómo",
+        "body": [
+          "La herramienta no recomprime tu imagen. Recorta, a nivel de bytes, solo las partes del archivo que contienen metadatos y copia los datos de píxeles sin cambios, así que la calidad no varía en absoluto.",
+          "En JPEG elimina el segmento APP1 (EXIF y XMP), el segmento APP13 (IPTC) y los comentarios de texto (COM), y mantiene la cabecera JFIF y el perfil de color ICC para que los colores no cambien. En PNG elimina los fragmentos de texto (tEXt, zTXt, iTXt), el fragmento EXIF y el de hora de modificación (tIME). En WebP elimina los fragmentos EXIF y XMP."
+        ]
+      },
+      {
+        "heading": "Cómo usarla y opciones",
+        "list": [
+          "Los formatos admitidos son JPEG, PNG y WebP. Puedes añadir varios archivos a la vez, procesarlos y descargarlos uno por uno o en un ZIP.",
+          "\"Eliminar solo la ubicación GPS\" borra únicamente las coordenadas GPS en JPEG y conserva el modelo de cámara, el objetivo y los ajustes de disparo. Algunas herramientas de edición copian también el GPS en XMP, así que para garantizar la eliminación de la ubicación desactiva esta opción y usa la eliminación completa.",
+          "\"Eliminar IPTC\" está activada por defecto. Desactívala si quieres que la información de derechos de autor siga unida a la foto.",
+          "Antes de procesar, la herramienta muestra si cada foto tiene información de cámara o GPS, para que veas qué se eliminará."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Úsala antes de publicar en redes sociales, en un blog o en un sitio de compraventa, para evitar que se filtre la ubicación de fotos tomadas cerca de tu casa. También es útil antes de enviar fotos a una web de stock o a un cliente, si quieres limpiar la información de equipo y ajustes."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "HEIC y TIFF no son compatibles. Convierte primero a JPEG las fotos HEIC del iPhone.",
+          "La herramienta no elimina lo que se ve en la imagen, como caras, carteles o matrículas. Solo elimina metadatos.",
+          "Algunas redes sociales eliminan los metadatos al subir, pero varía según el servicio, así que es más seguro eliminarlos tú antes.",
+          "Tu original queda intacto y descargas un archivo nuevo. Comprueba el resultado antes de borrar el original.",
+          "Todo ocurre en tu navegador y tus fotos nunca se envían a un servidor."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta herramienta",
+      "items": [
+        {
+          "slug": "exif-remover-social-media-privacy",
+          "title": "Cómo eliminar los datos de ubicación antes de subir fotos a redes sociales con el eliminador de EXIF"
+        },
+        {
+          "slug": "exif-remover-stock-photo-submission",
+          "title": "Cómo usar el eliminador de EXIF antes de enviar fotos a bancos de imágenes"
+        },
+        {
+          "slug": "gps-data-in-photos-privacy",
+          "title": "Datos GPS en Fotos: Qué Revelan y Cómo Proteger tu Privacidad"
+        }
+      ]
+    }
   },
   "CropFactorCalculator": {
     "cardTitle": "Calculadora de factor de recorte / distancia focal equivalente",
@@ -1475,7 +1879,58 @@
       }
     ],
     "exampleLeftAlt": "El mismo objetivo encuadrado en una cámara de fotograma completo",
-    "exampleRightAlt": "El mismo objetivo encuadrado en una cámara de sensor recortado, mostrando un campo de visión más estrecho"
+    "exampleRightAlt": "El mismo objetivo encuadrado en una cámara de sensor recortado, mostrando un campo de visión más estrecho",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "El factor de recorte es la diagonal de un sensor de formato completo (36×24 mm), de unos 43,3 mm, dividida entre la diagonal de tu sensor. La distancia focal equivalente es la distancia focal real por el factor de recorte, y el ángulo de visión es 2 × atan(dimensión del sensor ÷ (2 × distancia focal)), calculado por separado para el ancho y el alto.",
+          "En las opciones avanzadas, el sensor de comparación indica qué distancia focal da el mismo ángulo de visión: tu focal equivalente dividida entre el factor de recorte del sensor de comparación. La apertura equivalente multiplica tu número f por (tu factor de recorte ÷ el factor de recorte de comparación) para mostrar el número f que da una profundidad de campo similar con el mismo encuadre."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Los factores de recorte de los ajustes de sensor son: formato completo 1,00, APS-C de Canon aprox. 1,61, APS-C de Nikon/Sony/Fuji aprox. 1,53, Micro Cuatro Tercios aprox. 2,00, 1 pulgada aprox. 2,73 y medio formato aprox. 0,79. Coinciden con los 1,5×, 1,6× y 2× que suelen citar los fabricantes.",
+          "Un objetivo de 50 mm en una cámara APS-C de Nikon o Sony tiene una focal equivalente de unos 77 mm, con un ángulo de visión de unos 26,4° de ancho y 17,7° de alto. Los mismos 50 mm en formato completo dan unos 39,6° de ancho.",
+          "Un objetivo de 25 mm en Micro Cuatro Tercios equivale a unos 50 mm. Para lograr ese ángulo en APS-C (Nikon/Sony) necesitarías un objetivo de unos 33 mm.",
+          "Comparar un 25 mm f/1.8 de Micro Cuatro Tercios con el formato completo da una apertura equivalente de unos f/3,6, es decir, un desenfoque de fondo similar a f/3,6 en formato completo con el mismo encuadre."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Úsala al cambiar a una cámara con otro tamaño de sensor o al comprar un objetivo, para saber qué distancia focal da tu ángulo de visión actual en otro sistema. También sirve para comprobar las focales equivalentes que aparecen en las descripciones de fotos de distintos sensores."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "El factor de recorte solo afecta al ángulo de visión. No cambia la distancia focal real del objetivo ni la exposición (número f, velocidad de obturación, ISO), así que tus ajustes de exposición siguen igual.",
+          "La apertura equivalente sirve para comparar profundidad de campo y desenfoque de fondo, no para la exposición. El mismo f/1.8 en un sensor más pequeño da más profundidad de campo.",
+          "No confundas la distancia focal impresa en el objetivo con la focal equivalente. Las calculadoras de profundidad de campo y de astrofotografía necesitan la focal real.",
+          "El APS-C de Canon y el de otras marcas difieren un poco en tamaño, por lo que sus factores de recorte son 1,61 y 1,53.",
+          "Los resultados son aproximaciones de fórmulas estándar y pueden diferir algo de la distorsión real del objetivo o de las especificaciones publicadas por el fabricante."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "crop-factor-calculator-lens-choice",
+          "title": "Cómo elegir objetivos para un cuerpo de sensor recortado con la calculadora de factor de recorte"
+        },
+        {
+          "slug": "sensor-size-and-crop-factor-explained",
+          "title": "Sensor APS-C vs Full Frame: Qué cambia realmente el tamaño de sensor y el factor de recorte"
+        },
+        {
+          "slug": "camera-field-of-view-calculator-guide",
+          "title": "¿Qué tan ancho es ese objetivo, en realidad? Cómo calcular el campo de visión en grados"
+        }
+      ]
+    }
   },
   "DofHyperfocalTable": {
     "cardTitle": "Tablas de profundidad de campo e hiperfocal",
@@ -1515,7 +1970,57 @@
       }
     ],
     "exampleLeftAlt": "Foto de paisaje enfocada a la distancia hiperfocal, nítida desde el primer plano hasta el infinito",
-    "exampleRightAlt": "Foto de paisaje enfocada demasiado cerca, dejando el fondo lejano desenfocado"
+    "exampleRightAlt": "Foto de paisaje enfocada demasiado cerca, dejando el fondo lejano desenfocado",
+    "sections": [
+      {
+        "heading": "Cómo leer la tabla hiperfocal",
+        "body": [
+          "La distancia hiperfocal es la distancia de enfoque que mantiene nítido todo hasta el infinito y, a la vez, acerca lo más posible el inicio de la zona nítida. Si enfocas ahí, la zona desde la mitad de esa distancia hasta el infinito queda dentro de una nitidez aceptable. Cada fila de la tabla indica esta distancia en metros para una apertura.",
+          "La fórmula es H = f² / (N × c) + f, donde f es la distancia focal, N el número f y c el círculo de confusión en milímetros. Una distancia focal más larga o una apertura más abierta alejan la distancia hiperfocal, y cerrar el diafragma la acerca."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Fotograma completo, 24mm a f/8: la distancia hiperfocal es de unos 2,42 m. Si enfocas a 2,42 m, todo desde aproximadamente 1,2 m hasta el infinito sale con nitidez aceptable.",
+          "El tamaño del sensor importa con 35mm a f/8: unos 5,14 m en fotograma completo, pero unos 7,69 m en APS-C (con un círculo de confusión de 0,02 mm). Un sensor más pequeño admite un círculo de confusión menor, lo que aleja la distancia hiperfocal.",
+          "Fotograma completo, 50mm a f/2.8: unos 29,81 m. Si cierras el mismo objetivo a f/8, baja a unos 10,47 m."
+        ]
+      },
+      {
+        "heading": "Cómo leer la tabla de profundidad de campo",
+        "body": [
+          "La tabla de profundidad de campo usa la apertura que elegiste arriba y muestra el límite cercano, el límite lejano y la profundidad total en nueve distancias, de 0,5 m a 100 m. Cuando la distancia al sujeto es igual o mayor que la hiperfocal, el límite lejano aparece como \"Infinito\".",
+          "Por ejemplo, con un 50mm en fotograma completo y un sujeto a 5 m, a f/8 queda nítido de unos 3,39 m a 9,49 m (unos 6,10 m en total), pero a f/2.8 solo de unos 4,29 m a 6,00 m (unos 1,71 m en total). Con un solo cambio de apertura a la misma distancia, la zona nítida cambia mucho."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "Los valores del círculo de confusión son aproximaciones habituales para cada tamaño de sensor. Si vas a imprimir en grande o a revisar la imagen al 100 %, elige \"Personalizado\" e introduce un valor menor para ser más conservador.",
+          "Al enfocar en la distancia hiperfocal, el límite cercano queda aproximadamente a la mitad de esa distancia. Si un primer plano muy cercano es importante, comprueba ese punto antes de disparar.",
+          "Cerrar demasiado el diafragma permite que la difracción suavice toda la imagen. La apertura más pequeña de la tabla no siempre es la mejor opción.",
+          "Son valores teóricos de referencia. El comportamiento del objetivo y la precisión real del enfoque varían, así que revisa ampliando las fotos importantes después de disparar."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta tabla",
+      "items": [
+        {
+          "slug": "hyperfocal-distance-explained",
+          "title": "Distancia hiperfocal explicada: dónde enfocar para que el primer plano y el fondo salgan nítidos"
+        },
+        {
+          "slug": "dof-calculator-landscape-sharpness",
+          "title": "Usando la calculadora de DoF para lograr nitidez de primer plano a horizonte en paisajes"
+        },
+        {
+          "slug": "understanding-depth-of-field",
+          "title": "Entendiendo la Profundidad de Campo: Apertura, Distancia Focal y Distancia"
+        }
+      ]
+    }
   },
   "Sunny16Calculator": {
     "cardTitle": "Exposición Sunny 16",
@@ -1553,7 +2058,59 @@
       }
     ],
     "exampleLeftAlt": "Foto tomada al aire libre bajo luz solar directa y brillante",
-    "exampleRightAlt": "Foto tomada al aire libre bajo un cielo nublado"
+    "exampleRightAlt": "Foto tomada al aire libre bajo un cielo nublado",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "Para cada condición de luz, la calculadora parte de una apertura base (soleado f/16, ligeramente nublado f/11, nublado f/8, muy nublado f/5.6, sombra abierta o atardecer f/4) con una velocidad de obturación de unos 1/100 s a ISO 100. Después recalcula la velocidad, stop a stop, para la apertura y el ISO que elijas.",
+          "Abrir la apertura un stop reduce a la mitad el tiempo de obturación, y subir el ISO un stop también. La calculadora aplica ambos en orden para llegar al valor final."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Con sol (f/16), ISO 100 y f/16, la velocidad es de unos 1/100 s. Es la clásica regla Sunny 16.",
+          "Con sol, ISO 400 y f/8, son unos 1/1600 s. Abrir dos stops y subir el ISO dos stops hace el obturador cuatro stops más rápido.",
+          "Con sol e ISO 100, abrir a f/5.6 da unos 1/800 s. Muestra lo rápido que debe ser el obturador cuando abres para desenfocar más el fondo.",
+          "Un día nublado (f/8) con ISO 400 y f/2.8 da unos 1/3200 s.",
+          "En sombra abierta (f/4) con ISO 100 y f/4, son unos 1/100 s, y con ISO 800 y f/2, unos 1/3200 s."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Úsala como referencia rápida con cámaras de película sin fotómetro, al disparar en exposición manual o cuando la exposición automática de tu cámara parece fallar. También es buena práctica memorizar valores de partida aproximados para cada condición de luz antes de salir."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "Los valores son estimaciones para la luz diurna habitual en exteriores. Pueden no cumplirse con el sol bajo de la mañana o la tarde, reflejos fuertes de nieve o arena, o escenas a contraluz.",
+          "Si tu sujeto es especialmente oscuro o claro, comprueba con el fotómetro de la cámara o una toma de prueba y aplica compensación de exposición si hace falta.",
+          "Elegir mal la condición de luz desplaza el resultado uno o dos stops. Ayuda fijarte en lo nítidos que son los bordes de las sombras.",
+          "Si la velocidad sale demasiado lenta, puede aparecer movimiento de cámara. Sube el ISO o abre la apertura.",
+          "La velocidad mostrada se redondea a un paso estándar cercano. En una cámara real, elige el valor disponible más próximo."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "the-exposure-triangle-explained",
+          "title": "El triángulo de exposición explicado: por qué el mismo brillo puede verse completamente distinto"
+        },
+        {
+          "slug": "using-exposure-compensation",
+          "title": "Usando la compensación de exposición (EV): cómo corregir los momentos en que el fotómetro se equivoca"
+        },
+        {
+          "slug": "understanding-exif-iso-shutter-aperture",
+          "title": "Entendiendo los Datos EXIF: ISO, Velocidad de Obturación y Apertura Explicados"
+        }
+      ]
+    }
   },
   "AdvancedDofDiffractionCalculator": {
     "cardTitle": "DoF avanzada y difracción",
@@ -1595,7 +2152,58 @@
       }
     ],
     "exampleLeftAlt": "Foto tomada con una apertura amplia, nítida y con poca profundidad de campo",
-    "exampleRightAlt": "Foto tomada con una apertura muy cerrada, suavizada por la difracción en toda la imagen"
+    "exampleRightAlt": "Foto tomada con una apertura muy cerrada, suavizada por la difracción en toda la imagen",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "El diámetro del disco de Airy es de aproximadamente 2,44 × longitud de onda × número f, con una longitud de onda de referencia de 550 nm, la mitad de la luz visible. El número f en el que ese diámetro iguala el círculo de confusión que fija el tamaño de tu sensor es la apertura límite por difracción: círculo de confusión ÷ (2,44 × longitud de onda).",
+          "La profundidad de campo usa las mismas fórmulas hiperfocales que la calculadora de profundidad de campo, así que el límite de difracción y la profundidad de campo aparecen juntos para la misma apertura. Puedes sopesar la nitidez que pierdes por difracción frente a la profundidad de campo que ganas al cerrar."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Las aperturas límite por difracción según el sensor son de unos f/22,4 en formato completo, f/26,8 en medio formato, f/14,9 en APS-C, f/11,2 en Micro Cuatro Tercios y f/8,2 en 1 pulgada. Cuanto más pequeño es el sensor, antes se nota la difracción.",
+          "A f/16 el disco de Airy mide unos 0,0215 mm (21,5 μm). Es menor que el círculo de confusión de formato completo de 0,03 mm, así que está dentro del límite, pero en APS-C (0,02 mm) lo supera en un 7 % aprox. y en Micro Cuatro Tercios (0,015 mm) en un 43 % aprox.",
+          "En formato completo con un 24 mm enfocado a 3 m, el límite cercano es de unos 1,35 m a f/8, unos 0,87 m a f/16 y unos 0,69 m a f/22. Pasado f/8, cada stop adicional aporta cada vez menos profundidad de campo.",
+          "En APS-C con un 35 mm enfocado a 2 m, la zona nítida a f/8 va de unos 1,59 a 2,69 m, y se amplía a unos 1,33 a 4,07 m a f/16. Pero f/16 supera el límite de difracción de este sensor, de unos f/14,9."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Es más útil en paisaje y arquitectura al decidir hasta dónde puedes cerrar el diafragma para ganar profundidad de campo. Si piensas imprimir en grande o recortar mucho, puedes comprobar de antemano cuánto te costará una apertura más allá del límite de difracción."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "Superar el límite de difracción no inutiliza una foto. La pérdida de nitidez crece poco a poco y, cuando la profundidad de campo importa más, una apertura más allá del límite puede ser la mejor opción.",
+          "El cálculo es una aproximación con una longitud de onda fija y un círculo de confusión estándar, así que la resolución real del objetivo y los megapíxeles del sensor cambiarán el resultado.",
+          "La apertura más nítida de un objetivo suele estar dos o tres stops por debajo de la máxima, y es un factor distinto del límite de difracción.",
+          "Los resultados suponen una visualización a tamaño de pantalla. Al 100 % de zoom, la difracción puede notarse con una apertura anterior.",
+          "Un círculo de confusión personalizado debe estar entre 0,001 y 0,1 mm. Úsalo solo cuando conozcas el valor adecuado para tu sensor."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "advanced-dof-diffraction-calculator-guide",
+          "title": "Cómo encontrar el diafragma limitado por difracción de tu cámara (y por qué no es toda la historia)"
+        },
+        {
+          "slug": "diffraction-and-optimal-aperture",
+          "title": "Difracción y apertura óptima: por qué cerrar demasiado el diafragma suaviza tus fotos"
+        },
+        {
+          "slug": "understanding-depth-of-field",
+          "title": "Entendiendo la Profundidad de Campo: Apertura, Distancia Focal y Distancia"
+        }
+      ]
+    }
   },
   "CameraFovCalculator": {
     "cardTitle": "Campo de visión de la cámara",
@@ -1631,7 +2239,58 @@
       }
     ],
     "exampleLeftAlt": "Foto tomada con un objetivo gran angular que muestra un campo de visión amplio",
-    "exampleRightAlt": "Foto tomada con un teleobjetivo que muestra un campo de visión estrecho y acercado"
+    "exampleRightAlt": "Foto tomada con un teleobjetivo que muestra un campo de visión estrecho y acercado",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "El ángulo de visión es 2 × atan(dimensión del sensor ÷ (2 × distancia focal)). La misma fórmula se aplica al ancho, al alto y a la diagonal del sensor para obtener el ángulo horizontal, el vertical y el diagonal.",
+          "El ángulo de visión depende tanto de la distancia focal como del tamaño del sensor: las focales más largas lo estrechan y los sensores más grandes lo amplían. La tabla bajo la calculadora muestra el ángulo de visión de las focales habituales, de 14 mm a 300 mm, para el sensor que elijas."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "En formato completo, 24 mm da unos 73,7° en horizontal, 53,1° en vertical y 84,1° en diagonal. 50 mm da unos 39,6° en horizontal, 27,0° en vertical y 46,8° en diagonal.",
+          "En formato completo, 85 mm son unos 28,6° en diagonal, 200 mm unos 12,3° y 14 mm unos 114,2°. La diagonal es la cifra que más se cita en las descripciones de objetivos.",
+          "En APS-C (23,5×15,6 mm), 50 mm da unos 26,4° en horizontal, 17,7° en vertical y 31,5° en diagonal, un encuadre más estrecho que con el mismo objetivo en formato completo.",
+          "Un objetivo de 25 mm en Micro Cuatro Tercios (17,3×13 mm) da unos 46,8° en diagonal, igual que un 50 mm en formato completo."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Es útil en arquitectura e interiores, vídeo y documentación de obras, en cualquier caso en que necesites saber cuán ancha queda una escena, expresada como ángulo. Si necesitas el ángulo en sí y no el factor de recorte ni la focal equivalente, puedes leerlo directamente."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "No confundas el ángulo de visión vertical con el horizontal. Al girar la cámara en vertical se intercambian, pero la diagonal permanece igual.",
+          "El ángulo de visión que citan los fabricantes de objetivos suele ser el diagonal. Compararlo con una cifra horizontal hace que los números parezcan distintos.",
+          "El cálculo usa solo el tamaño del sensor y la distancia focal. No tiene en cuenta la distorsión del objetivo ni el ligero estrechamiento que algunos objetivos muestran al enfocar de cerca.",
+          "Para una cámara concreta, elige \"Personalizado\" en el tamaño de sensor e introduce el ancho y el alto del sensor, en milímetros, según el fabricante.",
+          "La distancia focal que debes introducir es la real. Introducir una focal equivalente hace que el ángulo de visión parezca demasiado estrecho para el sensor."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "camera-field-of-view-calculator-guide",
+          "title": "¿Qué tan ancho es ese objetivo, en realidad? Cómo calcular el campo de visión en grados"
+        },
+        {
+          "slug": "sensor-size-and-crop-factor-explained",
+          "title": "Sensor APS-C vs Full Frame: Qué cambia realmente el tamaño de sensor y el factor de recorte"
+        },
+        {
+          "slug": "crop-factor-calculator-lens-choice",
+          "title": "Cómo elegir objetivos para un cuerpo de sensor recortado con la calculadora de factor de recorte"
+        }
+      ]
+    }
   },
   "FlashGuideNumberCalculator": {
     "cardTitle": "Número guía del flash",
@@ -1671,7 +2330,59 @@
       }
     ],
     "exampleLeftAlt": "Foto tomada cerca del flash, iluminada de forma brillante y uniforme",
-    "exampleRightAlt": "Foto tomada lejos del flash, que aparece oscura y subexpuesta"
+    "exampleRightAlt": "Foto tomada lejos del flash, que aparece oscura y subexpuesta",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "El número guía (GN) es el número f × la distancia. Conociendo el GN, distancia = GN ÷ número f y número f = GN ÷ distancia. Los fabricantes suelen publicar el GN a ISO 100, así que al cambiar el ISO la calculadora usa GN × √(ISO ÷ 100).",
+          "El GN y la distancia se manejan en la misma unidad, metros o pies. Un metro son unos 3,28 pies."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "Un flash con GN 58 (m, ISO 100) usado a f/8 puede iluminar correctamente un sujeto de hasta unos 7,25 m.",
+          "Subir el mismo flash a ISO 400 duplica el GN a unos 116, así que a f/8 llega a unos 14,5 m. Cuatro veces el ISO y solo el doble de GN es la relación de raíz cuadrada.",
+          "Con un flash de GN 60 (m, ISO 100) y un sujeto a 5 m, la apertura necesaria es f/12. A ISO 400 necesitas f/24.",
+          "Pasar de ISO 100 a 200 multiplica el GN por unos 1,41, de modo que un GN 58 pasa a ser de unos 82.",
+          "Un flash de GN 190 (pies, ISO 100) usado a f/5.6 llega a unos 33,9 ft."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Ayuda al usar el flash en modo manual o con un estroboscopio fuera de cámara, para valorar a qué apertura y distancia obtienes suficiente luz. También sirve para preparar de antemano una tabla de referencia en eventos donde las distancias cambian a menudo."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "Un flash con cabezal zoom tiene un GN distinto en cada posición de zoom. Introduce el GN de la posición de zoom que realmente usas.",
+          "El GN publicado se mide en condiciones ideales. La reflectividad de la sala, el tamaño del sujeto y los difusores pueden hacer que los resultados reales difieran mucho.",
+          "Rebotar el flash en el techo o una pared, o usar un difusor o una ventana de luz, reduce la luz que llega al sujeto. Puede que necesites una apertura más abierta o una distancia menor que la indicada.",
+          "Reducir la potencia del flash reduce el GN. Si introdujiste el GN a plena potencia, supón una distancia menor a potencias fraccionadas (1/2, 1/4, etc.).",
+          "La velocidad de obturación no afecta a este cálculo, pero superar la velocidad de sincronización del flash puede tapar parte del fotograma."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "flash-guide-number-calculator-guide",
+          "title": "La matemática del número guía: cómo ajustar la potencia del flash manual sin adivinar"
+        },
+        {
+          "slug": "flash-sync-speed-explained",
+          "title": "Velocidad de sincronización del flash explicada: el límite oculto de la velocidad de obturación"
+        },
+        {
+          "slug": "studio-lighting-basics",
+          "title": "Fundamentos de iluminación de estudio: profundidad con luces de tres puntos y ratios de iluminación"
+        }
+      ]
+    }
   },
   "ShutterCountChecker": {
     "cardTitle": "Comprobador de disparos del obturador",
@@ -1713,7 +2424,58 @@
     "supportCanon": "Canon - EOS R5, EOS R6, EOS R6 Mark II, EOS R8, EOS R50 (solo archivos CR3)",
     "supportCanonNote": "El resto de cuerpos Canon, antiguos o nuevos, todavía no son compatibles; iremos añadiendo más a medida que se documenten.",
     "exampleLeftAlt": "Foto de primer plano del mecanismo del obturador de una cámara",
-    "exampleRightAlt": "Foto de una cámara DSLR usada siendo inspeccionada antes de comprarla"
+    "exampleRightAlt": "Foto de una cámara DSLR usada siendo inspeccionada antes de comprarla",
+    "sections": [
+      {
+        "heading": "Cómo lee el valor",
+        "body": [
+          "Muchas cámaras registran el contador del obturador en una zona específica del fabricante dentro del archivo de la foto, llamada MakerNote. Los visores EXIF habituales no interpretan esa zona, así que el valor queda oculto, pero esta herramienta lee los bytes en bruto del archivo y lo encuentra directamente.",
+          "En Nikon lee el campo del contador del obturador, sin cifrar, dentro del MakerNote. En Canon lee una ubicación de almacenamiento documentada públicamente en los archivos CR3 de las EOS R5, R6, R6 Mark II, R8 y R50. Todo se ejecuta en tu navegador y tu foto nunca se envía a ningún sitio."
+        ]
+      },
+      {
+        "heading": "Cómo usarla y qué admite",
+        "list": [
+          "Arrastra un RAW de Nikon (.NEF), un JPEG de la cámara o un archivo CR3 de Canon, y aparecerán el modelo de cámara y el contador del obturador.",
+          "Se admiten NEF y JPEG de cámara de Nikon, y archivos CR3 de los cinco modelos de Canon indicados.",
+          "Otros cuerpos de Canon, Sony, Fujifilm, Olympus, Panasonic y Pentax aún no se admiten, porque o no guardan el valor en el archivo o lo guardan de forma distinta según el modelo, lo que exige un trabajo aparte.",
+          "Si subes un archivo de una cámara no admitida, la herramienta no fuerza un número; te indica que esa cámara no es compatible."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Es útil antes de comprar una cámara de segunda mano, para comprobar tú mismo el contador del obturador con la foto original que envía el vendedor. También puedes usarla para vigilar el uso de tu propia cámara con el tiempo."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "Las fotos que pasaron por edición o redes sociales pueden haber perdido sus metadatos, así que el valor puede faltar. Usa el archivo original directamente de la cámara.",
+          "El contador del obturador es solo una referencia para juzgar el estado de una cámara. La durabilidad nominal del obturador varía según el modelo, y superarla no significa que la cámara falle de inmediato.",
+          "Algunas cámaras sin espejo cuentan exposiciones del sensor y no accionamientos del obturador mecánico, así que el número puede significar algo distinto.",
+          "Algunos modelos antiguos o de gama de entrada no registran este valor en absoluto, así que ninguna herramienta puede leerlo.",
+          "La compatibilidad con Canon R5/R6 se basa en datos publicados y no se ha verificado con cada unidad y versión de firmware. Si un contador parece incorrecto, avísanos."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta herramienta",
+      "items": [
+        {
+          "slug": "shutter-count-checker-guide",
+          "title": "Qué es el conteo de disparos del obturador y por qué comprobarlo antes de comprar una cámara de segunda mano"
+        },
+        {
+          "slug": "understanding-exif-iso-shutter-aperture",
+          "title": "Entendiendo los Datos EXIF: ISO, Velocidad de Obturación y Apertura Explicados"
+        },
+        {
+          "slug": "gps-data-in-photos-privacy",
+          "title": "Datos GPS en Fotos: Qué Revelan y Cómo Proteger tu Privacidad"
+        }
+      ]
+    }
   },
   "GoldenHourCalculator": {
     "cardTitle": "Calculadora de hora dorada y hora azul",
@@ -1757,7 +2519,58 @@
       }
     ],
     "exampleLeftAlt": "Foto de paisaje tomada durante la hora dorada, con luz cálida y suave",
-    "exampleRightAlt": "Foto de paisaje tomada durante la hora azul, con luz fría y tenue"
+    "exampleRightAlt": "Foto de paisaje tomada durante la hora azul, con luz fría y tenue",
+    "sections": [
+      {
+        "heading": "Cómo funciona el cálculo",
+        "body": [
+          "La calculadora obtiene la altura del sol a partir de tu fecha y de la latitud/longitud, y halla los tramos horarios en los que está dentro de ciertas bandas. El amanecer y el atardecer son el momento en que el borde superior del sol toca el horizonte (altura de unos -0,83°). La hora dorada va desde ese momento hasta una altura de unos +6°, y la hora azul abarca de unos -6° hasta el amanecer (o desde justo después del atardecer hasta -6°).",
+          "Los resultados se muestran como hora azul de la mañana, hora dorada de la mañana, hora dorada de la tarde y hora azul de la tarde. Tu ubicación solo se usa en tu navegador y nunca se envía a un servidor."
+        ]
+      },
+      {
+        "heading": "Ejemplos con números",
+        "list": [
+          "En Incheon, Corea (latitud 37,4563, longitud 126,7052) el 2 de octubre de 2026, la hora azul de la mañana va de aprox. 06:03 a 06:29 y la hora dorada de la mañana de aprox. 06:29 a 07:03. La hora dorada de la tarde va de aprox. 17:40 a 18:15 y la hora azul de la tarde de aprox. 18:15 a 18:41.",
+          "En el mismo lugar, la hora dorada de la tarde en el solsticio de verano (21 de junio) va de aprox. 19:18 a 19:57 (unos 39 minutos), y en el solsticio de invierno (21 de diciembre) de aprox. 16:37 a 17:18 (unos 41 minutos). Las horas cambian mucho con la estación, pero la duración se mantiene parecida.",
+          "Cerca del ecuador, en Singapur (2 de octubre de 2026), la hora dorada dura unos 27 minutos y la azul unos 21, menos que en Incheon, porque el sol se pone en un ángulo más vertical.",
+          "En Tromsø, en el Ártico (latitud 69,65°), el sol no se pone el 21 de junio y no sale el 21 de diciembre, así que no hay hora dorada ni azul, y la calculadora muestra una nota que lo indica."
+        ]
+      },
+      {
+        "heading": "Cuándo usarla",
+        "body": [
+          "Cuando ya sabes dónde y cuándo vas a fotografiar, te ayuda a fijar con exactitud la hora de llegada y de preparación antes del amanecer. También sirve para comparar qué día y a qué hora de un viaje es mejor para disparar."
+        ]
+      },
+      {
+        "heading": "Límites y errores frecuentes",
+        "list": [
+          "Las horas se muestran en la zona horaria actual de este dispositivo. Si introduces coordenadas de otra región, puede que no sean la hora local de ese lugar, así que ten en cuenta la diferencia horaria.",
+          "El cálculo refleja solo la posición geométrica del sol. Las nubes, la neblina, las condiciones atmosféricas y el relieve, como montañas o edificios, pueden cambiar cuándo aparece realmente la luz.",
+          "La hora dorada y la azul no tienen bordes nítidos; la luz cambia gradualmente. Llega y prepárate unos minutos antes de la hora de inicio para ir sobre seguro.",
+          "En latitudes altas, el sol de medianoche del pleno verano y la noche polar del pleno invierno pueden hacer que esas bandas no se den.",
+          "La latitud es positiva al norte y negativa al sur, y la longitud es positiva al este y negativa al oeste. Un signo equivocado te lleva a un lugar completamente distinto."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías que combinan bien con esta calculadora",
+      "items": [
+        {
+          "slug": "golden-hour-calculator-guide",
+          "title": "Hora dorada y hora azul: ¿cuándo son exactamente? (con el cálculo)"
+        },
+        {
+          "slug": "sunrise-sunset-photography-camera-settings",
+          "title": "Los Mejores Ajustes de Cámara para Fotografía de Amanecer y Atardecer"
+        },
+        {
+          "slug": "six-frames-light-timing-and-composition",
+          "title": "Seis fotos, seis lecciones: cómo la luz, el momento y la composición dieron forma a nuestras propias imágenes"
+        }
+      ]
+    }
   },
   "Share": {
     "deviceShare": "Compartir con el dispositivo",

@@ -1106,7 +1106,58 @@
       }
     ],
     "exampleLeftAlt": "Photo focused on a close subject with a shallow depth of field",
-    "exampleRightAlt": "Photo focused on a distant subject with a deep depth of field"
+    "exampleRightAlt": "Photo focused on a distant subject with a deep depth of field",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "The calculator first finds the hyperfocal distance, H = f²/(N·c) + f, where f is focal length, N is the f-number and c is the circle of confusion set by sensor size. For a subject distance s it then finds the near limit Dn = H·s/(H+(s−f)) and the far limit Df = H·s/(H−(s−f)); the difference is the total depth of field.",
+          "When the subject distance reaches the hyperfocal distance or more, the far limit is shown as infinity. Enter the distance from the camera sensor (focal plane) to the subject."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "On full frame (circle of confusion 0.03 mm), a 50 mm lens at f/1.8 focused at 2 m has a hyperfocal distance of about 46.3 m. The sharp zone runs from about 1.92 m to 2.09 m, a total depth of field of only about 17 cm.",
+          "An 85 mm lens at f/1.8 on a portrait subject 3 m away gives roughly 2.94 m to 3.07 m (about 13 cm). That is why you need to place focus precisely on the eyes.",
+          "A 24 mm lens at f/11 focused at 3 m has a hyperfocal distance of about 1.77 m, so the far limit is infinity and the near limit is about 1.12 m. Everything from 1.12 m to infinity is sharp.",
+          "With the same 50 mm, f/8 and 2 m, full frame gives about 1.69 m to 2.46 m (about 77 cm), while Micro Four Thirds (circle of confusion 0.015 mm) gives about 1.83 m to 2.21 m (about 38 cm). Sensor size changes the result."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "For landscapes, use it to find where to focus so a nearby flower and a distant mountain are both sharp. For portraits, use it to judge how far to open the aperture for enough background blur. Before buying a lens you can also compare the depth of field of f/1.4 and f/2.8 at the same angle of view in numbers."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "The circle of confusion is a viewing-condition reference value. If you print large or zoom in far, the truly sharp zone can be narrower than calculated.",
+          "Stopping down too far softens the whole image through diffraction. Closing to f/22 for more depth of field is not always a gain.",
+          "The calculation assumes focus lands exactly where you aimed. With shallow depth of field, small autofocus errors change the result a lot.",
+          "Choosing a sensor size that does not match your camera shifts the result. On a crop body, check the sensor size first.",
+          "Enter the real focal length printed on the lens, not an equivalent value."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "understanding-depth-of-field",
+          "title": "Understanding Depth of Field: Aperture, Focal Length, and Distance"
+        },
+        {
+          "slug": "dof-calculator-landscape-sharpness",
+          "title": "Using the DoF Calculator for Front-to-Back Landscape Sharpness"
+        },
+        {
+          "slug": "dof-calculator-portrait-background-blur",
+          "title": "Using the DoF Calculator to Nail Portrait Background Blur"
+        }
+      ]
+    }
   },
   "ExposureCalculator": {
     "cardTitle": "Exposure Calculator",
@@ -1143,7 +1194,58 @@
       }
     ],
     "exampleLeftAlt": "Freeze-motion photo made with a fast shutter speed",
-    "exampleRightAlt": "Motion-blur photo made with a slow shutter speed"
+    "exampleRightAlt": "Motion-blur photo made with a slow shutter speed",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "Exposure is the sum of the brightness that aperture, shutter speed and ISO produce. The calculator converts all three to the same unit, the stop. Doubling shutter time or ISO adds one stop, while aperture follows the area of the opening, so it scales with the inverse square of the f-number. That is why going from f/4 to f/2.8 adds one stop.",
+          "You pick one setting you want to change and one setting to compensate with. The third stays at its baseline value, and the calculator finds the compensating value that keeps overall brightness the same."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "From a baseline of f/4, 1/125 s and ISO 400, raising shutter speed to 1/500 s to freeze motion (2 stops) needs f/2 to compensate with aperture while ISO stays fixed.",
+          "From the same baseline, opening to f/2 (2 stops) and compensating with shutter speed gives 1/500 s. It agrees with the example above.",
+          "From the same baseline, lowering ISO to 100 (2 stops) while keeping aperture fixed means slowing the shutter to about 1/31 s (roughly 1/30 s) for the same brightness.",
+          "From f/8, 1/60 s and ISO 200, opening to f/2.8 adds about 3 stops, so compensating with shutter speed while ISO stays fixed gives about 1/490 s (roughly 1/500 s)."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "It is most useful when you already know a correct exposure and want to change a setting for a creative reason, such as more background blur or frozen motion, without changing brightness. It is also a good way to build intuition for how the three settings relate while you practice manual mode."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "It assumes your baseline exposure is already right. If the baseline is off, the result is off by the same amount.",
+          "Many cameras use 1/3-stop steps, so choose the available setting closest to the calculated value. A small difference is usually not a problem.",
+          "In very long exposures, reciprocity failure can make the image darker than calculated, and this calculator does not account for it.",
+          "Changing aperture also changes depth of field, raising ISO adds noise and changing shutter speed changes how motion looks. The same brightness does not mean the same photo.",
+          "You cannot pick the same setting for both the one you change and the one that compensates."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "the-exposure-triangle-explained",
+          "title": "The Exposure Triangle Explained: Why the Same Brightness Can Look Completely Different"
+        },
+        {
+          "slug": "using-exposure-compensation",
+          "title": "Using Exposure Compensation: How to Correct the Moments Your Meter Gets Wrong"
+        },
+        {
+          "slug": "understanding-exif-iso-shutter-aperture",
+          "title": "Understanding EXIF Data: ISO, Shutter Speed, and Aperture Explained"
+        }
+      ]
+    }
   },
   "TimelapseCalculator": {
     "shootPlanTitle": "Shoot Plan",
@@ -1191,7 +1293,58 @@
       }
     ],
     "exampleLeftAlt": "Long-exposure night sky timelapse frame with star trails",
-    "exampleRightAlt": "Fast-moving clouds captured across a timelapse sequence"
+    "exampleRightAlt": "Fast-moving clouds captured across a timelapse sequence",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "Shot count equals shooting time divided by interval. Knowing any two of the three fixes the third, and when you enter interval and duration the shot count is rounded down. Video length is shot count divided by frame rate (fps), and storage is shot count × file size per shot, divided by 1,024 to get GB.",
+          "Shutter angle is your shutter speed divided by the interval. A 100% ratio counts as 360°. Under 30% is flagged as choppy, 30 to 70% as a natural cinematic amount, and over 70% as smooth with heavy motion blur."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "With the defaults, a 5 s interval over 60 minutes gives 720 shots, and at 24 fps the video runs 30 s. At 25 MB per shot, storage is about 17.58 GB.",
+          "A 3-hour sunset at an 8 s interval is 1,350 shots. At 30 fps that is 45 s of video, and about 32.96 GB at 25 MB per shot.",
+          "To make a 10 s video at 24 fps you need 240 frames. Shooting for 30 minutes (1,800 s), set the interval to 7.5 s.",
+          "With a 5 s interval and a 1/50 s shutter, the ratio is only 0.4%, which is choppy. With a 2 s interval and a 1 s shutter, the ratio is 50% (180°), a cinematic amount."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "It is most useful when you decide the video length first and work backward to the shots, interval and storage you need. It also helps when you want to try different intervals for scenes that change at different speeds, such as clouds and sunsets."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "The interval has to be longer than the exposure time. If it is shorter than your shutter speed, the camera cannot keep up.",
+          "The camera also needs time to save each photo, so do not set the interval exactly equal to the shutter speed. Leave some margin.",
+          "A scene that goes from day to night changes brightness a lot, so shutter speed changes too. Keep in mind that shutter angle is based on a single shutter speed.",
+          "Storage is an estimate from the file size you enter. It can differ from reality depending on camera and format.",
+          "Also check that your battery and memory card are enough for the whole shooting time."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "timelapse-calculator-interval-shooting",
+          "title": "Calculating Interval and Total Shoot Time with the Timelapse Calculator"
+        },
+        {
+          "slug": "timelapse-calculator-storage-planning",
+          "title": "Planning Storage Needs with the Timelapse Calculator"
+        },
+        {
+          "slug": "timelapse-camera-settings",
+          "title": "Timelapse Camera Settings: From Intervalometers to Exposure Ramping"
+        }
+      ]
+    }
   },
   "AstroCalculator": {
     "cardTitle": "Star Exposure",
@@ -1226,7 +1379,58 @@
       }
     ],
     "exampleLeftAlt": "Milky Way photographed with pinpoint stars using a short exposure",
-    "exampleRightAlt": "Night sky photo showing star trails from an overly long exposure"
+    "exampleRightAlt": "Night sky photo showing star trails from an overly long exposure",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "The 500 rule gives exposure time in seconds as 500 ÷ (focal length × crop factor). The NPF rule uses (35 × f-number + 30 × pixel pitch in μm) ÷ focal length, so it accounts for your aperture and the real size of your sensor's pixels.",
+          "Pixel pitch is sensor width divided by horizontal pixel count, and the pixel count comes from megapixels and aspect ratio. The closer your sensor size and resolution presets are to your camera, the closer the result is to reality."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "Full frame, 24 mm f/2.8, about 45 MP (pixel pitch about 4.4 μm): the 500 rule gives about 21 s and the NPF rule about 9.6 s. The higher the resolution, the bigger the gap.",
+          "The same lens on a roughly 24.2 MP full-frame body (about 6.0 μm) stretches the NPF result to about 12 s. Fewer megapixels mean larger pixels, so a slightly longer exposure is still safe.",
+          "Full frame, 14 mm f/2.8, about 61 MP (about 3.8 μm): 500 rule about 36 s, NPF about 15 s.",
+          "APS-C (crop 1.5), 16 mm f/2.8, about 33 MP (about 3.3 μm): 500 rule about 21 s, NPF about 12 s."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "Before heading out for the Milky Way or star photos, work out the maximum exposure for each lens and camera combination so you are not calculating in the dark on location. Seeing both rules side by side also shows which one is more conservative."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "Both rules estimate whether stars look like points at normal viewing size. If you print large or view at 100%, shoot shorter.",
+          "The estimates assume a sky near the celestial equator. Stars near the celestial pole, such as around Polaris, move more slowly and can take longer exposures, while stars near the celestial equator trail faster.",
+          "On a crop body, enter the real focal length; the crop factor is applied through the sensor size you pick. Entering an equivalent focal length counts it twice.",
+          "A shorter exposure gathers less light. How to balance it with a wider aperture and higher ISO is a separate decision.",
+          "If you do not know your exact megapixel count, choose the closest preset. A small difference barely changes the result."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "astro-calculator-npf-rule",
+          "title": "Setting Exposure with the Astro Calculator's NPF Rule"
+        },
+        {
+          "slug": "astro-calculator-milky-way-planning",
+          "title": "Planning Milky Way Shoot Timing with the Astro Calculator"
+        },
+        {
+          "slug": "astrophotography-camera-settings-night-sky",
+          "title": "Astrophotography Basics: Camera Settings for Shooting the Night Sky"
+        }
+      ]
+    }
   },
   "BracketCalculator": {
     "cardTitle": "Bracket Exposure",
@@ -1273,7 +1477,58 @@
       }
     ],
     "exampleLeftAlt": "A camera mounted on a tripod outdoors, set up for exposure bracketing",
-    "exampleRightAlt": "An HDR-blended photo combining several differently exposed frames"
+    "exampleRightAlt": "An HDR-blended photo combining several differently exposed frames",
+    "sections": [
+      {
+        "heading": "How the bracket list is built",
+        "body": [
+          "The calculator puts your baseline exposure in the middle (0 EV) and adds frames above and below it, spaced by the step size you choose. Frame counts are limited to the odd numbers 3, 5, 7 and 9 so there is always a baseline frame, and step sizes are 1/3, 1/2, 1 or 2 stops.",
+          "Only one of aperture, shutter speed or ISO changes; the other two stay at their baseline values. Shutter speed and ISO double with every stop, while the f-number changes by about 1.41 times (√2) per stop but in the opposite direction. A brighter (+EV) frame uses a wider aperture, which means a smaller f-number."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "Baseline 1/125 s, f/8, ISO 100 with shutter-speed bracketing, 5 frames at ±1 stop: the frames are about 1/500 s, 1/250 s, 1/125 s, 1/62 s and 1/31 s. The total brightness range is 4 stops, and with 1.5 s of overhead per shot the estimated total shooting time is about 7.6 s.",
+          "For a night scene with a 4 s baseline, the same 5-frame bracket gives 1 s, 2 s, 4 s, 8 s and 16 s. The exposures alone add up to 31 s, and with overhead the tripod has to stay still for about 38.5 s.",
+          "If you bracket aperture instead, starting from f/8, the +1 stop frame is about f/5.7 and the -1 stop frame is about f/11."
+        ]
+      },
+      {
+        "heading": "How to read the dynamic range guide",
+        "body": [
+          "A total brightness range under 4 stops is labeled \"standard\": most scenes fit in a single exposure, so bracketing is optional. From 4 up to 8 stops it is \"high contrast\", the range where HDR blending helps with a bright sky over a shaded foreground. At 8 stops or more it is \"very wide\", for scenes like backlit silhouettes or a bright window in a dark room, where more frames are worth considering.",
+          "These categories are rules of thumb. How much a single frame can actually hold depends on your camera sensor and whether you shoot RAW."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "For still scenes such as landscapes, shutter-speed bracketing is the safest choice. Changing aperture changes depth of field between frames, and changing ISO changes noise.",
+          "Even on a tripod, leaves in the wind or moving people can leave ghosting when you merge the frames. The more frames you shoot, the bigger the risk.",
+          "Your camera's automatic exposure bracketing (AEB) supports different frame counts and step sizes depending on the model. Treat the results as a reference and check the real settings range.",
+          "For long exposures, the longest frame may exceed your camera's maximum shutter speed. In that case consider bulb mode or a smaller step.",
+          "The default overhead of 1.5 s per shot is a typical estimate. If your camera clears its buffer slowly, raise the value yourself."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "bracketing-calculator-hdr-stops",
+          "title": "Setting HDR Exposure Stop Intervals with the Bracketing Calculator"
+        },
+        {
+          "slug": "exposure-bracketing-hdr-basics",
+          "title": "Exposure Bracketing & HDR Basics: Capturing a Scene Your Sensor Can't"
+        },
+        {
+          "slug": "understanding-dynamic-range",
+          "title": "Understanding Dynamic Range: The Brightness Range Your Sensor Can Actually Hold"
+        }
+      ]
+    }
   },
   "PrintResolutionCalculator": {
     "cardTitle": "Print Resolution",
@@ -1327,7 +1582,54 @@
       }
     ],
     "exampleLeftAlt": "A printed photo being examined closely for sharpness",
-    "exampleRightAlt": "A large-format printer producing a photo print"
+    "exampleRightAlt": "A large-format printer producing a photo print",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "The maximum print size in inches is your photo's pixel count divided by DPI. Width and height are calculated separately, and a cm value is shown using 2.54 cm per inch. If you already have a target print size, width and height in inches × DPI gives the pixels you need, and the product of the two is the required megapixels.",
+          "The upscale factor in the advanced section is the square root of required megapixels divided by current megapixels. At 1 or below no enlargement is needed, up to 1.3 is minor, up to 2 is moderate, and above 2 is a major shortfall."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "A 6000×4000 px photo (about 24 MP) can print up to about 20.0×13.3 in (about 50.8×33.9 cm) at 300 DPI, or about 40.0×26.7 in at 150 DPI.",
+          "An 8×10 in print at 300 DPI needs 2,400×3,000 px (7.2 MP), and A4 (8.27×11.69 in) needs about 2,480×3,508 px (8.7 MP). A 24 MP photo has plenty of headroom.",
+          "16×20 in needs 4,800×6,000 px (28.8 MP), an upscale factor of about 1.10 for a 24 MP photo, and A2 needs about 4,961×7,016 px (34.8 MP), about 1.20. Both are minor, so ordinary resizing is enough.",
+          "20×30 in needs 6,000×9,000 px (54 MP), about 1.5, and A1 needs about 7,016×9,933 px (69.7 MP), about 1.7. In this range an AI upscaler can help."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "Use it before ordering a framed print, an album or a poster, to check that your photo's resolution is enough. It is also handy when you wonder how large you can print, or when choosing a camera and estimating the megapixels a given print size needs."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "300 DPI is the benchmark for prints viewed up close. Large posters and banners viewed from a distance often look sharp at 150 to 200 DPI.",
+          "If you cropped the photo, enter the pixel size after cropping. Entering the original camera size will say you can print larger than you really can.",
+          "For print sizes with a different aspect ratio (for example a 3:2 photo printed at 4:5), the edges get cropped, so the actual layout can differ from the calculated result.",
+          "Falling short on pixels does not always mean re-shooting. At 1.3× or below, ordinary resizing is often enough.",
+          "Real print quality also depends on the print shop's equipment and paper."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "print-resolution-calculator-album",
+          "title": "Checking Wedding Album Print Resolution with the Calculator"
+        },
+        {
+          "slug": "print-resolution-calculator-poster",
+          "title": "What to Check Before Printing a Large Poster with the Print Resolution Calculator"
+        }
+      ]
+    }
   },
   "StorageCalculator": {
     "cardTitle": "Storage Space",
@@ -1378,7 +1680,58 @@
       }
     ],
     "exampleLeftAlt": "Several camera memory cards laid out together",
-    "exampleRightAlt": "Photos being backed up to an external hard drive"
+    "exampleRightAlt": "Photos being backed up to an external hard drive",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "The math is simple. Original storage in GB is file size per shot (MB) × number of shots ÷ 1,000, and total storage is the original × (1 + extra backup copies). Cards needed is total storage divided by card size, rounded up. Using 1 GB = 1,000 MB matches how card makers label capacity.",
+          "The default file sizes assume a typical 24–45 MP full-frame or APS-C camera: about 8 MB for JPEG, 30 MB for compressed RAW and 65 MB for uncompressed RAW. Real sizes depend on your sensor and the scene, so use \"Custom\" if you know your actual file size."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "Shooting 300 frames a day for 5 days is 1,500 shots. In compressed RAW (30 MB) the original is 45 GB; with one extra backup copy you need 90 GB, which one 128 GB card covers.",
+          "The same 1,500 shots as JPEG (8 MB) come to 12 GB, or 24 GB with a backup. Changing format alone cuts the storage to roughly a quarter.",
+          "In uncompressed RAW (65 MB) the original is 97.5 GB and 195 GB with a backup, which takes two 128 GB cards.",
+          "Uploading 90 GB (backup included) at 100 Mbps takes about 2 hours in theory (7,200 s). For 195 GB it is about 4 hours 20 minutes."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "Use it before a trip to decide how many cards to pack, to pick an external SSD size, or to estimate space before a shoot that produces hundreds of frames at once, like a timelapse. The daily-shots mode suits trips and projects where you shoot a similar amount every day."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "If your camera saves RAW and JPEG together, add both file sizes and enter the total under \"Custom\". Calculating only one format can leave you short.",
+          "Usable space is a little below a card's labeled capacity, and filling a card to the brim is risky. As the page notes, plan for 10–20% more than the calculated figure.",
+          "Backup copies means extra copies beyond the original. Entering 1 calculates for 2 total copies including the original.",
+          "Upload time is a theoretical value that assumes your entered speed holds steady. Real uploads can take longer depending on the network.",
+          "Video is not included. If you also record video, add its storage separately."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "storage-calculator-trip-planning",
+          "title": "Planning Memory Card Needs for a Trip with the Storage Calculator"
+        },
+        {
+          "slug": "storage-calculator-raw-vs-jpeg",
+          "title": "Comparing RAW vs JPEG File Sizes with the Storage Calculator"
+        },
+        {
+          "slug": "raw-vs-jpeg-which-should-you-shoot",
+          "title": "RAW vs. JPEG: Which Should You Shoot?"
+        }
+      ]
+    }
   },
   "ExifRemover": {
     "cardTitle": "Remove Metadata",
@@ -1426,7 +1779,58 @@
       }
     ],
     "exampleLeftAlt": "A photo's metadata panel showing camera settings and GPS location",
-    "exampleRightAlt": "A clean photo file with all metadata stripped out"
+    "exampleRightAlt": "A clean photo file with all metadata stripped out",
+    "sections": [
+      {
+        "heading": "What gets removed and how",
+        "body": [
+          "The tool does not re-compress your image. It cuts out only the parts of the file that hold metadata, at the byte level, and copies the pixel data through unchanged, so quality does not change at all.",
+          "In JPEG it removes the APP1 segment (EXIF and XMP), the APP13 segment (IPTC) and text comments (COM), while leaving the JFIF header and the ICC color profile so colors stay the same. In PNG it removes text chunks (tEXt, zTXt, iTXt), the EXIF chunk and the modification-time chunk (tIME). In WebP it removes the EXIF and XMP chunks."
+        ]
+      },
+      {
+        "heading": "How to use it and the options",
+        "list": [
+          "Supported formats are JPEG, PNG and WebP. You can add several files at once, process them, and download them one by one or as a ZIP.",
+          "\"Remove GPS location only\" deletes just the GPS coordinates in JPEG and keeps camera model, lens and shooting settings. Some editing tools also copy GPS into XMP, so for guaranteed location removal turn this off and use full removal.",
+          "\"Remove IPTC\" is on by default. Turn it off if you want copyright information to stay attached to the photo.",
+          "Before processing, the tool shows whether each photo has camera info or GPS, so you can see what will be removed."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "Use it before posting to social media, a blog or a marketplace to keep the location of photos taken near your home from leaking out. It is also useful before submitting photos to a stock site or a client when you want to tidy up equipment and settings information."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "HEIC and TIFF are not supported. Convert iPhone HEIC photos to JPEG first.",
+          "The tool does not remove what is visible in the picture, such as faces, signs or license plates. It removes metadata only.",
+          "Some social networks strip metadata on upload, but this varies by service, so removing it yourself first is safer.",
+          "Your original stays untouched and you download a new file. Check the result before deleting the original.",
+          "Everything happens in your browser and your photos are never sent to a server."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this tool",
+      "items": [
+        {
+          "slug": "exif-remover-social-media-privacy",
+          "title": "Removing GPS Data Before Social Media Uploads with the EXIF Remover"
+        },
+        {
+          "slug": "exif-remover-stock-photo-submission",
+          "title": "Using the EXIF Remover Before Stock Photo Submission"
+        },
+        {
+          "slug": "gps-data-in-photos-privacy",
+          "title": "GPS Data in Photos: What It Reveals and How to Protect Your Privacy"
+        }
+      ]
+    }
   },
   "CropFactorCalculator": {
     "cardTitle": "Crop Factor / Equivalent Focal Length Calculator",
@@ -1475,7 +1879,58 @@
       }
     ],
     "exampleLeftAlt": "The same lens framed on a full-frame camera",
-    "exampleRightAlt": "The same lens framed on a crop-sensor camera, showing a narrower field of view"
+    "exampleRightAlt": "The same lens framed on a crop-sensor camera, showing a narrower field of view",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "Crop factor is the diagonal of a full-frame (36×24 mm) sensor, about 43.3 mm, divided by the diagonal of your sensor. The equivalent focal length is the real focal length times the crop factor, and field of view is 2 × atan(sensor dimension ÷ (2 × focal length)), calculated separately for width and height.",
+          "In the advanced options, the comparison sensor tells you which focal length gives the same field of view: your equivalent focal length divided by the comparison sensor's crop factor. The equivalent aperture multiplies your f-number by (your crop factor ÷ comparison crop factor) to show the f-number that gives similar depth of field for the same framing."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "The crop factors for the sensor presets are full frame 1.00, Canon APS-C about 1.61, Nikon/Sony/Fuji APS-C about 1.53, Micro Four Thirds about 2.00, 1-inch about 2.73 and medium format about 0.79. These line up with the 1.5×, 1.6× and 2× figures manufacturers usually quote.",
+          "A 50 mm lens on a Nikon or Sony APS-C camera has an equivalent focal length of about 77 mm, with a field of view of about 26.4° wide and 17.7° tall. The same 50 mm on full frame is about 39.6° wide.",
+          "A 25 mm lens on Micro Four Thirds is equivalent to about 50 mm. To get that field of view on APS-C (Nikon/Sony) you would need a lens of about 33 mm.",
+          "Comparing a Micro Four Thirds 25 mm f/1.8 with full frame gives an equivalent aperture of about f/3.6, meaning background blur similar to f/3.6 on full frame for the same framing."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "Use it when switching to a camera with a different sensor size or buying a lens, to see what focal length gives your current field of view on another system. It also helps when you want to check the equivalent focal lengths quoted in photo descriptions for different sensors."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "Crop factor applies to field of view only. It does not change the lens's real focal length or exposure (f-number, shutter speed, ISO), so your exposure settings stay the same.",
+          "Equivalent aperture is for comparing depth of field and background blur, not for exposure. The same f/1.8 on a smaller sensor gives deeper depth of field.",
+          "Do not mix up the focal length printed on the lens with the equivalent focal length. Depth-of-field and astro calculators need the real focal length.",
+          "Canon APS-C and other makers' APS-C sensors differ slightly in size, so their crop factors are 1.61 and 1.53.",
+          "Results are approximations from standard formulas and can differ a little from real lens distortion or manufacturer-published specifications."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "crop-factor-calculator-lens-choice",
+          "title": "Choosing Lenses for a Crop-Sensor Body with the Crop Factor Calculator"
+        },
+        {
+          "slug": "sensor-size-and-crop-factor-explained",
+          "title": "Crop Sensor vs Full Frame: What Sensor Size and Crop Factor Actually Change"
+        },
+        {
+          "slug": "camera-field-of-view-calculator-guide",
+          "title": "How Wide Is That Lens, Really? Calculating Field of View in Degrees"
+        }
+      ]
+    }
   },
   "DofHyperfocalTable": {
     "cardTitle": "Depth of Field & Hyperfocal Tables",
@@ -1515,7 +1970,57 @@
       }
     ],
     "exampleLeftAlt": "Landscape photo focused at the hyperfocal distance, sharp from the foreground to infinity",
-    "exampleRightAlt": "Landscape photo focused too close, leaving the distant background out of focus"
+    "exampleRightAlt": "Landscape photo focused too close, leaving the distant background out of focus",
+    "sections": [
+      {
+        "heading": "How to read the hyperfocal table",
+        "body": [
+          "The hyperfocal distance is the focus distance that keeps everything out to infinity acceptably sharp while stretching the in-focus zone as close to you as possible. Focus there and the zone from half that distance to infinity falls within acceptable sharpness. Each row of the table gives this distance in meters for one aperture.",
+          "The formula is H = f² / (N × c), plus f. Here f is focal length, N is the f-number and c is the circle of confusion in millimeters. A longer focal length or a wider aperture pushes the hyperfocal distance farther away, and stopping down brings it closer."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "Full frame, 24mm at f/8: the hyperfocal distance is about 2.42 m. Focus at 2.42 m and everything from roughly 1.2 m to infinity is acceptably sharp.",
+          "Sensor size matters at 35mm and f/8: about 5.14 m on full frame, but about 7.69 m on APS-C (using a 0.02 mm circle of confusion). A smaller sensor allows a smaller circle of confusion, which pushes the hyperfocal distance out.",
+          "Full frame, 50mm at f/2.8: about 29.81 m. Stop the same lens down to f/8 and it drops to about 10.47 m."
+        ]
+      },
+      {
+        "heading": "How to read the depth-of-field table",
+        "body": [
+          "The depth-of-field table uses the aperture you chose above and lists the near limit, far limit and total depth of field at nine subject distances from 0.5 m to 100 m. When the subject distance is at or beyond the hyperfocal distance, the far limit reads \"Infinity\".",
+          "For example, a full-frame 50mm lens focused on a subject 5 m away keeps about 3.39 m to 9.49 m sharp at f/8 (about 6.10 m in total), but only about 4.29 m to 6.00 m at f/2.8 (about 1.71 m in total). One aperture change at the same distance changes the sharp zone dramatically."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "The circle of confusion values are common approximations for each sensor size. If you plan to print large or inspect images at 100%, choose \"Custom\" and enter a smaller value to be more conservative.",
+          "When you focus at the hyperfocal distance, the near limit sits at about half that distance. If a very close foreground matters, check that point before you shoot.",
+          "Stopping down too far lets diffraction soften the whole image. The smallest aperture in the table is not always the best choice.",
+          "These are theoretical reference values. Lens behavior and real focusing accuracy vary, so check important frames by zooming in after you shoot."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this table",
+      "items": [
+        {
+          "slug": "hyperfocal-distance-explained",
+          "title": "Hyperfocal Distance Explained: Where to Focus for Sharp Foreground and Background"
+        },
+        {
+          "slug": "dof-calculator-landscape-sharpness",
+          "title": "Using the DoF Calculator for Front-to-Back Landscape Sharpness"
+        },
+        {
+          "slug": "understanding-depth-of-field",
+          "title": "Understanding Depth of Field: Aperture, Focal Length, and Distance"
+        }
+      ]
+    }
   },
   "Sunny16Calculator": {
     "cardTitle": "Sunny 16 Exposure",
@@ -1553,7 +2058,59 @@
       }
     ],
     "exampleLeftAlt": "Photo taken outdoors in bright, direct sunlight",
-    "exampleRightAlt": "Photo taken outdoors under overcast, cloudy skies"
+    "exampleRightAlt": "Photo taken outdoors under overcast, cloudy skies",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "For each lighting condition the calculator starts from a baseline aperture (sunny f/16, slight overcast f/11, overcast f/8, heavy overcast f/5.6, open shade or sunset f/4) with a shutter speed of about 1/100 s at ISO 100. It then recalculates the shutter speed, stop for stop, for the aperture and ISO you choose.",
+          "Opening the aperture by one stop halves the shutter time, and so does raising ISO by one stop. The calculator applies both in turn to reach the final value."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "In sunny conditions (f/16) at ISO 100 and f/16, the shutter speed is about 1/100 s. This is the classic Sunny 16 rule.",
+          "In sunny conditions at ISO 400 and f/8, it is about 1/1600 s. Opening two stops and raising ISO two stops makes the shutter four stops faster.",
+          "In sunny conditions at ISO 100, opening to f/5.6 gives about 1/800 s. It shows how fast the shutter has to be when you open up for a blurrier background.",
+          "On an overcast day (f/8) at ISO 400 and f/2.8, the result is about 1/3200 s.",
+          "In open shade (f/4) at ISO 100 and f/4, it is about 1/100 s, and at ISO 800 with f/2 it is about 1/3200 s."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "Use it as a quick reference with film cameras that have no meter, when shooting in manual exposure, or when your camera's auto exposure looks off. It is also good practice to memorize rough starting values for each lighting condition before heading outdoors."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "The values are estimates for typical outdoor daytime light. They may not hold for low sun in the morning or evening, strong reflections from snow or sand, or backlit scenes.",
+          "If your subject is unusually dark or bright, check with your camera's meter or a test shot and apply exposure compensation if needed.",
+          "Choosing the wrong lighting condition shifts the result by a stop or two. Judging by how sharp the edges of shadows are can help.",
+          "If the shutter speed comes out too slow, camera shake can appear. Raise ISO or open the aperture.",
+          "The displayed shutter speed is rounded to a near standard step. On a real camera, pick the closest available value."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "the-exposure-triangle-explained",
+          "title": "The Exposure Triangle Explained: Why the Same Brightness Can Look Completely Different"
+        },
+        {
+          "slug": "using-exposure-compensation",
+          "title": "Using Exposure Compensation: How to Correct the Moments Your Meter Gets Wrong"
+        },
+        {
+          "slug": "understanding-exif-iso-shutter-aperture",
+          "title": "Understanding EXIF Data: ISO, Shutter Speed, and Aperture Explained"
+        }
+      ]
+    }
   },
   "AdvancedDofDiffractionCalculator": {
     "cardTitle": "Advanced DoF & Diffraction",
@@ -1595,7 +2152,58 @@
       }
     ],
     "exampleLeftAlt": "Photo shot at a wide aperture with sharp detail and shallow depth of field",
-    "exampleRightAlt": "Photo shot at a very narrow aperture, softened by diffraction across the whole frame"
+    "exampleRightAlt": "Photo shot at a very narrow aperture, softened by diffraction across the whole frame",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "The Airy disk diameter is about 2.44 × wavelength × f-number, using a reference wavelength of 550 nm, the middle of visible light. The f-number at which that diameter equals the circle of confusion set by your sensor size is the diffraction-limited aperture: circle of confusion ÷ (2.44 × wavelength).",
+          "Depth of field uses the same hyperfocal formulas as the DoF calculator, so the diffraction limit and depth of field appear side by side for the same aperture. You can weigh the sharpness you lose to diffraction against the depth of field you gain by stopping down."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "The diffraction-limited apertures by sensor are about f/22.4 for full frame, f/26.8 for medium format, f/14.9 for APS-C, f/11.2 for Micro Four Thirds and f/8.2 for 1-inch. The smaller the sensor, the sooner diffraction shows.",
+          "At f/16 the Airy disk is about 0.0215 mm (21.5 μm). That is smaller than the full-frame circle of confusion of 0.03 mm, so it is within the limit, but on APS-C (0.02 mm) it is about 7% past the limit and on Micro Four Thirds (0.015 mm) about 43% past.",
+          "On full frame with a 24 mm lens focused at 3 m, the near limit is about 1.35 m at f/8, about 0.87 m at f/16 and about 0.69 m at f/22. Beyond f/8, each extra stop buys less and less depth of field.",
+          "On APS-C with a 35 mm lens focused at 2 m, the sharp zone at f/8 is about 1.59 to 2.69 m, widening to about 1.33 to 4.07 m at f/16. But f/16 is past this sensor's diffraction limit of about f/14.9."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "It is most useful in landscape and architecture work when deciding how far you can stop down for depth of field. If you plan large prints or heavy crops, you can check in advance how much an aperture past the diffraction limit will cost you."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "Passing the diffraction limit does not make a photo unusable. Softness grows gradually, and when depth of field matters more, an aperture past the limit can be the better choice.",
+          "The calculation is an approximation using a fixed wavelength and a standard circle of confusion, so real lens resolution and sensor megapixels will change the outcome.",
+          "A lens's sharpest aperture is usually two or three stops down from wide open, which is a separate factor from the diffraction limit.",
+          "Results assume screen-size viewing. At 100% zoom, diffraction can show at an earlier aperture.",
+          "A custom circle of confusion must be between 0.001 and 0.1 mm. Use it only when you know the right value for your sensor."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "advanced-dof-diffraction-calculator-guide",
+          "title": "Finding Your Camera's Diffraction-Limited Aperture (and Why It's Not the Whole Story)"
+        },
+        {
+          "slug": "diffraction-and-optimal-aperture",
+          "title": "Diffraction & Optimal Aperture: Why Stopping Down Too Far Softens Your Photos"
+        },
+        {
+          "slug": "understanding-depth-of-field",
+          "title": "Understanding Depth of Field: Aperture, Focal Length, and Distance"
+        }
+      ]
+    }
   },
   "CameraFovCalculator": {
     "cardTitle": "Camera Field of View",
@@ -1631,7 +2239,58 @@
       }
     ],
     "exampleLeftAlt": "Photo taken with a wide-angle lens showing a broad field of view",
-    "exampleRightAlt": "Photo taken with a telephoto lens showing a narrow, zoomed-in field of view"
+    "exampleRightAlt": "Photo taken with a telephoto lens showing a narrow, zoomed-in field of view",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "Field of view is 2 × atan(sensor dimension ÷ (2 × focal length)). The same formula is applied to the sensor's width, height and diagonal to give horizontal, vertical and diagonal field of view.",
+          "Field of view depends on both focal length and sensor size: longer focal lengths narrow it, and larger sensors widen it. The table below the calculator shows the field of view at common focal lengths from 14 mm to 300 mm for the sensor you pick."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "On full frame, 24 mm gives about 73.7° horizontal, 53.1° vertical and 84.1° diagonal. 50 mm gives about 39.6° horizontal, 27.0° vertical and 46.8° diagonal.",
+          "On full frame, 85 mm is about 28.6° diagonal, 200 mm about 12.3° and 14 mm about 114.2°. Diagonal is the figure most often quoted in lens descriptions.",
+          "On APS-C (23.5×15.6 mm), 50 mm gives about 26.4° horizontal, 17.7° vertical and 31.5° diagonal, framing narrower than the same lens on full frame.",
+          "A 25 mm lens on Micro Four Thirds (17.3×13 mm) gives about 46.8° diagonal, the same as 50 mm on full frame."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "It is useful for architecture and interior work, video and site documentation, anywhere you need to know how wide a scene will be framed as an angle. If you need the angle itself rather than crop factor or equivalent focal length, you can read it directly."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "Do not mix up vertical and horizontal field of view. Turning the camera vertical swaps the two, but the diagonal stays the same.",
+          "The field of view quoted in lens marketing is usually diagonal. Comparing against a horizontal figure makes the numbers look different.",
+          "The calculation uses only sensor size and focal length. It does not account for lens distortion or the slight narrowing some lenses show at close focus.",
+          "For a specific camera, choose \"Custom\" under sensor size and enter the manufacturer's sensor width and height in millimeters.",
+          "The focal length to enter is the real one. Entering an equivalent focal length makes the field of view look too narrow for the sensor."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "camera-field-of-view-calculator-guide",
+          "title": "How Wide Is That Lens, Really? Calculating Field of View in Degrees"
+        },
+        {
+          "slug": "sensor-size-and-crop-factor-explained",
+          "title": "Crop Sensor vs Full Frame: What Sensor Size and Crop Factor Actually Change"
+        },
+        {
+          "slug": "crop-factor-calculator-lens-choice",
+          "title": "Choosing Lenses for a Crop-Sensor Body with the Crop Factor Calculator"
+        }
+      ]
+    }
   },
   "FlashGuideNumberCalculator": {
     "cardTitle": "Flash Guide Number",
@@ -1671,7 +2330,59 @@
       }
     ],
     "exampleLeftAlt": "Photo taken close to the flash, evenly and brightly lit",
-    "exampleRightAlt": "Photo taken far from the flash, appearing dim and underexposed"
+    "exampleRightAlt": "Photo taken far from the flash, appearing dim and underexposed",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "Guide number (GN) equals f-number × distance. Knowing GN, distance = GN ÷ f-number and f-number = GN ÷ distance. Manufacturers usually publish GN at ISO 100, so when you change ISO the calculator uses GN × √(ISO ÷ 100).",
+          "GN and distance are handled in the same unit, either meters or feet. One meter is about 3.28 feet."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "A flash with GN 58 (m, ISO 100) used at f/8 can properly light a subject up to about 7.25 m away.",
+          "Raising the same flash to ISO 400 doubles GN to about 116, so at f/8 it reaches about 14.5 m. Four times the ISO but only twice the GN is the square-root relationship.",
+          "With a GN 60 (m, ISO 100) flash and a subject 5 m away, the aperture needed is f/12. At ISO 400 you need f/24.",
+          "Going from ISO 100 to 200 multiplies GN by about 1.41, so GN 58 becomes about 82.",
+          "A flash rated GN 190 (feet, ISO 100) used at f/5.6 reaches about 33.9 ft."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "It helps when using flash in manual mode or with an off-camera strobe, to judge at which aperture and distance you get enough light. It is also good for building a reference chart ahead of time for events where distances change often."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "A zoom-head flash has a different GN at each zoom position. Enter the GN for the zoom position you are actually using.",
+          "Published GN is measured under ideal conditions. Room reflectivity, subject size and diffusers can make real results differ a lot.",
+          "Bouncing off a ceiling or wall, or using a diffuser or softbox, reduces the light reaching your subject. You may need a wider aperture or a closer distance than the result suggests.",
+          "Lowering flash power lowers GN. If you entered the full-power GN, assume a shorter distance at fractional power (1/2, 1/4 and so on).",
+          "Shutter speed does not affect this calculation, but going above your flash sync speed can block part of the frame."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "flash-guide-number-calculator-guide",
+          "title": "Guide Number Math: How to Set Manual Flash Power Without Guessing"
+        },
+        {
+          "slug": "flash-sync-speed-explained",
+          "title": "Flash Sync Speed Explained: The Hidden Shutter Speed Ceiling"
+        },
+        {
+          "slug": "studio-lighting-basics",
+          "title": "Studio Lighting Basics: Shaping Depth with Three-Point Lighting and Lighting Ratios"
+        }
+      ]
+    }
   },
   "ShutterCountChecker": {
     "cardTitle": "Shutter Count Checker",
@@ -1713,7 +2424,58 @@
     "supportCanon": "Canon - EOS R5, EOS R6, EOS R6 Mark II, EOS R8, EOS R50 (CR3 files only)",
     "supportCanonNote": "Every other Canon body, old or new, isn't supported yet — we'll add more as they're documented.",
     "exampleLeftAlt": "Close-up photo of a camera's shutter mechanism",
-    "exampleRightAlt": "Photo of a used DSLR camera body being inspected before purchase"
+    "exampleRightAlt": "Photo of a used DSLR camera body being inspected before purchase",
+    "sections": [
+      {
+        "heading": "How it reads the value",
+        "body": [
+          "Many cameras record the shutter count in a manufacturer-specific area inside the photo file, called the MakerNote. Ordinary EXIF viewers do not interpret that area, so the value stays hidden, but this tool reads the file's raw bytes and finds it directly.",
+          "For Nikon it reads the unencrypted shutter count field inside the MakerNote. For Canon it reads a publicly documented storage location in CR3 files from the EOS R5, R6, R6 Mark II, R8 and R50. Everything runs in your browser and your photo is never sent anywhere."
+        ]
+      },
+      {
+        "heading": "How to use it and what is supported",
+        "list": [
+          "Drop in a Nikon RAW (.NEF), an in-camera JPEG or a Canon CR3 file, and the camera model and shutter count appear.",
+          "Supported are Nikon NEF and in-camera JPEG, and CR3 files from the five Canon models above.",
+          "Other Canon bodies, Sony, Fujifilm, Olympus, Panasonic and Pentax are not supported yet, because they either do not store the value in the file or store it differently per model, which needs separate work.",
+          "If you upload a file from an unsupported camera, the tool does not force a number; it tells you the camera is not supported."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "It is useful before buying a used camera, to check the shutter count yourself from the original photo the seller sends. You can also use it to keep an eye on your own camera's usage over time."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "Photos that went through editing or social media may have had their metadata removed, so the value can be missing. Use the original file straight from the camera.",
+          "Shutter count is only a reference for judging a camera's condition. Rated shutter durability differs by model, and passing it does not mean the camera fails right away.",
+          "Some mirrorless bodies count sensor exposures rather than mechanical shutter actuations, so the number can mean something different.",
+          "Some older or entry-level models never record this value at all, so no tool can read it.",
+          "Canon R5/R6 support is based on published data and has not been verified against every individual unit and firmware version. If a count looks wrong, let us know."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this tool",
+      "items": [
+        {
+          "slug": "shutter-count-checker-guide",
+          "title": "Shutter Count Explained: How to Check It Before Buying a Used Camera"
+        },
+        {
+          "slug": "understanding-exif-iso-shutter-aperture",
+          "title": "Understanding EXIF Data: ISO, Shutter Speed, and Aperture Explained"
+        },
+        {
+          "slug": "gps-data-in-photos-privacy",
+          "title": "GPS Data in Photos: What It Reveals and How to Protect Your Privacy"
+        }
+      ]
+    }
   },
   "GoldenHourCalculator": {
     "cardTitle": "Golden Hour & Blue Hour Calculator",
@@ -1757,7 +2519,58 @@
       }
     ],
     "exampleLeftAlt": "Landscape photo taken during golden hour with warm, soft light",
-    "exampleRightAlt": "Landscape photo taken during blue hour with cool, dim light"
+    "exampleRightAlt": "Landscape photo taken during blue hour with cool, dim light",
+    "sections": [
+      {
+        "heading": "How the calculation works",
+        "body": [
+          "The calculator works out the sun's altitude from your date and latitude/longitude and finds the time ranges where it falls in set bands. Sunrise and sunset are when the top of the sun touches the horizon (altitude about -0.83°). Golden hour runs from that moment up to about +6° altitude, and blue hour covers about -6° up to sunrise (or from just after sunset down to -6°).",
+          "Results are listed as morning blue hour, morning golden hour, evening golden hour and evening blue hour. Your location is used only in your browser and is never sent to a server."
+        ]
+      },
+      {
+        "heading": "Worked examples",
+        "list": [
+          "In Incheon, Korea (latitude 37.4563, longitude 126.7052) on October 2, 2026, morning blue hour is about 06:03 to 06:29 and morning golden hour about 06:29 to 07:03. Evening golden hour is about 17:40 to 18:15 and evening blue hour about 18:15 to 18:41.",
+          "In the same place, the evening golden hour on the summer solstice (June 21) runs about 19:18 to 19:57 (about 39 minutes), and on the winter solstice (December 21) about 16:37 to 17:18 (about 41 minutes). The clock times shift a lot with the season, but the length stays similar.",
+          "Near the equator in Singapore (October 2, 2026), golden hour is about 27 minutes and blue hour about 21 minutes, shorter than in Incheon, because the sun sets closer to vertically.",
+          "In Tromsø, in the Arctic (latitude 69.65°), the sun never sets on June 21 and never rises on December 21, so there is no golden or blue hour, and the calculator shows a note saying so."
+        ]
+      },
+      {
+        "heading": "When to use it",
+        "body": [
+          "Once you know where and when you will shoot, it helps you set an exact arrival and setup time before sunrise. It also helps you compare which day and time of a trip is best for shooting."
+        ]
+      },
+      {
+        "heading": "Limits and common mistakes",
+        "list": [
+          "Times are shown in this device's current time zone. If you enter coordinates for another region, the times may not be that place's local time, so account for the time difference.",
+          "The calculation reflects only the sun's geometric position. Clouds, haze, atmospheric conditions and terrain such as mountains or buildings can change when the light actually appears.",
+          "Golden and blue hour do not have sharp edges; the light changes gradually. Arrive and set up a few minutes before the start time to be safe.",
+          "At high latitudes, midsummer midnight sun and midwinter polar night may mean the bands do not occur.",
+          "Latitude is positive in the north and negative in the south, and longitude is positive in the east and negative in the west. A wrong sign puts you in a completely different place."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides that pair well with this calculator",
+      "items": [
+        {
+          "slug": "golden-hour-calculator-guide",
+          "title": "Golden Hour and Blue Hour: When Exactly Are They? (With the Math)"
+        },
+        {
+          "slug": "sunrise-sunset-photography-camera-settings",
+          "title": "Best Camera Settings for Sunrise and Sunset Photography"
+        },
+        {
+          "slug": "six-frames-light-timing-and-composition",
+          "title": "Six Frames, Six Lessons: How Light, Timing and Composition Shaped Our Own Photos"
+        }
+      ]
+    }
   },
   "Share": {
     "deviceShare": "Share via device",

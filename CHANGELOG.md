@@ -1,3 +1,14 @@
+## 2026-10-02 — 도구 페이지 16종 설명 보강 + `<article>` 태그 적용
+
+**변경 사항**
+- 신규 서버 컴포넌트 `src/components/tools/tool-sections.tsx`(`ToolSections`): 도구 설명 아래에 섹션(h3)과 "함께 읽으면 좋은 가이드" 링크를 렌더링.
+- 도구 16종 전체(DofCalculator, ExposureCalculator, TimelapseCalculator, AstroCalculator, BracketCalculator, DofHyperfocalTable, Sunny16Calculator, GoldenHourCalculator, AdvancedDofDiffractionCalculator, CameraFovCalculator, FlashGuideNumberCalculator, PrintResolutionCalculator, StorageCalculator, ExifRemover, CropFactorCalculator, ShutterCountChecker)에 `messages/{ko,en,ja,es}.json`의 `sections`(계산 원리 / 숫자 예시 / 사용 시점 / 유의점) 4개와 `related`(관련 가이드 3개 이하)를 추가. 도구당 4개 언어 모두 완성.
+- 숫자 예시는 각 계산기의 실제 공식(`src/lib/*`)으로 Python·Node에서 재계산해 확인(골든아워는 `suncalc`로 인천·싱가포르·트롬쇠 시각 계산).
+- 각 도구 페이지의 설명+FAQ 영역을 `<article>`로 감쌈. `LegalPage`(About/Contact/Privacy/Terms/Disclosure)는 제목+본문을 `<article>`로 감쌈(Contact의 하위 children은 article 밖). 홈/도구 목록/가이드 목록은 적용하지 않음(가이드 상세는 기존 `<article>` 유지).
+
+**검증**: `tsc --noEmit` 통과. 로컬 dev에서 16개 도구×4개 언어 모두 200, `<article>` 1개, 섹션 h3 확인, 관련 가이드 링크 전부 200. 법적 페이지 5종×4개 언어 `<article>` 1개·h1 1개 확인, 홈·도구 목록·가이드 목록은 `<article>` 0개.
+**백업**: `_backups/exiflens_backup_20261002_140243_tool_articles`. 푸시 전(라이브 사이트 미검증).
+
 ## 2026-10-02 — About 장비 표: Nikon ARCREST II 규격 확정, Canon BR-E1 추가
 
 **변경 사항**

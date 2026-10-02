@@ -24,6 +24,7 @@ export function LegalPage({
 }) {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-10">
+      <article className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           {title}
@@ -47,6 +48,7 @@ export function LegalPage({
           </section>
         ))}
       </div>
+      </article>
 
       {children}
     </div>

@@ -9,6 +9,11 @@ import { ToolImageDevPanel } from "@/components/dev/tool-image-dev-panel";
 import { getToolImages } from "@/lib/tool-images";
 import { AdZone } from "@/components/ad-zone";
 import { ShareButton } from "@/components/share-button";
+import {
+  ToolSections,
+  type ToolRelated,
+  type ToolSection,
+} from "@/components/tools/tool-sections";
 
 type FaqItem = { question: string; answer: string };
 
@@ -50,6 +55,8 @@ export default async function ExposureStopsCalculatorPage({
   const t = await getTranslations("ExposureCalculator");
   const toolsHubT = await getTranslations("ToolsHub");
   const faqs: FaqItem[] = t.raw("faq");
+  const extraSections = t.raw("sections") as ToolSection[];
+  const related = t.raw("related") as ToolRelated;
 
   const breadcrumb = breadcrumbJsonLd([
     { name: "ExifLens", url: `${SITE_URL}/${locale}` },
@@ -129,42 +136,45 @@ export default async function ExposureStopsCalculatorPage({
         className="max-w-[300px]"
       />
 
-      <section className="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="text-base font-semibold text-foreground">
-            {t("aboutTitle")}
-          </h2>
-          <ShareButton
-            title={t("pageTitle")}
-            text={t("pageDescription")}
-            url={`${SITE_URL}/${locale}/tools/exposure-stops-calculator`}
-          />
-        </div>
-        <p>{t("aboutBody")}</p>
-        <p className="text-xs">{t("disclaimer")}</p>
-      </section>
+      <article className="flex flex-col gap-8">
+        <section className="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-base font-semibold text-foreground">
+              {t("aboutTitle")}
+            </h2>
+            <ShareButton
+              title={t("pageTitle")}
+              text={t("pageDescription")}
+              url={`${SITE_URL}/${locale}/tools/exposure-stops-calculator`}
+            />
+          </div>
+          <p>{t("aboutBody")}</p>
+          <ToolSections sections={extraSections} related={related} />
+          <p className="text-xs">{t("disclaimer")}</p>
+        </section>
 
-      <section className="flex flex-col gap-2">
-        <h2 className="text-base font-semibold">{t("faqTitle")}</h2>
-        {faqs.map((item, i) => (
-          <details
-            key={i}
-            className="group rounded-lg border border-border bg-card px-4 py-3"
-          >
-            <summary className="cursor-pointer list-none text-sm font-medium marker:content-none">
-              <span className="flex items-center justify-between gap-4">
-                {item.question}
-                <span className="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">
-                  +
+        <section className="flex flex-col gap-2">
+          <h2 className="text-base font-semibold">{t("faqTitle")}</h2>
+          {faqs.map((item, i) => (
+            <details
+              key={i}
+              className="group rounded-lg border border-border bg-card px-4 py-3"
+            >
+              <summary className="cursor-pointer list-none text-sm font-medium marker:content-none">
+                <span className="flex items-center justify-between gap-4">
+                  {item.question}
+                  <span className="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">
+                    +
+                  </span>
                 </span>
-              </span>
-            </summary>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {item.answer}
-            </p>
-          </details>
-        ))}
-      </section>
+              </summary>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </section>
+      </article>
 
       {process.env.NODE_ENV === "development" ? (
         <ToolImageDevPanel
