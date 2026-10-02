@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 type LegalSection = {
   heading: string;
   body: string[];
@@ -13,10 +15,12 @@ export function LegalPage({
   title,
   updated,
   sections,
+  children,
 }: {
   title: string;
   updated?: string;
   sections: LegalSection[];
+  children?: ReactNode;
 }) {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-10">
@@ -43,6 +47,8 @@ export function LegalPage({
           </section>
         ))}
       </div>
+
+      {children}
     </div>
   );
 }

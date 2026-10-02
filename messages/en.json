@@ -300,6 +300,13 @@
         ]
       },
       {
+        "heading": "The Photographer Behind ExifLens",
+        "body": [
+          "ExifLens is built and run by a working photographer who shoots landscapes, cityscapes and autumn color under the name Chronicle of Moments_SH. Every tool on this site began as a small problem in the field: working out an ND filter exposure at the water's edge, checking how wide a lens really is on a crop body, or finding out exactly when the sun would line up with a subject.",
+          "The photographs below are our own work, and the watermark in each corner is the same name behind our guides. They are here so you can judge who is writing the advice you read: not stock illustrations, but frames that taught us the lessons we write about."
+        ]
+      },
+      {
         "heading": "Who It's For",
         "body": [
           "ExifLens is built for landscape and long-exposure photographers who need a quick ND filter calculator in the field, and for anyone who wants to check or showcase a photo's camera settings without digging through desktop software."
@@ -311,7 +318,44 @@
           "Have feedback, found a bug, or want to suggest a feature? Email us at skysmoga@gmail.com — we read every message."
         ]
       }
-    ]
+    ],
+    "gallery": {
+      "heading": "From Our Own Camera",
+      "intro": "Six photographs we made ourselves, from long-exposure seascapes to backlit leaves and city light.",
+      "linkLabel": "Read the story behind each frame",
+      "items": [
+        {
+          "file": "01-long-exposure-seascape",
+          "caption": "Dusk seascape, long exposure",
+          "alt": "Long-exposure seascape at dusk with silky water around dark rocks"
+        },
+        {
+          "file": "02-backlit-maple-sunstar",
+          "caption": "Backlit maple and sunstar",
+          "alt": "Red maple leaves backlit by a low sun forming a starburst"
+        },
+        {
+          "file": "03-bw-ferris-wheel",
+          "caption": "Ferris wheel in black and white",
+          "alt": "Black-and-white close crop of a ferris wheel"
+        },
+        {
+          "file": "04-calm-lake-skyline",
+          "caption": "Lake and skyline on a clear autumn day",
+          "alt": "Skyscrapers beside a calm lake under a blue sky"
+        },
+        {
+          "file": "05-autumn-waterway-towers",
+          "caption": "Autumn trees along a waterway",
+          "alt": "Autumn trees along a waterway with towers behind"
+        },
+        {
+          "file": "06-sun-in-sculpture-arch",
+          "caption": "The setting sun inside a sculpture arch",
+          "alt": "Setting sun framed inside the arch of a large sculpture"
+        }
+      ]
+    }
   },
   "Disclosure": {
     "title": "Affiliate Disclosure",

@@ -300,6 +300,13 @@
         ]
       },
       {
+        "heading": "El fotógrafo detrás de ExifLens",
+        "body": [
+          "ExifLens está creado y gestionado por un fotógrafo en activo que retrata paisajes, ciudades y el color del otoño bajo el nombre Chronicle of Moments_SH. Cada herramienta de este sitio nació de un pequeño problema sobre el terreno: calcular la exposición con un filtro ND a la orilla del agua, comprobar cuánto abarca realmente un objetivo en una cámara de sensor recortado o saber exactamente cuándo el sol se alinearía con un sujeto.",
+          "Las fotografías de abajo son obra propia, y la marca de agua de cada esquina es el mismo nombre que firma nuestras guías. Están aquí para que puedas juzgar quién escribe los consejos que lees: no son ilustraciones de archivo, sino imágenes que nos enseñaron las lecciones sobre las que escribimos."
+        ]
+      },
+      {
         "heading": "Para quién es",
         "body": [
           "ExifLens está pensado para fotógrafos de paisajes y exposición larga que necesitan una calculadora rápida de filtros ND en el campo, y para cualquiera que quiera revisar o mostrar la configuración de cámara de una foto sin abrir software de escritorio."
@@ -311,7 +318,44 @@
           "¿Tienes comentarios, encontraste un error o quieres sugerir una función? Escríbenos a skysmoga@gmail.com; leemos todos los mensajes."
         ]
       }
-    ]
+    ],
+    "gallery": {
+      "heading": "Desde nuestra propia cámara",
+      "intro": "Seis fotografías propias, desde paisajes marinos de larga exposición hasta hojas a contraluz y luz urbana.",
+      "linkLabel": "Lee la historia detrás de cada imagen",
+      "items": [
+        {
+          "file": "01-long-exposure-seascape",
+          "caption": "Paisaje marino al anochecer, larga exposición",
+          "alt": "Paisaje marino de larga exposición al anochecer con agua suave alrededor de rocas oscuras"
+        },
+        {
+          "file": "02-backlit-maple-sunstar",
+          "caption": "Arce a contraluz con estrella solar",
+          "alt": "Hojas rojas de arce a contraluz con un sol bajo que forma una estrella"
+        },
+        {
+          "file": "03-bw-ferris-wheel",
+          "caption": "Noria en blanco y negro",
+          "alt": "Recorte cercano en blanco y negro de una noria"
+        },
+        {
+          "file": "04-calm-lake-skyline",
+          "caption": "Lago y horizonte urbano en un claro día de otoño",
+          "alt": "Rascacielos junto a un lago tranquilo bajo un cielo azul"
+        },
+        {
+          "file": "05-autumn-waterway-towers",
+          "caption": "Árboles otoñales junto a un canal",
+          "alt": "Árboles otoñales junto a un canal con torres detrás"
+        },
+        {
+          "file": "06-sun-in-sculpture-arch",
+          "caption": "El sol poniente dentro del arco de una escultura",
+          "alt": "Sol poniente enmarcado en el arco de una gran escultura"
+        }
+      ]
+    }
   },
   "Disclosure": {
     "title": "Divulgación de Afiliados",
