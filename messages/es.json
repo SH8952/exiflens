@@ -22,7 +22,7 @@
     "uploaderErrorTooLarge": "Este archivo es demasiado grande (máx. 100MB).",
     "uploaderErrorParse": "No se pudo leer el EXIF de esta foto. Puede que no contenga metadatos.",
     "exifSectionTitle": "EXIF extraído",
-    "exifEmpty": "Sube una foto para ver cámara, velocidad de obturación, apertura, ISO y distancia focal.",
+    "exifEmpty": "Sube una foto para ver cámara, velocidad de obturación, apertura, ISO, distancia focal y la fecha y hora de captura.",
     "camera": "Cámara",
     "lens": "Objetivo",
     "shutter": "Velocidad de obturación",
@@ -30,6 +30,7 @@
     "iso": "ISO",
     "focalLength": "Distancia focal",
     "gps": "Ubicación GPS",
+    "takenAtDateTime": "Fecha y hora de captura",
     "viewOnMap": "Ver en el mapa",
     "gpsMapTitle": "Mapa de la ubicación GPS",
     "gpsMapClose": "Cerrar",
@@ -59,7 +60,7 @@
     "guideHighlightsSubtitle": "Guías prácticas sobre exposición, filtros ND y técnicas de cada género fotográfico.",
     "guideHighlightsCta": "Ver todas las guías →",
     "toolsHighlightsTitle": "Explora las herramientas",
-    "toolsHighlightsSubtitle": "Calculadoras gratuitas en el navegador — sin registro ni subir fotos.",
+    "toolsHighlightsSubtitle": "Descubre herramientas gratuitas que no requieren registro y procesan tus fotos en tu propio navegador, sin subirlas a ningún servidor.",
     "toolsHighlightsCta": "Ver todas las herramientas →",
     "faqHighlightsTitle": "Preguntas frecuentes",
     "faqHighlightsSubtitle": "Preguntas reales de fotógrafos, recopiladas de nuestras herramientas y guías.",
@@ -1018,9 +1019,10 @@
   },
   "ToolsHub": {
     "title": "Herramientas fotográficas",
-    "subtitle": "Calculadoras gratuitas que funcionan solo en tu navegador, sin registro ni subida de archivos.",
+    "subtitle": "Una colección de herramientas gratuitas sin registro, donde tus fotos no se suben a ningún servidor y se procesan directamente en tu navegador.",
     "fieldSectionTitle": "Calculadoras para el terreno",
     "postShootSectionTitle": "Herramientas de posproducción y uso profesional",
+    "imageSectionTitle": "Herramientas de edición y conversión de imágenes",
     "comingSoon": "Próximamente",
     "tools": {
       "dof-calculator": {
@@ -1086,6 +1088,30 @@
       "golden-hour-calculator": {
         "name": "Calculadora de hora dorada y hora azul",
         "description": "Consulta los intervalos de hora dorada y hora azul de hoy solo con una fecha y una ubicación."
+      },
+      "image-compressor": {
+        "name": "Compresor de imágenes",
+        "description": "Reduce fotos JPG, PNG y WebP al tamaño objetivo en KB. Con opción de eliminar la ubicación."
+      },
+      "image-resizer": {
+        "name": "Cambiar tamaño de imágenes",
+        "description": "Cambia el tamaño de tus fotos por píxeles o porcentaje, con ajustes para blogs, redes sociales e impresión."
+      },
+      "image-converter": {
+        "name": "Conversor de formato de imagen",
+        "description": "Convierte HEIC, WebP, PNG y más a JPG, o JPG a PNG y WebP."
+      },
+      "image-crop-rotate": {
+        "name": "Recortar y girar imágenes",
+        "description": "Recorta con una proporción fija, gira 90 grados y voltea horizontal o verticalmente."
+      },
+      "image-watermark": {
+        "name": "Marca de agua para imágenes",
+        "description": "Añade una marca de agua de texto o logotipo a muchas fotos a la vez, con control de posición y opacidad."
+      },
+      "image-mosaic": {
+        "name": "Mosaico y desenfoque de imágenes",
+        "description": "Oculta rostros, matrículas y datos personales con pixelado, desenfoque o un recuadro negro."
       }
     }
   },
@@ -2589,6 +2615,514 @@
         }
       ]
     }
+  },
+  "ImageTools": {
+    "privacyNote": "Tus imágenes no se envían a ningún servidor. Se procesan solo dentro de este navegador y desaparecen al cerrar la pestaña.",
+    "dropLabel": "Arrastra y suelta las imágenes aquí",
+    "dropHint": "Puedes procesar hasta {max} imágenes a la vez.",
+    "selectButton": "Elegir imágenes",
+    "tooMany": "Solo se añadieron las primeras {max} imágenes; el resto quedó fuera.",
+    "skippedType": "Se omitieron {count} archivo(s) en un formato no compatible.",
+    "skippedSize": "Se omitieron {count} archivo(s) de más de {max} MB.",
+    "statusReady": "En espera",
+    "statusProcessing": "Procesando…",
+    "statusDone": "Listo",
+    "downloadOne": "Descargar",
+    "removeFile": "Quitar de la lista",
+    "optionsTitle": "Opciones",
+    "processButton": "Procesar {count} imagen(es)",
+    "processingButton": "Procesando…",
+    "zippingButton": "Creando ZIP…",
+    "downloadZipButton": "Descargar {count} en ZIP",
+    "clearAll": "Borrar todo",
+    "totalSummary": "Total {before} → {after}",
+    "errors": {
+      "decode-failed": "No se pudo leer esta imagen",
+      "too-large": "Esta imagen es demasiado grande para procesarla",
+      "encode-failed": "No se pudo guardar",
+      "format-unsupported": "Este navegador no admite el formato de salida elegido",
+      "canvas-unavailable": "La función de dibujo del navegador no está disponible",
+      "unknown": "Ocurrió un error durante el procesamiento"
+    }
+  },
+  "ImageCompressor": {
+    "modeLabel": "Cómo reducir",
+    "modeQuality": "Ajustar la calidad",
+    "modeTarget": "Ajustar a un tamaño objetivo (KB)",
+    "qualityLabel": "Calidad (menor calidad, archivo más pequeño)",
+    "targetLabel": "Tamaño objetivo",
+    "targetHint": "La herramienta busca automáticamente la mejor calidad que quepa en este tamaño. Solo para JPG y WebP.",
+    "widthLabel": "Ancho máximo",
+    "widthHint": "Reducir el ancho en píxeles de las fotos grandes disminuye mucho su peso. Los valores mayores que el original se ignoran.",
+    "widthOriginal": "Mantener el tamaño original",
+    "formatLabel": "Formato de salida",
+    "formatHint": "PNG se guarda sin pérdida de calidad, por lo que apenas se reduce. Si el peso importa, elige JPG o WebP.",
+    "formatAuto": "Mantener el formato original",
+    "metadataLabel": "Información de la foto (EXIF)",
+    "metadataStrip": "Eliminar todo (predeterminado)",
+    "metadataGps": "Eliminar solo la ubicación",
+    "metadataKeep": "Conservar todo",
+    "metadataHint": "Conservar la información o eliminar solo la ubicación funciona al guardar un JPG como JPG. Con PNG, WebP o un formato distinto, la información de la foto se elimina.",
+    "missedTarget": "Algunas fotos no alcanzaron el tamaño objetivo ni con la calidad mínima. Prueba a reducir el ancho máximo.",
+    "pageTitle": "Compresor de imágenes – reduce fotos a un tamaño en KB",
+    "pageDescription": "Reduce fotos JPG, PNG y WebP al peso que necesitas. Se procesan en tu navegador sin subirlas, con opciones para eliminar la ubicación o conservar el EXIF.",
+    "aboutTitle": "Cómo usar el compresor de imágenes",
+    "aboutBody": "Los informes, los blogs y los formularios en línea suelen limitar el tamaño de las fotos que puedes adjuntar. Elige tus fotos y esta herramienta las vuelve a guardar dentro de tu navegador con menos peso. Ajusta tú mismo el control de calidad o, simplemente, escribe un objetivo como 500 KB y la herramienta busca la mejor calidad que quepa. Tus fotos nunca se suben a un servidor.",
+    "disclaimer": "Guardar como JPG o WebP provoca una pérdida de calidad pequeña y difícil de notar. Conserva tus originales importantes antes de comprimir.",
+    "sections": [
+      {
+        "heading": "Cómo usarlo",
+        "list": [
+          "Arrastra las imágenes o pulsa Elegir imágenes para añadir hasta 20 a la vez.",
+          "Elige Ajustar la calidad o Ajustar a un tamaño objetivo. Si un sitio impone un límite de peso, la opción de tamaño objetivo es más cómoda.",
+          "Si hace falta, define un ancho máximo y un formato de salida.",
+          "Pulsa Procesar para ver el tamaño guardado de cada imagen y descárgalas una a una o todas juntas en un ZIP."
+        ]
+      },
+      {
+        "heading": "Por qué baja el peso",
+        "body": [
+          "JPG y WebP guardan la imagen descartando detalles que el ojo humano apenas nota. Cuanto menor es el valor de calidad, más se descarta y más pequeño queda el archivo. Si lo bajas demasiado, aparecen manchas en forma de bloques. Un valor entre 70 y 85 suele reducir mucho el peso casi sin diferencia visible.",
+          "Reducir el número de píxeles es el método más fiable. Las fotos del móvil suelen superar los 4000 píxeles de ancho, pero para un blog o para verlas en pantalla bastan de 1600 a 1920 píxeles."
+        ]
+      },
+      {
+        "heading": "Información de la foto (EXIF) y ubicación",
+        "body": [
+          "Como esta herramienta vuelve a guardar la foto, los datos de la cámara y la ubicación GPS se eliminan de forma predeterminada. Es la opción segura para fotos que publicas en redes sociales o foros.",
+          "Al guardar un JPG como JPG puedes elegir conservar todo o eliminar solo la ubicación. La foto se guarda ya girada a su orientación visible, así que la etiqueta de orientación se restablece y se descarta la miniatura incrustada. Los colores se guardan en sRGB, el estándar de la web."
+        ]
+      }
+    ],
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Se suben mis fotos a un servidor?",
+        "answer": "No. Todo se procesa dentro de tu navegador y tus fotos no se envían a ningún sitio. Las imágenes procesadas desaparecen al cerrar la pestaña, así que descarga los resultados que necesites."
+      },
+      {
+        "question": "¿Se estropeará la calidad al comprimir?",
+        "answer": "Con una calidad de JPG o WebP de entre 70 y 85, la diferencia es difícil de ver en pantalla. Si necesitas un archivo aún más pequeño, reducir el ancho máximo suele dañar menos la calidad que bajar más el valor de calidad."
+      },
+      {
+        "question": "¿Por qué mi PNG no se reduce mucho?",
+        "answer": "PNG es un formato sin pérdida, así que un valor de calidad no puede reducirlo. Para fotos, cambia el formato de salida a JPG o WebP, o reduce el ancho máximo. Un PNG transparente guardado como JPG recibe un fondo blanco donde era transparente."
+      },
+      {
+        "question": "Fijé un tamaño objetivo pero el resultado es mayor.",
+        "answer": "Según la foto, incluso la calidad mínima puede no alcanzar el objetivo, y aparece un aviso. Reduce el ancho máximo o sube un poco el objetivo e inténtalo de nuevo."
+      },
+      {
+        "question": "¿Qué pasa con la ubicación al comprimir?",
+        "answer": "De forma predeterminada se eliminan el EXIF y el GPS. Solo al guardar un JPG como JPG puedes conservar todo o eliminar únicamente la ubicación. Si solo quieres ocultar la ubicación, también sirve la herramienta de eliminación de EXIF."
+      }
+    ],
+    "exampleLeftAlt": "Una foto original de alta resolución y mucho peso",
+    "exampleRightAlt": "La misma foto guardada con menor tamaño de archivo"
+  },
+  "ImageResizer": {
+    "presetLabel": "Ajustes según el uso",
+    "presetPlaceholder": "Elige un ajuste (opcional)",
+    "preset": {
+      "blog800": "Entrada de blog (800 de ancho)",
+      "blog1200": "Entrada de blog (1200 de ancho)",
+      "hd": "HD 1280×720",
+      "fhd": "Full HD 1920×1080",
+      "insta": "Instagram vertical 1080×1350",
+      "square": "Cuadrado 1080×1080",
+      "profile": "Foto de perfil 400×400",
+      "a4": "Impresión A4 2480×3508"
+    },
+    "modeLabel": "Cómo definir el tamaño",
+    "modeFit": "Ajustar dentro de un tamaño máximo (mantiene la proporción)",
+    "modePercent": "Escalar por porcentaje",
+    "modeExact": "Definir un tamaño exacto",
+    "percentLabel": "Escala",
+    "widthLabel": "Ancho",
+    "heightLabel": "Alto",
+    "fitHint": "Puedes rellenar solo el ancho o solo el alto. Deja 0 para no limitar ese lado. Se mantienen las proporciones de la foto.",
+    "exactHint": "La foto se fuerza al tamaño que indiques. Si la proporción es distinta, la foto puede estirarse o aplastarse.",
+    "upscaleLabel": "Permitir agrandar por encima del original",
+    "upscaleHint": "Si está desactivado, no se aplican tamaños mayores que el original. Agrandar una foto la vuelve más borrosa, no más nítida.",
+    "formatLabel": "Formato de salida",
+    "formatAuto": "Mantener el formato original",
+    "qualityLabel": "Calidad de salida",
+    "keepExifLabel": "Conservar los datos de la cámara (EXIF)",
+    "keepExifHint": "Solo se aplica al guardar un JPG como JPG. Si está desactivado, se elimina toda la información de la foto, incluida la ubicación.",
+    "pageTitle": "Cambiar tamaño de imágenes – redimensiona fotos por píxeles o porcentaje",
+    "pageDescription": "Cambia el ancho, el alto o la escala de tus fotos. Con ajustes para blogs, redes sociales e impresión, y procesamiento por lotes. Se procesa en tu navegador sin subir nada.",
+    "aboutTitle": "Cómo usar el cambio de tamaño de imágenes",
+    "aboutBody": "Las presentaciones, los blogs, los anuncios de tiendas en línea y los formularios suelen exigir fotos de un tamaño concreto. Esta herramienta te permite definir el tamaño en píxeles o escalar por porcentaje, con ajustes para los usos más comunes. Tus fotos se procesan dentro de tu navegador y nunca se suben a un servidor.",
+    "disclaimer": "Agrandar una foto más allá de su tamaño original no añade detalle y la vuelve borrosa. Si necesitas una imagen más grande, parte del original más grande que tengas.",
+    "sections": [
+      {
+        "heading": "Tres formas de definir el tamaño",
+        "list": [
+          "Ajustar dentro de un tamaño máximo: defines límites de ancho y alto y la foto se reduce para caber en ellos manteniendo sus proporciones. Es la opción más habitual.",
+          "Escalar por porcentaje: cambia el tamaño en relación con el original, por ejemplo al 50 por ciento. Útil para reducir muchas fotos en la misma proporción.",
+          "Definir un tamaño exacto: fuerza la foto al ancho y alto que indiques. Si la proporción es distinta, la foto se deforma, así que úsalo solo cuando el tamaño sea obligatorio."
+        ]
+      },
+      {
+        "heading": "Tamaños recomendados según el uso",
+        "body": [
+          "Una foto de blog de 800 a 1200 píxeles de ancho se ve nítida en casi todas las pantallas. Más grande solo añade peso y ralentiza la página. En Instagram, 1080×1350 es el estándar vertical y 1080×1080 el cuadrado.",
+          "Imprimir requiere tanto un tamaño de impresión como una resolución. Para imprimir A4 (210×297 mm) a 300 ppp necesitas unos 2480×3508 píxeles. Para comprobar antes la calidad de impresión, usa la calculadora de resolución de impresión junto con esta herramienta."
+        ]
+      },
+      {
+        "heading": "Muchas fotos a la vez",
+        "body": [
+          "Puedes procesar hasta 20 fotos con los mismos ajustes y descargar los resultados en un solo ZIP. Los nombres de archivo guardados incluyen el nuevo tamaño, por ejemplo photo-1200x800.jpg, para distinguirlos de los originales. Al reducir, la imagen se achica en varios pasos en lugar de uno solo, lo que atenúa los bordes dentados."
+        ]
+      }
+    ],
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Puedo definir solo el ancho y mantener las proporciones?",
+        "answer": "Sí. En Ajustar dentro de un tamaño máximo, escribe solo el ancho y deja el alto en 0. El alto se calcula automáticamente."
+      },
+      {
+        "question": "¿Cambiar el tamaño reduce también el peso del archivo?",
+        "answer": "Normalmente mucho. Si reduces a la mitad el ancho y el alto, quedan una cuarta parte de los píxeles y el archivo se reduce de forma parecida. Si necesitas alcanzar un peso exacto, usa el compresor de imágenes."
+      },
+      {
+        "question": "¿Agrandar una foto pequeña la hace más nítida?",
+        "answer": "No. Agrandar no puede crear detalle que nunca existió, así que la foto se ve borrosa. Por eso, de forma predeterminada no se aplican tamaños mayores que el original."
+      },
+      {
+        "question": "¿Se suben mis fotos a un servidor?",
+        "answer": "No. Todo se procesa dentro de tu navegador y tus fotos no se envían a ningún sitio."
+      },
+      {
+        "question": "¿Se elimina la ubicación al cambiar el tamaño?",
+        "answer": "De forma predeterminada se eliminan los datos de la cámara y la ubicación. Al activar Conservar EXIF, la información se traslada solo al guardar un JPG como JPG. Si no quieres exponer tu ubicación, déjalo desactivado."
+      }
+    ],
+    "exampleLeftAlt": "Una foto grande antes de cambiar su tamaño",
+    "exampleRightAlt": "La foto redimensionada al tamaño que necesitas"
+  },
+  "ImageConverter": {
+    "targetLabel": "Convertir a",
+    "qualityLabel": "Calidad",
+    "backgroundLabel": "Fondo de las zonas transparentes",
+    "backgroundHint": "JPG no admite transparencia, así que las zonas transparentes se rellenan con el color elegido.",
+    "backgroundWhite": "Blanco",
+    "backgroundBlack": "Negro",
+    "metadataNote": "Al cambiar de formato no se conservan los datos de la cámara (EXIF) ni la ubicación. Los GIF animados solo convierten su primer fotograma.",
+    "pageTitle": "Conversor de formato de imagen – HEIC a JPG, PNG y WebP",
+    "pageDescription": "Convierte imágenes HEIC, WebP, PNG, GIF, BMP y AVIF a JPG, PNG o WebP. Útil para pasar fotos HEIC del iPhone a JPG, procesadas en tu navegador sin subirlas.",
+    "aboutTitle": "Cómo usar el conversor de formato de imagen",
+    "aboutBody": "Las fotos HEIC del iPhone que no se abren en Windows o en un sitio de envío, o una imagen WebP que no puedes poner en un documento, necesitan un cambio de formato. Esta herramienta convierte muchas imágenes a la vez a JPG, PNG o WebP. La conversión ocurre dentro de tu navegador, así que tus fotos nunca se suben a un servidor.",
+    "disclaimer": "Al convertir no se conservan los datos de la cámara ni la ubicación. Guarda tus originales aparte. La conversión de HEIC puede tardar un poco en algunos navegadores.",
+    "sections": [
+      {
+        "heading": "¿Qué formato elegir?",
+        "list": [
+          "JPG: el formato de foto más extendido, que abren casi todos los programas y sitios. La opción habitual para envíos e impresión.",
+          "PNG: sin pérdida y con transparencia. Bueno para logotipos, capturas de pantalla e imágenes con mucho texto, pero pesado para fotos.",
+          "WebP: más ligero que JPG con la misma calidad, por lo que es ideal para páginas web. Algunos programas antiguos no pueden abrirlo."
+        ]
+      },
+      {
+        "heading": "Convertir fotos HEIC del iPhone",
+        "body": [
+          "De forma predeterminada, los iPhone guardan las fotos en el formato compacto HEIC. Windows y algunos sitios de compras o administraciones no pueden leerlo, así que hay que pasarlo a JPG.",
+          "Al elegir un archivo HEIC, primero se descodifica a JPG y después se guarda en el formato que hayas elegido. Si un HEIC contiene varias imágenes, solo se convierte la principal."
+        ]
+      },
+      {
+        "heading": "Qué cambia al convertir",
+        "body": [
+          "JPG y WebP tienen pérdida, así que cada conversión cuesta un poco de calidad. Convierte una sola vez desde el original siempre que sea posible. Al pasar un PNG transparente a JPG, la zona transparente se rellena de blanco o del color que elijas. Al convertir no se conservan el EXIF ni el GPS."
+        ]
+      }
+    ],
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Puedo convertir fotos HEIC del iPhone a JPG?",
+        "answer": "Sí. Elige tus archivos HEIC y deja JPG como formato de destino. La conversión se hace en tu navegador y las fotos no se suben."
+      },
+      {
+        "question": "¿Se suben mis fotos a un servidor?",
+        "answer": "No. Toda la conversión se hace dentro de tu navegador y tus fotos no se envían a ningún sitio."
+      },
+      {
+        "question": "¿Se pierde calidad al convertir?",
+        "answer": "Convertir a PNG no pierde nada. Guardar como JPG o WebP pierde un poco según el valor de calidad, y por encima de 90 la diferencia es difícil de ver."
+      },
+      {
+        "question": "¿Se convierten los GIF animados?",
+        "answer": "Solo se convierte el primer fotograma de un GIF animado. La animación no se conserva."
+      },
+      {
+        "question": "¿Puedo convertir archivos RAW?",
+        "answer": "No. Esta herramienta admite JPG, PNG, WebP, GIF, BMP, AVIF y HEIC. Los archivos RAW como CR3, NEF o ARW no son compatibles."
+      }
+    ],
+    "exampleLeftAlt": "Un archivo de foto antes de convertirlo",
+    "exampleRightAlt": "La foto convertida a otro formato como JPG"
+  },
+  "ImageCropRotate": {
+    "privacyNote": "Tu imagen no se envía a ningún servidor. Se procesa solo dentro de este navegador y desaparece al cerrar la pestaña.",
+    "uploadLabel": "Elegir una imagen (una)",
+    "errTooLarge": "Esta imagen es demasiado grande para procesarla.",
+    "errDecode": "No se pudo leer esta imagen.",
+    "errFormat": "Este navegador no admite el formato de salida elegido.",
+    "errEncode": "No se pudo guardar.",
+    "rotateLeft": "↺ Girar 90° a la izquierda",
+    "rotateRight": "↻ Girar 90° a la derecha",
+    "flipH": "Voltear horizontalmente",
+    "flipV": "Voltear verticalmente",
+    "resetCrop": "Restablecer el recorte",
+    "aspectLabel": "Proporción del recorte",
+    "aspectFree": "Libre",
+    "cropReadout": "Selección {w}×{h}px (de {total}px) · Arrastra sobre la foto para dibujar un área, arrastra dentro para moverla y arrastra los puntos de las esquinas para cambiar el tamaño.",
+    "outputTitle": "Opciones de salida",
+    "formatLabel": "Formato de salida",
+    "formatAuto": "Mantener el formato original",
+    "qualityLabel": "Calidad de salida",
+    "keepExifLabel": "Conservar los datos de la cámara (EXIF)",
+    "keepExifHint": "Solo se aplica al guardar un JPG como JPG. Si está desactivado, se elimina toda la información de la foto, incluida la ubicación.",
+    "processingButton": "Procesando…",
+    "applyButton": "Aplicar recorte y giro",
+    "downloadResult": "Descargar {name} ({dims}px, {size})",
+    "pageTitle": "Recortar y girar imágenes – recorte por proporción, giro de 90° y volteo",
+    "pageDescription": "Recorta una foto con la proporción que necesitas, gírala 90 grados o voltéala horizontal o verticalmente. Admite proporciones fijas como 1:1, 4:3 y 16:9, y se procesa en tu navegador sin subir nada.",
+    "aboutTitle": "Cómo usar la herramienta de recortar y girar",
+    "aboutBody": "Usa esta herramienta para quedarte solo con la parte de una foto que necesitas para un informe, o para enderezar una foto que salió de lado. Carga una foto, arrastra el área de recorte al rango que quieras y guarda. Tu foto se procesa dentro de tu navegador y nunca se sube a un servidor.",
+    "disclaimer": "Al cambiar el giro o el volteo, el área de recorte se restablece a la imagen completa. La parte recortada no se conserva en el archivo guardado.",
+    "sections": [
+      {
+        "heading": "Cómo recortar",
+        "list": [
+          "Elige una imagen y el área de recorte empieza abarcando toda la foto.",
+          "Arrastra sobre la foto para dibujar un área nueva, arrastra dentro del área para moverla y arrastra los cuatro puntos de las esquinas para cambiar su tamaño.",
+          "Elige una proporción como 1:1, 4:3 o 16:9 en lugar de Libre y el área mantiene esa proporción mientras la ajustas.",
+          "Pulsa Aplicar y se genera el resultado con un enlace de descarga."
+        ]
+      },
+      {
+        "heading": "Proporciones de recorte según el uso",
+        "body": [
+          "1:1 sirve para fotos de perfil y publicaciones cuadradas de Instagram, y 3:4 se acerca a la proporción vertical del feed de Instagram. 16:9 encaja con las miniaturas de YouTube y las diapositivas de presentaciones, mientras que 3:2 y 4:3 se acercan a la proporción original de las cámaras y funcionan bien para imprimir. 9:16 es el formato vertical de Shorts, Reels e Historias."
+        ]
+      },
+      {
+        "heading": "Girar y voltear",
+        "body": [
+          "A veces una foto del móvil se ve de lado porque en el archivo solo se guardó una marca de rotación. Esta herramienta carga la foto tal como la ves, así que un giro de 90 grados se aplica exactamente a lo que hay en pantalla. Los selfis que se ven en espejo se corrigen con un volteo horizontal."
+        ]
+      }
+    ],
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Cómo recorto con una proporción exacta?",
+        "answer": "Elige la proporción que quieras en Proporción del recorte, por ejemplo 1:1 o 16:9. Se mantiene mientras dibujas o arrastras las esquinas."
+      },
+      {
+        "question": "¿Se suben mis fotos a un servidor?",
+        "answer": "No. Todo se procesa dentro de tu navegador y tu foto no se envía a ningún sitio."
+      },
+      {
+        "question": "¿Recortar reduce la calidad?",
+        "answer": "El recorte en sí conserva los píxeles del área seleccionada con su resolución original. La foto se vuelve a guardar como JPG o WebP, así que según el ajuste de calidad es posible una pérdida muy pequeña, apenas visible con un ajuste alto."
+      },
+      {
+        "question": "Mi foto girada vuelve a verse girada en otro sitio.",
+        "answer": "Esta herramienta aplica el giro a los propios píxeles y guarda un valor de orientación normal, así que otros programas la muestran igual."
+      },
+      {
+        "question": "¿Puedo recortar varias fotos a la vez?",
+        "answer": "Cada foto necesita su propia área de recorte, así que se procesan de una en una. Para reducir muchas fotos al mismo tamaño, usa Cambiar tamaño de imágenes."
+      }
+    ],
+    "exampleLeftAlt": "La foto completa antes de recortarla",
+    "exampleRightAlt": "La foto recortada solo con la parte que necesitas",
+    "dropLabel": "Arrastra y suelta una imagen aquí",
+    "dropHint": "Una imagen cada vez. Si sueltas otra foto durante la edición, se reemplaza y se restablece el área de recorte.",
+    "selectButton": "Elegir una imagen",
+    "errNotImage": "Solo se pueden usar imágenes JPG, PNG y WebP."
+  },
+  "ImageWatermark": {
+    "typeLabel": "Tipo de marca de agua",
+    "typeText": "Texto",
+    "typeImage": "Imagen de logotipo",
+    "textLabel": "Texto de la marca de agua",
+    "colorLabel": "Color del texto",
+    "logoLabel": "Elegir una imagen de logotipo",
+    "logoHint": "Lo mejor es un PNG con fondo transparente. Tus archivos no se envían a ningún servidor.",
+    "logoError": "No se pudo leer la imagen del logotipo.",
+    "logoRequired": "Elige una imagen de logotipo y aparecerá en la vista previa.",
+    "positionLabel": "Posición",
+    "position": {
+      "tl": "Arriba a la izquierda",
+      "tc": "Arriba al centro",
+      "tr": "Arriba a la derecha",
+      "ml": "Centro a la izquierda",
+      "mc": "Centro",
+      "mr": "Centro a la derecha",
+      "bl": "Abajo a la izquierda",
+      "bc": "Abajo al centro",
+      "br": "Abajo a la derecha",
+      "tile": "Repetir por toda la foto (mosaico)"
+    },
+    "textSizeLabel": "Tamaño del texto (relativo al ancho de la foto)",
+    "logoSizeLabel": "Tamaño del logotipo (relativo al ancho de la foto)",
+    "opacityLabel": "Opacidad",
+    "marginLabel": "Margen del borde",
+    "angleLabel": "Inclinación",
+    "shadowLabel": "Añadir sombra (se ve bien también en fotos claras)",
+    "formatLabel": "Formato de salida",
+    "formatAuto": "Mantener el formato original",
+    "qualityLabel": "Calidad de salida",
+    "keepExifLabel": "Conservar los datos de la cámara (EXIF)",
+    "keepExifHint": "Solo se aplica al guardar un JPG como JPG. Si está desactivado, se elimina toda la información de la foto, incluida la ubicación.",
+    "previewNote": "Vista previa (según la primera foto · se aplica con las mismas proporciones a todas las fotos)",
+    "pageTitle": "Marca de agua para imágenes – añade texto o logotipo en lote",
+    "pageDescription": "Añade una marca de agua de texto o logotipo a muchas fotos a la vez. Controla posición, tamaño, opacidad y repetición en mosaico, procesado en tu navegador sin subir nada.",
+    "aboutTitle": "Cómo usar la marca de agua para imágenes",
+    "aboutBody": "Usa esta herramienta para añadir tu nombre o la fuente a las fotos de un blog, un portafolio o una tienda antes de publicarlas, y disuadir su uso no autorizado. Elige texto o logotipo, define la posición y la opacidad, comprueba la vista previa y aplica los mismos ajustes a muchas fotos a la vez. Tus fotos nunca se suben a un servidor.",
+    "disclaimer": "Las imágenes con marca de agua se guardan como archivos nuevos, separados de tus originales. Conserva los originales. Una marca de agua no puede impedir por completo el uso no autorizado.",
+    "sections": [
+      {
+        "heading": "Cómo usarlo",
+        "list": [
+          "Añade fotos y aparece una vista previa con la primera.",
+          "Elige texto o una imagen de logotipo y escribe el texto o elige el archivo del logotipo.",
+          "Ajusta posición, tamaño y opacidad y comprueba la vista previa.",
+          "Pulsa Procesar para aplicar los mismos ajustes a todas las fotos y descárgalas una a una o en un ZIP."
+        ]
+      },
+      {
+        "heading": "Visible pero sin molestar",
+        "body": [
+          "Una marca pequeña en una esquina no estropea la foto, pero es fácil de recortar. Una marca tenue repetida por toda la foto protege mejor, pero estorba al verla. Elige según tu objetivo. Una opacidad de entre el 40 y el 60 por ciento y un tamaño del 4 al 8 por ciento del ancho de la foto es un buen punto de partida.",
+          "El texto blanco puede perderse en fotos claras, así que conviene dejar la sombra activada. Para logotipos, un PNG con fondo transparente se integra de forma natural en la foto sin un recuadro alrededor."
+        ]
+      },
+      {
+        "heading": "Derechos de autor y atribución",
+        "body": [
+          "Una marca de agua es solo una atribución visible y no sustituye a los derechos legales. Los derechos de autor pertenecen al fotógrafo desde que se toma la foto, y también puedes dejar tu nombre en los datos EXIF. Esta herramienta elimina el EXIF de forma predeterminada, así que activa Conservar EXIF si quieres mantenerlo."
+        ]
+      }
+    ],
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Puedo añadir la misma marca de agua a muchas fotos a la vez?",
+        "answer": "Sí. Puedes aplicar los mismos ajustes a hasta 20 fotos y descargarlas en un ZIP. Los tamaños son relativos al ancho de cada foto, así que las fotos de distinta resolución quedan con un aspecto parecido."
+      },
+      {
+        "question": "¿Se suben mis fotos a un servidor?",
+        "answer": "No. Todo se procesa dentro de tu navegador y ni las fotos ni los archivos de logotipo se envían a ningún sitio."
+      },
+      {
+        "question": "¿Puedo quitar la marca de agua más tarde?",
+        "answer": "En el resultado guardado, la marca de agua está integrada en la foto y no se puede deshacer. Por eso debes conservar tus originales aparte."
+      },
+      {
+        "question": "¿Se admiten marcas de agua con acentos o caracteres especiales?",
+        "answer": "Sí. El texto se dibuja con las fuentes instaladas en tu dispositivo, incluidas letras con acentos, números y símbolos como ©. Las formas pueden variar ligeramente entre dispositivos."
+      },
+      {
+        "question": "¿Añadir una marca de agua reduce la calidad?",
+        "answer": "La marca de agua se dibuja con la resolución original, así que el tamaño no cambia. Guardar como JPG o WebP puede costar una pérdida mínima según el ajuste, apenas visible con un ajuste alto."
+      }
+    ],
+    "exampleLeftAlt": "Una foto antes de añadir la marca de agua",
+    "exampleRightAlt": "La foto con una marca de agua de texto"
+  },
+  "ImageMosaic": {
+    "privacyNote": "Tu imagen no se envía a ningún servidor. Se procesa solo dentro de este navegador y desaparece al cerrar la pestaña.",
+    "uploadLabel": "Elegir una imagen (una)",
+    "errTooLarge": "Esta imagen es demasiado grande para procesarla.",
+    "errDecode": "No se pudo leer esta imagen.",
+    "errFormat": "Este navegador no admite el formato de salida elegido.",
+    "errEncode": "No se pudo guardar.",
+    "drawHint": "Arrastra sobre la parte que quieres ocultar para dibujar un área. Puedes añadir tantas áreas como necesites.",
+    "regionCount": "{count} área(s) ocultas",
+    "undo": "Deshacer la última área",
+    "clear": "Borrar todo",
+    "optionsTitle": "Opciones",
+    "effectLabel": "Cómo ocultar",
+    "effectPixelate": "Pixelar",
+    "effectBlur": "Desenfocar",
+    "effectBlack": "Recuadro negro",
+    "strengthLabel": "Intensidad (más alta, más difícil de leer)",
+    "shapeLabel": "Forma del área",
+    "shapeRect": "Rectángulo",
+    "shapeEllipse": "Elipse",
+    "formatLabel": "Formato de salida",
+    "formatAuto": "Mantener el formato original",
+    "qualityLabel": "Calidad de salida",
+    "keepExifLabel": "Conservar los datos de la cámara (EXIF)",
+    "keepExifHint": "Recomendamos dejarlo desactivado. Si se activa, la información de la foto, incluida la ubicación, permanece en el JPG.",
+    "processingButton": "Procesando…",
+    "applyButton": "Aplicar mosaico",
+    "downloadResult": "Descargar {name} ({size})",
+    "pageTitle": "Mosaico y desenfoque de imágenes – oculta rostros, matrículas y datos personales",
+    "pageDescription": "Oculta rostros, matrículas, direcciones y datos personales de una foto con pixelado, desenfoque o un recuadro negro. Se procesa en tu navegador sin subir nada.",
+    "aboutTitle": "Cómo usar la herramienta de mosaico",
+    "aboutBody": "Las fotos que publicas en un blog o una comunidad suelen captar cosas que deberían ocultarse, como la cara de un transeúnte, una matrícula o la dirección de una etiqueta de envío. Arrastra sobre las partes que quieres ocultar y elige pixelado, desenfoque o un recuadro negro. Tu foto se procesa dentro de tu navegador y nunca se sube a un servidor.",
+    "disclaimer": "Los rostros no se detectan automáticamente, así que debes marcar cada área tú mismo. Comprueba la vista previa para asegurarte de que todo queda cubierto antes de guardar. Un mosaico débil aún puede ser legible.",
+    "sections": [
+      {
+        "heading": "Cómo usarlo",
+        "list": [
+          "Elige una foto y aparece el editor.",
+          "Arrastra sobre cada parte que quieras ocultar. Añade tantas áreas como necesites y usa Deshacer la última área para corregir un error.",
+          "Elige el método y la intensidad, y la vista previa se actualiza al instante.",
+          "Pulsa Aplicar mosaico y el resultado se genera con la resolución original y un enlace de descarga."
+        ]
+      },
+      {
+        "heading": "¿Qué método es más seguro?",
+        "body": [
+          "Un recuadro negro borra por completo la información de esa zona, así que es el más fiable. Úsalo para matrículas, direcciones, teléfonos y números de documento, donde el texto nunca debe poder leerse.",
+          "El pixelado y el desenfoque se ven más naturales, pero con poca intensidad el texto o los rostros pueden seguir siendo reconocibles. Cubre un área generosa y sube la intensidad, a partir de 7. Esta herramienta dimensiona las celdas del mosaico en relación con el área, así que sigue siendo difícil de leer incluso en fotos grandes."
+        ]
+      },
+      {
+        "heading": "Comprueba antes de publicar",
+        "body": [
+          "La información personal de una foto no es solo lo que se ve. Los datos EXIF pueden contener coordenadas de ubicación. De forma predeterminada, esta herramienta vuelve a guardar la foto y elimina el EXIF y el GPS. Revisa también los reflejos en ventanas o gafas de sol y el texto que se transparenta por detrás de un documento."
+        ]
+      }
+    ],
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Encuentra los rostros y los oculta automáticamente?",
+        "answer": "No. Por ahora marcas tú cada área arrastrando. Así la foto permanece en tu dispositivo y puedes ver y elegir exactamente qué se oculta."
+      },
+      {
+        "question": "¿Se suben mis fotos a un servidor?",
+        "answer": "No. Todo se procesa dentro de tu navegador y tu foto no se envía a ningún sitio, así que es seguro usarla con fotos sensibles."
+      },
+      {
+        "question": "¿Se puede restaurar más tarde la parte oculta?",
+        "answer": "El resultado guardado no conserva los píxeles originales, por lo que no se puede restaurar por medios habituales. Con poca intensidad todavía se puede adivinar la forma aproximada, así que sube la intensidad o usa el recuadro negro."
+      },
+      {
+        "question": "¿Cómo debo ocultar matrículas o direcciones?",
+        "answer": "Para información que no debe poder leerse, usa el recuadro negro. El pixelado y el desenfoque pueden dejar el texto legible si la intensidad no es lo bastante alta."
+      },
+      {
+        "question": "¿Qué pasa con la ubicación al guardar?",
+        "answer": "De forma predeterminada se eliminan el EXIF y la ubicación. Solo un JPG guardado con Conservar EXIF activado mantiene la información original de la foto."
+      }
+    ],
+    "exampleLeftAlt": "Una foto donde se ven datos personales",
+    "exampleRightAlt": "La foto con rostros y otros datos pixelados",
+    "dropLabel": "Arrastra y suelta una imagen aquí",
+    "dropHint": "Una imagen cada vez. Si sueltas otra foto durante la edición, se reemplaza y se borran las áreas ocultas.",
+    "selectButton": "Elegir una imagen",
+    "errNotImage": "Solo se pueden usar imágenes JPG, PNG y WebP."
   },
   "Share": {
     "deviceShare": "Compartir con el dispositivo",

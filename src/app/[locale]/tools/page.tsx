@@ -4,7 +4,13 @@ import { routing } from "@/i18n/routing";
 import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { AdZone } from "@/components/ad-zone";
-import { FIELD_TOOLS, POST_SHOOT_TOOLS, type ToolEntry } from "@/lib/tools-roster";
+import {
+  FIELD_TOOLS,
+  POST_SHOOT_TOOLS,
+  IMAGE_TOOLS,
+  getVisibleTools,
+  type ToolEntry,
+} from "@/lib/tools-roster";
 
 type ResolvedTool = ToolEntry & { name: string; description: string };
 
@@ -46,7 +52,7 @@ export default async function ToolsHubPage({
   const t = await getTranslations("ToolsHub");
 
   const resolve = (tools: ToolEntry[]): ResolvedTool[] =>
-    tools.map((tool) => ({
+    getVisibleTools(tools).map((tool) => ({
       ...tool,
       name: t(`tools.${tool.slug}.name`),
       description: t(`tools.${tool.slug}.description`),
@@ -54,6 +60,7 @@ export default async function ToolsHubPage({
 
   const fieldTools = resolve(FIELD_TOOLS);
   const postShootTools = resolve(POST_SHOOT_TOOLS);
+  const imageTools = resolve(IMAGE_TOOLS);
   const comingSoonLabel = t("comingSoon");
 
   const breadcrumb = breadcrumbJsonLd([
@@ -87,6 +94,11 @@ export default async function ToolsHubPage({
         tools={postShootTools}
         comingSoonLabel={comingSoonLabel}
       />
+      <ToolSection
+        title={t("imageSectionTitle")}
+        tools={imageTools}
+        comingSoonLabel={comingSoonLabel}
+      />
 
       <AdZone
         id="tools-hub-mid"
@@ -107,6 +119,7 @@ function ToolSection({
   tools: ResolvedTool[];
   comingSoonLabel: string;
 }) {
+  if (tools.length === 0) return null;
   return (
     <section className="flex flex-col gap-4">
       <h2 className="text-lg font-semibold">{title}</h2>
@@ -129,6 +142,11 @@ function ToolCard({
   const card = (
     <div className="flex h-full flex-col gap-2 rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/50">
       <h3 className="font-semibold">{tool.name}</h3>
+      {tool.status === "hidden" ? (
+        <span className="w-fit rounded-full bg-amber-500/15 px-2 py-0.5 text-xs text-amber-600">
+          DEV ONLY · 숨김
+        </span>
+      ) : null}
       <p className="text-sm text-muted-foreground">{tool.description}</p>
       {tool.status === "comingSoon" ? (
         <span className="mt-auto inline-flex w-fit items-center rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">

@@ -3,6 +3,7 @@ import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL, languageAlternates } from "@/lib/seo";
 import { getAllGuidesMeta } from "@/lib/guides";
 import { BLOG_LOCALE, getAllBlogMeta } from "@/lib/blog";
+import { getLiveImageToolPaths } from "@/lib/tools-roster";
 
 /**
  * Every static route currently in the app, per Google AdSense/SEO checklist
@@ -30,6 +31,8 @@ const STATIC_PATHS = [
   "/tools/storage-calculator",
   "/tools/exif-remover",
   "/tools/crop-factor-calculator",
+  // 이미지 편집·변환 도구 — status가 "live"인 것만 자동 포함 (hidden 제외)
+  ...getLiveImageToolPaths(),
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

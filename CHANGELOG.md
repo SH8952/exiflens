@@ -1,3 +1,46 @@
+## 2026-10-03 — 홈 화면 "추출된 EXIF" 목록에 촬영 날짜·시간 행 추가
+
+- `src/components/exif-panel.tsx`: "GPS 위치" 바로 아래에 촬영 날짜·시간 행 추가. 값은 기존 추출 결과(`ParsedExif.takenAt`, 형식 `2026-10-01 21:30:45`, JPG/PNG 등과 RAW 모두)를 그대로 사용하며 추출 로직은 변경 없음. 날짜 정보가 없거나 사진 업로드 전에는 다른 항목처럼 "—".
+- `messages/{ko,en,ja,es}.json`: `Home.takenAtDateTime`("촬영 날짜·시간" / "Date & Time Taken" / "撮影日時" / "Fecha y hora de captura") 추가, `Home.exifEmpty` 안내 문구에 촬영 날짜·시간 추가.
+- 검증: tsc·eslint·next build 통과. 백업: `_backups/exiflens_backup_*_exif_takenat_row`. 로컬 화면 확인 후 푸시(이미지 도구 6종 변경과 함께).
+
+## 2026-10-03 — 이미지 자르기·회전 도구: 업로드 영역을 다른 도구와 같은 디자인으로 통일
+
+- `src/components/image-tools/image-crop-rotate-card.tsx`: 일반 파일 선택 칸을 점선 사각형 박스 + "여기에 이미지를 끌어다 놓으세요" 문구 + "이미지 선택" 버튼으로 교체(모자이크·압축 등과 동일). 카드 전체가 드롭을 받고 드래그 중 테두리 강조. 여러 장을 놓으면 첫 번째 JPG/PNG/WebP만 사용, 이미지가 아니면 안내 문구, 편집 중 다른 사진을 놓으면 교체(자르기 영역 초기화). 사진 처리 로직은 변경 없음.
+- `messages/{ko,en,ja,es}.json`: `ImageCropRotate`에 `dropLabel`·`dropHint`·`selectButton`·`errNotImage` 추가.
+- 검증: tsc·eslint·next build 통과. 백업: `_backups/exiflens_backup_*_crop_dropzone`. 로컬 화면 확인 필요.
+
+## 2026-10-03 — 이미지 모자이크 도구: 사진 끌어다 놓기(드래그 앤 드롭) 지원
+
+- 증상: 모자이크 화면에 사진을 끌어다 놓으면 새 탭으로 사진이 열림. 원인: 사진 선택 부분이 일반 파일 선택 칸뿐이라 칸 밖·편집 화면 위에 놓으면 브라우저가 파일을 직접 열었음.
+- `src/components/image-tools/image-mosaic-card.tsx`: 카드 전체가 드롭을 받도록 변경(드래그 중 테두리 강조). 점선 박스 + "이미지 선택" 버튼으로 다른 도구와 같은 모양으로 통일. 여러 장을 놓으면 첫 번째 JPG/PNG/WebP만 사용, 이미지가 아니면 안내 문구. 편집 중 다른 사진을 놓으면 새 사진으로 교체(그린 영역 초기화).
+- `messages/{ko,en,ja,es}.json`: `ImageMosaic`에 `dropLabel`·`dropHint`·`selectButton`·`errNotImage` 추가. 사진 처리 로직은 변경 없음. 자르기·회전은 변경하지 않음.
+- 검증: tsc·eslint·next build 통과. 백업: `_backups/exiflens_backup_*_mosaic_dropzone`. 로컬 화면 확인 필요.
+
+## 2026-10-03 — 이미지 도구 6종에 개발자 전용 "이미지 관리" 패널·예시 사진 영역 추가
+
+- `src/components/image-tools/image-tool-page.tsx`: 기존 계산기 도구와 같은 `ToolExampleImages`(설명 위 예시 사진 좌·우)와 개발 모드(`NODE_ENV=development`) 전용 `ToolImageDevPanel`("이미지 관리") 연결. 도구별 기본 검색어(`DEV_PANEL_QUERIES`) 지정. 사진이 없으면 아무것도 렌더링하지 않아 화면 변화 없음.
+- `messages/{ko,en,ja,es}.json`: 6개 도구 네임스페이스에 `exampleLeftAlt`·`exampleRightAlt` 추가.
+- 숨김(hidden) 도구도 개발 화면에서는 패널이 보여 공개 전에 사진을 미리 고를 수 있음. 사진은 `src/data/tool-images.json`·`public/tools/images`에 저장(푸시 시 해당 파일 포함 필요).
+- 검증: tsc·eslint·next build 통과, 운영 빌드에서 압축 도구 200·숨김 도구 404, 패널·저장 API 관련 코드가 운영 페이지에 포함되지 않음. 백업: `_backups/exiflens_backup_*_image_tools_dev_panel`.
+
+## 2026-10-03 — 이미지 편집·변환 도구 6종 추가 (1번만 공개, 나머지 숨김) + 도구 허브 "이미지 편집 · 변환 도구" 섹션
+
+**배경**: 사진 전문 영역이 아닌 일반 사용자(직장인·학생)가 보고서·블로그용 이미지를 빠르게 손보는 기능을 추가해 (1) 타 사이트에서 제공하는 기본 기능 공백을 메우고 (2) 도구별 설명 텍스트를 늘리고 (3) 검색 진입점을 넓힘. 모든 처리는 브라우저(Canvas) 안에서 이루어지며 이미지는 서버로 전송되지 않음.
+
+**도구 6종** (`/tools/<slug>`, 4개 언어): `image-compressor`(이미지 용량 줄이기 — 품질/목표 KB 이분 탐색, EXIF 제거·GPS만 제거·유지), `image-resizer`(크기 조절 — 최대 크기/비율/정확한 크기, 프리셋 8종), `image-converter`(형식 변환 — HEIC/WebP/PNG/GIF/BMP/AVIF → JPG/PNG/WebP, heic2any 동적 로드), `image-crop-rotate`(자르기·회전 — 비율 고정, 90도 회전, 좌우·상하 뒤집기), `image-watermark`(워터마크 — 글자/로고, 9방향+타일, 일괄 적용), `image-mosaic`(모자이크 — 모자이크/흐림/검은 가림, 수동 영역 지정).
+
+**공개 상태**: `src/lib/tools-roster.ts`에 `IMAGE_TOOLS` 그룹과 `hidden` 상태를 추가. 현재 `image-compressor`만 `live`, 나머지 5종은 `hidden`. `hidden`은 허브·홈·FAQ·홈 FAQ·사이트맵에서 제외되고, 운영 환경에서는 주소로 직접 접속해도 404이며, 번역 메시지도 페이지 소스에 실리지 않음(`src/i18n/request.ts`가 운영 환경에서 hidden 도구의 네임스페이스·허브 항목을 제거). **공개 방법: `tools-roster.ts`에서 해당 도구의 `status`를 `"live"`로 한 줄 바꾸고 푸시** (사이트맵은 live 이미지 도구를 자동 포함).
+
+**변경 파일**
+- 신규: `src/lib/image-ops.ts`(디코딩·리사이즈·인코딩·목표 용량 탐색·JPEG EXIF 이식), `src/lib/watermark-render.ts`, `src/lib/mosaic-render.ts`, `src/components/image-tools/*`(batch-workbench, fields, 도구별 카드 6개, image-tool-page), `src/app/[locale]/tools/image-*/page.tsx` 6개.
+- 수정: `src/lib/tools-roster.ts`, `src/app/[locale]/tools/page.tsx`(세 번째 섹션, 빈 섹션 미표시, 개발 환경에서만 hidden 카드에 "DEV ONLY" 표시), `src/app/[locale]/faq/page.tsx`, `src/components/home-faq-highlights.tsx`, `src/app/sitemap.ts`, `src/i18n/request.ts`, `messages/{ko,en,ja,es}.json`(`ImageTools` 공통 + 도구 6개 네임스페이스, `ToolsHub.imageSectionTitle`·도구 6개 이름/설명), `package.json`·`package-lock.json`(heic2any 0.0.4, MIT).
+- 문구 변경(4개 언어): `ToolsHub.subtitle`, `Home.toolsHighlightsSubtitle` — "사진 업로드도 필요 없는 계산기" → "사진이 서버로 업로드되지 않고 브라우저에서 처리되는 무료 도구"로 정정(새 도구는 사진을 선택해 처리하므로 기존 문구가 부정확해짐).
+
+**동작 메모**: EXIF 유지는 JPG→JPG만 가능(Orientation 1로 재설정, 내장 썸네일 제거, 픽셀 크기 태그 갱신). 기본값은 EXIF·GPS 모두 제거. 형식 변환·PNG·WebP는 항상 제거. 색은 sRGB로 저장. 한 번에 최대 20장·파일당 60MB. RAW는 미지원(FAQ에 명시).
+
+**검증**: `tsc --noEmit`·eslint 통과, `next build` 성공. 빌드 후 `next start`: ko/en/ja `/tools/image-compressor` 200, hidden 5종 404, 사이트맵에 image-compressor만 포함, 허브·홈·FAQ·압축 페이지 소스에 hidden 도구 문구 0건. 이미지 처리 코드는 Chromium에서 별도 검증(EXIF 방향 적용, 150KB 목표 도달, GPS 제거/유지, 방향 1 재설정, 워터마크 위치·타일, 모자이크 영역 한정). 백업: `_backups/exiflens_backup_20261003_043610_image_tools_foundation`. 로컬(localhost) 화면 확인 후 푸시 예정.
+
 ## 2026-10-03 — 블로그 첫 글 추가: "야간 사진 촬영 빛 갈라짐 최적의 세팅 방법"
 
 - `content/blog/ko/night-photography-light-starburst-settings.mdx` 신규 (한국어 전용, 운영자 경험 + EXIF 5건 + 등가 노출표 + 회절 설명 + FAQ).

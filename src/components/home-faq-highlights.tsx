@@ -1,6 +1,11 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { FIELD_TOOLS, POST_SHOOT_TOOLS, type ToolEntry } from "@/lib/tools-roster";
+import {
+  FIELD_TOOLS,
+  POST_SHOOT_TOOLS,
+  IMAGE_TOOLS,
+  type ToolEntry,
+} from "@/lib/tools-roster";
 
 type FaqItem = { question: string; answer: string };
 
@@ -53,7 +58,13 @@ export async function HomeFaqHighlights() {
   const homeFaqs: FaqItem[] = t.raw("faq");
   const fieldFaqs = await collectToolFaqs(FIELD_TOOLS);
   const postShootFaqs = await collectToolFaqs(POST_SHOOT_TOOLS);
-  const allFaqs: FaqItem[] = [...homeFaqs, ...fieldFaqs, ...postShootFaqs];
+  const imageFaqs = await collectToolFaqs(IMAGE_TOOLS);
+  const allFaqs: FaqItem[] = [
+    ...homeFaqs,
+    ...fieldFaqs,
+    ...postShootFaqs,
+    ...imageFaqs,
+  ];
 
   const faqs = pickRandomFaqs(allFaqs, 5);
   if (faqs.length === 0) return null;

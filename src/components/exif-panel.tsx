@@ -84,6 +84,11 @@ export function ExifPanel() {
           viewMapLabel={t("viewOnMap")}
           onViewMap={() => setShowMap(true)}
         />
+        {/* 촬영 날짜·시간 — GPS 위치 바로 아래 (석한 요청, 2026-10-03). 값이 없으면 "—" */}
+        <Row
+          label={t("takenAtDateTime")}
+          value={hasData ? data.takenAt : null}
+        />
       </dl>
       <p className="mt-4 text-xs text-muted-foreground">{t("exifEmpty")}</p>
 

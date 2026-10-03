@@ -22,7 +22,7 @@
     "uploaderErrorTooLarge": "This file is too large (max 100MB).",
     "uploaderErrorParse": "Couldn't read EXIF data from this photo. It may not contain any metadata.",
     "exifSectionTitle": "Extracted EXIF",
-    "exifEmpty": "Upload a photo to see its camera, shutter speed, aperture, ISO and focal length.",
+    "exifEmpty": "Upload a photo to see its camera, shutter speed, aperture, ISO, focal length and the date and time it was taken.",
     "camera": "Camera",
     "lens": "Lens",
     "shutter": "Shutter Speed",
@@ -30,6 +30,7 @@
     "iso": "ISO",
     "focalLength": "Focal Length",
     "gps": "GPS Location",
+    "takenAtDateTime": "Date & Time Taken",
     "viewOnMap": "View on map",
     "gpsMapTitle": "GPS location map",
     "gpsMapClose": "Close",
@@ -59,7 +60,7 @@
     "guideHighlightsSubtitle": "In-depth guides on exposure, ND filters, and shooting techniques for every genre.",
     "guideHighlightsCta": "Browse all guides →",
     "toolsHighlightsTitle": "Explore the Photo Tools",
-    "toolsHighlightsSubtitle": "Free browser-based calculators — no sign-up, no photo upload required.",
+    "toolsHighlightsSubtitle": "Browse free tools that need no sign-up and process your photos in your own browser without uploading them to a server.",
     "toolsHighlightsCta": "Browse all tools →",
     "faqHighlightsTitle": "Frequently Asked Questions",
     "faqHighlightsSubtitle": "Real questions from photographers, pulled from across our tools and guides.",
@@ -1018,9 +1019,10 @@
   },
   "ToolsHub": {
     "title": "Photography Tools",
-    "subtitle": "Free, browser-only calculators for photographers — nothing uploaded, nothing to sign up for.",
+    "subtitle": "A collection of free tools with no sign-up, where your photos are never uploaded to a server and are processed right in your browser.",
     "fieldSectionTitle": "On-Location Calculators",
     "postShootSectionTitle": "Post-Shoot & Pro Tools",
+    "imageSectionTitle": "Image Editing & Conversion Tools",
     "comingSoon": "Coming soon",
     "tools": {
       "dof-calculator": {
@@ -1086,6 +1088,30 @@
       "golden-hour-calculator": {
         "name": "Golden Hour & Blue Hour Calculator",
         "description": "Check today's golden hour and blue hour windows from just a date and location."
+      },
+      "image-compressor": {
+        "name": "Image Compressor",
+        "description": "Shrink JPG, PNG and WebP photos to a target size in KB. Optional location-data removal."
+      },
+      "image-resizer": {
+        "name": "Image Resizer",
+        "description": "Resize photos by pixels or percentage, with presets for blogs, social media and print."
+      },
+      "image-converter": {
+        "name": "Image Format Converter",
+        "description": "Convert HEIC, WebP, PNG and more to JPG, or JPG to PNG and WebP."
+      },
+      "image-crop-rotate": {
+        "name": "Image Crop & Rotate",
+        "description": "Crop to a fixed aspect ratio, rotate 90 degrees, and flip horizontally or vertically."
+      },
+      "image-watermark": {
+        "name": "Image Watermark",
+        "description": "Add a text or logo watermark to many photos at once, with position and opacity controls."
+      },
+      "image-mosaic": {
+        "name": "Image Mosaic Blur",
+        "description": "Hide faces, license plates and personal details with pixelation, blur or a black box."
       }
     }
   },
@@ -2589,6 +2615,514 @@
         }
       ]
     }
+  },
+  "ImageTools": {
+    "privacyNote": "Your images are not sent to any server. They are processed only inside this browser, and disappear when you close the tab.",
+    "dropLabel": "Drag and drop images here",
+    "dropHint": "You can process up to {max} images at a time.",
+    "selectButton": "Choose images",
+    "tooMany": "Only the first {max} images were added; the rest were left out.",
+    "skippedType": "{count} file(s) in an unsupported format were skipped.",
+    "skippedSize": "{count} file(s) larger than {max} MB were skipped.",
+    "statusReady": "Ready",
+    "statusProcessing": "Processing…",
+    "statusDone": "Done",
+    "downloadOne": "Download",
+    "removeFile": "Remove from list",
+    "optionsTitle": "Options",
+    "processButton": "Process {count} image(s)",
+    "processingButton": "Processing…",
+    "zippingButton": "Building ZIP…",
+    "downloadZipButton": "Download {count} as ZIP",
+    "clearAll": "Clear all",
+    "totalSummary": "Total {before} → {after}",
+    "errors": {
+      "decode-failed": "Could not read this image",
+      "too-large": "This image is too large to process",
+      "encode-failed": "Saving failed",
+      "format-unsupported": "This browser does not support the chosen output format",
+      "canvas-unavailable": "The browser drawing feature is unavailable",
+      "unknown": "Something went wrong while processing"
+    }
+  },
+  "ImageCompressor": {
+    "modeLabel": "How to shrink",
+    "modeQuality": "Set quality",
+    "modeTarget": "Fit a target size (KB)",
+    "qualityLabel": "Quality (lower means smaller files)",
+    "targetLabel": "Target size",
+    "targetHint": "The tool automatically finds the best quality at or below this size. Applies to JPG and WebP only.",
+    "widthLabel": "Maximum width",
+    "widthHint": "Reducing the pixel width of large photos shrinks them dramatically. Values larger than the original are ignored.",
+    "widthOriginal": "Keep original size",
+    "formatLabel": "Output format",
+    "formatHint": "PNG is saved without quality loss, so it barely shrinks. If file size matters, choose JPG or WebP.",
+    "formatAuto": "Keep original format",
+    "metadataLabel": "Photo info (EXIF)",
+    "metadataStrip": "Remove everything (default)",
+    "metadataGps": "Remove location only",
+    "metadataKeep": "Keep everything",
+    "metadataHint": "Keeping info or removing only location works when saving a JPG as a JPG. For PNG, WebP or a changed format, photo info is removed.",
+    "missedTarget": "Some photos could not reach the target size even at minimum quality. Try reducing the maximum width.",
+    "pageTitle": "Image Compressor – Reduce Photo Size to a Target KB",
+    "pageDescription": "Shrink JPG, PNG and WebP photos to the file size you need. Processed in your browser with no upload, with options to remove location data or keep EXIF.",
+    "aboutTitle": "How to use the image compressor",
+    "aboutBody": "Reports, blog posts and online application forms often limit the size of the photos you can attach. Choose your photos and this tool re-saves them inside your browser at a smaller file size. Adjust the quality slider yourself, or simply enter a target such as 500 KB and the tool finds the best quality that fits. Your photos are never uploaded to a server.",
+    "disclaimer": "Saving as JPG or WebP causes a small loss of quality that is hard to notice. Keep your important originals before compressing.",
+    "sections": [
+      {
+        "heading": "How to use it",
+        "list": [
+          "Drag images in or press Choose images to add up to 20 at once.",
+          "Pick either Set quality or Fit a target size. If a site gives a size limit, the target option is easier.",
+          "If needed, set a maximum width and an output format.",
+          "Press Process to see the saved size for every image, then download them one by one or all together as a ZIP."
+        ]
+      },
+      {
+        "heading": "Why file size drops",
+        "body": [
+          "JPG and WebP save an image by discarding detail the human eye struggles to notice. The lower the quality value, the more is discarded and the smaller the file becomes. Go too low and blocky patches appear. A value between 70 and 85 usually cuts the size a lot with almost no visible difference.",
+          "Reducing the number of pixels is the most reliable method. Phone photos are often more than 4000 pixels wide, but 1600 to 1920 pixels is plenty for a blog or on-screen use."
+        ]
+      },
+      {
+        "heading": "Photo info (EXIF) and location",
+        "body": [
+          "Because this tool re-saves your photo, camera details and GPS location are removed by default. That default is the safe choice for photos you post on social media or forums.",
+          "When saving a JPG as a JPG you can choose to keep everything or remove only the location. The photo is saved already rotated to its visible orientation, so the orientation tag is reset and the embedded preview thumbnail is dropped. Colors are saved in the web standard sRGB."
+        ]
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "Are my photos uploaded to a server?",
+        "answer": "No. Everything is processed inside your browser and your photos are not sent anywhere. Processed images disappear when you close the tab, so download the results you need."
+      },
+      {
+        "question": "Will compressing ruin the quality?",
+        "answer": "At a JPG or WebP quality of about 70 to 85, the difference is hard to see on screen. If you need a smaller file than that, reducing the maximum width usually harms quality less than lowering quality further."
+      },
+      {
+        "question": "Why doesn't my PNG get much smaller?",
+        "answer": "PNG is a lossless format, so a quality value cannot shrink it. For photos, switch the output format to JPG or WebP, or reduce the maximum width. A transparent PNG saved as JPG gets a white background where it was transparent."
+      },
+      {
+        "question": "I set a target size but the result is larger.",
+        "answer": "Depending on the photo, even the lowest quality may not reach the target, and a notice appears. Reduce the maximum width or raise the target a little and try again."
+      },
+      {
+        "question": "What happens to location data when I compress?",
+        "answer": "By default EXIF and GPS are removed. Only when saving a JPG as a JPG can you keep everything or remove only the location. If hiding location is all you need, the EXIF Remover tool also works."
+      }
+    ],
+    "exampleLeftAlt": "A large high-resolution original photo",
+    "exampleRightAlt": "The same photo saved at a smaller file size"
+  },
+  "ImageResizer": {
+    "presetLabel": "Presets by use",
+    "presetPlaceholder": "Choose a preset (optional)",
+    "preset": {
+      "blog800": "Blog post (800 wide)",
+      "blog1200": "Blog post (1200 wide)",
+      "hd": "HD 1280×720",
+      "fhd": "Full HD 1920×1080",
+      "insta": "Instagram portrait 1080×1350",
+      "square": "Square 1080×1080",
+      "profile": "Profile picture 400×400",
+      "a4": "A4 print 2480×3508"
+    },
+    "modeLabel": "How to set the size",
+    "modeFit": "Fit within a maximum size (keeps ratio)",
+    "modePercent": "Scale by percentage",
+    "modeExact": "Set an exact size",
+    "percentLabel": "Scale",
+    "widthLabel": "Width",
+    "heightLabel": "Height",
+    "fitHint": "You can fill in just one of width or height. Leave 0 to not limit that side. The photo's proportions are kept.",
+    "exactHint": "The photo is forced to the size you enter. If the ratio differs, the photo may be stretched or squashed.",
+    "upscaleLabel": "Allow making images larger than the original",
+    "upscaleHint": "When off, sizes larger than the original are not applied. Enlarging makes a photo blurrier, not sharper.",
+    "formatLabel": "Output format",
+    "formatAuto": "Keep original format",
+    "qualityLabel": "Output quality",
+    "keepExifLabel": "Keep camera info (EXIF)",
+    "keepExifHint": "Applies only when saving a JPG as a JPG. When off, all photo info including location is removed.",
+    "pageTitle": "Image Resizer – Resize Photos by Pixels or Percentage",
+    "pageDescription": "Change the width, height or scale of your photos. Presets for blogs, social media and print, with batch processing. Processed in your browser with no upload.",
+    "aboutTitle": "How to use the image resizer",
+    "aboutBody": "Presentations, blogs, online shop listings and application forms often require photos of a certain size. This tool lets you set the size in pixels or scale by percentage, with presets for common uses. Your photos are processed inside your browser and never uploaded to a server.",
+    "disclaimer": "Enlarging a photo beyond its original size adds no new detail and makes it blurry. If you need a larger image, start from the biggest original you have.",
+    "sections": [
+      {
+        "heading": "Three ways to set the size",
+        "list": [
+          "Fit within a maximum size: set width and height limits and the photo is shrunk to fit inside them while keeping its proportions. This is the most common choice.",
+          "Scale by percentage: change the size relative to the original, such as 50 percent. Handy for shrinking many photos by the same amount.",
+          "Set an exact size: forces the photo to the width and height you enter. If the ratio differs the photo is distorted, so use it only when a size is strictly required."
+        ]
+      },
+      {
+        "heading": "Recommended sizes by use",
+        "body": [
+          "A blog photo 800 to 1200 pixels wide looks sharp on most screens. Anything larger just adds weight and slows the page. On Instagram, 1080×1350 is the portrait standard and 1080×1080 the square standard.",
+          "Printing needs both a print size and a resolution. To print A4 (210×297 mm) at 300 dpi you need about 2480×3508 pixels. To check print quality first, use the Print Resolution Calculator alongside this tool."
+        ]
+      },
+      {
+        "heading": "Many photos at once",
+        "body": [
+          "You can process up to 20 photos with the same settings and download the results as one ZIP. Saved file names include the new size, for example photo-1200x800.jpg, so they stay distinct from the originals. When shrinking, the image is reduced in several steps rather than one jump, which reduces jagged edges."
+        ]
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "Can I set only the width and keep the proportions?",
+        "answer": "Yes. In Fit within a maximum size, enter only the width and leave the height at 0. The height is calculated automatically."
+      },
+      {
+        "question": "Does resizing also reduce file size?",
+        "answer": "Usually by a lot. Halving the width and height leaves a quarter of the pixels, and the file shrinks accordingly. If you need to hit an exact file size, use the Image Compressor."
+      },
+      {
+        "question": "Does enlarging a small photo make it sharper?",
+        "answer": "No. Enlarging cannot create detail that was never there, so the photo looks blurry. That is why sizes larger than the original are not applied by default."
+      },
+      {
+        "question": "Are my photos uploaded to a server?",
+        "answer": "No. Everything is processed inside your browser and your photos are not sent anywhere."
+      },
+      {
+        "question": "Is location data removed when I resize?",
+        "answer": "By default camera info and location are removed. Turning on Keep EXIF carries the info over only when saving a JPG as a JPG. If you do not want to expose your location, leave it off."
+      }
+    ],
+    "exampleLeftAlt": "A large photo before resizing",
+    "exampleRightAlt": "The photo resized to the size you need"
+  },
+  "ImageConverter": {
+    "targetLabel": "Convert to",
+    "qualityLabel": "Quality",
+    "backgroundLabel": "Background for transparent areas",
+    "backgroundHint": "JPG does not support transparency, so transparent areas are filled with the chosen color.",
+    "backgroundWhite": "White",
+    "backgroundBlack": "Black",
+    "metadataNote": "Changing the format does not keep camera info (EXIF) or location data. Animated GIFs convert only their first frame.",
+    "pageTitle": "Image Format Converter – HEIC to JPG, PNG and WebP",
+    "pageDescription": "Convert HEIC, WebP, PNG, GIF, BMP and AVIF images to JPG, PNG or WebP. Handy for turning iPhone HEIC photos into JPG, processed in your browser with no upload.",
+    "aboutTitle": "How to use the image format converter",
+    "aboutBody": "iPhone HEIC photos that will not open on Windows or on a submission site, or a WebP image you cannot put into a document, need a format change. This tool converts many images at once to JPG, PNG or WebP. Conversion happens inside your browser, so your photos are never uploaded to a server.",
+    "disclaimer": "Camera info and location are not kept when converting. Keep your originals separately. HEIC conversion can take a while in some browsers.",
+    "sections": [
+      {
+        "heading": "Which format should you choose?",
+        "list": [
+          "JPG: the most widely used photo format, opened by almost every program and site. The default choice for submissions and printing.",
+          "PNG: lossless and supports transparency. Good for logos, screenshots and text-heavy images, but files are large for photos.",
+          "WebP: smaller than JPG at the same quality, so it suits web pages. Some older programs cannot open it."
+        ]
+      },
+      {
+        "heading": "Converting iPhone HEIC photos",
+        "body": [
+          "By default iPhones save photos in the compact HEIC format. Windows and some shopping or government submission sites cannot read it, so it has to become JPG.",
+          "When you choose a HEIC file, it is first decoded to JPG and then saved in the format you picked. If a HEIC file contains several images, only the main one is converted."
+        ]
+      },
+      {
+        "heading": "What changes during conversion",
+        "body": [
+          "JPG and WebP are lossy, so each conversion costs a little quality. Convert once from the original whenever possible. Turning a transparent PNG into JPG fills the transparent area with white or the color you pick. Converting does not keep EXIF and GPS information."
+        ]
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "Can I convert iPhone HEIC photos to JPG?",
+        "answer": "Yes. Choose your HEIC files and leave the target as JPG. The conversion happens in your browser and the photos are not uploaded."
+      },
+      {
+        "question": "Are my photos uploaded to a server?",
+        "answer": "No. Every conversion is done inside your browser and your photos are not sent anywhere."
+      },
+      {
+        "question": "Does converting reduce quality?",
+        "answer": "Converting to PNG loses nothing. Saving as JPG or WebP loses a little depending on the quality value, and above 90 the difference is hard to see."
+      },
+      {
+        "question": "Are animated GIFs converted?",
+        "answer": "Only the first frame of an animated GIF is converted. The animation is not kept."
+      },
+      {
+        "question": "Can I convert RAW files?",
+        "answer": "No. This tool supports JPG, PNG, WebP, GIF, BMP, AVIF and HEIC. RAW files such as CR3, NEF or ARW are not supported."
+      }
+    ],
+    "exampleLeftAlt": "A photo file before conversion",
+    "exampleRightAlt": "The photo converted to another format such as JPG"
+  },
+  "ImageCropRotate": {
+    "privacyNote": "Your image is not sent to any server. It is processed only inside this browser, and disappears when you close the tab.",
+    "uploadLabel": "Choose an image (one)",
+    "errTooLarge": "This image is too large to process.",
+    "errDecode": "Could not read this image.",
+    "errFormat": "This browser does not support the chosen output format.",
+    "errEncode": "Saving failed.",
+    "rotateLeft": "↺ Rotate left 90°",
+    "rotateRight": "↻ Rotate right 90°",
+    "flipH": "Flip horizontally",
+    "flipV": "Flip vertically",
+    "resetCrop": "Reset crop area",
+    "aspectLabel": "Crop ratio",
+    "aspectFree": "Free",
+    "cropReadout": "Selection {w}×{h}px (of {total}px) · Drag on the photo to draw an area, drag inside to move it, and drag the corner dots to resize.",
+    "outputTitle": "Output options",
+    "formatLabel": "Output format",
+    "formatAuto": "Keep original format",
+    "qualityLabel": "Output quality",
+    "keepExifLabel": "Keep camera info (EXIF)",
+    "keepExifHint": "Applies only when saving a JPG as a JPG. When off, all photo info including location is removed.",
+    "processingButton": "Processing…",
+    "applyButton": "Apply crop and rotation",
+    "downloadResult": "Download {name} ({dims}px, {size})",
+    "pageTitle": "Image Crop & Rotate – Crop by Ratio, Rotate 90°, Flip",
+    "pageDescription": "Crop a photo to the ratio you need, rotate it 90 degrees, or flip it horizontally or vertically. Supports fixed ratios such as 1:1, 4:3 and 16:9, processed in your browser with no upload.",
+    "aboutTitle": "How to use the image crop and rotate tool",
+    "aboutBody": "Use this tool to keep only the part of a photo you need for a report, or to turn a sideways photo upright. Load a photo, drag the crop area to the range you want, and save. Your photo is processed inside your browser and never uploaded to a server.",
+    "disclaimer": "Changing rotation or flip resets the crop area to the full image. The cropped-away part is not kept in the saved file.",
+    "sections": [
+      {
+        "heading": "How to crop",
+        "list": [
+          "Choose an image and the crop area starts as the whole photo.",
+          "Drag on the photo to draw a new area, drag inside the area to move it, and drag the four corner dots to resize it.",
+          "Pick a ratio such as 1:1, 4:3 or 16:9 instead of Free and the area keeps that ratio as you adjust it.",
+          "Press Apply and the result is made with a download link."
+        ]
+      },
+      {
+        "heading": "Crop ratios by use",
+        "body": [
+          "1:1 suits profile pictures and square Instagram posts, and 3:4 is close to the portrait ratio used in the Instagram feed. 16:9 fits YouTube thumbnails and presentation slides, while 3:2 and 4:3 are near the native ratio of cameras and work well for printing. 9:16 is the vertical format for Shorts, Reels and Stories."
+        ]
+      },
+      {
+        "heading": "Rotating and flipping",
+        "body": [
+          "A phone photo sometimes looks sideways because only a rotation flag was saved in the file. This tool loads the photo as you see it, so a 90 degree rotation is applied to exactly what is on screen. Selfies that look mirrored can be corrected with a horizontal flip."
+        ]
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "How do I crop to an exact ratio?",
+        "answer": "Choose the ratio you want under Crop ratio, for example 1:1 or 16:9. It is kept while you draw or drag the corners."
+      },
+      {
+        "question": "Are my photos uploaded to a server?",
+        "answer": "No. Everything is processed inside your browser and your photo is not sent anywhere."
+      },
+      {
+        "question": "Does cropping reduce quality?",
+        "answer": "Cropping itself keeps the pixels of the selected area at their original resolution. The photo is re-saved as JPG or WebP, so a very small loss is possible depending on the quality setting, and with a high setting it is barely visible."
+      },
+      {
+        "question": "My rotated photo looks turned again somewhere else.",
+        "answer": "This tool applies the rotation to the pixels themselves and saves a normal orientation value, so other programs show it the same way."
+      },
+      {
+        "question": "Can I crop several photos at once?",
+        "answer": "Each photo needs its own crop area, so they are handled one at a time. To shrink many photos to the same size, use the Image Resizer."
+      }
+    ],
+    "exampleLeftAlt": "The full photo before cropping",
+    "exampleRightAlt": "The photo cropped to just the part you need",
+    "dropLabel": "Drag and drop an image here",
+    "dropHint": "One image at a time. Dropping another photo while editing replaces it and resets the crop area.",
+    "selectButton": "Choose an image",
+    "errNotImage": "Only JPG, PNG and WebP images can be used."
+  },
+  "ImageWatermark": {
+    "typeLabel": "Watermark type",
+    "typeText": "Text",
+    "typeImage": "Logo image",
+    "textLabel": "Watermark text",
+    "colorLabel": "Text color",
+    "logoLabel": "Choose a logo image",
+    "logoHint": "A PNG with a transparent background works best. Your files are not sent to a server.",
+    "logoError": "Could not read the logo image.",
+    "logoRequired": "Choose a logo image and it will appear in the preview.",
+    "positionLabel": "Position",
+    "position": {
+      "tl": "Top left",
+      "tc": "Top center",
+      "tr": "Top right",
+      "ml": "Middle left",
+      "mc": "Center",
+      "mr": "Middle right",
+      "bl": "Bottom left",
+      "bc": "Bottom center",
+      "br": "Bottom right",
+      "tile": "Repeat across the photo (tile)"
+    },
+    "textSizeLabel": "Text size (relative to photo width)",
+    "logoSizeLabel": "Logo size (relative to photo width)",
+    "opacityLabel": "Opacity",
+    "marginLabel": "Edge margin",
+    "angleLabel": "Tilt",
+    "shadowLabel": "Add a shadow (keeps it visible on bright photos)",
+    "formatLabel": "Output format",
+    "formatAuto": "Keep original format",
+    "qualityLabel": "Output quality",
+    "keepExifLabel": "Keep camera info (EXIF)",
+    "keepExifHint": "Applies only when saving a JPG as a JPG. When off, all photo info including location is removed.",
+    "previewNote": "Preview (based on the first photo · applied at the same proportions to every photo)",
+    "pageTitle": "Image Watermark – Add Text or Logo Watermarks in Bulk",
+    "pageDescription": "Add a text or logo watermark to many photos at once. Control position, size, opacity and tiling, processed in your browser with no upload.",
+    "aboutTitle": "How to use the image watermark tool",
+    "aboutBody": "Use this tool to add your name or source to photos for a blog, portfolio or shop before posting them, to discourage unauthorized use. Choose text or a logo, set the position and opacity, check the preview, and apply the same settings to many photos at once. Your photos are never uploaded to a server.",
+    "disclaimer": "Watermarked images are saved as new files separate from your originals. Keep the originals. A watermark cannot fully prevent unauthorized use.",
+    "sections": [
+      {
+        "heading": "How to use it",
+        "list": [
+          "Add photos and a preview appears using the first one.",
+          "Choose text or a logo image, then enter the text or pick the logo file.",
+          "Adjust position, size and opacity and check the preview.",
+          "Press Process to apply the same settings to every photo and download them one by one or as a ZIP."
+        ]
+      },
+      {
+        "heading": "Visible but not annoying",
+        "body": [
+          "A small mark in a corner does not spoil the photo but is easy to crop out. A faint mark repeated across the whole photo protects better but gets in the way of viewing. Choose based on your purpose. Around 40 to 60 percent opacity and 4 to 8 percent of the photo width is a sensible start.",
+          "White text can disappear on bright photos, so keep the shadow on. For logos, a PNG with a transparent background sits naturally on the photo without a box around it."
+        ]
+      },
+      {
+        "heading": "Copyright and credit",
+        "body": [
+          "A watermark is only a visible credit and does not replace legal rights. Copyright belongs to the photographer from the moment the photo is taken, and you can also leave your name in the EXIF data. This tool removes EXIF by default, so turn on Keep EXIF if you want to retain it."
+        ]
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "Can I add the same watermark to many photos at once?",
+        "answer": "Yes. You can apply the same settings to up to 20 photos and download them as a ZIP. Sizes are relative to each photo's width, so photos of different resolutions get a similar look."
+      },
+      {
+        "question": "Are my photos uploaded to a server?",
+        "answer": "No. Everything is processed inside your browser and neither photos nor logo files are sent anywhere."
+      },
+      {
+        "question": "Can I remove the watermark later?",
+        "answer": "In the saved result the watermark is merged into the photo and cannot be undone. That is why you must keep your originals separately."
+      },
+      {
+        "question": "Do watermarks support non-English text?",
+        "answer": "Yes. Text is drawn using fonts installed on your device, including letters, numbers and symbols such as ©. Shapes may differ slightly between devices."
+      },
+      {
+        "question": "Does adding a watermark reduce quality?",
+        "answer": "The watermark is drawn at the original resolution, so the size does not change. Saving as JPG or WebP can cost a very small amount of quality depending on the setting, barely visible at a high setting."
+      }
+    ],
+    "exampleLeftAlt": "A photo before adding a watermark",
+    "exampleRightAlt": "The photo with a text watermark added"
+  },
+  "ImageMosaic": {
+    "privacyNote": "Your image is not sent to any server. It is processed only inside this browser, and disappears when you close the tab.",
+    "uploadLabel": "Choose an image (one)",
+    "errTooLarge": "This image is too large to process.",
+    "errDecode": "Could not read this image.",
+    "errFormat": "This browser does not support the chosen output format.",
+    "errEncode": "Saving failed.",
+    "drawHint": "Drag over the part you want to hide to draw an area. You can add as many areas as you need.",
+    "regionCount": "{count} area(s) hidden",
+    "undo": "Undo last area",
+    "clear": "Clear all",
+    "optionsTitle": "Options",
+    "effectLabel": "How to hide",
+    "effectPixelate": "Pixelate",
+    "effectBlur": "Blur",
+    "effectBlack": "Black box",
+    "strengthLabel": "Strength (higher is harder to read)",
+    "shapeLabel": "Area shape",
+    "shapeRect": "Rectangle",
+    "shapeEllipse": "Ellipse",
+    "formatLabel": "Output format",
+    "formatAuto": "Keep original format",
+    "qualityLabel": "Output quality",
+    "keepExifLabel": "Keep camera info (EXIF)",
+    "keepExifHint": "We recommend leaving this off. When on, photo info including location stays in the JPG.",
+    "processingButton": "Processing…",
+    "applyButton": "Apply mosaic",
+    "downloadResult": "Download {name} ({size})",
+    "pageTitle": "Image Mosaic Blur – Hide Faces, License Plates and Personal Info",
+    "pageDescription": "Hide faces, license plates, addresses and personal details in a photo with pixelation, blur or a black box. Processed in your browser with no upload.",
+    "aboutTitle": "How to use the image mosaic tool",
+    "aboutBody": "Photos you post to a blog or community often catch things that should be hidden, such as a passerby's face, a license plate or the address on a delivery label. Drag over the parts you want to hide and choose pixelation, blur or a black box. Your photo is processed inside your browser and never uploaded to a server.",
+    "disclaimer": "Faces are not detected automatically, so you need to mark each area yourself. Check the preview to be sure everything is covered before saving. A weak mosaic can still be readable.",
+    "sections": [
+      {
+        "heading": "How to use it",
+        "list": [
+          "Choose a photo and the editor appears.",
+          "Drag over each part to hide. Add as many areas as you need and use Undo last area to remove a mistake.",
+          "Pick the method and strength, and the preview updates right away.",
+          "Press Apply mosaic and the result is made at the original resolution with a download link."
+        ]
+      },
+      {
+        "heading": "Which method is safest?",
+        "body": [
+          "A black box erases the information in that area completely, so it is the most reliable. Use it for license plates, addresses, phone numbers and ID numbers, where text must never be readable.",
+          "Pixelate and blur look more natural, but at low strength text or faces may remain recognizable. Cover a generous area and set the strength high, around 7 or more. This tool sizes the mosaic cells relative to the area, so it stays hard to read even on large photos."
+        ]
+      },
+      {
+        "heading": "Check before you post",
+        "body": [
+          "Personal information in a photo is not only what you can see. The EXIF data can contain location coordinates. By default this tool re-saves the photo and removes EXIF and GPS. Also look again for reflections in windows or sunglasses and for text showing through the back of a document."
+        ]
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "Does it find faces and hide them automatically?",
+        "answer": "No. For now you drag to mark each area yourself. This lets the photo stay on your device, and you can see and choose exactly what is hidden."
+      },
+      {
+        "question": "Are my photos uploaded to a server?",
+        "answer": "No. Everything is processed inside your browser and your photo is not sent anywhere, so it is safe to use with sensitive photos."
+      },
+      {
+        "question": "Can the hidden part be restored later?",
+        "answer": "The saved result does not keep the original pixels, so it cannot be restored by ordinary means. At low strength the rough shape may still be guessed, so raise the strength or use the black box."
+      },
+      {
+        "question": "How should I hide license plates or addresses?",
+        "answer": "For information that must not be readable, use the black box. Pixelate and blur can leave text readable unless the strength is high enough."
+      },
+      {
+        "question": "What happens to location data when I save?",
+        "answer": "By default EXIF and location are removed. Only a JPG saved with Keep EXIF turned on retains the original photo info."
+      }
+    ],
+    "exampleLeftAlt": "A photo where personal details are visible",
+    "exampleRightAlt": "The photo with faces and other details pixelated",
+    "dropLabel": "Drag and drop an image here",
+    "dropHint": "One image at a time. Dropping another photo while editing replaces it and clears the hidden areas.",
+    "selectButton": "Choose an image",
+    "errNotImage": "Only JPG, PNG and WebP images can be used."
   },
   "Share": {
     "deviceShare": "Share via device",

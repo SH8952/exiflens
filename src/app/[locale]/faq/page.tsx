@@ -3,7 +3,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { SITE_URL, languageAlternates, ogLocale } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
-import { FIELD_TOOLS, POST_SHOOT_TOOLS, type ToolEntry } from "@/lib/tools-roster";
+import {
+  FIELD_TOOLS,
+  POST_SHOOT_TOOLS,
+  IMAGE_TOOLS,
+  type ToolEntry,
+} from "@/lib/tools-roster";
 
 type FaqItem = { question: string; answer: string };
 type ToolFaqGroup = { slug: string; name: string; faqs: FaqItem[] };
@@ -65,6 +70,7 @@ export default async function FaqPage({
 
   const fieldGroups = await buildToolGroups(FIELD_TOOLS);
   const postShootGroups = await buildToolGroups(POST_SHOOT_TOOLS);
+  const imageGroups = await buildToolGroups(IMAGE_TOOLS);
 
   // Every question on the page, flattened, feeds a single FAQPage JSON-LD
   // block — combining the site-level FAQ with every live tool's own FAQ
@@ -74,6 +80,7 @@ export default async function FaqPage({
     ...homeFaqs,
     ...fieldGroups.flatMap((g) => g.faqs),
     ...postShootGroups.flatMap((g) => g.faqs),
+    ...imageGroups.flatMap((g) => g.faqs),
   ];
 
   const faqJsonLd = {
@@ -108,6 +115,7 @@ export default async function FaqPage({
       <FaqCategory title={t("generalSectionTitle")} faqs={homeFaqs} />
       <FaqToolCategory title={toolsHubT("fieldSectionTitle")} groups={fieldGroups} />
       <FaqToolCategory title={toolsHubT("postShootSectionTitle")} groups={postShootGroups} />
+      <FaqToolCategory title={toolsHubT("imageSectionTitle")} groups={imageGroups} />
     </div>
   );
 }
