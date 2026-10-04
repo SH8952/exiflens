@@ -45,7 +45,7 @@ export async function HomeUsageSection() {
               <h3 className="text-sm font-semibold text-foreground">
                 {step.title}
               </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
                 {step.body}
               </p>
             </div>

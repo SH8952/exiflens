@@ -53,31 +53,31 @@
     "usageSteps": [
       {
         "title": "Upload a photo",
-        "body": "Drag a photo into the upload area at the top of the page, or click to choose one. JPG, PNG, and most camera RAW formats are supported, with up to 100MB per file. Your photo is never sent to a server — everything is processed inside your browser."
+        "body": "Drag a photo into the upload area at the top of the page, or click to choose one. JPG, PNG, and most camera RAW formats are supported,\nwith up to 100MB per file. Your photo is never sent to a server — everything is processed inside your browser."
       },
       {
         "title": "Read the EXIF data",
-        "body": "As soon as the photo loads, the camera, lens, shutter speed, aperture, ISO, focal length, and the date and time taken appear in the “Extracted EXIF” panel. Photos that went through a messaging app or social network may have had their metadata removed, so some fields might not appear."
+        "body": "As soon as the photo loads, the camera, lens, shutter speed, aperture, ISO, focal length, and the date and time taken appear in the “Extracted EXIF” panel.\nPhotos that went through a messaging app or social network may have had their metadata removed, so some fields might not appear."
       },
       {
         "title": "See where it was taken on a map",
-        "body": "If the photo contains GPS data, click “View on map” next to the location row to see exactly where it was shot. Photos without location data leave this row empty."
+        "body": "If the photo contains GPS data, click “View on map” next to the location row to see exactly where it was shot.\nPhotos without location data leave this row empty."
       },
       {
         "title": "Calculate your ND filter exposure",
-        "body": "The ND filter calculator shows the shutter speed detected from your photo as the base value. Pick a filter strength or type in a custom number of stops to get the long-exposure shutter speed you need in the field, then use the built-in timer while you shoot. Matching gear recommendations for the selected ND filter are shown too."
+        "body": "The ND filter calculator shows the shutter speed detected from your photo as the base value. Pick a filter strength or type in a custom number of stops to get the long-exposure\nshutter speed you need in the field, then use the built-in timer while you shoot. Matching gear recommendations for the selected ND filter are shown too."
       },
       {
         "title": "Build a camera-info frame",
-        "body": "Use “Create a frame” in the top menu, or the button that appears after uploading, to open the EXIF Frame Generator. Add a clean camera-info frame to your photo and download it at the original resolution — handy for social media and portfolios."
+        "body": "Use “Create a frame” in the top menu, or the button that appears after uploading, to open the EXIF Frame Generator. Add a clean camera-info frame to your photo\nand download it at the original resolution — handy for social media and portfolios."
       },
       {
         "title": "Protect your privacy before sharing",
-        "body": "EXIF data can include where and when a photo was taken and what device shot it, so sharing the original file can expose personal information. Remove the metadata with the EXIF / Metadata Remover before you post."
+        "body": "EXIF data can include where and when a photo was taken and what device shot it, so sharing the original file can expose personal information.\nRemove the metadata with the EXIF / Metadata Remover before you post."
       },
       {
         "title": "Explore more tools and guides",
-        "body": "Depth-of-field, golden hour, crop factor, and exposure stops calculators, plus an image compressor, are all free in the Tools menu. Read the guides for exposure, ND filters, and genre-by-genre shooting tips, and check the FAQ for quick answers."
+        "body": "Depth-of-field, golden hour, crop factor, and exposure stops calculators, plus an image compressor, are all free in the Tools menu.\nRead the guides for exposure, ND filters, and genre-by-genre shooting tips, and check the FAQ for quick answers."
       }
     ],
     "guideHighlightsTitle": "Explore the Guides",
