@@ -51,10 +51,34 @@
     "privacyNote": "100% en el navegador. Tus fotos nunca se suben a un servidor.",
     "usageTitle": "Cómo usar ExifLens",
     "usageSteps": [
-      "Arrastra y suelta una foto (o haz clic para explorar) en el cargador de arriba: se admiten JPG, PNG y la mayoría de formatos RAW de cámara.",
-      "Tu cámara, objetivo, velocidad de obturación, apertura, ISO y distancia focal aparecen al instante en el panel EXIF, leído por completo en tu navegador.",
-      "Elige una velocidad de obturación base y una intensidad de filtro ND en la calculadora para obtener el tiempo de exposición larga exacto que necesitarás en el terreno.",
-      "Ve al Generador de Marcos para añadir un marco limpio con la información de la cámara a la foto y descargarla en resolución completa."
+      {
+        "title": "Sube una foto",
+        "body": "Arrastra una foto al área de carga de la parte superior o haz clic para elegirla. Se admiten JPG, PNG y la mayoría de formatos RAW de cámara, con hasta 100 MB por archivo. Tu foto nunca se envía a un servidor: todo se procesa dentro de tu navegador."
+      },
+      {
+        "title": "Consulta los datos EXIF",
+        "body": "En cuanto se carga la foto, la cámara, el objetivo, la velocidad de obturación, la apertura, el ISO, la distancia focal y la fecha y hora de captura aparecen en el panel «EXIF extraído». Las fotos que pasaron por una app de mensajería o una red social pueden haber perdido sus metadatos, así que algunos campos podrían no aparecer."
+      },
+      {
+        "title": "Mira dónde se tomó en un mapa",
+        "body": "Si la foto contiene datos GPS, haz clic en «Ver en el mapa» junto a la fila de ubicación para ver el lugar exacto de la toma. Las fotos sin datos de ubicación dejan esta fila vacía."
+      },
+      {
+        "title": "Calcula la exposición con filtro ND",
+        "body": "La calculadora de filtros ND muestra como valor base la velocidad de obturación detectada en tu foto. Elige la intensidad del filtro o escribe un número de pasos personalizado para obtener la velocidad de exposición larga que necesitarás en el terreno, y usa el temporizador mientras disparas. También verás recomendaciones de equipo para el filtro ND elegido."
+      },
+      {
+        "title": "Crea un marco con la información de la cámara",
+        "body": "Usa «Crear marco» en el menú superior, o el botón que aparece tras la carga, para abrir el Generador de Marcos EXIF. Añade a tu foto un marco limpio con los datos de la cámara y descárgala en la resolución original: ideal para redes sociales y portafolios."
+      },
+      {
+        "title": "Protege tu privacidad antes de compartir",
+        "body": "El EXIF puede incluir dónde y cuándo se tomó la foto y con qué dispositivo, así que compartir el archivo original puede revelar datos personales. Elimina los metadatos con el Eliminador de EXIF / Metadatos antes de publicar."
+      },
+      {
+        "title": "Descubre más herramientas y guías",
+        "body": "Las calculadoras de profundidad de campo, hora dorada, factor de recorte y pasos de exposición, junto con un compresor de imágenes, son gratuitas en el menú Herramientas. Lee las guías sobre exposición, filtros ND y consejos por género, y consulta las preguntas frecuentes para resolver dudas rápidamente."
+      }
     ],
     "guideHighlightsTitle": "Explora las guías",
     "guideHighlightsSubtitle": "Guías prácticas sobre exposición, filtros ND y técnicas de cada género fotográfico.",
