@@ -106,5 +106,77 @@
       "imageCredit": "Jamie Street",
       "imageCreditUrl": "https://unsplash.com/@jamie452?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "dof-hyperfocal-table": {
+    "left": {
+      "image": "/tools/images/dof-hyperfocal-table-left.webp",
+      "imageCredit": "Tim Mossholder",
+      "imageCreditUrl": "https://unsplash.com/@timmossholder?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/dof-hyperfocal-table-right.webp",
+      "imageCredit": "Erik Mclean",
+      "imageCreditUrl": "https://unsplash.com/@introspectivedsgn?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "sunny-16-calculator": {
+    "left": {
+      "image": "/tools/images/sunny-16-calculator-left.webp",
+      "imageCredit": "Howard Walsh",
+      "imageCreditUrl": "https://unsplash.com/@hswalsh?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/sunny-16-calculator-right.webp",
+      "imageCredit": "Jay",
+      "imageCreditUrl": "https://unsplash.com/@ja024?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "golden-hour-calculator": {
+    "left": {
+      "image": "/tools/images/golden-hour-calculator-left.webp",
+      "imageCredit": "Brian Jones",
+      "imageCreditUrl": "https://unsplash.com/@briannjoness?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/golden-hour-calculator-right.webp",
+      "imageCredit": "Joshua Woroniecki",
+      "imageCreditUrl": "https://unsplash.com/@joshuaworoniecki?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "advanced-dof-diffraction-calculator": {
+    "left": {
+      "image": "/tools/images/advanced-dof-diffraction-calculator-left.webp",
+      "imageCredit": "Aryo Yarahmadi",
+      "imageCreditUrl": "https://unsplash.com/@aryo_yarahmadi?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/advanced-dof-diffraction-calculator-right.webp",
+      "imageCredit": "Adam Bignell",
+      "imageCreditUrl": "https://unsplash.com/@adam_29063?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "camera-fov-calculator": {
+    "left": {
+      "image": "/tools/images/camera-fov-calculator-left.webp",
+      "imageCredit": "weston m",
+      "imageCreditUrl": "https://unsplash.com/@shootnmatch?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/camera-fov-calculator-right.webp",
+      "imageCredit": "Andrea Badino",
+      "imageCreditUrl": "https://unsplash.com/@tautotes?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "flash-guide-number-calculator": {
+    "left": {
+      "image": "/tools/images/flash-guide-number-calculator-left.webp",
+      "imageCredit": "Tom Pumford",
+      "imageCreditUrl": "https://unsplash.com/@tompumford?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/flash-guide-number-calculator-right.webp",
+      "imageCredit": "Erik Mclean",
+      "imageCreditUrl": "https://unsplash.com/@introspectivedsgn?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
