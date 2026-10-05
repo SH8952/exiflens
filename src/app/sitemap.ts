@@ -31,6 +31,13 @@ const STATIC_PATHS = [
   "/tools/storage-calculator",
   "/tools/exif-remover",
   "/tools/crop-factor-calculator",
+  "/tools/dof-hyperfocal-table",
+  "/tools/sunny-16-calculator",
+  "/tools/golden-hour-calculator",
+  "/tools/advanced-dof-diffraction-calculator",
+  "/tools/camera-fov-calculator",
+  "/tools/flash-guide-number-calculator",
+  "/tools/shutter-count-checker",
   // 이미지 편집·변환 도구 — status가 "live"인 것만 자동 포함 (hidden 제외)
   ...getLiveImageToolPaths(),
 ];

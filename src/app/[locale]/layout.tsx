@@ -41,7 +41,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Home" });
-  const title = "ExifLens — EXIF Viewer & ND Calculator";
+  // 언어별 홈 제목(Home.metaTitle) — 한국어 검색(네이버 등)에서 "ND 필터 계산기" 키워드가 제목에 보이도록.
+  const title = t("metaTitle");
   const description = t("subtitle");
 
   return {

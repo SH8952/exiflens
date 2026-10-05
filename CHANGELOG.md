@@ -1,3 +1,12 @@
+## 2026-10-05 — 홈 검색 제목을 언어별로 분리 + 사이트맵에 빠져 있던 도구 7종 추가
+
+- 배경: 네이버 웹마스터도구 점검에서 한국어 홈의 검색 결과용 제목이 영어("ExifLens — EXIF Viewer & ND Calculator")로 모든 언어에 고정되어 있어, "nd 필터 계산기" 같은 한국어 검색어가 제목에 보이지 않아 홈 노출 대비 클릭이 0인 것으로 판단. 구글 노출이 아직 거의 없는 시점이라 지금 바꾸는 것이 영향이 가장 적음.
+- `messages/{ko,en,ja,es}.json`: `Home.metaTitle` 추가. ko "ExifLens — EXIF 뷰어 & ND 필터 계산기" / en 기존 제목 그대로 / ja "ExifLens — EXIFビューア & NDフィルター計算機" / es "ExifLens — Visor EXIF y calculadora de filtros ND". ja·es는 번역 초안(원어민 검수 전).
+- `src/app/[locale]/layout.tsx`: 고정 영어 제목을 `t("metaTitle")`로 교체(title·og:title·twitter:title에 모두 반영). 다른 페이지의 `%s · ExifLens` 제목 형식은 변경 없음.
+- `src/app/sitemap.ts`: 사이트맵에서 빠져 있던 공개 도구 7종(dof-hyperfocal-table, sunny-16-calculator, golden-hour-calculator, advanced-dof-diffraction-calculator, camera-fov-calculator, flash-guide-number-calculator, shutter-count-checker)을 `STATIC_PATHS`에 추가(언어 4개 × 7 = 28개 URL 추가, hreflang 포함). 숨김 이미지 도구는 계속 제외.
+- 검증: JSON 라운드트립 동일 확인 후 병합, tsc·eslint·next build 통과, 운영 빌드에서 4개 언어 제목·og:title 확인, 사이트맵에 7종 × 4개 언어 포함·숨김 도구 0개·중복 URL 0개 확인. 백업: `_backups/title-sitemap_20261005_*`.
+- 참고: 향후 새 도구를 공개할 때 `STATIC_PATHS`에 직접 추가해야 사이트맵에 들어감(이미지 도구만 자동 포함). 같은 누락이 재발하지 않도록 공개 시 함께 확인할 것.
+
 ## 2026-10-04 — 홈 사용법 설명 문구에 지정 위치 줄바꿈 적용
 
 - 요청: 사용법 7단계 설명에서 사용자가 화면에 표시한 위치(지원하며, / 표시됩니다. / 있습니다. / 장노출 / 붙여 등)에서 줄을 바꿔 가독성 개선.
