@@ -39,6 +39,46 @@ export type GuideMeta = GuideFrontmatter & {
   readingMinutes: number;
 };
 
+/** 가이드 본문의 H2 소제목 하나(목차용). id는 rehype-slug가 붙인 앵커 id와 동일. */
+export type GuideHeading = {
+  id: string;
+  text: string;
+};
+
+type HastNode = {
+  type: string;
+  tagName?: string;
+  value?: string;
+  properties?: Record<string, unknown>;
+  children?: HastNode[];
+};
+
+function hastText(node: HastNode): string {
+  if (node.type === "text") return node.value ?? "";
+  return (node.children ?? []).map(hastText).join("");
+}
+
+/**
+ * 목차용 H2 수집 플러그인. 반드시 rehypeSlug 뒤(= id가 이미 붙은 뒤)에, 그리고
+ * rehypeAutolinkHeadings 앞에 둔다 — 앞에 두면 id가 없고, 뒤에 두면 앵커 아이콘이
+ * 텍스트에 섞일 수 있다. 본문 HTML은 건드리지 않고 `headings` 배열에만 채운다.
+ * H3(FAQ 질문 등)는 목차가 길어지므로 제외한다.
+ */
+function collectH2Headings(headings: GuideHeading[]) {
+  return () => (tree: HastNode) => {
+    const walk = (node: HastNode) => {
+      if (node.type === "element" && node.tagName === "h2") {
+        const id = typeof node.properties?.id === "string" ? node.properties.id : "";
+        const text = hastText(node).trim();
+        if (id && text) headings.push({ id, text });
+        return;
+      }
+      node.children?.forEach(walk);
+    };
+    walk(tree);
+  };
+}
+
 function guideDir(locale: Locale) {
   return path.join(GUIDES_DIR, locale);
 }
@@ -125,13 +165,19 @@ export function getRelatedGuides(
 export async function compileGuide(
   locale: Locale,
   slug: string,
-): Promise<{ Content: ComponentType; meta: GuideMeta } | null> {
+): Promise<{
+  Content: ComponentType;
+  meta: GuideMeta;
+  headings: GuideHeading[];
+} | null> {
   const filePath = path.join(guideDir(locale), `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
   const raw = readRawSource(locale, slug);
   const { data, content } = matter(raw);
   const fm = data as GuideFrontmatter;
+
+  const headings: GuideHeading[] = [];
 
   const { default: Content } = await evaluate(content, {
     ...runtime,
@@ -141,7 +187,7 @@ export async function compileGuide(
     // 버그가 있었음(2026-10-02 확인). "~~"(더블 틸드)로만 취소선을 인식하도록 제한.
     // flydronemap은 2026-09-28에 동일하게 수정함. 이 옵션을 제거하지 말 것.
     remarkPlugins: [[remarkGfm, { singleTilde: false }]],
-    rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
+    rehypePlugins: [rehypeSlug, collectH2Headings(headings), rehypeAutolinkHeadings],
   });
 
   return {
@@ -151,5 +197,6 @@ export async function compileGuide(
       slug,
       readingMinutes: estimateReadingMinutes(content, locale),
     },
+    headings,
   };
 }

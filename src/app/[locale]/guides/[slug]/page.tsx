@@ -18,6 +18,7 @@ import {
 } from "@/lib/guides";
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 import { GuideToolCta } from "@/components/guide-tool-cta";
+import { GuideToc } from "@/components/guides/guide-toc";
 import { ShareButton } from "@/components/share-button";
 
 export function generateStaticParams() {
@@ -74,7 +75,7 @@ export default async function GuidePage({
 
   const compiled = await compileGuide(locale as Locale, slug);
   if (!compiled) notFound();
-  const { Content, meta } = compiled;
+  const { Content, meta, headings } = compiled;
   const relatedGuides = getRelatedGuides(locale as Locale, slug);
 
   const dateFormatter = new Intl.DateTimeFormat(locale, {
@@ -197,7 +198,9 @@ export default async function GuidePage({
         </figure>
       ) : null}
 
-      <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-a:text-primary">
+      <GuideToc headings={headings} />
+
+      <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-headings:scroll-mt-6 prose-a:text-primary">
         <Content />
       </article>
 
