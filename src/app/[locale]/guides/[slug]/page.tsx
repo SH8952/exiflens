@@ -19,6 +19,7 @@ import {
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 import { GuideToolCta } from "@/components/guide-tool-cta";
 import { GuideToc } from "@/components/guides/guide-toc";
+import { GuideFloatingToc } from "@/components/guides/guide-floating-toc";
 import { ShareButton } from "@/components/share-button";
 
 export function generateStaticParams() {
@@ -199,6 +200,7 @@ export default async function GuidePage({
       ) : null}
 
       <GuideToc headings={headings} />
+      <GuideFloatingToc headings={headings} />
 
       <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-headings:scroll-mt-6 prose-a:text-primary">
         <Content />
