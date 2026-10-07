@@ -7,7 +7,7 @@ import { routing } from "@/i18n/routing";
 import { headers } from "next/headers";
 import { CONSENT_REGION_CODES, needsConsentBanner } from "@/lib/consent";
 import { ConsentBanner } from "@/components/consent-banner";
-import { SITE_URL, languageAlternates, ogLocale } from "@/lib/seo";
+import { SITE_URL, languageAlternates, ogLocale, DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -75,11 +75,13 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/${locale}`,
+      images: DEFAULT_OG_IMAGES,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: DEFAULT_TWITTER_IMAGES,
     },
   };
 }

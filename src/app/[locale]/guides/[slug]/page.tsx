@@ -5,6 +5,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import {
+  DEFAULT_OG_IMAGES,
+  DEFAULT_TWITTER_IMAGES,
   SITE_URL,
   breadcrumbJsonLd,
   languageAlternates,
@@ -54,13 +56,13 @@ export async function generateMetadata({
       url: `${SITE_URL}/${locale}/guides/${slug}`,
       publishedTime: meta.publishedAt,
       modifiedTime: meta.updatedAt ?? meta.publishedAt,
-      images: meta.image ? [{ url: `${SITE_URL}${meta.image}`, width: 1600, height: 900 }] : undefined,
+      images: meta.image ? [{ url: `${SITE_URL}${meta.image}`, width: 1600, height: 900 }] : DEFAULT_OG_IMAGES,
     },
     twitter: {
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,
-      images: meta.image ? [`${SITE_URL}${meta.image}`] : undefined,
+      images: meta.image ? [`${SITE_URL}${meta.image}`] : DEFAULT_TWITTER_IMAGES,
     },
   };
 }

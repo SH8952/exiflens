@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { ExposureCalculatorCard } from "@/components/exposure-calculator-card";
 import { ToolExampleImages } from "@/components/tools/tool-example-images";
@@ -41,6 +41,7 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/${locale}/tools/exposure-stops-calculator`,
+      images: DEFAULT_OG_IMAGES,
     },
   };
 }

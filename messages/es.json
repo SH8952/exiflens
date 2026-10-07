@@ -184,7 +184,77 @@
     "posterTitle2": "Título Línea 2",
     "posterLocationName": "Nombre del Lugar",
     "posterLocationAddress": "Dirección",
-    "formatLabel": "Formato de exportación"
+    "formatLabel": "Formato de exportación",
+    "aboutTitle": "Sobre el generador de marcos EXIF",
+    "aboutBody": "El generador de marcos EXIF lee la información de disparo guardada en el archivo de una foto (cámara, objetivo, distancia focal, apertura, velocidad de obturación, ISO y fecha de captura) y la añade al borde de la imagen como un marco limpio con los datos. Resulta útil cuando publicas en Instagram, en un blog o en un portafolio y quieres mostrar con qué equipo y ajustes tomaste la foto. Todo se procesa dentro de tu navegador, así que la foto nunca se envía a un servidor, y el resultado con marco se puede guardar en la resolución original como PNG o JPG.",
+    "sections": [
+      {
+        "heading": "Cómo usarlo",
+        "list": [
+          "Sube una foto. Si ya subiste una en el análisis EXIF de arriba, puedes seguir trabajando con ella aquí.",
+          "Elige un tema de marco. Hay más de 20, desde estilos clásicos que añaden la información debajo de la foto hasta otros más originales como Polaroid, tira de película y póster.",
+          "Ajusta la relación de aspecto y el margen. Puedes mantener la proporción original o elegir 1:1, 4:5, 4:3, 3:2, 16:9 o 9:16 según dónde vayas a publicar, y ajustar también el valor del margen.",
+          "Revisa el texto que se muestra en el marco y edítalo si hace falta. Puedes cambiar cámara, objetivo, distancia focal, apertura, velocidad de obturación, ISO y fecha de captura, y tus cambios solo afectan al marco.",
+          "Elige el formato de exportación (PNG o JPG) y descarga."
+        ]
+      },
+      {
+        "heading": "Qué muestra el marco y los temas",
+        "body": [
+          "En el marco aparecen el modelo de cámara, el objetivo, la distancia focal, la apertura, la velocidad de obturación, el ISO y la fecha de captura registrados en el EXIF de la foto. Los campos que no se registraron quedan vacíos, así que puedes escribirlos tú mismo.",
+          "Cada tema presenta la información de forma distinta. Hay diseños inspirados en marcas de equipo como Leica y Hasselblad, estilos con aire de película y estilos como Tip y Póster en los que puedes colocar tu propio texto. El tema Personalizado te deja elegir el color de fondo, el color del texto, la fuente y si se muestra el logotipo de la marca."
+        ]
+      },
+      {
+        "heading": "Antes de guardar",
+        "list": [
+          "El resultado con marco se guarda en la resolución original, así que las fotos grandes pueden generar archivos pesados. Si el tamaño importa, prueba a guardar en JPG.",
+          "Los archivos HEIC/HEIF no tienen vista previa en esta herramienta. Conviértelos a JPG o PNG antes de subirlos.",
+          "Los archivos RAW se muestran cuando incluyen una imagen de vista previa. Si un RAW no la tiene, expórtalo como JPG desde tu programa de edición antes de subirlo.",
+          "Los archivos sin EXIF, como capturas de pantalla o fotos recibidas por aplicaciones de mensajería, muestran los campos del marco vacíos, así que escribe los valores a mano."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guías recomendadas",
+      "items": [
+        {
+          "slug": "how-to-add-exif-frame-to-photos",
+          "title": "Cómo Añadir un Marco EXIF Profesional a tus Fotos"
+        },
+        {
+          "slug": "understanding-exif-iso-shutter-aperture",
+          "title": "Entendiendo los Datos EXIF: ISO, Velocidad de Obturación y Apertura Explicados"
+        },
+        {
+          "slug": "exif-remover-social-media-privacy",
+          "title": "Cómo eliminar los datos de ubicación antes de subir fotos a redes sociales con el eliminador de EXIF"
+        }
+      ]
+    },
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "question": "¿Se sube mi foto a un servidor?",
+        "answer": "No. La lectura de la foto, la composición del marco y el guardado del resultado ocurren dentro de tu navegador, y la foto no se envía a ningún sitio."
+      },
+      {
+        "question": "¿Puedo usar una foto sin datos EXIF?",
+        "answer": "Sí. Escribe la cámara, el objetivo, la distancia focal y otros valores en los campos de texto del marco y el marco se creará con ellos."
+      },
+      {
+        "question": "¿Editar el texto del marco cambia el EXIF de mi foto original?",
+        "answer": "No. Tus cambios solo afectan al marco. El EXIF del archivo de la foto y los valores del panel EXIF de arriba no cambian."
+      },
+      {
+        "question": "¿Qué relación de aspecto conviene para redes sociales?",
+        "answer": "Puedes elegir 1:1, 4:5, 9:16 y más en la opción de relación de aspecto. Las proporciones recomendadas pueden cambiar según el servicio, así que consulta las especificaciones actuales del lugar donde vayas a publicar."
+      },
+      {
+        "question": "¿Es mejor guardar en PNG o en JPG?",
+        "answer": "PNG conserva toda la calidad pero genera archivos más grandes, mientras que JPG pesa menos y es más cómodo para subir y compartir. Elige JPG cuando el sitio donde publicas tenga un límite de tamaño."
+      }
+    ]
   },
   "Footer": {
     "rights": "Todos los derechos reservados.",

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { GoldenHourCalculatorCard } from "@/components/golden-hour-calculator-card";
 import { AdZone } from "@/components/ad-zone";
@@ -41,6 +41,7 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/${locale}/tools/golden-hour-calculator`,
+      images: DEFAULT_OG_IMAGES,
     },
   };
 }

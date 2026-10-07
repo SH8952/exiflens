@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
-import {
-  SITE_URL,
-  breadcrumbJsonLd,
-  languageAlternates,
-  ogLocale,
-} from "@/lib/seo";
+import { SITE_URL, breadcrumbJsonLd, languageAlternates, ogLocale, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { getAllGuidesMeta } from "@/lib/guides";
 import { GuideCategorySection } from "@/components/guides/guide-category-section";
 
@@ -34,6 +29,7 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/${locale}/guides`,
+      images: DEFAULT_OG_IMAGES,
     },
   };
 }

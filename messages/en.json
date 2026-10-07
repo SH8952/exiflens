@@ -184,7 +184,77 @@
     "posterTitle2": "Title Line 2",
     "posterLocationName": "Location Name",
     "posterLocationAddress": "Address",
-    "formatLabel": "Export Format"
+    "formatLabel": "Export Format",
+    "aboutTitle": "About the EXIF Frame Generator",
+    "aboutBody": "The EXIF Frame Generator reads the shooting information stored in a photo file (camera, lens, focal length, aperture, shutter speed, ISO and date taken) and adds it to the edge of the photo as a clean info frame. It is handy when you post to Instagram, a blog or a portfolio and want to show which gear and settings you used. Everything is processed inside your browser, so your photo is never sent to a server, and the framed result can be saved at the original resolution as PNG or JPG.",
+    "sections": [
+      {
+        "heading": "How to use it",
+        "list": [
+          "Upload a photo. If you already uploaded one in the EXIF analysis above, you can keep working with it here.",
+          "Pick a frame theme. More than 20 are available, from classic styles that add the info below the photo to distinctive ones such as Polaroid, film strip and poster.",
+          "Set the aspect ratio and padding. Keep the original ratio or choose 1:1, 4:5, 4:3, 3:2, 16:9 or 9:16 to fit where you will post, and adjust the padding value.",
+          "Check the text shown on the frame and edit it if needed. You can change camera, lens, focal length, aperture, shutter speed, ISO and date taken, and your edits only affect the frame.",
+          "Choose the export format (PNG or JPG) and download."
+        ]
+      },
+      {
+        "heading": "What the frame shows and the themes",
+        "body": [
+          "The camera model, lens, focal length, aperture, shutter speed, ISO and date taken recorded in the photo's EXIF appear on the frame. Fields that were not recorded stay empty, so you can type them in yourself.",
+          "Each theme presents the information differently. There are layouts inspired by gear brands such as Leica and Hasselblad, film-style looks, and styles like Tip and Poster where you can place your own text. The Custom theme lets you choose the background color, text color, font and whether to show the brand logo."
+        ]
+      },
+      {
+        "heading": "Before you save",
+        "list": [
+          "The framed result is saved at the original resolution, so large photos can produce large files. If file size matters, try saving as JPG.",
+          "HEIC/HEIF files cannot be previewed in this tool. Convert them to JPG or PNG before uploading.",
+          "RAW files are shown when they contain an embedded preview image. If a RAW file has none, export it as JPG from your editing software first.",
+          "Files with EXIF removed, such as screenshots or photos received through messaging apps, show empty frame fields, so please type the values in."
+        ]
+      }
+    ],
+    "related": {
+      "heading": "Guides worth reading next",
+      "items": [
+        {
+          "slug": "how-to-add-exif-frame-to-photos",
+          "title": "How to Add a Professional EXIF Frame to Your Photos"
+        },
+        {
+          "slug": "understanding-exif-iso-shutter-aperture",
+          "title": "Understanding EXIF Data: ISO, Shutter Speed, and Aperture Explained"
+        },
+        {
+          "slug": "exif-remover-social-media-privacy",
+          "title": "Removing GPS Data Before Social Media Uploads with the EXIF Remover"
+        }
+      ]
+    },
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "Is my photo uploaded to a server?",
+        "answer": "No. Reading the photo, composing the frame and saving the result all happen inside your browser, and the photo is not sent anywhere."
+      },
+      {
+        "question": "Can I use a photo without EXIF data?",
+        "answer": "Yes. Type the camera, lens, focal length and other values into the frame text fields and the frame is built from them."
+      },
+      {
+        "question": "Does editing the frame text change the EXIF of my original photo?",
+        "answer": "No. Your edits only affect the frame. The EXIF in the photo file and the values in the EXIF panel above stay unchanged."
+      },
+      {
+        "question": "Which aspect ratio is good for social media?",
+        "answer": "You can choose 1:1, 4:5, 9:16 and more under the aspect ratio option. Recommended ratios can change from service to service, so check the current specs of the place you will post to."
+      },
+      {
+        "question": "Should I save as PNG or JPG?",
+        "answer": "PNG keeps full quality but makes larger files, while JPG is smaller and easier to upload and share. Choose JPG when the place you post to has a file size limit."
+      }
+    ]
   },
   "Footer": {
     "rights": "All rights reserved.",

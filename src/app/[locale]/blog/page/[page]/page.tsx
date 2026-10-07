@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { SITE_URL, ogLocale } from "@/lib/seo";
+import { SITE_URL, ogLocale, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { BLOG_LOCALE, getBlogPage, isBlogLocale } from "@/lib/blog";
 import { BlogListView } from "@/components/blog-list-view";
 
@@ -48,6 +48,7 @@ export async function generateMetadata({
       title,
       description: t("subtitle"),
       url,
+      images: DEFAULT_OG_IMAGES,
     },
   };
 }

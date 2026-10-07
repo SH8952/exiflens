@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { isToolAccessible } from "@/lib/tools-roster";
 import { AdZone } from "@/components/ad-zone";
 import { ToolExampleImages } from "@/components/tools/tool-example-images";
@@ -57,6 +57,7 @@ export async function buildImageToolMetadata(
       title,
       description,
       url: `${SITE_URL}/${locale}/tools/${slug}`,
+      images: DEFAULT_OG_IMAGES,
     },
   };
 }

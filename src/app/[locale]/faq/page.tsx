@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { SITE_URL, languageAlternates, ogLocale } from "@/lib/seo";
+import { SITE_URL, languageAlternates, ogLocale, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import {
   FIELD_TOOLS,
@@ -37,6 +37,7 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/${locale}/faq`,
+      images: DEFAULT_OG_IMAGES,
     },
   };
 }

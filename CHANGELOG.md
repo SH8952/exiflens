@@ -1,3 +1,11 @@
+## 2026-10-07 — 공유 미리보기(OG) 기본 이미지 추가 + /frame 설명 글·FAQ 보강
+
+- 배경: 외부 SEO 점검 결과 참고 — (1) 가이드·블로그 외 페이지에 `og:image`가 없어 링크 공유 시 이미지 없이 글자만 보임, (2) 핵심 도구 페이지 /frame(EXIF 프레임 생성기)의 서버 렌더 본문이 약 260자로 설명 글이 없음. (llms.txt·본문 대 코드 비율은 효과가 확인되지 않아 제외.)
+- OG 이미지: `public/og-default.png`(1200×630, 로고+ExifLens+한 줄 소개) 신규. `src/lib/seo.ts`에 `DEFAULT_OG_IMAGE(S)`/`DEFAULT_TWITTER_IMAGES` 추가. 페이지가 `openGraph`를 직접 지정하면 상위 레이아웃의 이미지가 상속되지 않는 것을 로컬에서 확인해, 레이아웃·about·faq·contact·disclosure·privacy·terms·frame·guides 목록·blog 목록(2종)·tools 허브·도구 페이지 17종·이미지 도구 공통 컴포넌트의 openGraph(있는 곳은 twitter도)에 `images`를 명시. 글 자체 이미지가 있는 가이드·블로그 글은 기존 이미지 유지, 대표 이미지 없는 가이드(crop-factor)만 기본 이미지로 대체.
+- /frame: `Frame` 메시지(ko/en/ja/es)에 aboutTitle·aboutBody·sections(사용 방법/표시 정보와 테마/저장 전 확인)·related(가이드 3개)·faqTitle·faq(5개) 추가. `frame/page.tsx`에 기존 도구 페이지와 같은 구성(article + ToolSections + FAQ details + FAQPage JSON-LD) 추가. 본문 약 260자 → 2,100자 이상(ko). 설명은 실제 기능(테마·화면비 7종·PNG/JPG·브라우저 내 처리·HEIC/RAW 안내)만 기준으로 작성.
+- 로컬 확인: tsc·eslint 통과, 18개 페이지 렌더에서 og:image/twitter:image 확인(가이드·블로그 글은 자기 이미지 유지), /frame 4개 언어 렌더·FAQPage 포함, `/og-default.png` 200.
+- 되돌리려면: 변경된 page.tsx들·seo.ts·messages 4개의 이번 추가분과 `public/og-default.png` 제거.
+
 ## 2026-10-06 — 가이드 대표 이미지 설명(alt) 개선
 
 - 신규 `content/guides/image-alt.json`: 가이드 대표 이미지 71장(고유 파일 70장 + six-frames 글의 6번 사진)에 대해 사진에 실제로 보이는 장면을 ko/en/ja/es로 작성(이미지 경로 → 언어별 설명). 이미지는 모두 직접 보고 작성.

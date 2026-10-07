@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
-import { SITE_URL, ogLocale } from "@/lib/seo";
+import { SITE_URL, ogLocale, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { BlogListView } from "@/components/blog-list-view";
 import { BLOG_LOCALE, getAllBlogMeta, isBlogLocale } from "@/lib/blog";
 
@@ -37,6 +37,7 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/${BLOG_LOCALE}/blog`,
+      images: DEFAULT_OG_IMAGES,
     },
   };
 }
