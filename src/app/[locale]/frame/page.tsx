@@ -7,6 +7,7 @@ import {
   type ToolRelated,
   type ToolSection,
 } from "@/components/tools/tool-sections";
+import { BackLink } from "@/components/back-link";
 
 type FaqItem = { question: string; answer: string };
 
@@ -72,6 +73,7 @@ export default async function FramePage({
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10">
+      <BackLink to="home" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(frameJsonLd) }}

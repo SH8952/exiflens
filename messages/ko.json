@@ -3227,5 +3227,9 @@
     "copyLink": "링크 복사",
     "copied": "복사됨",
     "viewOnWeb": "웹으로 보기"
+  },
+  "BackNav": {
+    "toHome": "← 홈으로",
+    "toTools": "← 도구 목록으로"
   }
 }

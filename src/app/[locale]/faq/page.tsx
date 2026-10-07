@@ -9,6 +9,7 @@ import {
   IMAGE_TOOLS,
   type ToolEntry,
 } from "@/lib/tools-roster";
+import { BackLink } from "@/components/back-link";
 
 type FaqItem = { question: string; answer: string };
 type ToolFaqGroup = { slug: string; name: string; faqs: FaqItem[] };
@@ -99,6 +100,7 @@ export default async function FaqPage({
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-4 py-10">
+      <BackLink to="home" className="-mb-4" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

@@ -4,6 +4,7 @@ import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL, breadcrumbJsonLd, languageAlternates, ogLocale, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { getAllGuidesMeta } from "@/lib/guides";
 import { GuideCategorySection } from "@/components/guides/guide-category-section";
+import { BackLink } from "@/components/back-link";
 
 export async function generateMetadata({
   params,
@@ -112,6 +113,7 @@ export default async function GuidesIndexPage({
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 py-10">
+      <BackLink to="home" className="-mb-4" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}

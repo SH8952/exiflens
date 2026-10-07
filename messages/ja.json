@@ -3226,5 +3226,9 @@
     "copyLink": "リンクをコピー",
     "copied": "コピーしました",
     "viewOnWeb": "ウェブで見る"
+  },
+  "BackNav": {
+    "toHome": "← ホームに戻る",
+    "toTools": "← ツール一覧に戻る"
   }
 }

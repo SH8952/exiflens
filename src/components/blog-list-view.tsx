@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { SITE_URL, breadcrumbJsonLd } from "@/lib/seo";
 import { getBlogPage } from "@/lib/blog";
+import { BackLink } from "@/components/back-link";
 
 /**
  * 블로그 목록(1페이지·2페이지 이후 공용) — 2026-10-02.
@@ -35,6 +36,7 @@ export async function BlogListView({
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-10">
+      <BackLink to="home" className="-mb-4" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}

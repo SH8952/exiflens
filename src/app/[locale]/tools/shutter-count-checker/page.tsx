@@ -14,6 +14,7 @@ import {
 import { ToolExampleImages } from "@/components/tools/tool-example-images";
 import { ToolImageDevPanel } from "@/components/dev/tool-image-dev-panel";
 import { getToolImages } from "@/lib/tool-images";
+import { BackLink } from "@/components/back-link";
 
 type FaqItem = { question: string; answer: string };
 
@@ -92,6 +93,7 @@ export default async function ShutterCountCheckerPage({
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-10">
+      <BackLink to="tools" className="-mb-2" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}

@@ -11,6 +11,7 @@ import {
   getVisibleTools,
   type ToolEntry,
 } from "@/lib/tools-roster";
+import { BackLink } from "@/components/back-link";
 
 type ResolvedTool = ToolEntry & { name: string; description: string };
 
@@ -71,6 +72,7 @@ export default async function ToolsHubPage({
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-10">
+      <BackLink to="home" className="-mb-2" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}

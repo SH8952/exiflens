@@ -14,6 +14,7 @@ import {
   type ToolRelated,
   type ToolSection,
 } from "@/components/tools/tool-sections";
+import { BackLink } from "@/components/back-link";
 
 type FaqItem = { question: string; answer: string };
 
@@ -92,6 +93,7 @@ export default async function ExifRemoverPage({
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-10">
+      <BackLink to="tools" className="-mb-2" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}

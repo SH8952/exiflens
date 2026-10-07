@@ -3226,5 +3226,9 @@
     "copyLink": "Copiar enlace",
     "copied": "Copiado",
     "viewOnWeb": "Ver en la web"
+  },
+  "BackNav": {
+    "toHome": "← Volver al inicio",
+    "toTools": "← Volver a Herramientas"
   }
 }

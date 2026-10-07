@@ -3226,5 +3226,9 @@
     "copyLink": "Copy link",
     "copied": "Copied",
     "viewOnWeb": "View on web"
+  },
+  "BackNav": {
+    "toHome": "← Back to Home",
+    "toTools": "← Back to Tools"
   }
 }
