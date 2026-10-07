@@ -42,6 +42,40 @@ def extract_tags(en_mdx_path):
     return [t.strip().strip('"').strip("'") for t in raw.split(",") if t.strip()]
 
 
+def update_image_alt(repo, image_path, photo):
+    """content/guides/image-alt.json 의 해당 이미지 항목을 최신 사진 기준으로 갱신한다.
+
+    - 같은 경로의 사진이 바뀌었을 수 있으므로 기존 항목(이전 사진 설명)은 먼저 지운다.
+    - Unsplash가 주는 영어 설명(alt_description)이 있으면 en 항목으로만 저장한다.
+      ko/ja/es는 번역이 필요하므로 비워 두며, 비어 있는 언어는 사이트에서 글 제목을
+      대신 쓴다(기존 동작과 동일). 나중에 Claude가 사진을 보고 채울 수 있다.
+    실패해도 발행을 막지 않는다.
+    """
+    try:
+        alt_path = os.path.join(repo, "content", "guides", "image-alt.json")
+        data = {}
+        if os.path.exists(alt_path):
+            with open(alt_path, encoding="utf-8") as f:
+                data = json.load(f)
+        data.pop(image_path, None)
+
+        text = (photo.get("alt_description") or photo.get("description") or "").strip()
+        text = re.sub(r"\s+", " ", text)
+        if text:
+            text = text[0].upper() + text[1:]
+            if len(text) > 125:
+                text = text[:125].rsplit(" ", 1)[0]
+            data[image_path] = {"en": text}
+
+        tmp = alt_path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+        os.replace(tmp, alt_path)
+    except Exception as e:
+        sys.stderr.write(f"[attach-guide-image] 이미지 설명(alt) 갱신 실패(발행은 계속 진행): {e}\n")
+
+
 def fetch_image(repo, slug, en_mdx_path):
     env = load_env(os.path.join(repo, "automation", ".env"))
     access_key = env.get("UNSPLASH_ACCESS_KEY") or os.environ.get("UNSPLASH_ACCESS_KEY")
@@ -92,6 +126,8 @@ def fetch_image(repo, slug, en_mdx_path):
     utm = "utm_source=ExifLens&utm_medium=referral"
     sep = "&" if "?" in photographer_link else "?"
     photographer_link = f"{photographer_link}{sep}{utm}"
+
+    update_image_alt(repo, f"/guides/images/{slug}.webp", photo)
 
     return {
         "image": f"/guides/images/{slug}.webp",

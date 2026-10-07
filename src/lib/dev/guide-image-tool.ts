@@ -140,8 +140,35 @@ function writeGuideImageFrontmatter(slug: string, data: ImageFrontmatter): strin
   return updatedLocales;
 }
 
+/**
+ * 대표 이미지를 교체하면 같은 경로의 이전 사진 설명(content/guides/image-alt.json)이
+ * 새 사진과 맞지 않게 되므로 해당 슬러그의 항목을 지운다. 항목이 없으면 화면에서는
+ * 글 제목이 대신 쓰인다(안전한 기본 동작).
+ */
+function removeGuideImageAlt(slug: string) {
+  try {
+    const altPath = path.join(process.cwd(), "content", "guides", "image-alt.json");
+    if (!fs.existsSync(altPath)) return;
+    const data = JSON.parse(fs.readFileSync(altPath, "utf-8")) as Record<string, unknown>;
+    const prefix = `/guides/images/${slug}.`;
+    let changed = false;
+    for (const key of Object.keys(data)) {
+      if (key.startsWith(prefix)) {
+        delete data[key];
+        changed = true;
+      }
+    }
+    if (changed) {
+      fs.writeFileSync(altPath, JSON.stringify(data, null, 2) + "\n", "utf-8");
+    }
+  } catch {
+    // 설명 목록 정리 실패는 이미지 교체 자체를 막지 않는다.
+  }
+}
+
 /** 기존에 저장돼 있던 {slug}.* 이미지 파일을 전부 지운다 (확장자가 바뀌는 경우 이전 파일이 남지 않도록). */
 function removeExistingGuideImages(slug: string) {
+  removeGuideImageAlt(slug);
   const imagesDir = path.join(process.cwd(), "public", "guides", "images");
   if (!fs.existsSync(imagesDir)) return;
   for (const file of fs.readdirSync(imagesDir)) {

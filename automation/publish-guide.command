@@ -183,6 +183,8 @@ except Exception:
   IMAGE_PATH="public/guides/images/${SLUG}.webp"
   git add "content/guides/en/${SLUG}.mdx" "content/guides/ja/${SLUG}.mdx" "content/guides/ko/${SLUG}.mdx" "content/guides/es/${SLUG}.mdx"
   [ -f "$REPO/$IMAGE_PATH" ] && git add "$IMAGE_PATH"
+  # 대표 이미지 설명(alt) 목록: attach-guide-image.py가 갱신했을 수 있음 (변경 없으면 add해도 무해)
+  [ -f "$REPO/content/guides/image-alt.json" ] && git add "content/guides/image-alt.json"
 
   # CHANGELOG는 오늘 처리하는 전체 건이 한 스니펫(changelog-snippet.txt)에 모두
   # 들어있는 구조이므로, 여러 건을 반복 처리해도 중복 삽입되지 않도록 아래에서

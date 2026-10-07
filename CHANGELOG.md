@@ -1,3 +1,19 @@
+## 2026-10-06 — 가이드 대표 이미지 설명(alt) 개선
+
+- 신규 `content/guides/image-alt.json`: 가이드 대표 이미지 71장(고유 파일 70장 + six-frames 글의 6번 사진)에 대해 사진에 실제로 보이는 장면을 ko/en/ja/es로 작성(이미지 경로 → 언어별 설명). 이미지는 모두 직접 보고 작성.
+- `src/lib/guides.ts`: `getGuideImageAlt(locale, image, fallback)` 추가. 설명이 있으면 사용, 없으면(새로 발행되는 글 등) 기존처럼 글 제목을 사용 → 자동 발행 파이프라인·글(mdx) 파일 변경 없음.
+- 적용 위치: 가이드 상세 대표 이미지(`guides/[slug]/page.tsx`), 홈의 가이드 카드(`home-guide-highlights.tsx`).
+- 로컬 확인: tsc·eslint 통과, 4개 언어 가이드 페이지와 홈에서 alt 반영 확인, frontmatter 이미지 전부 항목 존재(누락 0). 되돌리려면 위 세 파일 변경 원복(JSON은 두어도 무해).
+- 자동 발행 확장: `automation/attach-guide-image.py`에 `update_image_alt` 추가 — 새 글의 Unsplash 사진을 받을 때 영어 설명(alt_description)을 `image-alt.json`에 `en`으로 저장(같은 경로의 이전 항목은 먼저 삭제, 실패해도 발행은 계속). ko/ja/es는 번역이 필요해 비워 두며 비면 글 제목을 대신 사용. `automation/publish-guide.command`가 이 JSON도 함께 `git add`(명시 경로, `-A` 아님).
+- 개발자 도구: `src/lib/dev/guide-image-tool.ts`에서 대표 이미지를 교체/업로드하면 해당 슬러그의 이전 사진 설명 항목을 자동 삭제(같은 파일 경로에 새 사진이 들어가도 틀린 설명이 남지 않도록).
+- 후속(미진행): 새 글의 ko/ja/es 설명은 Claude가 사진을 보고 채워야 함(자동 발행 재개 후 필요 시).
+
+## 2026-10-06 — 사이트맵에 이미지 주소 추가(이미지 검색 색인 보조)
+
+- `src/app/sitemap.ts`: 가이드·블로그 글 항목마다 화면에 실제로 나오는 이미지의 원본 파일 주소(`<image:loc>`)를 추가. 대표 이미지(frontmatter `image`) + 본문 마크다운 이미지 + 블로그 `<BlogPhoto src>`가 대상이며, /public에 파일이 실제로 있는 것만 포함. 최적화 주소(/_next/image)는 쓰지 않음.
+- 로컬 확인: `sitemap.xml` 200 응답, 이미지 주소 총 309개(가이드 대표 이미지 70장×4개 언어, six-frames 글 사진 6장×4개 언어, 블로그 5장), 이미지가 없는 글(crop-factor 가이드 등)은 항목 없음. 페이지 화면에는 영향 없음.
+- 되돌리려면 sitemap.ts 한 파일만 원복. 후속(미진행): 가이드 대표 이미지 alt 개선(이미지별 설명 JSON 방식).
+
 ## 2026-10-06 — 가이드 "리모컨 목차"(스크롤 고정 목차) 추가
 
 - 신규 `src/components/guides/guide-floating-toc.tsx`: 넓은 화면(1280px~)에서는 본문 오른쪽 여백에 고정 패널, 좁은 화면에서는 오른쪽 아래 "☰ 목차" 버튼으로 펼침. 현재 읽는 소제목 강조, 480px 이상 스크롤 시 표시.

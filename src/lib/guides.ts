@@ -39,6 +39,32 @@ export type GuideMeta = GuideFrontmatter & {
   readingMinutes: number;
 };
 
+type GuideImageAltMap = Record<string, Partial<Record<Locale, string>>>;
+let guideImageAltCache: GuideImageAltMap | null = null;
+
+/**
+ * 가이드 대표 이미지의 설명(alt). `content/guides/image-alt.json`에 이미지 경로별·언어별로
+ * 사진에 실제로 보이는 장면을 적어 두었다. 항목이 없으면(새로 발행된 글 등) `fallback`
+ * (보통 글 제목)을 그대로 쓰므로 기존 동작과 같다. 글(mdx) 파일은 건드리지 않는다.
+ */
+export function getGuideImageAlt(
+  locale: Locale,
+  image: string | undefined,
+  fallback: string,
+): string {
+  if (!image) return fallback;
+  if (!guideImageAltCache) {
+    try {
+      guideImageAltCache = JSON.parse(
+        fs.readFileSync(path.join(GUIDES_DIR, "image-alt.json"), "utf8"),
+      ) as GuideImageAltMap;
+    } catch {
+      guideImageAltCache = {};
+    }
+  }
+  return guideImageAltCache[image]?.[locale] || fallback;
+}
+
 /** 가이드 본문의 H2 소제목 하나(목차용). id는 rehype-slug가 붙인 앵커 id와 동일. */
 export type GuideHeading = {
   id: string;

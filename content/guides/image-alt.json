@@ -1,0 +1,428 @@
+{
+  "/guides/images/advanced-dof-diffraction-calculator-guide.webp": {
+    "ko": "햇살을 받아 초록빛과 노란빛으로 물든 나뭇잎과 부드럽게 흐려진 배경",
+    "en": "Sunlit green and yellow leaves on a branch against a softly blurred background",
+    "ja": "日差しを受けて緑と黄色に染まる枝の葉と、やわらかくぼけた背景",
+    "es": "Hojas verdes y amarillas iluminadas por el sol sobre una rama, con el fondo suavemente desenfocado"
+  },
+  "/guides/images/astro-calculator-milky-way-planning.webp": {
+    "ko": "산 능선과 들판 위로 은하수가 흐르는 별이 가득한 밤하늘",
+    "en": "Starry night sky with the Milky Way above a mountain ridge and open meadow",
+    "ja": "山の稜線と草原の上に天の川が流れる、星でいっぱいの夜空",
+    "es": "Cielo nocturno lleno de estrellas con la Vía Láctea sobre una cordillera y un prado"
+  },
+  "/guides/images/astro-calculator-npf-rule.webp": {
+    "ko": "분홍과 초록빛으로 물든 은하수 아래 서 있는 사람의 실루엣",
+    "en": "Silhouette of a person standing beneath a pink and green Milky Way",
+    "ja": "ピンクと緑に染まる天の川の下に立つ人のシルエット",
+    "es": "Silueta de una persona bajo una Vía Láctea de tonos rosas y verdes"
+  },
+  "/guides/images/astrophotography-camera-settings-night-sky.webp": {
+    "ko": "숲이 둘러싼 잔잔한 호수 위로 은하수가 뜨고 수면에 별빛이 비치는 밤 풍경",
+    "en": "Milky Way rising over a calm forest lake with stars reflected on the water",
+    "ja": "森に囲まれた静かな湖の上に天の川が昇り、水面に星が映る夜景",
+    "es": "La Vía Láctea sobre un lago sereno rodeado de bosque, con las estrellas reflejadas en el agua"
+  },
+  "/guides/images/avoiding-camera-shake-long-exposure.webp": {
+    "ko": "해 질 녘 아치형 다리 위 도로를 따라 붉은 자동차 궤적이 길게 이어진 장노출 사진",
+    "en": "Long-exposure photo of red car light trails along a road on an arched bridge at sunset",
+    "ja": "夕暮れのアーチ橋の道路に赤い車の光跡が長く伸びる長時間露光写真",
+    "es": "Fotografía de larga exposición con estelas rojas de coches en la carretera de un puente en arco al atardecer"
+  },
+  "/guides/images/back-button-focus-explained.webp": {
+    "ko": "메뉴와 Fn, 초점 확대 버튼이 보이는 미러리스 카메라의 뒷면",
+    "en": "Back of a mirrorless camera showing the menu, Fn and focus magnifier buttons",
+    "ja": "メニュー、Fn、ピント拡大ボタンが見えるミラーレスカメラの背面",
+    "es": "Parte trasera de una cámara sin espejo con los botones de menú, Fn y ampliación de enfoque"
+  },
+  "/guides/images/beginners-guide-to-manual-mode.webp": {
+    "ko": "다이얼과 렌즈가 보이는 카메라 윗면을 흰 배경 위에서 담은 사진",
+    "en": "Top of a camera with dials and lens photographed against a white background",
+    "ja": "ダイヤルとレンズが見えるカメラの上面を白背景で撮影した写真",
+    "es": "Parte superior de una cámara con diales y objetivo sobre un fondo blanco"
+  },
+  "/guides/images/bracketing-calculator-hdr-stops.webp": {
+    "ko": "호숫가 자갈밭 위로 구름 낀 파란 하늘과 수면에 반짝이는 햇빛",
+    "en": "Blue sky with clouds over a pebble lakeshore and sunlight sparkling on the water",
+    "ja": "湖畔の小石の浜の上に広がる雲の浮かぶ青空と、水面にきらめく日差し",
+    "es": "Cielo azul con nubes sobre una orilla de guijarros y el sol brillando en el agua"
+  },
+  "/guides/images/camera-field-of-view-calculator-guide.webp": {
+    "ko": "노을빛이 드는 황금빛 들판에서 한 사람이 먼 곳을 가리키며 이야기하는 두 남자",
+    "en": "Two men talking in a golden field at sunset while one points into the distance",
+    "ja": "夕日に照らされた黄金色の野原で、一人が遠くを指さして話す二人の男性",
+    "es": "Dos hombres conversando en un campo dorado al atardecer mientras uno señala a lo lejos"
+  },
+  "/guides/images/choosing-the-right-nd-filter.webp": {
+    "ko": "강가 삼각대 위의 카메라와 흐릿하게 보이는 쌍둥이 첨탑의 옛 도시 풍경",
+    "en": "Camera on a tripod by a river with an old town and twin church towers blurred behind",
+    "ja": "川辺の三脚に載ったカメラと、背景にぼけて見える双塔の旧市街",
+    "es": "Cámara sobre un trípode junto a un río con una ciudad antigua y dos torres desenfocadas al fondo"
+  },
+  "/guides/images/color-space-srgb-vs-adobe-rgb.webp": {
+    "ko": "무지개색으로 물든 장미 꽃송이를 가까이에서 담은 사진",
+    "en": "Close-up of roses dyed in rainbow colors",
+    "ja": "虹色に染まったバラの花を近くから撮った写真",
+    "es": "Primer plano de rosas teñidas con los colores del arcoíris"
+  },
+  "/guides/images/diffraction-and-optimal-aperture.webp": {
+    "ko": "나뭇가지 사이로 들어온 햇빛이 무지갯빛 번짐으로 퍼지는 장면",
+    "en": "Sunlight through tree branches spreading into rainbow-colored flare",
+    "ja": "木の枝の間から差し込む日光が虹色のにじみとなって広がる場面",
+    "es": "Luz del sol entre las ramas de un árbol que se extiende en destellos de colores del arcoíris"
+  },
+  "/guides/images/dof-calculator-landscape-sharpness.webp": {
+    "ko": "푸른 하늘과 구름 아래 가을빛 들판과 나무가 펼쳐진 풍경",
+    "en": "Autumn field and trees under a blue sky with scattered clouds",
+    "ja": "青空と雲の下に広がる秋色の野原と木々",
+    "es": "Campo y árboles otoñales bajo un cielo azul con nubes dispersas"
+  },
+  "/guides/images/dof-calculator-portrait-background-blur.webp": {
+    "ko": "어두운 배경에서 짧은 머리의 여성을 담은 흑백 인물 사진",
+    "en": "Black-and-white portrait of a short-haired woman against a dark background",
+    "ja": "暗い背景で短い髪の女性を写した白黒のポートレート",
+    "es": "Retrato en blanco y negro de una mujer de pelo corto sobre fondo oscuro"
+  },
+  "/guides/images/exif-remover-social-media-privacy.webp": {
+    "ko": "파란 배경 위에 놓인 여러 소셜 미디어 앱 아이콘 입체 이미지",
+    "en": "3D social media app icons arranged on a blue background",
+    "ja": "青い背景に並べられた複数のSNSアプリアイコンの立体画像",
+    "es": "Iconos 3D de redes sociales sobre un fondo azul"
+  },
+  "/guides/images/exif-remover-stock-photo-submission.webp": {
+    "ko": "두 손으로 렌즈를 장착한 DSLR 카메라를 잡고 있는 모습",
+    "en": "Two hands holding a DSLR camera with a lens attached",
+    "ja": "レンズを付けた一眼レフカメラを両手で持つ様子",
+    "es": "Dos manos sosteniendo una cámara réflex con objetivo"
+  },
+  "/guides/images/exposure-bracketing-hdr-basics.webp": {
+    "ko": "해 질 녘 보랏빛 하늘이 수로에 비치는 베네치아 운하 풍경",
+    "en": "Venice canal at dusk with a purple sky reflected in the water",
+    "ja": "夕暮れの紫色の空が水面に映るヴェネツィアの運河",
+    "es": "Canal de Venecia al anochecer con el cielo púrpura reflejado en el agua"
+  },
+  "/guides/images/exposure-calculator-nd-filter-long-exposure.webp": {
+    "ko": "손에 든 필터 안에 보랏빛 석양 풍경이 담겨 보이는 사진",
+    "en": "Hand holding a filter ring that frames a purple sunset scene",
+    "ja": "手に持ったフィルターの中に紫色の夕景が映る写真",
+    "es": "Mano sosteniendo un filtro que enmarca un atardecer púrpura"
+  },
+  "/guides/images/exposure-calculator-night-photography.webp": {
+    "ko": "나무 실루엣과 마을 불빛 위로 별이 희미하게 보이는 밤하늘",
+    "en": "Night sky with faint stars above a tree silhouette and distant town lights",
+    "ja": "木のシルエットと街の明かりの上にかすかに星が見える夜空",
+    "es": "Cielo nocturno con estrellas tenues sobre la silueta de un árbol y las luces de un pueblo"
+  },
+  "/guides/images/filter-stacking-guide.webp": {
+    "ko": "창가에서 손으로 들고 있는 어두운 ND 필터",
+    "en": "Hand holding a dark ND filter by a window",
+    "ja": "窓辺で手に持つ濃い色のNDフィルター",
+    "es": "Mano sosteniendo un filtro ND oscuro junto a una ventana"
+  },
+  "/guides/images/flash-guide-number-calculator-guide.webp": {
+    "ko": "나무 벽 앞에서 플래시를 단 카메라로 얼굴을 가리고 촬영하는 사람",
+    "en": "Person hiding behind a flash-equipped camera in front of a wooden wall",
+    "ja": "木の壁の前で、フラッシュ付きカメラで顔を隠して構える人",
+    "es": "Persona detrás de una cámara con flash frente a una pared de madera"
+  },
+  "/guides/images/flash-sync-speed-explained.webp": {
+    "ko": "흰 벽 앞에서 플래시를 단 카메라를 들고 있는 남자",
+    "en": "Man holding a camera with a mounted flash in front of a white wall",
+    "ja": "白い壁の前でフラッシュ付きカメラを構える男性",
+    "es": "Hombre sosteniendo una cámara con flash frente a una pared blanca"
+  },
+  "/guides/images/focus-modes-af-s-vs-af-c-vs-mf.webp": {
+    "ko": "손에 든 렌즈 속에 도시 풍경이 거꾸로 비쳐 보이는 사진",
+    "en": "Hand holding a lens with an inverted city view visible through it",
+    "ja": "手に持ったレンズの中に街の景色が逆さに映る写真",
+    "es": "Mano sosteniendo un objetivo que muestra una vista invertida de la ciudad"
+  },
+  "/guides/images/focus-stacking-for-macro-photography.webp": {
+    "ko": "보라색 꽃잎에 맺힌 물방울을 가까이에서 담은 접사 사진",
+    "en": "Macro photo of water droplets on purple flower petals",
+    "ja": "紫色の花びらに付いた水滴を近接撮影したマクロ写真",
+    "es": "Fotografía macro de gotas de agua sobre pétalos morados"
+  },
+  "/guides/images/free-alternative-to-photopills-exposure-calculators.webp": {
+    "ko": "그래프 인쇄물 위에 놓인 스마트폰 계산기 화면",
+    "en": "Smartphone calculator on top of printed charts and graphs",
+    "ja": "グラフの印刷物の上に置かれたスマートフォンの電卓画面",
+    "es": "Calculadora de un teléfono sobre gráficos impresos"
+  },
+  "/guides/images/free-nd-filter-calculator-alternative-to-shootcalc.webp": {
+    "ko": "서류 위에서 손으로 스마트폰 계산기를 쓰는 모습",
+    "en": "Hand using a smartphone calculator over a pile of papers",
+    "ja": "書類の上でスマートフォンの電卓を使う手元",
+    "es": "Mano usando la calculadora de un teléfono sobre unos papeles"
+  },
+  "/guides/images/golden-hour-calculator-guide.webp": {
+    "ko": "주황빛 구름 아래로 해가 지는 바다 풍경",
+    "en": "Sunset over the sea beneath orange clouds",
+    "ja": "オレンジ色の雲の下で夕日が沈む海",
+    "es": "Puesta de sol sobre el mar bajo nubes anaranjadas"
+  },
+  "/guides/images/gps-data-in-photos-privacy.webp": {
+    "ko": "케이지와 외부 모니터를 장착한 미러리스 카메라를 테이블 위에 둔 모습",
+    "en": "Mirrorless camera with a cage and external monitor set up on a table",
+    "ja": "ケージと外部モニターを付けたミラーレスカメラをテーブルに置いた様子",
+    "es": "Cámara sin espejo con jaula y monitor externo sobre una mesa"
+  },
+  "/guides/images/graduated-nd-filter-guide.webp": {
+    "ko": "어두운 바닥 위에 놓인 미러리스 카메라와 렌즈, 필터들",
+    "en": "Mirrorless camera with lenses and filters on a dark surface",
+    "ja": "暗い台の上に置かれたミラーレスカメラ、レンズ、フィルター",
+    "es": "Cámara sin espejo con objetivos y filtros sobre una superficie oscura"
+  },
+  "/guides/images/how-to-add-exif-frame-to-photos.webp": {
+    "ko": "해안 절벽과 바다 앞에서 손으로 든 빈 액자",
+    "en": "Hand holding an empty picture frame in front of a coastal cliff and sea",
+    "ja": "海岸の崖と海を背景に、手で持った空の額縁",
+    "es": "Mano sosteniendo un marco vacío frente a un acantilado costero y el mar"
+  },
+  "/guides/images/how-to-choose-a-tripod.webp": {
+    "ko": "해변 모래 위 미니 삼각대에 세워 둔 스마트폰",
+    "en": "Smartphone mounted on a mini tripod on a sandy beach",
+    "ja": "砂浜のミニ三脚に取り付けたスマートフォン",
+    "es": "Teléfono montado en un minitrípode sobre la arena de una playa"
+  },
+  "/guides/images/how-to-read-a-histogram.webp": {
+    "ko": "카메라와 모니터에 라이브 뷰 화면을 띄운 촬영 작업대",
+    "en": "Camera and monitors showing a live view on a shooting desk",
+    "ja": "カメラとモニターにライブビューを映した撮影デスク",
+    "es": "Cámara y monitores mostrando la vista en vivo en una mesa de trabajo"
+  },
+  "/guides/images/hyperfocal-distance-explained.webp": {
+    "ko": "렌즈 거리 눈금에 0.9m, 1.6m, 무한대 표시가 보이는 근접 사진",
+    "en": "Close-up of a lens distance scale marked 0.9 m, 1.6 m and infinity",
+    "ja": "レンズの距離目盛りに0.9m、1.6m、無限遠が見えるクローズアップ",
+    "es": "Primer plano de la escala de distancias de un objetivo con 0,9 m, 1,6 m e infinito"
+  },
+  "/guides/images/image-stabilization-explained.webp": {
+    "ko": "초록빛 습지에 서 있는 흰 따오기",
+    "en": "White ibis standing in a green marsh",
+    "ja": "緑の湿地に立つ白いトキ",
+    "es": "Ibis blanco de pie en un humedal verde"
+  },
+  "/guides/images/landscape-waterfall-camera-settings.webp": {
+    "ko": "바위 사이로 흐르는 물이 비단처럼 부드럽게 표현된 폭포 장노출 사진",
+    "en": "Long-exposure waterfall with silky smooth water flowing over rocks",
+    "ja": "岩の間を流れる水が絹のようになめらかに写った滝の長時間露光写真",
+    "es": "Cascada de larga exposición con el agua sedosa fluyendo entre las rocas"
+  },
+  "/guides/images/light-trail-photography-camera-settings.webp": {
+    "ko": "검은 배경 위로 푸른빛 선이 사선으로 뻗는 빛 궤적 사진",
+    "en": "Blue light streaks cutting diagonally across a black background",
+    "ja": "黒い背景を斜めに走る青い光の軌跡",
+    "es": "Estelas de luz azul que cruzan en diagonal un fondo negro"
+  },
+  "/guides/images/low-light-noise-reduction-settings.webp": {
+    "ko": "마른 풀과 나뭇가지가 있는 황량한 땅의 흑백 풍경",
+    "en": "Black-and-white landscape of barren ground with dry grass and driftwood",
+    "ja": "枯れ草と流木のある荒れ地の白黒風景",
+    "es": "Paisaje en blanco y negro de un terreno árido con hierba seca y ramas"
+  },
+  "/guides/images/macro-depth-of-field-vs-standard-dof.webp": {
+    "ko": "솔잎 가지에 앉은 주황빛 무늬 나비를 검은 배경에서 담은 접사 사진",
+    "en": "Macro photo of an orange-patterned butterfly resting on a pine branch against black",
+    "ja": "松葉の枝にとまるオレンジ模様のチョウを黒背景で撮ったマクロ写真",
+    "es": "Fotografía macro de una mariposa de dibujos anaranjados sobre una rama de pino con fondo negro"
+  },
+  "/guides/images/macro-photography-basics.webp": {
+    "ko": "조리개와 셔터 다이얼이 보이는 클래식 카메라 윗면의 얕은 심도 사진",
+    "en": "Shallow-depth-of-field shot of the top of a classic camera with its dials",
+    "ja": "ダイヤルが見えるクラシックカメラの上面を浅い被写界深度で撮った写真",
+    "es": "Fotografía de poca profundidad de campo de la parte superior de una cámara clásica con sus diales"
+  },
+  "/guides/images/macro-photography-diffraction-explained.webp": {
+    "ko": "이슬이 맺힌 분홍빛 민들레 씨앗을 붉은 배경에서 담은 접사 사진",
+    "en": "Macro photo of a pink dandelion seed covered in dew drops against a red background",
+    "ja": "露の付いたピンク色のタンポポの綿毛を赤い背景で撮ったマクロ写真",
+    "es": "Fotografía macro de una semilla de diente de león rosa con gotas de rocío sobre fondo rojo"
+  },
+  "/guides/images/mirrorless-vs-dslr-explained.webp": {
+    "ko": "흰 바닥 위에 어깨끈과 함께 놓인 카메라 네 대",
+    "en": "Four cameras with straps laid out on a white surface",
+    "ja": "白い台の上にストラップと一緒に並べた4台のカメラ",
+    "es": "Cuatro cámaras con sus correas sobre una superficie blanca"
+  },
+  "/guides/images/nd-filter-types-explained.webp": {
+    "ko": "카메라 렌즈에 장착된 가변 ND 필터의 눈금 링을 가까이에서 담은 사진",
+    "en": "Close-up of a variable ND filter ring with its scale mounted on a camera lens",
+    "ja": "カメラレンズに装着した可変NDフィルターの目盛りリングのクローズアップ",
+    "es": "Primer plano del anillo con escala de un filtro ND variable montado en un objetivo"
+  },
+  "/guides/images/nd-filter-vs-polarizer-filter.webp": {
+    "ko": "나무 테이블 위에 놓인 카메라 본체, 렌즈, 필터 링과 액션캠",
+    "en": "Camera body, lens, filter rings and an action camera on a wooden table",
+    "ja": "木のテーブルに置かれたカメラ本体、レンズ、フィルターリング、アクションカメラ",
+    "es": "Cuerpo de cámara, objetivo, anillos de filtro y una cámara de acción sobre una mesa de madera"
+  },
+  "/guides/images/night-cityscape-photography-settings.webp": {
+    "ko": "어두운 하늘 아래 불빛이 반짝이는 도시 야경",
+    "en": "Night view of a city with glittering lights under a dark sky",
+    "ja": "暗い空の下で明かりがきらめく都市の夜景",
+    "es": "Vista nocturna de una ciudad con luces brillantes bajo un cielo oscuro"
+  },
+  "/guides/images/panning-shot-technique.webp": {
+    "ko": "배경이 흐르듯 담긴 팬닝 기법으로 달리는 오토바이 라이더",
+    "en": "Motorcyclist captured with a panning technique and a streaked background",
+    "ja": "背景が流れるように写るパンニングで撮った走行中のバイクライダー",
+    "es": "Motociclista fotografiado con la técnica de barrido y un fondo difuminado en movimiento"
+  },
+  "/guides/images/panorama-photography-settings.webp": {
+    "ko": "파란 하늘에 흰 구름이 넓게 펼쳐진 풍경",
+    "en": "Wide blue sky filled with white clouds",
+    "ja": "青空いっぱいに広がる白い雲",
+    "es": "Amplio cielo azul con nubes blancas"
+  },
+  "/guides/images/portrait-photography-camera-settings.webp": {
+    "ko": "들판에서 모자를 쓰고 뒤를 돌아보는 여성의 인물 사진",
+    "en": "Portrait of a woman in a hat looking back in an open field",
+    "ja": "野原で帽子をかぶり振り返る女性のポートレート",
+    "es": "Retrato de una mujer con sombrero mirando hacia atrás en un campo abierto"
+  },
+  "/guides/images/prime-lens-vs-zoom-lens.webp": {
+    "ko": "갈색 배경 위에 놓인 줌 렌즈를 위에서 내려다본 사진",
+    "en": "Top-down view of a zoom lens on a brown background",
+    "ja": "茶色の背景の上に置かれたズームレンズを真上から見た写真",
+    "es": "Vista cenital de un objetivo zoom sobre un fondo marrón"
+  },
+  "/guides/images/print-resolution-calculator-album.webp": {
+    "ko": "웨딩 사진이 담긴 펼쳐진 사진 앨범",
+    "en": "Open photo album showing a wedding photograph",
+    "ja": "ウェディング写真が載った開いたフォトアルバム",
+    "es": "Álbum de fotos abierto con una fotografía de boda"
+  },
+  "/guides/images/print-resolution-calculator-poster.webp": {
+    "ko": "신문이 인쇄되어 나오는 인쇄기의 롤러",
+    "en": "Printing press rollers with newspapers coming off the line",
+    "ja": "新聞が印刷されて出てくる印刷機のローラー",
+    "es": "Rodillos de una imprenta con periódicos saliendo de la máquina"
+  },
+  "/guides/images/raw-vs-jpeg-which-should-you-shoot.webp": {
+    "ko": "돌담에 빨랫줄로 걸어 둔 흑백 사진 인화물들",
+    "en": "Black-and-white prints hung on a clothesline against a stone wall",
+    "ja": "石壁に洗濯ひもで吊るされた白黒写真のプリント",
+    "es": "Copias fotográficas en blanco y negro colgadas de una cuerda frente a un muro de piedra"
+  },
+  "/guides/images/sensor-size-and-crop-factor-explained.webp": {
+    "ko": "렌즈를 뺀 카메라 본체 안으로 이미지 센서가 보이는 사진",
+    "en": "Camera body with the lens removed showing the image sensor",
+    "ja": "レンズを外したカメラ本体の中にイメージセンサーが見える写真",
+    "es": "Cuerpo de cámara sin objetivo que deja ver el sensor de imagen"
+  },
+  "/guides/images/shutter-count-checker-guide.webp": {
+    "ko": "도로 중앙선 위에 놓인 미러리스 카메라를 낮은 각도에서 담은 사진",
+    "en": "Low-angle shot of a mirrorless camera placed on a road's center line",
+    "ja": "道路の中央線の上に置かれたミラーレスカメラをローアングルで撮った写真",
+    "es": "Fotografía a ras de suelo de una cámara sin espejo sobre la línea central de una carretera"
+  },
+  "/guides/images/storage-calculator-raw-vs-jpeg.webp": {
+    "ko": "서랍이 열린 오래된 카드 보관함 캐비닛",
+    "en": "Old card catalog cabinet with a drawer pulled open",
+    "ja": "引き出しが開いた古いカード目録のキャビネット",
+    "es": "Antiguo fichero de tarjetas con un cajón abierto"
+  },
+  "/guides/images/storage-calculator-trip-planning.webp": {
+    "ko": "지도 위에 필름 카메라와 인스턴트 사진이 놓인 빈티지 풍경",
+    "en": "Vintage scene of a film camera and instant photos resting on a map",
+    "ja": "地図の上にフィルムカメラとインスタント写真が置かれたヴィンテージ風景",
+    "es": "Escena vintage con una cámara de carrete y fotos instantáneas sobre un mapa"
+  },
+  "/guides/images/street-photography-exposure-settings.webp": {
+    "ko": "해 질 녘 높은 건물 사이로 이어진 텅 빈 도시 거리",
+    "en": "Empty city street between tall buildings at dusk",
+    "ja": "夕暮れの高層ビルの間に続く人けのない都会の通り",
+    "es": "Calle vacía de una ciudad entre edificios altos al atardecer"
+  },
+  "/guides/images/studio-lighting-basics.webp": {
+    "ko": "소프트박스 조명과 흰 배경지를 갖춘 사진 스튜디오",
+    "en": "Photography studio with softbox lights and a white backdrop",
+    "ja": "ソフトボックス照明と白いバックペーパーを備えた写真スタジオ",
+    "es": "Estudio fotográfico con luces softbox y fondo blanco"
+  },
+  "/guides/images/sunrise-sunset-photography-camera-settings.webp": {
+    "ko": "낮게 뜬 해가 바다에 붉은 빛줄기를 드리우는 일몰 풍경",
+    "en": "Sunset with a low sun casting a golden path across the sea",
+    "ja": "低い位置の太陽が海に光の道を落とす夕景",
+    "es": "Atardecer con el sol bajo dejando un camino de luz dorada sobre el mar"
+  },
+  "/guides/images/the-exposure-triangle-explained.webp": {
+    "ko": "해 질 녘 흐릿한 가로등 빛을 배경으로 놓인 촛불",
+    "en": "Candle lit in the foreground against blurred streetlights at dusk",
+    "ja": "夕暮れのぼけた街灯の光を背景にともるろうそく",
+    "es": "Vela encendida en primer plano frente a farolas desenfocadas al anochecer"
+  },
+  "/guides/images/timelapse-calculator-interval-shooting.webp": {
+    "ko": "흰 배경에 12시 20분을 가리키는 플립 시계",
+    "en": "Flip clock showing 12:20 against a white background",
+    "ja": "白い背景で12時20分を示すパタパタ時計",
+    "es": "Reloj de paletas que marca las 12:20 sobre un fondo blanco"
+  },
+  "/guides/images/timelapse-calculator-storage-planning.webp": {
+    "ko": "양옆으로 장비 선반이 길게 늘어선 복도",
+    "en": "Long corridor lined with equipment racks on both sides",
+    "ja": "両側に機器ラックが長く並ぶ廊下",
+    "es": "Largo pasillo con bastidores de equipos a ambos lados"
+  },
+  "/guides/images/timelapse-camera-settings.webp": {
+    "ko": "어두운 배경에 불빛이 켜진 자동차 회전계 계기판",
+    "en": "Illuminated tachometer gauge glowing against a dark background",
+    "ja": "暗い背景に光る自動車のタコメーター",
+    "es": "Tacómetro iluminado sobre un fondo oscuro"
+  },
+  "/guides/images/understanding-depth-of-field.webp": {
+    "ko": "조리개 숫자 1.4, 2.8, 4, 5.6이 새겨진 클래식 렌즈의 조리개 링",
+    "en": "Aperture ring of a classic lens engraved with f-numbers such as 1.4, 2.8, 4 and 5.6",
+    "ja": "1.4、2.8、4、5.6などの絞り値が刻まれたクラシックレンズの絞りリング",
+    "es": "Anillo de diafragma de un objetivo clásico con números f como 1,4, 2,8, 4 y 5,6"
+  },
+  "/guides/images/understanding-dynamic-range.webp": {
+    "ko": "검은 배경에서 세로로 늘어진 여러 색의 빛줄기 장노출 사진",
+    "en": "Long-exposure photo of multicolored light streaks hanging vertically on a black background",
+    "ja": "黒い背景に縦に伸びる色とりどりの光の筋を写した長時間露光写真",
+    "es": "Fotografía de larga exposición con estelas de luz de varios colores en vertical sobre fondo negro"
+  },
+  "/guides/images/understanding-exif-iso-shutter-aperture.webp": {
+    "ko": "ISO 200이 표시된 카메라 윗면 LCD와 버튼을 누르는 손가락",
+    "en": "Camera top LCD showing ISO 200 with a finger pressing a button",
+    "ja": "ISO 200を表示するカメラ上面の液晶と、ボタンを押す指",
+    "es": "Pantalla LCD superior de una cámara con ISO 200 y un dedo pulsando un botón"
+  },
+  "/guides/images/understanding-metering-modes.webp": {
+    "ko": "조리개 숫자 1.4, 2, 2.8, 4가 보이는 렌즈 링 근접 사진",
+    "en": "Close-up of a lens ring marked with aperture numbers 1.4, 2, 2.8 and 4",
+    "ja": "1.4、2、2.8、4の絞り値が見えるレンズリングのクローズアップ",
+    "es": "Primer plano del anillo de un objetivo con los números de diafragma 1,4, 2, 2,8 y 4"
+  },
+  "/guides/images/using-exposure-compensation.webp": {
+    "ko": "사람의 옆모습 실루엣 안에 사막에 앉은 사람들이 겹쳐 보이는 다중 노출 사진",
+    "en": "Double-exposure image of a person's silhouette containing small figures sitting in a desert",
+    "ja": "人物のシルエットの中に砂漠に座る人々が重なって見える多重露光写真",
+    "es": "Imagen de doble exposición con la silueta de una persona que contiene figuras sentadas en un desierto"
+  },
+  "/guides/images/white-balance-explained.webp": {
+    "ko": "어두운 배경에서 필라멘트가 주황빛으로 빛나는 전구와 흐릿한 불빛",
+    "en": "Glowing filament bulb with blurred warm lights in the dark background",
+    "ja": "暗い背景でフィラメントがオレンジ色に光る電球とぼけた明かり",
+    "es": "Bombilla de filamento brillante con luces cálidas desenfocadas al fondo"
+  },
+  "/guides/images/wide-angle-vs-telephoto-focal-length.webp": {
+    "ko": "렌즈 앞유리에 청록빛 보케 같은 반사가 비치는 줌 렌즈 정면 사진",
+    "en": "Front of a zoom lens with teal bokeh-like reflections on the glass",
+    "ja": "レンズ前玉に青緑色のボケのような反射が映るズームレンズの正面写真",
+    "es": "Frente de un objetivo zoom con reflejos azul verdosos similares al bokeh en el cristal"
+  },
+  "/guides/images/wildlife-photography-camera-settings.webp": {
+    "ko": "안개 낀 새벽 들판에서 사슴을 앞에 두고 무릎을 꿇고 촬영하는 사진가의 실루엣",
+    "en": "Silhouette of a photographer kneeling in a misty dawn field with a deer in the distance",
+    "ja": "霧の朝の野原でシカを前にひざまずいて撮影する写真家のシルエット",
+    "es": "Silueta de un fotógrafo arrodillado en un campo con niebla al amanecer, con un ciervo al fondo"
+  },
+  "/guides/photos/06-sun-in-sculpture-arch.webp": {
+    "ko": "주황빛 하늘 아래 커다란 알 모양 조형물의 아치 안에 지는 해가 걸려 있는 장면",
+    "en": "Setting sun framed inside the arch of a large egg-shaped sculpture under an orange sky",
+    "ja": "オレンジ色の空の下、大きな卵形の彫刻のアーチの中に沈む夕日が収まる場面",
+    "es": "Sol poniente enmarcado en el arco de una gran escultura con forma de huevo bajo un cielo anaranjado"
+  }
+}

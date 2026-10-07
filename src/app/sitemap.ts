@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { MetadataRoute } from "next";
 import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL, languageAlternates } from "@/lib/seo";
@@ -42,6 +44,34 @@ const STATIC_PATHS = [
   ...getLiveImageToolPaths(),
 ];
 
+/**
+ * 이미지 사이트맵용: 글 한 편에서 실제로 화면에 나오는 이미지의 원본 파일 주소를 모은다.
+ * 대표 이미지(frontmatter `image`) + 본문의 마크다운 이미지 `![](/...)` +
+ * 블로그 `<BlogPhoto src="/...">`. /public 에 실제 파일이 있는 것만 포함한다
+ * (구글 공식 안내: `<image:loc>`만 필요, 캡션·제목 태그는 더 이상 쓰지 않음).
+ * 최적화 주소(/_next/image?...)가 아닌 원본 파일 주소를 넣는다.
+ */
+function collectImageUrls(
+  contentFile: string,
+  featured: string | undefined,
+): string[] | undefined {
+  const paths = new Set<string>();
+  if (featured) paths.add(featured);
+
+  try {
+    const raw = fs.readFileSync(contentFile, "utf8");
+    for (const m of raw.matchAll(/!\[[^\]]*\]\((\/[^)\s]+)\)/g)) paths.add(m[1]);
+    for (const m of raw.matchAll(/<BlogPhoto\b[^>]*?\bsrc="(\/[^"]+)"/g)) paths.add(m[1]);
+  } catch {
+    // 파일을 못 읽어도 대표 이미지만으로 계속한다.
+  }
+
+  const urls = [...paths]
+    .filter((p) => fs.existsSync(path.join(process.cwd(), "public", p)))
+    .map((p) => `${SITE_URL}${p}`);
+  return urls.length > 0 ? urls : undefined;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
@@ -70,6 +100,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: {
         languages: languageAlternates(`/guides/${guide.slug}`),
       },
+      images: collectImageUrls(
+        path.join(process.cwd(), "content", "guides", locale, `${guide.slug}.mdx`),
+        guide.image,
+      ),
     })),
   );
 
@@ -93,6 +127,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: new Date(post.updatedAt ?? post.publishedAt),
             changeFrequency: "monthly" as const,
             priority: 0.6,
+            images: collectImageUrls(
+              path.join(process.cwd(), "content", "blog", BLOG_LOCALE, `${post.slug}.mdx`),
+              post.image,
+            ),
           })),
         ];
 

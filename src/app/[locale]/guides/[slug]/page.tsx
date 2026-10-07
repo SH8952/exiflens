@@ -12,6 +12,7 @@ import {
 } from "@/lib/seo";
 import {
   compileGuide,
+  getGuideImageAlt,
   getGuideMeta,
   getGuideSlugs,
   getRelatedGuides,
@@ -167,7 +168,7 @@ export default async function GuidePage({
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
             <Image
               src={meta.image}
-              alt={meta.title}
+              alt={getGuideImageAlt(locale as Locale, meta.image, meta.title)}
               fill
               sizes="(min-width: 768px) 768px, 100vw"
               className="object-cover"

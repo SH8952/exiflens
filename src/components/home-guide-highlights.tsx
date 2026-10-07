@@ -2,7 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { getAllGuidesMeta } from "@/lib/guides";
+import { getAllGuidesMeta, getGuideImageAlt } from "@/lib/guides";
 
 /**
  * Homepage "가이드 하이라이트" card section — surfaces a few guide articles
@@ -58,7 +58,7 @@ export async function HomeGuideHighlights({ locale }: { locale: string }) {
               <div className="relative aspect-[16/9] overflow-hidden rounded-lg bg-muted">
                 <Image
                   src={guide.image}
-                  alt={guide.title}
+                  alt={getGuideImageAlt(locale as Locale, guide.image, guide.title)}
                   fill
                   sizes="(min-width: 640px) 33vw, calc(100vw - 64px)"
                   className="object-cover transition duration-300 group-hover:scale-105"
