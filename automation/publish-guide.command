@@ -214,6 +214,27 @@ done
 echo ""
 echo "=== 전체 커밋 push 중... ==="
 git push origin main
+PUSH_RC=$?
+
+# --- 4.5. IndexNow 알림 (2026-10-07 추가) ---
+# push가 성공했을 때만, 이번에 발행한 건의 주소를 Bing·Naver·Yandex 등에 알립니다.
+# 배포가 끝날 때까지 기다렸다가 전송하므로 백그라운드로 분리해 실행하며(이 창은 바로 닫힘),
+# 실패해도 발행에는 영향이 없습니다. 기록: ~/Library/Logs/exiflens-indexnow.log
+if [ "$PUSH_RC" -eq 0 ] && [ -f "$REPO/automation/indexnow-submit.py" ]; then
+  INDEXNOW_SLUGS=()
+  for S in "${SLUGS[@]}"; do
+    SKIP=0
+    for F in "${FAILED_SLUGS[@]}"; do [ "$F" = "$S" ] && SKIP=1; done
+    [ "$SKIP" -eq 0 ] && INDEXNOW_SLUGS+=("$S")
+  done
+  if [ "${#INDEXNOW_SLUGS[@]}" -gt 0 ]; then
+    if python3 "$REPO/automation/indexnow-submit.py" --detach --slugs "${INDEXNOW_SLUGS[@]}"; then
+      echo "IndexNow 알림 예약됨: 배포 완료 후 자동 전송 (${INDEXNOW_SLUGS[*]})"
+    else
+      echo "(IndexNow 알림 예약 실패 - 발행에는 영향 없음)"
+    fi
+  fi
+fi
 
 # --- 5. 정리 (스크립트 자신은 삭제하지 않음) ---
 for SLUG in "${SLUGS[@]}"; do
