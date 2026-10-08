@@ -12,6 +12,7 @@ import {
   type ToolEntry,
 } from "@/lib/tools-roster";
 import { BackLink } from "@/components/back-link";
+import { ToolCardImage } from "@/components/tools/tool-card-image";
 
 type ResolvedTool = ToolEntry & { name: string; description: string };
 
@@ -91,6 +92,7 @@ export default async function ToolsHubPage({
         title={t("fieldSectionTitle")}
         tools={fieldTools}
         comingSoonLabel={comingSoonLabel}
+        prioritizeImages
       />
       <ToolSection
         title={t("postShootSectionTitle")}
@@ -117,18 +119,25 @@ function ToolSection({
   title,
   tools,
   comingSoonLabel,
+  prioritizeImages = false,
 }: {
   title: string;
   tools: ResolvedTool[];
   comingSoonLabel: string;
+  prioritizeImages?: boolean;
 }) {
   if (tools.length === 0) return null;
   return (
     <section className="flex flex-col gap-4">
       <h2 className="text-lg font-semibold">{title}</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {tools.map((tool) => (
-          <ToolCard key={tool.slug} tool={tool} comingSoonLabel={comingSoonLabel} />
+        {tools.map((tool, index) => (
+          <ToolCard
+            key={tool.slug}
+            tool={tool}
+            comingSoonLabel={comingSoonLabel}
+            priorityImage={prioritizeImages && index < 3}
+          />
         ))}
       </div>
     </section>
@@ -138,24 +147,33 @@ function ToolSection({
 function ToolCard({
   tool,
   comingSoonLabel,
+  priorityImage,
 }: {
   tool: ResolvedTool;
   comingSoonLabel: string;
+  priorityImage: boolean;
 }) {
   const card = (
-    <div className="flex h-full flex-col gap-2 rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/50">
-      <h3 className="font-semibold">{tool.name}</h3>
-      {tool.status === "hidden" ? (
-        <span className="w-fit rounded-full bg-amber-500/15 px-2 py-0.5 text-xs text-amber-600">
-          DEV ONLY · 숨김
-        </span>
-      ) : null}
-      <p className="text-sm text-muted-foreground">{tool.description}</p>
-      {tool.status === "comingSoon" ? (
-        <span className="mt-auto inline-flex w-fit items-center rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-          {comingSoonLabel}
-        </span>
-      ) : null}
+    <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-primary/50">
+      <ToolCardImage
+        slug={tool.slug}
+        sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw"
+        priority={priorityImage}
+      />
+      <div className="flex flex-1 flex-col gap-2 p-5">
+        <h3 className="font-semibold">{tool.name}</h3>
+        {tool.status === "hidden" ? (
+          <span className="w-fit rounded-full bg-amber-500/15 px-2 py-0.5 text-xs text-amber-600">
+            DEV ONLY · 숨김
+          </span>
+        ) : null}
+        <p className="text-sm text-muted-foreground">{tool.description}</p>
+        {tool.status === "comingSoon" ? (
+          <span className="mt-auto inline-flex w-fit items-center rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+            {comingSoonLabel}
+          </span>
+        ) : null}
+      </div>
     </div>
   );
 

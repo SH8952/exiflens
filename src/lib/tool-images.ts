@@ -27,3 +27,12 @@ const DATA = toolImagesData as ToolImagesMap;
 export function getToolImages(slug: string): Partial<Record<ToolImageSlot, ToolImageMeta>> {
   return DATA[slug] ?? {};
 }
+
+/**
+ * 도구 목록·홈 카드의 썸네일로 쓸 이미지 경로. 도구 페이지 예시 이미지의
+ * 왼쪽 → 오른쪽 순으로 첫 번째를 쓰고, 둘 다 없으면 undefined(= 텍스트 카드).
+ */
+export function getToolCardImage(slug: string): string | undefined {
+  const images = DATA[slug] ?? {};
+  return images.left?.image ?? images.right?.image;
+}

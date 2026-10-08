@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getLiveTools } from "@/lib/tools-roster";
+import { ToolCardImage } from "@/components/tools/tool-card-image";
 
 /**
  * Homepage "사진 도구" highlights section — lists every live /tools
@@ -45,14 +46,20 @@ export async function HomeToolsHighlights() {
           <Link
             key={tool.slug}
             href={`/tools/${tool.slug}`}
-            className="group flex flex-col gap-1.5 rounded-xl border border-border bg-card p-4 transition hover:border-foreground/30"
+            className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition hover:border-foreground/30"
           >
-            <h3 className="font-semibold leading-snug tracking-tight group-hover:underline">
-              {t(`tools.${tool.slug}.name`)}
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              {t(`tools.${tool.slug}.description`)}
-            </p>
+            <ToolCardImage
+              slug={tool.slug}
+              sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw"
+            />
+            <div className="flex flex-col gap-1.5 p-4">
+              <h3 className="font-semibold leading-snug tracking-tight group-hover:underline">
+                {t(`tools.${tool.slug}.name`)}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {t(`tools.${tool.slug}.description`)}
+              </p>
+            </div>
           </Link>
         ))}
       </div>
