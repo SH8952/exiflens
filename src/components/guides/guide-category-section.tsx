@@ -71,17 +71,21 @@ export function GuideCategorySection({
     }
   };
   const hasMore = items.length > initialVisibleCount;
-  const visibleItems = expanded ? items : items.slice(0, initialVisibleCount);
+  // 모든 카드를 처음부터 HTML에 넣어 두고(검색 로봇이 링크를 모두 볼 수 있도록),
+  // 접힌 상태에서는 initialVisibleCount 이후 카드만 화면에서 숨긴다(2026-10-09).
+  // 숨긴 카드의 이미지는 lazy 로딩이라 접힌 동안 내려받지 않는다.
 
   return (
     <section className="flex flex-col gap-4">
       <h2 className="text-xl font-semibold tracking-tight">{categoryLabel}</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {visibleItems.map((item, index) => (
+        {items.map((item, index) => (
           <Link
             key={item.slug}
             href={`/guides/${item.slug}`}
-            className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-primary/40"
+            className={`group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-primary/40${
+              !expanded && index >= initialVisibleCount ? " hidden" : ""
+            }`}
           >
             {item.image ? (
               <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted max-sm:aspect-[2/1]">
