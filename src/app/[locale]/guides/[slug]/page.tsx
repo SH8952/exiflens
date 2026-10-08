@@ -24,6 +24,7 @@ import { GuideToolCta } from "@/components/guide-tool-cta";
 import { MdxTable } from "@/components/mdx-table";
 import { GuideToc } from "@/components/guides/guide-toc";
 import { GuideFloatingToc } from "@/components/guides/guide-floating-toc";
+import { ReadingProgress } from "@/components/guides/reading-progress";
 import { ShareButton } from "@/components/share-button";
 
 export function generateStaticParams() {
@@ -82,6 +83,9 @@ export default async function GuidePage({
   if (!compiled) notFound();
   const { Content, meta, headings } = compiled;
   const relatedGuides = getRelatedGuides(locale as Locale, slug);
+  // 한국어: 단어 중간에서 줄바꿈되지 않도록 어절 단위로 줄바꿈(긴 영문·주소는 필요할 때만 끊김).
+  const koWrap =
+    locale === "ko" ? "[word-break:keep-all] [overflow-wrap:break-word]" : "";
 
   const dateFormatter = new Intl.DateTimeFormat(locale, {
     year: "numeric",
@@ -117,6 +121,7 @@ export default async function GuidePage({
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-10">
+      <ReadingProgress targetId="guide-article" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -134,7 +139,7 @@ export default async function GuidePage({
       </Link>
 
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className={`text-3xl font-bold tracking-tight sm:text-4xl ${koWrap}`.trim()}>
           {meta.title}
         </h1>
         <div className="flex flex-wrap items-center justify-between gap-2">
@@ -206,7 +211,10 @@ export default async function GuidePage({
       <GuideToc headings={headings} />
       <GuideFloatingToc headings={headings} />
 
-      <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-headings:scroll-mt-6 prose-a:text-primary">
+      <article
+        id="guide-article"
+        className={`prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-headings:scroll-mt-6 prose-a:text-primary prose-p:leading-8 prose-li:leading-7 prose-h2:mt-12 prose-h2:border-b prose-h2:border-border prose-h2:pb-2 prose-h3:mt-8 prose-blockquote:border-primary/60 prose-blockquote:not-italic prose-img:rounded-lg ${koWrap}`.trim()}
+      >
         <Content components={{ table: MdxTable }} />
       </article>
 
