@@ -8,6 +8,7 @@ import { isToolAccessible } from "@/lib/tools-roster";
 import { GearRecommendationSection } from "@/components/gear-recommendation-section";
 import { CrossLinkFlyDroneMap } from "@/components/cross-link/cross-link-flydronemap";
 import { HomeUsageSection } from "@/components/home-usage-section";
+import { HomeTrustBadges } from "@/components/home-trust-badges";
 import { HomeGuideHighlights } from "@/components/home-guide-highlights";
 import { HomeToolsHighlights } from "@/components/home-tools-highlights";
 import { HomeFaqHighlights } from "@/components/home-faq-highlights";
@@ -37,6 +38,7 @@ export default async function HomePage({
         <p className="mx-auto max-w-2xl text-muted-foreground">
           {t("subtitle")}
         </p>
+        <HomeTrustBadges />
       </div>
 
       {/* Section 1: Image Dropzone */}
