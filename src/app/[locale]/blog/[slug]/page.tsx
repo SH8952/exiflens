@@ -99,6 +99,10 @@ export default async function BlogPostPage({
     description: meta.description,
     datePublished: meta.publishedAt,
     dateModified: meta.updatedAt ?? meta.publishedAt,
+    // 대표 이미지(썸네일) — 구글 디스커버·리치 결과가 글의 대표 이미지를 인식하도록 구조화 데이터에도 명시.
+    ...(meta.thumbnail || meta.image
+      ? { image: [`${SITE_URL}${meta.thumbnail ?? meta.image}`] }
+      : {}),
     author: {
       "@type": "Person",
       name: "Photographer SH",

@@ -51,17 +51,40 @@ export type BlogMeta = BlogFrontmatter & {
   readingMinutes: number;
 };
 
+/**
+ * 예약 발행 — 2026-10-07. `publishedAt`(YYYY-MM-DD)이 한국 시간(Asia/Seoul) 오늘보다 미래인 글은
+ * 아직 공개하지 않는다(목록·글 주소·사이트맵·RSS·관련 글 모두 제외, 글 주소 직접 접근은 404).
+ * 한국 시간 기준 해당 날짜 0시부터 공개된다. 로컬 개발 서버(`npm run dev`)에서는 미리보기를 위해
+ * 예약 글도 보인다. 블로그 목록·글 상세·목록 2페이지 이후·RSS는 요청 때마다 만들어지므로 날짜가 되면 바로 공개되고,
+ * 사이트맵은 배포할 때 만들어지므로 그 뒤 첫 배포부터 예약 글이 반영된다.
+ * 날짜 형식이 올바르지 않으면 안전하게 공개한다(기존 글이 사라지는 사고 방지).
+ */
+export function isBlogPublished(publishedAt: string, now: Date = new Date()): boolean {
+  if (process.env.NODE_ENV === "development") return true;
+  const day = String(publishedAt ?? "").slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return true;
+  const todayKst = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
+  return day <= todayKst;
+}
+
 function blogDir() {
   return path.join(BLOG_DIR, BLOG_LOCALE);
 }
 
+/** 공개된 글의 slug 목록(예약 글 제외). */
 export function getBlogSlugs(): string[] {
   const dir = blogDir();
   if (!fs.existsSync(dir)) return [];
   return fs
     .readdirSync(dir)
     .filter((file) => file.endsWith(".mdx"))
-    .map((file) => file.replace(/\.mdx$/, ""));
+    .map((file) => file.replace(/\.mdx$/, ""))
+    .filter((slug) => getBlogMeta(slug) !== null);
 }
 
 function estimateReadingMinutes(body: string): number {
@@ -75,6 +98,7 @@ export function getBlogMeta(slug: string): BlogMeta | null {
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
   const fm = data as BlogFrontmatter;
+  if (!isBlogPublished(fm.publishedAt)) return null;
   return {
     ...fm,
     slug,
@@ -130,6 +154,7 @@ export async function compileBlogPost(
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
   const fm = data as BlogFrontmatter;
+  if (!isBlogPublished(fm.publishedAt)) return null;
 
   const { default: Content } = await evaluate(content, {
     ...runtime,
