@@ -1,3 +1,15 @@
+## 2026-10-09 — 네이버 검색어 기반 한국어 문구 보강 (ND 계산·폭포·빛번짐·야경 화이트밸런스·셔터 앵글)
+
+- 근거: 네이버 서치어드바이저 TOP30(폭포 사진 계열 클릭 5, ND 필터 계산 계열 노출 22, 빛번짐 계열 25 등). 한국어만 수정(네이버 근거가 한국어뿐이라 en/ja/es는 어색한 직역을 피하려고 이번에는 변경하지 않음).
+- `content/guides/ko/landscape-waterfall-camera-settings.mdx`: 제목을 "풍경·폭포 사진 찍는 법: 조리개값·셔터스피드·필터 설정"으로, 설명에 필터 종류(ND·편광) 반영, 상단에 "폭포 사진 찍는 법 한눈에 보기" 요약 추가(본문에 이미 있는 수치만 사용), 필터 종류(ND·CPL) 설명 한 문장과 내부 링크 추가.
+- `content/guides/ko/exposure-calculator-nd-filter-long-exposure.mdx`: "자주 묻는 질문" 신설 — "ND 필터 계산은 어떻게 하나요", "ND8·ND64·ND1000은 몇 스탑인가요".
+- `content/blog/ko/night-photography-light-starburst-settings.mdx`: FAQ에 "빛번짐과 빛 갈라짐은 같은 현상인가요" 추가.
+- `content/guides/ko/white-balance-explained.mdx`: "야경 화이트밸런스는 어떻게 설정할까" 섹션 추가(기존 "커스텀 화이트밸런스 잡는 법" 소제목은 이미 존재).
+- `messages/ko.json`: 타임랩스 계산기 설명에 "셔터 앵글(개각도) 기준 모션 블러" 반영.
+- 변경 불필요로 확인: 홈 제목에 이미 "EXIF 뷰어", "ND 필터 계산기" 포함.
+- 검증: tsc 오류 없음, build 성공, 해당 페이지 5곳에 새 문구 반영 확인, en/ja/es 가이드 200.
+- 백업: `_backups/naver-keyword-wording_*/`.
+
 ## 2026-10-09 — 가이드 목록 "더보기": 접힌 카드도 처음부터 HTML에 포함(검색 로봇 링크 확보)
 
 - 배경: Search Console 분석에서 9/17 이후 노출이 급감(9/18부터 하루 1~2회). 같은 시기 도입한 "더보기"가 접힌 카드(5번째 이후)를 HTML에 넣지 않아 목록 페이지의 가이드 링크가 72편 중 27편으로 줄었던 것이 한 가지 가능성.
