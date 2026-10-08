@@ -21,6 +21,7 @@ import {
 } from "@/lib/guides";
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 import { GuideToolCta } from "@/components/guide-tool-cta";
+import { MdxTable } from "@/components/mdx-table";
 import { GuideToc } from "@/components/guides/guide-toc";
 import { GuideFloatingToc } from "@/components/guides/guide-floating-toc";
 import { ShareButton } from "@/components/share-button";
@@ -206,7 +207,7 @@ export default async function GuidePage({
       <GuideFloatingToc headings={headings} />
 
       <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-headings:scroll-mt-6 prose-a:text-primary">
-        <Content />
+        <Content components={{ table: MdxTable }} />
       </article>
 
       <GuideToolCta locale={locale} />

@@ -3233,5 +3233,19 @@
   "BackNav": {
     "toHome": "← Back to Home",
     "toTools": "← Back to Tools"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The address may be incorrect, or the page may have been moved or removed. Try one of the links below.",
+    "home": "Go to home",
+    "tools": "Browse tools",
+    "guides": "Browse guides",
+    "blog": "Browse blog"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "description": "An error occurred while loading this page. Please try again in a moment.",
+    "retry": "Try again",
+    "home": "Go to home"
   }
 }

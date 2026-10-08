@@ -3233,5 +3233,19 @@
   "BackNav": {
     "toHome": "← Volver al inicio",
     "toTools": "← Volver a Herramientas"
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "description": "Es posible que la dirección sea incorrecta o que la página se haya movido o eliminado. Prueba con uno de los enlaces de abajo.",
+    "home": "Ir al inicio",
+    "tools": "Ver herramientas",
+    "guides": "Ver guías",
+    "blog": "Ver blog"
+  },
+  "ErrorPage": {
+    "title": "Algo salió mal",
+    "description": "Se produjo un error al cargar esta página. Inténtalo de nuevo en un momento.",
+    "retry": "Reintentar",
+    "home": "Ir al inicio"
   }
 }

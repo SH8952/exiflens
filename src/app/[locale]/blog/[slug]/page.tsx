@@ -19,6 +19,7 @@ import {
 import { GuideToolCta } from "@/components/guide-tool-cta";
 import { ShareButton } from "@/components/share-button";
 import { BlogPhoto } from "@/components/blog-photo";
+import { MdxTable } from "@/components/mdx-table";
 
 export function generateStaticParams() {
   return getBlogSlugs().map((slug) => ({ locale: BLOG_LOCALE, slug }));
@@ -200,7 +201,7 @@ export default async function BlogPostPage({
       ) : null}
 
       <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-a:text-primary">
-        <Content components={{ BlogPhoto }} />
+        <Content components={{ BlogPhoto, table: MdxTable }} />
       </article>
 
       <GuideToolCta locale={locale} />

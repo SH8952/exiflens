@@ -192,7 +192,7 @@ export async function compileGuide(
   locale: Locale,
   slug: string,
 ): Promise<{
-  Content: ComponentType;
+  Content: ComponentType<{ components?: Record<string, ComponentType<never>> }>;
   meta: GuideMeta;
   headings: GuideHeading[];
 } | null> {
@@ -217,7 +217,9 @@ export async function compileGuide(
   });
 
   return {
-    Content: Content as ComponentType,
+    Content: Content as ComponentType<{
+      components?: Record<string, ComponentType<never>>;
+    }>,
     meta: {
       ...fm,
       slug,
