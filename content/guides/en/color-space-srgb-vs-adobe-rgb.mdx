@@ -11,6 +11,17 @@ imageCreditUrl: "https://unsplash.com/@denmychan?utm_source=ExifLens&utm_medium=
 
 Buried deep in your camera's menu is a "Color Space" setting, and it's tempting to assume switching it from sRGB to Adobe RGB will simply give you better photos. But if you've ever shot JPEGs that way and then uploaded them to Instagram only to see the colors come out flat and muddy, the problem isn't your camera or lens — it's a mismatch between the color space your file carries and the software reading it. sRGB and Adobe RGB each define a different range of reproducible colors (a gamut), and the same underlying pixel data can look completely different depending on how accurately the display or print environment on the receiving end interprets that gamut.
 
+## Quick answer: sRGB or Adobe RGB?
+
+For most photographers who share photos online, sRGB is the safer choice. Adobe RGB only pays off when your whole workflow — a wide-gamut monitor, color-managed editing, and a printer that can use the extra colors — can actually show it.
+
+| | sRGB | Adobe RGB |
+|---|---|---|
+| Color range | Standard range used by most screens and websites | Wider range, especially in greens and cyans |
+| Best for | Web, social media, sharing, everyday viewing | Print work and wide-gamut, color-managed workflows |
+| Main risk | Very saturated colors can be clipped | Looks dull and flat when shown in software that ignores color profiles |
+| RAW files | Setting only affects the preview and embedded JPEG | Setting only affects the preview and embedded JPEG |
+
 ## What a color space actually is
 
 A color space is a defined subset of the full range of colors the human eye can perceive, mapped out for a specific device or standard. Measured against the CIE 1931 chromaticity diagram, sRGB covers roughly 35.9% of visible color, while Adobe RGB covers about 52.1%. The difference is most pronounced in the green and cyan range, where Adobe RGB can render noticeably more saturated greens than sRGB can reach; the gap in the blue and violet range is comparatively small. A wider gamut doesn't automatically make a photo better, though — that extra color information only matters if the display, printer, or browser rendering the final image is actually capable of interpreting it correctly.

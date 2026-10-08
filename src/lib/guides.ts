@@ -106,13 +106,34 @@ function collectH2Headings(headings: GuideHeading[]) {
 }
 
 /**
- * 한국어 가이드 전용: 체크리스트/실수/FAQ/정리 H2 구역을 <section class="guide-box ...">로
+ * 전 언어 가이드: 체크리스트/실수/FAQ/정리 H2 구역을 <section class="guide-box ...">로
  * 감싸 박스 디자인(globals.css)을 입힌다. 글 파일은 수정하지 않는다.
  * collectH2Headings 뒤·rehypeAutolinkHeadings 앞에 두어 H2 id·앵커·순서를 그대로 유지한다.
- * 다른 언어는 적용하지 않는다(2026-10-08 한국어 우선).
+ * 4개 언어 모두 적용(ko 2026-10-08, ja·en·es 2026-10-09).
  */
-function boxKind(title: string): string | null {
+function boxKind(title: string, locale: Locale): string | null {
   const t = title.replace(/\s+/g, " ").trim();
+  if (locale === "en") {
+    if (/\bFAQ\b/i.test(t)) return "faq";
+    if (/checklist/i.test(t)) return "checklist";
+    if (/mistake/i.test(t)) return "mistake";
+    if (t === "Putting It Together") return "summary";
+    return null;
+  }
+  if (locale === "es") {
+    if (/preguntas frecuentes/i.test(t)) return "faq";
+    if (/verificación|comprobación|checklist|lista rápida/i.test(t)) return "checklist";
+    if (/error/i.test(t)) return "mistake";
+    if (t === "Resumen" || t === "Poniéndolo Todo Junto") return "summary";
+    return null;
+  }
+  if (locale === "ja") {
+    if (t.includes("よくある質問")) return "faq";
+    if (t.includes("チェックリスト")) return "checklist";
+    if (t.includes("失敗") || t.includes("間違い")) return "mistake";
+    if (t === "まとめ") return "summary";
+    return null;
+  }
   if (t.includes("자주 묻는 질문")) return "faq";
   if (t.includes("체크리스트")) return "checklist";
   if (t.includes("실수")) return "mistake";
@@ -120,7 +141,7 @@ function boxKind(title: string): string | null {
   return null;
 }
 
-function wrapGuideBoxes() {
+function wrapGuideBoxes(locale: Locale) {
   return (tree: HastNode) => {
     const kids = tree.children ?? [];
     const out: HastNode[] = [];
@@ -129,7 +150,7 @@ function wrapGuideBoxes() {
       const node = kids[i];
       const kind =
         node.type === "element" && node.tagName === "h2"
-          ? boxKind(hastText(node))
+          ? boxKind(hastText(node), locale)
           : null;
       if (!kind) {
         out.push(node);
@@ -267,7 +288,7 @@ export async function compileGuide(
     rehypePlugins: [
       rehypeSlug,
       collectH2Headings(headings),
-      ...(locale === "ko" ? [wrapGuideBoxes] : []),
+      () => wrapGuideBoxes(locale),
       rehypeAutolinkHeadings,
     ],
   });

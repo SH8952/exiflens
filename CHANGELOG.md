@@ -1,3 +1,23 @@
+## 2026-10-09 — 영어·스페인어 가이드 박스 적용 + 영어/스페인어 검색 표현 보강 (전 언어 완료)
+
+- 박스: `src/lib/guides.ts` `boxKind` — 영어(FAQ·checklist·mistake·Putting It Together)와 스페인어(Preguntas frecuentes·verificación/comprobación/lista rápida·error·Resumen/Poniéndolo Todo Junto) 규칙 추가. 이제 4개 언어 모두 박스 적용. 글 파일 수정 없이 렌더링만 변경, H2 id·목차 유지.
+- 영어 "A vs B" 비교형 3편에 "Quick Answer" 요약+비교표 추가: `color-space-srgb-vs-adobe-rgb`(sRGB vs Adobe RGB), `wide-angle-vs-telephoto-focal-length`, `raw-vs-jpeg-which-should-you-shoot`. 제목은 이미 비교형이라 유지.
+- 스페인어: `understanding-depth-of-field` — 설명 보강 + "Profundidad de Campo Alta y Poca Profundidad de Campo" 섹션·표 추가("profundidad de campo alta/poca" 검색어 대응), `wide-angle-vs-telephoto-focal-length` — "Respuesta Rápida" 요약+표, `choosing-the-right-nd-filter` — 소제목을 "Tabla de Filtros ND: …"로 바꾸고 ND8~ND1000000 표 추가("tabla de filtros nd" 대응).
+- 변경하지 않은 것: 기존 본문, 한국어·일본어 추가 변경 없음(일본어는 앞 항목 참고).
+- 검증: tsc·eslint 오류 없음, build 성공, 4개 언어 가이드 각 72편 모두 200, 박스 구역 확인, 새 섹션 6곳 반영 확인.
+- 백업: `_backups/en-es-boxes-wording_*/`.
+
+## 2026-10-09 — 일본어 가이드 박스 적용 + 일본어 검색 표현 보강
+
+- 박스: `src/lib/guides.ts` — `boxKind(title, locale)`에 일본어 규칙 추가(よくある質問=FAQ, チェックリスト=체크리스트, 失敗/間違い=실수, まとめ=정리). 글 파일은 수정하지 않음. H2 id·목차 유지. 영어·스페인어는 아직 미적용.
+- 검색 표현(근거: Search Console 일본어 검색어 "光跡 撮影", "車 光跡", "ミラーショック 対策", "夜景 撮影 ホワイト バランス"):
+  - `light-trail-photography-camera-settings` 제목 "光跡撮影のやり方：車のライトを光の筋にするカメラ設定", 설명 보강.
+  - `avoiding-camera-shake-long-exposure` 제목 "長時間露光のブレ対策：ミラーショックや三脚の振動を防ぐ方法", 설명과 H2("ミラーショック（ミラー・シャッターの振動）対策") 보강.
+  - `night-cityscape-photography-settings` 제목의 부자연스러운 "夜景都市写真"를 "夜景撮影"으로 수정.
+- 변경하지 않은 것: 본문 내용, 영어·스페인어, 일본어 다른 페이지.
+- 검증: tsc·eslint 오류 없음, build 성공, 일본어 가이드 72편 모두 200, 박스 구역(체크리스트 55·실수 31·FAQ 14·정리 8, 2중 렌더링 포함), en/es 박스 없음, ko 박스 유지.
+- 백업: `_backups/ja-boxes-wording_*/`.
+
 ## 2026-10-09 — 네이버 검색어 기반 한국어 문구 보강 (ND 계산·폭포·빛번짐·야경 화이트밸런스·셔터 앵글)
 
 - 근거: 네이버 서치어드바이저 TOP30(폭포 사진 계열 클릭 5, ND 필터 계산 계열 노출 22, 빛번짐 계열 25 등). 한국어만 수정(네이버 근거가 한국어뿐이라 en/ja/es는 어색한 직역을 피하려고 이번에는 변경하지 않음).
