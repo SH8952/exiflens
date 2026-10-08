@@ -4,6 +4,7 @@ import { AdZone } from "@/components/ad-zone";
 import { ExifUploader } from "@/components/exif-uploader";
 import { ExifPanel } from "@/components/exif-panel";
 import { NdCalculatorCard } from "@/components/nd-calculator-card";
+import { isToolAccessible } from "@/lib/tools-roster";
 import { GearRecommendationSection } from "@/components/gear-recommendation-section";
 import { CrossLinkFlyDroneMap } from "@/components/cross-link/cross-link-flydronemap";
 import { HomeUsageSection } from "@/components/home-usage-section";
@@ -43,7 +44,7 @@ export default async function HomePage({
 
       {/* Section 2 & 3: EXIF display + ND calculator */}
       <section className="grid gap-4 md:grid-cols-2">
-        <ExifPanel />
+        <ExifPanel showCompressLink={isToolAccessible("image-compressor")} />
         <NdCalculatorCard />
       </section>
 

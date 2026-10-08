@@ -172,6 +172,7 @@ export function ImageCompressorCard() {
       options={options}
       process={processFile}
       zipName="exiflens-compressed-images.zip"
+      acceptHandoff
     />
   );
 }

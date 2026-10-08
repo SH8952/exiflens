@@ -1,3 +1,12 @@
+## 2026-10-08 — 홈 EXIF 패널에 "파일 용량" 항목 + 5MB 이상일 때 "용량 줄이기" 바로가기(사진 자동 전달)
+
+- 요청: "촬영 날짜·시간" 바로 아래에 파일 용량 항목을 추가하고, 용량 수치 옆에 이미지 용량 줄이기 도구 바로가기를 둔다. 노출 기준은 SNS 업로드 한도 기준(조사 후 5MB로 결정: X 5MB가 주요 SNS 중 가장 낮음, Instagram·Facebook·Threads 8MB, LinkedIn·Pinterest 10MB), 이동 시 사진도 함께 넘어가게.
+- 변경: `src/components/exif-panel.tsx` — "파일 용량" 행 추가(`formatBytes`, 사진 없으면 "—"). 용량 ≥ 5MB(5×1024×1024바이트)이고 압축기가 받는 형식(JPG·PNG·WebP)이며 60MB 이하일 때만 "용량 줄이기" 링크 노출(HEIC·RAW·60MB 초과·압축기가 비공개면 숨김). `src/app/[locale]/page.tsx` — `isToolAccessible("image-compressor")`를 패널에 전달. `src/store/exif-store.ts` — `handoffFile`·`setHandoffFile`·`takeHandoffFile` 추가(압축기로 넘길 사진 한 칸, 꺼내면 비워짐). `src/components/image-tools/batch-workbench.tsx` — `acceptHandoff` 옵션(압축기만 true): 열릴 때 한 번 넘어온 사진을 꺼내 목록에 자동 추가. `src/components/image-tools/image-compressor-card.tsx` — `acceptHandoff` 전달. `messages/{ko,en,ja,es}.json` — `fileSize`, `compressLink`, `compressLinkTitle`.
+- 동작: 링크를 누르면 `exif-store`(브라우저 메모리)에 사진을 담고 `/tools/image-compressor`로 이동 → 압축기가 열리며 사진이 목록에 자동 추가. 서버로 전송되지 않음. 새로고침·주소 직접 입력으로 압축기에 들어오면 전달된 사진 없음(기존처럼 직접 업로드). 나머지 이미지 도구 5개는 `acceptHandoff`가 꺼져 있어 변화 없음.
+- 검증: `tsc`·`eslint` 오류 없음, 실제 `next build` 성공. 4개 언어 홈 화면에서 "파일 용량" 라벨 확인. 컴포넌트 시험(렌더링): 사진 없음 "—"/링크 없음, 3MB·4.99MB 링크 없음, 5MB·PNG 12MB·WebP 8MB 링크 표시(`/tools/image-compressor`), 61MB·HEIC·CR3·압축기 비공개 시 링크 없음. 압축기 시험(가상 DOM): 넘어온 6MB JPG 자동 추가·저장 칸 비워짐, 다시 열어도 중복 없음, 옵션이 꺼진 도구는 소비하지 않음, HEIC·61MB는 건너뛰고 안내 표시. 실제 브라우저에서의 클릭·페이지 이동(웹 환경에 브라우저 없음)은 로컬 확인 필요.
+- 참고: 용량 표시는 소수 둘째 자리 MB(예: 4.99MB는 "5.00MB"로 보이지만 5MB 미만이라 링크는 없음).
+- 백업: `_backups/exif-filesize-compress-link_20261008_070311/`.
+
 ## 2026-10-07 — 블로그 예약 발행 (발행일이 미래인 글은 그 날짜(한국 시간 0시)가 되면 자동 공개)
 
 - 배경: 주 2편 발행 계획에 맞춰 글을 미리 작성해 푸시해 두고 날짜에 맞춰 공개할 수 있게 함. 기존에는 `content/blog/ko`에 파일이 올라가면 `publishedAt`과 관계없이 바로 공개됐음.

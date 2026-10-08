@@ -25,6 +25,15 @@ type ExifState = {
    */
   file: File | null;
   errorMessage: string | null;
+  /**
+   * 이미지 압축기로 넘길 사진(2026-10-08). 홈의 "용량 줄이기" 바로가기를 누르면 여기에 담기고,
+   * 압축기가 열리면서 한 번만 꺼내 목록에 자동으로 추가한다(꺼내면 비워지므로 나중에 압축기를
+   * 다시 열어도 중복으로 들어가지 않는다). 브라우저 메모리 안에서만 이동하며 서버로 전송되지 않는다.
+   * 새로고침하거나 주소를 직접 입력해 들어오면 비어 있다.
+   */
+  handoffFile: File | null;
+  setHandoffFile: (file: File | null) => void;
+  takeHandoffFile: () => File | null;
   startLoading: (fileName: string) => void;
   setSuccess: (data: ParsedExif, imageUrl: string, file: File) => void;
   setError: (message: string) => void;
@@ -42,6 +51,13 @@ export const useExifStore = create<ExifState>((set, get) => ({
   imageUrl: null,
   file: null,
   errorMessage: null,
+  handoffFile: null,
+  setHandoffFile: (file) => set({ handoffFile: file }),
+  takeHandoffFile: () => {
+    const file = get().handoffFile;
+    if (file) set({ handoffFile: null });
+    return file;
+  },
   startLoading: (fileName) => {
     revoke(get().imageUrl);
     set({

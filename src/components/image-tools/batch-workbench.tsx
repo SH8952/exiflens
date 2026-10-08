@@ -4,6 +4,7 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { formatBytes, savedPercent, ImageToolError } from "@/lib/image-ops";
+import { useExifStore } from "@/store/exif-store";
 
 export type ProcessResult = {
   blob: Blob;
@@ -49,7 +50,10 @@ export function BatchWorkbench({
   preview,
   showSizeChange = true,
   makeThumb,
+  acceptHandoff = false,
 }: {
+  /** 홈에서 "용량 줄이기"로 넘어온 사진을 열릴 때 한 번 자동 추가할지(이미지 압축기만 true). */
+  acceptHandoff?: boolean;
   /** 도구별 옵션 UI (상태는 도구 컴포넌트가 가진다). */
   options: React.ReactNode;
   /** 파일 하나를 처리해 결과를 돌려준다. 최신 옵션을 담은 클로저여야 한다. */
@@ -127,6 +131,16 @@ export function BatchWorkbench({
     if (next.length > 0) setEntries((prev) => [...prev, ...next]);
     if (inputRef.current) inputRef.current.value = "";
   };
+
+  // 홈에서 넘어온 사진 한 장을 한 번만 꺼내 목록에 추가(2026-10-08). 직접 들어온 경우엔 비어 있어 아무 일도 없다.
+  React.useEffect(() => {
+    if (!acceptHandoff) return;
+    const file = useExifStore.getState().takeHandoffFile();
+    // 효과 본문에서 상태를 바로 바꾸지 않도록 다음 작업으로 미룬다(파일은 이미 꺼냈으므로 중복되지 않는다).
+    if (file) queueMicrotask(() => addFiles([file]));
+    // 열릴 때 한 번만 실행
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const removeEntry = (id: string) => {
     setEntries((prev) => {
