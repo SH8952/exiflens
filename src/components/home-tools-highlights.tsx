@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { HomeSectionCta } from "@/components/home-section-cta";
 import { getLiveTools } from "@/lib/tools-roster";
 import { ToolCardImage } from "@/components/tools/tool-card-image";
 
@@ -64,12 +65,7 @@ export async function HomeToolsHighlights() {
         ))}
       </div>
 
-      <Link
-        href="/tools"
-        className="text-sm font-medium underline-offset-4 hover:underline"
-      >
-        {tHome("toolsHighlightsCta")}
-      </Link>
+      <HomeSectionCta href="/tools" label={tHome("toolsHighlightsCta")} />
     </section>
   );
 }

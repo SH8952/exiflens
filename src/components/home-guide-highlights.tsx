@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { HomeSectionCta } from "@/components/home-section-cta";
 import type { Locale } from "@/i18n/routing";
 import { getAllGuidesMeta, getGuideImageAlt } from "@/lib/guides";
 
@@ -80,12 +81,7 @@ export async function HomeGuideHighlights({ locale }: { locale: string }) {
         ))}
       </div>
 
-      <Link
-        href="/guides"
-        className="text-sm font-medium underline-offset-4 hover:underline"
-      >
-        {t("guideHighlightsCta")}
-      </Link>
+      <HomeSectionCta href="/guides" label={t("guideHighlightsCta")} />
     </section>
   );
 }

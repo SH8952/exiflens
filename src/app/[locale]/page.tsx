@@ -11,6 +11,7 @@ import { HomeUsageSection } from "@/components/home-usage-section";
 import { HomeTrustBadges } from "@/components/home-trust-badges";
 import { HomeGuideHighlights } from "@/components/home-guide-highlights";
 import { HomeToolsHighlights } from "@/components/home-tools-highlights";
+import { HomeBlogHighlights } from "@/components/home-blog-highlights";
 import { HomeFaqHighlights } from "@/components/home-faq-highlights";
 
 export default async function HomePage({
@@ -21,9 +22,14 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Home");
+  // 한국어: 단어 중간에서 줄바꿈되지 않도록 어절 단위로 줄바꿈(긴 영문·주소는 필요할 때만 끊김).
+  const koWrap =
+    locale === "ko" ? " [word-break:keep-all] [overflow-wrap:break-word]" : "";
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-10">
+    <div
+      className={`mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-10${koWrap}`}
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -69,6 +75,9 @@ export default async function HomePage({
 
       {/* Section 7: photo tool highlights — surfaces every live /tools calculator on the homepage itself, so desktop visitors who never open the header's tools menu still discover them; also adds more crawlable text/internal links for SEO. */}
       <HomeToolsHighlights />
+
+      {/* Section 7.5: latest blog posts (ko only — the blog is Korean-only; renders nothing in other locales). */}
+      <HomeBlogHighlights locale={locale} />
 
       {/* Section 8: FAQ highlights — placed right after the tool highlights since the FAQ pool includes tool-specific questions, so it reads naturally as "more about what you just saw". Picks 5 Q&A items at random (site-level + every live tool's FAQ) with their own FAQPage JSON-LD. */}
       <HomeFaqHighlights />

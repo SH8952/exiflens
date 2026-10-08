@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   Compass,
   Frame,
@@ -44,7 +44,22 @@ const STEP_ICONS: LucideIcon[] = [
   Compass,
 ];
 
+/**
+ * 사용법 본문을 문장 단위로 나눈다. messages 원문은 예전 넓은 화면 기준으로 문장 중간에
+ * 줄바꿈(\n)이 들어 있어 좁은 화면에서 어색하게 끊기므로, 줄바꿈은 무시(이어 붙임)하고
+ * 문장이 끝나는 곳(". ! ? 。")에서만 줄이 바뀌게 한다. 문구 자체는 바꾸지 않는다.
+ * 일본어는 띄어쓰기가 없어 이어 붙일 때 공백을 넣지 않는다.
+ */
+function splitSentences(body: string, locale: string): string[] {
+  const joined = body.replace(/\s*\n\s*/g, locale === "ja" ? "" : " ");
+  return joined
+    .split(/(?<=[.!?])\s+|(?<=。)/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+}
+
 export async function HomeUsageSection() {
+  const locale = await getLocale();
   const t = await getTranslations("Home");
   const tHeader = await getTranslations("Header");
   const steps = t.raw("usageSteps") as UsageStep[];
@@ -87,8 +102,12 @@ export async function HomeUsageSection() {
                 <h3 className="text-sm font-semibold text-foreground">
                   {step.title}
                 </h3>
-                <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
-                  {step.body}
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {splitSentences(step.body, locale).map((sentence, k) => (
+                    <span key={k} className="block">
+                      {sentence}
+                    </span>
+                  ))}
                 </p>
               </div>
             </li>

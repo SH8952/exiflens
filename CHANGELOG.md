@@ -1,3 +1,15 @@
+## 2026-10-08 — 홈 화면 4-3·4-4: 최신 블로그 영역 + "전체 보기" 버튼 통일, 모바일 배지·사용법 줄바꿈 보정
+
+- 요청: 4-3(최신 블로그 영역)·4-4(영역 제목·"더 보기" 정돈) 진행(두 단계씩 나눠 진행하려던 계획의 2번째 묶음). 모바일 확인 결과 반영 — 신뢰 배지가 두 줄로 나뉘는 문제, 사용법 문장이 문장 중간에서 줄바꿈되는 문제(문장이 "~다."에서 끝나는 곳에서 줄이 바뀌게).
+- 4-3: `src/components/home-blog-highlights.tsx`(신규) — 도구 영역 아래에 최신 블로그 글 최대 3개를 썸네일 카드(3:2)로 노출. 블로그가 한국어 전용이라 한국어 홈에서만 보이고 en/ja/es 홈에는 아무것도 그리지 않음. 예약 발행 글은 `getAllBlogMeta()`가 자동 제외. `messages`에 `Home.blogHighlightsTitle/Subtitle/Cta`(4개 언어) 추가.
+- 4-4: `src/components/home-section-cta.tsx`(신규) — 영역마다 제각각이던 밑줄 텍스트 링크를 같은 윤곽선 버튼으로 통일. 가이드·도구·FAQ·블로그 영역에 적용(`home-guide-highlights`·`home-tools-highlights`·`home-faq-highlights`·`home-blog-highlights`).
+- 모바일 배지: `src/components/home-trust-badges.tsx` — sm(640px) 미만에서는 마지막 배지("4개 언어 지원")를 숨겨 3개가 한 줄에 들어가게 함(더 좁은 폰에서는 자연스럽게 줄바꿈).
+- 사용법 줄바꿈: `src/components/home-usage-section.tsx` — messages 원문에 문장 중간 줄바꿈(\n)이 있어 좁은 화면에서 어색하게 끊겼음. 줄바꿈은 무시하고 문장 끝(". ! ? 。")에서만 줄이 바뀌도록 문장 단위로 나눠 표시(문구 자체는 변경 없음, 일본어는 이어 붙일 때 공백 없음). 카드당 문장 7단계 합계 16문장.
+- 한국어 단어 중간 줄바꿈 방지: `src/app/[locale]/page.tsx` — ko 홈 전체에 `word-break: keep-all`(+ overflow-wrap) 적용(예: 제목 "EXIF 뷰/어"처럼 끊기던 문제). en/ja/es는 변화 없음.
+- 변경하지 않은 것: 광고 위치, 푸터 방문자 수, 사용법·배지 문구, 다른 홈 영역 구성.
+- 검증: `tsc`·`eslint` 오류 없음(미사용 import 1건 정리), `next build --webpack` 성공, `next start`에서 ko/en/ja/es 홈 200, 블로그 썸네일·링크는 ko 홈에만(2개, en/ja/es 0개) 확인, 영역 버튼 4개 문구 존재, 사용법 문장 span 16개, keep-all은 ko에만 적용, 블로그·가이드·도구 200·없는 주소 404 유지. 실제 화면은 로컬/모바일 확인 필요.
+- 백업: `_backups/home-blog-cta-polish_*/`.
+
 ## 2026-10-08 — 홈 화면 개선: 사용법 카드화 + 소개 문구 아래 신뢰 배지 줄 (4개 언어)
 
 - 배경: 사이트를 더 풍부하고 프로페셔널하게 다듬는 4단계(홈 화면 구성 보강) 중 4-1·4-2. 4-3(최신 블로그 영역)·4-4(영역 제목 정돈)은 요청 시 진행. 푸터 방문자 수는 사용자 결정으로 그대로 유지.

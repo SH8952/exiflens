@@ -12,10 +12,13 @@ export async function HomeTrustBadges() {
 
   return (
     <ul className="flex flex-wrap justify-center gap-2 pt-1">
-      {badges.map((badge) => (
+      {badges.map((badge, index) => (
         <li
           key={badge}
-          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground"
+          className={`inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground ${
+            // 모바일에서 한 줄에 들어가도록 마지막(가장 덜 중요한) 배지는 sm 미만에서 숨김
+            index === badges.length - 1 ? "max-sm:hidden" : ""
+          }`.trim()}
         >
           <Check aria-hidden="true" className="size-3.5 text-primary" />
           {badge}

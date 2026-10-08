@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { HomeSectionCta } from "@/components/home-section-cta";
 import {
   FIELD_TOOLS,
   POST_SHOOT_TOOLS,
@@ -119,12 +119,7 @@ export async function HomeFaqHighlights() {
         ))}
       </div>
 
-      <Link
-        href="/faq"
-        className="text-sm font-medium underline-offset-4 hover:underline"
-      >
-        {t("faqHighlightsCta")}
-      </Link>
+      <HomeSectionCta href="/faq" label={t("faqHighlightsCta")} />
     </section>
   );
 }
