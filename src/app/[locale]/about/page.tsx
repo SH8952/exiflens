@@ -76,9 +76,9 @@ export default async function AboutPage({
   return (
     <LegalPage title={t("title")} sections={mainSections}>
       <section>
-        <details className="group rounded-lg border">
+        <details className="group rounded-xl border bg-muted/30 shadow-sm">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 [&::-webkit-details-marker]:hidden">
-            <h2 className="text-lg font-semibold tracking-tight">
+            <h2 className="border-l-4 border-primary pl-3 text-lg font-semibold tracking-tight">
               {story.heading}
             </h2>
             <span className="flex shrink-0 items-center gap-1 text-xs font-medium text-muted-foreground">
@@ -114,7 +114,7 @@ export default async function AboutPage({
 
       <section className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-semibold tracking-tight">
+          <h2 className="border-l-4 border-primary pl-3 text-lg font-semibold tracking-tight">
             {gear.heading}
           </h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
@@ -125,7 +125,7 @@ export default async function AboutPage({
           {gear.groups.map((group) => (
             <div key={group.name} className="flex flex-col gap-2">
               <h3 className="text-sm font-semibold">{group.name}</h3>
-              <div className="overflow-x-auto rounded-lg border">
+              <div className="overflow-x-auto rounded-xl border shadow-sm">
                 <table className="w-full min-w-[32rem] text-left text-sm">
                   <thead className="bg-muted/50 text-xs text-muted-foreground">
                     <tr>
@@ -145,7 +145,7 @@ export default async function AboutPage({
                   </thead>
                   <tbody className="divide-y">
                     {group.items.map((item) => (
-                      <tr key={item.name} className="align-top">
+                      <tr key={item.name} className="align-top transition-colors hover:bg-muted/40">
                         <th
                           scope="row"
                           className="px-3 py-2 font-medium text-foreground"
@@ -189,7 +189,7 @@ export default async function AboutPage({
 
       <section className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-semibold tracking-tight">
+          <h2 className="border-l-4 border-primary pl-3 text-lg font-semibold tracking-tight">
             {gallery.heading}
           </h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
@@ -200,16 +200,16 @@ export default async function AboutPage({
           {gallery.items.map((item) => (
             <li key={item.file}>
               <figure className="flex flex-col gap-1.5">
-                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+                <div className="group/photo relative aspect-[3/2] w-full overflow-hidden rounded-xl shadow-sm">
                   <Image
                     src={`/guides/photos/${item.file}.webp`}
                     alt={item.alt}
                     fill
                     sizes="(min-width: 768px) 368px, 100vw"
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover/photo:scale-105"
                   />
                 </div>
-                <figcaption className="text-xs text-muted-foreground">
+                <figcaption className="px-1 text-xs leading-relaxed text-muted-foreground">
                   {item.caption}
                 </figcaption>
               </figure>
@@ -226,8 +226,8 @@ export default async function AboutPage({
         </p>
       </section>
 
-      <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold tracking-tight">
+      <section className="flex flex-col gap-2 rounded-xl border bg-muted/30 p-5 shadow-sm">
+        <h2 className="border-l-4 border-primary pl-3 text-lg font-semibold tracking-tight">
           {contact.heading}
         </h2>
         {contact.body.map((paragraph, i) => (
