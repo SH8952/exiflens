@@ -1,3 +1,12 @@
+## 2026-10-08 — 가이드 목록 카드에 대표 이미지 썸네일 추가 (4개 언어 공통)
+
+- 요청: 가이드 목록(`/guides`)이 텍스트 카드뿐이라 밋밋해 보이므로 블로그 목록처럼 카드 상단에 썸네일을 넣는다. 카드 배치는 위쪽 16:9 이미지 + 아래 제목·설명(세로형)으로 결정. ExifLens 가이드에만 적용(다른 사이트는 사용자가 필요할 때 따로 요청).
+- 변경: `src/components/guides/guide-category-section.tsx` — 카드를 이미지 영역 + 글 영역으로 재구성(`next/image`, `fill`, 16:9, 모바일은 2:1로 낮춤, 호버 시 살짝 확대). 항목에 `image`·`imageAlt` 추가, `prioritizeImages` 옵션 추가(첫 화면 섹션의 첫 2장만 우선 로딩, 나머지는 지연 로딩). 대표 이미지가 없는 글은 이미지 영역 없이 기존 텍스트 카드 그대로. `src/app/[locale]/guides/page.tsx` — 각 글의 `meta.image`와 `getGuideImageAlt`(언어별 alt)를 카드에 전달, 첫 번째 카테고리 섹션에 `prioritizeImages` 지정.
+- 변경하지 않은 것: 글 상세 페이지, 메타데이터·구조화 데이터, "더보기/접기" 동작(펼침 상태 기억 포함), 대표 이미지 파일.
+- 검증: `tsc`·`eslint` 오류 없음, 실제 `next build --webpack` 성공, `next start`로 ko/en/ja/es 목록 200 OK·글 상세 200 OK. 목록 HTML에서 카드마다 `img`(alt 포함)가 들어가고 우선 로딩 2장, 나머지는 `loading="lazy"` 확인. 실제 화면 모양은 로컬(`npm run dev`)에서 확인 필요(웹 환경에 브라우저 없음).
+- 참고: 이미지는 `next/image`가 카드 크기에 맞게 줄여서 제공(원본 90~410KB를 그대로 싣지 않음). 격리 복사본에서 Turbopack 빌드는 node_modules 심볼릭 링크 문제로 실패하므로 `--webpack`으로 검증(복사본 환경 한정 문제, 실제 코드와 무관).
+- 백업: `_backups/guide-list-thumbnail_*/`.
+
 ## 2026-10-08 — 홈 EXIF 패널에 "파일 용량" 항목 + 5MB 이상일 때 "용량 줄이기" 바로가기(사진 자동 전달)
 
 - 요청: "촬영 날짜·시간" 바로 아래에 파일 용량 항목을 추가하고, 용량 수치 옆에 이미지 용량 줄이기 도구 바로가기를 둔다. 노출 기준은 SNS 업로드 한도 기준(조사 후 5MB로 결정: X 5MB가 주요 SNS 중 가장 낮음, Instagram·Facebook·Threads 8MB, LinkedIn·Pinterest 10MB), 이동 시 사진도 함께 넘어가게.

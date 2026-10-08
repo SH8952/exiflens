@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useState } from "react";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 
@@ -9,6 +10,9 @@ export interface GuideCategoryItem {
   title: string;
   description: string;
   dateLabel: string;
+  /** 대표 이미지 경로(없으면 이미지 영역 없이 텍스트 카드로 표시). */
+  image?: string;
+  imageAlt?: string;
 }
 
 // Runs before the browser paints on the client (so a restored "expanded"
@@ -28,6 +32,8 @@ interface GuideCategorySectionProps {
   expandLabel: string;
   collapseLabel: string;
   initialVisibleCount?: number;
+  /** 첫 화면에 보이는 섹션이면 상단 카드 이미지를 우선 로딩한다. */
+  prioritizeImages?: boolean;
 }
 
 export function GuideCategorySection({
@@ -36,6 +42,7 @@ export function GuideCategorySection({
   expandLabel,
   collapseLabel,
   initialVisibleCount = 4,
+  prioritizeImages = false,
 }: GuideCategorySectionProps) {
   const storageKey = `${EXPANDED_STORAGE_PREFIX}${categoryLabel}`;
   const [expanded, setExpanded] = useState(false);
@@ -70,21 +77,35 @@ export function GuideCategorySection({
     <section className="flex flex-col gap-4">
       <h2 className="text-xl font-semibold tracking-tight">{categoryLabel}</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {visibleItems.map((item) => (
+        {visibleItems.map((item, index) => (
           <Link
             key={item.slug}
             href={`/guides/${item.slug}`}
-            className="flex flex-col gap-1 rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40"
+            className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-primary/40"
           >
-            <h3 className="text-lg font-semibold tracking-tight">
-              {item.title}
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              {item.description}
-            </p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {item.dateLabel}
-            </p>
+            {item.image ? (
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted max-sm:aspect-[2/1]">
+                <Image
+                  src={item.image}
+                  alt={item.imageAlt ?? item.title}
+                  fill
+                  sizes="(min-width: 1024px) 512px, (min-width: 640px) 50vw, 100vw"
+                  priority={prioritizeImages && index < 2}
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+            ) : null}
+            <div className="flex flex-col gap-1 p-5">
+              <h3 className="text-lg font-semibold tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {item.description}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {item.dateLabel}
+              </p>
+            </div>
           </Link>
         ))}
       </div>

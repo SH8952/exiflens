@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL, breadcrumbJsonLd, languageAlternates, ogLocale, DEFAULT_OG_IMAGES } from "@/lib/seo";
-import { getAllGuidesMeta } from "@/lib/guides";
+import { getAllGuidesMeta, getGuideImageAlt } from "@/lib/guides";
 import { GuideCategorySection } from "@/components/guides/guide-category-section";
 import { BackLink } from "@/components/back-link";
 
@@ -133,16 +133,21 @@ export default async function GuidesIndexPage({
         </p>
       ) : (
         <div className="flex flex-col gap-10">
-          {categoryGroups.map(([category, categoryGuides]) => (
+          {categoryGroups.map(([category, categoryGuides], groupIndex) => (
             <GuideCategorySection
               key={category}
               categoryLabel={category}
               expandLabel={t("showMore")}
               collapseLabel={t("showLess")}
+              prioritizeImages={groupIndex === 0}
               items={categoryGuides.map((guide) => ({
                 slug: guide.slug,
                 title: guide.title,
                 description: guide.description,
+                image: guide.image,
+                imageAlt: guide.image
+                  ? getGuideImageAlt(locale as Locale, guide.image, guide.title)
+                  : undefined,
                 dateLabel: `${dateFormatter.format(new Date(guide.publishedAt))} · ${t("readingTime", { minutes: guide.readingMinutes })}`,
               }))}
             />
