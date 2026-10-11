@@ -1,3 +1,11 @@
+## 2026-10-12 — 블로그 세 번째 글: "같은 사진, 다른 분위기: 보정이 사진의 의도를 바꾸는 순간" + 사진 비교 컴포넌트
+
+- 글: `content/blog/ko/same-photo-different-mood-retouching.mdx` (분류 "사진 보정", 발행일 2026-10-12, 썸네일 = 병을 든 사람 사진 3:2 크롭 `retouch-thumb.webp`). 같은 사진 5장을 서로 다른 보정 두 가지(A/B)로 좌우에 나란히 보여 주며 분위기를 비교. 구성: 도입 → 5개 소제목(의도·작가의 몫·보정이 분위기를 바꾸는 방식(표)·보정 전에 정할 것·분위기 선택) → FAQ 4개 → 정리 → 저작권 안내. 사용자 문장은 맞춤법만 고쳐 그대로 사용, 장소는 쓰지 않음, A/B 비교 설명은 사진에서 보이는 결과 기준.
+- 새 컴포넌트 `src/components/blog-photo-pair.tsx`(`BlogPhotoPair`): 기존 `BlogPhoto`를 2열로 배치하고 아래에 A/B 라벨. 모바일에서도 좌우 비교 유지. 기존 `BlogPhoto`와 앞의 두 글은 변경 없음. `src/app/[locale]/blog/[slug]/page.tsx`에 import와 MDX components 등록만 추가.
+- 이미지 `public/blog/images/retouch-N-a|b.webp`(본문용, 세로 900px·가로 1200px 폭) + `-full.webp`(클릭 시 원본 해상도) 20장, `retouch-thumb.webp`(1200×800). 사진 프레임은 입히지 않고 EXIF는 쌍마다 한 번만 캡션으로 표기(촬영일 포함).
+- 검증(격리 복사본): tsc 오류 없음, eslint 오류 없음, build 성공, `/ko/blog` 목록·글 상세 200, 사진 21종 200, 사이트맵·RSS 포함, 구조화 데이터 image(썸네일) 확인, 기존 글 200.
+- 백업: `_backups/blog-photo-pair_*/`.
+
 ## 2026-10-09 — 영어·스페인어 가이드 박스 적용 + 영어/스페인어 검색 표현 보강 (전 언어 완료)
 
 - 박스: `src/lib/guides.ts` `boxKind` — 영어(FAQ·checklist·mistake·Putting It Together)와 스페인어(Preguntas frecuentes·verificación/comprobación/lista rápida·error·Resumen/Poniéndolo Todo Junto) 규칙 추가. 이제 4개 언어 모두 박스 적용. 글 파일 수정 없이 렌더링만 변경, H2 id·목차 유지.
