@@ -1,3 +1,14 @@
+## 2026-10-12 — 셔터카운트 체커: exiftool 정기 점검 — 캐논 PowerShot G5 X Mark II 추가, R6 Mark III는 근거 부족으로 보류
+
+- 배경: 셔터카운트 체커가 지원하는 카메라 목록을 exiftool(GPL/Artistic 라이선스 오픈소스) 프로젝트의 최신 공개 태그 문서와 정기적으로 대조하는 점검 작업. exiftool GitHub 메인 브랜치(버전 13.59, Canon.pm 최종 커밋 2026-05-27)의 Canon/Sony/FujiFilm/Olympus/Panasonic/Pentax 6개 브랜드 태그 파일을 전체 조사.
+- 발견 및 반영: **캐논 PowerShot G5 X Mark II**(CR3 파일)에 공개된 `ShutterCount` 오프셋(0x0a95, int32u, exiftool 포럼 #15356 출처)을 `CANON_CAMERA_INFO_SHUTTER_COUNT`에 추가. "모든 사진에서 1씩 증가(기계식/전자식 셔터 무관)", "디렉터리·카운터 리셋에 영향받지 않음"이라는 상세 주석까지 있어, 출시 당시 EOS R5/R6에 적용했던 것과 동일한 수준의 단일·명확 근거로 판단. JPEG용 오프셋(0x0293)도 문서에는 있으나, 이 모듈이 캐논을 CR3 전용으로 유지하는 기존 범위를 벗어나므로 구현하지 않고 주석에만 기록.
+- 발견했지만 보류: **EOS R6 Mark III**에도 오프셋(0x086d, 포럼 #17745 + 개인 이메일)이 공개되어 있으나, 필드명이 `ShutterCount`가 아닌 `ImageCount`이고 16비트(최대 65535, 수십만 샷을 기록하는 바디의 평생 카운터로는 구조적으로 부적합)이며 "SD카드 포맷 시 0으로 초기화됨"이라는 명시적 한계가 있어, 이미 제외된 후지필름 X-T1 ImageCount와 동일한 신뢰도 문제로 판단해 구현하지 않음.
+- 교차 확인 한계: 두 모델 모두 exiftool 공개 테스트 샘플(t/images)에 실제 파일이 없어 end-to-end 실측 검증은 불가능 — EOS R5/R6 최초 구현 때와 동일하게, exiftool 공개 문서의 내용을 그대로 신뢰하고 반영(독자적으로 재도출한 것은 아님).
+- 변경 파일: `src/lib/shutter-count-checker.ts`(매핑 테이블 + 모듈/함수 doc comment), `messages/{ko,en,ja,es}.json`(`ShutterCountChecker.supportCanon`/`aboutBody`), `content/guides/{ko,en,ja,es}/shutter-count-checker-guide.mdx`("왜 니콘부터" 섹션).
+- 검증: `npx tsc --noEmit` 오류 0건, `npx eslint src/lib/shutter-count-checker.ts` 오류 0건.
+- 백업: `_backups/backup_20261012_002938_g5x-mark-ii-shutter-count/`.
+- 참고: 이 커밋들은 로컬에만 생성되었으며 push하지 않음 — 사용자 승인 후 원격 반영 필요.
+
 ## 2026-10-12 — 블로그 세 번째 글: "같은 사진, 다른 분위기: 보정이 사진의 의도를 바꾸는 순간" + 사진 비교 컴포넌트
 
 - 글: `content/blog/ko/same-photo-different-mood-retouching.mdx` (분류 "사진 보정", 발행일 2026-10-12, 썸네일 = 병을 든 사람 사진 3:2 크롭 `retouch-thumb.webp`). 같은 사진 5장을 서로 다른 보정 두 가지(A/B)로 좌우에 나란히 보여 주며 분위기를 비교. 구성: 도입 → 5개 소제목(의도·작가의 몫·보정이 분위기를 바꾸는 방식(표)·보정 전에 정할 것·분위기 선택) → FAQ 4개 → 정리 → 저작권 안내. 사용자 문장은 맞춤법만 고쳐 그대로 사용, 장소는 쓰지 않음, A/B 비교 설명은 사진에서 보이는 결과 기준.
