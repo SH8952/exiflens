@@ -67,12 +67,36 @@
  *     supporting R6 Mark II (the model actually requested) means R8/R50
  *     come along for free from the identical, equally-documented mapping —
  *     not a separate guess on our part.
- * Every other Canon body — the R7, R10, R3, R1, R5 Mark II, R6 Mark III,
- * and every CR2-era DSLR — has no known offset published anywhere yet
- * (checked directly against exiftool's current (13.59) Canon tag table,
- * not just the older locally-installed 12.76), so those still return the
- * same honest "not supported yet" result as any other unmapped Canon body,
- * old or new.
+ * Every other Canon body — the R7, R10, R3, R1, R5 Mark II, and every
+ * CR2-era DSLR — has no known *ShutterCount* offset published anywhere yet
+ * (re-checked 2026-10-12 against exiftool's current (13.59) Canon tag
+ * table), so those still return the same honest "not supported yet" result
+ * as any other unmapped Canon body, old or new.
+ *
+ *   - EOS R6 Mark III has a documented offset (0x086d, exiftool's public
+ *     Canon tag table, citing forum thread #17745 and a private email to
+ *     the exiftool maintainer), but the field there is named `ImageCount`,
+ *     not `ShutterCount`: it is stored as a 16-bit value (max 65535, so it
+ *     cannot represent a real lifetime actuation count on a body rated for
+ *     hundreds of thousands of shots) and the same source explicitly notes
+ *     it "resets to 0 when SD card is formatted" — i.e. it isn't a durable
+ *     lifetime counter at all. Deliberately left unmapped for the same
+ *     reliability reason the Fujifilm X-T1 `ImageCount` field is excluded
+ *     below, not because the offset is unknown.
+ *   - PowerShot G5 X Mark II (added 2026-10-12) *does* have a documented
+ *     `ShutterCount` (exiftool's public Canon tag table, citing forum
+ *     thread #15356): int32u, offset 0x0293 for its in-camera JPEG and
+ *     0x0a95 for its CR3, both explicitly noted as advancing for every
+ *     photo "regardless of mechanical or electronic shutter" and not
+ *     resetting on directory/counter resets from the camera menu — the same
+ *     kind of single, clearly-scoped documentation that was judged
+ *     sufficient for EOS R5/R6 at launch. Only the CR3 offset (0x0a95) is
+ *     wired up here, matching this module's existing Canon-is-CR3-only
+ *     scope; the JPEG offset is recorded above for completeness but not
+ *     implemented, since generic Canon JPEG parsing is out of scope. As
+ *     with R5/R6, no real G5 X Mark II file was available to verify the
+ *     offset end-to-end — this is exiftool's public documentation taken on
+ *     trust, not independently re-derived.
  *
  * CR3 isn't TIFF at all — it's an ISO-BMFF (MP4-family) container. Canon
  * wraps the classic TIFF-structured Exif/MakerNote data (the same data a
@@ -295,6 +319,10 @@ const CANON_CAMERA_INFO_SHUTTER_COUNT: { modelPattern: RegExp; byteOffset: numbe
   // the marketing name "R6 Mark II" — matches exiftool's own condition
   // exactly, since that's what actually appears in real files' Model tag.
   { modelPattern: /\bEOS (R6m2|R8|R50)$/, byteOffset: 0x0d29 },
+  // PowerShot G5 X Mark II, CR3 only (added 2026-10-12 — see module doc
+  // comment for the exiftool source citation and the same "not verified
+  // against a real file" caveat that applied to EOS R5/R6 at launch).
+  { modelPattern: /\bG5 X Mark II$/, byteOffset: 0x0a95 },
 ];
 
 function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
@@ -333,9 +361,9 @@ function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
 /**
  * Reads the shutter/actuation count from a supported camera file, entirely
  * client-side (the file's bytes never leave the browser). Supported today:
- * Nikon (NEF / in-camera JPEG) and Canon EOS R5, R6, R6 Mark II, R8, and R50
- * (CR3 only). Every other brand or model returns `{ supported: false }` with
- * an honest explanation
+ * Nikon (NEF / in-camera JPEG) and Canon EOS R5, R6, R6 Mark II, R8, R50,
+ * and PowerShot G5 X Mark II (CR3 only). Every other brand or model returns
+ * `{ supported: false }` with an honest explanation
  * — see the module doc comment for why, and
  * `content/guides/<locale>/shutter-count-checker-guide.mdx` for the full
  * supported-brand roadmap shown to users.
