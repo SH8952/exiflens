@@ -43,7 +43,7 @@ export function ExifUploader() {
   };
 
   return (
-    <section aria-label="EXIF uploader" className="flex flex-col gap-2">
+    <section aria-label="EXIF uploader" data-clarity-mask="True" className="flex flex-col gap-2">
       {/* Only shown once a photo is uploaded — nudges people toward the EXIF
           Frame Generator with the photo they already have, instead of
           leaving it to the header nav link alone (2026-08-31, 석한 요청). */}

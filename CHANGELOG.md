@@ -1,3 +1,14 @@
+## 2026-10-14 — Microsoft Clarity(무료 세션 녹화·히트맵) 적용 — ExifLens 한정
+
+- 배경: Bing 웹마스터 도구의 "마이크로소프트 선명도(Clarity)" 연동 안내(프로젝트 ID `yxt95ftmoi`)에 따라, 방문자가 실제로 어디서 막히는지 확인할 수 있도록 Clarity를 ExifLens에만 추가(다른 사이트 미적용).
+- 새 파일 `src/lib/clarity.ts`: `loadClarity(granted)` — 운영자 제외(`dev_exclude=1` 쿠키)·로컬 호스트 제외(GA4와 동일 기준), 스텁 함수 + 스크립트 1회 비동기 주입, 동의 시 `clarity('consentv2', {ad_Storage, analytics_Storage: 'granted'})` 호출.
+- `src/components/consent-banner.tsx`: 이펙트 추가 — 동의가 필요한 지역(EEA·영국·스위스, 국가 미확인 포함)은 "동의" 후에만, 그 외 지역은 즉시 로드, 어느 지역이든 "거부"를 선택했다면 로드하지 않음. 서버 렌더 HTML에는 Clarity 스크립트가 들어가지 않음(클라이언트 주입).
+- 마스킹: 사진에서 추출된 데이터가 표시되는 도구 영역 루트에 `data-clarity-mask="True"` 추가 — `exif-uploader`, `exif-panel`, `exif-frame-generator`, `exif-remover-card`, `shutter-count-checker-card`, `image-tools/batch-workbench`(압축·리사이즈·워터마크 공통), `image-crop-rotate-card`, `image-mosaic-card`, `gps-map-modal`. 입력란은 Clarity 기본 설정으로 항상 가려짐.
+- 개인정보처리방침 4개 언어(`messages/{ko,en,ja,es}.json`): "쿠키 및 광고" 항목에 Clarity 사용·마스킹·동의 안내 문단 추가, 최종 수정일 2026-10-14로 갱신. 쿠키 배너 문구(`Consent.message`)에 "사용 행태 분석(세션 녹화)" 반영.
+- 검증(격리 복사본): tsc 오류 0건, eslint 오류 0건, `next build --webpack` 성공, 4개 언어 개인정보처리방침 200 + Clarity 문구 확인, 마스킹 속성이 exif-remover·image-compressor·shutter-count-checker 페이지 HTML에 렌더됨, 홈 HTML에 `clarity.ms` 스크립트 없음(클라이언트 주입 확인).
+- 백업: `_backups/clarity_20261014_225312/`.
+- 사용자 작업: push 후 Bing 웹마스터 도구 Clarity 설정 화면에서 "진행" 클릭.
+
 ## 2026-10-12 — 셔터카운트 체커: exiftool 정기 점검 — 캐논 PowerShot G5 X Mark II 추가, R6 Mark III는 근거 부족으로 보류
 
 - 배경: 셔터카운트 체커가 지원하는 카메라 목록을 exiftool(GPL/Artistic 라이선스 오픈소스) 프로젝트의 최신 공개 태그 문서와 정기적으로 대조하는 점검 작업. exiftool GitHub 메인 브랜치(버전 13.59, Canon.pm 최종 커밋 2026-05-27)의 Canon/Sony/FujiFilm/Olympus/Panasonic/Pentax 6개 브랜드 태그 파일을 전체 조사.

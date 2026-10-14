@@ -328,7 +328,7 @@ export function ImageCropRotateCard() {
   const pct = (v: number, total: number) => `${(v / total) * 100}%`;
 
   return (
-    <div
+    <div data-clarity-mask="True"
       className={`rounded-xl border bg-card p-5 transition-colors ${
         dragging ? "border-primary bg-primary/5" : "border-border"
       }`}

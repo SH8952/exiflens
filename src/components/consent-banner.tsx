@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { loadClarity } from "@/lib/clarity";
 
 const STORAGE_KEY = "consent-choice";
 
@@ -86,6 +87,13 @@ export function ConsentBanner({ needsConsent }: { needsConsent: boolean }) {
     }
     // "rejected"는 기본값(denied)과 동일한 상태이므로 별도 업데이트 불필요.
   }, [choice]);
+
+  // Microsoft Clarity: 동의가 필요한 지역(EEA·영국·스위스, 국가 미확인 포함)은
+  // "동의" 후에만, 그 외 지역은 즉시 로드하되 "거부" 선택은 어디서든 존중한다.
+  React.useEffect(() => {
+    const allowed = needsConsent ? choice === "accepted" : choice !== "rejected";
+    if (allowed) loadClarity(choice === "accepted");
+  }, [needsConsent, choice]);
 
   if (!needsConsent || choice !== "pending") return null;
 

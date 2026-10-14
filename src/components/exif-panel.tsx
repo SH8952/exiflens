@@ -88,7 +88,7 @@ export function ExifPanel({ showCompressLink = false }: { showCompressLink?: boo
     isCompressorSupported(file);
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5">
+    <div data-clarity-mask="True" className="rounded-xl border border-border bg-card p-5">
       <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
         {t("exifSectionTitle")}
       </h2>

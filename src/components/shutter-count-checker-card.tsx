@@ -49,7 +49,7 @@ export function ShutterCountCheckerCard() {
   };
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5">
+    <div data-clarity-mask="True" className="rounded-xl border border-border bg-card p-5">
       <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
         {t("cardTitle")}
       </h2>

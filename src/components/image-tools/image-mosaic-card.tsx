@@ -208,7 +208,7 @@ export function ImageMosaicCard() {
   };
 
   return (
-    <div
+    <div data-clarity-mask="True"
       className={`rounded-xl border bg-card p-5 transition-colors ${
         dragging ? "border-primary bg-primary/5" : "border-border"
       }`}

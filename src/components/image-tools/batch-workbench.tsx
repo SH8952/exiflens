@@ -230,7 +230,7 @@ export function BatchWorkbench({
     .reduce((s, e) => s + (e.result?.blob.size ?? 0), 0);
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5">
+    <div data-clarity-mask="True" className="rounded-xl border border-border bg-card p-5">
       <p className="mb-4 text-xs text-muted-foreground">{t("privacyNote")}</p>
 
       <div

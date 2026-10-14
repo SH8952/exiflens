@@ -280,7 +280,7 @@
   },
   "Privacy": {
     "title": "Privacy Policy",
-    "updated": "Last updated: August 25, 2026",
+    "updated": "Last updated: October 14, 2026",
     "sections": [
       {
         "heading": "Overview",
@@ -298,7 +298,8 @@
         "heading": "Cookies and Advertising",
         "body": [
           "We use Google AdSense to display advertising on the Service. Google and its partners may use cookies, device identifiers, and similar technologies to serve ads based on your prior visits to this and other websites. You can learn more about how Google uses data on Google's Ads Privacy page, and you can opt out of personalized advertising through Google Ads Settings.",
-          "We may also use cookies or similar technologies through Google Analytics or similar analytics providers to understand, in aggregate and non-identifying form, how visitors use the Service."
+          "We may also use cookies or similar technologies through Google Analytics or similar analytics providers to understand, in aggregate and non-identifying form, how visitors use the Service.",
+          "To understand how visitors use the Service (clicks, scrolling, navigation) and improve it, we use the session recording and heatmap features of Microsoft Clarity. Areas that display photo analysis results and all input fields are masked in recordings, and the photo files you upload are never collected. For visitors in the European Economic Area, the United Kingdom, and Switzerland, Clarity is enabled only if you select \"Accept\" in the cookie banner. See the Microsoft Privacy Statement (privacy.microsoft.com) for details."
         ]
       },
       {
@@ -1121,7 +1122,7 @@
     ]
   },
   "Consent": {
-    "message": "We use cookies to analyze traffic and personalize ads. You can accept or decline non-essential cookies.",
+    "message": "We use cookies to analyze traffic, understand how the site is used (session recordings), and personalize ads. You can accept or decline non-essential cookies.",
     "accept": "Accept",
     "reject": "Decline"
   },

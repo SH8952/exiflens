@@ -280,7 +280,7 @@
   },
   "Privacy": {
     "title": "Política de Privacidad",
-    "updated": "Última actualización: 25 de agosto de 2026",
+    "updated": "Última actualización: 14 de octubre de 2026",
     "sections": [
       {
         "heading": "Resumen",
@@ -298,7 +298,8 @@
         "heading": "Cookies y publicidad",
         "body": [
           "Utilizamos Google AdSense para mostrar publicidad en el Servicio. Google y sus socios pueden usar cookies, identificadores de dispositivo y tecnologías similares para mostrar anuncios según tus visitas anteriores a este y otros sitios web. Puedes obtener más información sobre cómo usa Google los datos en la página de privacidad de anuncios de Google, y puedes inhabilitar la publicidad personalizada desde la configuración de anuncios de Google.",
-          "También podemos usar cookies o tecnologías similares mediante Google Analytics u otros proveedores de análisis para entender, de forma agregada y no identificable, cómo se usa el Servicio."
+          "También podemos usar cookies o tecnologías similares mediante Google Analytics u otros proveedores de análisis para entender, de forma agregada y no identificable, cómo se usa el Servicio.",
+          "Para entender cómo se usa el Servicio (clics, desplazamiento, navegación) y mejorarlo, utilizamos las funciones de grabación de sesiones y mapas de calor de Microsoft Clarity. Las áreas que muestran los resultados del análisis de fotos y todos los campos de entrada se enmascaran en las grabaciones, y los archivos de fotos que subes nunca se recopilan. Para los visitantes del Espacio Económico Europeo, el Reino Unido y Suiza, Clarity solo se activa si seleccionas \"Aceptar\" en el banner de cookies. Consulta la Declaración de privacidad de Microsoft (privacy.microsoft.com) para más detalles."
         ]
       },
       {
@@ -1121,7 +1122,7 @@
     ]
   },
   "Consent": {
-    "message": "Utilizamos cookies para analizar el tráfico y personalizar los anuncios. Puede aceptar o rechazar las cookies no esenciales.",
+    "message": "Utilizamos cookies para analizar el tráfico, entender cómo se usa el sitio (grabación de sesiones) y personalizar los anuncios. Puede aceptar o rechazar las cookies no esenciales.",
     "accept": "Aceptar",
     "reject": "Rechazar"
   },
