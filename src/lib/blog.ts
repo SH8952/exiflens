@@ -7,6 +7,11 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import * as runtime from "react/jsx-runtime";
 import type { ComponentType } from "react";
+import {
+  collectH2Headings,
+  wrapGuideBoxes,
+  type GuideHeading,
+} from "@/lib/guides";
 
 /**
  * 블로그(/ko/blog) 콘텐츠 로더 — 2026-10-02 신설.
@@ -147,10 +152,13 @@ export async function compileBlogPost(
 ): Promise<{
   Content: ComponentType<{ components?: Record<string, ComponentType<never>> }>;
   meta: BlogMeta;
+  /** 본문 H2 소제목(목차용). 가이드 목차와 같은 방식으로 수집한다. */
+  headings: GuideHeading[];
 } | null> {
   const filePath = path.join(blogDir(), `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
+  const headings: GuideHeading[] = [];
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
   const fm = data as BlogFrontmatter;
@@ -162,7 +170,14 @@ export async function compileBlogPost(
     // remark-gfm 기본값은 "~" 하나로도 취소선이 되어 문장이 깨진다(2026-10-02 가이드에서
     // 확인된 버그). 이 옵션을 제거하지 말 것.
     remarkPlugins: [[remarkGfm, { singleTilde: false }]],
-    rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
+    // 2026-10-15: 가이드와 같은 목차 수집·박스(체크리스트/실수/FAQ/정리) 적용.
+    // 순서는 가이드와 동일(slug → H2 수집 → 박스 → 앵커). 블로그 글의 "정리" 제목도 요약 박스로 만든다.
+    rehypePlugins: [
+      rehypeSlug,
+      collectH2Headings(headings),
+      () => wrapGuideBoxes("ko", ["정리"]),
+      rehypeAutolinkHeadings,
+    ],
   });
 
   return {
@@ -174,5 +189,6 @@ export async function compileBlogPost(
       slug,
       readingMinutes: estimateReadingMinutes(content),
     },
+    headings,
   };
 }

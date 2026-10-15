@@ -1,3 +1,14 @@
+## 2026-10-15 — 블로그 글에 가이드식 박스 구분 + 목차 2종 적용
+
+- 요청: 블로그 글도 가이드처럼 "체크리스트·흔히 하는 실수·자주 묻는 질문·정리" 구역을 박스로 구분하고, 목차(본문 위 정적 목차 + 스크롤 따라다니는 고정 목차)를 넣어 달라는 요청.
+- `src/lib/guides.ts`: `collectH2Headings`, `wrapGuideBoxes`를 export로 공개하고, `wrapGuideBoxes`/`boxKind`에 선택 인자 `extraSummaryTitles`(기본값 빈 배열) 추가 — 가이드 동작은 그대로(인자를 넘기지 않음).
+- `src/lib/blog.ts` `compileBlogPost`: 가이드와 같은 순서(slug → H2 수집 → 박스 → 앵커)로 플러그인 적용, 반환값에 `headings` 추가. 블로그 글의 "정리" 제목도 요약 박스로 처리(가이드 규칙의 "정리하기"에 더해 `["정리"]` 전달).
+- `src/app/[locale]/blog/[slug]/page.tsx`: 글 본문 위에 `GuideToc`(펼쳐진 정적 목차)와 `GuideFloatingToc`(고정 목차) 추가, 본문에 `prose-headings:scroll-mt-6`(앵커 이동 시 여백) 추가. 박스 CSS는 기존 `globals.css`의 `.prose .guide-box*`를 그대로 사용(새 CSS 없음). 글 파일(mdx)은 수정하지 않음.
+- 읽기 진행 막대 추가(같은 날 후속 요청): 가이드의 `ReadingProgress`(`src/components/guides/reading-progress.tsx`)를 그대로 재사용해 블로그 상세 페이지 화면 맨 위에 본문(`id="blog-article"`)을 읽은 만큼 채워지는 가로 막대 표시. 새 부품·CSS 없음, 가이드 코드 불변.
+- 영향: 기존 블로그 글 3개에도 같은 규칙이 적용됨(자주 묻는 질문·정리 박스 + 목차). 박스가 아닌 소제목 모양은 그대로.
+- 검증(격리 복사본): tsc 0, eslint 0, `next build --webpack` 성공, 블로그 글 4개 모두 200 + 박스/목차 렌더(새 글: 체크리스트·실수·FAQ·정리 4박스 + 목차 11개 항목), 가이드 페이지 박스 그대로, 블로그 목록 200.
+- 백업: `_backups/blog-box-toc_*/`.
+
 ## 2026-10-15 — 블로그 새 글: 풍경사진에 광각 렌즈가 꼭 필요할까?
 
 - 새 글 `content/blog/ko/landscape-photography-wide-angle-lens-necessary.mdx`(분류 "렌즈 & 화각", 발행일 2026-10-15): 풍경사진 8장(광각 15mm 2장, 표준 4장, 망원 쪽 2장)과 EXIF로 광각·표준·망원 렌즈가 풍경을 담는 방식을 비교. 사진은 글 전체에 분산 배치(각 사진마다 EXIF 캡션), 환산 초점거리(R7 APS-C ×1.6) 표 2개, 체크리스트·흔히 하는 실수·FAQ 4개·정리하기·저작권 안내 포함. 촬영 장소 정보는 쓰지 않음.

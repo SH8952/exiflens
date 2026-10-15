@@ -90,7 +90,7 @@ function hastText(node: HastNode): string {
  * 텍스트에 섞일 수 있다. 본문 HTML은 건드리지 않고 `headings` 배열에만 채운다.
  * H3(FAQ 질문 등)는 목차가 길어지므로 제외한다.
  */
-function collectH2Headings(headings: GuideHeading[]) {
+export function collectH2Headings(headings: GuideHeading[]) {
   return () => (tree: HastNode) => {
     const walk = (node: HastNode) => {
       if (node.type === "element" && node.tagName === "h2") {
@@ -111,8 +111,13 @@ function collectH2Headings(headings: GuideHeading[]) {
  * collectH2Headings 뒤·rehypeAutolinkHeadings 앞에 두어 H2 id·앵커·순서를 그대로 유지한다.
  * 4개 언어 모두 적용(ko 2026-10-08, ja·en·es 2026-10-09).
  */
-function boxKind(title: string, locale: Locale): string | null {
+function boxKind(
+  title: string,
+  locale: Locale,
+  extraSummaryTitles: readonly string[] = [],
+): string | null {
   const t = title.replace(/\s+/g, " ").trim();
+  if (extraSummaryTitles.includes(t)) return "summary";
   if (locale === "en") {
     if (/\bFAQ\b/i.test(t)) return "faq";
     if (/checklist/i.test(t)) return "checklist";
@@ -141,7 +146,14 @@ function boxKind(title: string, locale: Locale): string | null {
   return null;
 }
 
-function wrapGuideBoxes(locale: Locale) {
+/**
+ * 블로그(2026-10-15)도 같은 함수를 재사용한다. extraSummaryTitles는 블로그 글의 "정리"처럼
+ * 가이드 규칙("정리하기")에 없는 요약 제목을 박스로 만들 때만 넘긴다(가이드는 넘기지 않으므로 동작 불변).
+ */
+export function wrapGuideBoxes(
+  locale: Locale,
+  extraSummaryTitles: readonly string[] = [],
+) {
   return (tree: HastNode) => {
     const kids = tree.children ?? [];
     const out: HastNode[] = [];
@@ -150,7 +162,7 @@ function wrapGuideBoxes(locale: Locale) {
       const node = kids[i];
       const kind =
         node.type === "element" && node.tagName === "h2"
-          ? boxKind(hastText(node), locale)
+          ? boxKind(hastText(node), locale, extraSummaryTitles)
           : null;
       if (!kind) {
         out.push(node);

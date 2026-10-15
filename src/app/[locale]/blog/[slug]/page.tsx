@@ -21,6 +21,9 @@ import { ShareButton } from "@/components/share-button";
 import { BlogPhoto } from "@/components/blog-photo";
 import { BlogPhotoPair } from "@/components/blog-photo-pair";
 import { MdxTable } from "@/components/mdx-table";
+import { GuideToc } from "@/components/guides/guide-toc";
+import { GuideFloatingToc } from "@/components/guides/guide-floating-toc";
+import { ReadingProgress } from "@/components/guides/reading-progress";
 
 export function generateStaticParams() {
   return getBlogSlugs().map((slug) => ({ locale: BLOG_LOCALE, slug }));
@@ -84,7 +87,7 @@ export default async function BlogPostPage({
 
   const compiled = await compileBlogPost(slug);
   if (!compiled) notFound();
-  const { Content, meta } = compiled;
+  const { Content, meta, headings } = compiled;
   const relatedPosts = getRelatedBlogPosts(slug);
   const url = `${SITE_URL}/${locale}/blog/${slug}`;
 
@@ -201,7 +204,14 @@ export default async function BlogPostPage({
         </figure>
       ) : null}
 
-      <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-a:text-primary">
+      <ReadingProgress targetId="blog-article" />
+      <GuideToc headings={headings} />
+      <GuideFloatingToc headings={headings} />
+
+      <article
+        id="blog-article"
+        className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-headings:scroll-mt-6 prose-a:text-primary"
+      >
         <Content components={{ BlogPhoto, BlogPhotoPair, table: MdxTable }} />
       </article>
 
