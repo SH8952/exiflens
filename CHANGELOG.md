@@ -1,3 +1,13 @@
+## 2026-10-15 — 내부 링크 분배 개선 + 한국어 가이드 3개 보강 (색인 미방문 213개 대응)
+
+- 배경: 서치 콘솔 "발견됨 - 현재 색인이 생성되지 않음" 213개(가이드 160·도구 50·기타 3)가 전부 최종 크롤링 1970-01-01, 즉 구글이 한 번도 방문하지 않은 URL이었음. 원인 점검에서 `getRelatedGuides`가 "같은 분류의 최신 3개"만 항상 같은 순서로 골라 대부분의 가이드가 관련 링크를 거의 받지 못하는 구조임을 확인. 가이드 본문 내부 링크도 한국어 72개 합계 77개로 적음.
+- `src/lib/guides.ts` `getRelatedGuides`: 같은 분류 안에서 현재 글 다음 순서부터 순환(ring)하며 고르도록 변경(기본 4개: 같은 분류 최대 3 + 전체 순환으로 보충). 무작위 아님·빌드마다 동일. 한국어 기준 가이드 inbound 최소 1 / 최대 7(이전: 대부분 0).
+- `src/app/[locale]/guides/[slug]/page.tsx`: 가이드 하단에 "ExifLens 무료 도구" 링크 3개 영역 추가(도구 17개를 가이드 순서대로 순환 → 도구당 가이드에서 12~13개 링크). `messages/{ko,en,ja,es}.json`에 `Guides.relatedTools` 추가.
+- 한국어 가이드 3개 보강(`content/guides/ko/diffraction-and-optimal-aperture.mdx`, `hyperfocal-distance-explained.mdx`, `image-stabilization-explained.mdx`): 도입부 뒤 "한눈에 보는 …" 표 1개, 체크리스트 앞 "자주 묻는 질문" 3개(기존 FAQ 박스 규칙 적용), 도구 링크(회절·심도 계산기, 하이퍼포컬 표, 노출 스톱 계산기) 포함, `updatedAt: 2026-10-15`. 본문 내용은 기존 글의 수치·설명만 재정리(새 주장 추가 없음).
+- 검증(격리 복사본): tsc 0, eslint 0, `next build --webpack` 성공(436쪽), ko 가이드 72쪽 전부 관련 가이드 4개·도구 링크 확인, 3개 가이드 200 + 표/FAQ/도구 영역 렌더 확인.
+- 백업: `_backups/internal-links_20261015_005746/`. 사이트맵 축소·IndexNow 재발송은 하지 않음(보류).
+- 다음 확인: 1~2주 뒤 서치 콘솔에서 미방문 URL 수와 풍경·폭포(22위)·회절(10위)·하이퍼포컬(11위) 순위 변화 재확인.
+
 ## 2026-10-14 — Microsoft Clarity(무료 세션 녹화·히트맵) 적용 — ExifLens 한정
 
 - 배경: Bing 웹마스터 도구의 "마이크로소프트 선명도(Clarity)" 연동 안내(프로젝트 ID `yxt95ftmoi`)에 따라, 방문자가 실제로 어디서 막히는지 확인할 수 있도록 Clarity를 ExifLens에만 추가(다른 사이트 미적용).

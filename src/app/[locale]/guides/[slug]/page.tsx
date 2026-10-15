@@ -16,6 +16,7 @@ import {
   compileGuide,
   getGuideImageAlt,
   getGuideMeta,
+  getAllGuidesMeta,
   getGuideSlugs,
   getRelatedGuides,
 } from "@/lib/guides";
@@ -26,6 +27,7 @@ import { GuideToc } from "@/components/guides/guide-toc";
 import { GuideFloatingToc } from "@/components/guides/guide-floating-toc";
 import { ReadingProgress } from "@/components/guides/reading-progress";
 import { ShareButton } from "@/components/share-button";
+import { ALL_TOOLS, getVisibleTools } from "@/lib/tools-roster";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -83,6 +85,28 @@ export default async function GuidePage({
   if (!compiled) notFound();
   const { Content, meta, headings } = compiled;
   const relatedGuides = getRelatedGuides(locale as Locale, slug);
+
+  // 가이드 하단 "무료 도구" 링크 3개. 도구 페이지가 내부 링크를 고르게 받도록,
+  // 가이드 순서(최신순)를 기준으로 도구 목록을 순환하며 3개씩 고른다(무작위 아님,
+  // 빌드마다 동일). 2026-10-15 추가.
+  const tTools = await getTranslations("ToolsHub");
+  const liveTools = getVisibleTools(ALL_TOOLS).filter(
+    (tool) => tool.status === "live",
+  );
+  const guideIndex = Math.max(
+    0,
+    getAllGuidesMeta(locale as Locale).findIndex((g) => g.slug === slug),
+  );
+  const relatedTools = liveTools.length
+    ? Array.from({ length: Math.min(3, liveTools.length) }, (_, k) => {
+        const tool = liveTools[(guideIndex * 3 + k) % liveTools.length];
+        return {
+          slug: tool.slug,
+          name: tTools(`tools.${tool.slug}.name`),
+          description: tTools(`tools.${tool.slug}.description`),
+        };
+      })
+    : [];
   // 한국어: 단어 중간에서 줄바꿈되지 않도록 어절 단위로 줄바꿈(긴 영문·주소는 필요할 때만 끊김).
   const koWrap =
     locale === "ko" ? "[word-break:keep-all] [overflow-wrap:break-word]" : "";
@@ -237,6 +261,33 @@ export default async function GuidePage({
                 >
                   {guide.title}
                 </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
+
+      {relatedTools.length > 0 ? (
+        <nav
+          aria-label={t("relatedTools")}
+          className="flex flex-col gap-3 border-t border-border pt-6"
+        >
+          <h2 className="text-lg font-semibold tracking-tight">
+            {t("relatedTools")}
+          </h2>
+          <ul className="flex flex-col gap-2">
+            {relatedTools.map((tool) => (
+              <li key={tool.slug} className="text-sm">
+                <Link
+                  href={`/tools/${tool.slug}`}
+                  className="font-medium text-primary hover:underline"
+                >
+                  {tool.name}
+                </Link>
+                <span className="text-muted-foreground">
+                  {" — "}
+                  {tool.description}
+                </span>
               </li>
             ))}
           </ul>

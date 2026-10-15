@@ -235,23 +235,40 @@ export function getAllGuidesMeta(locale: Locale): GuideMeta[] {
 
 /**
  * Up to `limit` other guides to link to from the bottom of a guide page.
- * Same-category guides are preferred (photographers reading an ND filter
- * guide are more likely to want another ND filter guide next); if there
- * aren't enough in the same category, the list is padded out with the
- * most recent guides from other categories.
+ *
+ * 2026-10-15: 기존에는 "같은 분류의 최신 N개"를 항상 같은 순서로 골라서, 분류 안의
+ * 모든 가이드가 똑같은 최신 3개로만 링크하고 나머지 가이드는 관련 링크를 거의 받지
+ * 못했다(구글 서치 콘솔 "발견됨 - 색인 안 됨" 가이드가 많았던 원인 중 하나).
+ * 이제는 같은 분류 안에서 "현재 글 바로 다음 순서부터" 순환(ring)하며 고른다.
+ * 모든 가이드가 같은 분류 안에서 정확히 같은 수의 링크를 받고, 결과는 빌드마다
+ * 동일(무작위 아님)하다. 같은 분류 후보가 부족하면 전체 목록의 다음 순서로
+ * 채운다. 같은 분류를 우선하는 원칙은 그대로다.
  */
 export function getRelatedGuides(
   locale: Locale,
   currentSlug: string,
-  limit = 3,
+  limit = 4,
 ): GuideMeta[] {
-  const all = getAllGuidesMeta(locale).filter((g) => g.slug !== currentSlug);
-  const current = getGuideMeta(locale, currentSlug);
+  const all = getAllGuidesMeta(locale);
+  const current = all.find((g) => g.slug === currentSlug);
+  if (!current) return [];
 
-  const sameCategory = all.filter((g) => g.category === current?.category);
-  const rest = all.filter((g) => g.category !== current?.category);
+  const picked: GuideMeta[] = [];
+  const taken = new Set<string>([currentSlug]);
+  const takeRing = (list: GuideMeta[], max: number) => {
+    const at = list.findIndex((g) => g.slug === currentSlug);
+    for (let step = 1; step < list.length && picked.length < max; step++) {
+      const g = list[(at + step) % list.length];
+      if (taken.has(g.slug)) continue;
+      taken.add(g.slug);
+      picked.push(g);
+    }
+  };
 
-  return [...sameCategory, ...rest].slice(0, limit);
+  const sameCategory = all.filter((g) => g.category === current.category);
+  takeRing(sameCategory, Math.min(limit - 1, 3));
+  takeRing(all, limit);
+  return picked;
 }
 
 /**
