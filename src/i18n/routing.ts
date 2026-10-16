@@ -22,4 +22,10 @@ export const routing = defineRouting({
   // including Googlebot; the in-site language switcher (which links to
   // locale-prefixed URLs directly) is unaffected.
   localeDetection: false,
+  // The site already emits hreflang alternates itself (languageAlternates() in
+  // src/lib/seo.ts, rendered in <head>). next-intl's default `Link` response
+  // header would add a second, conflicting set: it advertises en/es/ja
+  // alternates even for Korean-only blog posts (those 307/308 to /ko) and
+  // points x-default at a prefix-less URL that itself redirects.
+  alternateLinks: false,
 });

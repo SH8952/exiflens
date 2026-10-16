@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { redirect } from "@/i18n/navigation";
+import { permanentRedirect } from "@/i18n/navigation";
 import { SITE_URL, ogLocale, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { BlogListView } from "@/components/blog-list-view";
 import { BLOG_LOCALE, getAllBlogMeta, isBlogLocale } from "@/lib/blog";
@@ -49,7 +49,7 @@ export default async function BlogIndexPage({
 }) {
   const { locale } = await params;
   if (!isBlogLocale(locale)) {
-    redirect({ href: "/blog", locale: BLOG_LOCALE });
+    permanentRedirect({ href: "/blog", locale: BLOG_LOCALE });
   }
   setRequestLocale(locale);
   return <BlogListView locale={locale} page={1} />;

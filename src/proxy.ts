@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
@@ -20,7 +20,26 @@ const DEV_EXCLUDE_TOKEN = process.env.DEV_EXCLUDE_TOKEN;
  * cookie is never set, and resolution falls back to locale alone.
  */
 export default function proxy(request: NextRequest) {
-  const response = intlMiddleware(request);
+  let response = intlMiddleware(request);
+
+  // next-intl redirects prefix-less URLs (/blog/x -> /en/blog/x) with 307
+  // (temporary), which lets search engines keep indexing the prefix-less URL
+  // as canonical. The move is permanent, so answer 308 instead. The bare root
+  // "/" is left alone (it keeps next-intl's default behaviour).
+  const redirectTarget = response.headers.get("location");
+  if (
+    response.status === 307 &&
+    redirectTarget &&
+    request.nextUrl.pathname !== "/"
+  ) {
+    const permanent = NextResponse.redirect(redirectTarget, 308);
+    response.headers.forEach((value, key) => {
+      if (key.toLowerCase() === "location") return;
+      if (key.toLowerCase() === "set-cookie") permanent.headers.append(key, value);
+      else permanent.headers.set(key, value);
+    });
+    response = permanent;
+  }
 
   const country = request.headers.get("x-vercel-ip-country");
   if (country) {

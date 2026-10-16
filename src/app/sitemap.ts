@@ -73,16 +73,35 @@ function collectImageUrls(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  // lastmod must reflect real content changes, not the build/request time.
+  // Home and the guide hub change when guides or blog posts are added or
+  // updated, so they use the newest content date. Other static pages (legal,
+  // tools, frame...) have no reliable per-page date, so lastmod is omitted
+  // for them rather than reporting a misleading "modified today".
+  const contentDates = [
+    ...routing.locales.flatMap((locale) =>
+      getAllGuidesMeta(locale as Locale).map(
+        (guide) => new Date(guide.updatedAt ?? guide.publishedAt).getTime(),
+      ),
+    ),
+    ...getAllBlogMeta().map((post) =>
+      new Date(post.updatedAt ?? post.publishedAt).getTime(),
+    ),
+  ].filter((time) => !Number.isNaN(time));
+  const latestContentDate =
+    contentDates.length > 0 ? new Date(Math.max(...contentDates)) : undefined;
 
   const staticEntries = STATIC_PATHS.flatMap((path) => {
     const changeFrequency: "weekly" | "monthly" =
       path === "" || path === "/frame" || path === "/guides" ? "weekly" : "monthly";
     const priority = path === "" ? 1 : path === "/frame" ? 0.9 : path === "/guides" ? 0.7 : 0.3;
 
+    const lastModified =
+      path === "" || path === "/guides" ? latestContentDate : undefined;
+
     return routing.locales.map((locale) => ({
       url: `${SITE_URL}/${locale}${path}`,
-      lastModified,
+      ...(lastModified ? { lastModified } : {}),
       changeFrequency,
       priority,
       alternates: {

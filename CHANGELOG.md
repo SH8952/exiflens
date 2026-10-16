@@ -1,3 +1,13 @@
+## 2026-10-16 — 검색엔진 신호 정리 3건: 대체 링크 헤더 제거 · 리다이렉트 308 · 사이트맵 lastmod
+
+- 배경: Bing 웹마스터 URL 검사에서 새 블로그 글이 "검색되었으나 크롤링되지 않음"으로 표시되어 Bing 웹마스터 지침(중복 URL 정리, 영구 이동은 301, 정확한 lastmod)과 대조. 응답 헤더에서 next-intl 기본 `Link: rel="alternate"` 헤더가 모든 페이지에 붙고, `x-default`가 언어 경로 없는 URL(`/blog/…`)을 가리키며, 한국어 전용 블로그 글에도 en/es/ja 대체 주소를 광고(해당 주소는 /ko로 리다이렉트)하는 모순을 발견. 서치 콘솔에서 언어 경로 없는 URL이 색인된 원인 후보로도 추정(확정 아님).
+- ① `src/i18n/routing.ts`: `alternateLinks: false` — 대체 링크 응답 헤더 제거. `<head>`의 hreflang(`languageAlternates()`)은 그대로.
+- ② 리다이렉트 307 → 308(영구): `src/proxy.ts`에서 next-intl의 언어 경로 없는 URL 리다이렉트(`/blog/x`→`/en/blog/x` 등)를 308로 변환(루트 `/`는 기존 307 유지, 쿠키·헤더 보존). `src/i18n/navigation.ts`에 `permanentRedirect` 공개, `src/app/[locale]/blog/page.tsx`·`blog/[slug]/page.tsx`의 한국어 외 언어 → `/ko` 리다이렉트를 `permanentRedirect`로 변경.
+- ③ `src/app/sitemap.ts`: 정적 페이지 lastmod가 빌드 시각이던 것을 수정 — 홈·`/guides`는 가이드·블로그 중 최신 콘텐츠 날짜, 그 외 정적 페이지는 lastmod 생략(가이드·블로그 개별 글은 기존대로 실제 수정일).
+- 검증(격리 복사본): tsc 0, eslint 0, `next build --webpack` 성공. 응답 `Link` 헤더 0건(홈·블로그·가이드), 경로 없는 URL 3종과 한국어 외 블로그 URL 모두 308, `/`는 307, 일반 페이지 200, 사이트맵 401개 중 301개에만 lastmod(홈·가이드 허브는 2026-10-15).
+- 주의: 308은 브라우저·검색엔진에 오래 기억되므로 블로그를 다국어로 번역하게 되면 한국어 외 언어 경로 리다이렉트를 되돌려야 함.
+- 백업: `_backups/exiflens_backup_20261016_161350_pre-header-redirect-lastmod/`.
+
 ## 2026-10-16 — 심사 관점 점검 후 소소한 보완 4건
 
 - 배경: 애드센스 로봇 관점 정밀 점검(라이브 페이지 + 소스 대조)에서 큰 결함은 없었고, 아래 4건만 다듬기로 함. 자동 요약이 지적한 `&amp;`(정상 HTML 표기), 가이드 제목 앵커(aria-hidden 아이콘), 푸터 "/rss.xml"(실제로는 아이콘), 언어 전환 없음(실제로 있음)은 문제가 아님을 확인.

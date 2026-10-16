@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link, redirect } from "@/i18n/navigation";
+import { Link, permanentRedirect } from "@/i18n/navigation";
 import {
   SITE_URL,
   breadcrumbJsonLd,
@@ -79,7 +79,8 @@ export default async function BlogPostPage({
 }) {
   const { locale, slug } = await params;
   if (!isBlogLocale(locale)) {
-    redirect({ href: `/blog/${slug}`, locale: BLOG_LOCALE });
+    // Blog is Korean-only: other locales move permanently to /ko (308, not 307).
+    permanentRedirect({ href: `/blog/${slug}`, locale: BLOG_LOCALE });
   }
   setRequestLocale(locale);
   const t = await getTranslations("Blog");
