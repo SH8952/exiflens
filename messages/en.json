@@ -55,7 +55,7 @@
     "stopTimer": "Stop",
     "restartTimer": "Start again",
     "timerDone": "Done! Remove the filter cap.",
-    "gearSectionTitle": "Gear Recommendations",
+    "gearSectionTitle": "Gear Recommendations (Affiliate Links)",
     "gearSectionHint": "Recommended ND filters for your selection will appear here.",
     "gearDisclosure": "As an affiliate, we may earn a commission from qualifying purchases made through these links, at no extra cost to you.",
     "privacyNote": "100% client-side. Your photos are never uploaded to a server.",
@@ -280,7 +280,7 @@
   },
   "Privacy": {
     "title": "Privacy Policy",
-    "updated": "Last updated: October 14, 2026",
+    "updated": "Last updated: October 16, 2026",
     "sections": [
       {
         "heading": "Overview",
@@ -297,7 +297,7 @@
       {
         "heading": "Cookies and Advertising",
         "body": [
-          "We use Google AdSense to display advertising on the Service. Google and its partners may use cookies, device identifiers, and similar technologies to serve ads based on your prior visits to this and other websites. You can learn more about how Google uses data on Google's Ads Privacy page, and you can opt out of personalized advertising through Google Ads Settings.",
+          "We use Google AdSense to display advertising on the Service. Google and its partners may use cookies, device identifiers, and similar technologies to serve ads based on your prior visits to this and other websites. You can learn more about how Google uses data on Google's Ads Privacy page, and you can opt out of personalized advertising through Google Ads Settings, or opt out of many ad vendors' personalized advertising at once at aboutads.info.",
           "We may also use cookies or similar technologies through Google Analytics or similar analytics providers to understand, in aggregate and non-identifying form, how visitors use the Service.",
           "To understand how visitors use the Service (clicks, scrolling, navigation) and improve it, we use the session recording and heatmap features of Microsoft Clarity. Areas that display photo analysis results and all input fields are masked in recordings, and the photo files you upload are never collected. For visitors in the European Economic Area, the United Kingdom, and Switzerland, Clarity is enabled only if you select \"Accept\" in the cookie banner. See the Microsoft Privacy Statement (privacy.microsoft.com) for details."
         ]
