@@ -423,6 +423,14 @@
         ]
       },
       {
+        "heading": "Editorial Principles",
+        "body": [
+          "The tools and guides on ExifLens are based on formulas and standard definitions widely used in photography and post-processing. Calculation results are reference values to help you plan a shoot, so we recommend double-checking them in the field with a test shot or the histogram.",
+          "The site operator reviews the explanations and figures in guides and blog posts before publishing. If you spot an error or something that does not match the facts, please let us know at the email address below, and we will check it and correct the text.",
+          "When we use photos from outside sources, we credit the source and the author. Product recommendations and affiliate links are labeled according to the principles on the Affiliate Disclosure page, and affiliate relationships never influence calculation results or the explanations in our guides."
+        ]
+      },
+      {
         "heading": "Get in Touch",
         "body": [
           "Have feedback, found a bug, or want to suggest a feature? Email us at skysmoga@gmail.com — we read every message."
