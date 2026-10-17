@@ -1,3 +1,11 @@
+## 2026-10-17 — robots.txt에 Daum 웹마스터도구 소유 확인 PIN 코드 추가
+
+- 배경: Daum 웹마스터도구에 사이트를 등록하려면 robots.txt 하단에 `#DaumWebMasterTool:…` 주석 줄을 넣어 소유를 확인해야 함(PIN 코드는 도구가 발급).
+- `src/app/robots.ts`(MetadataRoute.Robots)는 주석 줄을 출력할 수 없어 `src/app/robots.txt/route.ts`(정적 GET 핸들러)로 교체. 규칙은 기존과 동일: `User-Agent: *`, `Allow: /`, `Disallow: /api/`, `Sitemap: {SITE_URL}/sitemap.xml`. 마지막 줄에 PIN 주석 추가. 인증이 끝나도 지우지 말 것.
+- 검증(격리 복사본): tsc 0, eslint 0, `next build --webpack` 성공(`/robots.txt` 정적), 응답 200 text/plain, 본문 규칙 4줄 + PIN 줄 확인, 홈 307·`/ko`·블로그·사이트맵 정상. 로컬 응답의 Sitemap 주소는 로컬 환경변수 값이며 운영에서는 SITE_URL(exifnd.com)이 쓰임.
+- 백업: `_backups/exiflens_backup_20261017_044638_pre-daum-robots/`(삭제된 robots.ts는 같은 폴더에 `robots.ts.removed`).
+- 배포 후: Daum 웹마스터도구에서 "로봇룰 테스트" → "인증 시작하기".
+
 ## 2026-10-16 — 검색엔진 신호 정리 3건: 대체 링크 헤더 제거 · 리다이렉트 308 · 사이트맵 lastmod
 
 - 배경: Bing 웹마스터 URL 검사에서 새 블로그 글이 "검색되었으나 크롤링되지 않음"으로 표시되어 Bing 웹마스터 지침(중복 URL 정리, 영구 이동은 301, 정확한 lastmod)과 대조. 응답 헤더에서 next-intl 기본 `Link: rel="alternate"` 헤더가 모든 페이지에 붙고, `x-default`가 언어 경로 없는 URL(`/blog/…`)을 가리키며, 한국어 전용 블로그 글에도 en/es/ja 대체 주소를 광고(해당 주소는 /ko로 리다이렉트)하는 모순을 발견. 서치 콘솔에서 언어 경로 없는 URL이 색인된 원인 후보로도 추정(확정 아님).
