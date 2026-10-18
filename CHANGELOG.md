@@ -4,7 +4,7 @@
 - `content/blog/ko/travel-prime-lens-vs-zoom-lens.mdx` 신규(발행일 2026-10-19, 카테고리 "렌즈 & 화각"). 사용자 여행 이야기(EOS 800D + EF40mm f/2.8 STM, 첫 혼자 일본 여행)를 바탕으로 환산 화각, 단렌즈 장단점, 발로 줌의 한계, 비교표, 체크리스트·실수·FAQ·정리·저작권 안내 구성. 사용자 메모의 "F1.8"은 EXIF 기준 f/2.8로 정정.
 - `src/components/blog-photo-duo.tsx` 신규: 서로 다른 사진 2장을 좌우(모바일 포함 항상 2열)로 배치하고 사진마다 EXIF 캡션을 붙임(가로·세로 혼합 시 세로 가운데 정렬). `src/app/[locale]/blog/[slug]/page.tsx`에 `BlogPhotoDuo` 등록(기존 컴포넌트 동작 변경 없음).
 - 이미지 29장 추가: `public/blog/images/travel-prime-{1..14}.webp`, `-full.webp`, `travel-prime-thumb.webp`. 본문 7쌍을 글 중간중간에 분산 배치.
-- 사진 11·13 EXIF(1/800초, 2024-03-10) 반영, 사용자 말씀 문단도 합니다체로 통일(2026-10-19).
+- 사진 11·13 EXIF(1/800초, 2024-03-10) 반영, 사용자 말씀 문단도 합니다체로 통일(2026-10-19). 사용자에게만 해당하는 "F1.8 정정 참고" 안내 문구는 본문에서 삭제(F2.8로만 표기).
 
 **검증**: `tsc --noEmit`, eslint 통과 / 격리 복사본 `next build --webpack` 성공, `next start`로 해당 글 200 응답, 이미지 28장 + 썸네일 참조 확인. 백업: `_backups/blog-travel-lens_20261018_221223`.
 
