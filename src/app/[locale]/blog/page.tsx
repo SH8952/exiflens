@@ -5,6 +5,11 @@ import { SITE_URL, ogLocale, DEFAULT_OG_IMAGES } from "@/lib/seo";
 import { BlogListView } from "@/components/blog-list-view";
 import { BLOG_LOCALE, getAllBlogMeta, isBlogLocale } from "@/lib/blog";
 
+// 2026-10-18 CPU 다이어트: 레이아웃이 더 이상 요청 헤더를 읽지 않아 대부분의 페이지가
+// 정적으로 만들어진다. 이 페이지는 "요청 때마다" 결과가 달라지는 동작(블로그 예약 발행 날짜 판정)이
+// 있어 지금까지처럼 요청마다 새로 만들도록 명시한다(동작 변경 없음).
+export const dynamic = "force-dynamic";
+
 /**
  * 블로그 목록 — 한국어 전용(/ko/blog). 다른 언어로 직접 접근하면 /ko/blog 로
  * 리디렉션한다(헤더 메뉴는 처음부터 /ko/blog 로 연결). hreflang 대체 주소는

@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { headers } from "next/headers";
-import { CONSENT_REGION_CODES, needsConsentBanner } from "@/lib/consent";
+import { CONSENT_REGION_CODES } from "@/lib/consent";
 import { ConsentBanner } from "@/components/consent-banner";
 import { SITE_URL, languageAlternates, ogLocale, DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -101,9 +100,11 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const headersList = await headers();
-  const geoCountry = headersList.get("x-vercel-ip-country");
-  const needsConsent = needsConsentBanner(geoCountry);
+  // 2026-10-18 CPU 다이어트: 이전에는 여기서 headers()로 방문자 국가를 읽어
+  // 동의 배너 필요 여부를 서버에서 계산했는데, 레이아웃이 요청 헤더를 읽으면
+  // 하위 모든 페이지가 요청마다 서버에서 새로 렌더링되어 함수 CPU를 소모한다.
+  // 판정 자체(needsConsentBanner)는 그대로 두고, 입력값만 proxy가 심어 두는
+  // geo-country 쿠키를 브라우저에서 읽도록 ConsentBanner 안으로 옮겼다.
 
   return (
     <html lang={locale} suppressHydrationWarning className="h-full antialiased">
@@ -168,7 +169,7 @@ export default async function LocaleLayout({
               />
             </div>
             <SiteFooter />
-            <ConsentBanner needsConsent={needsConsent} />
+            <ConsentBanner />
           </NextIntlClientProvider>
         </ThemeProvider>
         {process.env.NODE_ENV === "development" ? <DevServerWatch /> : null}

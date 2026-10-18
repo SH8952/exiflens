@@ -1,3 +1,29 @@
+## 2026-10-18 — Vercel CPU 다이어트: 레이아웃의 요청 헤더 읽기 제거로 대부분의 페이지를 정적으로 제공 (동작 변경 없음)
+
+**배경**
+- Moneypick(Hobby) 팀의 Fluid Active CPU가 한도(4h)에 임박(3h59m, ExifLens 43.3%). 실제 응답이 `cache-control: private, no-cache, no-store` / `x-vercel-cache: MISS`로 확인되어, 모든 페이지가 요청마다 서버에서 렌더링되고 있었음. 원인: `src/app/[locale]/layout.tsx`가 `headers()`로 `x-vercel-ip-country`를 읽음(동의 배너용) → 하위 전체 페이지가 동적 렌더링.
+- 목표: 방문자에게 보이는 동작(언어 선택, 제휴 광고 판정, 무작위 카드, 예약 발행, 동의 배너)은 그대로 두고 사용량만 줄이기. 사용자 확인 후 ExifLens에서 로컬 검증까지 진행(배포는 사용자 승인 후).
+
+**변경**
+- `src/app/[locale]/layout.tsx`: `headers()` 읽기와 `needsConsent` 계산 제거, `<ConsentBanner />`로 변경. (GA4 inline script의 consent `region` 설정은 원래 브라우저 쪽이라 그대로)
+- `src/components/consent-banner.tsx`: 국가를 서버 헤더 대신 proxy가 이미 심는 `geo-country` 쿠키에서 브라우저가 읽도록 변경(`useSyncExternalStore`). 판정 함수 `needsConsentBanner`와 "국가 미확인=동의 필요" 규칙은 그대로. 서버 렌더·하이드레이션 전에는 "아직 모름" 상태로 두어 배너도 Clarity도 건드리지 않음(국가 확인 전 추적 시작 방지).
+- `export const dynamic = "force-dynamic"` 명시(지금까지처럼 요청마다 생성, 동작 변경 없음): 홈(가이드·FAQ 카드 무작위 노출, 블로그 하이라이트 예약 발행 판정), `blog/page.tsx`, `blog/[slug]/page.tsx`, `rss.xml/route.ts` (`blog/page/[page]`는 기존에 이미 설정).
+- 제휴 광고 판정(`resolveAffiliateProvider`, `gear-recommendation`), 언어 라우팅(`localeDetection: false`), 프록시는 변경 없음.
+
+**검증 (격리 복사본, `next build --webpack` — 실제 폴더 `.next`는 건드리지 않음)**
+- 경로 표: 변경 전 동적(ƒ) 48 + 정적(○) 5 → 변경 후 동적 16(홈, 블로그 3종, RSS, API, 404 캐치올) + 정적 5 + 사전 생성(●) 32(가이드, 도구, 소개·약관 등).
+- `next start`: `/en/guides`는 `Cache-Control: s-maxage=31536000`, `x-nextjs-cache: HIT`; 국가 헤더(DE)를 보내면 정적 페이지 응답에도 `geo-country=DE` 쿠키가 실림. `/ko/blog`는 기존처럼 `private, no-store`.
+- 예약 발행: 2099년 가짜 글이 목록·RSS·홈에서 숨겨지고 주소는 404, 기존 글은 200. 홈을 4번 열면 가이드 카드 조합이 매번 달라짐.
+- 동의 배너(jsdom에서 실제 컴포넌트 하이드레이션): DE·GB는 배너 표시+Clarity 미로드, KR·US는 배너 없음+Clarity 로드, 쿠키 없음은 배너 표시, 이미 동의/거부 선택한 경우도 기존 규칙대로.
+- `npx tsc --noEmit`, eslint(변경 파일) 통과.
+- 작업 전 백업: `.backups/CPU다이어트전_20261018/`.
+
+**참고·한계**
+- 사이트 푸터의 연도는 이제 빌드 시점 기준으로 고정됨(해가 바뀐 뒤 첫 배포 때 갱신).
+- Vercel CDN 단계에서 정적 페이지 응답에 쿠키가 실리는지는 배포 후에만 확인 가능(로컬 서버에서는 확인됨). 배포 후 `curl -sI https://exifnd.com/en/guides`에서 `x-vercel-cache: HIT/PRERENDER`와 `geo-country` 쿠키 확인 필요.
+- 실제 CPU 감소폭은 배포 후 Vercel 사용량으로 확인. 홈·블로그·API·프록시는 그대로 CPU를 사용.
+- 되돌리려면 위 6개 파일을 백업본으로 복원.
+
 ## 2026-10-17 — robots.txt에 Daum 웹마스터도구 소유 확인 PIN 코드 추가
 
 - 배경: Daum 웹마스터도구에 사이트를 등록하려면 robots.txt 하단에 `#DaumWebMasterTool:…` 주석 줄을 넣어 소유를 확인해야 함(PIN 코드는 도구가 발급).

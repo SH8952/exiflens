@@ -14,6 +14,11 @@ import { HomeToolsHighlights } from "@/components/home-tools-highlights";
 import { HomeBlogHighlights } from "@/components/home-blog-highlights";
 import { HomeFaqHighlights } from "@/components/home-faq-highlights";
 
+// 2026-10-18 CPU 다이어트: 레이아웃이 더 이상 요청 헤더를 읽지 않아 대부분의 페이지가
+// 정적으로 만들어진다. 이 페이지는 "요청 때마다" 결과가 달라지는 동작(홈의 가이드·FAQ 카드 무작위 노출, 블로그 하이라이트의 예약 발행 날짜 판정)이
+// 있어 지금까지처럼 요청마다 새로 만들도록 명시한다(동작 변경 없음).
+export const dynamic = "force-dynamic";
+
 export default async function HomePage({
   params,
 }: {

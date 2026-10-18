@@ -3,6 +3,11 @@ import { SITE_URL } from "@/lib/seo";
 import { getAllGuidesMeta } from "@/lib/guides";
 import { BLOG_LOCALE, getAllBlogMeta } from "@/lib/blog";
 
+// 2026-10-18 CPU 다이어트: 레이아웃이 더 이상 요청 헤더를 읽지 않아 대부분의 페이지가
+// 정적으로 만들어진다. 이 페이지는 "요청 때마다" 결과가 달라지는 동작(블로그 예약 발행 날짜 판정)이
+// 있어 지금까지처럼 요청마다 새로 만들도록 명시한다(동작 변경 없음).
+export const dynamic = "force-dynamic";
+
 /**
  * Site-wide RSS 2.0 feed of guide articles across every locale, submitted to
  * search-engine webmaster tools (Naver Search Advisor 등) so new/updated
