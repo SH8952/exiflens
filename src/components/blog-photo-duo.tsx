@@ -12,15 +12,31 @@ export type BlogPhotoDuoItem = BlogPhotoData & { caption: string };
 export function BlogPhotoDuo({
   a,
   b,
+  stack = false,
 }: {
   a: BlogPhotoDuoItem;
   b: BlogPhotoDuoItem;
+  /** true면 좌우가 아니라 위아래로 한 장씩 배치(가로·세로 사진이 섞일 때). 세로 사진은 폭을 줄여 너무 커지지 않게 한다. */
+  stack?: boolean;
 }) {
   return (
     <div className="not-prose my-6">
-      <div className="grid grid-cols-2 items-center gap-2 sm:gap-4">
+      <div
+        className={
+          stack
+            ? "flex flex-col items-center gap-6"
+            : "grid grid-cols-2 items-center gap-2 sm:gap-4"
+        }
+      >
         {[a, b].map(({ caption, ...photo }) => (
-          <figure key={photo.src} className="m-0 min-w-0">
+          <figure
+            key={photo.src}
+            className={
+              stack
+                ? `m-0 w-full min-w-0 ${photo.height > photo.width ? "max-w-sm" : ""}`
+                : "m-0 min-w-0"
+            }
+          >
             <BlogPhoto {...photo} />
             <figcaption className="mt-1.5 text-center text-xs italic text-muted-foreground sm:text-sm">
               {caption}
