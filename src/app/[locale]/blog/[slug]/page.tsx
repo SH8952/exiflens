@@ -20,6 +20,7 @@ import { GuideToolCta } from "@/components/guide-tool-cta";
 import { ShareButton } from "@/components/share-button";
 import { BlogPhoto } from "@/components/blog-photo";
 import { BlogPhotoPair } from "@/components/blog-photo-pair";
+import { BlogPhotoDuo } from "@/components/blog-photo-duo";
 import { MdxTable } from "@/components/mdx-table";
 import { GuideToc } from "@/components/guides/guide-toc";
 import { GuideFloatingToc } from "@/components/guides/guide-floating-toc";
@@ -218,7 +219,7 @@ export default async function BlogPostPage({
         id="blog-article"
         className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-headings:scroll-mt-6 prose-a:text-primary"
       >
-        <Content components={{ BlogPhoto, BlogPhotoPair, table: MdxTable }} />
+        <Content components={{ BlogPhoto, BlogPhotoPair, BlogPhotoDuo, table: MdxTable }} />
       </article>
 
       <GuideToolCta locale={locale} />
