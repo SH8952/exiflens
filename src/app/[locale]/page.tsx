@@ -57,7 +57,10 @@ export default async function HomePage({
 
       {/* Section 2 & 3: EXIF display + ND calculator */}
       <section className="grid gap-4 md:grid-cols-2">
-        <ExifPanel showCompressLink={isToolAccessible("image-compressor")} />
+        <ExifPanel
+          showCompressLink={isToolAccessible("image-compressor")}
+          showRemoverLink={isToolAccessible("exif-remover")}
+        />
         <NdCalculatorCard />
       </section>
 

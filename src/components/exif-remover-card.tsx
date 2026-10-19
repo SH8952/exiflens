@@ -20,6 +20,10 @@ type FileEntry = {
   summary: ParsedExif | null;
   resultBlob: Blob | null;
   resultUrl: string | null;
+  /** 처리 후 파일 크기(바이트) — 결과 요약의 "용량 변화" 표시용(2026-10-19). */
+  resultSize: number | null;
+  /** 처리 당시 선택한 방식 — GPS만 제거했는지, 전체를 제거했는지. */
+  resultMode: "gpsOnly" | "all" | null;
   errorMessage: string | null;
 };
 
@@ -50,6 +54,8 @@ export function ExifRemoverCard() {
       summary: null,
       resultBlob: null,
       resultUrl: null,
+      resultSize: null,
+      resultMode: null,
       errorMessage: null,
     }));
 
@@ -98,7 +104,15 @@ export function ExifRemoverCard() {
         setEntries((prev) =>
           prev.map((e) =>
             e.id === target.id
-              ? { ...e, status: "done", resultBlob: result.blob, resultUrl: url, errorMessage: null }
+              ? {
+                  ...e,
+                  status: "done",
+                  resultBlob: result.blob,
+                  resultUrl: url,
+                  resultSize: result.blob.size,
+                  resultMode: gpsOnly ? "gpsOnly" : "all",
+                  errorMessage: null,
+                }
               : e,
           ),
         );
@@ -215,6 +229,22 @@ export function ExifRemoverCard() {
   );
 }
 
+/**
+ * 처리 결과 한 줄 요약(2026-10-19). 제거 항목은 처리 전 분석에서 확인된 정보를 기준으로 한다 —
+ * "GPS 없음"이어도 XMP 안에 위치 정보가 있을 수 있으므로 "없었다"고 단정하는 문구는 쓰지 않는다.
+ */
+function removedSummary(entry: FileEntry, t: ReturnType<typeof useTranslations>): string {
+  if (entry.resultMode === "gpsOnly") return t("resultGpsOnly");
+  const s = entry.summary;
+  const items: string[] = [];
+  if (s?.camera || s?.lens) items.push(t("removedCamera"));
+  if (s?.shutterSpeedLabel || s?.aperture || s?.iso || s?.focalLength) items.push(t("removedSettings"));
+  if (s?.gps) items.push(t("removedGps"));
+  if (s?.takenAt) items.push(t("removedTakenAt"));
+  items.push(t("removedOther"));
+  return t("resultRemoved", { items: items.join(t("resultSeparator")) });
+}
+
 function FileRow({
   entry,
   onRemove,
@@ -240,6 +270,16 @@ function FileRow({
             </>
           ) : null}
         </p>
+        {entry.status === "done" && entry.resultSize !== null ? (
+          <p className="text-muted-foreground">
+            {t("resultSizeChange", {
+              before: formatFileSize(entry.file.size),
+              after: formatFileSize(entry.resultSize),
+            })}
+            {" · "}
+            {removedSummary(entry, t)}
+          </p>
+        ) : null}
       </div>
       <div className="flex shrink-0 items-center gap-2">
         <StatusBadge status={entry.status} t={t} />
