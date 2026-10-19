@@ -1,3 +1,18 @@
+## 2026-10-19 (11차) — 항목 이름 한 줄 표시
+- 주제별 탭 목록의 항목 이름이 2:3 고정 비율 때문에 10글자 남짓 넘기며 두 줄로 꺾이던 문제(RecommendedExposureIndex, ScaleFactorTo35mmEquivalent, Country/Primary Location Code 등) 해결: 이름 칸을 내용 너비에 맞추고(최대 62%) 값 칸이 나머지를 사용. 이름이 최대 폭을 넘을 때만 줄바꿈.
+- 백업: _backups/exif-name-oneline_20261019_183701
+
+## 2026-10-19 (10차) — 탭 줄 마우스 이동
+- PC에서 탭을 키보드 방향키로만 넘길 수 있던 문제 해결: 숨은 탭이 있는 쪽 끝에 ‹ › 버튼(클릭 시 탭 줄이 부드럽게 이동) + 탭 줄 위에서 마우스 휠로 좌우 이동(끝에 닿으면 페이지 스크롤로 넘김). 9차의 흐려지는 표시는 버튼 배경으로 통합.
+- 검증: tsc·eslint, 격리 빌드, 4개 언어 200·MISSING_MESSAGE 0. 백업: _backups/exif-tab-mouse_20261019_183114
+
+## 2026-10-19 (9차) — 탭 이름·숨은 탭 안내
+- 요약 탭 이름 "추출된 EXIF" → "EXIF 요약"(ko) / "EXIF summary"(en) / "Resumen EXIF"(es) / "EXIFサマリー"(ja). 사용 가이드 본문의 패널 이름도 같이 변경.
+- "저작권·설명" → "저작권"(ko), "색상 프로필" → "색상"(ko, en·es·ja도 짧게)으로 줄여 잘림 방지.
+- 탭이 한 줄에 다 안 들어갈 때(오른쪽 탭이 스크롤 뒤에 숨던 문제): 가려진 쪽 끝에 흐려지는 표시 + 선택한 탭이 보이도록 자동 스크롤.
+- 참고: XMP·색상·기타 탭은 파일에 해당 정보(XMP 패킷, ICC 프로필, 분류 밖 항목)가 있을 때만 생성됨(합성 사진으로 확인).
+- 검증: tsc·eslint, 격리 빌드, 4개 언어 200·MISSING_MESSAGE 0. 백업: _backups/exif-tabs-labels_20261019_182630
+
 ## 2026-10-19 (8차) — 바디 이름 항목 이름을 BodyModel 로 표시
 - 카메라·렌즈 탭의 Model 항목을 렌즈 모델(LensModel)과 짝이 맞게 BodyModel 로 표시(화면 표시 전용, 내보내기 파일은 원본 이름 Model 유지). 탭 안 순서: Make, BodyModel, LensMake, LensModel.
 - 7차 결과는 석한님이 localhost에서 확인 완료(R5m2 + RF24-70 / RF100 MACRO 파일 모두 소유자 이름·시리얼 번호·렌즈 사양 정상 표시).

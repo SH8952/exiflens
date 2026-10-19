@@ -28,7 +28,7 @@
     "uploaderErrorUnsupported": "Unsupported file type. Please upload a JPG, PNG or a supported camera RAW file.",
     "uploaderErrorTooLarge": "This file is too large (max 100MB).",
     "uploaderErrorParse": "Couldn't read EXIF data from this photo. It may not contain any metadata.",
-    "exifSectionTitle": "Extracted EXIF",
+    "exifSectionTitle": "EXIF summary",
     "exifEmpty": "Upload a photo to see its camera, shutter speed, aperture, ISO, focal length and the date and time it was taken.",
     "exifExportTxt": "Export TXT",
     "exifExportCsv": "Export CSV",
@@ -41,7 +41,7 @@
     "exifCatEditing": "Editing & dates",
     "exifCatCopyright": "Copyright",
     "exifCatXmp": "XMP",
-    "exifCatColor": "Color profile",
+    "exifCatColor": "Color",
     "exifCatOther": "Other",
     "exifExportNote": "May include serial numbers or owner names. Check before sharing.",
     "gpsWarningTitle": "This photo contains location (GPS) data.",
@@ -84,7 +84,7 @@
       },
       {
         "title": "Read the EXIF data",
-        "body": "As soon as the photo loads, the camera, lens, shutter speed, aperture, ISO, focal length, and the date and time taken appear in the “Extracted EXIF” panel.\nPhotos that went through a messaging app or social network may have had their metadata removed, so some fields might not appear."
+        "body": "As soon as the photo loads, the camera, lens, shutter speed, aperture, ISO, focal length, and the date and time taken appear in the “EXIF summary” panel.\nPhotos that went through a messaging app or social network may have had their metadata removed, so some fields might not appear."
       },
       {
         "title": "See where it was taken on a map",

@@ -266,11 +266,62 @@ export function ExifPanel({
     () => (fullForFile?.status === "ready" ? categorizeMetadata(fullForFile.groups) : []),
     [fullForFile],
   );
+  // 탭 줄이 한 줄에 다 안 들어가면 가로로 스크롤된다 — 숨은 탭이 있다는 표시(양끝 그라데이션)와, 선택한 탭이 항상 보이도록 하는 자동 스크롤.
+  const tabScrollRef = React.useRef<HTMLDivElement>(null);
+  const [tabFade, setTabFade] = React.useState({ left: false, right: false });
+  const scrollTabs = (direction: -1 | 1) => {
+    const el = tabScrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * Math.max(120, Math.round(el.clientWidth * 0.6)), behavior: "smooth" });
+  };
   // 사진이 바뀌어 현재 탭이 사라지면 요약 탭으로 돌아간다.
   const activeKey = categories.some((c) => c.key === tab) ? tab : "summary";
   const activeCategory = categories.find((c) => c.key === activeKey) ?? null;
   const canExport = fullForFile?.status === "ready" && fullForFile.groups.length > 0;
   const showGpsNotice = activeKey === "summary" && gps !== null && file !== null && gpsNoticeClosedFor !== file;
+
+  React.useEffect(() => {
+    const el = tabScrollRef.current;
+    if (!el) return;
+    const update = () => {
+      const max = el.scrollWidth - el.clientWidth;
+      setTabFade({ left: el.scrollLeft > 1, right: el.scrollLeft < max - 1 });
+    };
+    el.addEventListener("scroll", update, { passive: true });
+    // 마우스 휠(세로 휠)로도 탭을 좌우로 넘긴다. 더 갈 곳이 없으면 페이지 스크롤에 맡긴다.
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (max <= 0) return;
+      const next = el.scrollLeft + e.deltaY;
+      if ((e.deltaY < 0 && el.scrollLeft <= 0) || (e.deltaY > 0 && el.scrollLeft >= max - 1)) return;
+      e.preventDefault();
+      el.scrollLeft = Math.min(max, Math.max(0, next));
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(update);
+    if (observer) {
+      observer.observe(el);
+      Array.from(el.children).forEach((child) => observer.observe(child));
+    }
+    return () => {
+      el.removeEventListener("scroll", update);
+      el.removeEventListener("wheel", onWheel);
+      observer?.disconnect();
+    };
+  }, [categories]);
+
+  React.useEffect(() => {
+    const container = tabScrollRef.current;
+    const tab = document.getElementById(`exif-tab-${activeKey}`);
+    if (!container || !tab || !container.contains(tab)) return;
+    const left = tab.offsetLeft - container.offsetLeft;
+    const right = left + tab.offsetWidth;
+    if (left < container.scrollLeft) container.scrollTo({ left: Math.max(0, left - 24) });
+    else if (right > container.scrollLeft + container.clientWidth) {
+      container.scrollTo({ left: right - container.clientWidth + 24 });
+    }
+  }, [activeKey, categories]);
 
   React.useEffect(() => {
     if (!showGpsNotice) return;
@@ -297,17 +348,44 @@ export function ExifPanel({
         >
           {t("exifSectionTitle")}
         </TabButton>
-        <div className="-mb-px flex min-w-0 flex-1 gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {categories.map((c) => (
-            <TabButton
-              key={c.key}
-              id={c.key}
-              active={activeKey === c.key}
-              onClick={() => setTab(c.key)}
+        <div className="relative -mb-px min-w-0 flex-1">
+          <div
+            ref={tabScrollRef}
+            className="relative flex gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {categories.map((c) => (
+              <TabButton
+                key={c.key}
+                id={c.key}
+                active={activeKey === c.key}
+                onClick={() => setTab(c.key)}
+              >
+                {t(CATEGORY_LABEL_KEYS[c.key])}
+              </TabButton>
+            ))}
+          </div>
+          {tabFade.left ? (
+            <button
+              type="button"
+              aria-hidden="true"
+              tabIndex={-1}
+              onClick={() => scrollTabs(-1)}
+              className="absolute inset-y-0 left-0 flex w-10 items-center justify-start bg-gradient-to-r from-card via-card to-transparent pb-2 text-lg leading-none text-muted-foreground transition-colors hover:text-foreground"
             >
-              {t(CATEGORY_LABEL_KEYS[c.key])}
-            </TabButton>
-          ))}
+              ‹
+            </button>
+          ) : null}
+          {tabFade.right ? (
+            <button
+              type="button"
+              aria-hidden="true"
+              tabIndex={-1}
+              onClick={() => scrollTabs(1)}
+              className="absolute inset-y-0 right-0 flex w-10 items-center justify-end bg-gradient-to-l from-card via-card to-transparent pb-2 text-lg leading-none text-muted-foreground transition-colors hover:text-foreground"
+            >
+              ›
+            </button>
+          ) : null}
         </div>
         {canExport && file ? (
           <ExportMenu
@@ -376,7 +454,7 @@ export function ExifPanel({
             <div className="absolute inset-0 flex flex-col">
               <div className="min-h-0 flex-1 overflow-y-auto pr-1">
                 {activeCategory ? (
-                  <dl className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-x-3 gap-y-2 text-sm">
+                  <dl className="grid grid-cols-[fit-content(62%)_minmax(0,1fr)] gap-x-3 gap-y-2 text-sm">
                     {activeCategory.entries.map((e, i) => (
                       <React.Fragment key={`${activeCategory.key}-${e.name}-${i}`}>
                         <dt className="break-words text-muted-foreground">{e.name}</dt>

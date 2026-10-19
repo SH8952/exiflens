@@ -28,7 +28,7 @@
     "uploaderErrorUnsupported": "対応していないファイル形式です。JPG、PNG、または対応するRAWファイルをアップロードしてください。",
     "uploaderErrorTooLarge": "ファイルサイズが大きすぎます（最大100MB）。",
     "uploaderErrorParse": "この写真からEXIF情報を読み取れませんでした。メタデータが含まれていない可能性があります。",
-    "exifSectionTitle": "抽出されたEXIF",
+    "exifSectionTitle": "EXIFサマリー",
     "exifEmpty": "写真をアップロードすると、カメラ、シャッタースピード、絞り、ISO、焦点距離、撮影日時が表示されます。",
     "exifExportTxt": "TXTで書き出す",
     "exifExportCsv": "CSVで書き出す",
@@ -41,7 +41,7 @@
     "exifCatEditing": "編集・日時",
     "exifCatCopyright": "著作権",
     "exifCatXmp": "XMP",
-    "exifCatColor": "色プロファイル",
+    "exifCatColor": "カラー",
     "exifCatOther": "その他",
     "exifExportNote": "シリアル番号や所有者名など個人情報が含まれる場合があります。共有前にご確認を。",
     "gpsWarningTitle": "この写真には撮影場所（GPS）の情報が含まれています。",
@@ -84,7 +84,7 @@
       },
       {
         "title": "EXIF情報を確認する",
-        "body": "アップロードするとすぐに、カメラ、レンズ、シャッタースピード、絞り、ISO、焦点距離、撮影日時が「抽出されたEXIF」パネルに表示されます。\nメッセージアプリやSNSを経由した写真はメタデータが削除されていることがあり、一部の項目が表示されない場合があります。"
+        "body": "アップロードするとすぐに、カメラ、レンズ、シャッタースピード、絞り、ISO、焦点距離、撮影日時が「EXIFサマリー」パネルに表示されます。\nメッセージアプリやSNSを経由した写真はメタデータが削除されていることがあり、一部の項目が表示されない場合があります。"
       },
       {
         "title": "撮影場所を地図で見る",

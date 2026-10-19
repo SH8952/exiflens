@@ -28,7 +28,7 @@
     "uploaderErrorUnsupported": "Tipo de archivo no compatible. Sube un JPG, PNG o un archivo RAW compatible.",
     "uploaderErrorTooLarge": "Este archivo es demasiado grande (máx. 100MB).",
     "uploaderErrorParse": "No se pudo leer el EXIF de esta foto. Puede que no contenga metadatos.",
-    "exifSectionTitle": "EXIF extraído",
+    "exifSectionTitle": "Resumen EXIF",
     "exifEmpty": "Sube una foto para ver cámara, velocidad de obturación, apertura, ISO, distancia focal y la fecha y hora de captura.",
     "exifExportTxt": "Exportar TXT",
     "exifExportCsv": "Exportar CSV",
@@ -41,7 +41,7 @@
     "exifCatEditing": "Edición y fechas",
     "exifCatCopyright": "Derechos",
     "exifCatXmp": "XMP",
-    "exifCatColor": "Perfil de color",
+    "exifCatColor": "Color",
     "exifCatOther": "Otros",
     "exifExportNote": "Puede incluir números de serie o nombres. Revísalo antes de compartir.",
     "gpsWarningTitle": "Esta foto contiene datos de ubicación (GPS).",
@@ -84,7 +84,7 @@
       },
       {
         "title": "Consulta los datos EXIF",
-        "body": "En cuanto se carga la foto, la cámara, el objetivo, la velocidad de obturación, la apertura, el ISO, la distancia focal y la fecha y hora de captura aparecen en el panel «EXIF extraído».\nLas fotos que pasaron por una app de mensajería o una red social pueden haber perdido sus metadatos, así que algunos campos podrían no aparecer."
+        "body": "En cuanto se carga la foto, la cámara, el objetivo, la velocidad de obturación, la apertura, el ISO, la distancia focal y la fecha y hora de captura aparecen en el panel «Resumen EXIF».\nLas fotos que pasaron por una app de mensajería o una red social pueden haber perdido sus metadatos, así que algunos campos podrían no aparecer."
       },
       {
         "title": "Mira dónde se tomó en un mapa",
