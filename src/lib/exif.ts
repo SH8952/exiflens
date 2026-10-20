@@ -189,7 +189,9 @@ export async function parseExifFile(file: File): Promise<ParsedExif> {
   const gps =
     gpsGroup &&
     typeof gpsGroup.Latitude === "number" &&
-    typeof gpsGroup.Longitude === "number"
+    typeof gpsGroup.Longitude === "number" &&
+    Number.isFinite(gpsGroup.Latitude) &&
+    Number.isFinite(gpsGroup.Longitude)
       ? { latitude: gpsGroup.Latitude, longitude: gpsGroup.Longitude }
       : null;
 

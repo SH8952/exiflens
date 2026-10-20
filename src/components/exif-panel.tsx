@@ -333,7 +333,7 @@ export function ExifPanel({
   }, [showGpsNotice, file]);
 
   return (
-    <div data-clarity-mask="True" className="relative rounded-xl border border-border bg-card p-5">
+    <div data-clarity-mask="True" className="relative min-w-0 rounded-xl border border-border bg-card p-5">
       <h2 className="sr-only">{t("exifSectionTitle")}</h2>
       <div
         role="tablist"

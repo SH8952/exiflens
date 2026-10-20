@@ -56,7 +56,7 @@ export default async function HomePage({
       <ExifUploader />
 
       {/* Section 2 & 3: EXIF display + ND calculator */}
-      <section className="grid gap-4 md:grid-cols-2">
+      <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <ExifPanel
           showCompressLink={isToolAccessible("image-compressor")}
           showRemoverLink={isToolAccessible("exif-remover")}
