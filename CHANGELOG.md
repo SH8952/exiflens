@@ -1,3 +1,11 @@
+## 2026-10-21 — 백업 폴더 단일화·1주일 초과 백업 삭제·백업 방식 수정 (사이트 동작 변경 없음)
+- 2026-10-14 이전(1주일 경과) 백업 폴더·압축 파일 삭제. 보존: 10-14 이후 백업, 날짜 없는 보조 자료.
+- `.backups`에 있던 `CPU다이어트전_20261018`을 `_backups`로 합치고 `.backups` 폴더 제거.
+- 백업 위치를 `_backups/` 한 곳으로 통일(CLAUDE.md 규칙 추가). 새 `automation/make-backup.sh [라벨]`: `_backups/`·`.next*`·`node_modules`·`.git` 제외 rsync 백업(중첩·용량 폭증 방지).
+- `automation/publish-guide.command`·`apply-seo-task.command`의 rsync 제외 목록에 `.next*`(.next_old·.next_stale 포함)와 모든 백업 폴더명 추가.
+- 불필요 파일 정리: 자동 생성되는 `.DS_Store`와 `automation/__pycache__` 삭제(모두 git 무시 대상, 재생성 가능).
+- 백업: _backups/백업규칙정비전_20261021
+
 ## 2026-10-20 (3차) — 일본어 모바일 GPS 안내 문구 단축
 - 석한님 휴대폰 확인: ko·en·es는 한 줄, 일본어만 마지막 2글자가 줄바꿈됨(이 폰은 한 줄에 14글자까지). 일본어 `gpsMobileNote`를 "スマホ経由だと削除される場合あり"(16자) → "スマホ経由は削除の場合あり"(13자)로 변경. 번역 파일 1곳만 변경.
 - 백업: _backups/exif-gps-note-ja_20261020_215649
