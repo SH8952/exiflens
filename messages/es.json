@@ -47,6 +47,7 @@
     "gpsWarningTitle": "Esta foto contiene datos de ubicación (GPS).",
     "gpsWarningBody": "Si compartes la foto tal cual, el lugar donde se tomó puede quedar expuesto. Te recomendamos eliminar los datos de ubicación antes de compartirla.",
     "gpsWarningLink": "Eliminar datos de ubicación",
+    "gpsMobileNote": "El móvil puede borrarla al subir",
     "camera": "Cámara",
     "lens": "Objetivo",
     "shutter": "Velocidad de obturación",

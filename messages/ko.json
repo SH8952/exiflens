@@ -47,6 +47,7 @@
     "gpsWarningTitle": "이 사진에는 촬영 위치(GPS) 정보가 들어 있습니다.",
     "gpsWarningBody": "사진을 그대로 공유하면 촬영 장소가 함께 노출될 수 있습니다. 공유하기 전에 위치 정보를 제거하는 것을 권장합니다.",
     "gpsWarningLink": "위치 정보 제거하러 가기",
+    "gpsMobileNote": "휴대폰 업로드 시 제거될 수 있음",
     "camera": "카메라",
     "lens": "렌즈",
     "shutter": "셔터스피드",

@@ -40,6 +40,23 @@ function Row({ label, value }: { label: string; value: string | null }) {
   );
 }
 
+/**
+ * 휴대폰·태블릿 여부(2026-10-20). 안드로이드는 브라우저로 올리는 사진의 위치 정보를 개인정보 보호를 위해 지울 수 있어서,
+ * 모바일에서 GPS 가 없을 때만 짧은 안내를 보여 주려고 쓴다. 서버 렌더링에서는 false(PC 표시)로 시작한다.
+ */
+function subscribeNothing() {
+  return () => {};
+}
+function detectMobileDevice(): boolean {
+  if (typeof navigator === "undefined") return false;
+  if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) return true;
+  // iPadOS 는 데스크톱 Safari 처럼 보이므로 터치 지점 수로 구분한다.
+  return /Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
+}
+function useIsMobileDevice(): boolean {
+  return React.useSyncExternalStore(subscribeNothing, detectMobileDevice, () => false);
+}
+
 function GpsRow({
   label,
   gps,
@@ -47,6 +64,7 @@ function GpsRow({
   onViewMap,
   warnLabel,
   onWarn,
+  missingNote,
 }: {
   label: string;
   gps: { latitude: number; longitude: number } | null;
@@ -55,6 +73,8 @@ function GpsRow({
   /** GPS 안내 팝업을 다시 여는 경고 아이콘의 설명 — GPS가 있을 때만 아이콘을 보여 준다(2026-10-19). */
   warnLabel: string;
   onWarn: () => void;
+  /** 휴대폰에서 올렸는데 GPS 가 없을 때 "—" 대신 보여 주는 짧은 안내. 없으면 "—". */
+  missingNote: string | null;
 }) {
   return (
     <>
@@ -84,6 +104,8 @@ function GpsRow({
               {viewMapLabel}
             </button>
           </>
+        ) : missingNote ? (
+          <span className="text-xs font-normal text-muted-foreground">{missingNote}</span>
         ) : (
           "—"
         )}
@@ -236,6 +258,7 @@ export function ExifPanel({
 
   const hasData = status === "success" && data !== null;
   const gps = hasData ? data.gps : null;
+  const isMobileDevice = useIsMobileDevice();
   // 파일 용량 — 촬영 날짜·시간 바로 아래(석한 요청, 2026-10-08). 5MB 이상이고 압축기가 받는
   // 형식(JPG·PNG·WebP, 60MB 이하)이면 "용량 줄이기" 바로가기를 보여 주고, 누르면 사진을 압축기로 넘긴다.
   const fileSizeLabel = hasData && file ? formatBytes(file.size) : null;
@@ -423,6 +446,7 @@ export function ExifPanel({
               onViewMap={() => setShowMap(true)}
               warnLabel={t("gpsWarningTitle")}
               onWarn={() => setGpsNoticeClosedFor(null)}
+              missingNote={hasData && !gps && isMobileDevice ? t("gpsMobileNote") : null}
             />
             {/* 촬영 날짜·시간 — GPS 위치 바로 아래 (석한 요청, 2026-10-03). 값이 없으면 "—" */}
             <Row label={t("takenAtDateTime")} value={hasData ? data.takenAt : null} />
