@@ -4,6 +4,7 @@
 - 백업 위치를 `_backups/` 한 곳으로 통일(CLAUDE.md 규칙 추가). 새 `automation/make-backup.sh [라벨]`: `_backups/`·`.next*`·`node_modules`·`.git` 제외 rsync 백업(중첩·용량 폭증 방지).
 - `automation/publish-guide.command`·`apply-seo-task.command`의 rsync 제외 목록에 `.next*`(.next_old·.next_stale 포함)와 모든 백업 폴더명 추가.
 - 불필요 파일 정리: 자동 생성되는 `.DS_Store`와 `automation/__pycache__` 삭제(모두 git 무시 대상, 재생성 가능).
+- 임시 보조 자료 삭제: `_backups/`의 `_stage`(빈 파일 1개), `blog_dummy_test`(블로그 시험용 더미 글 12개), `obsolete-push-scripts`(이미 실행·대체된 1회성 push 스크립트). `search-console-analysis`(키워드 후보 엑셀)는 보존.
 - 백업: _backups/백업규칙정비전_20261021
 
 ## 2026-10-20 (3차) — 일본어 모바일 GPS 안내 문구 단축
