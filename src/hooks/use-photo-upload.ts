@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { isSupportedImageFile, parseExifFile } from "@/lib/exif";
 import { useExifStore } from "@/store/exif-store";
 
-const MAX_FILE_SIZE_BYTES = 100 * 1024 * 1024; // 100MB, generous for RAW files
+const MAX_FILE_SIZE_BYTES = 200 * 1024 * 1024; // 200MB (2026-10-21: 100MB에서 상향, 브라우저에서만 처리하므로 서버 부담 없음)
 
 /**
  * Shared "pick or drop a photo, parse its EXIF, store it" logic — used by

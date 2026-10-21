@@ -26,7 +26,7 @@
     "uploaderReset": "Subir otra foto",
     "goToFrameButton": "Crear un marco",
     "uploaderErrorUnsupported": "Tipo de archivo no compatible. Sube un JPG, PNG o un archivo RAW compatible.",
-    "uploaderErrorTooLarge": "Este archivo es demasiado grande (máx. 100MB).",
+    "uploaderErrorTooLarge": "Este archivo es demasiado grande (máx. 200MB).",
     "uploaderErrorParse": "No se pudo leer el EXIF de esta foto. Puede que no contenga metadatos.",
     "exifSectionTitle": "Resumen EXIF",
     "exifEmpty": "Sube una foto para ver cámara, velocidad de obturación, apertura, ISO, distancia focal y la fecha y hora de captura.",
@@ -81,7 +81,7 @@
     "usageSteps": [
       {
         "title": "Sube una foto",
-        "body": "Arrastra una foto al área de carga de la parte superior o haz clic para elegirla. Se admiten JPG, PNG y la mayoría de formatos RAW de cámara,\ncon hasta 100 MB por archivo. Tu foto nunca se envía a un servidor: todo se procesa dentro de tu navegador."
+        "body": "Arrastra una foto al área de carga de la parte superior o haz clic para elegirla. Se admiten JPG, PNG y la mayoría de formatos RAW de cámara,\ncon hasta 200 MB por archivo. Tu foto nunca se envía a un servidor: todo se procesa dentro de tu navegador."
       },
       {
         "title": "Consulta los datos EXIF",

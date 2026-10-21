@@ -21,7 +21,7 @@ import {
 /** 이 용량 이상이면 "용량 줄이기" 바로가기를 보여 준다 — 주요 SNS 사진 업로드 한도 중 가장 낮은 X(5MB) 기준(2026-10-08). */
 const COMPRESS_LINK_MIN_BYTES = 5 * 1024 * 1024;
 /** 이미지 압축기가 받는 파일 한 장의 최대 용량(batch-workbench 기본값과 같다). */
-const COMPRESSOR_MAX_BYTES = 60 * 1024 * 1024;
+const COMPRESSOR_MAX_BYTES = 200 * 1024 * 1024;
 const COMPRESSOR_ACCEPT_RE = /\.(jpe?g|png|webp)$/i;
 
 function isCompressorSupported(file: File): boolean {
@@ -260,7 +260,7 @@ export function ExifPanel({
   const gps = hasData ? data.gps : null;
   const isMobileDevice = useIsMobileDevice();
   // 파일 용량 — 촬영 날짜·시간 바로 아래(석한 요청, 2026-10-08). 5MB 이상이고 압축기가 받는
-  // 형식(JPG·PNG·WebP, 60MB 이하)이면 "용량 줄이기" 바로가기를 보여 주고, 누르면 사진을 압축기로 넘긴다.
+  // 형식(JPG·PNG·WebP, 200MB 이하)이면 "용량 줄이기" 바로가기를 보여 주고, 누르면 사진을 압축기로 넘긴다.
   const fileSizeLabel = hasData && file ? formatBytes(file.size) : null;
   const canCompress =
     showCompressLink &&

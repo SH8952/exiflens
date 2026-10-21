@@ -26,7 +26,7 @@
     "uploaderReset": "Upload another photo",
     "goToFrameButton": "Create a Frame",
     "uploaderErrorUnsupported": "Unsupported file type. Please upload a JPG, PNG or a supported camera RAW file.",
-    "uploaderErrorTooLarge": "This file is too large (max 100MB).",
+    "uploaderErrorTooLarge": "This file is too large (max 200MB).",
     "uploaderErrorParse": "Couldn't read EXIF data from this photo. It may not contain any metadata.",
     "exifSectionTitle": "EXIF summary",
     "exifEmpty": "Upload a photo to see its camera, shutter speed, aperture, ISO, focal length and the date and time it was taken.",
@@ -81,7 +81,7 @@
     "usageSteps": [
       {
         "title": "Upload a photo",
-        "body": "Drag a photo into the upload area at the top of the page, or click to choose one. JPG, PNG, and most camera RAW formats are supported,\nwith up to 100MB per file. Your photo is never sent to a server — everything is processed inside your browser."
+        "body": "Drag a photo into the upload area at the top of the page, or click to choose one. JPG, PNG, and most camera RAW formats are supported,\nwith up to 200MB per file. Your photo is never sent to a server — everything is processed inside your browser."
       },
       {
         "title": "Read the EXIF data",

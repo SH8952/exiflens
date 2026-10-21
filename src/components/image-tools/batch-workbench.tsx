@@ -46,7 +46,7 @@ export function BatchWorkbench({
   accept = DEFAULT_ACCEPT,
   extensions = DEFAULT_EXTENSIONS,
   maxFiles = 20,
-  maxFileBytes = 60 * 1024 * 1024,
+  maxFileBytes = 200 * 1024 * 1024,
   preview,
   showSizeChange = true,
   makeThumb,
