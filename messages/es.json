@@ -2769,6 +2769,7 @@
     "tooMany": "Solo se añadieron las primeras {max} imágenes; el resto quedó fuera.",
     "skippedType": "Se omitieron {count} archivo(s) en un formato no compatible.",
     "skippedSize": "Se omitieron {count} archivo(s) de más de {max} MB.",
+    "skippedTotal": "Se omitieron {count} archivo(s) porque se superó el límite de tamaño total ({max} MB).",
     "statusReady": "En espera",
     "statusProcessing": "Procesando…",
     "statusDone": "Listo",

@@ -2770,6 +2770,7 @@
     "tooMany": "최대 {max}장까지만 추가되어 일부는 제외되었습니다.",
     "skippedType": "지원하지 않는 형식의 파일 {count}개를 제외했습니다.",
     "skippedSize": "{max}MB를 넘는 파일 {count}개를 제외했습니다.",
+    "skippedTotal": "한 번에 올릴 수 있는 합계 용량({max}MB)을 넘어 파일 {count}개를 제외했습니다.",
     "statusReady": "대기",
     "statusProcessing": "처리 중…",
     "statusDone": "완료",

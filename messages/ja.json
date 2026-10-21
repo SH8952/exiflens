@@ -2769,6 +2769,7 @@
     "tooMany": "最大 {max} 枚までしか追加できないため、一部は除外されました。",
     "skippedType": "対応していない形式のファイル {count} 件を除外しました。",
     "skippedSize": "{max}MB を超えるファイル {count} 件を除外しました。",
+    "skippedTotal": "合計サイズの上限（{max} MB）を超えるため、ファイル {count} 件を除外しました。",
     "statusReady": "待機",
     "statusProcessing": "処理中…",
     "statusDone": "完了",

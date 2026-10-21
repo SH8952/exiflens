@@ -2769,6 +2769,7 @@
     "tooMany": "Only the first {max} images were added; the rest were left out.",
     "skippedType": "{count} file(s) in an unsupported format were skipped.",
     "skippedSize": "{count} file(s) larger than {max} MB were skipped.",
+    "skippedTotal": "{count} file(s) were skipped because the total size limit ({max} MB) was exceeded.",
     "statusReady": "Ready",
     "statusProcessing": "Processing…",
     "statusDone": "Done",
