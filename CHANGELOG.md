@@ -1,3 +1,11 @@
+## 2026-10-24 — 보안 업데이트: Next.js 16.3.2 → 16.4.2 및 의존 패키지 취약점 수정
+- 배경: `npm audit` 결과 Next.js(16.0.0~16.4.0 구간, critical)와 sharp·source-map-js·zod·js-yaml(high)에 알려진 취약점이 보고됨. 보안 점검 목록(1번)에 따라 진행.
+- 변경: `next`·`eslint-config-next` 16.3.2 → 16.4.2(정확한 버전 고정 유지). 잠금 파일 갱신으로 sharp 0.35.5, source-map-js 1.2.2, zod 4.6.7, js-yaml 3.15.2/4.3.2 등 취약점 수정 버전 적용(`npm audit fix`, 강제 업그레이드 없음). 코드·화면·번역 변경 없음.
+- 남은 취약점: 중간(moderate) 2건 — `@tailwindcss/typography`가 쓰는 `postcss-selector-parser`(빌드 시점 도구, 수정하려면 호환성이 깨지는 다운그레이드 필요)라 이번에는 적용하지 않음.
+- 검증(격리 복사본, 실제 폴더 미변경): 깨끗한 설치 → `tsc --noEmit` 통과 → eslint 오류 0 → `next build --webpack` 성공 → 서버 기동 후 사이트맵 403개 주소 중 100개 표본 전부 200·번역 누락(MISSING_MESSAGE) 0, 구도 글·RSS·사이트맵·robots·이미지·방문자 카운트 API 정상, 루트 → /en 리다이렉트 유지.
+- 참고: 작업 중 실제 폴더의 `node_modules`가 중간 상태가 되어, 맥에서 `npm ci`로 다시 설치해야 함(잠금 파일 기준이라 결과 동일).
+- 백업: _backups/security-next-upgrade_20261024_030901 (롤백: 백업의 package.json·package-lock.json 복원 후 `npm ci`)
+
 ## 2026-10-21 (5차) — 구도 글 문구 수정
 - 블로그 "사진을 찍을 때 셔터 누르기 전에 확인하는 구도 5가지" 본문의 "아래 5가지는 모두 셔터 전에 눈으로 확인할 수 있는 것들입니다"를 "셔터 누르기 전에"로 수정(석한님 지적). 글 파일 1곳만 변경.
 - 백업: _backups/blog-composition-wording_ 폴더(최신)
