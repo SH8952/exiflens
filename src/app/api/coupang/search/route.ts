@@ -1,10 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import {
   CoupangApiError,
   CoupangConfigError,
   searchCoupangProducts,
   type CoupangProduct,
 } from "@/lib/coupang";
+import { rateLimit } from "@/lib/rate-limit";
 
 // Row 1 (ND filter section): well-known filter brand names plus one generic
 // "가변 ND" search, so results span multiple manufacturers instead of being
@@ -68,7 +69,12 @@ function randomDistribution(total: number, parts: number): number[] {
   return counts;
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  // Per-IP request limit (30/min). Over the limit the client gets an empty
+  // product list (429), which the gear-card component already handles quietly.
+  const limited = rateLimit(request, "coupang-search", 30, 60_000, { products: [] });
+  if (limited) return limited;
+
   const [row1Settled, accessorySettled] = await Promise.all([
     Promise.allSettled(
       ROW1_KEYWORDS.map((keyword) => searchCoupangProducts(keyword, ROW1_POOL_SIZE)),

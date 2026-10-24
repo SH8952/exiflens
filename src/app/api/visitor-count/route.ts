@@ -5,6 +5,7 @@ import {
   getBotCounts,
   incrementBotCounts,
 } from "@/lib/visitor-counter";
+import { rateLimit } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +56,13 @@ export async function GET(request: NextRequest) {
     process.env.NODE_ENV === "development" ||
     LOCAL_HOSTNAMES.has(request.nextUrl.hostname);
   const isBot = isBotRequest(request);
+
+  // Per-IP request limit (60/min) — a normal visitor calls this once per page
+  // load. The developer (cookie) and local dev are exempt.
+  if (!hasDevCookie && !isLocal) {
+    const limited = rateLimit(request, "visitor-count", 60);
+    if (limited) return limited;
+  }
 
   let counts;
   if (hasDevCookie || isLocal) {

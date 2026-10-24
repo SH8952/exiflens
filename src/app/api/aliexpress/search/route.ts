@@ -6,6 +6,7 @@ import {
   type AliexpressProduct,
 } from "@/lib/aliexpress";
 import { getBlockedProductIds } from "@/lib/aliexpress-blocklist";
+import { rateLimit } from "@/lib/rate-limit";
 
 // Row 1 (ND filter section). 2026-09-06: 사용자가 직접 지정한 ND 필터
 // 제조사 브랜드명 기반 키워드로 전면 교체(기존 "ND1000 filter" 같은 범용
@@ -125,6 +126,11 @@ function randomDistribution(total: number, capacities: number[]): number[] {
 // 없었음. 자격증명이 이미 정상인 상태이므로 원래의 동시 요청 방식으로
 // 되돌려 실제로 문제가 재발하는지 확인 중 — 재발하면 다시 순차로 바꿀 것.
 export async function GET(request: NextRequest) {
+  // Per-IP request limit (30/min). Over the limit the client gets an empty
+  // product list (429), which the gear-card component already handles quietly.
+  const limited = rateLimit(request, "aliexpress-search", 30, 60_000, { products: [] });
+  if (limited) return limited;
+
   const locale = request.nextUrl.searchParams.get("locale") ?? "";
   const target = LOCALE_TO_ALIEXPRESS[locale] ?? DEFAULT_ALIEXPRESS_LOCALE;
 

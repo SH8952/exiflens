@@ -1,3 +1,10 @@
+## 2026-10-24 (2차) — 보안: 공개 API 요청 횟수 제한 + 기본 보안 헤더
+- 요청 횟수 제한(IP당, 1분 기준): 방문자 카운터 `/api/visitor-count` 60회, 쿠팡 검색 `/api/coupang/search` 30회, 알리익스프레스 검색 `/api/aliexpress/search` 30회. 한도를 넘으면 429(+Retry-After) 응답. 검색 API는 `{ "products": [] }`로 응답해 기존 장비 추천 컴포넌트가 "상품 없음"으로 조용히 처리(서버가 미리 채워 둔 상품은 그대로 유지), 방문자 카운터는 숫자만 숨겨짐.
+- 구현: 새 파일 `src/lib/rate-limit.ts`(서버 인스턴스 메모리 기반 고정 윈도우). Redis를 쓰지 않아 Redis 명령 사용량이 늘지 않음. 서버 인스턴스가 여러 개면 실제 한도가 설정값보다 다소 높을 수 있으나 폭주 차단 목적에는 충분. `next dev`(로컬 개발)에서는 제한 없음. 방문자 카운터는 개발자 쿠키 보유자·로컬 호스트도 제외. 한도는 사무실·학교·통신사 공유 IP를 고려해 넉넉하게 설정.
+- 보안 헤더(`next.config.ts`, 모든 경로): `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`. CSP·Permissions-Policy는 광고(AdSense)·GA4·지도 iframe·위치 계산기(geolocation) 영향 때문에 넣지 않음.
+- 검증(격리 복사본, 실제 폴더 미변경): `tsc` 통과, eslint 오류 0, `next build --webpack` 성공. 빌드된 서버에서 페이지·API·RSS·사이트맵·이미지 모두 3개 헤더 확인, 주요 페이지 200, 방문자 카운터 70회 중 60회 200/10회 429, 다른 IP 200, 개발자 쿠키 200, 쿠팡·알리 검색 35회 중 30회 200/5회 429(본문 `{"products":[]}`, Retry-After 60).
+- 백업: _backups/security-ratelimit-headers_20261024_033125
+
 ## 2026-10-24 — 보안 업데이트: Next.js 16.3.2 → 16.4.2 및 의존 패키지 취약점 수정
 - 배경: `npm audit` 결과 Next.js(16.0.0~16.4.0 구간, critical)와 sharp·source-map-js·zod·js-yaml(high)에 알려진 취약점이 보고됨. 보안 점검 목록(1번)에 따라 진행.
 - 변경: `next`·`eslint-config-next` 16.3.2 → 16.4.2(정확한 버전 고정 유지). 잠금 파일 갱신으로 sharp 0.35.5, source-map-js 1.2.2, zod 4.6.7, js-yaml 3.15.2/4.3.2 등 취약점 수정 버전 적용(`npm audit fix`, 강제 업그레이드 없음). 코드·화면·번역 변경 없음.
