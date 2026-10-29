@@ -1,3 +1,9 @@
+## 2026-10-29 — 블로그: "가로 구도 vs 세로 구도, 장면에 맞는 사진 방향 고르는 법" 추가
+- 글: `content/blog/ko/orientation-horizontal-vertical-photo-when-to-shoot.mdx`(분류 "사진 구도", `publishedAt: "2026-10-29"`). 가로 4장(해변, 줄지어 선 건물, 그래피티 벽, 클래식 밴)·세로 4장(고층 빌딩과 열차, 택시, 좁은 골목 2장), 가로/세로 비교표, 사진 8장 설정 요약표, 체크리스트·흔히 하는 실수·FAQ 4개·정리하기·저작권 안내. 내부 링크: 구도 5가지 글, 심도 가이드, 크롭 팩터 가이드, 빛·타이밍·구도 가이드, 크롭 팩터·화각 계산기. 장소명·GPS는 본문에 쓰지 않음.
+- 이미지 17개: `public/blog/images/orientation-{1..8}.webp`(클래식 다크 프레임, 1600px), `-{1..8}-full.webp`(원본, 긴 변 2576px), `orientation-thumb-van.webp`(1200×800, 클래식 밴 사진 단독(가로 원본 그대로 3:2 축소); 처음의 두 사진 조합은 목록 카드에서 잘려 보여 교체). EXIF는 ExifLens 화면 스크린샷 값(R7, 2024-11-20/12-01/12-04) 사용. 코드·번역 변경 없음.
+- 검증(격리 복사본, 실제 폴더 미변경): `next build --webpack` 성공, 글 200·이미지 17개 전부 200·목록·RSS·사이트맵 포함·og:image 썸네일·JSON-LD datePublished 2026-10-29·내부 링크 전부 200.
+- 백업: _backups/blog-orientation_20261029_132814
+
 ## 2026-10-27 — 블로그: "가을에 담을 수 있는 풍경 6가지, 촬영 설정과 구도 정리" 추가 (공개일 2026-10-26)
 - 글: `content/blog/ko/autumn-scenery-photography-subjects-settings.mdx`(분류 "풍경 사진", `publishedAt: "2026-10-26"` → 푸시하면 바로 공개). 사진 8장(2024-10-12 R7 3장, 2025-10-17 R5 Mark II 5장), 가을 풍경 6가지, 요약표 2개, 체크리스트·흔히 하는 실수·FAQ 4개·정리하기·저작권 안내. 내부 링크: 심도 가이드, 매크로 기초, ISO·셔터·조리개, 크롭 팩터 가이드, 일출·일몰 촬영 가이드, 심도·크롭 팩터·골든아워 계산기.
 - 이미지 17개: `public/blog/images/autumn-scenery-{1..8}.webp`(클래식 다크 프레임, 1600px), `-{1..8}-full.webp`(원본, 긴 변 2576px), `autumn-scenery-thumb.webp`(1200×800). EXIF는 ExifLens 화면 스크린샷 값 사용. 코드·번역 변경 없음.
