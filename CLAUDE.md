@@ -9,3 +9,6 @@
 **백업 폴더는 `_backups/` 하나로만 통일한다 (2026-10-21 확정).** `_backups`·`.backups`·`.claude-backups` 등 다른 이름의 백업 폴더를 새로 만들지 않는다.
 백업은 `bash automation/make-backup.sh [라벨]` 로 만든다 — `_backups/`, `.next*`(빌드 캐시), `node_modules`, `.git` 은 자동 제외되어 중첩·용량 폭증이 없다.
 `_backups/` 안의 백업은 **1주일(7일) 지나면 삭제**한다 (작업 시작 전 백업 생성 시 함께 정리).
+
+## 푸시할 때 IndexNow 자동 알림 (2026-10-30 확정)
+일회용 push `.command` 스크립트를 만들 때 `git push origin HEAD` 대신 `bash automation/push-and-notify.sh` 를 호출한다. push 성공 후 이번에 올라간 커밋에서 바뀐 페이지 주소(`content/guides|blog/<언어>/*.mdx`, `src/app/[locale]/**/page.tsx`)만 IndexNow 에 알린다(백그라운드 분리, 같은 주소 24시간 내 재전송 안 함, 실패해도 push 에 영향 없음). 동적 데이터 경로나 컴포넌트만 바뀐 경우는 주소가 정해지지 않아 `python3 automation/indexnow-submit.py --urls <경로>` 로 직접 알린다. `git add -A` 는 쓰지 않는다.

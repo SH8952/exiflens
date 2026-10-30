@@ -1,3 +1,7 @@
+## 2026-10-30 — 푸시할 때 IndexNow 자동 알림 추가
+
+- `automation/indexnow-push-hook.py`·`automation/push-and-notify.sh` 신규(firelic·FlyDroneMap 과 동일 구조). push 후 바뀐 가이드·블로그·페이지 주소만 배포 확인 뒤 IndexNow 로 전송, 같은 주소 24시간 내 재전송 안 함, 실패해도 push 영향 없음. 기존 `indexnow-submit.py`·`publish-guide.command` 변경 없음. 백업 `_backups/exiflens_backup_20261030_063512_indexnow-hook`.
+
 ## 2026-10-29 — 블로그: "가로 구도 vs 세로 구도, 장면에 맞는 사진 방향 고르는 법" 추가
 - 글: `content/blog/ko/orientation-horizontal-vertical-photo-when-to-shoot.mdx`(분류 "사진 구도", `publishedAt: "2026-10-29"`). 가로 4장(해변, 줄지어 선 건물, 그래피티 벽, 클래식 밴)·세로 4장(고층 빌딩과 열차, 택시, 좁은 골목 2장), 가로/세로 비교표, 사진 8장 설정 요약표, 체크리스트·흔히 하는 실수·FAQ 4개·정리하기·저작권 안내. 내부 링크: 구도 5가지 글, 심도 가이드, 크롭 팩터 가이드, 빛·타이밍·구도 가이드, 크롭 팩터·화각 계산기. 장소명·GPS는 본문에 쓰지 않음.
 - 이미지 17개: `public/blog/images/orientation-{1..8}.webp`(클래식 다크 프레임, 1600px), `-{1..8}-full.webp`(원본, 긴 변 2576px), `orientation-thumb-van.webp`(1200×800, 클래식 밴 사진 단독(가로 원본 그대로 3:2 축소); 처음의 두 사진 조합은 목록 카드에서 잘려 보여 교체). EXIF는 ExifLens 화면 스크린샷 값(R7, 2024-11-20/12-01/12-04) 사용. 코드·번역 변경 없음.
