@@ -178,5 +178,89 @@
       "imageCredit": "Erik Mclean",
       "imageCreditUrl": "https://unsplash.com/@introspectivedsgn?utm_source=ExifLens&utm_medium=referral"
     }
+  },
+  "shutter-count-checker": {
+    "left": {
+      "image": "/tools/images/shutter-count-checker-left.webp",
+      "imageCredit": "daniil kazorin",
+      "imageCreditUrl": "https://unsplash.com/@dani4ka?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/shutter-count-checker-right.webp",
+      "imageCredit": "Neal E. Johnson",
+      "imageCreditUrl": "https://unsplash.com/@neal_johnson?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "image-compressor": {
+    "left": {
+      "image": "/tools/images/image-compressor-left.webp",
+      "imageCredit": "Rirri",
+      "imageCreditUrl": "https://unsplash.com/@rirri01?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/image-compressor-right.webp",
+      "imageCredit": "Etienne Girardet",
+      "imageCreditUrl": "https://unsplash.com/@etiennegirardet?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "image-resizer": {
+    "left": {
+      "image": "/tools/images/image-resizer-left.webp",
+      "imageCredit": "pine  watt",
+      "imageCreditUrl": "https://unsplash.com/@pinewatt?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/image-resizer-right.webp",
+      "imageCredit": "Mockaroon",
+      "imageCreditUrl": "https://unsplash.com/@mockaroon?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "image-converter": {
+    "left": {
+      "image": "/tools/images/image-converter-left.webp",
+      "imageCredit": "Rubaitul Azad",
+      "imageCreditUrl": "https://unsplash.com/@rubaitulazad?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/image-converter-right.webp",
+      "imageCredit": "Rubaitul Azad",
+      "imageCreditUrl": "https://unsplash.com/@rubaitulazad?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "image-crop-rotate": {
+    "left": {
+      "image": "/tools/images/image-crop-rotate-left.webp",
+      "imageCredit": "Abhishek Kumar",
+      "imageCreditUrl": "https://unsplash.com/@abhishekkumar98?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/image-crop-rotate-right.webp",
+      "imageCredit": "Talles Alves",
+      "imageCreditUrl": "https://unsplash.com/@deffyall?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "image-watermark": {
+    "left": {
+      "image": "/tools/images/image-watermark-left.webp",
+      "imageCredit": "Lewis Keegan",
+      "imageCreditUrl": "https://unsplash.com/@skillscouter?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/image-watermark-right.webp",
+      "imageCredit": "Markus Spiske",
+      "imageCreditUrl": "https://unsplash.com/@markusspiske?utm_source=ExifLens&utm_medium=referral"
+    }
+  },
+  "image-mosaic": {
+    "left": {
+      "image": "/tools/images/image-mosaic-left.webp",
+      "imageCredit": "Alexandros Giannakakis",
+      "imageCreditUrl": "https://unsplash.com/@alegi__?utm_source=ExifLens&utm_medium=referral"
+    },
+    "right": {
+      "image": "/tools/images/image-mosaic-right.webp",
+      "imageCredit": "Desmond Leung",
+      "imageCreditUrl": "https://unsplash.com/@demandshothk?utm_source=ExifLens&utm_medium=referral"
+    }
   }
 }
