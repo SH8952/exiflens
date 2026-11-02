@@ -67,9 +67,15 @@
  *     supporting R6 Mark II (the model actually requested) means R8/R50
  *     come along for free from the identical, equally-documented mapping —
  *     not a separate guess on our part.
+ *   - EOS RP (added 2026-11-02 during the regular exiftool check) —
+ *     firmware-dependent: offset 0x095C for firmware 1.0.1, offset 0x0960
+ *     for firmware 1.6.0+ (exiftool's public Canon tag table,
+ *     `CameraInfoRP`; see the dedicated doc comment above
+ *     `canonEosRpShutterCountOffset` below for the exact condition). No
+ *     offset is published for firmware versions in between.
  * Every other Canon body — the R7, R10, R3, R1, R5 Mark II, and every
  * CR2-era DSLR — has no known *ShutterCount* offset published anywhere yet
- * (re-checked 2026-10-12 against exiftool's current (13.59) Canon tag
+ * (re-checked 2026-11-02 against exiftool's current main-branch Canon tag
  * table), so those still return the same honest "not supported yet" result
  * as any other unmapped Canon body, old or new.
  *
@@ -325,6 +331,46 @@ const CANON_CAMERA_INFO_SHUTTER_COUNT: { modelPattern: RegExp; byteOffset: numbe
   { modelPattern: /\bG5 X Mark II$/, byteOffset: 0x0a95 },
 ];
 
+/**
+ * EOS RP is a special case: unlike every other mapped Canon body, its
+ * `ShutterCount` offset depends on the camera's firmware version rather
+ * than being fixed per model (exiftool's public Canon tag table,
+ * `CameraInfoRP`): offset 0x095c for firmware 1.0.1, offset 0x0960 for
+ * firmware 1.6.0 or later (exiftool's own comment there says "tested with
+ * 1.6.0 and 1.7.0"). No offset is documented for firmware versions in
+ * between (e.g. 1.1.0–1.5.x), so those are left unsupported rather than
+ * guessed. Found 2026-11-02 during the regular exiftool tag-table check;
+ * not verified end-to-end against a real EOS RP file, same caveat as every
+ * other Canon mapping in this module that was taken from exiftool's public
+ * documentation rather than independently re-derived.
+ */
+const CANON_EOS_RP_MODEL_PATTERN = /\bEOS RP$/;
+const CANON_FIRMWARE_VERSION_TAG = 0x0007; // "CanonFirmwareVersion" in the main MakerNote IFD
+
+function readCanonFirmwareVersion(
+  view: DataView,
+  makerNoteIfd: IfdEntry[],
+  base: number,
+  littleEndian: boolean,
+): string | null {
+  const entry = findEntry(makerNoteIfd, CANON_FIRMWARE_VERSION_TAG);
+  if (!entry) return null;
+  const raw = readAsciiValue(view, entry, base, littleEndian);
+  const match = raw?.match(/(\d+\.\d+\.\d+)/);
+  return match ? match[1] : null;
+}
+
+/** Returns the documented ShutterCount byte offset for this EOS RP firmware version, or null if undocumented. */
+function canonEosRpShutterCountOffset(firmwareVersion: string | null): number | null {
+  if (!firmwareVersion) return null;
+  if (firmwareVersion === "1.0.1") return 0x095c;
+  // Lexicographic comparison, matching exiftool's own Perl `ge` string
+  // comparison for this exact condition (fine for the "1.x.y" versions
+  // documented for this model).
+  if (firmwareVersion >= "1.6.0") return 0x0960;
+  return null;
+}
+
 function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
   const boxes = findCanonCr3InfoBoxes(view);
   if (!boxes) {
@@ -345,12 +391,25 @@ function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
   const makerNoteIfd = readIfdEntries(view, mnIfdOffset, mnLE);
 
   const cameraInfoEntry = findEntry(makerNoteIfd, 0x000d);
-  const mapping = CANON_CAMERA_INFO_SHUTTER_COUNT.find((m) => cameraModel && m.modelPattern.test(cameraModel));
-  if (!cameraInfoEntry || !mapping) {
+  if (!cameraInfoEntry) {
     return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
   }
-
   const blob = readBlobLocation(view, cameraInfoEntry, boxes.cmt3.payloadStart, mnLE);
+
+  if (cameraModel && CANON_EOS_RP_MODEL_PATTERN.test(cameraModel)) {
+    const firmwareVersion = readCanonFirmwareVersion(view, makerNoteIfd, boxes.cmt3.payloadStart, mnLE);
+    const offset = canonEosRpShutterCountOffset(firmwareVersion);
+    if (offset === null || offset + 4 > blob.length) {
+      return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
+    }
+    const shutterCount = view.getUint32(blob.offset + offset, mnLE);
+    return { supported: true, brand: "canon", shutterCount, cameraModel };
+  }
+
+  const mapping = CANON_CAMERA_INFO_SHUTTER_COUNT.find((m) => cameraModel && m.modelPattern.test(cameraModel));
+  if (!mapping) {
+    return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
+  }
   if (mapping.byteOffset + 4 > blob.length) {
     return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
   }
@@ -362,7 +421,7 @@ function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
  * Reads the shutter/actuation count from a supported camera file, entirely
  * client-side (the file's bytes never leave the browser). Supported today:
  * Nikon (NEF / in-camera JPEG) and Canon EOS R5, R6, R6 Mark II, R8, R50,
- * and PowerShot G5 X Mark II (CR3 only). Every other brand or model returns
+ * EOS RP, and PowerShot G5 X Mark II (CR3 only). Every other brand or model returns
  * `{ supported: false }` with an honest explanation
  * — see the module doc comment for why, and
  * `content/guides/<locale>/shutter-count-checker-guide.mdx` for the full
