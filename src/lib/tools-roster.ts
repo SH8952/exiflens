@@ -60,15 +60,15 @@ export const POST_SHOOT_TOOLS: ToolEntry[] = [
  * 이미지 편집 · 변환 도구 — 사진 전문 영역이 아니라 직장인·학생·일반 사용자가
  * 보고서/블로그/제출용 이미지를 빠르게 손보는 용도. 모든 처리는 브라우저 안에서
  * 이루어지며 이미지는 서버로 전송되지 않는다.
- * 공개 순서: 이미지 압축 먼저 → 나머지는 hidden 상태로 두었다가 순차 공개.
+ * 공개 이력: 이미지 압축 먼저 공개 → 2026-11-02 나머지 5종 일괄 공개.
  */
 export const IMAGE_TOOLS: ToolEntry[] = [
   { slug: "image-compressor", status: "live", faqNamespace: "ImageCompressor" },
-  { slug: "image-resizer", status: "hidden", faqNamespace: "ImageResizer" },
-  { slug: "image-converter", status: "hidden", faqNamespace: "ImageConverter" },
-  { slug: "image-crop-rotate", status: "hidden", faqNamespace: "ImageCropRotate" },
-  { slug: "image-watermark", status: "hidden", faqNamespace: "ImageWatermark" },
-  { slug: "image-mosaic", status: "hidden", faqNamespace: "ImageMosaic" },
+  { slug: "image-resizer", status: "live", faqNamespace: "ImageResizer" },
+  { slug: "image-converter", status: "live", faqNamespace: "ImageConverter" },
+  { slug: "image-crop-rotate", status: "live", faqNamespace: "ImageCropRotate" },
+  { slug: "image-watermark", status: "live", faqNamespace: "ImageWatermark" },
+  { slug: "image-mosaic", status: "live", faqNamespace: "ImageMosaic" },
 ];
 
 /** All tools, field tools first, in the order the /tools hub itself lists them. */
