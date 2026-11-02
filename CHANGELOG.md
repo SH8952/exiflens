@@ -1,3 +1,8 @@
+## 2026-11-02 — 블로그: "도심 공원 가을 사진 찍는 법, 빌딩과 단풍을 한 프레임에 담는 구도 정리" 추가
+- 글: `content/blog/ko/urban-park-autumn-photography-skyscrapers-reflections.mdx`(분류 "풍경 사진", `publishedAt: "2026-11-02"`). 사진 6장(R5 Mark II + RF24-70mm 한 렌즈, 2025-11-18 14:15~16:14): 빌딩과 단풍 물길, 억새 너머 도시, 전통 정자(세로), 나무 사이 빌딩과 반영(세로), 마른 연잎 수면, 단풍 역광. 장면 요약표·촬영 시각표·설정 요약표, 체크리스트·흔히 하는 실수·FAQ 4개·정리하기·저작권 안내. 내부 링크: 심도 가이드·심도 계산기·일출·일몰 가이드·골든아워 계산기·빛·타이밍·구도 가이드, 블로그 4개(구도 5가지, 가로 vs 세로, 별 모양 빛, 가을 풍경 6가지). 장소명·GPS 좌표는 본문에 쓰지 않음.
+- 이미지 13개: `public/blog/images/urban-autumn-{1..6}.webp`(클래식 다크 프레임, 1600px), `-{1..6}-full.webp`(원본, 긴 변 2576px), `urban-autumn-thumb.webp`(1200×800, 사진 1장 단독 크롭). EXIF는 ExifLens 화면 스크린샷 값 사용. 코드·번역 변경 없음.
+- 백업: _backups/blog-urban-autumn_20261102_070446
+
 ## 2026-11-02 — 셔터카운트 체커: exiftool 정기 점검 — 캐논 EOS RP 추가(펌웨어별 오프셋)
 
 - 배경: 셔터카운트 체커가 지원하는 카메라 목록을 exiftool(GPL/Artistic 라이선스 오픈소스) 프로젝트의 최신 공개 태그 문서와 정기적으로 대조하는 점검 작업(직전 점검: 2026-10-12). exiftool GitHub 메인 브랜치(커밋 980409314, 2026-10-28)의 Canon/Sony/FujiFilm/Olympus/Panasonic/Pentax 6개 브랜드 태그 파일을 `grep -iE "shuttercount|imagecount|actuation"`으로 전체 재조사.
