@@ -1,3 +1,13 @@
+## 2026-11-02 — 셔터카운트 체커: exiftool 정기 점검 — 캐논 EOS RP 추가(펌웨어별 오프셋)
+
+- 배경: 셔터카운트 체커가 지원하는 카메라 목록을 exiftool(GPL/Artistic 라이선스 오픈소스) 프로젝트의 최신 공개 태그 문서와 정기적으로 대조하는 점검 작업(직전 점검: 2026-10-12). exiftool GitHub 메인 브랜치(커밋 980409314, 2026-10-28)의 Canon/Sony/FujiFilm/Olympus/Panasonic/Pentax 6개 브랜드 태그 파일을 `grep -iE "shuttercount|imagecount|actuation"`으로 전체 재조사.
+- 발견 및 반영: **캐논 EOS RP**(CR3 파일)에 공개된 `ShutterCount`가 다른 지원 기종과 달리 펌웨어 버전에 따라 오프셋이 달라짐(exiftool `CameraInfoRP` 테이블): 펌웨어 1.0.1은 0x095c, 펌웨어 1.6.0 이상(exiftool 주석 "tested with 1.6.0 and 1.7.0")은 0x0960. 그 사이 펌웨어 버전(1.1.0~1.5.x 등)은 오프셋이 공개되어 있지 않아 미지원으로 남김. 메인 MakerNote IFD의 태그 0x0007(`CanonFirmwareVersion`, 문자열)에서 "X.X.X" 패턴을 추출해 두 오프셋 중 하나를 선택하는 방식으로 구현 — 기존 5개 기종(고정 오프셋 1개)과 달리 이번이 첫 "펌웨어 조건부" 분기.
+- 발견했지만 보류: 없음. 그 외 5개 브랜드(소니·후지필름·올림푸스·파나소닉·펜탁스)와 캐논의 나머지 미지원 기종(R7/R10/R3/R1/R5 Mark II/R6 Mark III 등)은 2026-10-12 점검 때와 동일한 결론(각각 신뢰도 문제·필드 부재·근거 부족)으로 변화 없음.
+- 변경 파일: `src/lib/shutter-count-checker.ts`(펌웨어 버전 읽기 헬퍼 `readCanonFirmwareVersion`, 오프셋 선택 함수 `canonEosRpShutterCountOffset`, EOS RP 전용 분기 + 모듈 doc comment), `messages/{ko,en,ja,es}.json`(`ShutterCountChecker.aboutBody`/FAQ 2건/`supportCanon`/하단 요약문에 EOS RP 추가), `content/guides/{ko,en,ja,es}/shutter-count-checker-guide.mdx`(지원 기종 수 6→7).
+- 검증: `npx tsc --noEmit` 오류 0건, `npx eslint src/lib/shutter-count-checker.ts` 오류 0건, 4개 언어 messages JSON 파싱 확인. 실제 EOS RP 샘플 파일은 확보하지 못해 end-to-end 실측 검증은 못함(기존 R5/R6/R8/R50/G5X Mark II와 동일하게 exiftool 공개 문서를 신뢰해 반영).
+- 백업: `_backups/backup_20261102_001746_canon-eos-rp-shutter-count/`.
+- 참고: 이 커밋들은 로컬에만 생성, push 하지 않음 — 다음 대화에서 석한님 확인 후 직접 push 필요.
+
 ## 2026-10-30 — 푸시할 때 IndexNow 자동 알림 추가
 
 - `automation/indexnow-push-hook.py`·`automation/push-and-notify.sh` 신규(firelic·FlyDroneMap 과 동일 구조). push 후 바뀐 가이드·블로그·페이지 주소만 배포 확인 뒤 IndexNow 로 전송, 같은 주소 24시간 내 재전송 안 함, 실패해도 push 영향 없음. 기존 `indexnow-submit.py`·`publish-guide.command` 변경 없음. 백업 `_backups/exiflens_backup_20261030_063512_indexnow-hook`.
