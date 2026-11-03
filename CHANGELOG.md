@@ -1,3 +1,10 @@
+## 2026-11-03 — 홈 화면 장비 추천(쿠팡·알리)·관련 도구를 원래 위치로 복구
+
+**변경 사항**
+- `src/app/[locale]/page.tsx`: 2026-10-02에 애드센스 심사 대응으로 홈 맨 아래로 임시 이동했던 `GearRecommendationSection`(쿠팡·알리 제휴)과 `CrossLinkFlyDroneMap`(관련 도구)을 원래 위치(ND 계산기 섹션 바로 아래, 광고 `mid-content` 앞)로 되돌림. 순서: ND 계산기 → 장비 추천 → 관련 도구 → 광고. 임시 조치 주석 2개는 복구 안내 주석으로 교체. 컴포넌트 내부는 변경 없음. 도구 페이지의 제휴 섹션은 변경하지 않음.
+
+**검증**: `tsc --noEmit`·eslint 통과. 사용자 요청으로 진행(결정: 관련 도구도 함께 복구). 백업: `_backups/exiflens_backup_20261103_105659_gear_restore_original_position`.
+
 ## 2026-11-02 — 이미지 도구 5종 일괄 공개 (크기 조절·형식 변환·자르기·회전·워터마크·모자이크)
 - 배경: 서치콘솔 변화를 기다려 순차 공개하려던 계획을 바꿔, 올해 안에 색인·유입을 만들기 위해 숨김 5종을 한 번에 공개.
 - 변경: `src/lib/tools-roster.ts`의 `image-resizer`·`image-converter`·`image-crop-rotate`·`image-watermark`·`image-mosaic` 상태를 `hidden` → `live`(주석도 공개 이력으로 갱신). 페이지·번역·FAQ는 기존 구현 그대로.
