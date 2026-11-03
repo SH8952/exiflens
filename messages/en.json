@@ -298,7 +298,7 @@
   },
   "Privacy": {
     "title": "Privacy Policy",
-    "updated": "Last updated: October 16, 2026",
+    "updated": "Last updated: November 3, 2026",
     "sections": [
       {
         "heading": "Overview",
@@ -315,7 +315,7 @@
       {
         "heading": "Cookies and Advertising",
         "body": [
-          "We use Google AdSense to display advertising on the Service. Google and its partners may use cookies, device identifiers, and similar technologies to serve ads based on your prior visits to this and other websites. You can learn more about how Google uses data on Google's Ads Privacy page, and you can opt out of personalized advertising through Google Ads Settings, or opt out of many ad vendors' personalized advertising at once at aboutads.info.",
+          "We may use Google AdSense to display advertising on the Service. Google and its partners may use cookies, device identifiers, and similar technologies to serve ads based on your prior visits to this and other websites. You can learn more about how Google uses data on Google's Ads Privacy page, and you can opt out of personalized advertising through Google Ads Settings, or opt out of many ad vendors' personalized advertising at once at aboutads.info.",
           "We may also use cookies or similar technologies through Google Analytics or similar analytics providers to understand, in aggregate and non-identifying form, how visitors use the Service.",
           "To understand how visitors use the Service (clicks, scrolling, navigation) and improve it, we use the session recording and heatmap features of Microsoft Clarity. Areas that display photo analysis results and all input fields are masked in recordings, and the photo files you upload are never collected. For visitors in the European Economic Area, the United Kingdom, and Switzerland, Clarity is enabled only if you select \"Accept\" in the cookie banner. See the Microsoft Privacy Statement (privacy.microsoft.com) for details."
         ]
@@ -323,7 +323,7 @@
       {
         "heading": "Affiliate Links",
         "body": [
-          "Some pages contain affiliate links, including links to Coupang Partners and Amazon Associates. If you click one of these links and make a qualifying purchase, we may earn a commission at no additional cost to you. See our Affiliate Disclosure for details."
+          "Some pages contain affiliate links, including links to Coupang Partners and the AliExpress Affiliate Program. If you click one of these links and make a qualifying purchase, we may earn a commission at no additional cost to you. See our Affiliate Disclosure for details."
         ]
       },
       {
@@ -354,7 +354,7 @@
   },
   "Terms": {
     "title": "Terms of Service",
-    "updated": "Last updated: August 25, 2026",
+    "updated": "Last updated: November 3, 2026",
     "sections": [
       {
         "heading": "Acceptance of Terms",
@@ -383,7 +383,7 @@
       {
         "heading": "Third-Party Links and Advertising",
         "body": [
-          "The Service displays advertising through Google AdSense and may include affiliate links to third-party retailers such as Coupang and Amazon. We are not responsible for the content, policies, or practices of any third-party site you visit through these links."
+          "The Service displays advertising through Google AdSense and may include affiliate links to third-party retailers such as Coupang and AliExpress. We are not responsible for the content, policies, or practices of any third-party site you visit through these links."
         ]
       },
       {
@@ -1060,12 +1060,12 @@
   },
   "Disclosure": {
     "title": "Affiliate Disclosure",
-    "updated": "Last updated: August 25, 2026",
+    "updated": "Last updated: November 3, 2026",
     "sections": [
       {
         "heading": "Our Participation in Affiliate Programs",
         "body": [
-          "ExifLens is a participant in the Coupang Partners Program and the Amazon Associates Program, affiliate advertising programs designed to provide a means for sites to earn advertising fees by linking to Coupang.com and Amazon.com (and their affiliated sites)."
+          "ExifLens is a participant in the Coupang Partners Program and the AliExpress Affiliate Program, affiliate advertising programs designed to provide a means for sites to earn advertising fees by linking to Coupang.com and AliExpress.com (and their affiliated sites)."
         ]
       },
       {

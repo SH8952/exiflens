@@ -298,7 +298,7 @@
   },
   "Privacy": {
     "title": "Política de Privacidad",
-    "updated": "Última actualización: 16 de octubre de 2026",
+    "updated": "Última actualización: 3 de noviembre de 2026",
     "sections": [
       {
         "heading": "Resumen",
@@ -315,7 +315,7 @@
       {
         "heading": "Cookies y publicidad",
         "body": [
-          "Utilizamos Google AdSense para mostrar publicidad en el Servicio. Google y sus socios pueden usar cookies, identificadores de dispositivo y tecnologías similares para mostrar anuncios según tus visitas anteriores a este y otros sitios web. Puedes obtener más información sobre cómo usa Google los datos en la página de privacidad de anuncios de Google, y puedes inhabilitar la publicidad personalizada desde la configuración de anuncios de Google, o inhabilitar la publicidad personalizada de muchos anunciantes a la vez en aboutads.info.",
+          "Podemos utilizar Google AdSense para mostrar publicidad en el Servicio. Google y sus socios pueden usar cookies, identificadores de dispositivo y tecnologías similares para mostrar anuncios según tus visitas anteriores a este y otros sitios web. Puedes obtener más información sobre cómo usa Google los datos en la página de privacidad de anuncios de Google, y puedes inhabilitar la publicidad personalizada desde la configuración de anuncios de Google, o inhabilitar la publicidad personalizada de muchos anunciantes a la vez en aboutads.info.",
           "También podemos usar cookies o tecnologías similares mediante Google Analytics u otros proveedores de análisis para entender, de forma agregada y no identificable, cómo se usa el Servicio.",
           "Para entender cómo se usa el Servicio (clics, desplazamiento, navegación) y mejorarlo, utilizamos las funciones de grabación de sesiones y mapas de calor de Microsoft Clarity. Las áreas que muestran los resultados del análisis de fotos y todos los campos de entrada se enmascaran en las grabaciones, y los archivos de fotos que subes nunca se recopilan. Para los visitantes del Espacio Económico Europeo, el Reino Unido y Suiza, Clarity solo se activa si seleccionas \"Aceptar\" en el banner de cookies. Consulta la Declaración de privacidad de Microsoft (privacy.microsoft.com) para más detalles."
         ]
@@ -323,7 +323,7 @@
       {
         "heading": "Enlaces de afiliados",
         "body": [
-          "Algunas páginas contienen enlaces de afiliados, incluidos enlaces a Coupang Partners y Amazon Associates. Si haces clic en uno de estos enlaces y realizas una compra que califique, podemos ganar una comisión sin costo adicional para ti. Consulta nuestra Divulgación de Afiliados para más detalles."
+          "Algunas páginas contienen enlaces de afiliados, incluidos enlaces a Coupang Partners y al Programa de Afiliados de AliExpress. Si haces clic en uno de estos enlaces y realizas una compra que califique, podemos ganar una comisión sin costo adicional para ti. Consulta nuestra Divulgación de Afiliados para más detalles."
         ]
       },
       {
@@ -354,7 +354,7 @@
   },
   "Terms": {
     "title": "Términos de Servicio",
-    "updated": "Última actualización: 25 de agosto de 2026",
+    "updated": "Última actualización: 3 de noviembre de 2026",
     "sections": [
       {
         "heading": "Aceptación de los términos",
@@ -383,7 +383,7 @@
       {
         "heading": "Enlaces de terceros y publicidad",
         "body": [
-          "El Servicio muestra publicidad mediante Google AdSense y puede incluir enlaces de afiliados a comercios externos como Coupang y Amazon. No somos responsables del contenido, las políticas ni las prácticas de ningún sitio de terceros al que accedas a través de estos enlaces."
+          "El Servicio muestra publicidad mediante Google AdSense y puede incluir enlaces de afiliados a comercios externos como Coupang y AliExpress. No somos responsables del contenido, las políticas ni las prácticas de ningún sitio de terceros al que accedas a través de estos enlaces."
         ]
       },
       {
@@ -1060,12 +1060,12 @@
   },
   "Disclosure": {
     "title": "Divulgación de Afiliados",
-    "updated": "Última actualización: 25 de agosto de 2026",
+    "updated": "Última actualización: 3 de noviembre de 2026",
     "sections": [
       {
         "heading": "Nuestra participación en programas de afiliados",
         "body": [
-          "ExifLens participa en el Programa de Coupang Partners y en el Programa de Afiliados de Amazon (Amazon Associates), programas de publicidad de afiliados diseñados para que los sitios puedan ganar comisiones publicitarias enlazando a Coupang.com y Amazon.com (y sus sitios asociados)."
+          "ExifLens participa en el Programa de Coupang Partners y en el Programa de Afiliados de AliExpress (AliExpress Affiliate Program), programas de publicidad de afiliados diseñados para que los sitios puedan ganar comisiones publicitarias enlazando a Coupang.com y AliExpress.com (y sus sitios asociados)."
         ]
       },
       {
