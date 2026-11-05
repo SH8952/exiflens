@@ -9,12 +9,15 @@ import {
   ogLocale,
 } from "@/lib/seo";
 import {
-  BLOG_LOCALE,
+  BLOG_FALLBACK_LOCALE,
+  BLOG_LOCALES,
   compileBlogPost,
+  getBlogLocalesFor,
   getBlogMeta,
   getBlogSlugs,
   getRelatedBlogPosts,
   isBlogLocale,
+  type BlogLocale,
 } from "@/lib/blog";
 import { GuideToolCta } from "@/components/guide-tool-cta";
 import { ShareButton } from "@/components/share-button";
@@ -32,7 +35,9 @@ import { ReadingProgress } from "@/components/guides/reading-progress";
 export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
-  return getBlogSlugs().map((slug) => ({ locale: BLOG_LOCALE, slug }));
+  return BLOG_LOCALES.flatMap((locale) =>
+    getBlogSlugs(locale).map((slug) => ({ locale, slug })),
+  );
 }
 
 export async function generateMetadata({
@@ -42,15 +47,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!isBlogLocale(locale)) return {};
-  const meta = getBlogMeta(slug);
+  const meta = getBlogMeta(slug, locale);
   if (!meta) return {};
 
-  const url = `${SITE_URL}/${BLOG_LOCALE}/blog/${slug}`;
+  const url = `${SITE_URL}/${locale}/blog/${slug}`;
+  // 같은 글이 공개된 언어끼리만 hreflang 으로 연결한다(x-default 는 영어, 없으면 생략).
+  const available = getBlogLocalesFor(slug);
+  const languages: Record<string, string> = Object.fromEntries(
+    available.map((l) => [l, `${SITE_URL}/${l}/blog/${slug}`]),
+  );
+  if (available.includes(BLOG_FALLBACK_LOCALE)) {
+    languages["x-default"] = `${SITE_URL}/${BLOG_FALLBACK_LOCALE}/blog/${slug}`;
+  }
   return {
     title: meta.title,
     description: meta.description,
-    // 번역본이 없으므로 hreflang 대체 주소는 달지 않는다.
-    alternates: { canonical: url },
+    alternates: { canonical: url, languages },
     openGraph: {
       type: "article",
       locale: ogLocale(locale),
@@ -85,17 +97,17 @@ export default async function BlogPostPage({
 }) {
   const { locale, slug } = await params;
   if (!isBlogLocale(locale)) {
-    // Blog is Korean-only: other locales move permanently to /ko (308, not 307).
-    permanentRedirect({ href: `/blog/${slug}`, locale: BLOG_LOCALE });
+    // No blog in this locale (es): move permanently to the English post (308, not 307).
+    permanentRedirect({ href: `/blog/${slug}`, locale: BLOG_FALLBACK_LOCALE });
   }
   setRequestLocale(locale);
   const t = await getTranslations("Blog");
   const tHome = await getTranslations("Home");
 
-  const compiled = await compileBlogPost(slug);
+  const compiled = await compileBlogPost(slug, locale as BlogLocale);
   if (!compiled) notFound();
   const { Content, meta, headings } = compiled;
-  const relatedPosts = getRelatedBlogPosts(slug);
+  const relatedPosts = getRelatedBlogPosts(slug, 3, locale as BlogLocale);
   const url = `${SITE_URL}/${locale}/blog/${slug}`;
 
   const dateFormatter = new Intl.DateTimeFormat(locale, {

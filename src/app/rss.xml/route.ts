@@ -1,7 +1,7 @@
 import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/seo";
 import { getAllGuidesMeta } from "@/lib/guides";
-import { BLOG_LOCALE, getAllBlogMeta } from "@/lib/blog";
+import { BLOG_LOCALES, getAllBlogMeta } from "@/lib/blog";
 
 // 2026-10-18 CPU 다이어트: 레이아웃이 더 이상 요청 헤더를 읽지 않아 대부분의 페이지가
 // 정적으로 만들어진다. 이 페이지는 "요청 때마다" 결과가 달라지는 동작(블로그 예약 발행 날짜 판정)이
@@ -43,16 +43,18 @@ export async function GET() {
     })),
   );
 
-  // 블로그 글(한국어 전용)도 같은 피드에 포함한다.
-  for (const post of getAllBlogMeta()) {
-    allItems.push({
-      title: post.title,
-      description: post.description,
-      url: `${SITE_URL}/${BLOG_LOCALE}/blog/${post.slug}`,
-      date: new Date(post.updatedAt ?? post.publishedAt),
-      slug: post.slug,
-      locale: BLOG_LOCALE,
-    });
+  // 블로그 글(ko·en·ja)도 같은 피드에 포함한다.
+  for (const blogLocale of BLOG_LOCALES) {
+    for (const post of getAllBlogMeta(blogLocale)) {
+      allItems.push({
+        title: post.title,
+        description: post.description,
+        url: `${SITE_URL}/${blogLocale}/blog/${post.slug}`,
+        date: new Date(post.updatedAt ?? post.publishedAt),
+        slug: post.slug,
+        locale: blogLocale,
+      });
+    }
   }
 
   allItems.sort((a, b) => b.date.getTime() - a.date.getTime());

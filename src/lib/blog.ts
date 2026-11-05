@@ -19,14 +19,17 @@ import {
  * 가이드(`content/guides/<locale>/`)와 별도 영역이다. 가이드는 정보 전달 중심,
  * 블로그는 롱테일·에버그린 주제를 다루는 글(운영자의 실제 경험 메모 + 보강)이다.
  *
- * 한국어 전용: 글은 `content/blog/ko/<slug>.mdx` 한 벌만 둔다. 다른 언어(en/ja/es)
- * 화면의 "블로그" 메뉴는 이 한국어 주소로 연결되고, /en/blog 등으로 직접 들어오면
- * /ko/blog 로 리디렉션된다(중복 URL·빈 목록 페이지로 인한 얇은 콘텐츠 방지).
- * 나중에 다른 언어를 추가하려면 BLOG_LOCALES 에 추가하고 해당 폴더를 만든다.
+ * 2026-11-05: 한국어(ko)·영어(en)·일본어(ja) 3개 언어. 글은 `content/blog/<locale>/<slug>.mdx`
+ * 에 두며 같은 글은 언어와 관계없이 같은 slug·같은 공개일을 쓴다(언어 전환·hreflang 연결용).
+ * 스페인어(es) 화면에서 /es/blog 로 들어오면 영어 블로그(/en/blog)로 영구 이동한다.
+ * 언어를 더 추가하려면 BLOG_LOCALES 에 추가하고 해당 폴더를 만든다.
  */
-export const BLOG_LOCALES = ["ko"] as const;
+export const BLOG_LOCALES = ["ko", "en", "ja"] as const;
 export type BlogLocale = (typeof BLOG_LOCALES)[number];
+/** 원본(작성) 언어. 기본값과 호환용. */
 export const BLOG_LOCALE: BlogLocale = "ko";
+/** 블로그가 없는 언어(es 등)가 이동할 언어. */
+export const BLOG_FALLBACK_LOCALE: BlogLocale = "en";
 
 export function isBlogLocale(locale: string): locale is BlogLocale {
   return (BLOG_LOCALES as readonly string[]).includes(locale);
@@ -77,28 +80,36 @@ export function isBlogPublished(publishedAt: string, now: Date = new Date()): bo
   return day <= todayKst;
 }
 
-function blogDir() {
-  return path.join(BLOG_DIR, BLOG_LOCALE);
+function blogDir(locale: BlogLocale = BLOG_LOCALE) {
+  return path.join(BLOG_DIR, locale);
 }
 
 /** 공개된 글의 slug 목록(예약 글 제외). */
-export function getBlogSlugs(): string[] {
-  const dir = blogDir();
+export function getBlogSlugs(locale: BlogLocale = BLOG_LOCALE): string[] {
+  const dir = blogDir(locale);
   if (!fs.existsSync(dir)) return [];
   return fs
     .readdirSync(dir)
     .filter((file) => file.endsWith(".mdx"))
     .map((file) => file.replace(/\.mdx$/, ""))
-    .filter((slug) => getBlogMeta(slug) !== null);
+    .filter((slug) => getBlogMeta(slug, locale) !== null);
 }
 
-function estimateReadingMinutes(body: string): number {
+function estimateReadingMinutes(body: string, locale: BlogLocale): number {
+  if (locale === "en") {
+    const words = body.trim().split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.round(words / 200));
+  }
+  // ko·ja: 공백 제외 글자 수 ÷ 500 (가이드와 같은 기준)
   const chars = body.replace(/\s/g, "").length;
   return Math.max(1, Math.round(chars / 500));
 }
 
-export function getBlogMeta(slug: string): BlogMeta | null {
-  const filePath = path.join(blogDir(), `${slug}.mdx`);
+export function getBlogMeta(
+  slug: string,
+  locale: BlogLocale = BLOG_LOCALE,
+): BlogMeta | null {
+  const filePath = path.join(blogDir(locale), `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
@@ -107,14 +118,14 @@ export function getBlogMeta(slug: string): BlogMeta | null {
   return {
     ...fm,
     slug,
-    readingMinutes: estimateReadingMinutes(content),
+    readingMinutes: estimateReadingMinutes(content, locale),
   };
 }
 
 /** 최신 글이 먼저 오도록 publishedAt 내림차순. */
-export function getAllBlogMeta(): BlogMeta[] {
-  return getBlogSlugs()
-    .map((slug) => getBlogMeta(slug))
+export function getAllBlogMeta(locale: BlogLocale = BLOG_LOCALE): BlogMeta[] {
+  return getBlogSlugs(locale)
+    .map((slug) => getBlogMeta(slug, locale))
     .filter((p): p is BlogMeta => p !== null)
     .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
 }
@@ -122,12 +133,15 @@ export function getAllBlogMeta(): BlogMeta[] {
 /** 목록 한 페이지에 보여줄 글 수(PC 기준 4열 × 3줄). 넘으면 하단에 1, 2, 3… 페이지로 나뉜다. */
 export const BLOG_PAGE_SIZE = 12;
 
-export function getBlogPage(page: number): {
+export function getBlogPage(
+  page: number,
+  locale: BlogLocale = BLOG_LOCALE,
+): {
   posts: BlogMeta[];
   totalPages: number;
   total: number;
 } {
-  const all = getAllBlogMeta();
+  const all = getAllBlogMeta(locale);
   const totalPages = Math.max(1, Math.ceil(all.length / BLOG_PAGE_SIZE));
   return {
     posts: all.slice((page - 1) * BLOG_PAGE_SIZE, page * BLOG_PAGE_SIZE),
@@ -137,9 +151,13 @@ export function getBlogPage(page: number): {
 }
 
 /** 같은 분류 글을 우선, 모자라면 최신 글로 채운다. */
-export function getRelatedBlogPosts(currentSlug: string, limit = 3): BlogMeta[] {
-  const all = getAllBlogMeta().filter((p) => p.slug !== currentSlug);
-  const current = getBlogMeta(currentSlug);
+export function getRelatedBlogPosts(
+  currentSlug: string,
+  limit = 3,
+  locale: BlogLocale = BLOG_LOCALE,
+): BlogMeta[] {
+  const all = getAllBlogMeta(locale).filter((p) => p.slug !== currentSlug);
+  const current = getBlogMeta(currentSlug, locale);
   const sameCategory = all.filter(
     (p) => current?.category && p.category === current.category,
   );
@@ -147,15 +165,26 @@ export function getRelatedBlogPosts(currentSlug: string, limit = 3): BlogMeta[] 
   return [...sameCategory, ...rest].slice(0, limit);
 }
 
+/** 해당 언어에 이 글이 공개되어 있는지(언어 전환·hreflang 연결용). */
+export function hasBlogPost(slug: string, locale: BlogLocale): boolean {
+  return getBlogMeta(slug, locale) !== null;
+}
+
+/** 이 글이 공개된 모든 블로그 언어(hreflang 대체 주소용). */
+export function getBlogLocalesFor(slug: string): BlogLocale[] {
+  return BLOG_LOCALES.filter((l) => hasBlogPost(slug, l));
+}
+
 export async function compileBlogPost(
   slug: string,
+  locale: BlogLocale = BLOG_LOCALE,
 ): Promise<{
   Content: ComponentType<{ components?: Record<string, ComponentType<never>> }>;
   meta: BlogMeta;
   /** 본문 H2 소제목(목차용). 가이드 목차와 같은 방식으로 수집한다. */
   headings: GuideHeading[];
 } | null> {
-  const filePath = path.join(blogDir(), `${slug}.mdx`);
+  const filePath = path.join(blogDir(locale), `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
   const headings: GuideHeading[] = [];
@@ -175,7 +204,7 @@ export async function compileBlogPost(
     rehypePlugins: [
       rehypeSlug,
       collectH2Headings(headings),
-      () => wrapGuideBoxes("ko", ["정리"]),
+      () => wrapGuideBoxes(locale, locale === "ko" ? ["정리"] : []),
       rehypeAutolinkHeadings,
     ],
   });
@@ -187,7 +216,7 @@ export async function compileBlogPost(
     meta: {
       ...fm,
       slug,
-      readingMinutes: estimateReadingMinutes(content),
+      readingMinutes: estimateReadingMinutes(content, locale),
     },
     headings,
   };

@@ -4,7 +4,12 @@ import type { MetadataRoute } from "next";
 import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL, languageAlternates } from "@/lib/seo";
 import { getAllGuidesMeta } from "@/lib/guides";
-import { BLOG_LOCALE, getAllBlogMeta } from "@/lib/blog";
+import {
+  BLOG_FALLBACK_LOCALE,
+  BLOG_LOCALES,
+  getAllBlogMeta,
+  getBlogLocalesFor,
+} from "@/lib/blog";
 import { getLiveImageToolPaths } from "@/lib/tools-roster";
 
 /**
@@ -84,8 +89,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         (guide) => new Date(guide.updatedAt ?? guide.publishedAt).getTime(),
       ),
     ),
-    ...getAllBlogMeta().map((post) =>
-      new Date(post.updatedAt ?? post.publishedAt).getTime(),
+    ...BLOG_LOCALES.flatMap((locale) =>
+      getAllBlogMeta(locale).map((post) =>
+        new Date(post.updatedAt ?? post.publishedAt).getTime(),
+      ),
     ),
   ].filter((time) => !Number.isNaN(time));
   const latestContentDate =
@@ -126,32 +133,54 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  // 블로그는 한국어 전용 — 번역본이 없으므로 hreflang 대체 주소(alternates)는 달지
-  // 않는다. 글이 하나도 없는 동안은 목록 페이지(noindex)도 사이트맵에서 뺀다.
-  const blogPosts = getAllBlogMeta();
-  const blogEntries =
-    blogPosts.length === 0
-      ? []
-      : [
-          {
-            url: `${SITE_URL}/${BLOG_LOCALE}/blog`,
-            lastModified: new Date(
-              blogPosts[0].updatedAt ?? blogPosts[0].publishedAt,
-            ),
-            changeFrequency: "weekly" as const,
-            priority: 0.7,
-          },
-          ...blogPosts.map((post) => ({
-            url: `${SITE_URL}/${BLOG_LOCALE}/blog/${post.slug}`,
-            lastModified: new Date(post.updatedAt ?? post.publishedAt),
-            changeFrequency: "monthly" as const,
-            priority: 0.6,
-            images: collectImageUrls(
-              path.join(process.cwd(), "content", "blog", BLOG_LOCALE, `${post.slug}.mdx`),
-              post.image,
-            ),
-          })),
-        ];
+  // 블로그는 ko·en·ja(2026-11-05). 같은 글이 공개된 언어끼리 hreflang 대체 주소로 연결한다.
+  // 글이 하나도 없는 언어의 목록 페이지(noindex)는 사이트맵에서 뺀다.
+  const blogEntries = BLOG_LOCALES.flatMap((blogLocale) => {
+    const blogPosts = getAllBlogMeta(blogLocale);
+    if (blogPosts.length === 0) return [];
+    const listLanguages: Record<string, string> = Object.fromEntries(
+      BLOG_LOCALES.filter((l) => getAllBlogMeta(l).length > 0).map((l) => [
+        l,
+        `${SITE_URL}/${l}/blog`,
+      ]),
+    );
+    if (listLanguages[BLOG_FALLBACK_LOCALE]) {
+      listLanguages["x-default"] = listLanguages[BLOG_FALLBACK_LOCALE];
+    }
+    return [
+      {
+        url: `${SITE_URL}/${blogLocale}/blog`,
+        lastModified: new Date(
+          blogPosts[0].updatedAt ?? blogPosts[0].publishedAt,
+        ),
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+        alternates: { languages: listLanguages },
+      },
+      ...blogPosts.map((post) => {
+        const languages: Record<string, string> = Object.fromEntries(
+          getBlogLocalesFor(post.slug).map((l) => [
+            l,
+            `${SITE_URL}/${l}/blog/${post.slug}`,
+          ]),
+        );
+        if (languages[BLOG_FALLBACK_LOCALE]) {
+          languages["x-default"] = languages[BLOG_FALLBACK_LOCALE];
+        }
+        return {
+          url: `${SITE_URL}/${blogLocale}/blog/${post.slug}`,
+          lastModified: new Date(post.updatedAt ?? post.publishedAt),
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+          alternates: { languages },
+          images: collectImageUrls(
+            path.join(process.cwd(), "content", "blog", blogLocale, `${post.slug}.mdx`),
+            post.image,
+          ),
+        };
+      }),
+    ];
+  });
 
   return [...staticEntries, ...guideEntries, ...blogEntries];
 }

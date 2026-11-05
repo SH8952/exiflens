@@ -6,13 +6,13 @@ import { HomeSectionCta } from "@/components/home-section-cta";
 
 /**
  * 홈 "최신 블로그 글" 영역 — 직접 촬영한 사진과 경험이 담긴 블로그 글 최대 3개를 썸네일 카드로 노출.
- * 블로그는 한국어 전용이라 한국어 홈에서만 보이고(다른 언어는 아무것도 그리지 않음), 글이 없으면
+ * 블로그가 있는 언어(ko·en·ja) 홈에서만 보이고(es는 아무것도 그리지 않음), 글이 없으면
  * 영역 자체를 그리지 않는다. 예약 발행 글은 `getAllBlogMeta()`가 자동으로 제외한다.
  */
 export async function HomeBlogHighlights({ locale }: { locale: string }) {
   if (!isBlogLocale(locale)) return null;
 
-  const posts = getAllBlogMeta().slice(0, 3);
+  const posts = getAllBlogMeta(locale).slice(0, 3);
   if (posts.length === 0) return null;
 
   const t = await getTranslations("Home");

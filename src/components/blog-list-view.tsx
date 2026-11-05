@@ -2,7 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { SITE_URL, breadcrumbJsonLd } from "@/lib/seo";
-import { getBlogPage } from "@/lib/blog";
+import { getBlogPage, isBlogLocale, BLOG_FALLBACK_LOCALE } from "@/lib/blog";
 import { BackLink } from "@/components/back-link";
 
 /**
@@ -19,7 +19,10 @@ export async function BlogListView({
 }) {
   const t = await getTranslations("Blog");
   const tHome = await getTranslations("Home");
-  const { posts, totalPages } = getBlogPage(page);
+  const { posts, totalPages } = getBlogPage(
+    page,
+    isBlogLocale(locale) ? locale : BLOG_FALLBACK_LOCALE,
+  );
 
   const dateFormatter = new Intl.DateTimeFormat(locale, {
     year: "numeric",

@@ -20,9 +20,13 @@ export function LanguageSwitcher() {
     <Select
       value={locale}
       onValueChange={(next) => {
-        // 블로그는 한국어 전용이라 /en/blog 등은 /ko/blog 로 되돌아간다(언어를
-        // 못 바꾸는 것처럼 보임). 블로그 화면에서 언어를 바꾸면 해당 언어 홈으로 이동.
-        const target = pathname.startsWith("/blog") ? "/" : pathname;
+        // 블로그는 ko·en·ja 3개 언어(2026-11-05, 같은 글은 같은 주소 slug). 그 언어끼리는
+        // 같은 글/목록으로 바꾸고, 블로그가 없는 언어(es)로 바꾸면 홈으로 이동한다.
+        const blogLocales = ["ko", "en", "ja"];
+        const target =
+          pathname.startsWith("/blog") && !blogLocales.includes(next)
+            ? "/"
+            : pathname;
         router.replace(target, { locale: next as Locale });
       }}
     >

@@ -13,11 +13,14 @@ export function BlogPhotoDuo({
   a,
   b,
   stack = false,
+  hint = "(사진을 클릭하면 원본 크기로 볼 수 있습니다)",
 }: {
   a: BlogPhotoDuoItem;
   b: BlogPhotoDuoItem;
   /** true면 좌우가 아니라 위아래로 한 장씩 배치(가로·세로 사진이 섞일 때). 세로 사진은 폭을 줄여 너무 커지지 않게 한다. */
   stack?: boolean;
+  /** 사진 아래 안내 문구. 기본은 한국어, 영어·일본어 글은 해당 언어 문구를 넘긴다. */
+  hint?: string;
 }) {
   return (
     <div className="not-prose my-6">
@@ -45,7 +48,7 @@ export function BlogPhotoDuo({
         ))}
       </div>
       <p className="mt-2 text-center text-xs italic text-muted-foreground">
-        (사진을 클릭하면 원본 크기로 볼 수 있습니다)
+        {hint}
       </p>
     </div>
   );

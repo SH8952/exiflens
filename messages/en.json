@@ -5,7 +5,7 @@
     "aboutNav": "About",
     "guidesNav": "Guides",
     "faqNav": "FAQ",
-    "blogNav": "Blog (KO)",
+    "blogNav": "Blog",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "toolsNav": "Tools"
@@ -1113,7 +1113,7 @@
   },
   "Blog": {
     "title": "Blog",
-    "subtitle": "Posts that pair first-hand shooting notes with settings and the math behind them (Korean only).",
+    "subtitle": "Posts that pair first-hand shooting notes with settings and the math behind them.",
     "empty": "No posts yet — coming soon.",
     "readingTime": "{minutes} min read",
     "backToBlog": "← Back to blog",

@@ -1,3 +1,11 @@
+## 2026-11-05 — 블로그 영어·일본어 확장(한국어 전용 → ko/en/ja 3개 언어, 글 10개 × 3)
+- 배경: 영어 블로그 목록에 "No posts yet — coming soon" 빈 문구만 보이고 블로그가 한국어 전용이어서, 외부 점검(공사 중·콘텐츠 가치 지적)과 영어·일본어 방문자 대응이 필요했음.
+- 코드: `src/lib/blog.ts` — 언어별 폴더(`content/blog/{ko,en,ja}`), `BLOG_LOCALES`, 언어별 글 목록·상세·관련 글·읽는 시간. `src/app/[locale]/blog/*` 3개 페이지 — 언어별 canonical·hreflang(ko/en/ja + x-default=en), 블로그 미지원 언어(es)는 /en/blog로 이동, 정적 경로를 3개 언어로 생성. `blog-list-view`·`home-blog-highlights`·`site-header`·`language-switcher`(블로그 경로 유지)·`sitemap.ts`(언어별 블로그 항목+alternates)·`rss.xml/route.ts`(3개 언어)·`blog-photo-duo`(`hint` 속성 추가, 기본값은 기존 한국어). `messages/{en,ja,es}.json` — Blog.subtitle("한국어 전용" 문구 제거), Header.blogNav.
+- 콘텐츠: `content/blog/en/`·`content/blog/ja/` 각 10편(ko와 같은 슬러그·발행일·이미지 파일 공유). 제목·설명·태그·본문·표·체크리스트·FAQ·저작권 안내 번역, 사진 안내 문구(`hint`)와 박스 자동 인식 제목(Checklist/Common Mistakes/FAQ/Putting It Together, チェックリスト/よくある失敗/よくある質問/まとめ), 내부 링크는 /en·/ja 경로로 변환.
+- 검증: `tsc --noEmit` 통과, 내부 링크 26종 존재 확인, 격리 빌드 성공. /en/blog·/ja/blog·/ko/blog 200, 10편 × 3개 언어 상세 200(박스 개수 ko와 동일), /es/blog → 308 /en/blog, hreflang 4종·canonical 확인, 사이트맵·RSS에 3개 언어 글 포함, 빈 문구는 글이 있어 표시되지 않음(번들 문자열로만 존재).
+- 앞으로: 새 블로그 글은 ko/en/ja 3개 버전을 같은 슬러그·발행일로 함께 작성.
+- 백업: _backups/blog-i18n-en-ja_20261105_093216
+
 ## 2026-11-05 — 가이드 하단 CTA·무료 도구 링크를 글 주제에 맞는 도구로 교체
 - 배경: 모든 가이드가 같은 문구("사진 EXIF 분석")와 홈 링크를 쓰고, 하단 "무료 도구" 3개는 가이드 순서로 도구를 순환 배정해 글 주제와 무관한 도구가 붙었음(외부 점검의 콘텐츠 가치·구조 지적 대응).
 - 변경: 신규 `src/lib/guide-tools.ts`(가이드 72개 → 관련 도구 1~3개 매핑, 4개 언어 슬러그 일치 검증). `src/components/guide-tool-cta.tsx` — 매핑이 있으면 상단 CTA=첫 도구, 하단 CTA=둘째 도구(없으면 첫째)로 연결, 매핑 없는 글(블로그 포함)은 기존 문구·홈 링크 유지. `src/app/[locale]/guides/[slug]/page.tsx` — 하단 "무료 도구" 목록을 매핑 기준으로 표시(매핑 없으면 기존 순환). `messages/{en,ko,ja,es}.json` Guides에 ctaToolText·ctaToolButton·homeToolName·homeToolDescription 추가. "home"은 홈의 EXIF 분석 & ND 필터 계산기.

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Aperture, Menu, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { LanguageSwitcher } from "@/components/language-switcher";
 
@@ -11,6 +11,9 @@ const navLinkClass =
 
 export function SiteHeader() {
   const t = useTranslations("Header");
+  const locale = useLocale();
+  // 블로그는 ko·en·ja 3개 언어(2026-11-05). 블로그가 없는 언어(es)는 영어 블로그로 연결.
+  const blogLocale = ["ko", "en", "ja"].includes(locale) ? locale : "en";
   const pathname = usePathname();
   const onFramePage = pathname === "/frame";
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,8 +63,7 @@ export function SiteHeader() {
           <Link href="/faq" className={navLinkClass}>
             {t("faqNav")}
           </Link>
-          {/* 블로그는 한국어 전용(/ko/blog) — 모든 언어 화면에서 한국어 블로그로 연결 */}
-          <Link href="/blog" locale="ko" className={navLinkClass}>
+          <Link href="/blog" locale={blogLocale} className={navLinkClass}>
             {t("blogNav")}
           </Link>
           <Link href="/tools" className={navLinkClass}>
@@ -116,7 +118,7 @@ export function SiteHeader() {
           </Link>
           <Link
             href="/blog"
-            locale="ko"
+            locale={blogLocale}
             className={`${navLinkClass} py-2.5`}
             onClick={() => setMenuOpen(false)}
           >
