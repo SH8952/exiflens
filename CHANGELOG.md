@@ -1,3 +1,12 @@
+## 2026-11-05 — 구글 인증 CMP(애드센스 유럽 규정 메시지) 대비: 직접 만든 동의 배너와 중복 방지
+- 배경: 유럽(EEA·영국·스위스) 방문자에게 개인 맞춤 광고를 게재하려면 구글 인증·TCF 연동 CMP가 필요하다. 사이트의 동의 배너는 직접 만든 것(구글 동의 모드 v2 신호만 연동)이라 인증 CMP가 아니다. 애드센스 "개인정보 보호 및 메시지"에서 구글 CMP 메시지를 게시할 때 두 메시지가 겹치지 않도록 코드를 먼저 준비.
+- 변경: 신규 `src/lib/google-cmp.ts`(구글 CMP 감지: `__tcfapi` ping 또는 `__tcfapiLocator` iframe, 최대 1.5초 대기 후 "absent" 확정, useSyncExternalStore용 스토어). `src/components/consent-banner.tsx` — 구글 CMP가 present/pending이면 직접 만든 배너 미표시, 예전 localStorage "동의"의 gtag 갱신과 Clarity 로드는 구글 CMP가 없다고 확정된 뒤에만 수행. 동의 모드 기본값(거부)·지역 목록·국가 판정·선택 저장 방식은 변경 없음.
+- 동작: 구글 메시지 미게시·광고 차단 등으로 신호가 없으면 지금과 같이 직접 만든 배너가 뜬다(최대 1.5초 늦게). 구글 CMP가 활성이면 직접 만든 배너는 숨고, 유럽권 방문자의 Clarity는 구글 동의와 연동하기 전까지 로드하지 않음(보수적).
+- 검증: `tsc --noEmit`·eslint 통과, 감지 로직 5개 상황(신호 없음→absent, ping 정상→present, ping 오류→absent, iframe→present, 늦게 도착→present) 시험 통과, 격리 빌드 성공·ko/en/ja/es/privacy/도구 페이지 200. 실제 구글 메시지와의 연동은 게시 후 확인 필요.
+- 순서: 이 코드를 먼저 배포한 뒤 애드센스에서 유럽 규정 메시지를 게시(반대 순서면 잠깐 겹칠 수 있음).
+- 백업: _backups/consent-cmp-prep_20261105_064423
+- 보완(같은 날): "absent"로 확정한 뒤에도 0.5초 간격으로 구글 CMP 신호를 계속 확인해, 느린 네트워크에서 구글 CMP가 뒤늦게 나타나면 즉시 "present"로 전환하고 직접 만든 배너를 닫는다(중복 방지 누락 보완). "present"가 되면 확인 중단. `src/lib/google-cmp.ts`만 수정. 검증: tsc·eslint 통과, 6개 시나리오(신호 없음, 1.5초 전 pending, 일찍 도착, 늦게 도착, 늦게 iframe, ping 오류) 통과. 로컬 브라우저에서 EEA(DE) 조건으로 배너 표시 확인 완료. 백업: _backups/cmp-late-detect_20261105_070653
+
 ## 2026-11-04 — 블로그 새 글 추가: 건축 사진 외부·내부 촬영(예약 발행 2026-11-05)
 - 글: `content/blog/ko/architecture-photography-handheld-indoor-outdoor-composition.mdx`, 제목 "같은 건물을 외부와 내부로 찍을 때 달라지는 것들, 삼각대 없이 노출과 구도 잡는 법", 분류 "건축 사진", 공개일 2026-11-05(한국 시간 0시부터 자동 공개, 예약 발행).
 - 내용: 방문 후기가 아닌 촬영 감각·구도 설명. 사진 6장(전부 Canon EOS R7 + RF15-35mm F2.8 L IS USM, 삼각대 없이 촬영, 2024-11-03), EXIF는 ExifLens 스크린샷 값. 화각·R7 환산(×1.6)·대각 화각 표, 세로/가로 프레임 비교, 정면 대칭, 디테일 컷, 실내 1/2초·1/30초 손각 설명, F2.8↔F8 스톱 환산표(노출 차이 약 8.6스톱 등 직접 계산 검증).

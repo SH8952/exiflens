@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { loadClarity } from "@/lib/clarity";
 import { needsConsentBanner } from "@/lib/consent";
+import { getCmpServerSnapshot, getCmpSnapshot, subscribeCmp } from "@/lib/google-cmp";
 
 const STORAGE_KEY = "consent-choice";
 
@@ -109,23 +110,31 @@ export function ConsentBanner() {
   const geoReady = geo !== GEO_NOT_READY;
   const needsConsent = needsConsentBanner(geo || null);
   const choice = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  // Google 인증 CMP(애드센스 유럽 규정 메시지)가 게시되어 있으면 "present"가 되어 이 배너는 양보한다.
+  const cmp = React.useSyncExternalStore(subscribeCmp, getCmpSnapshot, getCmpServerSnapshot);
 
   React.useEffect(() => {
-    if (choice === "accepted") {
+    // 구글 CMP가 있으면 동의 상태는 그쪽이 gtag로 갱신하므로, 예전에 이 배너에서 저장한
+    // "동의"가 덮어쓰지 않도록 구글 CMP가 없다고 확정된 뒤에만 반영한다.
+    if (choice === "accepted" && cmp === "absent") {
       updateConsent(true);
     }
     // "rejected"는 기본값(denied)과 동일한 상태이므로 별도 업데이트 불필요.
-  }, [choice]);
+  }, [choice, cmp]);
 
   // Microsoft Clarity: 동의가 필요한 지역(EEA·영국·스위스, 국가 미확인 포함)은
   // "동의" 후에만, 그 외 지역은 즉시 로드하되 "거부" 선택은 어디서든 존중한다.
   React.useEffect(() => {
     if (!geoReady) return;
-    const allowed = needsConsent ? choice === "accepted" : choice !== "rejected";
+    // 동의가 필요한 지역에서 구글 CMP가 활성이면(present) 그쪽 동의와 연동하기 전까지 Clarity는 로드하지 않는다.
+    const allowed = needsConsent
+      ? choice === "accepted" && cmp === "absent"
+      : choice !== "rejected";
     if (allowed) loadClarity(choice === "accepted");
-  }, [geoReady, needsConsent, choice]);
+  }, [geoReady, needsConsent, choice, cmp]);
 
-  if (!geoReady || !needsConsent || choice !== "pending") return null;
+  // 구글 CMP가 있거나(present) 아직 확인 중(pending)이면 직접 만든 배너는 띄우지 않는다(중복 방지).
+  if (!geoReady || !needsConsent || choice !== "pending" || cmp !== "absent") return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t bg-background/95 p-4 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-background/90">
