@@ -1,3 +1,9 @@
+## 2026-11-05 — 미완성 텍스트 진단 4차 대응: "추가할 예정·今後追加·añadiendo·yet" 계열 일괄 정리
+- 배경: 3차 배포 후에도 adpass가 96점 유지. 라이브 ko/ja/es/en 페이지 소스를 직접 스캔해 남은 "앞으로 추가할 예정", "今後追加予定", "iremos añadiendo", "공사 현장(construction)" 등을 확인.
+- 변경: `messages/{en,es,ja,ko}.json` 문구만. 셔터 카운트 소개·FAQ·지원 안내, 이미지 변환 형식 안내, 장비 소개 문구에서 향후 추가 약속 문장 삭제·"아직/まだ/yet" 제거, 타임랩스 예시 "공사 현장→건설 현장"(en building sites). 의미는 현재 지원 상태 서술로 유지.
+- 검증: JSON 파싱, 잔여 패턴 재검색.
+- 백업: _backups/placeholder-fix4_*
+
 ## 2026-11-05 — 미완성 텍스트 진단 3차 대응: 메시지 키 `comingSoon` → `unavailableLabel` 변경
 - 배경: 2차 배포 후 라이브 페이지 소스에서 "check back soon"류는 사라졌고, 모든 페이지 소스에 실려 나가는 메시지 키 이름 `comingSoon`과 "not yet supported" 문구만 남아 있었음.
 - 변경: `messages/{en,es,ja,ko}.json`의 Tools 허브 라벨 키·값 변경(Unavailable/No disponible/提供停止中/제공 안 함), 셔터 카운트 지원 안내 문구 중립화, `src/app/[locale]/tools/page.tsx`의 `t("comingSoon")` → `t("unavailableLabel")` 한 줄. 내부 상태값 `status: "comingSoon"`은 화면·페이지 소스에 노출되지 않아 유지. 현재 모든 도구가 live라 화면 변화 없음.

@@ -539,7 +539,7 @@
     },
     "gear": {
       "heading": "Mi equipo",
-      "intro": "Alterno dos cuerpos de cámara según lo que vaya a fotografiar. Iré añadiendo más accesorios a esta lista con el tiempo.",
+      "intro": "Alterno dos cuerpos de cámara según lo que vaya a fotografiar.",
       "groups": [
         {
           "name": "Cuerpos de cámara",
@@ -1952,7 +1952,7 @@
     "cardTitle": "Eliminar Metadatos",
     "privacyNote": "Esta herramienta nunca sube tus fotos a un servidor — todo ocurre en tu navegador. Tus archivos nunca salen de tu dispositivo.",
     "uploadLabel": "Subir Fotos (hasta 20)",
-    "formatNote": "Formatos compatibles: JPEG, PNG, WebP. HEIC (formato predeterminado de iPhone) y TIFF aún no son compatibles.",
+    "formatNote": "Formatos compatibles: JPEG, PNG, WebP. HEIC (formato predeterminado de iPhone) y TIFF no son compatibles.",
     "advancedTitle": "Opciones Avanzadas",
     "gpsOnlyLabel": "Eliminar solo la ubicación GPS (mantener el resto del EXIF)",
     "gpsOnlyHint": "Solo JPEG. Algunos archivos también guardan las coordenadas GPS en XMP — para garantizar la eliminación completa de la ubicación, desactiva esto y usa la eliminación completa.",
@@ -1986,7 +1986,7 @@
     "pageDescription": "Elimina de forma segura el EXIF, la ubicación GPS y los metadatos IPTC de tus fotos directamente en tu navegador. Procesa varios archivos a la vez y descárgalos como ZIP.",
     "aboutTitle": "Sobre esta herramienta",
     "aboutBody": "Las fotos suelen llevar metadatos EXIF ocultos: modelo de cámara, configuración de disparo, fecha y hora de la toma, y a veces incluso la ubicación GPS exacta donde se tomó la foto. Eliminar esto antes de compartir una foto en línea evita que se filtre información personal no deseada. Esta herramienta elimina solo las secciones de metadatos a nivel de bytes sin volver a comprimir los datos de píxeles de la imagen, por lo que no hay ninguna pérdida de calidad. Todo se ejecuta en tu navegador — tus fotos nunca se envían a un servidor.",
-    "disclaimer": "HEIC (formato predeterminado de fotos de iPhone) y TIFF aún no son compatibles de forma fiable con las APIs estándar del navegador, por lo que no están incluidos. Conviértelos primero a JPEG (desde la configuración de tu teléfono o cámara) si necesitas usar esta herramienta con ellos.",
+    "disclaimer": "HEIC (formato predeterminado de fotos de iPhone) y TIFF no son compatibles de forma fiable con las APIs estándar del navegador, por lo que no están incluidos. Conviértelos primero a JPEG (desde la configuración de tu teléfono o cámara) si necesitas usar esta herramienta con ellos.",
     "faqTitle": "Preguntas Frecuentes",
     "faq": [
       {
@@ -2634,7 +2634,7 @@
       },
       {
         "question": "¿Es compatible con cámaras Canon?",
-        "answer": "Sí, con un puñado de modelos. Actualmente son compatibles la EOS R5, la EOS R6, la EOS R6 Mark II, la EOS R8, la EOS R50 y la EOS RP (solo archivos CR3). A diferencia de Nikon, Canon guarda este valor en una posición de byte distinta para casi cada modelo de cámara, y actualmente solo existe una ubicación documentada públicamente para estos seis cuerpos. El resto de cámaras Canon, antiguas o nuevas, todavía no están mapeadas; iremos añadiendo más a medida que se documenten sus ubicaciones."
+        "answer": "Sí, con un puñado de modelos. Actualmente son compatibles la EOS R5, la EOS R6, la EOS R6 Mark II, la EOS R8, la EOS R50 y la EOS RP (solo archivos CR3). A diferencia de Nikon, Canon guarda este valor en una posición de byte distinta para casi cada modelo de cámara, y actualmente solo existe una ubicación documentada públicamente para estos seis cuerpos. El resto de cámaras Canon, antiguas o nuevas, no están mapeadas."
       },
       {
         "question": "¿Funciona con archivos JPEG o solo con RAW?",
@@ -2646,7 +2646,7 @@
       }
     ],
     "supportCanon": "Canon - EOS R5, EOS R6, EOS R6 Mark II, EOS R8, EOS R50, EOS RP, PowerShot G5 X Mark II (solo archivos CR3)",
-    "supportCanonNote": "El resto de cuerpos Canon, antiguos o nuevos, todavía no son compatibles; iremos añadiendo más a medida que se documenten.",
+    "supportCanonNote": "El resto de cuerpos Canon, antiguos o nuevos, no son compatibles.",
     "exampleLeftAlt": "Foto de primer plano del mecanismo del obturador de una cámara",
     "exampleRightAlt": "Foto de una cámara DSLR usada siendo inspeccionada antes de comprarla",
     "sections": [
@@ -2662,7 +2662,7 @@
         "list": [
           "Arrastra un RAW de Nikon (.NEF), un JPEG de la cámara o un archivo CR3 de Canon, y aparecerán el modelo de cámara y el contador del obturador.",
           "Se admiten NEF y JPEG de cámara de Nikon, y archivos CR3 de los cinco modelos de Canon indicados.",
-          "Otros cuerpos de Canon, Sony, Fujifilm, Olympus, Panasonic y Pentax aún no se admiten, porque o no guardan el valor en el archivo o lo guardan de forma distinta según el modelo, lo que exige un trabajo aparte.",
+          "Otros cuerpos de Canon, Sony, Fujifilm, Olympus, Panasonic y Pentax no se admiten, porque o no guardan el valor en el archivo o lo guardan de forma distinta según el modelo, lo que exige un trabajo aparte.",
           "Si subes un archivo de una cámara no admitida, la herramienta no fuerza un número; te indica que esa cámara no es compatible."
         ]
       },
