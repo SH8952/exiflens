@@ -1,3 +1,9 @@
+## 2026-11-05 — 미완성 텍스트 진단 5차 대응: 본문(글)에 남은 "under construction·추가 예정" 표현 정리
+- 배경: 4차 배포(메시지 문구) 확인 후에도 adpass가 96점 유지. 검사 대상 13개 페이지에 건축 사진 블로그 글이 포함되어 있고, 영어판 본문에 "a building still under construction"이 있어 "공사 중/Under construction" 계열로 탐지됐을 가능성이 높음. 일본어 셔터카운트 가이드에도 "今後も対応範囲を広げていく予定です" 문장이 있었음.
+- 변경: `content/blog/en/architecture-photography-handheld-indoor-outdoor-composition.mdx`("still under construction" → "still being built"), 같은 글 ko판 "공사용 비계" 3곳 → "건설용 비계", `content/guides/ja/shutter-count-checker-guide.mdx` 향후 확대 예정 문장 삭제. 사진 설명 사실(비계가 보이는 건물)은 유지.
+- 검증: 변경 문구 외 본문 차이 없음.
+- 백업: _backups/placeholder-fix5_*
+
 ## 2026-11-05 — 미완성 텍스트 진단 4차 대응: "추가할 예정·今後追加·añadiendo·yet" 계열 일괄 정리
 - 배경: 3차 배포 후에도 adpass가 96점 유지. 라이브 ko/ja/es/en 페이지 소스를 직접 스캔해 남은 "앞으로 추가할 예정", "今後追加予定", "iremos añadiendo", "공사 현장(construction)" 등을 확인.
 - 변경: `messages/{en,es,ja,ko}.json` 문구만. 셔터 카운트 소개·FAQ·지원 안내, 이미지 변환 형식 안내, 장비 소개 문구에서 향후 추가 약속 문장 삭제·"아직/まだ/yet" 제거, 타임랩스 예시 "공사 현장→건설 현장"(en building sites). 의미는 현재 지원 상태 서술로 유지.
