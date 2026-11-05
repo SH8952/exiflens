@@ -22,6 +22,7 @@ import {
 } from "@/lib/guides";
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 import { GuideToolCta } from "@/components/guide-tool-cta";
+import { HOME_TOOL, getGuideTools } from "@/lib/guide-tools";
 import { MdxTable } from "@/components/mdx-table";
 import { GuideToc } from "@/components/guides/guide-toc";
 import { GuideFloatingToc } from "@/components/guides/guide-floating-toc";
@@ -97,16 +98,35 @@ export default async function GuidePage({
     0,
     getAllGuidesMeta(locale as Locale).findIndex((g) => g.slug === slug),
   );
-  const relatedTools = liveTools.length
-    ? Array.from({ length: Math.min(3, liveTools.length) }, (_, k) => {
-        const tool = liveTools[(guideIndex * 3 + k) % liveTools.length];
-        return {
-          slug: tool.slug,
-          name: tTools(`tools.${tool.slug}.name`),
-          description: tTools(`tools.${tool.slug}.description`),
-        };
-      })
-    : [];
+  // 2026-11-05: 글 주제와 맞는 도구(src/lib/guide-tools.ts). 매핑이 없으면 기존 순환 방식.
+  const mappedTools = getGuideTools(slug);
+  const relatedTools = mappedTools
+    ? mappedTools.map((toolSlug) =>
+        toolSlug === HOME_TOOL
+          ? {
+              slug: "",
+              href: "/",
+              name: t("homeToolName"),
+              description: t("homeToolDescription"),
+            }
+          : {
+              slug: toolSlug,
+              href: `/tools/${toolSlug}`,
+              name: tTools(`tools.${toolSlug}.name`),
+              description: tTools(`tools.${toolSlug}.description`),
+            },
+      )
+    : liveTools.length
+      ? Array.from({ length: Math.min(3, liveTools.length) }, (_, k) => {
+          const tool = liveTools[(guideIndex * 3 + k) % liveTools.length];
+          return {
+            slug: tool.slug,
+            href: `/tools/${tool.slug}`,
+            name: tTools(`tools.${tool.slug}.name`),
+            description: tTools(`tools.${tool.slug}.description`),
+          };
+        })
+      : [];
   // 한국어: 단어 중간에서 줄바꿈되지 않도록 어절 단위로 줄바꿈(긴 영문·주소는 필요할 때만 끊김).
   const koWrap =
     locale === "ko" ? "[word-break:keep-all] [overflow-wrap:break-word]" : "";
@@ -193,7 +213,7 @@ export default async function GuidePage({
         </div>
       </div>
 
-      <GuideToolCta locale={locale} />
+      <GuideToolCta locale={locale} slug={slug} position="top" />
 
       {meta.image ? (
         <figure className="flex flex-col gap-1.5">
@@ -242,7 +262,7 @@ export default async function GuidePage({
         <Content components={{ table: MdxTable }} />
       </article>
 
-      <GuideToolCta locale={locale} />
+      <GuideToolCta locale={locale} slug={slug} position="bottom" />
 
       {relatedGuides.length > 0 ? (
         <nav
@@ -277,9 +297,9 @@ export default async function GuidePage({
           </h2>
           <ul className="flex flex-col gap-2">
             {relatedTools.map((tool) => (
-              <li key={tool.slug} className="text-sm">
+              <li key={tool.href} className="text-sm">
                 <Link
-                  href={`/tools/${tool.slug}`}
+                  href={tool.href}
                   className="font-medium text-primary hover:underline"
                 >
                   {tool.name}

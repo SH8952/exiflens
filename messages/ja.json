@@ -1105,7 +1105,11 @@
     "ctaBannerButton": "無料で写真を解析する",
     "writtenBy": "執筆",
     "updatedOn": "{date} 更新",
-    "authorName": "Photographer SH"
+    "authorName": "Photographer SH",
+    "ctaToolText": "このガイドの内容を「{tool}」で試してみましょう。",
+    "ctaToolButton": "無料で使う",
+    "homeToolName": "EXIF解析 & NDフィルター計算機",
+    "homeToolDescription": "写真の撮影情報を読み取り、NDフィルターの長時間露光時間を計算します。"
   },
   "Blog": {
     "title": "ブログ",
@@ -1197,7 +1201,7 @@
         "description": "焦点距離・絞り・センサーサイズから近点・遠点の合焦範囲と過焦点距離を計算します。"
       },
       "exposure-stops-calculator": {
-        "name": "露出トライアング/ストップ変換計算機",
+        "name": "露出トライアングル / ストップ変換計算機",
         "description": "シャッタースピード・絞り・ISOのいずれかを変更した際、同じ露出を保つための他の値を計算します。"
       },
       "timelapse-calculator": {

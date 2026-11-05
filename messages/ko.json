@@ -1106,7 +1106,11 @@
     "ctaBannerButton": "무료로 사진 분석하기",
     "writtenBy": "작성",
     "updatedOn": "{date} 업데이트",
-    "authorName": "Photographer SH"
+    "authorName": "Photographer SH",
+    "ctaToolText": "이 가이드와 함께 쓰기 좋은 무료 도구: {tool}",
+    "ctaToolButton": "무료로 사용하기",
+    "homeToolName": "EXIF 분석 & ND 필터 계산기",
+    "homeToolDescription": "사진의 촬영 정보를 읽고 ND 필터 장노출 시간을 계산합니다."
   },
   "Blog": {
     "title": "블로그",

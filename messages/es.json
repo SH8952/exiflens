@@ -1105,7 +1105,11 @@
     "ctaBannerButton": "Analiza tu foto gratis",
     "writtenBy": "Escrito por",
     "updatedOn": "Actualizado el {date}",
-    "authorName": "Photographer SH"
+    "authorName": "Photographer SH",
+    "ctaToolText": "Pon en práctica esta guía con {tool}.",
+    "ctaToolButton": "Probar gratis",
+    "homeToolName": "Analizador EXIF y calculadora de filtros ND",
+    "homeToolDescription": "Lee los ajustes de cámara de tu foto y calcula tiempos de larga exposición con filtros ND."
   },
   "Blog": {
     "title": "Blog",
