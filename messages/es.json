@@ -1114,7 +1114,7 @@
   "Blog": {
     "title": "Blog",
     "subtitle": "Entradas que combinan notas de campo con ajustes y los cálculos detrás de ellos (solo en coreano).",
-    "empty": "Aún no hay entradas — próximamente.",
+    "empty": "No hay entradas para mostrar.",
     "readingTime": "{minutes} min de lectura",
     "backToBlog": "← Volver al blog",
     "relatedPosts": "Entradas relacionadas",
@@ -1194,7 +1194,7 @@
     "fieldSectionTitle": "Calculadoras para el terreno",
     "postShootSectionTitle": "Herramientas de posproducción y uso profesional",
     "imageSectionTitle": "Herramientas de edición y conversión de imágenes",
-    "comingSoon": "Próximamente",
+    "comingSoon": "Aún no disponible",
     "tools": {
       "dof-calculator": {
         "name": "Calculadora de profundidad de campo",

@@ -1092,7 +1092,7 @@
   "Guides": {
     "title": "ガイド",
     "subtitle": "EXIFデータ、NDフィルター、カメラ設定を使いこなすための実践的なガイドです。",
-    "empty": "この言語で公開されているガイドはまだありません。近日公開予定です。",
+    "empty": "この言語で表示できるガイドはありません。",
     "readingTime": "{minutes}分で読めます",
     "showMore": "もっと見る",
     "showLess": "閉じる",
@@ -1114,7 +1114,7 @@
   "Blog": {
     "title": "ブログ",
     "subtitle": "撮影現場での体験と設定値、計算の根拠をまとめた記事です。",
-    "empty": "まだ記事がありません。近日公開予定です。",
+    "empty": "表示できる記事がありません。",
     "readingTime": "{minutes}分で読めます",
     "backToBlog": "← ブログ一覧へ",
     "relatedPosts": "関連記事",
@@ -1194,7 +1194,7 @@
     "fieldSectionTitle": "撮影現場向け計算ツール",
     "postShootSectionTitle": "撮影後・実務向けツール",
     "imageSectionTitle": "画像編集・変換ツール",
-    "comingSoon": "近日公開",
+    "comingSoon": "提供前",
     "tools": {
       "dof-calculator": {
         "name": "被写界深度(DoF)計算機",

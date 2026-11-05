@@ -1114,7 +1114,7 @@
   "Blog": {
     "title": "Blog",
     "subtitle": "Posts that pair first-hand shooting notes with settings and the math behind them.",
-    "empty": "No posts yet — coming soon.",
+    "empty": "No posts to show.",
     "readingTime": "{minutes} min read",
     "backToBlog": "← Back to blog",
     "relatedPosts": "Related posts",
@@ -1194,7 +1194,7 @@
     "fieldSectionTitle": "On-Location Calculators",
     "postShootSectionTitle": "Post-Shoot & Pro Tools",
     "imageSectionTitle": "Image Editing & Conversion Tools",
-    "comingSoon": "Coming soon",
+    "comingSoon": "Not yet available",
     "tools": {
       "dof-calculator": {
         "name": "Depth of Field Calculator",

@@ -1,3 +1,9 @@
+## 2026-11-05 — 진단 도구 "미완성·자리표시자 텍스트" 오류 대응: "곧 공개" 계열 문구 중립화
+- 배경: 애드패스 재검사에서 exifnd.com이 96점(콘텐츠 품질 오류 1건 "공사 중 / Coming soon")으로 유지. 화면에는 안 보이는 빈 목록·도구 허브 라벨 문구가 번역 데이터(페이지에 함께 실리는 문구)에 남아 있던 것이 원인으로 추정.
+- 변경: `messages/{en,es,ja,ko}.json` 문구만. Blog.empty "No posts yet — coming soon." → "No posts to show."(es·ja 동일 취지), 가이드 빈 목록(ja) → "この言語で表示できるガイドはありません。", ToolsHub.comingSoon "Coming soon/준비 중/近日公開/Próximamente" → "Not yet available/제공 전/提供前/Aún no disponible". 코드 변경 없음.
+- 검증: 4개 언어 JSON 파싱 확인, "coming soon·준비 중·近日·próximamente" 잔여 검색 결과 없음(메시지·소스). 화면 동작 변화 없음(해당 문구는 글·도구가 없을 때만 표시).
+- 백업: _backups/placeholder-text-fix_*
+
 ## 2026-11-05 — 블로그 영어·일본어 확장(한국어 전용 → ko/en/ja 3개 언어, 글 10개 × 3)
 - 배경: 영어 블로그 목록에 "No posts yet — coming soon" 빈 문구만 보이고 블로그가 한국어 전용이어서, 외부 점검(공사 중·콘텐츠 가치 지적)과 영어·일본어 방문자 대응이 필요했음.
 - 코드: `src/lib/blog.ts` — 언어별 폴더(`content/blog/{ko,en,ja}`), `BLOG_LOCALES`, 언어별 글 목록·상세·관련 글·읽는 시간. `src/app/[locale]/blog/*` 3개 페이지 — 언어별 canonical·hreflang(ko/en/ja + x-default=en), 블로그 미지원 언어(es)는 /en/blog로 이동, 정적 경로를 3개 언어로 생성. `blog-list-view`·`home-blog-highlights`·`site-header`·`language-switcher`(블로그 경로 유지)·`sitemap.ts`(언어별 블로그 항목+alternates)·`rss.xml/route.ts`(3개 언어)·`blog-photo-duo`(`hint` 속성 추가, 기본값은 기존 한국어). `messages/{en,ja,es}.json` — Blog.subtitle("한국어 전용" 문구 제거), Header.blogNav.
