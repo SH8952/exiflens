@@ -1194,7 +1194,7 @@
     "fieldSectionTitle": "撮影現場向け計算ツール",
     "postShootSectionTitle": "撮影後・実務向けツール",
     "imageSectionTitle": "画像編集・変換ツール",
-    "comingSoon": "提供前",
+    "unavailableLabel": "提供停止中",
     "tools": {
       "dof-calculator": {
         "name": "被写界深度(DoF)計算機",
@@ -2620,7 +2620,7 @@
     "resetButton": "別のファイルを確認",
     "supportTableTitle": "対応カメラ",
     "supportNikon": "ニコン - NEF / カメラ内JPEG(ほとんどのデジタル一眼レフ・ミラーレス機種)",
-    "supportOthers": "ソニー、富士フイルム、オリンパス、パナソニック、ペンタックス - 現時点では未対応",
+    "supportOthers": "ソニー、富士フイルム、オリンパス、パナソニック、ペンタックス - 現在は対応していません",
     "pageTitle": "シャッターカウントチェッカー",
     "pageDescription": "NEF、CR3、JPEGファイルから、カメラのシャッターが何回作動したかをブラウザ上でそのまま確認できます。現在はニコンと一部のキヤノンEOS R機種に対応しており、今後さらに多くのブランドを追加予定です。",
     "aboutTitle": "シャッターカウントとは",

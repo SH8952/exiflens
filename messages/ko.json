@@ -1195,7 +1195,7 @@
     "fieldSectionTitle": "촬영 현장 계산 도구",
     "postShootSectionTitle": "촬영 후 · 실무 도구",
     "imageSectionTitle": "이미지 편집 · 변환 도구",
-    "comingSoon": "제공 전",
+    "unavailableLabel": "제공 안 함",
     "tools": {
       "dof-calculator": {
         "name": "심도(DoF) 계산기",
@@ -2621,7 +2621,7 @@
     "resetButton": "다른 파일 확인하기",
     "supportTableTitle": "지원 카메라",
     "supportNikon": "니콘 - NEF / 카메라 JPEG (대부분의 DSLR·미러리스 기종)",
-    "supportOthers": "소니, 후지필름, 올림푸스, 파나소닉, 펜탁스 - 아직 지원되지 않음",
+    "supportOthers": "소니, 후지필름, 올림푸스, 파나소닉, 펜탁스 - 현재 지원 대상이 아님",
     "pageTitle": "셔터카운트 체커",
     "pageDescription": "카메라의 셔터가 몇 번 작동했는지 NEF, CR3, JPEG 파일에서 브라우저에서 바로 확인하세요. 현재 니콘과 일부 캐논 EOS R 기종을 지원하며, 앞으로 더 많은 브랜드를 추가할 예정입니다.",
     "aboutTitle": "셔터카운트란?",

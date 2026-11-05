@@ -1194,7 +1194,7 @@
     "fieldSectionTitle": "On-Location Calculators",
     "postShootSectionTitle": "Post-Shoot & Pro Tools",
     "imageSectionTitle": "Image Editing & Conversion Tools",
-    "comingSoon": "Not yet available",
+    "unavailableLabel": "Unavailable",
     "tools": {
       "dof-calculator": {
         "name": "Depth of Field Calculator",
@@ -2620,7 +2620,7 @@
     "resetButton": "Check another file",
     "supportTableTitle": "Supported cameras",
     "supportNikon": "Nikon - NEF / in-camera JPEG (most DSLR and mirrorless bodies)",
-    "supportOthers": "Sony, Fujifilm, Olympus, Panasonic, Pentax - not yet supported",
+    "supportOthers": "Sony, Fujifilm, Olympus, Panasonic, Pentax - currently unsupported",
     "pageTitle": "Shutter Count Checker",
     "pageDescription": "Find out how many shutter actuations your camera has recorded, directly from a NEF, CR3, or JPEG file — entirely in your browser. Currently supports Nikon and select Canon EOS R bodies, with more brands on the way.",
     "aboutTitle": "About shutter count",

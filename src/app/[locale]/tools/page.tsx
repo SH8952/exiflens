@@ -64,7 +64,7 @@ export default async function ToolsHubPage({
   const fieldTools = resolve(FIELD_TOOLS);
   const postShootTools = resolve(POST_SHOOT_TOOLS);
   const imageTools = resolve(IMAGE_TOOLS);
-  const comingSoonLabel = t("comingSoon");
+  const comingSoonLabel = t("unavailableLabel");
 
   const breadcrumb = breadcrumbJsonLd([
     { name: "ExifLens", url: `${SITE_URL}/${locale}` },

@@ -1194,7 +1194,7 @@
     "fieldSectionTitle": "Calculadoras para el terreno",
     "postShootSectionTitle": "Herramientas de posproducción y uso profesional",
     "imageSectionTitle": "Herramientas de edición y conversión de imágenes",
-    "comingSoon": "Aún no disponible",
+    "unavailableLabel": "No disponible",
     "tools": {
       "dof-calculator": {
         "name": "Calculadora de profundidad de campo",
@@ -2620,7 +2620,7 @@
     "resetButton": "Comprobar otro archivo",
     "supportTableTitle": "Cámaras compatibles",
     "supportNikon": "Nikon - NEF / JPEG de cámara (la mayoría de cuerpos DSLR y sin espejo)",
-    "supportOthers": "Sony, Fujifilm, Olympus, Panasonic, Pentax - aún no compatibles",
+    "supportOthers": "Sony, Fujifilm, Olympus, Panasonic, Pentax - no compatibles actualmente",
     "pageTitle": "Comprobador de disparos del obturador",
     "pageDescription": "Descubre cuántos disparos ha registrado el obturador de tu cámara directamente desde un archivo NEF, CR3 o JPEG, todo desde el navegador. Actualmente compatible con Nikon y algunos cuerpos Canon EOS R, con más marcas en camino.",
     "aboutTitle": "Sobre el conteo de disparos del obturador",

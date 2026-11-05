@@ -1,3 +1,9 @@
+## 2026-11-05 — 미완성 텍스트 진단 3차 대응: 메시지 키 `comingSoon` → `unavailableLabel` 변경
+- 배경: 2차 배포 후 라이브 페이지 소스에서 "check back soon"류는 사라졌고, 모든 페이지 소스에 실려 나가는 메시지 키 이름 `comingSoon`과 "not yet supported" 문구만 남아 있었음.
+- 변경: `messages/{en,es,ja,ko}.json`의 Tools 허브 라벨 키·값 변경(Unavailable/No disponible/提供停止中/제공 안 함), 셔터 카운트 지원 안내 문구 중립화, `src/app/[locale]/tools/page.tsx`의 `t("comingSoon")` → `t("unavailableLabel")` 한 줄. 내부 상태값 `status: "comingSoon"`은 화면·페이지 소스에 노출되지 않아 유지. 현재 모든 도구가 live라 화면 변화 없음.
+- 검증: JSON 파싱, `comingSoon` 메시지 키 사용처 1곳뿐임을 확인, 타입체크·로컬 빌드 확인.
+- 백업: _backups/placeholder-fix3_*
+
 ## 2026-11-05 — 미완성 텍스트 진단 2차 대응: "check back soon·곧 추가될 예정" 계열 잔여 문구 정리
 - 배경: 1차 배포 후에도 애드패스가 96점 유지. 라이브 페이지 소스(메시지 JSON이 페이지에 실려 나감)에 "check back soon", "곧 추가될 예정", "vuelve pronto" 등이 남아 있음을 확인.
 - 변경: `messages/{en,es,ko}.json` 문구만 — Guides.empty(en/es/ko), Blog.empty(ko), 장비 소개 문구(ko), 셔터 카운트 지원 안내(ko). 화면 동작 변화 없음(해당 상태에서만 표시되는 문구).
