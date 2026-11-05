@@ -445,6 +445,7 @@
         "body": [
           "Las herramientas y guías de ExifLens se basan en fórmulas y definiciones estándar ampliamente utilizadas en fotografía y edición. Los resultados de los cálculos son valores de referencia para planificar una sesión, por lo que recomendamos comprobarlos en el campo con una toma de prueba o el histograma.",
           "El responsable del sitio revisa las explicaciones y las cifras de las guías y de las entradas del blog antes de publicarlas. Si detectas un error o algo que no se ajuste a los hechos, avísanos en el correo que aparece más abajo y lo revisaremos y corregiremos.",
+          "Cómo se hace el contenido: las fotografías, las notas de rodaje y la experiencia de campo que hay detrás de las herramientas y guías provienen del responsable del sitio. La redacción y la maquetación cuentan con la ayuda de herramientas de IA, y el responsable revisa las fórmulas, las cifras y la redacción antes de publicar y corrige el texto cuando un lector avisa de un error.",
           "Cuando usamos fotografías de fuentes externas, indicamos la fuente y al autor. Las recomendaciones de productos y los enlaces de afiliados se muestran según los principios de la página «Divulgación de Afiliados», y las relaciones de afiliación nunca influyen en los resultados de los cálculos ni en las explicaciones de las guías."
         ]
       },
@@ -1135,15 +1136,45 @@
         ]
       },
       {
+        "heading": "Idiomas",
+        "body": [
+          "Podemos leer y responder mensajes en inglés y coreano."
+        ]
+      },
+      {
         "heading": "Reportar errores y sugerir funciones",
         "body": [
           "¿Encontraste algo que no funciona bien o tienes una idea para una nueva herramienta? Cuéntanos los detalles (qué ocurrió, tu navegador/dispositivo y los pasos para reproducirlo si es un error) y lo revisaremos."
         ]
       },
       {
+        "heading": "Correcciones y comentarios sobre el contenido",
+        "body": [
+          "Si encuentras un error en una guía, una entrada del blog o el resultado de una herramienta, envíanos la dirección de la página y lo que te parece incorrecto. Lo contrastamos con la fórmula de base o con la documentación del fabricante de la cámara y actualizamos la página una vez verificado."
+        ]
+      },
+      {
+        "heading": "Uso de fotos y derechos de autor",
+        "body": [
+          "Las fotos de este sitio las tomó el responsable bajo el nombre Chronicle of Moments_SH. Para pedir permiso de uso, envíanos por correo la foto, cómo piensas usarla y dónde se publicará."
+        ]
+      },
+      {
+        "heading": "Consultas de privacidad",
+        "body": [
+          "Las preguntas sobre privacidad, cookies o tus datos pueden enviarse a la misma dirección. La Política de Privacidad explica cómo trata los datos ExifLens, incluido que las fotos analizadas en tu navegador no se suben."
+        ]
+      },
+      {
         "heading": "Consultas comerciales y de colaboración",
         "body": [
           "Para consultas de publicidad, colaboración o prensa, escríbenos a la misma dirección de correo indicada arriba."
+        ]
+      },
+      {
+        "heading": "Quién gestiona ExifLens",
+        "body": [
+          "ExifLens lo gestiona un fotógrafo y desarrollador independiente que trabaja bajo el nombre Chronicle of Moments_SH. Los mensajes enviados al correo de arriba llegan directamente al responsable."
         ]
       }
     ]

@@ -445,6 +445,7 @@
         "body": [
           "The tools and guides on ExifLens are based on formulas and standard definitions widely used in photography and post-processing. Calculation results are reference values to help you plan a shoot, so we recommend double-checking them in the field with a test shot or the histogram.",
           "The site operator reviews the explanations and figures in guides and blog posts before publishing. If you spot an error or something that does not match the facts, please let us know at the email address below, and we will check it and correct the text.",
+          "How the content is made: the photographs, shooting notes and field experience behind the tools and guides come from the site operator. Writing and layout are assisted by AI tools, and the operator checks the formulas, figures and wording before publishing and corrects the text when a reader reports a mistake.",
           "When we use photos from outside sources, we credit the source and the author. Product recommendations and affiliate links are labeled according to the principles on the Affiliate Disclosure page, and affiliate relationships never influence calculation results or the explanations in our guides."
         ]
       },
@@ -1135,15 +1136,45 @@
         ]
       },
       {
+        "heading": "Languages",
+        "body": [
+          "We can read and reply to messages in English and Korean."
+        ]
+      },
+      {
         "heading": "Bug Reports & Feature Requests",
         "body": [
           "Found something broken, or have an idea for a tool we should add? Send us the details (what happened, your browser/device, and steps to reproduce if it's a bug) and we'll look into it."
         ]
       },
       {
+        "heading": "Corrections & Content Feedback",
+        "body": [
+          "If you find an error in a guide, blog post or tool result, send us the page address and what looks wrong. We check it against the underlying formula or the camera maker's documentation and update the page once it is verified."
+        ]
+      },
+      {
+        "heading": "Photo Use & Copyright",
+        "body": [
+          "The photos on this site were taken by the operator under the name Chronicle of Moments_SH. To ask permission to use one, email us the photo, how you plan to use it and where it will appear."
+        ]
+      },
+      {
+        "heading": "Privacy Requests",
+        "body": [
+          "Questions about privacy, cookies or your data can go to the same address. The Privacy Policy explains how ExifLens handles data, including that photos analyzed in your browser are not uploaded."
+        ]
+      },
+      {
         "heading": "Business & Partnership Inquiries",
         "body": [
           "For advertising, partnership, or press inquiries, please reach out to the same email address above."
+        ]
+      },
+      {
+        "heading": "Who Runs ExifLens",
+        "body": [
+          "ExifLens is operated by an individual photographer and developer working under the name Chronicle of Moments_SH. Messages sent to the address above go directly to the operator."
         ]
       }
     ]
