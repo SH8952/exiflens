@@ -1,3 +1,9 @@
+## 2026-11-05 — 미완성 텍스트 진단 2차 대응: "check back soon·곧 추가될 예정" 계열 잔여 문구 정리
+- 배경: 1차 배포 후에도 애드패스가 96점 유지. 라이브 페이지 소스(메시지 JSON이 페이지에 실려 나감)에 "check back soon", "곧 추가될 예정", "vuelve pronto" 등이 남아 있음을 확인.
+- 변경: `messages/{en,es,ko}.json` 문구만 — Guides.empty(en/es/ko), Blog.empty(ko), 장비 소개 문구(ko), 셔터 카운트 지원 안내(ko). 화면 동작 변화 없음(해당 상태에서만 표시되는 문구).
+- 검증: JSON 파싱 확인, 잔여 문구 재검색.
+- 백업: _backups/placeholder-fix2_*
+
 ## 2026-11-05 — 진단 도구 "미완성·자리표시자 텍스트" 오류 대응: "곧 공개" 계열 문구 중립화
 - 배경: 애드패스 재검사에서 exifnd.com이 96점(콘텐츠 품질 오류 1건 "공사 중 / Coming soon")으로 유지. 화면에는 안 보이는 빈 목록·도구 허브 라벨 문구가 번역 데이터(페이지에 함께 실리는 문구)에 남아 있던 것이 원인으로 추정.
 - 변경: `messages/{en,es,ja,ko}.json` 문구만. Blog.empty "No posts yet — coming soon." → "No posts to show."(es·ja 동일 취지), 가이드 빈 목록(ja) → "この言語で表示できるガイドはありません。", ToolsHub.comingSoon "Coming soon/준비 중/近日公開/Próximamente" → "Not yet available/제공 전/提供前/Aún no disponible". 코드 변경 없음.
