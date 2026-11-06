@@ -1,3 +1,10 @@
+## 2026-11-06 — 구글 색인 대기 대응: 우선순위 사이트맵(/sitemap-priority.xml) 추가
+- 배경: 서치 콘솔에서 약 210개가 "발견됨 - 현재 색인 미생성"으로 대기 중이고, 구글 문서도 핵심 페이지만 담은 사이트맵을 따로 제출해 보고서를 그 사이트맵으로 걸러 보도록 안내함. 기존 사이트맵(/sitemap.xml)은 변경하지 않고 보조 사이트맵만 추가.
+- 변경: 새 파일 `src/app/sitemap-priority.xml/route.ts` 1개(기존 파일 수정 없음). 포함 주소 57개 = 4개 언어의 홈·도구 허브·가이드 허브·핵심 도구 8종(44) + 블로그 목록 ko·en·ja(3) + 한국어 블로그 글 전체(10). 블로그 lastmod는 frontmatter 실제 날짜만 사용, 나머지는 lastmod 생략. 응답은 CDN 1시간 캐시, `rss.xml`과 같은 방식(요청 시 계산, 예약 발행 반영).
+- 검증: tsc 타입체크 0 오류, eslint 0 경고, 포함 경로가 전체 사이트맵 STATIC_PATHS에 모두 존재, 예약(미래 날짜) 글 없음. 같은 방식(점이 들어간 폴더의 route.ts)이 `rss.xml`로 이미 운영 중. 격리 빌드는 개발 환경(리눅스 arm64)에서 Next SWC 바이너리를 불러오지 못해 실행하지 못했고, 로컬 `npm run dev`의 `/sitemap-priority.xml` 확인으로 대체.
+- 후속: 푸시·배포 후 서치 콘솔 > 사이트맵에 `https://exifnd.com/sitemap-priority.xml` 제출. 사이트맵별 발견·색인 수로 핵심 페이지 색인 속도 추적.
+- 백업: _backups/priority-sitemap_20261106_144246
+
 ## 2026-11-05 — 미완성 텍스트 진단 5차 대응: 본문(글)에 남은 "under construction·추가 예정" 표현 정리
 - 배경: 4차 배포(메시지 문구) 확인 후에도 adpass가 96점 유지. 검사 대상 13개 페이지에 건축 사진 블로그 글이 포함되어 있고, 영어판 본문에 "a building still under construction"이 있어 "공사 중/Under construction" 계열로 탐지됐을 가능성이 높음. 일본어 셔터카운트 가이드에도 "今後も対応範囲を広げていく予定です" 문장이 있었음.
 - 변경: `content/blog/en/architecture-photography-handheld-indoor-outdoor-composition.mdx`("still under construction" → "still being built"), 같은 글 ko판 "공사용 비계" 3곳 → "건설용 비계", `content/guides/ja/shutter-count-checker-guide.mdx` 향후 확대 예정 문장 삭제. 사진 설명 사실(비계가 보이는 건물)은 유지.
