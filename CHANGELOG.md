@@ -1,3 +1,11 @@
+## 2026-11-07 — 구글 상위 노출 작업 1순위: 일본어 광궤적 가이드(/ja/guides/light-trail-photography-camera-settings) 전면 개선
+- 배경: 서치 콘솔(최근 3개월)에서 "光跡 撮影"(34위), "車 光跡"(31위)이 30위대이고, 일본어 상위 경쟁 4곳(Lifehacker Japan, cizucu, Adobe Japan, CAPA)이 표·FAQ가 없고 날짜가 오래됨. 기존 글은 직역투에 설정 수치가 범위뿐이고 실제 사진·EXIF가 없었음.
+- 변경: 일본어 mdx 1개 전면 재작성(자연스러운 일본어, 셔터 속도별 실사 비교, 장면별 설정 표, 실제 촬영 설정 기록 표 7행, 실패 대처, FAQ 4개, 내부 링크 8곳, title·description·태그 조정, updatedAt 2026-11-07). 사진 7장을 `public/guides/photos/light-trail-01~07-*.webp`로 추가(긴 변 1600px, WebP 82, 위치정보 등 메타데이터 없음). 상단 이미지를 Unsplash 사진에서 직접 촬영한 사진으로 교체(imageCredit 제거), `content/guides/image-alt.json`에 새 이미지 alt 4개 언어 추가. ko/en/es 판과 코드는 변경 없음.
+- 사실 근거: 설정 수치는 사용자가 보낸 ExifLens 화면(7장)의 값만 사용. 촬영 장소명·GPS는 본문에 넣지 않음. 장면별 표는 실측값이 아니라 "출발점(目安)"으로 표기하고, 실측값은 별도 표(7행)로 분리.
+- 검증: mdx 컴파일(remark-gfm) 성공, 내부 링크·이미지 경로 12개 모두 존재, git 변경은 대상 파일뿐. 격리 빌드는 SWC 문제로 불가, 로컬 `npm run dev`의 `/ja/guides/light-trail-photography-camera-settings` 확인으로 대체.
+- 후속: 푸시 후 서치 콘솔에서 해당 URL 색인 재요청, 약 2~4주 뒤 "光跡 撮影"·"車 光跡" 순위와 노출 변화 확인. 영어 40위권 2개 페이지(장노출 흔들림 방지, 손떨림 보정)가 다음 후보.
+- 백업: _backups/ja-light-trail-guide_20261106_161252
+
 ## 2026-11-06 — 구글 색인 대기 대응: 우선순위 사이트맵(/sitemap-priority.xml) 추가
 - 배경: 서치 콘솔에서 약 210개가 "발견됨 - 현재 색인 미생성"으로 대기 중이고, 구글 문서도 핵심 페이지만 담은 사이트맵을 따로 제출해 보고서를 그 사이트맵으로 걸러 보도록 안내함. 기존 사이트맵(/sitemap.xml)은 변경하지 않고 보조 사이트맵만 추가.
 - 변경: 새 파일 `src/app/sitemap-priority.xml/route.ts` 1개(기존 파일 수정 없음). 포함 주소 57개 = 4개 언어의 홈·도구 허브·가이드 허브·핵심 도구 8종(44) + 블로그 목록 ko·en·ja(3) + 한국어 블로그 글 전체(10). 블로그 lastmod는 frontmatter 실제 날짜만 사용, 나머지는 lastmod 생략. 응답은 CDN 1시간 캐시, `rss.xml`과 같은 방식(요청 시 계산, 예약 발행 반영).
