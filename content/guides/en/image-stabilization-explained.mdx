@@ -1,15 +1,16 @@
 ---
-title: "Image Stabilization Explained: How Many Stops of IBIS Can You Actually Trust"
-description: "Trusted a '5.5-stop' stabilization spec and dropped your shutter speed way down, only to get a blurry shot? Here's how IBIS and lens stabilization actually differ, how many stops you can realistically count on, and when stabilization gets in the way."
+title: "Image Stabilization Explained: How Many Stops of IBIS You Can Trust"
+description: "Trusted a 5.5-stop spec and still got blur? See how IBIS differs from lens IS, a safe handheld shutter speed table, and two real handheld frames at 100%."
 publishedAt: "2026-09-09"
-tags: ["image stabilization", "IBIS", "slow shutter"]
+updatedAt: "2026-11-07"
+tags: ["image stabilization", "IBIS", "slow shutter", "handheld shutter speed", "camera shake"]
 category: "Camera Basics & Exposure"
 image: "/guides/images/image-stabilization-explained.webp"
 imageCredit: "Joshua J. Cotten"
 imageCreditUrl: "https://unsplash.com/@jcotten?utm_source=ExifLens&utm_medium=referral"
 ---
 
-A spec sheet claiming "5.5 stops of stabilization" makes it tempting to assume you can hand-hold a shot at 1/4s when the scene technically calls for 1/125s. Try it in practice, though, and more than half your frames at 1/4s often come out with a faint blur. The manufacturer isn't lying — the gap comes from how that number is measured versus how you actually shoot. Understanding what stabilization corrects and what it doesn't turns slow-shutter hand-holding from a guessing game into something predictable.
+A spec sheet claiming "5.5 stops of stabilization" makes it tempting to assume you can hand-hold a shot at 1/4s when the scene technically calls for 1/125s. Try it in practice, though, and more than half your frames at 1/4s often come out with a faint blur. The manufacturer isn't lying; the gap comes from how that number is measured versus how you actually shoot. Understanding what stabilization corrects and what it doesn't turns slow-shutter hand-holding from a guessing game into something predictable.
 
 ## IBIS and lens stabilization move different things
 
@@ -17,24 +18,109 @@ In-body image stabilization (IBIS) shifts the sensor itself in the opposite dire
 
 ## The stop rating on the spec sheet comes from lab conditions
 
-The stabilization figure manufacturers publish (5.5 stops, 8 stops, and so on) is measured under the CIPA standard — a controlled test using a specific lens on a rig or a trained tester holding a very stable stance, not the messy reality of a hand-held shot in the field. Real-world hand shake varies a lot by person, and factors like breathing, finger pressure on the shutter button, standing posture, or cold hands add variables the lab test never sees. That's why it's more realistic to assume you'll reliably get 3 to 4 stops out of a 5.5-stop rated system, not the full number. If your unstabilized safe shutter speed on a 50mm lens is 1/50s, trying to push all the way to 1/1.5s on faith in the spec is optimistic — shooting several frames around 1/3s to 1/6s (roughly 3.5 to 4 stops down) will get you a much higher keeper rate.
+The stabilization figure manufacturers publish (5.5 stops, 8 stops, and so on) is measured under the CIPA standard: a controlled test using a specific lens on a rig or a trained tester holding a very stable stance, not the messy reality of a hand-held shot in the field. Real-world hand shake varies a lot by person, and factors like breathing, finger pressure on the shutter button, standing posture, or cold hands add variables the lab test never sees. That's why it's more realistic to assume you'll reliably get 3 to 4 stops out of a 5.5-stop rated system, not the full number. If your unstabilized safe shutter speed on a 50mm lens is 1/50s, trying to push all the way to 1/1.5s on faith in the spec is optimistic. Shooting several frames around 1/3s to 1/6s (roughly 3.5 to 4 stops down) will get you a much higher keeper rate.
+
+## Safe hand-held shutter speed table
+
+The classic rule says your safe unstabilized shutter speed is about 1 divided by the focal length in seconds. On a camera with a smaller sensor, use the full-frame equivalent focal length (multiply by the crop factor, 1.6 for Canon APS-C). The table below applies that rule and then adds a realistic 3.5 stops of stabilization. The values are starting points, not guarantees, and every number is rounded.
+
+| Full-frame focal length | Safe without stabilization | With 3.5 stops (realistic) | With 5.5 stops (spec ceiling) |
+|---|---|---|---|
+| 24mm | ≈1/25s | ≈1/2s | ≈1.9s |
+| 35mm | ≈1/35s | ≈1/3s | ≈1.3s |
+| 50mm | ≈1/50s | ≈1/4s | ≈0.9s |
+| 85mm | ≈1/85s | ≈1/8s | ≈1/2s |
+| 135mm | ≈1/135s | ≈1/12s | ≈1/3s |
+| 200mm | ≈1/200s | ≈1/18s | ≈1/4s |
+
+For an APS-C camera with a 1.6 crop factor, the same logic gives these values:
+
+| Lens focal length | Equivalent | Safe without stabilization | With 3.5 stops (realistic) |
+|---|---|---|---|
+| 15mm | 24mm | ≈1/25s | ≈1/2s |
+| 24mm | 38mm | ≈1/40s | ≈1/3s |
+| 29mm | 46mm | ≈1/50s | ≈1/4s |
+| 40mm | 64mm | ≈1/60s | ≈1/6s |
+| 50mm | 80mm | ≈1/80s | ≈1/7s |
+
+You can check your own crop factor and equivalent focal length with our [crop factor calculator](/en/tools/crop-factor-calculator), and read how sensor size changes the numbers in [sensor size and crop factor explained](/en/guides/sensor-size-and-crop-factor-explained).
+
+## Two real hand-held frames at 100%
+
+Here are two frames taken without a tripod. They are single shots from different cameras, lenses, and scenes, so they are not a controlled comparison. They do show how the numbers above play out at the edges.
+
+The first was taken with a Canon EOS R7 and an RF15-35mm F2.8 L IS USM, a body and lens that both offer stabilization. At 29mm (about 46mm equivalent) and 1.3 seconds, it is about 5.9 stops slower than the unstabilized safe speed of roughly 1/46s.
+
+![Night street scene with a starburst street lamp and tall apartment towers, taken hand-held at 1.3 seconds](/guides/photos/light-trail-01-street-starburst.webp)
+
+*Canon EOS R7 · RF15-35mm F2.8 L IS USM · 29mm · f/11 · ISO 2000 · 1.3 s · hand-held · 2024-09-28*
+
+At 100%, the individual windows on the far buildings are still crisp.
+
+![100% crop of apartment windows from the 1.3 second hand-held frame, windows still sharp](/guides/photos/stabilization-handheld-1-3s-crop.webp)
+
+*100% crop of the same frame*
+
+The second was taken with a Canon EOS 800D and an EF40mm f/2.8 STM, a camera and lens without stabilization. At 40mm (about 64mm equivalent) and 1/2 second, it is about 5 stops slower than the unstabilized safe speed of roughly 1/64s.
+
+![Night railway crossing with a passing train blurred by motion, taken hand-held at 1/2 second](/guides/photos/light-trail-07-train-crossing.webp)
+
+*Canon EOS 800D · EF40mm f/2.8 STM · 40mm · f/2.8 · ISO 100 · 1/2 s · hand-held · 2024-03-11*
+
+At 100%, the windows and wires have clear double edges from camera shake.
+
+![100% crop of buildings and overhead wires from the 1/2 second hand-held frame, clearly doubled by shake](/guides/photos/stabilization-handheld-half-second-crop.webp)
+
+*100% crop of the same frame*
+
+Treat the first frame as a best case rather than a promise. It is one shared frame, so it shows what is possible, and the 3 to 4 stops above remains the number to plan around. The second frame shows what the same slow shutter speed looks like when nothing is helping.
 
 ## Real scenario: calculating a safe hand-held shutter speed at night
 
-Say you're hand-holding a 50mm lens indoors under soft ambient light to shoot a portrait. Without stabilization, the classic "1/focal length" rule puts your safe shutter speed around 1/50s. Apply a realistic 3.5-stop stabilization benefit and you can, in theory, push down to roughly 1/4s. But if your subject is moving even slightly, stabilization only cancels camera shake — it does nothing for subject motion blur — so the usable shutter speed drops back to something closer to 1/30s–1/60s. The key is to always separate "how much camera shake am I correcting" from "how much subject movement can I tolerate" when deciding how far to push a slow shutter.
+Say you're hand-holding a 50mm lens indoors under soft ambient light to shoot a portrait. Without stabilization, the classic "1/focal length" rule puts your safe shutter speed around 1/50s. Apply a realistic 3.5-stop stabilization benefit and you can, in theory, push down to roughly 1/4s. But if your subject is moving even slightly, stabilization only cancels camera shake. It does nothing for subject motion blur, so the usable shutter speed drops back to something closer to 1/30s–1/60s. The key is to always separate "how much camera shake am I correcting" from "how much subject movement can I tolerate" when deciding how far to push a slow shutter.
 
 ## A common mistake: leaving stabilization on while mounted on a tripod
 
-A surprisingly common mistake is leaving image stabilization active after the camera is already locked down on a tripod. Some older stabilization systems fail to recognize that the camera is completely still, mistake their own micro-vibrations for shake, and keep "correcting" against a movement that was never there — which can actually introduce blur into an otherwise stable shot. Many recent cameras auto-detect tripod use and disable stabilization on their own, but it's still safer to switch it off manually before a long exposure. This matters especially with ND filter long exposures running several seconds or more, where stabilization left on can be the very thing that softens an otherwise sharp frame.
+A surprisingly common mistake is leaving image stabilization active after the camera is already locked down on a tripod. Some older stabilization systems fail to recognize that the camera is completely still, mistake their own micro-vibrations for shake, and keep "correcting" against a movement that was never there, which can actually introduce blur into an otherwise stable shot. Many recent cameras auto-detect tripod use and disable stabilization on their own, but it's still safer to switch it off manually before a long exposure. This matters especially with ND filter long exposures running several seconds or more, where stabilization left on can be the very thing that softens an otherwise sharp frame. More tripod and long-exposure fixes are in our guide to [avoiding camera shake in long exposure photography](/en/guides/avoiding-camera-shake-long-exposure).
 
 ## What image stabilization can't fix
 
-Stabilization, true to its name, only cancels low-frequency hand shake. It does nothing for subject motion blur, a focus that was never accurate in the first place, or a hard jolt at the moment of the shutter press (like your whole body lurching as you mash the button). For fast-moving subjects — sports, wildlife — you still need a genuinely fast shutter speed; leaning on stabilization to drop the shutter speed in these situations just trades camera shake for a bigger dose of subject blur. Think of stabilization as a tool for reducing your own hand movement at slow shutter speeds, and handle subject motion and overall exposure as a separate decision.
+Stabilization, true to its name, only cancels low-frequency hand shake. It does nothing for subject motion blur, a focus that was never accurate in the first place, or a hard jolt at the moment of the shutter press (like your whole body lurching as you mash the button). For fast-moving subjects such as sports and wildlife, you still need a genuinely fast shutter speed; leaning on stabilization to drop the shutter speed in these situations just trades camera shake for a bigger dose of subject blur. Think of stabilization as a tool for reducing your own hand movement at slow shutter speeds, and handle subject motion and overall exposure as a separate decision.
+
+## Test your own keeper rate in 10 minutes
+
+The only number that matters is yours. Here is a quick way to find it:
+
+1. Pick a sharp, detailed subject (a sign with small text works well) and a fixed focal length.
+2. Start at your unstabilized safe speed from the table and take 5 frames with stabilization on.
+3. Lower the shutter speed one stop at a time (1/60, 1/30, 1/15, 1/8, 1/4, 1/2 s), taking 5 frames at each speed.
+4. Open the frames at 100% and count how many are sharp at each speed.
+5. The slowest speed where most frames are sharp is your reliable limit. Note it down per lens.
+
+Repeat with stabilization off to see how many stops it really gives you. You can read the shutter speed, aperture and ISO of any frame with the [ExifLens viewer](/en).
 
 ## Checklist
 
-- Treat the manufacturer's stop rating as a lab ceiling — plan around getting roughly 60-70% of it in real shooting conditions.
+- Treat the manufacturer's stop rating as a lab ceiling: plan around getting roughly 60-70% of it in real shooting conditions.
 - Separate camera shake from subject motion blur before deciding how slow you can push the shutter speed.
 - Switch stabilization off manually on a tripod or during long exposures, including ND filter shots.
 - Remember that IBIS works with any mounted lens, while lens-based stabilization also steadies your viewfinder view.
 - Fire off several frames at a slow shutter speed and pick the sharpest one rather than betting everything on a single shot.
+
+## Frequently Asked Questions
+
+### How many stops of stabilization can I realistically count on?
+
+Plan around 3 to 4 stops for a system rated at 5.5 stops, then check your own keeper rate with the test above. Better technique, such as bracing your elbows and exhaling before the shutter press, can improve the result.
+
+### Should I turn stabilization off on a tripod?
+
+Yes for long exposures, unless your camera automatically detects tripod use. See [avoiding camera shake in long exposure photography](/en/guides/avoiding-camera-shake-long-exposure) for the full tripod checklist.
+
+### Does stabilization freeze a moving subject?
+
+No. It only counters your own hand movement. A walking person or a passing train still blurs at a slow shutter speed, as in the railway crossing frame above.
+
+### Does a crop-sensor camera need a faster shutter speed?
+
+Yes, by the crop factor. A 40mm lens on a 1.6x camera frames like a 64mm lens, so its safe unstabilized shutter speed is closer to 1/60s than 1/40s. Our [exposure stops calculator](/en/tools/exposure-stops-calculator) helps you convert between shutter speeds when you change the number of stops.
