@@ -12,7 +12,8 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  /* 시그니처 색상: 바이올렛 (2026-11-07) — 라이트 #6D28D9 / 다크 #A78BFA. 흰 배경 대비 7.1:1, 어두운 배경 대비 7.3:1 */
+  --primary: oklch(0.491 0.241 292.6);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -33,7 +34,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.72 0.14 60);
+  --primary: oklch(0.709 0.159 293.5);
   --primary-foreground: oklch(0.145 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);

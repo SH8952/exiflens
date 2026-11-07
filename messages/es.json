@@ -8,7 +8,9 @@
     "blogNav": "Blog (EN)",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
-    "toolsNav": "Herramientas"
+    "toolsNav": "Herramientas",
+    "toLightMode": "Cambiar a modo claro",
+    "toDarkMode": "Cambiar a modo oscuro"
   },
   "Home": {
     "title": "ExifLens — Visor EXIF Gratis en Línea y Verificador de Metadatos de Fotos",

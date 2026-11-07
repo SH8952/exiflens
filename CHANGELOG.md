@@ -1,3 +1,12 @@
+## 2026-11-07 — 라이트/다크 전환 버튼 추가 + 시그니처 색상 앰버 → 바이올렛 변경
+- 배경: FlyDroneMap과 시그니처 색(앰버 #e38d3d)·파비콘이 똑같아 사이트별 구분이 안 됨. 네 사이트(ExifLens 바이올렛 / FlyDroneMap 스카이 블루 / firelic 그린 / lifehub 앰버)가 겹치지 않도록 ExifLens를 바이올렛으로 확정. 이번 작업은 ExifLens만 진행(나머지 사이트는 미변경).
+- 모드: 기본값은 기존과 같은 다크 유지(`defaultTheme="dark"`, 시스템 설정 미추종). 헤더(데스크톱·모바일)에 해/달 전환 버튼 `ThemeToggle`(`src/components/theme-toggle.tsx`) 추가. 선택은 next-themes가 브라우저에 저장. 버튼 문구 `Header.toLightMode`·`toDarkMode`를 ko/en/ja/es 4개 언어에 추가. 라이트 모드 색상 토큰은 이미 정의돼 있었고, 하드코딩 색은 이미지 위 오버레이(bg-black/55 등)뿐이라 라이트에서도 문제 없음을 코드로 확인.
+- 색상: `globals.css`의 `--primary`를 라이트 `oklch(0.491 0.241 292.6)`(#6D28D9, 흰 배경 대비 7.1:1), 다크 `oklch(0.709 0.159 293.5)`(#A78BFA, 어두운 배경 대비 7.3:1)로 교체. 가이드 박스의 초록·주황·파랑 의미색과 개발자 전용 패널의 앰버는 브랜드색이 아니므로 그대로 둠.
+- 파비콘: `src/app/icon.png`(512)·`apple-icon.png`(180)·`favicon.ico`(16·32·48·256)를 어두운 인디고 배경(#1E1B4B)+밝은 바이올렛 마크(#A78BFA)로 재생성(모양은 그대로, 색만 치환). 소셜 공유 이미지 `public/og-default.png`의 앰버 포인트(상단 줄·로고·주소)도 바이올렛으로 치환, 검은 배경과 흰 글자는 유지.
+- 검증: tsc 0 오류, 변경 파일 eslint 0 경고(처음 `set-state-in-effect` 오류가 나서 `useSyncExternalStore`로 수정). 4개 언어 번역 키 일치 확인. 이 작업 환경(리눅스 arm64)은 맥용 node_modules의 SWC가 없어 build·dev 실행 불가 → 로컬 `ExifLens 실행.command`로 사용자 확인 필요.
+- 알려진 한계: 소셜 미리보기(카카오·페이스북 등)는 플랫폼이 이전 이미지를 캐시하고 있어 새 색이 반영되기까지 시간이 걸릴 수 있음. 브라우저 탭 아이콘도 캐시 때문에 한동안 이전 색이 보일 수 있음.
+- 백업: _backups/exiflens_backup_20261107_105020_theme_toggle_violet_signature
+
 ## 2026-11-07 — 푸터의 중복 "도구" 링크 제거
 - 배경: 상단 메뉴에 이미 "도구" 탭(`/tools`)이 있는데 푸터에도 같은 `/tools` 링크가 있어 중복. 사용자가 형제 프로젝트(FlyDroneMap·firelic)에는 중복이 없음을 직접 확인해 ExifLens만 정리.
 - 변경: `src/components/site-footer.tsx`에서 `/tools` 링크 3줄 삭제(코드 변경은 이것뿐). 푸터의 개인정보·이용약관·공시·문의·공유·RSS 링크는 그대로. 번역 문구 `Footer.tools`는 쓰이지 않게 되지만 남겨 둠(오류 없음, 나중에 다시 쓸 수 있음). 404 페이지의 도구 링크와 상단 메뉴·홈 도구 소개 영역은 변경 없음.

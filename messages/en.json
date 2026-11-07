@@ -8,7 +8,9 @@
     "blogNav": "Blog",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "toolsNav": "Tools"
+    "toolsNav": "Tools",
+    "toLightMode": "Switch to light mode",
+    "toDarkMode": "Switch to dark mode"
   },
   "Home": {
     "title": "ExifLens — Free Online EXIF Viewer & Photo Metadata Checker",

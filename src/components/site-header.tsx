@@ -5,6 +5,7 @@ import { Aperture, Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navLinkClass =
   "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground";
@@ -71,12 +72,14 @@ export function SiteHeader() {
           </Link>
           {frameLink}
           <LanguageSwitcher />
+          <ThemeToggle />
         </nav>
 
         {/* Mobile: not enough width for 4 text links + language select without
             wrapping onto two lines, so they collapse into a hamburger menu */}
         <div className="flex items-center gap-2 sm:hidden">
           <LanguageSwitcher />
+          <ThemeToggle />
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}

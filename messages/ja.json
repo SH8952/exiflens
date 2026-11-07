@@ -8,7 +8,9 @@
     "blogNav": "ブログ",
     "openMenu": "メニューを開く",
     "closeMenu": "メニューを閉じる",
-    "toolsNav": "ツール"
+    "toolsNav": "ツール",
+    "toLightMode": "ライトモードに切り替え",
+    "toDarkMode": "ダークモードに切り替え"
   },
   "Home": {
     "title": "ExifLens — 無料オンラインEXIFビューア＆写真メタデータチェッカー",

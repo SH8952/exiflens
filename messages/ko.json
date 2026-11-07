@@ -8,7 +8,9 @@
     "blogNav": "블로그",
     "openMenu": "메뉴 열기",
     "closeMenu": "메뉴 닫기",
-    "toolsNav": "도구"
+    "toolsNav": "도구",
+    "toLightMode": "라이트 모드로 전환",
+    "toDarkMode": "다크 모드로 전환"
   },
   "Home": {
     "title": "ExifLens — 무료 온라인 EXIF 뷰어 & 사진 메타데이터 확인",
