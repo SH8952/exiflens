@@ -1,3 +1,11 @@
+## 2026-11-09 — 블로그 새 글: 흑백 사진이 매력적인 이유와 흑백이 잘 어울리는 장면 고르는 법 (ko/en/ja)
+- 글: `content/blog/{ko,en,ja}/black-and-white-photography-expression-appeal.mdx`, 발행일 2026-11-09(월), 분류 "흑백 사진". 제목은 사용자가 5개 후보 중 4번 선택. 사진 7장(R5 Mark II 6장, R7 1장)과 EXIF 스크린샷 기반, 경험 메모 없음(장소명·좌표·감상 미사용).
+- 구성: 도입 → 색을 덜어내면 남는 것들(표) → 선과 원근 → 대칭·반복·반영 → 명암 대비와 실루엣 → 질감 → 흑백에 어울리는/안 어울리는 장면(표) → 촬영·보정 포인트 → 설정 한눈에(표) → 체크리스트 → 흔히 하는 실수 → FAQ 4개 → 정리 → 저작권 안내. 내부 링크: 가이드 7개·블로그 2개(모두 3개 언어에 존재 확인).
+- 이미지: `public/blog/images/bw-photography-1~7.webp`(클래식 다크 프레임, 가로 1600px) + `-full.webp`(프레임 없음, 원본 해상도) + `bw-photography-thumb.webp`(가로 나무 실루엣 사진, 1200×800). 사용자가 썸네일을 가로 사진으로 지정. GPS: 업로드 사진에 이미 EXIF가 없고 재인코딩으로 제거 — 본문에 좌표 없음.
+- 검증: 세 글 모두 MDX 컴파일(remark-gfm, rehype-slug) 오류 없음, 이미지 참조 14개 전부 존재, 링크 대상 파일 존재 확인, 사진 대조표로 번호·방향 확인. 이 작업 환경은 맥용 node_modules의 SWC가 없어 `next build`는 못 돌림 → 로컬 `npm run dev` 확인 필요.
+- 상태: 커밋·푸시 전(사용자 로컬 확인 후 "진행해줘"로 푸시).
+- 백업: _backups/blog-bw-photography_*
+
 ## 2026-11-07 — 라이트/다크 전환 버튼 추가 + 시그니처 색상 앰버 → 바이올렛 변경
 - 배경: FlyDroneMap과 시그니처 색(앰버 #e38d3d)·파비콘이 똑같아 사이트별 구분이 안 됨. 네 사이트(ExifLens 바이올렛 / FlyDroneMap 스카이 블루 / firelic 그린 / lifehub 앰버)가 겹치지 않도록 ExifLens를 바이올렛으로 확정. 이번 작업은 ExifLens만 진행(나머지 사이트는 미변경).
 - 모드: 기본값은 기존과 같은 다크 유지(`defaultTheme="dark"`, 시스템 설정 미추종). 헤더(데스크톱·모바일)에 해/달 전환 버튼 `ThemeToggle`(`src/components/theme-toggle.tsx`) 추가. 선택은 next-themes가 브라우저에 저장. 버튼 문구 `Header.toLightMode`·`toDarkMode`를 ko/en/ja/es 4개 언어에 추가. 라이트 모드 색상 토큰은 이미 정의돼 있었고, 하드코딩 색은 이미지 위 오버레이(bg-black/55 등)뿐이라 라이트에서도 문제 없음을 코드로 확인.
