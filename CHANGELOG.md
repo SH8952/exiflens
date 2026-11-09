@@ -123,6 +123,18 @@
 - 검증: 격리 빌드 성공, ko/en/ja/es × 6개 이미지 도구 페이지 24개 전부 200, 사이트맵에 도구별 24개 항목 노출, 한국어 도구 허브에 5개 카드 노출.
 - 백업: _backups/tools-reveal_20261102_075002
 
+## 2026-11-09 — 셔터카운트 체커: exiftool 정기 점검 — 캐논 EOS R7/R10/R100 추가, R3는 근거 부족으로 보류
+
+- 배경: 셔터카운트 체커가 지원하는 카메라 목록을 exiftool(GPL/Artistic 라이선스 오픈소스) 프로젝트의 최신 공개 태그 문서와 정기적으로 대조하는 점검 작업(직전 점검: 2026-11-02, exiftool 커밋 980409314). exiftool GitHub 메인 브랜치(커밋 9b8664d, 2026-11-05)의 Canon/Sony/FujiFilm/Olympus/Panasonic/Pentax 6개 브랜드 태그 파일을 `grep -iE "shuttercount|imagecount|actuation"`으로 전체 재조사.
+- 발견 및 반영: **캐논 EOS R7, EOS R10**(CR3 파일)에 공개된 `ShutterCount`(exiftool `CameraInfoR7` 테이블, 오프셋 0x0c93, int32u)를 추가. 이번 발견은 기존 매핑(exiftool 문서를 그대로 신뢰)보다 근거가 더 강함 — exiftool 자체 문서를 넘어, 별도의 MIT 라이선스 오픈소스 프로젝트(github.com/4eloveek/canon-r-shutter-checker)가 실제 R7 CR3/JPEG 10개, R10 CR3 45개 파일로 이 오프셋을 독립적으로 교차 검증(값이 노출마다 정확히 1씩 증가, 같은 사진의 CR3·JPEG 값 일치, 감소 사례 없음). exiftool 주석에 따르면 합성 이미지(파노라마 JPEG 등)는 이 위치에 0 또는 65535가 저장되므로, 두 값(및 이론상의 0xffffffff)을 "셔터카운트 아님"으로 제외 처리(exiftool 자체 RawConv와 동일한 처리).
+- 발견 및 반영: **캐논 EOS R100**(CR3 파일)에 공개된 `ShutterCount`(exiftool `CameraInfoR100` 테이블, 오프셋 0x0acf, int32u)를 동일한 방식으로 추가. 같은 독립 프로젝트가 실제 R100 CR3 35개 파일로 "감소 없이 상승"을 확인. R7/R10과 동일한 0/65535/0xffffffff 제외 처리 적용.
+- 발견했지만 보류: **EOS R3**에도 오프셋(0x0fa9, exiftool `CameraInfoR3` 테이블)이 공개되어 있으나, exiftool 자체 주석이 "카메라가 표시하는 숫자와 대조하지 않았음(Not compared with the number shown by the camera)"이라고 명시 — 지금까지 신뢰하고 반영해 온 다른 모든 매핑(R5/R6/RP/G5X Mark II 등, "실제 파일로 검증 못함"일 뿐 exiftool 자신의 신뢰도 단서는 없었음)보다 근거가 명확히 더 약하다고 판단해, 실제 샘플 파일 테스트나 제2의 독립 출처 확인 전까지는 구현하지 않고 보류.
+- 변화 없음: 그 외 5개 브랜드(소니·후지필름·올림푸스·파나소닉·펜탁스)는 2026-11-02 점검과 동일한 결론 유지. 특히 소니는 신규 `Tag9050d` 테이블(ILCE-1M2/6700/7CM2/7CR/7M5/7RM6/ILME-FX2용 `ShutterCount`, 태그 0x000a)을 발견했으나, 이 MakerNote 블록 자체가 암호화(`ProcessEnciphered`)되어 있어 단순 오프셋 추가가 아니라 별도의 복호화 로직 구현이 필요한 수준의 작업— 이번 정기 점검의 범위를 벗어난다고 판단해 손대지 않고 보류(추후 별도 작업으로 검토 필요). 올림푸스·파나소닉은 여전히 관련 필드 전혀 없음(구조적 한계, 결론 불변).
+- 변경 파일: `src/lib/shutter-count-checker.ts`(`CANON_CAMERA_INFO_SHUTTER_COUNT`에 R7/R10/R100 항목과 `invalidValues`(합성 이미지 제외) 필드 신규 추가, 모듈/함수 doc comment), `messages/{ko,en,ja,es}.json`(`ShutterCountChecker.aboutBody`/FAQ 2건/`supportCanon`/하단 요약문에 R7·R10·R100 추가, 지원 기종 수 표기 6→9), `content/guides/{ko,en,ja,es}/shutter-count-checker-guide.mdx`(지원 기종 수 7→10).
+- 검증: `npx tsc --noEmit` 오류 0건, `npx eslint src/lib/shutter-count-checker.ts` 오류 0건, 4개 언어 messages JSON 파싱 확인. 실제 R7/R10/R100 샘플 파일로의 end-to-end 실측 검증은 이 세션에서 하지 못함 — 단, 위 독립 오픈소스 프로젝트의 교차 검증(최대 45개 파일)이 기존 R5/R6 등 매핑들보다 근거 수준이 높음.
+- 백업: `_backups/backup_20261109_001457_canon-r7-r10-r100-shutter-count/`.
+- 참고: 이 커밋들은 로컬에만 생성, push 하지 않음 — 다음 대화에서 석한님 확인 후 직접 push 필요.
+
 ## 2026-11-02 — 블로그: "도심 공원 가을 사진 찍는 법, 빌딩과 단풍을 한 프레임에 담는 구도 정리" 추가
 - 글: `content/blog/ko/urban-park-autumn-photography-skyscrapers-reflections.mdx`(분류 "풍경 사진", `publishedAt: "2026-11-02"`). 사진 6장(R5 Mark II + RF24-70mm 한 렌즈, 2025-11-18 14:15~16:14): 빌딩과 단풍 물길, 억새 너머 도시, 전통 정자(세로), 나무 사이 빌딩과 반영(세로), 마른 연잎 수면, 단풍 역광. 장면 요약표·촬영 시각표·설정 요약표, 체크리스트·흔히 하는 실수·FAQ 4개·정리하기·저작권 안내. 내부 링크: 심도 가이드·심도 계산기·일출·일몰 가이드·골든아워 계산기·빛·타이밍·구도 가이드, 블로그 4개(구도 5가지, 가로 vs 세로, 별 모양 빛, 가을 풍경 6가지). 장소명·GPS 좌표는 본문에 쓰지 않음.
 - 이미지 13개: `public/blog/images/urban-autumn-{1..6}.webp`(클래식 다크 프레임, 1600px), `-{1..6}-full.webp`(원본, 긴 변 2576px), `urban-autumn-thumb.webp`(1200×800, 사진 1장 단독 크롭). EXIF는 ExifLens 화면 스크린샷 값 사용. 코드·번역 변경 없음.
