@@ -73,11 +73,35 @@
  *     `CameraInfoRP`; see the dedicated doc comment above
  *     `canonEosRpShutterCountOffset` below for the exact condition). No
  *     offset is published for firmware versions in between.
- * Every other Canon body — the R7, R10, R3, R1, R5 Mark II, and every
- * CR2-era DSLR — has no known *ShutterCount* offset published anywhere yet
- * (re-checked 2026-11-02 against exiftool's current main-branch Canon tag
- * table), so those still return the same honest "not supported yet" result
- * as any other unmapped Canon body, old or new.
+ *   - EOS R7, EOS R10 (added 2026-11-09 during the regular exiftool check) —
+ *     same offset, 0x0c93 (exiftool's public Canon tag table, `CameraInfoR7`,
+ *     citing a GitHub issue report). Unlike every other mapping in this
+ *     module, this one has independent cross-verification beyond exiftool's
+ *     own documentation: a separate MIT-licensed open-source project
+ *     (github.com/4eloveek/canon-r-shutter-checker) ran this exact offset
+ *     against 10 real EOS R7 CR3/JPEG files and 45 real EOS R10 CR3 files —
+ *     the value rose by exactly 1 per exposure, the CR3 and JPEG of the same
+ *     shot agreed, and it never decreased. exiftool's own notes say
+ *     composite images (e.g. panorama JPEGs) store 0 or 65535 here instead
+ *     of a real count, so this module excludes those two values (and the
+ *     theoretical 0xffffffff) the same way exiftool's own conversion does,
+ *     rather than treating them as a shutter count.
+ *   - EOS R100 (added 2026-11-09 during the regular exiftool check) — offset
+ *     0x0acf (exiftool's public Canon tag table, `CameraInfoR100`, citing
+ *     the same GitHub report), seen rising without a decrease across 35
+ *     real EOS R100 CR3 files by the same independent project. Same 0 /
+ *     65535 / 0xffffffff exclusion applied.
+ * Every other Canon body — the R3, R1, R5 Mark II, and every CR2-era DSLR —
+ * has no *ShutterCount* offset judged reliable enough to map yet (re-checked
+ * 2026-11-09 against exiftool's current main-branch Canon tag table): the
+ * EOS R3 does have a single documented offset (0x0fa9, `CameraInfoR3`), but
+ * exiftool's own note for it says the value was "not compared with the
+ * number shown by the camera" — a materially weaker claim than every other
+ * mapping here, so it is deliberately left unmapped pending either a
+ * real-file test or a second independent source, rather than copying a
+ * self-flagged-uncertain fact. Every unmapped body still returns the same
+ * honest "not supported yet" result as any other unmapped Canon body, old
+ * or new.
  *
  *   - EOS R6 Mark III has a documented offset (0x086d, exiftool's public
  *     Canon tag table, citing forum thread #17745 and a private email to
@@ -319,7 +343,17 @@ function readMakeModelFromMiniTiff(
 }
 
 /** Canon body families with a publicly documented `CameraInfo` ShutterCount byte offset (see module doc comment). */
-const CANON_CAMERA_INFO_SHUTTER_COUNT: { modelPattern: RegExp; byteOffset: number }[] = [
+const CANON_CAMERA_INFO_SHUTTER_COUNT: {
+  modelPattern: RegExp;
+  byteOffset: number;
+  /**
+   * Raw int32u values that are NOT a real shutter count for this mapping
+   * (e.g. composite/panorama images store a sentinel here instead) and
+   * should be treated as unsupported rather than returned as the count —
+   * matches exiftool's own RawConv for the same tag.
+   */
+  invalidValues?: number[];
+}[] = [
   { modelPattern: /\bEOS R[56]$/, byteOffset: 0x0af1 },
   // Model tag's raw internal string for these three bodies is "R6m2", not
   // the marketing name "R6 Mark II" — matches exiftool's own condition
@@ -329,6 +363,13 @@ const CANON_CAMERA_INFO_SHUTTER_COUNT: { modelPattern: RegExp; byteOffset: numbe
   // comment for the exiftool source citation and the same "not verified
   // against a real file" caveat that applied to EOS R5/R6 at launch).
   { modelPattern: /\bG5 X Mark II$/, byteOffset: 0x0a95 },
+  // EOS R7 / R10, CR3 only (added 2026-11-09 — see module doc comment for
+  // the independent cross-verification from a separate open-source
+  // project). 0/0xffff/0xffffffff mean "not a real count" per exiftool.
+  { modelPattern: /\bEOS R(7|10)$/, byteOffset: 0x0c93, invalidValues: [0, 0xffff, 0xffffffff] },
+  // EOS R100, CR3 only (added 2026-11-09 — same independent project and
+  // same sentinel-exclusion rule as R7/R10; see module doc comment).
+  { modelPattern: /\bEOS R100$/, byteOffset: 0x0acf, invalidValues: [0, 0xffff, 0xffffffff] },
 ];
 
 /**
@@ -414,15 +455,18 @@ function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
     return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
   }
   const shutterCount = view.getUint32(blob.offset + mapping.byteOffset, mnLE);
+  if (mapping.invalidValues?.includes(shutterCount)) {
+    return unsupported("canon", cameraModel, "이 파일에서는 셔터카운트 값을 확인할 수 없습니다(합성 이미지 등).");
+  }
   return { supported: true, brand: "canon", shutterCount, cameraModel };
 }
 
 /**
  * Reads the shutter/actuation count from a supported camera file, entirely
  * client-side (the file's bytes never leave the browser). Supported today:
- * Nikon (NEF / in-camera JPEG) and Canon EOS R5, R6, R6 Mark II, R8, R50,
- * EOS RP, and PowerShot G5 X Mark II (CR3 only). Every other brand or model returns
- * `{ supported: false }` with an honest explanation
+ * Nikon (NEF / in-camera JPEG) and Canon EOS R5, R6, R6 Mark II, R7, R8,
+ * R10, R50, R100, EOS RP, and PowerShot G5 X Mark II (CR3 only). Every other
+ * brand or model returns `{ supported: false }` with an honest explanation
  * — see the module doc comment for why, and
  * `content/guides/<locale>/shutter-count-checker-guide.mdx` for the full
  * supported-brand roadmap shown to users.
