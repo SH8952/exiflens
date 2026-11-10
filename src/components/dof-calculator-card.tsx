@@ -3,6 +3,13 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { Input } from "@/components/ui/input";
+import { publishShareState } from "@/lib/share-state";
+import {
+  parseBoundedNumber,
+  parseNumberChoice,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import {
   Select,
   SelectContent,
@@ -36,11 +43,64 @@ export function DofCalculatorCard() {
     DEFAULT_SUBJECT_DISTANCE_M,
   );
 
+  // 공유 링크(?f=&a=&s=&c=&d=)로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와
+  // 첫 화면을 맞추기 위해 마운트 직후에 한 번만 읽는다. 허용 범위 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const f = parseBoundedNumber(q.get("f"), 1, 2000);
+    const a = parseNumberChoice(q.get("a"), APERTURE_PRESETS);
+    const s = parseStringChoice(
+      q.get("s"),
+      SENSOR_PRESETS.map((p) => p.id),
+    );
+    const c = parseBoundedNumber(q.get("c"), MIN_CUSTOM_COC_MM, MAX_CUSTOM_COC_MM);
+    const d = parseBoundedNumber(q.get("d"), 0.1, 100000);
+    if (f !== null) setFocalLength(f);
+    if (a !== null) setAperture(a);
+    if (s !== null) setSensorId(s);
+    if (c !== null) setCustomCoc(c);
+    if (d !== null) setSubjectDistance(d);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const sensor =
     SENSOR_PRESETS.find((s) => s.id === sensorId) ?? SENSOR_PRESETS[0];
   const coc = sensor.circleOfConfusionMm ?? customCoc;
 
   const result = calculateDof(focalLength, aperture, coc, subjectDistance);
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    f: String(focalLength),
+    a: String(aperture),
+    s: sensorId,
+    ...(sensorId === "custom" ? { c: String(customCoc) } : {}),
+    d: String(subjectDistance),
+  }).toString();
+  const shareText = result
+    ? t("shareText", {
+        focal: focalLength,
+        aperture,
+        sensor: sensorId === "custom" ? t("customSensor") : sensor.label,
+        distance: subjectDistance,
+        dof:
+          result.totalDofMeters === null
+            ? t("infinity")
+            : formatDistanceMeters(result.totalDofMeters),
+      })
+    : null;
+  React.useEffect(() => {
+    publishShareState(
+      "/tools/dof-calculator",
+      shareText === null ? null : { query: shareQuery, text: shareText },
+    );
+  }, [shareQuery, shareText]);
+  React.useEffect(
+    () => () => publishShareState("/tools/dof-calculator", null),
+    [],
+  );
 
   return (
     <div className="rounded-xl border border-border bg-card p-5">

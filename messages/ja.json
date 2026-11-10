@@ -1290,6 +1290,7 @@
   },
   "DofCalculator": {
     "cardTitle": "被写界深度",
+    "shareText": "{focal}mm · f/{aperture} · {sensor} · 被写体 {distance}m → 全体の被写界深度 {dof}",
     "focalLength": "焦点距離 (mm)",
     "aperture": "絞り値 (F値)",
     "sensor": "センサーサイズ",
@@ -2250,6 +2251,7 @@
   },
   "Sunny16Calculator": {
     "cardTitle": "サニー16露出",
+    "shareText": "{condition} · {iso} · {aperture} → 推奨シャッタースピード {shutter}",
     "lightingCondition": "光の条件",
     "conditions": {
       "sunnyBright": "快晴、はっきりした影 (サニー16)",

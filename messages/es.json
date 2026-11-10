@@ -1290,6 +1290,7 @@
   },
   "DofCalculator": {
     "cardTitle": "Profundidad de campo",
+    "shareText": "{focal}mm · f/{aperture} · {sensor} · sujeto a {distance}m → profundidad de campo total {dof}",
     "focalLength": "Distancia focal (mm)",
     "aperture": "Apertura (valor f)",
     "sensor": "Tamaño del sensor",
@@ -2250,6 +2251,7 @@
   },
   "Sunny16Calculator": {
     "cardTitle": "Exposición Sunny 16",
+    "shareText": "{condition} · {iso} · {aperture} → velocidad de obturación recomendada {shutter}",
     "lightingCondition": "Condición de luz",
     "conditions": {
       "sunnyBright": "Sol brillante, sombras marcadas (Sunny 16)",

@@ -1291,6 +1291,7 @@
   },
   "DofCalculator": {
     "cardTitle": "심도 계산",
+    "shareText": "{focal}mm · f/{aperture} · {sensor} · 피사체 {distance}m → 총 심도 {dof}",
     "focalLength": "초점거리 (mm)",
     "aperture": "조리개 값 (f-stop)",
     "sensor": "센서 크기",
@@ -2251,6 +2252,7 @@
   },
   "Sunny16Calculator": {
     "cardTitle": "써니 16 노출",
+    "shareText": "{condition} · {iso} · {aperture} → 권장 셔터 속도 {shutter}",
     "lightingCondition": "조명 조건",
     "conditions": {
       "sunnyBright": "맑음, 뚜렷한 그림자 (써니 16)",

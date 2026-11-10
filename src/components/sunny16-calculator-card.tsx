@@ -2,6 +2,12 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { publishShareState } from "@/lib/share-state";
+import {
+  parseNumberChoice,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import {
   Select,
   SelectContent,
@@ -57,6 +63,24 @@ export function Sunny16CalculatorCard() {
   const [iso, setIso] = React.useState(100);
   const [aperture, setAperture] = React.useState(16);
 
+  // 공유 링크(?c=&i=&a=)로 들어온 경우 입력값을 채운다. 마운트 직후 한 번만 읽고,
+  // 허용 목록에 없는 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const c = parseStringChoice(
+      q.get("c"),
+      LIGHTING_CONDITIONS.map((l) => l.id),
+    );
+    const i = parseNumberChoice(q.get("i"), ISO_STOPS);
+    const a = parseNumberChoice(q.get("a"), APERTURE_STOPS);
+    if (c !== null) setConditionId(c);
+    if (i !== null) setIso(i);
+    if (a !== null) setAperture(a);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const condition =
     LIGHTING_CONDITIONS.find((c) => c.id === conditionId) ??
     LIGHTING_CONDITIONS[0];
@@ -94,6 +118,32 @@ export function Sunny16CalculatorCard() {
     });
 
   const shutterSeconds = step2?.compensateValue ?? null;
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    c: conditionId,
+    i: String(iso),
+    a: String(aperture),
+  }).toString();
+  const shareText =
+    shutterSeconds !== null
+      ? t("shareText", {
+          condition: t(`conditions.${condition.id}`),
+          iso: formatIso(iso),
+          aperture: formatAperture(aperture),
+          shutter: formatShutterSpeed(shutterSeconds),
+        })
+      : null;
+  React.useEffect(() => {
+    publishShareState(
+      "/tools/sunny-16-calculator",
+      shareText === null ? null : { query: shareQuery, text: shareText },
+    );
+  }, [shareQuery, shareText]);
+  React.useEffect(
+    () => () => publishShareState("/tools/sunny-16-calculator", null),
+    [],
+  );
 
   return (
     <div className="rounded-xl border border-border bg-card p-5">
