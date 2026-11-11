@@ -2,6 +2,12 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSharePublish } from "@/lib/use-share-publish";
+import {
+  parseBoundedNumber,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -45,6 +51,30 @@ export function CropFactorCalculatorCard() {
   const [aperture, setAperture] = React.useState(DEFAULT_APERTURE);
   const [subjectDistanceM, setSubjectDistanceM] = React.useState(DEFAULT_SUBJECT_DISTANCE_M);
 
+  // 공유 링크로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와 첫 화면을 맞추기 위해
+  // 마운트 직후 한 번만 읽고, 허용 범위·목록 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const ids = SENSOR_PRESETS.map((p) => p.id);
+    const s = parseStringChoice(q.get("s"), ids);
+    const w = parseBoundedNumber(q.get("w"), 1, 500);
+    const h = parseBoundedNumber(q.get("h"), 1, 500);
+    const f = parseBoundedNumber(q.get("f"), 1, 2000);
+    const cs = parseStringChoice(q.get("cs"), ids);
+    const a = parseBoundedNumber(q.get("a"), 0.5, 64);
+    const d = parseBoundedNumber(q.get("d"), 0.1, 100000);
+    if (s !== null) setSensorId(s);
+    if (w !== null) setCustomWidth(w);
+    if (h !== null) setCustomHeight(h);
+    if (f !== null) setFocalLength(f);
+    if (cs !== null) setCompareSensorId(cs);
+    if (a !== null) setAperture(a);
+    if (d !== null) setSubjectDistanceM(d);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const sensorPreset = SENSOR_PRESETS.find((s) => s.id === sensorId) ?? SENSOR_PRESETS[0];
   const sensorWidthMm = sensorPreset.widthMm ?? customWidth;
   const sensorHeightMm = sensorPreset.heightMm ?? customHeight;
@@ -62,6 +92,28 @@ export function CropFactorCalculatorCard() {
     cropFactor !== null ? calculateEquivalentFocalLengthMm(focalLength, cropFactor) : null;
   const horizontalFov = calculateFovDegrees(sensorWidthMm, focalLength);
   const verticalFov = calculateFovDegrees(sensorHeightMm, focalLength);
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    s: sensorId,
+    ...(sensorId === "custom"
+      ? { w: String(customWidth), h: String(customHeight) }
+      : {}),
+    f: String(focalLength),
+    cs: compareSensorId,
+    a: String(aperture),
+    d: String(subjectDistanceM),
+  }).toString();
+  const shareText =
+    cropFactor !== null && equivalentFocalLength !== null
+      ? t("shareText", {
+          sensor: sensorId === "custom" ? t("customOption") : sensorPreset.label,
+          focal: focalLength,
+          crop: formatCropFactor(cropFactor),
+          equivalent: formatFocalLengthMm(equivalentFocalLength),
+        })
+      : null;
+  useSharePublish("/tools/crop-factor-calculator", shareQuery, shareText);
 
   const compareCropFactor = calculateCropFactor(compareWidthMm, compareHeightMm);
   const comparableFocalLength =

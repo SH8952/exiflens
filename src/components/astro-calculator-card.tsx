@@ -2,6 +2,13 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSharePublish } from "@/lib/use-share-publish";
+import {
+  parseBoundedNumber,
+  parseNumberChoice,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -35,6 +42,29 @@ export function AstroCalculatorCard() {
   const [sensorId, setSensorId] = React.useState<AstroSensorPresetId>(DEFAULT_SENSOR_ID);
   const [megapixelId, setMegapixelId] = React.useState<MegapixelPresetId>(DEFAULT_MEGAPIXEL_ID);
 
+  // 공유 링크로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와 첫 화면을 맞추기 위해
+  // 마운트 직후 한 번만 읽고, 허용 범위·목록 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const f = parseBoundedNumber(q.get("f"), 1, 2000);
+    const a = parseNumberChoice(q.get("a"), APERTURE_PRESETS);
+    const s = parseStringChoice(
+      q.get("s"),
+      ASTRO_SENSOR_PRESETS.map((p) => p.id),
+    );
+    const m = parseStringChoice(
+      q.get("m"),
+      MEGAPIXEL_PRESETS.map((p) => p.id),
+    );
+    if (f !== null) setFocalLength(f);
+    if (a !== null) setAperture(a);
+    if (s !== null) setSensorId(s);
+    if (m !== null) setMegapixelId(m);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const sensor = ASTRO_SENSOR_PRESETS.find((s) => s.id === sensorId) ?? ASTRO_SENSOR_PRESETS[0];
   const megapixelPreset = MEGAPIXEL_PRESETS.find((m) => m.id === megapixelId) ?? MEGAPIXEL_PRESETS[0];
 
@@ -43,6 +73,25 @@ export function AstroCalculatorCard() {
 
   const rule500Seconds = calculate500Rule(focalLength, sensor.cropFactor);
   const npfSeconds = calculateNpfRule(focalLength, aperture, pixelPitchMicrons);
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    f: String(focalLength),
+    a: String(aperture),
+    s: sensorId,
+    m: megapixelId,
+  }).toString();
+  const shareText =
+    rule500Seconds !== null && npfSeconds !== null
+      ? t("shareText", {
+          focal: focalLength,
+          aperture,
+          sensor: sensor.label,
+          rule500: formatExposureSeconds(rule500Seconds),
+          npf: formatExposureSeconds(npfSeconds),
+        })
+      : null;
+  useSharePublish("/tools/astrophotography-calculator", shareQuery, shareText);
 
   return (
     <div className="rounded-xl border border-border bg-card p-5">

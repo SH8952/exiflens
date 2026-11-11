@@ -1378,6 +1378,7 @@
     }
   },
   "ExposureCalculator": {
+    "shareText": "Desde {baseline}: al cambiar {changed} a {newValue} → {compensate} a {compValue}",
     "cardTitle": "Calculadora de exposición",
     "baselineTitle": "Exposición actual (correcta)",
     "aperture": "Apertura (valor f)",
@@ -1466,6 +1467,7 @@
     }
   },
   "TimelapseCalculator": {
+    "shareText": "Intervalo {interval} · {shots} fotos → vídeo de {video} a {fps}fps, {storage} de almacenamiento",
     "shootPlanTitle": "Plan de disparo",
     "modeLabel": "Calcular a partir de",
     "modeIntervalAndDuration": "Intervalo + Tiempo total de disparo",
@@ -1565,6 +1567,7 @@
     }
   },
   "AstroCalculator": {
+    "shareText": "{focal}mm · f/{aperture} · {sensor} → regla 500: {rule500}, regla NPF: {npf}",
     "cardTitle": "Cálculo de exposición estelar",
     "focalLength": "Distancia focal (mm)",
     "aperture": "Apertura (valor f)",
@@ -1651,6 +1654,7 @@
     }
   },
   "BracketCalculator": {
+    "shareText": "{baseline} · bracketing de {param} ±{step} pasos × {count} fotos → tiempo total de disparo {time}",
     "cardTitle": "Exposición en Horquillado",
     "baselineTitle": "Exposición Base",
     "aperture": "Apertura (f-stop)",
@@ -1749,6 +1753,7 @@
     }
   },
   "PrintResolutionCalculator": {
+    "shareText": "{width}×{height}px a {dpi}dpi → tamaño máximo de impresión {sizeIn} ({sizeCm})",
     "cardTitle": "Resolución de Impresión",
     "photoSizeTitle": "Tamaño en Píxeles de la Foto",
     "widthPx": "Ancho (px)",
@@ -1850,6 +1855,7 @@
     }
   },
   "StorageCalculator": {
+    "shareText": "{fileSize}MB por foto · {shots} fotos · {backup} copias de seguridad → {total} necesarios, {cards} tarjetas de {cardGb}GB",
     "cardTitle": "Espacio de Almacenamiento",
     "formatLabel": "Formato de Archivo",
     "formatOption": {
@@ -2060,6 +2066,7 @@
     }
   },
   "CropFactorCalculator": {
+    "shareText": "{sensor} · {focal}mm → factor de recorte {crop}, equivalente a 35mm: {equivalent}",
     "cardTitle": "Calculadora de factor de recorte / distancia focal equivalente",
     "sensorLabel": "Mi sensor de cámara",
     "customOption": "Personalizado",
@@ -2160,6 +2167,7 @@
     }
   },
   "DofHyperfocalTable": {
+    "shareText": "{focal}mm · f/{aperture} · {sensor} → distancia hiperfocal {hyperfocal}",
     "cardTitle": "Tablas de profundidad de campo e hiperfocal",
     "focalLength": "Distancia focal (mm)",
     "sensor": "Tamaño del sensor",
@@ -2341,6 +2349,7 @@
     }
   },
   "AdvancedDofDiffractionCalculator": {
+    "shareText": "{focal}mm · f/{aperture} · {sensor} · sujeto a {distance}m → profundidad de campo total {dof}, apertura límite por difracción {limit}",
     "cardTitle": "DoF avanzada y difracción",
     "focalLength": "Distancia focal (mm)",
     "sensor": "Tamaño del sensor",
@@ -2434,6 +2443,7 @@
     }
   },
   "CameraFovCalculator": {
+    "shareText": "{sensor} · {focal}mm → campo de visión {horizontal} horizontal · {vertical} vertical · {diagonal} diagonal",
     "cardTitle": "Campo de visión de la cámara",
     "sensorLabel": "Tamaño del sensor",
     "customOption": "Personalizado",
@@ -2521,6 +2531,7 @@
     }
   },
   "FlashGuideNumberCalculator": {
+    "shareText": "GN {guide} · {iso} · {input} → {label}: {result}",
     "cardTitle": "Número guía del flash",
     "guideNumberLabel": "Número guía del flash (a ISO 100)",
     "guideNumberHint": "Consulta el manual o la ficha técnica de tu flash para ver su número guía publicado — la mayoría lo indican a ISO 100 para una posición de zoom concreta (habitualmente 35mm o 50mm).",

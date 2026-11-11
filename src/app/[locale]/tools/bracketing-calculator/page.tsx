@@ -9,7 +9,7 @@ import { ToolExampleImages } from "@/components/tools/tool-example-images";
 import { ToolImageDevPanel } from "@/components/dev/tool-image-dev-panel";
 import { getToolImages } from "@/lib/tool-images";
 import { AdZone } from "@/components/ad-zone";
-import { ShareButton } from "@/components/share-button";
+import { ResultShare } from "@/components/result-share";
 import {
   ToolSections,
   type ToolRelated,
@@ -152,10 +152,10 @@ export default async function BracketingCalculatorPage({
             <h2 className="text-base font-semibold text-foreground">
               {t("aboutTitle")}
             </h2>
-            <ShareButton
+            <ResultShare
+              path="/tools/bracketing-calculator"
               title={t("pageTitle")}
               text={t("pageDescription")}
-              url={`${SITE_URL}/${locale}/tools/bracketing-calculator`}
             />
           </div>
           <p>{t("aboutBody")}</p>

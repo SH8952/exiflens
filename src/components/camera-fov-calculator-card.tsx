@@ -2,6 +2,12 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSharePublish } from "@/lib/use-share-publish";
+import {
+  parseBoundedNumber,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -39,6 +45,26 @@ export function CameraFovCalculatorCard() {
   const [customHeight, setCustomHeight] = React.useState(DEFAULT_CUSTOM_HEIGHT_MM);
   const [focalLength, setFocalLength] = React.useState(DEFAULT_FOCAL_LENGTH_MM);
 
+  // 공유 링크로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와 첫 화면을 맞추기 위해
+  // 마운트 직후 한 번만 읽고, 허용 범위·목록 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const s = parseStringChoice(
+      q.get("s"),
+      SENSOR_PRESETS.map((p) => p.id),
+    );
+    const w = parseBoundedNumber(q.get("w"), 1, 500);
+    const h = parseBoundedNumber(q.get("h"), 1, 500);
+    const f = parseBoundedNumber(q.get("f"), 1, 2000);
+    if (s !== null) setSensorId(s);
+    if (w !== null) setCustomWidth(w);
+    if (h !== null) setCustomHeight(h);
+    if (f !== null) setFocalLength(f);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const sensorPreset = SENSOR_PRESETS.find((s) => s.id === sensorId) ?? SENSOR_PRESETS[0];
   const sensorWidthMm = sensorPreset.widthMm ?? customWidth;
   const sensorHeightMm = sensorPreset.heightMm ?? customHeight;
@@ -48,6 +74,26 @@ export function CameraFovCalculatorCard() {
   const verticalFov = calculateFovDegrees(sensorHeightMm, focalLength);
   const diagonalFov =
     diagonalMm !== null ? calculateFovDegrees(diagonalMm, focalLength) : null;
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    s: sensorId,
+    ...(sensorId === "custom"
+      ? { w: String(customWidth), h: String(customHeight) }
+      : {}),
+    f: String(focalLength),
+  }).toString();
+  const shareText =
+    horizontalFov !== null && verticalFov !== null && diagonalFov !== null
+      ? t("shareText", {
+          sensor: sensorId === "custom" ? t("customOption") : sensorPreset.label,
+          focal: focalLength,
+          horizontal: formatFovDegrees(horizontalFov),
+          vertical: formatFovDegrees(verticalFov),
+          diagonal: formatFovDegrees(diagonalFov),
+        })
+      : null;
+  useSharePublish("/tools/camera-fov-calculator", shareQuery, shareText);
 
   const tableRows = TABLE_FOCAL_LENGTHS_MM.map((mm) => ({
     focalLength: mm,

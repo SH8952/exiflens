@@ -2,6 +2,12 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSharePublish } from "@/lib/use-share-publish";
+import {
+  parseNumberChoice,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import {
   Select,
   SelectContent,
@@ -45,6 +51,29 @@ export function ExposureCalculatorCard() {
   const [newValue, setNewValue] = React.useState<number>(1 / 500);
   const [compensateParamChoice, setCompensateParamChoice] = React.useState<ExposureParam>("aperture");
 
+  // 공유 링크로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와 첫 화면을 맞추기 위해
+  // 마운트 직후 한 번만 읽고, 허용 범위·목록 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const a = parseNumberChoice(q.get("a"), APERTURE_STOPS);
+    const s = parseNumberChoice(q.get("s"), SHUTTER_SPEED_STOPS_SECONDS);
+    const i = parseNumberChoice(q.get("i"), ISO_STOPS);
+    const cp = parseStringChoice(q.get("cp"), PARAMS);
+    const nv = cp !== null ? parseNumberChoice(q.get("nv"), presetsFor(cp)) : null;
+    const cc = parseStringChoice(q.get("cc"), PARAMS);
+    if (a !== null) setAperture(a);
+    if (s !== null) setShutterSpeed(s);
+    if (i !== null) setIso(i);
+    if (cp !== null && nv !== null) {
+      setChangedParam(cp);
+      setNewValue(nv);
+      if (cc !== null && cc !== cp) setCompensateParamChoice(cc);
+    }
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const compensateOptions = PARAMS.filter((p) => p !== changedParam);
   // Derived during render rather than synced via an effect: whenever the
   // previously chosen compensate parameter is no longer valid (because it
@@ -68,6 +97,26 @@ export function ExposureCalculatorCard() {
 
   const paramLabel = (p: ExposureParam) =>
     p === "aperture" ? t("aperture") : p === "shutterSpeed" ? t("shutterSpeed") : t("iso");
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    a: String(aperture),
+    s: String(shutterSpeed),
+    i: String(iso),
+    cp: changedParam,
+    nv: String(newValue),
+    cc: compensateParam,
+  }).toString();
+  const shareText = result
+    ? t("shareText", {
+        baseline: `${formatAperture(aperture)} · ${formatShutterSpeed(shutterSpeed)} · ${formatIso(iso)}`,
+        changed: paramLabel(changedParam),
+        newValue: formatExposureValue(changedParam, newValue),
+        compensate: paramLabel(compensateParam),
+        compValue: formatExposureValue(compensateParam, result.compensateValue),
+      })
+    : null;
+  useSharePublish("/tools/exposure-stops-calculator", shareQuery, shareText);
 
   return (
     <div className="rounded-xl border border-border bg-card p-5">

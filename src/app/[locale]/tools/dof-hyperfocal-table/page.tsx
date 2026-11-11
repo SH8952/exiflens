@@ -6,7 +6,7 @@ import { toolSocialImages } from "@/lib/tool-og";
 import { Link } from "@/i18n/navigation";
 import { DofHyperfocalTableCard } from "@/components/dof-hyperfocal-table-card";
 import { AdZone } from "@/components/ad-zone";
-import { ShareButton } from "@/components/share-button";
+import { ResultShare } from "@/components/result-share";
 import {
   ToolSections,
   type ToolRelated,
@@ -152,10 +152,10 @@ export default async function DofHyperfocalTablePage({
             <h2 className="text-base font-semibold text-foreground">
               {t("aboutTitle")}
             </h2>
-            <ShareButton
+            <ResultShare
+              path="/tools/dof-hyperfocal-table"
               title={t("pageTitle")}
               text={t("pageDescription")}
-              url={`${SITE_URL}/${locale}/tools/dof-hyperfocal-table`}
             />
           </div>
           <p>{t("aboutBody")}</p>

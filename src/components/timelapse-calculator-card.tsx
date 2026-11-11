@@ -2,6 +2,13 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSharePublish } from "@/lib/use-share-publish";
+import {
+  parseBoundedNumber,
+  parseNumberChoice,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -45,6 +52,29 @@ export function TimelapseCalculatorCard() {
   const [fileSizeMb, setFileSizeMb] = React.useState(DEFAULT_FILE_SIZE_MB);
   const [shutterSpeed, setShutterSpeed] = React.useState(DEFAULT_SHUTTER_SPEED_SECONDS);
 
+  // 공유 링크로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와 첫 화면을 맞추기 위해
+  // 마운트 직후 한 번만 읽고, 허용 범위·목록 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const m = parseStringChoice(q.get("m"), MODES);
+    const iv = parseBoundedNumber(q.get("iv"), 0.1, 86400);
+    const dm = parseBoundedNumber(q.get("dm"), 1, 100000);
+    const n = parseBoundedNumber(q.get("n"), 1, 1000000);
+    const fp = parseNumberChoice(q.get("fps"), FPS_PRESETS);
+    const fs = parseBoundedNumber(q.get("fs"), 0.1, 10000);
+    const ss = parseNumberChoice(q.get("ss"), SHUTTER_SPEED_STOPS_SECONDS);
+    if (m !== null) setMode(m);
+    if (iv !== null) setIntervalSeconds(iv);
+    if (dm !== null) setDurationMinutes(dm);
+    if (n !== null) setShotCount(n);
+    if (fp !== null) setFps(fp);
+    if (fs !== null) setFileSizeMb(fs);
+    if (ss !== null) setShutterSpeed(ss);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const plan = calculateShootPlan({
     mode,
     intervalSeconds,
@@ -61,6 +91,28 @@ export function TimelapseCalculatorCard() {
   const shutterAngle = plan
     ? calculateShutterAngle(shutterSpeed, plan.intervalSeconds)
     : null;
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    m: mode,
+    iv: String(intervalSeconds),
+    dm: String(durationMinutes),
+    n: String(shotCount),
+    fps: String(fps),
+    fs: String(fileSizeMb),
+    ss: String(shutterSpeed),
+  }).toString();
+  const shareText =
+    plan && videoDurationSeconds !== null && storageGb !== null
+      ? t("shareText", {
+          interval: formatSeconds(plan.intervalSeconds),
+          shots: plan.shotCount,
+          fps,
+          video: formatDurationHms(videoDurationSeconds),
+          storage: formatGb(storageGb),
+        })
+      : null;
+  useSharePublish("/tools/timelapse-calculator", shareQuery, shareText);
 
   const modeLabel = (m: ShootPlanMode) =>
     m === "intervalAndDuration"

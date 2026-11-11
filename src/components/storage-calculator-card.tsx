@@ -2,6 +2,13 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSharePublish } from "@/lib/use-share-publish";
+import {
+  parseBoundedNumber,
+  parseNumberChoice,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -46,6 +53,39 @@ export function StorageCalculatorCard() {
   const [cardGb, setCardGb] = React.useState(DEFAULT_CARD_GB);
   const [uploadMbps, setUploadMbps] = React.useState(DEFAULT_UPLOAD_MBPS);
 
+  // 공유 링크로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와 첫 화면을 맞추기 위해
+  // 마운트 직후 한 번만 읽고, 허용 범위·목록 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const fmt = parseStringChoice(
+      q.get("fmt"),
+      STORAGE_FORMAT_PRESETS.map((p) => p.id),
+    );
+    const fsm = parseBoundedNumber(q.get("fsm"), 0.1, 10000);
+    const sm = parseStringChoice(q.get("sm"), ["direct", "daily"] as const);
+    const ds = parseBoundedNumber(q.get("ds"), 1, 10000000);
+    const dd = parseBoundedNumber(q.get("dd"), 1, 1000000);
+    const dy = parseBoundedNumber(q.get("dy"), 1, 3650);
+    const bk = parseBoundedNumber(q.get("bk"), 0, 20);
+    const cg = parseNumberChoice(
+      q.get("cg"),
+      MEMORY_CARD_PRESETS.map((p) => p.gb),
+    );
+    const up = parseBoundedNumber(q.get("up"), 0.1, 100000);
+    if (fmt !== null) setFormatId(fmt);
+    if (fsm !== null) setCustomFileSizeMb(fsm);
+    if (sm !== null) setShotCountMode(sm);
+    if (ds !== null) setDirectShotCount(ds);
+    if (dd !== null) setDailyShotCount(dd);
+    if (dy !== null) setDays(dy);
+    if (bk !== null) setBackupCopies(bk);
+    if (cg !== null) setCardGb(cg);
+    if (up !== null) setUploadMbps(up);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const fileSizeMb =
     formatId === CUSTOM_FORMAT_ID
       ? customFileSizeMb
@@ -64,6 +104,31 @@ export function StorageCalculatorCard() {
       : null;
 
   const uploadSeconds = plan ? calculateUploadTimeSeconds(plan.totalGb, uploadMbps) : null;
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    fmt: formatId,
+    ...(formatId === CUSTOM_FORMAT_ID ? { fsm: String(customFileSizeMb) } : {}),
+    sm: shotCountMode,
+    ds: String(directShotCount),
+    dd: String(dailyShotCount),
+    dy: String(days),
+    bk: String(backupCopies),
+    cg: String(cardGb),
+    up: String(uploadMbps),
+  }).toString();
+  const shareText =
+    plan && totalShots !== null
+      ? t("shareText", {
+          fileSize: fileSizeMb,
+          shots: formatShotCount(totalShots),
+          backup: backupCopies,
+          total: formatGb(plan.totalGb),
+          cards: plan.cardsNeeded,
+          cardGb,
+        })
+      : null;
+  useSharePublish("/tools/storage-calculator", shareQuery, shareText);
 
   return (
     <div className="rounded-xl border border-border bg-card p-5">

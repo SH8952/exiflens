@@ -1378,6 +1378,7 @@
     }
   },
   "ExposureCalculator": {
+    "shareText": "{baseline} を基準に {changed} を {newValue} に変更 → {compensate} は {compValue}",
     "cardTitle": "露出計算",
     "baselineTitle": "現在の(適正露出)設定",
     "aperture": "絞り値 (F値)",
@@ -1466,6 +1467,7 @@
     }
   },
   "TimelapseCalculator": {
+    "shareText": "{interval}間隔 · {shots}枚 → {fps}fps で動画 {video}、保存容量 {storage}",
     "shootPlanTitle": "撮影プラン",
     "modeLabel": "計算の基準",
     "modeIntervalAndDuration": "撮影間隔 + 総撮影時間",
@@ -1565,6 +1567,7 @@
     }
   },
   "AstroCalculator": {
+    "shareText": "{focal}mm · f/{aperture} · {sensor} → 500ルール {rule500}、NPFルール {npf}",
     "cardTitle": "星の露出計算",
     "focalLength": "焦点距離 (mm)",
     "aperture": "絞り値 (F値)",
@@ -1651,6 +1654,7 @@
     }
   },
   "BracketCalculator": {
+    "shareText": "{baseline} 基準 · {param} ±{step}段 {count}枚ブラケティング → 撮影時間 合計 {time}",
     "cardTitle": "ブラケティング露出",
     "baselineTitle": "基準露出",
     "aperture": "絞り値 (F値)",
@@ -1749,6 +1753,7 @@
     }
   },
   "PrintResolutionCalculator": {
+    "shareText": "{width}×{height}px · {dpi}dpi → 最大プリントサイズ {sizeIn} ({sizeCm})",
     "cardTitle": "印刷解像度",
     "photoSizeTitle": "写真のピクセルサイズ",
     "widthPx": "幅 (px)",
@@ -1850,6 +1855,7 @@
     }
   },
   "StorageCalculator": {
+    "shareText": "1枚あたり {fileSize}MB · {shots}枚 · バックアップ {backup}部 → 必要容量 {total}、{cardGb}GBカード {cards}枚",
     "cardTitle": "保存容量",
     "formatLabel": "ファイル形式",
     "formatOption": {
@@ -2060,6 +2066,7 @@
     }
   },
   "CropFactorCalculator": {
+    "shareText": "{sensor} · {focal}mm → クロップファクター {crop}、35mm換算 {equivalent}",
     "cardTitle": "センサーサイズ換算計算機",
     "sensorLabel": "使用センサー",
     "customOption": "カスタム",
@@ -2160,6 +2167,7 @@
     }
   },
   "DofHyperfocalTable": {
+    "shareText": "{focal}mm · f/{aperture} · {sensor} → 過焦点距離 {hyperfocal}",
     "cardTitle": "被写界深度・ハイパーフォーカル表",
     "focalLength": "焦点距離 (mm)",
     "sensor": "センサーサイズ",
@@ -2341,6 +2349,7 @@
     }
   },
   "AdvancedDofDiffractionCalculator": {
+    "shareText": "{focal}mm · f/{aperture} · {sensor} · 被写体 {distance}m → 総被写界深度 {dof}、回折限界絞り {limit}",
     "cardTitle": "高度な被写界深度・回折",
     "focalLength": "焦点距離 (mm)",
     "sensor": "センサーサイズ",
@@ -2434,6 +2443,7 @@
     }
   },
   "CameraFovCalculator": {
+    "shareText": "{sensor} · {focal}mm → 画角 水平 {horizontal} · 垂直 {vertical} · 対角 {diagonal}",
     "cardTitle": "カメラの画角",
     "sensorLabel": "センサーサイズ",
     "customOption": "カスタム",
@@ -2521,6 +2531,7 @@
     }
   },
   "FlashGuideNumberCalculator": {
+    "shareText": "GN {guide} · {iso} · {input} → {label}: {result}",
     "cardTitle": "フラッシュガイドナンバー",
     "guideNumberLabel": "フラッシュのガイドナンバー (ISO 100基準)",
     "guideNumberHint": "フラッシュの取扱説明書や仕様書で公式のガイドナンバーを確認してください — たいていISO 100、特定のズームヘッド設定(多くは35mmまたは50mm相当)を基準に記載されています。",

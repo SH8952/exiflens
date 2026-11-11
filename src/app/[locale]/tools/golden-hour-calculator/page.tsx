@@ -6,7 +6,7 @@ import { toolSocialImages } from "@/lib/tool-og";
 import { Link } from "@/i18n/navigation";
 import { GoldenHourCalculatorCard } from "@/components/golden-hour-calculator-card";
 import { AdZone } from "@/components/ad-zone";
-import { ShareButton } from "@/components/share-button";
+import { ResultShare } from "@/components/result-share";
 import {
   ToolSections,
   type ToolRelated,
@@ -152,10 +152,10 @@ export default async function GoldenHourCalculatorPage({
             <h2 className="text-base font-semibold text-foreground">
               {t("aboutTitle")}
             </h2>
-            <ShareButton
+            <ResultShare
+              path="/tools/golden-hour-calculator"
               title={t("pageTitle")}
               text={t("pageDescription")}
-              url={`${SITE_URL}/${locale}/tools/golden-hour-calculator`}
             />
           </div>
           <p>{t("aboutBody")}</p>

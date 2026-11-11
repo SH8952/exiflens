@@ -2,6 +2,13 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSharePublish } from "@/lib/use-share-publish";
+import {
+  parseBoundedNumber,
+  parseNumberChoice,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -47,7 +54,54 @@ export function PrintResolutionCalculatorCard() {
   const [customWidth, setCustomWidth] = React.useState(DEFAULT_CUSTOM_WIDTH_IN);
   const [customHeight, setCustomHeight] = React.useState(DEFAULT_CUSTOM_HEIGHT_IN);
 
+  // 공유 링크로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와 첫 화면을 맞추기 위해
+  // 마운트 직후 한 번만 읽고, 허용 범위·목록 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const w = parseBoundedNumber(q.get("w"), 1, 100000);
+    const h = parseBoundedNumber(q.get("h"), 1, 100000);
+    const d = parseNumberChoice(q.get("d"), DPI_PRESETS);
+    const p = parseStringChoice(q.get("p"), [
+      ...PRINT_SIZE_PRESETS.map((x) => x.id),
+      CUSTOM_PRINT_SIZE_ID,
+    ]);
+    const u = parseStringChoice(q.get("u"), ["in", "cm"] as const);
+    const cw = parseBoundedNumber(q.get("cw"), 0.1, 10000);
+    const ch = parseBoundedNumber(q.get("ch"), 0.1, 10000);
+    if (w !== null) setWidthPx(w);
+    if (h !== null) setHeightPx(h);
+    if (d !== null) setDpi(d);
+    if (p !== null) setPresetId(p);
+    if (u !== null) setCustomUnit(u);
+    if (cw !== null) setCustomWidth(cw);
+    if (ch !== null) setCustomHeight(ch);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const maxPrintSize = calculateMaxPrintSize(widthPx, heightPx, dpi);
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    w: String(widthPx),
+    h: String(heightPx),
+    d: String(dpi),
+    p: presetId,
+    ...(presetId === CUSTOM_PRINT_SIZE_ID
+      ? { u: customUnit, cw: String(customWidth), ch: String(customHeight) }
+      : {}),
+  }).toString();
+  const shareText = maxPrintSize
+    ? t("shareText", {
+        width: widthPx,
+        height: heightPx,
+        dpi,
+        sizeIn: `${formatLengthIn(maxPrintSize.widthIn)} × ${formatLengthIn(maxPrintSize.heightIn)}`,
+        sizeCm: `${formatLengthCm(maxPrintSize.widthCm)} × ${formatLengthCm(maxPrintSize.heightCm)}`,
+      })
+    : null;
+  useSharePublish("/tools/print-resolution-calculator", shareQuery, shareText);
 
   const preset = PRINT_SIZE_PRESETS.find((p) => p.id === presetId);
   const targetWidthIn =

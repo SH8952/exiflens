@@ -2,6 +2,13 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSharePublish } from "@/lib/use-share-publish";
+import {
+  parseBoundedNumber,
+  parseNumberChoice,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -52,6 +59,29 @@ export function BracketCalculatorCard() {
     DEFAULT_OVERHEAD_SECONDS_PER_SHOT,
   );
 
+  // 공유 링크로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와 첫 화면을 맞추기 위해
+  // 마운트 직후 한 번만 읽고, 허용 범위·목록 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const a = parseNumberChoice(q.get("a"), APERTURE_STOPS);
+    const s = parseNumberChoice(q.get("s"), SHUTTER_SPEED_STOPS_SECONDS);
+    const i = parseNumberChoice(q.get("i"), ISO_STOPS);
+    const bp = parseStringChoice(q.get("bp"), BRACKET_PARAMS);
+    const st = parseNumberChoice(q.get("st"), BRACKET_STEP_STOPS_OPTIONS);
+    const fc = parseNumberChoice(q.get("fc"), BRACKET_FRAME_COUNT_OPTIONS);
+    const o = parseBoundedNumber(q.get("o"), 0, 600);
+    if (a !== null) setAperture(a);
+    if (s !== null) setShutterSpeedSeconds(s);
+    if (i !== null) setIso(i);
+    if (bp !== null) setBracketParam(bp);
+    if (st !== null) setStepStops(st);
+    if (fc !== null) setFrameCount(fc);
+    if (o !== null) setOverheadSecondsPerShot(o);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const plan = calculateBracketPlan({
     baselineAperture: aperture,
     baselineShutterSpeedSeconds: shutterSpeedSeconds,
@@ -64,6 +94,27 @@ export function BracketCalculatorCard() {
 
   const paramLabel = (param: ExposureParam) =>
     param === "aperture" ? t("aperture") : param === "shutterSpeed" ? t("shutterSpeed") : t("iso");
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const shareQuery = new URLSearchParams({
+    a: String(aperture),
+    s: String(shutterSpeedSeconds),
+    i: String(iso),
+    bp: bracketParam,
+    st: String(stepStops),
+    fc: String(frameCount),
+    o: String(overheadSecondsPerShot),
+  }).toString();
+  const shareText = plan
+    ? t("shareText", {
+        baseline: `${formatAperture(aperture)} · ${formatShutterSpeed(shutterSpeedSeconds)} · ${formatIso(iso)}`,
+        param: paramLabel(bracketParam),
+        step: formatStepStops(stepStops),
+        count: frameCount,
+        time: formatShootingTimeSeconds(plan.totalShootingTimeSeconds),
+      })
+    : null;
+  useSharePublish("/tools/bracketing-calculator", shareQuery, shareText);
 
   return (
     <div className="rounded-xl border border-border bg-card p-5">

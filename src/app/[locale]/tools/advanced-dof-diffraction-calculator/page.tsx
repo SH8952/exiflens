@@ -6,7 +6,7 @@ import { toolSocialImages } from "@/lib/tool-og";
 import { Link } from "@/i18n/navigation";
 import { AdvancedDofDiffractionCard } from "@/components/advanced-dof-diffraction-card";
 import { AdZone } from "@/components/ad-zone";
-import { ShareButton } from "@/components/share-button";
+import { ResultShare } from "@/components/result-share";
 import {
   ToolSections,
   type ToolRelated,
@@ -155,10 +155,10 @@ export default async function AdvancedDofDiffractionCalculatorPage({
             <h2 className="text-base font-semibold text-foreground">
               {t("aboutTitle")}
             </h2>
-            <ShareButton
+            <ResultShare
+              path="/tools/advanced-dof-diffraction-calculator"
               title={t("pageTitle")}
               text={t("pageDescription")}
-              url={`${SITE_URL}/${locale}/tools/advanced-dof-diffraction-calculator`}
             />
           </div>
           <p>{t("aboutBody")}</p>

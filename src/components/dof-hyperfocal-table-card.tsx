@@ -2,6 +2,13 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSharePublish } from "@/lib/use-share-publish";
+import {
+  parseBoundedNumber,
+  parseNumberChoice,
+  parseStringChoice,
+  readSharedParams,
+} from "@/lib/shared-params";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -41,6 +48,26 @@ export function DofHyperfocalTableCard() {
   const [sensorId, setSensorId] = React.useState<SensorPresetId>("full-frame");
   const [customCoc, setCustomCoc] = React.useState(0.03);
 
+  // 공유 링크로 들어온 경우 입력값을 채운다. 서버 렌더링 결과(기본값)와 첫 화면을 맞추기 위해
+  // 마운트 직후 한 번만 읽고, 허용 범위·목록 밖의 값은 무시한다.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  React.useEffect(() => {
+    const q = readSharedParams();
+    if (!q) return;
+    const f = parseBoundedNumber(q.get("f"), 1, 2000);
+    const a = parseNumberChoice(q.get("a"), APERTURE_PRESETS);
+    const s = parseStringChoice(
+      q.get("s"),
+      SENSOR_PRESETS.map((p) => p.id),
+    );
+    const c = parseBoundedNumber(q.get("c"), MIN_CUSTOM_COC_MM, MAX_CUSTOM_COC_MM);
+    if (f !== null) setFocalLength(f);
+    if (a !== null) setAperture(a);
+    if (s !== null) setSensorId(s);
+    if (c !== null) setCustomCoc(c);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const sensor =
     SENSOR_PRESETS.find((s) => s.id === sensorId) ?? SENSOR_PRESETS[0];
   const coc = sensor.circleOfConfusionMm ?? customCoc;
@@ -52,6 +79,24 @@ export function DofHyperfocalTableCard() {
     aperture: f,
     result: calculateDof(focalLength, f, coc, 1),
   }));
+
+  // 페이지 하단 공유 버튼이 쓸 현재 입력값(링크)과 결과 요약(문구)을 올린다.
+  const hyperfocalResult = calculateDof(focalLength, aperture, coc, 1);
+  const shareQuery = new URLSearchParams({
+    f: String(focalLength),
+    a: String(aperture),
+    s: sensorId,
+    ...(sensorId === "custom" ? { c: String(customCoc) } : {}),
+  }).toString();
+  const shareText = hyperfocalResult
+    ? t("shareText", {
+        focal: focalLength,
+        aperture,
+        sensor: sensorId === "custom" ? t("customSensor") : sensor.label,
+        hyperfocal: formatDistanceMeters(hyperfocalResult.hyperfocalMeters),
+      })
+    : null;
+  useSharePublish("/tools/dof-hyperfocal-table", shareQuery, shareText);
 
   const dofRows = TABLE_SUBJECT_DISTANCES_M.map((distance) => ({
     distance,

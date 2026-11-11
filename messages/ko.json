@@ -1379,6 +1379,7 @@
     }
   },
   "ExposureCalculator": {
+    "shareText": "{baseline} 기준 · {changed}을(를) {newValue}(으)로 바꾸면 → {compensate} {compValue}",
     "cardTitle": "노출 계산",
     "baselineTitle": "현재(적정 노출) 설정",
     "aperture": "조리개 값 (f-stop)",
@@ -1467,6 +1468,7 @@
     }
   },
   "TimelapseCalculator": {
+    "shareText": "{interval} 간격 · {shots}장 → {fps}fps 영상 {video}, 저장 용량 {storage}",
     "shootPlanTitle": "촬영 계획",
     "modeLabel": "계산 기준",
     "modeIntervalAndDuration": "촬영 간격 + 총 촬영 시간",
@@ -1566,6 +1568,7 @@
     }
   },
   "AstroCalculator": {
+    "shareText": "{focal}mm · f/{aperture} · {sensor} → 500 법칙 {rule500}, NPF 법칙 {npf}",
     "cardTitle": "별 노출 계산",
     "focalLength": "초점거리 (mm)",
     "aperture": "조리개 값 (f-stop)",
@@ -1652,6 +1655,7 @@
     }
   },
   "BracketCalculator": {
+    "shareText": "{baseline} 기준 · {param} ±{step}스탑 {count}장 브라케팅 → 총 촬영 시간 {time}",
     "cardTitle": "브라케팅 노출 계산",
     "baselineTitle": "기준 노출",
     "aperture": "조리개 값 (f-stop)",
@@ -1750,6 +1754,7 @@
     }
   },
   "PrintResolutionCalculator": {
+    "shareText": "{width}×{height}px · {dpi}dpi → 최대 인쇄 크기 {sizeIn} ({sizeCm})",
     "cardTitle": "인쇄 해상도 계산",
     "photoSizeTitle": "사진 픽셀 크기",
     "widthPx": "가로 (px)",
@@ -1851,6 +1856,7 @@
     }
   },
   "StorageCalculator": {
+    "shareText": "장당 {fileSize}MB · 촬영 {shots}장 · 백업 {backup}벌 → 필요 용량 {total}, {cardGb}GB 카드 {cards}장",
     "cardTitle": "저장 용량 계산",
     "formatLabel": "파일 형식",
     "formatOption": {
@@ -2061,6 +2067,7 @@
     }
   },
   "CropFactorCalculator": {
+    "shareText": "{sensor} · {focal}mm → 크롭 팩터 {crop}, 35mm 환산 {equivalent}",
     "cardTitle": "센서 크기별 환산 화각 계산기",
     "sensorLabel": "내 카메라 센서",
     "customOption": "직접 입력",
@@ -2161,6 +2168,7 @@
     }
   },
   "DofHyperfocalTable": {
+    "shareText": "{focal}mm · f/{aperture} · {sensor} → 과초점 거리 {hyperfocal}",
     "cardTitle": "심도 & 하이퍼포컬 표",
     "focalLength": "초점거리 (mm)",
     "sensor": "센서 크기",
@@ -2342,6 +2350,7 @@
     }
   },
   "AdvancedDofDiffractionCalculator": {
+    "shareText": "{focal}mm · f/{aperture} · {sensor} · 피사체 {distance}m → 총 심도 {dof}, 회절 한계 조리개 {limit}",
     "cardTitle": "고급 심도 & 회절",
     "focalLength": "초점거리 (mm)",
     "sensor": "센서 크기",
@@ -2435,6 +2444,7 @@
     }
   },
   "CameraFovCalculator": {
+    "shareText": "{sensor} · {focal}mm → 화각 가로 {horizontal} · 세로 {vertical} · 대각선 {diagonal}",
     "cardTitle": "카메라 화각",
     "sensorLabel": "센서 크기",
     "customOption": "직접 입력",
@@ -2522,6 +2532,7 @@
     }
   },
   "FlashGuideNumberCalculator": {
+    "shareText": "GN {guide} · {iso} · {input} → {label}: {result}",
     "cardTitle": "플래시 가이드넘버",
     "guideNumberLabel": "플래시 가이드넘버 (ISO 100 기준)",
     "guideNumberHint": "플래시 매뉴얼이나 제품 사양에서 공식 가이드넘버를 확인하세요 — 대부분 ISO 100, 특정 줌 헤드 설정(보통 35mm 또는 50mm) 기준으로 표기되어 있습니다.",
