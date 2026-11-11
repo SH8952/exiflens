@@ -1,3 +1,15 @@
+## 2026-11-11 — 공유 기능 강화 1단계: 공유 측정(GA4 이벤트·UTM) + 언어별 공유 채널 + 카카오 기본 이미지
+- 배경: 공유 버튼은 이미 사이트 곳곳(도구 16종·블로그·가이드·이미지 도구·푸터)에 있었으나, 공유가 실제로 쓰이는지 측정할 수 없었고 채널이 한국 중심(X·Facebook·카카오)이었으며 도구 페이지의 카카오 공유는 이미지 없는 텍스트 메시지였음. 외부 홍보 활동은 하지 않고, 방문자가 쓰는 기능만 개선(사용자 방침).
+- 변경 1 (공유 측정): 공유 성공 시 GA4 권장 이벤트 `share`를 전송(`method`=채널, `content_type`=tool/blog/guide/page, `item_id`=언어 접두사 뺀 경로). `gtag`가 없거나 동의 전이면 조용히 건너뜀(공유 동작 영향 없음). 기기 공유는 공유 완료 후, 링크 복사는 복사 성공 후, 창 여는 채널(X·Facebook·Telegram·WhatsApp·LINE·BAND)은 클릭 시점, 카카오는 SDK 호출 성공 후 기록.
+- 변경 2 (UTM): 모든 공유 주소에 `utm_source=share&utm_medium=<채널>&utm_campaign=<콘텐츠 종류>` 추가(링크 복사는 medium=copy, 기기 공유는 native). 결과 공유 링크의 입력값 쿼리(`?f=&a=…`)는 그대로 유지. 페이지 canonical은 쿼리 없는 주소로 고정이라 색인 영향 없음(새 색인 대기 주소 생기지 않음).
+- 변경 3 (언어별 채널): ko = 카카오톡·BAND·X·Facebook / en = X·Facebook·WhatsApp·Telegram / ja = LINE·X·Facebook / es = WhatsApp·Telegram·X·Facebook. 기기 공유(지원 시)·링크 복사는 모든 언어에서 맨 위. **카카오톡은 한국어(ko)에서만 표시**(en/ja/es에서는 숨김 — `src/lib/share-links.ts`의 `CHANNELS_BY_LOCALE` 한 줄로 되돌릴 수 있음). 새 채널 아이콘은 lucide 일반 아이콘 사용(브랜드 로고 미사용).
+- 변경 4 (카카오 이미지): 페이지가 이미지를 따로 주지 않으면(도구 페이지 등) 사이트 기본 미리보기 `og-default.png`(1200×630)를 카카오 피드 카드 이미지로 사용. 기존 텍스트 전용 분기는 제거. 블로그·가이드는 기존처럼 각 글 이미지 사용.
+- 파일: 신규 `src/lib/share-links.ts`(순수 함수: 채널 구성·UTM·채널별 공유 주소), 수정 `src/components/share-button.tsx`. 호출부(`ShareButton`/`ResultShare` 사용처 20여 곳)의 props 변경 없음, 번역 파일(messages) 변경 없음.
+- 검증: tsc 0 오류, 변경 파일 eslint 0 경고, 단위 테스트(채널 구성 5개 언어 + 알 수 없는 언어 폴백, 경로 해석·콘텐츠 종류 판별, UTM 추가·기존 쿼리 보존·해시·잘못된 주소, 채널별 주소 인코딩) 전부 통과. 이 작업 환경은 맥용 SWC만 있어 `next dev`·`next build` 불가 → 로컬 `npm run dev`로 화면 확인 필요.
+- 확인 필요: Telegram 주소 형식은 공식 문서로 확인. WhatsApp(wa.me)·LINE(social-plugins.line.me)·BAND(band.us/plugin/share)는 공식 문서 열람이 막혀 확인하지 못했고 널리 쓰이는 형식을 사용 — 로컬 확인 때 각 버튼을 한 번씩 눌러 공유 창이 열리는지 확인. 카카오는 실제 전송 테스트 필요(카카오 개발자 콘솔에 도메인 등록 + Vercel 환경변수 `NEXT_PUBLIC_KAKAO_JS_KEY` 확인).
+- 상태: 코드 수정만 완료, 커밋·푸시 전(사용자가 복귀 후 로컬 확인 → `공유강화_Push.command` 실행).
+- 백업: _backups/exiflens_backup_20261111_012333_공유강화1단계_사전
+
 ## 2026-11-10 — DOF·써니16 계산기에 "결과 공유 링크" 추가 (입력값이 담긴 링크 + 결과 요약 문구)
 - 배경: 외부 홍보 없이 방문자 스스로의 공유로 링크·언급이 생기게 하려는 방향. 두 계산기 페이지에는 이미 페이지 주소만 공유하는 `ShareButton`(하단 소개 영역)이 있었으나 계산 결과는 담기지 않았음.
 - 변경: 페이지 하단 "이 계산기에 대해" 옆에 있던 기존 공유하기 버튼이 현재 입력값이 담긴 링크(DOF `?f=&a=&s=&c=&d=`, 써니16 `?c=&i=&a=`)와 결과 요약 문구("50mm · f/2.8 · Full Frame · 피사체 5m → 총 심도 …")를 공유하도록 바꿈. 링크를 연 사람에게는 같은 입력값이 채워짐. (처음에는 결과 박스 안에 버튼을 따로 넣었으나 사용자 요청으로 삭제하고 하단 버튼 하나로 통합.) 구조: 계산기 카드가 입력값·결과를 `src/lib/share-state.ts`(도구 경로별 작은 저장소)에 올리고 `ResultShare`(`src/components/result-share.tsx`)가 구독 — 값이 없으면(서버 렌더링·잘못된 입력) 기존처럼 기본 페이지 주소·설명을 공유. 새 파일: `result-share.tsx`, `share-state.ts`, `shared-params.ts`(범위·목록 검증). 수정: 두 계산기 카드, 두 페이지(`ShareButton` → `ResultShare` 교체), `messages/{ko,en,ja,es}.json`(`shareText` 키).
