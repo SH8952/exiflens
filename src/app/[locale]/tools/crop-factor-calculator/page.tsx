@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd, DEFAULT_OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/seo";
+import { toolSocialImages } from "@/lib/tool-og";
 import { Link } from "@/i18n/navigation";
 import { CropFactorCalculatorCard } from "@/components/crop-factor-calculator-card";
 import { ToolExampleImages } from "@/components/tools/tool-example-images";
@@ -42,7 +43,13 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/${locale}/tools/crop-factor-calculator`,
-      images: DEFAULT_OG_IMAGES,
+      images: toolSocialImages("crop-factor-calculator", title).og,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: toolSocialImages("crop-factor-calculator", title).twitter,
     },
   };
 }

@@ -33,6 +33,10 @@ declare global {
       isInitialized: () => boolean;
       Share: {
         sendDefault: (options: Record<string, unknown>) => void;
+        sendScrap: (options: Record<string, unknown>) => void;
+        scrapImage: (options: {
+          imageUrl: string;
+        }) => Promise<{ infos?: { original?: { url?: string } } }>;
       };
     };
   }
@@ -142,6 +146,9 @@ type ShareButtonProps = {
   url: string;
   /** Absolute image URL for the Kakao feed-style preview card. Omit to fall back to a text-only Kakao message. */
   image?: string;
+  /** true면 "계산 결과 요약"을 공유하는 것이므로 카카오톡에서 결과 문구가 담긴 카드로 보냅니다.
+   *  false(기본)이면 페이지의 OG 정보(큰 이미지·제목·설명·도메인)로 만든 링크 미리보기 카드로 보냅니다. */
+  isResult?: boolean;
   className?: string;
   variant?: "default" | "outline" | "secondary" | "ghost";
   size?: "default" | "sm" | "lg" | "icon";
@@ -156,6 +163,7 @@ export function ShareButton({
   text,
   url,
   image,
+  isResult = false,
   className,
   variant = "outline",
   size = "sm",
@@ -196,6 +204,13 @@ export function ShareButton({
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, [menuOpen]);
+
+  // 카카오 SDK는 공유 메뉴를 연 방문자에게만, 메뉴가 열릴 때 미리 불러옵니다(페이지 로드 시에는 불러오지 않음).
+  // 미리 받아 두면 카카오톡을 누른 뒤 지연이 줄어 공유창이 팝업 차단에 걸릴 가능성도 낮아집니다.
+  const hasKakao = channels.includes("kakao");
+  React.useEffect(() => {
+    if (menuOpen && hasKakao) loadKakaoSdk().catch(() => {});
+  }, [menuOpen, hasKakao]);
 
   const handleShareClick = () => {
     setMenuOpen((open) => !open);
@@ -243,8 +258,34 @@ export function ShareButton({
     try {
       await loadKakaoSdk();
       const link = linkFor("kakao");
-      // 페이지가 이미지를 따로 주지 않으면(도구 페이지 등) 사이트 기본 미리보기 이미지를 씁니다.
-      const imageUrl = image ?? `${new URL(link).origin}/og-default.png`;
+
+      // 1) 일반 페이지 공유: 페이지의 OG 정보로 만든 링크 미리보기 카드(큰 이미지 + 제목 + 설명 + 도메인).
+      if (!isResult) {
+        try {
+          window.Kakao?.Share.sendScrap({ requestUrl: link });
+          trackShare("kakao");
+          setMenuOpen(false);
+          return;
+        } catch {
+          // 스크랩 공유를 쓸 수 없으면 아래 피드 카드로 대신 보냅니다.
+        }
+      }
+
+      // 2) 결과 공유(또는 스크랩 실패 시): 결과 문구가 담긴 피드 카드.
+      //    카카오 메시지의 이미지는 카카오 서버에 올린 주소를 써야 하므로 먼저 이미지를 올려 주소를 받습니다.
+      //    실패하면 원래 주소를 그대로 넘깁니다(이미지가 안 보일 수 있을 뿐 공유는 됩니다).
+      const ogImage = document.querySelector<HTMLMetaElement>(
+        'meta[property="og:image"]',
+      )?.content;
+      const rawImage =
+        image ?? ogImage ?? `${new URL(link).origin}/og-default.png`;
+      let imageUrl = rawImage;
+      try {
+        const res = await window.Kakao?.Share.scrapImage({ imageUrl: rawImage });
+        imageUrl = res?.infos?.original?.url ?? rawImage;
+      } catch {
+        // 이미지 업로드 실패 — 원래 주소로 진행
+      }
       window.Kakao?.Share.sendDefault({
         objectType: "feed",
         content: {

@@ -148,7 +148,12 @@ export function NdCalculatorCard() {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
           {t("ndSectionTitle")}
         </h2>
-        <ShareButton title={t("ndSectionTitle")} text={shareText} url={shareUrl} />
+        <ShareButton
+          title={t("ndSectionTitle")}
+          text={shareText}
+          url={shareUrl}
+          isResult
+        />
       </div>
       <div className="flex flex-col gap-3 text-sm">
         <label className="flex flex-col gap-1.5">

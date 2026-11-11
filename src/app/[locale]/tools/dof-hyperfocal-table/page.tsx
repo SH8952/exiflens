@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd, DEFAULT_OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/seo";
+import { toolSocialImages } from "@/lib/tool-og";
 import { Link } from "@/i18n/navigation";
 import { DofHyperfocalTableCard } from "@/components/dof-hyperfocal-table-card";
 import { AdZone } from "@/components/ad-zone";
@@ -42,7 +43,13 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/${locale}/tools/dof-hyperfocal-table`,
-      images: DEFAULT_OG_IMAGES,
+      images: toolSocialImages("dof-hyperfocal-table", title).og,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: toolSocialImages("dof-hyperfocal-table", title).twitter,
     },
   };
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd, DEFAULT_OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, languageAlternates, ogLocale, breadcrumbJsonLd } from "@/lib/seo";
+import { toolSocialImages } from "@/lib/tool-og";
 import { Link } from "@/i18n/navigation";
 import { FlashGuideNumberCalculatorCard } from "@/components/flash-guide-number-calculator-card";
 import { AdZone } from "@/components/ad-zone";
@@ -42,7 +43,13 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/${locale}/tools/flash-guide-number-calculator`,
-      images: DEFAULT_OG_IMAGES,
+      images: toolSocialImages("flash-guide-number-calculator", title).og,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: toolSocialImages("flash-guide-number-calculator", title).twitter,
     },
   };
 }

@@ -30,5 +30,12 @@ export function ResultShare({ path, title, text }: ResultShareProps) {
   const base = `${SITE_URL}/${locale}${path}`;
   const url = state && state.query ? `${base}?${state.query}` : base;
 
-  return <ShareButton title={title} text={state?.text ?? text} url={url} />;
+  return (
+    <ShareButton
+      title={title}
+      text={state?.text ?? text}
+      url={url}
+      isResult={Boolean(state?.text)}
+    />
+  );
 }
