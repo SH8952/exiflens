@@ -7,7 +7,7 @@
 - 파일: 신규 `src/lib/use-share-publish.ts`. 수정 계산기 카드 11개, 도구 페이지 12개(`ShareButton` → `ResultShare`), `messages/{ko,en,ja,es}.json`, `CHANGELOG.md`.
 - 색인 영향 없음: canonical은 파라미터 없는 기본 주소 그대로, 사이트맵·본문 변경 없음(공유 링크의 쿼리는 새 색인 대상이 아님).
 - 검증: tsc 0 오류, eslint 0 경고(src/components, src/lib, tools 페이지), 4개 언어 문구 ICU 해석 검사 통과, 셔터·조리개·ISO·브라케팅 스텝 등 프리셋 값의 URL 왕복(문자열→숫자) 일치 검사 통과. 이 환경은 `next dev`·`next build` 불가 → 푸시 후 실제 사이트에서 확인.
-- 상태: 코드 수정 완료, 커밋·푸시 전(사용자가 `결과공유확대_Push.command` 직접 실행).
+- 상태: 푸시·배포 완료(2ce08b1). 실사이트 확인: 저장 용량·노출 보정(1/60 셔터 값 포함) 링크로 입력값 복원 정상, 천체사진에서 잘못된 값(`f=9999&a=99&s=bogus`)은 기본값 유지·canonical 파라미터 없음.
 - 백업: _backups/exiflens_backup_20261111_072836_결과공유확대_사전
 
 ## 2026-11-11 — 공유 강화 2단계: 도구 페이지별 공유 미리보기 이미지 + 카카오 링크 미리보기 카드
