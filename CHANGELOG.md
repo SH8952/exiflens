@@ -1,3 +1,14 @@
+## 2026-11-12 — 블로그 신규 글: 서울 북촌 한옥마을이 외국인 여행자에게 사랑받는 이유, 사진으로 걸어 본 골목 (ko/en/ja)
+- 내용: 세로 사진 12장(Canon EOS R7, 2024-10-08) + EXIF. 북촌 일대 10장, 인근 풍경 2장(낙원악기상가·통의동 보안여관, 북촌 밖임을 본문에 명시). 2026년 11월 기준 방문 안내(방문 가능 10:00~17:00, 과태료 10만 원 가능, 예외, 주민 배려)를 서울시 미디어허브·비즈한국 기사 근거로 정리하고 변경 가능성을 명시. GPS 좌표 미기재.
+- 발행: publishedAt 2026-11-12 (KST 00:00 공개). slug `bukchon-hanok-village-seoul-charm-photo-walk`. 썸네일은 9번 사진 크롭(1200×800).
+- 이미지: `public/blog/images/bukchon-{1..12}.webp`(프레임, 1600px), `-full.webp`(원본), `bukchon-thumb.webp` 총 25장.
+- 파일: `content/blog/{ko,en,ja}/bukchon-hanok-village-seoul-charm-photo-walk.mdx`.
+- 검증: 3개 언어 MDX 컴파일 통과, 내부 링크 대상 존재 확인, 이미지 참조 25장 일치, 좌표 표기 없음. `next build`는 이 환경에서 불가 → 푸시 후 실사이트 확인.
+- 추가: 서두(첫 사진 앞)에 초상권 주의 안내 인용 문단(타인의 얼굴이 또렷하게 나오지 않게 촬영) 3개 언어 반영.
+- 추가: 촬영 팁 섹션에 렌즈·조리개 선택 의도(관광객이 많아 인물이 들어가지 않도록 망원 사용, 조리개를 열어 시선 집중) 단락 3개 언어 반영.
+- 정리: 렌즈·조리개 의도 단락과 기존 망원 렌즈 단락의 중복 표현(12장 중 10장, 망원 설명)을 다듬어 3개 언어 통일.
+- 백업: _backups/blog-bukchon_20261112_050239
+
 ## 2026-11-11 — 공유 강화 3단계: 나머지 계산기 11종 결과 공유 링크(입력값 복원 + 결과 요약 문구)
 - 배경: 11/10에 DOF·써니16 계산기에 시범 적용한 "결과 공유"(입력값이 담긴 링크 + 결과 요약 문장)를 나머지 계산기로 확대. 공유 링크를 받은 사람이 열면 같은 입력값이 채워진 계산 화면을 바로 볼 수 있음.
 - 적용 11종: 노출 보정(exposure-stops), 천체사진(astrophotography), 브라케팅(bracketing), 화각(camera-fov), 크롭 팩터(crop-factor), 타임랩스(timelapse), 인쇄 해상도(print-resolution), 저장 용량(storage), 플래시 가이드 넘버(flash-guide-number), 과초점 거리표(dof-hyperfocal-table), 고급 심도·회절(advanced-dof-diffraction).
