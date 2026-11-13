@@ -7,7 +7,7 @@
 - 홈(`page.tsx`)은 KV·알리익스프레스 `no-store` 호출 때문에 정적화 불가 → 변경 없음(`force-dynamic` 유지).
 - 검증(클라우드 `next build`, 변경 전/후 비교): 번역 누락(MISSING_MESSAGE) 0건, 프리렌더 HTML 전 페이지 보이는 텍스트 동일, 정적 HTML 용량 약 67% 감소(블로그 글 322KB→132KB), 4개 언어 도구·가이드·블로그 Playwright 콘솔 오류·번역키 노출 0건, `next start` 에서 프록시 동작 표(일반/쿠키 보유/봇/`?dev=`/접두사 없음) 확인.
 - 동작 차이: 예약 발행 블로그 글·블로그 목록이 KST 자정 이후 최대 약 1시간 늦게 나타날 수 있음. 새 클라이언트 컴포넌트에서 `useTranslations("X")` 를 쓰면 해당 폴더 `layout.tsx`(또는 루트 `LAYOUT_NAMESPACES`)에 "X" 를 추가해야 함.
-- 상태: 푸시·배포 완료(커밋 해시는 푸시 후 갱신).
+- 상태: 푸시·배포 완료(345249e). 실사이트 확인: `/ko/about` HTML 364KB→174KB, `/ko/blog` 정적(PRERENDER) 응답, `rss.xml` 정상.
 - 백업: `_backups/exiflens_backup_20261113_061410_vercel-slim-before`. 롤백: `git revert <이번 커밋>`.
 
 ## 2026-11-12 — 블로그 신규 글: 서울 북촌 한옥마을이 외국인 여행자에게 사랑받는 이유, 사진으로 걸어 본 골목 (ko/en/ja)
