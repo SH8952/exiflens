@@ -91,6 +91,8 @@ export async function GET() {
   return new Response(xml, {
     headers: {
       "Content-Type": "application/rss+xml; charset=utf-8",
+      // 2026-11-13 Vercel 사용량 최적화: sitemap-priority.xml 과 같이 CDN 에 1시간 캐시(예약 발행 반영 지연 최대 1시간).
+      "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

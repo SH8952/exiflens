@@ -1,3 +1,15 @@
+## 2026-11-13 — Vercel 사용량 최적화(번역 슬림화·블로그 캐시·프록시 축소)
+
+- 배경: Vercel Hobby 한도 초과(Fluid Active CPU 4h39m/4h, ISR 읽기 816K/1M, Fast Origin Transfer 7.84GB/10GB) 대응. 원인은 모든 페이지 HTML에 번역 전체(약 100KB)가 중복으로 실려 ISR 읽기·전송량이 커진 것과, 매 요청 실행되는 서버 코드(CPU). 사이트가 보여주는 내용·기능은 그대로 두고 전송량·CPU만 줄이는 방향.
+- 번역 슬림화: `src/i18n/client-messages.tsx` 신규(`pickMessages`·`ClientMessages`). 루트 `layout.tsx` 는 공통 클라이언트 번역(`Consent·ErrorPage·Footer·Guides·Header·Home·Share`)만 브라우저로 보내고, 도구 22종·`frame` 폴더에 `layout.tsx` 를 새로 두어 각 페이지가 쓰는 번역만 추가로 전달. 서버 컴포넌트의 `getTranslations` 는 영향 없음.
+- 블로그: `blog/page.tsx` 를 `force-dynamic` → `revalidate = 3600`(목록 1시간 캐시). `src/lib/blog.ts` 에 글 컴파일 결과 캐시(프로덕션 한정, 공개일 판정은 요청마다 그대로 수행). `rss.xml` 에 CDN 캐시 헤더(`s-maxage=3600`).
+- 프록시(`src/proxy.ts`): matcher 를 좁혀 언어 접두사 주소(`/ko/…`)는 geo-country 쿠키가 없는 일반 방문자에게만 실행(재방문자·검색 봇은 건너뜀). 접두사 없는 주소의 언어 이동(308)·geo 쿠키·`?dev=` 개발자 제외 쿠키 동작은 그대로(`?dev=` 가 붙으면 항상 실행).
+- 홈(`page.tsx`)은 KV·알리익스프레스 `no-store` 호출 때문에 정적화 불가 → 변경 없음(`force-dynamic` 유지).
+- 검증(클라우드 `next build`, 변경 전/후 비교): 번역 누락(MISSING_MESSAGE) 0건, 프리렌더 HTML 전 페이지 보이는 텍스트 동일, 정적 HTML 용량 약 67% 감소(블로그 글 322KB→132KB), 4개 언어 도구·가이드·블로그 Playwright 콘솔 오류·번역키 노출 0건, `next start` 에서 프록시 동작 표(일반/쿠키 보유/봇/`?dev=`/접두사 없음) 확인.
+- 동작 차이: 예약 발행 블로그 글·블로그 목록이 KST 자정 이후 최대 약 1시간 늦게 나타날 수 있음. 새 클라이언트 컴포넌트에서 `useTranslations("X")` 를 쓰면 해당 폴더 `layout.tsx`(또는 루트 `LAYOUT_NAMESPACES`)에 "X" 를 추가해야 함.
+- 상태: 푸시·배포 완료(커밋 해시는 푸시 후 갱신).
+- 백업: `_backups/exiflens_backup_20261113_061410_vercel-slim-before`. 롤백: `git revert <이번 커밋>`.
+
 ## 2026-11-12 — 블로그 신규 글: 서울 북촌 한옥마을이 외국인 여행자에게 사랑받는 이유, 사진으로 걸어 본 골목 (ko/en/ja)
 - 내용: 세로 사진 12장(Canon EOS R7, 2024-10-08) + EXIF. 북촌 일대 10장, 인근 풍경 2장(낙원악기상가·통의동 보안여관, 북촌 밖임을 본문에 명시). 2026년 11월 기준 방문 안내(방문 가능 10:00~17:00, 과태료 10만 원 가능, 예외, 주민 배려)를 서울시 미디어허브·비즈한국 기사 근거로 정리하고 변경 가능성을 명시. GPS 좌표 미기재.
 - 발행: publishedAt 2026-11-12 (KST 00:00 공개). slug `bukchon-hanok-village-seoul-charm-photo-walk`. 썸네일은 9번 사진 크롭(1200×800).

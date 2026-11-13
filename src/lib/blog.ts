@@ -170,6 +170,9 @@ export function hasBlogPost(slug: string, locale: BlogLocale): boolean {
   return getBlogMeta(slug, locale) !== null;
 }
 
+type BlogContent = ComponentType<{ components?: Record<string, ComponentType<never>> }>;
+const blogCompileCache = new Map<string, { Content: BlogContent; headings: GuideHeading[] }>();
+
 /** 이 글이 공개된 모든 블로그 언어(hreflang 대체 주소용). */
 export function getBlogLocalesFor(slug: string): BlogLocale[] {
   return BLOG_LOCALES.filter((l) => hasBlogPost(slug, l));
@@ -187,32 +190,46 @@ export async function compileBlogPost(
   const filePath = path.join(blogDir(locale), `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
-  const headings: GuideHeading[] = [];
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
   const fm = data as BlogFrontmatter;
+  // 예약 발행 판정은 캐시와 상관없이 요청마다 수행한다(날짜가 지나면 바로 공개).
   if (!isBlogPublished(fm.publishedAt)) return null;
 
-  const { default: Content } = await evaluate(content, {
-    ...runtime,
-    // singleTilde: false — 가이드와 동일. "~"를 범위 표기(예: "f/11~f/16")로 쓰는데
-    // remark-gfm 기본값은 "~" 하나로도 취소선이 되어 문장이 깨진다(2026-10-02 가이드에서
-    // 확인된 버그). 이 옵션을 제거하지 말 것.
-    remarkPlugins: [[remarkGfm, { singleTilde: false }]],
-    // 2026-10-15: 가이드와 같은 목차 수집·박스(체크리스트/실수/FAQ/정리) 적용.
-    // 순서는 가이드와 동일(slug → H2 수집 → 박스 → 앵커). 블로그 글의 "정리" 제목도 요약 박스로 만든다.
-    rehypePlugins: [
-      rehypeSlug,
-      collectH2Headings(headings),
-      () => wrapGuideBoxes(locale, locale === "ko" ? ["정리"] : []),
-      rehypeAutolinkHeadings,
-    ],
-  });
+  // 2026-11-13 Vercel 사용량 최적화: MDX 컴파일(evaluate)이 요청마다 반복되던 것을
+  // 서버 인스턴스 메모리에 보관해 재사용한다(운영 환경 한정, 글 내용은 배포 때만 바뀜).
+  const cacheKey = `${locale}/${slug}`;
+  const cached = process.env.NODE_ENV === "production" ? blogCompileCache.get(cacheKey) : undefined;
+  let Content: BlogContent;
+  let headings: GuideHeading[];
+  if (cached) {
+    Content = cached.Content;
+    headings = [...cached.headings];
+  } else {
+    headings = [];
+    const evaluated = await evaluate(content, {
+      ...runtime,
+      // singleTilde: false — 가이드와 동일. "~"를 범위 표기(예: "f/11~f/16")로 쓰는데
+      // remark-gfm 기본값은 "~" 하나로도 취소선이 되어 문장이 깨진다(2026-10-02 가이드에서
+      // 확인된 버그). 이 옵션을 제거하지 말 것.
+      remarkPlugins: [[remarkGfm, { singleTilde: false }]],
+      // 2026-10-15: 가이드와 같은 목차 수집·박스(체크리스트/실수/FAQ/정리) 적용.
+      // 순서는 가이드와 동일(slug → H2 수집 → 박스 → 앵커). 블로그 글의 "정리" 제목도 요약 박스로 만든다.
+      rehypePlugins: [
+        rehypeSlug,
+        collectH2Headings(headings),
+        () => wrapGuideBoxes(locale, locale === "ko" ? ["정리"] : []),
+        rehypeAutolinkHeadings,
+      ],
+    });
+    Content = evaluated.default as BlogContent;
+    if (process.env.NODE_ENV === "production") {
+      blogCompileCache.set(cacheKey, { Content, headings: [...headings] });
+    }
+  }
 
   return {
-    Content: Content as ComponentType<{
-      components?: Record<string, ComponentType<never>>;
-    }>,
+    Content,
     meta: {
       ...fm,
       slug,
