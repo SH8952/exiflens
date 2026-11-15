@@ -26,7 +26,7 @@ export function generateStaticParams() {
 // GA4 measurement ID isn't a secret — it's exposed in every page's public
 // HTML/network requests regardless, so it's fine to hardcode rather than
 // wire up an env var for it.
-const GA4_MEASUREMENT_ID = "G-1P4CBYCR1V";
+const GA4_MEASUREMENT_ID = "G-NV0DZ95ZEG";
 
 const ADSENSE_PUBLISHER_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
 // AdSense's script tag requires the "ca-" prefixed client id (e.g.
