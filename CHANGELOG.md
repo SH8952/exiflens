@@ -1,3 +1,31 @@
+## 2026-11-16 — Blogger 블로그 Bing 웹마스터 도구 등록 + 사이트맵·RSS 제출
+
+- 변경: Blogger 템플릿 `<head>`에 `<meta name='msvalidate.01' content='7EA71C7B…89D1'/>` 1줄 삽입(네이버 메타 뒤, GA4 앞). 랜딩과 같은 계정 토큰이라 값이 동일함.
+- Bing 웹마스터: `https://exiflens.blogspot.com/` 사이트 추가 → HTML 메타 태그로 소유 확인 완료 → 사이트맵 `https://exiflens.blogspot.com/sitemap.xml`(상태: 성공), RSS `https://exiflens.blogspot.com/feeds/posts/default?alt=rss`(상태: 처리 중) 제출. 두 주소는 제출 전 200 응답 확인.
+- 검증: 실사이트 홈 HTML에 msvalidate 메타 1개·토큰 일치, 네이버 메타·GA4 유지.
+- 백업: 직전 상태는 `_backups/blogger_theme_사전_20261116_naver_meta`(네이버 메타 삽입 직전) 기준. 이번 변경은 메타 1줄 추가라 롤백은 해당 줄 삭제.
+
+## 2026-11-16 — Blogger 블로그 네이버 서치어드바이저 소유확인 태그 추가
+
+- 변경: Blogger 템플릿 `<head>`에 `<meta name='naver-site-verification' content='16c09f23…162a'/>` 1줄 삽입(GA4 코드 바로 앞). 네이버 서치어드바이저에 `https://exiflens.blogspot.com` 사이트 등록용.
+- 검증: 실사이트 홈 HTML에 메타 1개, 토큰 일치, GA·히어로 정상 확인.
+- 백업: `_backups/blogger_theme_사전_20261116_naver_meta` (GA4 삽입 이후 상태). 롤백: 해당 XML 업로드 또는 메타 줄 삭제.
+- 남은 일: 사용자가 네이버 소유확인 화면에서 [소유확인] 클릭 → 이후 sitemap/RSS 제출.
+
+## 2026-11-16 — 랜딩 허브 파비콘 추가 (landing.exifnd.com)
+
+- 원인: 랜딩 전체 페이지에 파비콘 링크와 파일이 없었음(`/favicon.ico` 404).
+- 변경: 본 사이트(exifnd.com)와 같은 아이콘(favicon.ico 16/32px, icon.png 512px, apple-icon.png 180px)을 `exiflens-landing-src/icons/`에 두고 `build.py`가 빌드 때 `favicon.ico`, `assets/icon.png`, `assets/apple-icon.png`로 복사. 허브·글 9개·404 모두 `<head>`에 icon/apple-touch-icon 링크 추가.
+- 검증: 로컬 서버에서 아이콘 3종 200, 각 페이지 링크 삽입 확인, 변경은 HTML 링크 1줄씩 + 아이콘 3개뿐.
+- 백업: `_backups/landing_favicon_사전_20261115_195643`. 롤백: 백업의 build.py·html 복원 후 build/푸시.
+
+## 2026-11-16 — Blogger 블로그 GA4 연결 + 관리자 제외 (exiflens.blogspot.com)
+
+- 변경: Blogger 템플릿 `<head>` 끝에 GA4(`G-NV0DZ95ZEG`) 코드 삽입(CDATA). 랜딩과 동일한 로직: `?dev=lp-sohhnt6c8o` 접속 시 `dev_exclude=1` 쿠키(1년) 저장 + 주소의 `?dev=` 제거, 쿠키/localhost면 gtag.js 미로드 + `ga-disable`, 일반 방문자는 동적 로드 + config. EEA 등 동의 기본값(denied)도 랜딩과 동일.
+- 검증(실사이트, 쿠키 없는 상태 → 토큰 접속 → 재접속): 일반 방문 시 gtag.js·g/collect 전송 확인 / 토큰 접속 후 쿠키 저장·주소 정리·히어로 화면 정상·GA 요청 0건 / 재접속도 0건.
+- 백업: `_backups/blogger_theme_사전_20261116_devexclude`(작업 직전 상태와 글자 수 일치 확인, 77,061자). 롤백: 테마 ▼ → 복원 → XML 업로드.
+- 사용법: 블로그 즐겨찾기를 `https://exiflens.blogspot.com/?dev=lp-sohhnt6c8o`로 PC·휴대폰 각각 한 번 열기.
+
 ## 2026-11-16 — GA4 개발자 제외 강화 (gtag.js 자동 page_view 차단)
 
 - 원인: `dev_exclude=1` 쿠키가 있어도 `gtag/js?id=G-NV0DZ95ZEG` 파일이 무조건 로드되어, 구글 쪽 태그 설정으로 page_view가 자동 전송됨(사용자 Chrome의 g/collect 전송 기록으로 확인). 기존 코드는 `gtag('config')` 호출만 막고 있었음.
