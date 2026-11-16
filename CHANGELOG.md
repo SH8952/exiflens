@@ -1,3 +1,11 @@
+## 2026-11-16 — PageSpeed 대응: GA4 로딩 지연 + 알리익스프레스 상품 이미지 축소 (애드센스 재신청 전 적용)
+
+- 배경: 모바일 PageSpeed 성능 89점(FCP·LCP 0.9초, CLS 0, TBT 430ms, 접근성·권장사항·SEO 100). 지적: 자바스크립트 실행 1.5초(서드파티 약 720ms: GA4·동의 팝업·애드센스), 이미지 전송 334KiB 낭비(알리 상품 이미지 800~2000px 원본을 약 250px로 표시).
+- 변경: (1) `src/app/[locale]/layout.tsx` — `gtag.js` 파일 로드를 페이지 로드 후 `requestIdleCallback`(최대 3초, 미지원 시 1.5초 타이머)으로 지연. consent default·config 호출은 dataLayer에 먼저 쌓아 순서 유지, 개발자 제외 로직 그대로. (2) `src/components/aliexpress-gear-cards.tsx` — 표시할 때만 이미지 주소 뒤에 `_350x350.jpg` 접미사(라이브 시험: 800×800 66KB → 350×350 17KB), 저장 데이터·캐시는 원본 그대로.
+- 애드센스 스크립트는 손대지 않음(재신청 심사 영향 방지). 애드센스 지연 로딩은 재신청 결과 후 별도 검토.
+- 검증: tsc·eslint 0 오류, 접미사 함수 단위 확인, 접미사 동작은 라이브 이미지 서버로 확인. GA 변경은 localhost에서 개발자 제외로 꺼져 있어 배포 후 일반 접속에서 확인 예정.
+- 백업: `_backups/pagespeed-ga-aliimg_20261116_225452/`.
+
 ## 2026-11-16 — 랜딩·Blogger 방문자 카운터 (Cloudflare Worker, 메인 사이트와 수치 분리)
 
 - Worker `exiflens-counter`(https://exiflens-counter.skysmoga.workers.dev, 코드: `exiflens-landing/exiflens-counter-worker/`): Upstash Redis REST, 키 `exiflens:landing:*` / `exiflens:blogger:*`로 분리 저장, 허용 출처 landing.exifnd.com·exiflens.blogspot.com(+로컬 읽기 전용), 봇 UA는 별도 카운터, `dev=1`(개발자 쿠키)은 읽기 전용 + 봇 수치 응답. 방문 1회 Redis 명령 2개, 하루 1회 제한 없음.

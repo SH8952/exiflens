@@ -136,11 +136,28 @@ export default async function LocaleLayout({
             });
             gtag('js', new Date());
             if (!__ndExcluded) {
-              var __ndGa = document.createElement('script');
-              __ndGa.async = true;
-              __ndGa.src = 'https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}';
-              document.head.appendChild(__ndGa);
+              // 2026-11-16 PageSpeed(TBT 430ms) 대응: gtag.js 파일 로드만 페이지 로드 후 한가한
+              // 시점으로 늦춘다. consent default/config 호출은 dataLayer 큐에 먼저 쌓아 두므로
+              // 파일이 로드되면 같은 순서로 처리된다(동의 기본값이 먼저 적용됨).
               gtag('config', '${GA4_MEASUREMENT_ID}');
+              var __ndLoadGa = function () {
+                var __ndGa = document.createElement('script');
+                __ndGa.async = true;
+                __ndGa.src = 'https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}';
+                document.head.appendChild(__ndGa);
+              };
+              var __ndScheduleGa = function () {
+                if ('requestIdleCallback' in window) {
+                  window.requestIdleCallback(__ndLoadGa, { timeout: 3000 });
+                } else {
+                  setTimeout(__ndLoadGa, 1500);
+                }
+              };
+              if (document.readyState === 'complete') {
+                __ndScheduleGa();
+              } else {
+                window.addEventListener('load', __ndScheduleGa, { once: true });
+              }
             }
           `}
         </Script>

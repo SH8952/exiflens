@@ -6,6 +6,18 @@ import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import type { AliexpressProduct } from "@/lib/aliexpress";
 
+// 2026-11-16 PageSpeed 지적(이미지 전송 334KiB): 알리익스프레스 상품 이미지가 800~2000px 원본인데
+// 카드에는 약 250px로 표시된다. 알리 CDN은 파일명 뒤에 `_350x350.jpg`를 붙이면 축소본(약 66KB → 17KB)을
+// 내려주므로 표시할 때만 접미사를 붙인다(저장된 데이터·캐시는 원본 주소 그대로). 이미 크기 접미사가 있거나
+// 알리 이미지 서버 주소가 아니면 그대로 반환한다.
+function smallAliexpressImage(url: string): string {
+  if (!/^https:\/\/[a-z0-9.-]*aliexpress-media\.com\//i.test(url)) return url;
+  if (/_\d+x\d+[^/]*$/.test(url)) return url;
+  if (!/\.(jpe?g|png|webp)$/i.test(url)) return url;
+  return `${url}_350x350.jpg`;
+}
+
+
 type FetchState =
   | { status: "empty"; locale: string }
   | { status: "error"; locale: string }
@@ -161,7 +173,7 @@ export function AliexpressGearCards({
             >
               <div className="relative aspect-square overflow-hidden rounded-md bg-muted">
                 <Image
-                  src={product.productImage}
+                  src={smallAliexpressImage(product.productImage)}
                   alt={product.productName}
                   fill
                   sizes="(min-width: 640px) 20vw, 45vw"
