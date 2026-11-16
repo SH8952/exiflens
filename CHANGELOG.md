@@ -1,3 +1,25 @@
+## 2026-11-16 — 랜딩·Blogger 방문자 카운터 (Cloudflare Worker, 메인 사이트와 수치 분리)
+
+- Worker `exiflens-counter`(https://exiflens-counter.skysmoga.workers.dev, 코드: `exiflens-landing/exiflens-counter-worker/`): Upstash Redis REST, 키 `exiflens:landing:*` / `exiflens:blogger:*`로 분리 저장, 허용 출처 landing.exifnd.com·exiflens.blogspot.com(+로컬 읽기 전용), 봇 UA는 별도 카운터, `dev=1`(개발자 쿠키)은 읽기 전용 + 봇 수치 응답. 방문 1회 Redis 명령 2개, 하루 1회 제한 없음.
+- 랜딩: `build.py` 푸터에 "Today · Total (Bots …)" 추가(글·허브·404), 푸시 완료 후 사용자 확인.
+- Blogger: 템플릿 `</body>` 앞에 같은 표시 스크립트 삽입(템플릿 길이 78,381 → 79,355자), 개발자 쿠키 설정용 `?dev=<랜딩과 같은 토큰>` 처리 포함. 라이브 확인: 푸터에 수치 표시, Worker 응답 정상. 롤백은 해당 `<script>` 블록(`exiflens-counter` 포함) 삭제.
+- 메인 사이트 코드·Vercel 사용량 영향 없음.
+
+## 2026-11-16 — 랜딩 관련 폴더 정리 (exiflens-landing 하위로 이동) + 카운터 Worker 준비
+
+- 이동: `exiflens-landing-src`, `exiflens-blogger-posts`, `exiflens-counter-worker` → `exiflens-landing/` 아래. 푸시 위치 혼동 방지가 목적.
+- 경로 조치: `build.py`의 `OUT`을 상위 폴더로 변경(재빌드 결과가 기존과 동일해 `exiflens-landing` git 변경 0건 확인), Worker 배포 스크립트의 `.env.local` 경로 수정, 세 폴더를 `exiflens-landing/.git/info/exclude`에 등록하고 메인 저장소 exclude에서 제거. 정기 예약 작업 2건의 프롬프트와 규칙 문서(§5)를 새 경로·한글 푸시 스크립트 규칙으로 갱신.
+- 카운터: Cloudflare Worker(랜딩·Blogger 방문 카운터, Upstash Redis, 키 분리 `exiflens:landing:*`/`exiflens:blogger:*`) 코드와 배포 스크립트 작성·모의 테스트 통과. 배포·푸터 적용은 사용자 배포 후 진행.
+- 백업: `_backups/folder-move_20261116_135625/`, `_backups/visitor-counter-landing-blogger_20261116_134756/`.
+
+## 2026-11-16 — 정기 발행 체계 구축 (랜딩 화·금 반자동 / Blogger 수·토 자동) + 첫 2편 준비
+
+- 규칙·주제표: 프로젝트 문서 `exiflens-publishing-schedule-quality-rules-2026-11-16`, `exiflens-topic-map-keyword-pool-2026-11-16` 신규(롱테일·틈새, 글마다 구조 변형, 주제 비중복, 발행 전 정밀 검사).
+- 랜딩 11/17(화) 글: `pages/ko_nd-filter-shutter-conversion.py` 추가 + build.py 재빌드(허브·nav·rss·sitemap 갱신). 푸시는 사용자가 `exiflens-landing/push-landing-nd-conversion.command` 더블클릭(11/17).
+- Blogger 11/18(수) 오전 9:00 예약 등록: `07_sunset-exposure-compensation`(노을 노출 보정 증상별 진단), 글 목록에서 '예약됨' 확인.
+- 정기 예약 작업 2건 등록: 월요일 10:17(KST) 화·수 분량 준비, 목요일 10:23(KST) 금·토 분량 준비(Mac·데스크톱 앱이 켜져 있어야 함).
+- 백업: `_backups/publishing-automation_20261116_130420/`.
+
 ## 2026-11-16 — Blogger 블로그 Bing 웹마스터 도구 등록 + 사이트맵·RSS 제출
 
 - 변경: Blogger 템플릿 `<head>`에 `<meta name='msvalidate.01' content='7EA71C7B…89D1'/>` 1줄 삽입(네이버 메타 뒤, GA4 앞). 랜딩과 같은 계정 토큰이라 값이 동일함.
