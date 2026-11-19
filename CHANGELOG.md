@@ -1,3 +1,12 @@
+## 2026-11-19 — 랜딩(landing.exifnd.com) IndexNow 적용
+- 배경: IndexNow는 본 사이트(exifnd.com)에만 적용되어 있었고 랜딩은 키 파일이 없어(404) 전송이 성립하지 않았음. 블로그(Blogger)는 루트에 키 파일을 둘 수 없어 IndexNow 불가 → Bing 웹마스터 도구에 사이트맵 제출로 대체.
+- 랜딩 저장소(`exiflens-landing`) 루트에 랜딩 전용 키 파일 `1f31e2c4a357ee38e68336411e4c27ce.txt` 추가(공개 값, 본 사이트 키와 별개). 푸시 후 `https://landing.exifnd.com/<키>.txt` 가 열려야 함.
+- `exiflens-landing/exiflens-landing-src/indexnow_landing.py` 신규(저장소 밖 로컬 소스 폴더, 표준 라이브러리만): push 한 커밋에서 바뀐 `index.html`·`<언어>/<슬러그>/index.html` 만 주소로 변환 → 서비스 중인 HTML이 로컬 파일과 같아질 때까지(최대 15분) 대기 → 키 파일 확인 → `api.indexnow.org` 전송. 같은 주소 24시간 내 재전송 안 함, 오류가 나도 종료코드 0.
+- `exiflens-landing/exiflens-landing-src/push-and-notify.sh` 신규: 랜딩 push 스크립트가 `git push` 대신 호출(push 성공 후 위 스크립트를 백그라운드로 실행).
+- 시험(실서버 전송 없음, 로컬 서버+가짜 접수 서버): 경로 매핑 12개, 실제 POST 형식(host·key·keyLocation·urlList), 24시간 중복 방지, 404 주소 제외, 키 파일 없음 시 전송 중단 모두 통과.
+- 적용 방법: 일회용 `exiflens-landing/landing_push_indexnow.command`(키 파일 1개만 add, 예상 밖 변경 시 중단, 자체 삭제)를 실행. 이후 랜딩 push 때는 `bash exiflens-landing-src/push-and-notify.sh` 사용.
+- 본 사이트·블로그 코드는 변경 없음. 백업: `_backups/exiflens_backup_20261119_155750_landing-indexnow`.
+
 ## 2026-11-19 — 크롤링됨-미색인 가이드 5개 보강(표·도식·FAQ·내부 링크)
 
 - 배경: 서치 콘솔 "크롤링됨 - 현재 색인이 생성되지 않음" 가이드 5개. 분석 결과 길이는 원인이 아니고, 내부 링크 부족(평균 0.6 vs 1.5)·표 0개·고유 정보 부재·메타 설명 과다가 원인으로 판단.

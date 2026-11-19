@@ -12,3 +12,6 @@
 
 ## 푸시할 때 IndexNow 자동 알림 (2026-10-30 확정)
 일회용 push `.command` 스크립트를 만들 때 `git push origin HEAD` 대신 `bash automation/push-and-notify.sh` 를 호출한다. push 성공 후 이번에 올라간 커밋에서 바뀐 페이지 주소(`content/guides|blog/<언어>/*.mdx`, `src/app/[locale]/**/page.tsx`)만 IndexNow 에 알린다(백그라운드 분리, 같은 주소 24시간 내 재전송 안 함, 실패해도 push 에 영향 없음). 동적 데이터 경로나 컴포넌트만 바뀐 경우는 주소가 정해지지 않아 `python3 automation/indexnow-submit.py --urls <경로>` 로 직접 알린다. `git add -A` 는 쓰지 않는다.
+
+## 랜딩(landing.exifnd.com) push 시 IndexNow 자동 알림 (2026-11-19 확정)
+랜딩 저장소(`exiflens-landing/`, 별도 git)의 일회용 push `.command` 를 만들 때 `git push origin HEAD` 대신 `bash exiflens-landing-src/push-and-notify.sh origin HEAD` 를 호출한다. 바뀐 `index.html`·`<언어>/<슬러그>/index.html` 주소만 배포 반영 확인 뒤 IndexNow 로 전송한다. 랜딩 키 파일은 저장소 루트의 `1f31e2c4a357ee38e68336411e4c27ce.txt`(지우지 말 것). 블로그(Blogger)는 IndexNow 불가(Bing 웹마스터 사이트맵 제출로 대체). `git add -A` 는 쓰지 않는다.
