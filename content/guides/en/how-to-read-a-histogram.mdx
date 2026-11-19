@@ -1,8 +1,8 @@
 ---
 title: "How to Read a Histogram (and Why It's More Reliable Than Your LCD)"
-description: "What the histogram on your camera actually shows, how to spot clipped highlights and crushed shadows before you leave the scene, and why there's no single 'correct' shape to aim for."
+description: "What your camera's histogram shows, how to spot clipped highlights and crushed shadows on location, and why no single shape is the correct one."
 publishedAt: "2026-08-26"
-updatedAt: "2026-10-02"
+updatedAt: "2026-11-19"
 tags: ["histogram", "exposure", "camera-basics"]
 category: "Camera Basics & Exposure"
 image: "/guides/images/how-to-read-a-histogram.webp"
@@ -45,6 +45,28 @@ The histogram on the back of most cameras is calculated from the small JPEG prev
 ## Scenario: Bright Window Interior
 
 We shoot a living room with a bright window. At the metered exposure the histogram shows a tall spike hard against the right edge, which is the window, and the room sits in the left third. Reduce exposure by one stop, which halves the light, and the spike pulls away from the edge so the sky regains detail, but the room becomes darker. Now we have a choice: accept a darker room, add fill light, or shoot a series. The [exposure stops calculator](/tools/exposure-stops-calculator) shows the shutter, aperture and ISO combinations for a one-stop change, and the [bracketing calculator](/tools/bracketing-calculator) helps plan a series that covers both ends.
+
+## Real Histograms From Night Shots
+
+Here are three of our own night photos with their histograms. All three sit hard against the left side, and that is correct: most of each frame is dark sky, shadow or a black background. Only 0.1% to 0.3% of the pixels in each photo are near pure white, so the bright lights keep their detail. A left-heavy graph is a warning only when you expected detail there.
+
+![Three night photographs with their luminance histograms, each weighted toward the dark end with almost no pixels at the right edge](/guides/photos/histogram-real-examples.webp)
+
+## Common Histogram Shapes at a Glance
+
+The same few shapes come up again and again. This table pairs each one with what it usually means and a sensible first move. None of these is a rule, because the scene decides what is correct.
+
+![Five schematic histogram shapes: clipped highlights, clipped shadows, low contrast, high contrast and a bright scene without clipping](/guides/photos/histogram-shapes-illustration.webp)
+
+| Shape on the graph | What it usually means | A sensible first move |
+| --- | --- | --- |
+| Piled hard against the right edge | Highlights are clipped | Lower exposure by 1/3 to 1 stop and check the highlight warning |
+| Piled hard against the left edge | Shadows are clipped | Raise exposure, or keep it if you want a silhouette |
+| Bunched in the middle, empty at both ends | Low-contrast scene such as fog or flat light | Usually fine as shot; add contrast when editing |
+| Tall spikes at both ends, little between | High-contrast scene such as a bright window in a dim room | Bracket the exposure or add fill light |
+| Bunched to the right without touching the edge | A bright scene such as snow or a white wall | Often correct; confirm nothing touches the edge |
+
+If a scene's brightness range is wider than the sensor can record, no single exposure fixes it. That is the point where [exposure bracketing and HDR](/en/guides/exposure-bracketing-hdr-basics) or a look at [dynamic range](/en/guides/understanding-dynamic-range) is more useful than another histogram check. To correct a shot that is a little too bright or dark, see how [exposure compensation](/en/guides/using-exposure-compensation) works, and if you shoot raw, read [RAW vs. JPEG](/en/guides/raw-vs-jpeg-which-should-you-shoot) for how much room each format leaves.
 
 ## Common Mistakes
 

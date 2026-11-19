@@ -1,7 +1,8 @@
 ---
 title: "RAW vs. JPEG: ¿Cuál Deberías Usar?"
-description: "Qué almacenan realmente los dos formatos, por qué los archivos RAW son mucho más grandes, y una forma práctica de decidir cuál se ajusta a tu flujo de trabajo, o si deberías capturar ambos a la vez."
+description: "Qué guarda cada formato, por qué los RAW pesan tanto y cómo decidir entre RAW, JPEG o ambos según tu flujo de trabajo y tu almacenamiento."
 publishedAt: "2026-08-26"
+updatedAt: "2026-11-19"
 tags: ["raw-vs-jpeg", "fundamentos-de-camara", "flujo-de-trabajo"]
 category: "Fundamentos de cámara y exposición"
 image: "/guides/images/raw-vs-jpeg-which-should-you-shoot.webp"
@@ -35,6 +36,53 @@ Un archivo RAW típicamente ocupa entre 20 y 80MB según la resolución de tu c�
 
 La mayoría de las cámaras pueden grabar ambos formatos simultáneamente en cada toma, a costa de usar más almacenamiento por fotograma. Como un JPEG es mucho más pequeño que un RAW, no se duplica: según la cámara y los ajustes, suele añadir aproximadamente un 20–40 %. Es una opción por defecto razonable para quien todavía está decidiendo: obtienes un JPEG listo para compartir de inmediato para uso casual, y un archivo RAW guardado junto a él por si una toma en particular resulta necesitar más corrección de la que el JPEG puede ofrecer. Es la opción más segura cuando aún no estás seguro de qué archivos vas a querer editar realmente.
 
-## ¿Cuál Deberías Elegir?
+## RAW y JPEG de un vistazo
+
+| | RAW | JPEG |
+| --- | --- | --- |
+| Datos guardados | Datos del sensor casi sin procesar | Imagen ya procesada y comprimida |
+| Niveles de brillo por canal | 4.096 (12 bits) o 16.384 (14 bits) | 256 (8 bits) |
+| Tamaño habitual | Entre 20 y 80 MB | Unos pocos MB |
+| Edición | Muy flexible sin pérdida de calidad | Margen limitado |
+| Compatibilidad | Necesita programa compatible | Se abre en cualquier dispositivo |
+| Velocidad de escritura | Más lenta | Más rápida |
+
+![Barras en escala logarítmica de los niveles de brillo por canal: JPEG 256, RAW de 12 bits 4.096 y RAW de 14 bits 16.384](/guides/photos/raw-jpeg-niveles.webp)
+
+Los 256 niveles de un JPEG son suficientes para ver la foto, pero dejan poco margen cuando hay que subir sombras o recuperar luces. Los 14 bits de un RAW guardan más información tonal, y por eso rescatan mejor una toma difícil. Para entender qué ocurre en los extremos del brillo, lee [qué es el rango dinámico](/es/guides/understanding-dynamic-range) y [cómo leer un histograma](/es/guides/how-to-read-a-histogram). Si corriges el balance de blancos después, [esta guía lo explica](/es/guides/white-balance-explained).
+
+## Ejemplo: cuánto espacio ocupa cada opción
+
+Supongamos, solo como ejemplo, que tus RAW pesan 30 MB y tus JPEG 8 MB. Mil fotos serían unos 30 GB en RAW y unos 8 GB en JPEG; con RAW+JPEG, unos 38 GB. Si guardas todo el año, la diferencia se multiplica. Cambia los valores por los de tu cámara en la [calculadora de almacenamiento](/es/tools/storage-calculator) y consulta [la guía de almacenamiento RAW vs. JPEG](/es/guides/storage-calculator-raw-vs-jpeg) para planificar discos y tarjetas.
+
+## Resumen
 
 Si ya sabes que editarás tus fotos y quieres máxima flexibilidad en exposición y color, dispara en RAW. Si quieres archivos listos para usar de inmediato y no planeas editar mucho, el JPEG es una elección legítima, no una concesión. Y si todavía no estás seguro, RAW+JPEG te permite posponer la decisión sin perder nada, a costa de almacenamiento adicional.
+
+## Errores Comunes
+
+- **Editar solo el JPEG de la cámara y borrar el RAW demasiado pronto.** Si luego necesitas corregir, ya no hay datos que recuperar.
+- **Pensar que el RAW siempre se ve mejor.** Sin edición, un RAW abierto en un visor puede verse más plano que el JPEG de la cámara.
+- **Llenar la tarjeta sin comprobar la capacidad.** Con RAW, la tarjeta se llena mucho antes de lo que parece.
+- **Enviar archivos RAW a quien no tiene programa para abrirlos.** Exporta antes a JPEG.
+
+## Lista de comprobación
+
+- ¿Vas a editar estas fotos o te basta el resultado directo de la cámara?
+- ¿Tienes espacio suficiente en tarjeta y en disco?
+- ¿Necesitas velocidad de ráfaga o archivos listos de inmediato?
+- ¿Prefieres RAW+JPEG hasta saber qué flujo te conviene?
+
+## Preguntas Frecuentes
+
+### ¿El RAW tiene mejor calidad que el JPEG?
+Guarda más información, que es lo que permite editar con más margen. Con una buena exposición y sin edición intensa, la diferencia visible puede ser pequeña.
+
+### ¿Puedo convertir un RAW a JPEG después?
+Sí, y es lo habitual: se edita el RAW y se exporta a JPEG para compartirlo.
+
+### ¿Se puede convertir un JPEG a RAW?
+No. Un JPEG no recupera los datos que se descartaron al guardarlo.
+
+### ¿Los RAW ocupan lo mismo en todas las cámaras?
+No. Dependen de la resolución, la profundidad de bits y la compresión que use tu cámara.

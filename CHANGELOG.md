@@ -1,3 +1,12 @@
+## 2026-11-19 — 크롤링됨-미색인 가이드 5개 보강(표·도식·FAQ·내부 링크)
+
+- 배경: 서치 콘솔 "크롤링됨 - 현재 색인이 생성되지 않음" 가이드 5개. 분석 결과 길이는 원인이 아니고, 내부 링크 부족(평균 0.6 vs 1.5)·표 0개·고유 정보 부재·메타 설명 과다가 원인으로 판단.
+- 보강(MDX): en/how-to-read-a-histogram, en/astrophotography-camera-settings-night-sky, es/panning-shot-technique, es/raw-vs-jpeg-which-should-you-shoot, ja/nd-filter-types-explained. 비교표, 내부 링크 3개 이상, 실수·체크리스트·FAQ 박스, 설명 문구 약 150자로 정리. es/panning 소제목을 "Errores habituales…"로, es/raw-vs-jpeg 마지막 소제목을 "Resumen"으로 변경(박스 인식). ja/nd는 선택 가이드와 역할 분리 섹션 추가. 각 mdx `updatedAt: 2026-11-19`.
+- 이미지: `public/guides/photos/` 도식 6개(직접 제작, 가로 1200px·라이트/다크 구분용 테두리). 히스토그램 도식은 야간 조명 축제 사진 3장에서 계산한 실제 히스토그램(EXIF 표기).
+- 검증: MDX 컴파일 5/5, 이미지 참조 누락 0, 사용자 로컬(localhost:3010)에서 5개 페이지 화면 확인.
+- 미반영(후속): ja/tools/bracketing-calculator 이미지·섹션, 허브(en/guides, ja/guides) 소개 문구.
+- 백업: `_backups/guides-reinforce_20261119_125333`.
+
 ## 2026-11-19 — 블로그 새 글: 야간 조명 축제 사진 찍는 법 (ko/en/ja, 발행일 2026-11-19)
 
 - 글: `night-light-festival-photography-shutter-speed-aperture` (ko/en/ja). 제목(ko) "야간 조명 축제 사진 찍는 법, 셔터스피드와 조리개로 장노출·클로즈업 담기", 분류 야간 촬영. 2024-10-11 저녁 조명 전시 사진 6장(R7): 광각 RF15-35mm f/11 ISO 100 셔터 1/2초·8초·25초 3장 + 망원 RF70-200mm f/2.8 ISO 100 1/6초(70·119·84mm) 3장, 모두 삼각대 사용(사용자 확인). 장소명 미표기, EXIF 스크린샷 값만 사용(산책로 전경은 촬영 시각 정보 없음 → "기록 없음").

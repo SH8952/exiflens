@@ -1,7 +1,8 @@
 ---
 title: "Astrophotography Basics: Camera Settings for Shooting the Night Sky"
-description: "The starting-point settings for shooting stars, the Milky Way, and star trails with a standard camera and lens — plus the math behind avoiding star trailing when you don't want it."
+description: "Starting settings for stars, the Milky Way and star trails with a standard camera and lens, plus the 500 rule math for avoiding star trailing."
 publishedAt: "2026-08-24"
+updatedAt: "2026-11-19"
 tags: ["astrophotography", "night-photography", "long-exposure"]
 category: "Photography Genres"
 image: "/guides/images/astrophotography-camera-settings-night-sky.webp"
@@ -23,6 +24,24 @@ A camera capable of full manual control and a sturdy tripod are the requirements
 
 **ISO: as high as your camera can handle while keeping noise acceptable.** This is the setting most dependent on your specific camera — a recent full-frame body might stay clean up to ISO 6400 or beyond, while an older or smaller-sensor camera may start showing heavy noise past ISO 1600. ISO 3200 is a reasonable starting point to test and adjust from.
 
+## Quick Reference: 500 Rule Shutter Times
+
+These values come straight from the formula above (500 divided by the full-frame-equivalent focal length). For a Canon APS-C body with a 1.6 crop factor, multiply the lens's focal length by 1.6 first. Other brands use a crop factor of about 1.5, which shifts the times slightly. Treat them as a ceiling to start from, not a target.
+
+| Lens | Full-frame body | Canon APS-C body (1.6x) |
+| --- | --- | --- |
+| 10mm | 50 s | 31.3 s |
+| 12mm | 41.7 s | 26 s |
+| 14mm | 35.7 s | 22.3 s |
+| 16mm | 31.3 s | 19.5 s |
+| 20mm | 25 s | 15.6 s |
+| 24mm | 20.8 s | 13 s |
+| 35mm | 14.3 s | 8.9 s |
+
+![Line chart of 500 rule shutter times against focal length for full-frame and Canon APS-C bodies](/guides/photos/astro-500-rule-chart.webp)
+
+To plan a specific night, the [astrophotography calculator](/en/tools/astrophotography-calculator) works out the trailing limit for your sensor, and the guides on the [NPF rule](/en/guides/astro-calculator-npf-rule) and [Milky Way planning](/en/guides/astro-calculator-milky-way-planning) go further than the 500 rule. A sturdy tripod and a remote release matter just as much, so see [choosing a tripod](/en/guides/how-to-choose-a-tripod) and [avoiding camera shake in long exposures](/en/guides/avoiding-camera-shake-long-exposure).
+
 ## Focusing in the Dark
 
 Autofocus generally fails in near-total darkness, so the standard technique is to switch to manual focus, point the lens at the brightest star or a distant light on the horizon, zoom in using your camera's live view (electronically, not by moving the lens), and manually adjust focus until that point of light is as small and sharp as possible. Once set, avoid touching the focus ring again for the rest of the session.
@@ -34,3 +53,33 @@ Everything above is aimed at avoiding star trails, but they're a legitimate crea
 ## Light Pollution Is the Real Limiting Factor
 
 Camera settings only go so far — the single biggest factor in how much of the sky is actually visible in your photo is how far you are from artificial light. A dark-sky location (checked in advance with a light pollution map) will show a visibly denser Milky Way and fainter stars than the same settings would capture from inside or near a city, regardless of how well-tuned your exposure is.
+
+## Common Mistakes
+
+- **Leaving autofocus on.** In the dark the lens hunts and may never lock. Switch to manual focus and set it on a bright star in live view.
+- **Using the full 500 rule time on a high-resolution sensor.** More pixels show trailing sooner, so shorten the exposure a little if stars look like short dashes at 100%.
+- **Shooting at the very widest aperture without checking the corners.** Stars near the edges can look smeared. Closing the aperture by a third or two thirds of a stop can sharpen them at the cost of some light.
+- **Forgetting to turn off stabilization on a tripod.** It can add blur when there is nothing to correct.
+- **Judging exposure on the camera's screen.** The screen looks bright in the dark. Check the [histogram](/en/guides/how-to-read-a-histogram) instead.
+
+## Checklist Before You Go
+
+- Is the battery full and is a spare packed? Cold nights drain batteries faster.
+- Is the tripod stable and the head locked?
+- Is the lens set to manual focus and focused on a bright star?
+- Are stabilization and any in-camera dust or noise effects checked?
+- Did you check a light pollution map and the moon phase for tonight?
+
+## FAQ
+
+### Do I need a star tracker?
+Not for the exposure times in the table. A tracker moves the camera with the sky so you can expose longer at lower ISO. It becomes useful when you want cleaner files than a high ISO gives you.
+
+### What white balance should I use?
+Shoot raw and set it later. As a starting point many photographers choose a color temperature around 3500K to 4500K, then adjust to taste.
+
+### Why do my stars look like short lines when I zoom in?
+That is trailing from the earth's rotation. Shorten the exposure, use a wider lens, or raise ISO to compensate.
+
+### Can I shoot the Milky Way near a city?
+You can, but light pollution lowers contrast and hides fainter stars. A darker site gives a bigger improvement than any setting. Our [low-light noise reduction guide](/en/guides/low-light-noise-reduction-settings) helps with the high ISO side.
