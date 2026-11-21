@@ -1,3 +1,10 @@
+## 2026-11-21 — 애드센스 신청 전 보완: 법적 페이지 검색 설명 분리 + 카드 이미지 대체 텍스트
+- 소개·개인정보처리방침·이용약관·문의·제휴 고지 5개 페이지가 검색 설명(description)이 없어 홈 설명을 그대로 물려받던 문제를 수정. `messages/{ko,en,es,ja}.json` 각 Namespace(About/Privacy/Terms/Contact/Disclosure)에 `description` 추가(20개), 5개 `page.tsx`의 `generateMetadata`에서 `description`과 `openGraph.description`으로 사용. 홈 설명은 그대로(중복 그룹 0건).
+- 홈·도구 목록 카드 썸네일의 빈 alt(`alt=""`) 해결: `ToolCardImage`에 `alt` 속성 추가(도구 이름 전달: `tools/page.tsx`, `home-tools-highlights.tsx`), `home-blog-highlights.tsx`는 글 제목 사용. 빈 alt 이미지 0건.
+- 검증: `tsc --noEmit` 통과, 격리 복사본 `next build --webpack` 성공 후 4개 언어×6개 페이지 설명·og:description, 홈/도구/ja 홈 alt 확인. 실제 사이트·작업 폴더 `.next` 미사용.
+- 확인(변경 없음): 구글 인증 CMP(유럽 규정 메시지)는 이미 연동됨 — 라이브에서 `__tcfapi`·`__tcfapiLocator`·`googlefc` 존재, 직접 만든 배너는 양보함.
+- 백업: `_backups/exiflens_backup_20261121_083353_adsense-meta-alt`. 푸시 전.
+
 ## 2026-11-21 — Blogger 글 게시: 가로등 야경 화이트밸런스 켈빈 표
 - 11/21(토) 09:00 예약이 Chrome 확장 미연결로 잡히지 않아(11/19) 석한님이 "지금 바로 게시"를 선택, 17:16(KST) 게시. 글 `exiflens-blogger-posts/08_streetlight-white-balance.html`(코드·파일 변경 없음).
 - 게시 주소 `https://exiflens.blogspot.com/2026/11/blog-post_21.html`(맞춤 퍼머링크 입력이 저장되지 않아 자동 주소로 게시, 이전 글과 동일). 라벨 촬영 설정·야경, 검색 설명 51자.

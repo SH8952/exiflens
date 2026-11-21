@@ -45,7 +45,7 @@ export async function HomeBlogHighlights({ locale }: { locale: string }) {
                 <div className="relative aspect-[3/2] w-full overflow-hidden bg-muted">
                   <Image
                     src={post.thumbnail}
-                    alt=""
+                    alt={post.title}
                     fill
                     sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"

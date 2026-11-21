@@ -300,6 +300,7 @@
   },
   "Privacy": {
     "title": "プライバシーポリシー",
+    "description": "アップロードした写真はブラウザ内でのみ処理され、サーバーへ送信されません。Cookie・広告・分析ツールの利用についてご案内します。",
     "updated": "最終更新日: 2026年11月3日",
     "sections": [
       {
@@ -356,6 +357,7 @@
   },
   "Terms": {
     "title": "利用規約",
+    "description": "ExifLensの利用範囲、ユーザーのコンテンツ、計算結果の参考値としての扱い、責任の制限などの利用規約です。",
     "updated": "最終更新日: 2026年11月3日",
     "sections": [
       {
@@ -416,6 +418,7 @@
   },
   "About": {
     "title": "ExifLensについて",
+    "description": "ExifLensを運営する写真家と編集方針、EXIF確認とNDフィルター計算を無料で提供する理由をご紹介します。",
     "sections": [
       {
         "heading": "ExifLensとは",
@@ -1063,6 +1066,7 @@
   },
   "Disclosure": {
     "title": "アフィリエイト開示",
+    "description": "Coupangパートナーズ・AliExpressのアフィリエイトリンクから報酬を得る場合があることと、編集の独立性をご案内します。",
     "updated": "最終更新日: 2026年11月3日",
     "sections": [
       {
@@ -1134,6 +1138,7 @@
   },
   "Contact": {
     "title": "ExifLensへのお問い合わせ",
+    "description": "ExifLensの運営者へ、お問い合わせ・不具合報告・訂正依頼・写真の使用許諾をメールで送る方法をご案内します。",
     "sections": [
       {
         "heading": "メールでのお問い合わせ",

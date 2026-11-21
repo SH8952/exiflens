@@ -157,6 +157,7 @@ function ToolCard({
     <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-primary/50">
       <ToolCardImage
         slug={tool.slug}
+        alt={tool.name}
         sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw"
         priority={priorityImage}
       />

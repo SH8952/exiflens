@@ -51,6 +51,7 @@ export async function HomeToolsHighlights() {
           >
             <ToolCardImage
               slug={tool.slug}
+              alt={t(`tools.${tool.slug}.name`)}
               sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw"
             />
             <div className="flex flex-col gap-1.5 p-4">

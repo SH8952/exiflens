@@ -301,6 +301,7 @@
   },
   "Privacy": {
     "title": "개인정보처리방침",
+    "description": "업로드한 사진은 브라우저에서만 처리되며 서버로 전송되지 않습니다. 쿠키, 광고, 분석 도구 사용 방식을 안내합니다.",
     "updated": "최종 수정일: 2026년 11월 3일",
     "sections": [
       {
@@ -357,6 +358,7 @@
   },
   "Terms": {
     "title": "이용약관",
+    "description": "ExifLens 서비스의 이용 범위, 이용자 콘텐츠, 계산 결과의 참고 용도, 책임의 제한 등 이용약관을 안내합니다.",
     "updated": "최종 수정일: 2026년 11월 3일",
     "sections": [
       {
@@ -417,6 +419,7 @@
   },
   "About": {
     "title": "ExifLens 소개",
+    "description": "ExifLens를 만든 사진가와 운영·편집 원칙, 사진 속 EXIF 확인과 ND 필터 계산 도구를 무료로 제공하는 이유를 소개합니다.",
     "sections": [
       {
         "heading": "ExifLens란",
@@ -1064,6 +1067,7 @@
   },
   "Disclosure": {
     "title": "제휴 마케팅 고지문",
+    "description": "쿠팡 파트너스와 알리익스프레스 제휴 링크로 수수료를 받을 수 있다는 점과 편집의 독립성을 안내합니다.",
     "updated": "최종 수정일: 2026년 11월 3일",
     "sections": [
       {
@@ -1135,6 +1139,7 @@
   },
   "Contact": {
     "title": "ExifLens 문의하기",
+    "description": "ExifLens 운영자에게 문의, 오류 제보, 정정 요청, 사진 사용 허락을 이메일로 보내는 방법을 안내합니다.",
     "sections": [
       {
         "heading": "이메일로 문의하기",

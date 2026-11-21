@@ -300,6 +300,7 @@
   },
   "Privacy": {
     "title": "Política de Privacidad",
+    "description": "Las fotos se procesan solo en tu navegador y nunca se suben. Cómo usa ExifLens las cookies, la publicidad y las herramientas de análisis.",
     "updated": "Última actualización: 3 de noviembre de 2026",
     "sections": [
       {
@@ -356,6 +357,7 @@
   },
   "Terms": {
     "title": "Términos de Servicio",
+    "description": "Términos de uso de ExifLens: uso permitido, tu contenido, las calculadoras como valores de referencia y los límites de responsabilidad.",
     "updated": "Última actualización: 3 de noviembre de 2026",
     "sections": [
       {
@@ -416,6 +418,7 @@
   },
   "About": {
     "title": "Sobre ExifLens",
+    "description": "Conoce al fotógrafo detrás de ExifLens, nuestros principios editoriales y por qué ofrecemos herramientas gratuitas para leer EXIF y calcular filtros ND.",
     "sections": [
       {
         "heading": "Qué es ExifLens",
@@ -1063,6 +1066,7 @@
   },
   "Disclosure": {
     "title": "Divulgación de Afiliados",
+    "description": "ExifLens puede recibir una comisión por los enlaces de afiliado de Coupang Partners y AliExpress, sin coste adicional para ti. Independencia editorial.",
     "updated": "Última actualización: 3 de noviembre de 2026",
     "sections": [
       {
@@ -1134,6 +1138,7 @@
   },
   "Contact": {
     "title": "Contacta con ExifLens",
+    "description": "Cómo escribir por correo al responsable de ExifLens para consultas, errores, correcciones o permisos de uso de fotos.",
     "sections": [
       {
         "heading": "Escríbenos por correo",

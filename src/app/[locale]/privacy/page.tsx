@@ -11,9 +11,11 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Privacy" });
   const title = t("title");
+  const description = t("description");
 
   return {
     title,
+    description,
     alternates: {
       canonical: `${SITE_URL}/${locale}/privacy`,
       languages: languageAlternates("/privacy"),
@@ -23,6 +25,7 @@ export async function generateMetadata({
       locale: ogLocale(locale),
       siteName: "ExifLens",
       title,
+      description,
       url: `${SITE_URL}/${locale}/privacy`,
       images: DEFAULT_OG_IMAGES,
     },
