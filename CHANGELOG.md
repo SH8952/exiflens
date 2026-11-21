@@ -1,3 +1,9 @@
+## 2026-11-21 — Blogger 글 게시: 가로등 야경 화이트밸런스 켈빈 표
+- 11/21(토) 09:00 예약이 Chrome 확장 미연결로 잡히지 않아(11/19) 석한님이 "지금 바로 게시"를 선택, 17:16(KST) 게시. 글 `exiflens-blogger-posts/08_streetlight-white-balance.html`(코드·파일 변경 없음).
+- 게시 주소 `https://exiflens.blogspot.com/2026/11/blog-post_21.html`(맞춤 퍼머링크 입력이 저장되지 않아 자동 주소로 게시, 이전 글과 동일). 라벨 촬영 설정·야경, 검색 설명 51자.
+- 검증: 게시 전 CTA 링크 4개 200, 게시 후 200·제목·검색 설명·UTM 3곳·표 4개·사이트맵 포함 확인. 사용한 Chrome 탭 모두 닫음.
+- 기록: 프로젝트 문서 `claude/exiflens-topic-map-keyword-pool-2026-11-16.md` §4 갱신. 백업 `_backups/exiflens_backup_20261121_081414_blogger-streetlight`.
+
 ## 2026-11-19 — 랜딩(landing.exifnd.com) IndexNow 적용
 - 배경: IndexNow는 본 사이트(exifnd.com)에만 적용되어 있었고 랜딩은 키 파일이 없어(404) 전송이 성립하지 않았음. 블로그(Blogger)는 루트에 키 파일을 둘 수 없어 IndexNow 불가 → Bing 웹마스터 도구에 사이트맵 제출로 대체.
 - 랜딩 저장소(`exiflens-landing`) 루트에 랜딩 전용 키 파일 `1f31e2c4a357ee38e68336411e4c27ce.txt` 추가(공개 값, 본 사이트 키와 별개). 푸시 후 `https://landing.exifnd.com/<키>.txt` 가 열려야 함.
