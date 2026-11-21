@@ -289,6 +289,7 @@
     ]
   },
   "Footer": {
+    "brand": "ExifLens",
     "rights": "Todos los derechos reservados.",
     "privacy": "Política de privacidad",
     "terms": "Términos de servicio",

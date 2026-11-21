@@ -1,3 +1,10 @@
+## 2026-11-21 — "엑시플" 적용 2차: 한국어 푸터·홈 FAQ·사이트 이름 구조화 데이터
+- 푸터 저작권 줄: `src/components/site-footer.tsx`가 `Footer.brand` 번역 키를 사용. 한국어는 "© 2026 ExifLens(엑시플). All rights reserved.", en/es/ja는 기존 "ExifLens" 그대로(4개 언어 messages에 `Footer.brand` 추가).
+- 홈 FAQ 첫 질문(한국어): "ExifLens(엑시플)를 사용하려면 회원가입이 필요한가요?" (`messages/ko.json` Home.faq[0].question만 변경).
+- 사이트 이름 구조화 데이터: `src/lib/seo.ts`에 `websiteJsonLd()` 추가, 홈 `page.tsx`가 WebSite JSON-LD를 함께 출력(name ExifLens, 한국어만 alternateName ["엑시플"]). 화면에는 보이지 않음.
+- 검증: `tsc --noEmit` 통과, 격리 복사본 `next build --webpack` 성공 후 4개 언어 홈의 푸터·JSON-LD(WebApplication, WebSite, FAQPage)·한국어 FAQ 확인. 실제 사이트 미사용.
+- 백업: `_backups/exiflens_backup_20261121_153919_brand-footer-faq-jsonld`. 푸시 전.
+
 ## 2026-11-21 — 한국어 브랜드명 "엑시플" 도입 (메인 소개 + 랜딩 + Blogger)
 - 이름 확정: "엑시플"(Exif + Lens의 L). 중복 조사: 구글 한국어 검색, KIPRIS 국내 상표(엑시플*·*엑시플·엑시프*·Exipl 모두 유효 상표 없음, "엑시플러스" 05류 소멸·EXIPLE 03류 소멸·FLEXIPLUS 09류 거절), 네이버 통합검색(학술 용어 exciplex 자료뿐) 확인.
 - 메인 사이트: `messages/ko.json` About "ExifLens란" 본문에 한국어 이름 소개 문단 1개 추가. 다른 페이지·언어에는 억지로 넣지 않음(사용자 지시).

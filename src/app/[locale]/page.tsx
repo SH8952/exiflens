@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { webApplicationJsonLd } from "@/lib/seo";
+import { webApplicationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { AdZone } from "@/components/ad-zone";
 import { ExifUploader } from "@/components/exif-uploader";
 import { ExifPanel } from "@/components/exif-panel";
@@ -39,6 +39,12 @@ export default async function HomePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(webApplicationJsonLd(locale)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteJsonLd(locale)),
         }}
       />
 

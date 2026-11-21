@@ -60,6 +60,21 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   };
 }
 
+/**
+ * 사이트 이름 구조화 데이터(WebSite). 한국어 페이지에는 한국어 이름 "엑시플"을 대체 이름으로 함께 알린다.
+ * 화면에는 보이지 않으며, 검색엔진이 ExifLens와 엑시플을 같은 사이트로 연결하는 데 쓰인다.
+ */
+export function websiteJsonLd(locale: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "ExifLens",
+    ...(locale === "ko" ? { alternateName: ["엑시플"] } : {}),
+    url: `${SITE_URL}/${locale}`,
+    inLanguage: locale,
+  };
+}
+
 export function webApplicationJsonLd(locale: string) {
   return {
     "@context": "https://schema.org",
