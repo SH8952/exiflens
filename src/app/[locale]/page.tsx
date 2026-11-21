@@ -70,6 +70,11 @@ export default async function HomePage({
         <NdCalculatorCard />
       </section>
 
+      {/* Privacy note: placed right under the EXIF/ND section, above the gear recommendations (moved up from below the ad zone on 2026-11-22). */}
+      <p className="-mt-4 text-center text-xs text-muted-foreground">
+        {t("privacyNote")}
+      </p>
+
       {/* Gear recommendation (Coupang/AliExpress) → related tools (FlyDroneMap): restored to the original spot right after the ND calculator section on 2026-11-03 (was temporarily moved to the page bottom on 2026-10-02 during the AdSense review). */}
       <GearRecommendationSection locale={locale} />
 
@@ -81,10 +86,6 @@ export default async function HomePage({
         size="300×250"
         className="max-w-[300px]"
       />
-
-      <p className="text-center text-xs text-muted-foreground">
-        {t("privacyNote")}
-      </p>
 
       {/* Section 5: crawlable usage text (AdSense/SEO checklist item 2). FAQ now lives on its own /faq page. */}
       <HomeUsageSection />

@@ -1,3 +1,8 @@
+## 2026-11-22 — 홈 개인정보 안내 문구 위치 이동
+- "100% 브라우저에서 처리됩니다. 사진은 서버로 전송되지 않습니다."(`Home.privacyNote`) 문구를 광고 자리 아래(페이지 중간)에서 EXIF 요약·ND 계산기 바로 아래, 장비 추천 위로 이동(`src/app/[locale]/page.tsx`, 4개 언어 공통). 번역·문구 내용은 변경 없음.
+- 위치만 바뀌며 광고 컴포넌트(`AdZone`, 현재 미렌더링)와 다른 섹션 순서는 그대로. 시각 정리를 위해 카드 쪽에 붙도록 `-mt-4` 적용.
+- 검증: `tsc --noEmit` 통과. 백업 `_backups/exiflens_backup_20261121_155354_privacy-note-move`. 푸시 전.
+
 ## 2026-11-21 — "엑시플" 적용 2차: 한국어 푸터·홈 FAQ·사이트 이름 구조화 데이터
 - 푸터 저작권 줄: `src/components/site-footer.tsx`가 `Footer.brand` 번역 키를 사용. 한국어는 "© 2026 ExifLens(엑시플). All rights reserved.", en/es/ja는 기존 "ExifLens" 그대로(4개 언어 messages에 `Footer.brand` 추가).
 - 홈 FAQ 첫 질문(한국어): "ExifLens(엑시플)를 사용하려면 회원가입이 필요한가요?" (`messages/ko.json` Home.faq[0].question만 변경).
