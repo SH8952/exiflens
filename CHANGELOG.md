@@ -1,3 +1,10 @@
+## 2026-11-21 — 한국어 브랜드명 "엑시플" 도입 (메인 소개 + 랜딩 + Blogger)
+- 이름 확정: "엑시플"(Exif + Lens의 L). 중복 조사: 구글 한국어 검색, KIPRIS 국내 상표(엑시플*·*엑시플·엑시프*·Exipl 모두 유효 상표 없음, "엑시플러스" 05류 소멸·EXIPLE 03류 소멸·FLEXIPLUS 09류 거절), 네이버 통합검색(학술 용어 exciplex 자료뿐) 확인.
+- 메인 사이트: `messages/ko.json` About "ExifLens란" 본문에 한국어 이름 소개 문단 1개 추가. 다른 페이지·언어에는 억지로 넣지 않음(사용자 지시).
+- 랜딩(landing.exifnd.com): 한국어 푸터 문구를 "ExifLens(엑시플)는 …"로 변경(`exiflens-landing-src/build.py` 한국어 footer, `i18n_hub.py` 한국어 f_desc). 빌드 결과 변경 파일 11개(허브 index, 404, ko 글 8개, sitemap lastmod). 푸시 전.
+- Blogger: 기존 글 8편 하단 문구 "ExifLens"→"ExifLens(엑시플)"(각 글 업데이트, 발행일·주소 불변, 8편 200 확인), 블로그 제목 "ExifLens(엑시플) | 사진 촬영 계산기와 촬영 노하우", 설명 "ExifLens(엑시플)가 ND 필터 노출 계산, …". 글 원본 html·빌드 스크립트(`build_posts.py`, `build_post_07/08`)도 같은 표기로 맞춤.
+- 백업: `_backups/exiflens_backup_20261121_152803_brand-name-eplsiple`(변경 전). 푸시 전.
+
 ## 2026-11-21 — 애드센스 신청 전 보완: 법적 페이지 검색 설명 분리 + 카드 이미지 대체 텍스트
 - 소개·개인정보처리방침·이용약관·문의·제휴 고지 5개 페이지가 검색 설명(description)이 없어 홈 설명을 그대로 물려받던 문제를 수정. `messages/{ko,en,es,ja}.json` 각 Namespace(About/Privacy/Terms/Contact/Disclosure)에 `description` 추가(20개), 5개 `page.tsx`의 `generateMetadata`에서 `description`과 `openGraph.description`으로 사용. 홈 설명은 그대로(중복 그룹 0건).
 - 홈·도구 목록 카드 썸네일의 빈 alt(`alt=""`) 해결: `ToolCardImage`에 `alt` 속성 추가(도구 이름 전달: `tools/page.tsx`, `home-tools-highlights.tsx`), `home-blog-highlights.tsx`는 글 제목 사용. 빈 alt 이미지 0건.
