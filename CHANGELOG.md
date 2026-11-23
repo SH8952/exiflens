@@ -1,3 +1,26 @@
+## 2026-11-23 — 정기 발행 준비: 화요일 랜딩 2편 + 수요일 Blogger 2편
+- 랜딩(11/24 화, 푸시 스크립트 1개로 2편): ① `ko/28mm-f8-landscape-focus-distance`(풀프레임 28mm f/8 풍경 초점 거리, 하이퍼포컬 약 3.3m·가까운 한계 약 1.65m, 조리개·초점거리별 표) ② `ko/iso-shutter-speed-conversion`(ISO 2배=1스톱, 1/30초→ISO 800에서 약 1/250초, ISO 3200 1/15초→ISO 100 약 2초). 글마다 핵심 카드·도식·og 이미지(`assets/og/ko-*.jpg`) 포함, 412/320px 가로 스크롤 없음. 빌드 결과 기존 글 8개 파일은 '함께 보면 좋은 글' 목록 갱신과 sitemap·rss·허브 반영만 변경. 푸시: `exiflens-landing/푸시_랜딩_28mm초점거리_ISO셔터환산.command`(석한님 더블클릭).
+- Blogger(11/25 수 예약 완료): A `backlight-flare-ghost-checklist`(역광 빛무리·번짐 체크리스트, 오전 9:00), B `full-moon-overexposed-looney-11`(보름달 Looney 11 시작값, 오후 1:00). `build_post_09_*.py`, `build_post_10_*.py`, posts.json 10개. 맞춤 퍼머링크 적용 확인.
+- 백업 `_backups/landing-publish_20261123_011811`. 메인 사이트 코드는 변경 없음.
+
+## 2026-11-22 — 랜딩·Blogger 정기 발행 "하루 1편 → 2편" 변경 (예약 작업 지시문)
+- 발행 날짜는 그대로: 랜딩 화·금, Blogger 수·토. 각 날짜에 2편씩 발행(주 8편: 랜딩 4 + Blogger 4). Blogger는 같은 날 오전 9:00(A 글)·오후 1:00(B 글, KST) 예약.
+- 준비 방식: 기존 예약 작업(월 10:17 `trig_015HhHLoeRUGWwZRmSzYKL6f`, 목 10:23 `trig_013pap5xWSTyR8wcpgsfvhga`) 1회 실행에서 A 글 완성·검사 후 B 글 진행. B 글이 시간·검사 때문에 끝나지 않으면 B만 제외하고 A만 발행, 사유는 프로젝트 문서에 기록(품질 기준 완화 없음). 랜딩 푸시 스크립트는 날짜당 1개(2편 파일 모두 포함).
+- 주제: A 글은 topic-map §3 승인 목록, B 글은 §2 키워드 풀·신규 조사로 §3에 먼저 추가 후 작성(풀 소진이 빨라지므로 주제 보충 필요). 첫 적용: 2026-11-23(월) 10:17 실행.
+- 변경은 예약 작업 지시문과 문서뿐이며 사이트 코드는 변경 없음. 백업 `_backups/changelog_*_two-posts`.
+
+## 2026-11-22 — "엑시플" 적용 4차: 랜딩 한국어 제목·헤더, Blogger 도입부·메뉴·템플릿
+- 랜딩(`exiflens-landing-src/build.py`, 한국어 페이지에만 적용): 글 `<title>` 끝에 " | ExifLens(엑시플)" 병기(글 제목 앞부분 불변), `og:site_name` "ExifLens(엑시플)", 허브·404 제목, 글 상단 로고 옆 작은 "엑시플", 글 하단 링크 문구 "ExifLens(엑시플) 홈", Article JSON-LD author·publisher에 alternateName "엑시플". en/es/ja 텍스트는 변경 없음(CSS 해시만 갱신). 변경 14개 파일. 푸시 전: `exiflens-landing/push-ko-brand-titles.command`. 백업 `_backups/landing_20261121_161843_ko-brand-titles-nav`.
+- Blogger 글 8편 도입부(첫 블록 바로 뒤)에 한 줄 추가: "이 글의 계산과 설정값은 무료 사진 도구 ExifLens(엑시플)로 직접 확인해 볼 수 있습니다." (링크 utm_content=intro). 8편 모두 실사이트 반영 확인, 발행일·주소 불변. 2013년 글은 대상 아님.
+- 앞으로 발행할 글 템플릿: `exiflens-blogger-posts/intro_line.py` 신규, `build_posts.py`·`build_post_07_sunset.py`·`build_post_08_streetlight.py`가 이를 호출. 새 글 스크립트도 저장 직전 `add_intro(body, 슬러그)`를 적용해야 함.
+- Blogger 템플릿: 상단 메뉴에 "엑시플 소개", 푸터 사이트 열에 "ExifLens(엑시플) 소개"(둘 다 /p/exiflens.html), 푸터 소개문 "ExifLens(엑시플, exifnd.com)". 모바일은 메뉴 줄이 가로 스크롤이라 마지막 항목은 밀어서 보임. 백업 `_backups/blogger_theme_사전_20261122_0125/theme-2938598806904960562.xml`(다운로드 폴더에도 같은 파일 사본 1개 남음), 글 원본 백업 `_backups/blogger-posts_20261121_161928_intro-line`.
+- 메인 사이트(exifnd.com) 코드는 변경 없음(애드센스 검토 중).
+
+## 2026-11-22 — "엑시플" 적용 3차: 랜딩 허브 소개 문구 + Blogger 소개 페이지
+- 랜딩 허브(landing.exifnd.com) 한국어 첫 화면 소개 문구: "ExifLens(엑시플)는 셔터카운트, EXIF, 가이드넘버, 화각까지 궁금한 사진 질문에 짧게 답하고 무료 계산 도구로 연결합니다." (`i18n_hub.py` lead 한국어, 재빌드로 index.html·404.html만 변경). 푸시 전.
+- Blogger: 소개 정적 페이지 신규 게시 `exiflens.blogspot.com/p/exiflens.html` (제목 "ExifLens(엑시플) 소개", 엑시플 뜻 설명 + exifnd.com/ko 링크). 게시 후 200 확인.
+- 백업: `_backups/landing_20261121_155544_hub-lead-brand`. 메인 사이트 코드는 변경 없음.
+
 ## 2026-11-22 — 홈 개인정보 안내 문구 위치 이동
 - "100% 브라우저에서 처리됩니다. 사진은 서버로 전송되지 않습니다."(`Home.privacyNote`) 문구를 광고 자리 아래(페이지 중간)에서 EXIF 요약·ND 계산기 바로 아래, 장비 추천 위로 이동(`src/app/[locale]/page.tsx`, 4개 언어 공통). 번역·문구 내용은 변경 없음.
 - 위치만 바뀌며 광고 컴포넌트(`AdZone`, 현재 미렌더링)와 다른 섹션 순서는 그대로. 시각 정리를 위해 카드 쪽에 붙도록 `-mt-4` 적용.
