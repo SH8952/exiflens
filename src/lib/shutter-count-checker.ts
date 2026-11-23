@@ -53,7 +53,7 @@
  * and 526 respectively, matching `exiftool -ShutterCount` on the same files
  * exactly.
  *
- * --- Canon (CR3 / EOS R mirrorless only) ---
+ * --- Canon (CR3 / EOS R mirrorless) ---
  * Unlike Nikon, Canon has no single formula: `ShutterCount` sits at a
  * different fixed byte offset inside a per-model opaque binary block
  * (`CameraInfo`) for every camera family, and that offset has to be
@@ -127,6 +127,46 @@
  *     with R5/R6, no real G5 X Mark II file was available to verify the
  *     offset end-to-end — this is exiftool's public documentation taken on
  *     trust, not independently re-derived.
+ *
+ * --- Canon (CR2 — classic EOS-1D/1Ds bodies, added 2026-11-23) ---
+ * Canon's very first professional EOS-1D-series bodies (2001–2004, long
+ * before CR3 existed) store ShutterCount in a completely different place
+ * than every CR3-era mapping above: a classic MakerNote IFD entry at tag
+ * 0x0093 ("CanonFileInfo" in exiftool's own naming), sitting directly in the
+ * file's outer TIFF/Exif structure with no inner container and no base-
+ * offset adjustment — confirmed against exiftool's own `MakerNotes.pm`
+ * (Canon's MakerNote IFD entry there has no `Base` override, unlike several
+ * other manufacturers' entries in that same table), so this module reads it
+ * with the same `tiffStart`-relative offsets already used for IFD0/ExifIFD/
+ * MakerNote above — no new base-handling logic needed. Two documented
+ * variants (exiftool's public Canon FileInfo tag table, both citing
+ * numbered reference #7):
+ *   - EOS-1D and EOS-1Ds: the value sits at byte offset 0 of this blob as a
+ *     plain big-endian (`MM`) int32u. exiftool's own condition for this
+ *     entry is purely "the file's own TIFF byte order is MM", not a Model
+ *     check — in practice almost only these two very early bodies produce
+ *     big-endian Canon files. This module additionally requires the Model
+ *     string to end in "EOS-1D" or "EOS-1Ds" as its own extra safety net,
+ *     which exiftool's own condition does not require.
+ *   - EOS-1D Mark II, EOS-1Ds Mark II, and EOS-1Ds Mark II N: same byte
+ *     offset 0, but the raw 32-bit value has its upper and lower 16-bit
+ *     halves swapped (exiftool's own `ValueConv` for this exact entry)
+ *     before it is a usable count. exiftool's own note here says "there
+ *     are reports that the ShutterCount changed when loading a settings
+ *     file on the 1DSmkII" — a caveat about one known way the counter can
+ *     jump, not doubt about whether the field itself is valid, so this
+ *     module still maps it.
+ * EOS-1D Mark III (same era) is deliberately NOT mapped even though
+ * exiftool documents an offset for it (0x176 in its `CameraInfo1DmkIII`
+ * table): exiftool's own note there says that offset "may be valid only
+ * for some 1DmkIII copies, even running the same firmware" — the same
+ * self-flagged-uncertain category this module already excludes EOS R3 and
+ * EOS R6 Mark III for, so it is left unsupported for the same reason.
+ * Verified 2026-11-23 only against exiftool's own public documentation
+ * (citation #7 for both variants) and its `MakerNotes.pm` base-offset
+ * table; no real EOS-1D/1Ds/1D Mark II/1Ds Mark II/1Ds Mark II N file (CR2
+ * or JPEG) was available to test this end-to-end — the same caveat already
+ * noted above for several CR3-era mappings.
  *
  * CR3 isn't TIFF at all — it's an ISO-BMFF (MP4-family) container. Canon
  * wraps the classic TIFF-structured Exif/MakerNote data (the same data a
@@ -461,13 +501,63 @@ function parseCanonCr3ShutterCount(view: DataView): ShutterCountResult {
   return { supported: true, brand: "canon", shutterCount, cameraModel };
 }
 
+/** MakerNote tag holding Canon's classic "CanonFileInfo" blob (exiftool's name for it), used only by the CR2-era bodies below (see module doc comment). */
+const CANON_FILE_INFO_TAG = 0x0093;
+
+/**
+ * Parses ShutterCount for Canon's original EOS-1D/1Ds generation (CR2/JPEG,
+ * not CR3 — see the module doc comment's CR2 section for the full citations
+ * and the end-to-end-verification caveat).
+ */
+function parseCanonClassicShutterCount(
+  view: DataView,
+  tiffStart: number,
+  outerLE: boolean,
+  canonMakerNoteIfd: IfdEntry[],
+  cameraModel: string | null,
+): ShutterCountResult {
+  const fileInfoEntry = findEntry(canonMakerNoteIfd, CANON_FILE_INFO_TAG);
+  if (!fileInfoEntry) {
+    return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
+  }
+  const blob = readBlobLocation(view, fileInfoEntry, tiffStart, outerLE);
+  if (blob.length < 4) {
+    return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
+  }
+
+  // EOS-1D / EOS-1Ds: plain big-endian int32u at offset 0. exiftool's own
+  // condition for this entry is purely "the file's TIFF byte order is MM"
+  // (`outerLE` false); the Model check below is this module's own extra
+  // safety net, not something exiftool itself requires.
+  if (!outerLE && cameraModel && /\bEOS-1Ds?$/.test(cameraModel)) {
+    const shutterCount = view.getUint32(blob.offset, outerLE);
+    return { supported: true, brand: "canon", shutterCount, cameraModel };
+  }
+
+  // EOS-1D Mark II / EOS-1Ds Mark II / EOS-1Ds Mark II N: same offset 0, but
+  // the raw 32-bit value has its upper and lower 16-bit halves swapped
+  // (exiftool's own ValueConv for this exact entry).
+  if (cameraModel && /\b1Ds? Mark II\b/.test(cameraModel)) {
+    const raw = view.getUint32(blob.offset, outerLE);
+    const shutterCount = ((raw >>> 16) | ((raw & 0xffff) << 16)) >>> 0;
+    return { supported: true, brand: "canon", shutterCount, cameraModel };
+  }
+
+  // Includes EOS-1D Mark III, which has a documented offset in exiftool's
+  // CameraInfo1DmkIII table but is deliberately not mapped here — see the
+  // module doc comment's CR2 section for why.
+  return unsupported("canon", cameraModel, "이 캐논 모델은 아직 지원되지 않습니다.");
+}
+
 /**
  * Reads the shutter/actuation count from a supported camera file, entirely
  * client-side (the file's bytes never leave the browser). Supported today:
- * Nikon (NEF / in-camera JPEG) and Canon EOS R5, R6, R6 Mark II, R7, R8,
- * R10, R50, R100, EOS RP, and PowerShot G5 X Mark II (CR3 only). Every other
- * brand or model returns `{ supported: false }` with an honest explanation
- * — see the module doc comment for why, and
+ * Nikon (NEF / in-camera JPEG); Canon EOS R5, R6, R6 Mark II, R7, R8, R10,
+ * R50, R100, EOS RP, and PowerShot G5 X Mark II (CR3 only); and Canon's
+ * original EOS-1D, EOS-1Ds, EOS-1D Mark II, EOS-1Ds Mark II, and EOS-1Ds
+ * Mark II N (CR2/JPEG). Every other brand or model returns
+ * `{ supported: false }` with an honest explanation — see the module doc
+ * comment for why, and
  * `content/guides/<locale>/shutter-count-checker-guide.mdx` for the full
  * supported-brand roadmap shown to users.
  */
@@ -517,7 +607,7 @@ export async function checkShutterCount(file: File): Promise<ShutterCountResult>
   const cameraModel = modelEntry ? readAsciiValue(view, modelEntry, tiffStart, outerLE) : null;
   const brand = brandFromMake(make);
 
-  if (brand !== "nikon") {
+  if (brand !== "nikon" && brand !== "canon") {
     return unsupported(
       brand,
       cameraModel,
@@ -538,6 +628,18 @@ export async function checkShutterCount(file: File): Promise<ShutterCountResult>
   }
   const makerNoteBlob = readBlobLocation(view, makerNoteEntry, tiffStart, outerLE);
   const makerNoteOffset = makerNoteBlob.offset;
+
+  if (brand === "canon") {
+    // Canon's classic MakerNote is a plain IFD starting right at this
+    // offset, using the same base (tiffStart) as the rest of the file's
+    // TIFF structure — unlike Nikon's, it has no "Nikon\0"-style signature
+    // or inner mini-TIFF header (see the module doc comment's CR2 section).
+    if (makerNoteOffset + 2 > view.byteLength) {
+      return unsupported(brand, cameraModel, "MakerNote 데이터가 손상되었거나 잘려 있습니다.");
+    }
+    const canonMakerNoteIfd = readIfdEntries(view, makerNoteOffset, outerLE);
+    return parseCanonClassicShutterCount(view, tiffStart, outerLE, canonMakerNoteIfd, cameraModel);
+  }
 
   if (makerNoteOffset + 10 > view.byteLength) {
     return unsupported(brand, cameraModel, "MakerNote 데이터가 손상되었거나 잘려 있습니다.");
@@ -571,5 +673,5 @@ export async function checkShutterCount(file: File): Promise<ShutterCountResult>
 }
 
 /** File extensions/MIME types this checker's UI accepts. */
-export const SHUTTER_COUNT_ACCEPTED_EXTENSIONS = [".nef", ".jpg", ".jpeg", ".cr3"];
-export const SHUTTER_COUNT_FILE_ACCEPT = "image/jpeg,.nef,.cr3";
+export const SHUTTER_COUNT_ACCEPTED_EXTENSIONS = [".nef", ".jpg", ".jpeg", ".cr3", ".cr2"];
+export const SHUTTER_COUNT_FILE_ACCEPT = "image/jpeg,.nef,.cr3,.cr2";
