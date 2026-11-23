@@ -1,3 +1,12 @@
+## 2026-11-23 — 블로그 새 글: 한낮 강한 햇빛에서 골목 사진 노출 잡는 법 (ko/en/ja, 사진 8장)
+- 소재: 2026-06-09 인천 송림동 일대 재개발 예정 골목(주민 이주 후·철거 전)에서 찍은 사진 8장. 보정 사진은 1·2·3번, 나머지 5장은 원본. 위치는 "인천 송림동 일대"까지만 표기, 간판·표지판은 보이는 그대로, 촬영 안전 수칙 섹션 필수 포함(철거 전 기록이며 현재 상태와 다를 수 있음 안내). 제목은 사용자가 후보 2번 선택. 썸네일은 가로 사진 1번.
+- 내용: 8장의 EXIF로 EV100 12.0~14.9(약 3스톱 차), Sunny 16 기준(14.6) 대비 표, 한낮 골목 노출 4단계, 컴팩트 카메라(FinePix F60fd) 환산 설명(수치 단정 없음). 체크리스트·흔히 하는 실수·FAQ·정리하기·저작권 안내 포함. 사용자 경험 메모 없이 사진·EXIF 기반(추측성 문장 제거).
+- 추가 파일: `content/blog/{ko,en,ja}/harsh-midday-sunlight-alley-photography-exposure.mdx`, `public/blog/images/redev-alley-{1..8}.webp`·`-full.webp`·`redev-alley-thumb.webp`(17개). 사이트 코드·컴포넌트 변경 없음.
+- 검증: 3개 언어 MDX 컴파일 OK, 내부 링크 대상(가이드·도구·블로그)과 이미지 17개 존재 확인, 3개 언어 구조(H2 14개·사진 8장·표·링크 13개)·수치 일치 확인. 로컬 `npm run dev` 확인은 사용자 진행.
+- 색인 요청 목록(`../exiflens-색인요청목록.html`) 맨 위에 새 글 ko/en/ja 3개 추가(185개).
+- 푸시: `푸시_블로그_한낮골목노출.command`(석한님 더블클릭, 명시한 파일만 커밋).
+- 백업: `_backups/blog-redevelopment-alley_*`, `_backups/blog-redevelopment-alley-index_*`.
+
 ## 2026-11-23 — 셔터카운트 체커: exiftool 정기 점검 — 캐논 구형 EOS-1D 계열(CR2) 5개 기종 추가, 1D Mark III는 근거 부족으로 보류
 
 - 배경: 정기 점검(직전 점검: 2026-11-09, exiftool 커밋 9b8664d)에서 exiftool GitHub 메인 브랜치(커밋 3d7a0538, 2026-11-16)의 Canon/Sony/FujiFilm/Olympus/Panasonic/Pentax 6개 브랜드 태그 파일을 재조사. 캐논의 신규 CR3 기종(R6 Mark III/R6 V의 ImageCount, R50 V)은 전부 이미 보류했던 것과 같은 한계(16비트·SD카드 포맷 시 초기화, 또는 필드 자체 없음)라 변경 없음. 대신 캐논의 CR2 세대(1D, 1Ds, 1D Mark II, 1Ds Mark II, 1Ds Mark II N — 2001~2004년 출시, CR3 등장 이전) MakerNote `FileInfo`(태그 0x0093) 블록에서 exiftool 번호 참조 #7로 문서화된 `ShutterCount`를 발견, 이번에 구현.
