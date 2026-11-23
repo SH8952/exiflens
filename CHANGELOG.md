@@ -1,3 +1,16 @@
+## 2026-11-23 — 셔터카운트 체커: exiftool 정기 점검 — 캐논 구형 EOS-1D 계열(CR2) 5개 기종 추가, 1D Mark III는 근거 부족으로 보류
+
+- 배경: 정기 점검(직전 점검: 2026-11-09, exiftool 커밋 9b8664d)에서 exiftool GitHub 메인 브랜치(커밋 3d7a0538, 2026-11-16)의 Canon/Sony/FujiFilm/Olympus/Panasonic/Pentax 6개 브랜드 태그 파일을 재조사. 캐논의 신규 CR3 기종(R6 Mark III/R6 V의 ImageCount, R50 V)은 전부 이미 보류했던 것과 같은 한계(16비트·SD카드 포맷 시 초기화, 또는 필드 자체 없음)라 변경 없음. 대신 캐논의 CR2 세대(1D, 1Ds, 1D Mark II, 1Ds Mark II, 1Ds Mark II N — 2001~2004년 출시, CR3 등장 이전) MakerNote `FileInfo`(태그 0x0093) 블록에서 exiftool 번호 참조 #7로 문서화된 `ShutterCount`를 발견, 이번에 구현.
+- 발견 및 반영: **캐논 EOS-1D, EOS-1Ds**(CR2/JPEG): MakerNote `CanonFileInfo`(태그 0x0093) 블록 오프셋 0의 빅엔디안(`MM`) int32u. exiftool 자체 조건은 "파일의 TIFF 바이트 순서가 MM"뿐(모델 조건 없음)이지만, 이 모듈은 안전장치로 Model 문자열이 "EOS-1D"/"EOS-1Ds"로 끝나는지도 함께 확인.
+- 발견 및 반영: **캐논 EOS-1D Mark II, EOS-1Ds Mark II, EOS-1Ds Mark II N**(CR2/JPEG): 같은 오프셋 0이지만 원시 32비트 값의 상위·하위 16비트를 서로 바꿔야 함(exiftool 자체 ValueConv). exiftool 주석은 "1DSmkII에서 설정 파일을 불러올 때 ShutterCount가 바뀐 사례가 있다"고만 적어 두었고, 필드 자체의 유효성을 의심하는 문구는 아니어서 구현.
+- 발견했지만 보류: **EOS-1D Mark III**(같은 세대, CameraInfo1DmkIII 테이블 오프셋 0x176)는 exiftool 자체가 "같은 펌웨어를 쓰는 개체 중에서도 일부에서만 유효할 수 있다"고 명시해, 기존에 EOS R3·R6 Mark III를 제외했던 것과 같은 수준의 약한 근거라 구현하지 않음.
+- 발견했지만 보류(소니, 범위 외): 소니의 구형 DSLR/NEX 계열(α230~900, α450~580, α33/35/55, NEX-3/5/C3, VG10E)에 **암호화되지 않은** `ShutterCount`/`ImageCount`(exiftool 참조 #13)가 존재함을 확인했으나, 소니 전용 MakerNote 하위 구조 파서(캐논·니콘에 없는 가변 길이 인덱스 테이블, `ProcessMoreInfo`)를 새로 설계해야 하는 수준의 작업이라 이번 점검(모델 매핑 1건 추가 수준)의 범위를 넘어선다고 판단해 보류. 사용자 확인 후 별도 작업으로 검토 예정.
+- 변화 없음: 올림푸스·파나소닉은 관련 필드가 전혀 없음(구조적 한계, 결론 불변). 후지필름은 X-T1 펌웨어 3 전용 `ImageCount` 하나만 있고 "펌웨어 설치 시 0 초기화 가능" 한계도 그대로. 펜탁스 `ShutterCount` 복호화 공식도 독립 교차 검증 출처가 여전히 없음.
+- 변경 파일: `src/lib/shutter-count-checker.ts`(새 함수 `parseCanonClassicShutterCount` + `CANON_FILE_INFO_TAG` 상수, `checkShutterCount()`에 캐논 분기 추가, 모듈 doc comment에 CR2 섹션 신설, `.cr2` 확장자 추가), `messages/{ko,en,ja,es}.json`(`ShutterCountChecker.uploadHint`/`pageDescription`/`aboutBody`/`disclaimer`/FAQ 2건/`supportCanon`/`supportCanonNote`/`sections` 내 관련 문구에 신규 5개 기종과 CR2 추가, 캐논 지원 기종 수 9→14 반영), `content/guides/{ko,en,ja,es}/shutter-count-checker-guide.mdx`("왜 니콘부터" 섹션 제목·본문, 캐논 지원 기종 수 5(오탈자)→15).
+- 검증: 합성 바이트 버퍼(8개 케이스: EOS-1D/1Ds MM 정상값, EOS-1D를 일부러 II로 만들어 거부되는지, Mark II 트리오의 16비트 스왑, EOS-1D Mark III·EOS 5D가 미지원으로 떨어지는지)로 실제 모듈을 직접 실행해 전부 기대값과 일치 확인. `npx tsc --noEmit` 오류 0건, `npx eslint`(해당 파일) 오류 0건, 4개 언어 messages JSON 파싱 확인. 실제 EOS-1D/1Ds 계열 CR2 샘플 파일로의 end-to-end 실측 검증은 이 세션에서 하지 못함 — exiftool 공개 문서(#7)만 근거.
+- 백업: `_backups/backup_20261123_071328_canon-cr2-classic-shutter-count/`.
+- 커밋만 생성, 원격 push는 하지 않음 — 석한님 확인 후 직접 push 필요.
+
 ## 2026-11-23 — 정기 발행 준비: 화요일 랜딩 2편 + 수요일 Blogger 2편
 - 랜딩(11/24 화, 푸시 스크립트 1개로 2편): ① `ko/28mm-f8-landscape-focus-distance`(풀프레임 28mm f/8 풍경 초점 거리, 하이퍼포컬 약 3.3m·가까운 한계 약 1.65m, 조리개·초점거리별 표) ② `ko/iso-shutter-speed-conversion`(ISO 2배=1스톱, 1/30초→ISO 800에서 약 1/250초, ISO 3200 1/15초→ISO 100 약 2초). 글마다 핵심 카드·도식·og 이미지(`assets/og/ko-*.jpg`) 포함, 412/320px 가로 스크롤 없음. 빌드 결과 기존 글 8개 파일은 '함께 보면 좋은 글' 목록 갱신과 sitemap·rss·허브 반영만 변경. 푸시: `exiflens-landing/푸시_랜딩_28mm초점거리_ISO셔터환산.command`(석한님 더블클릭).
 - Blogger(11/25 수 예약 완료): A `backlight-flare-ghost-checklist`(역광 빛무리·번짐 체크리스트, 오전 9:00), B `full-moon-overexposed-looney-11`(보름달 Looney 11 시작값, 오후 1:00). `build_post_09_*.py`, `build_post_10_*.py`, posts.json 10개. 맞춤 퍼머링크 적용 확인.
