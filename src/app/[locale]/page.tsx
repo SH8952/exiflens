@@ -15,9 +15,11 @@ import { HomeBlogHighlights } from "@/components/home-blog-highlights";
 import { HomeFaqHighlights } from "@/components/home-faq-highlights";
 
 // 2026-11-15 홈 정적화(ISR): 홈이 요청마다 서버에서 만들어지면서 한동안 접속이 없을 때 첫 접속이 1~2초 느렸다(함수 콜드 스타트).
-// 이제 5분(300초)마다 새로 만들어 CDN 캐시에서 바로 응답한다. 무작위 가이드/FAQ 카드는 새로 만들 때마다 다시 뽑히므로
-// "요청마다"가 아니라 "5분마다" 바뀐다(노출되는 FAQ 항목과 FAQPage 구조화 데이터는 항상 같은 묶음으로 함께 갱신).
-export const revalidate = 300;
+// 이제 CDN 캐시에서 바로 응답한다. 무작위 가이드/FAQ 카드는 새로 만들 때마다 다시 뽑히므로
+// "요청마다"가 아니라 "재생성 주기마다" 바뀐다(노출되는 FAQ 항목과 FAQPage 구조화 데이터는 항상 같은 묶음으로 함께 갱신).
+// 2026-11-25 CPU 다이어트(Vercel 경로별 분석): 재생성 주기 5분(300) → 1시간(3600). 블로그 목록 페이지(revalidate 3600)와 같은 주기라
+// 예약 발행 글이 홈 카드에 나타나는 시점도 목록과 같다. 되돌리려면 300으로.
+export const revalidate = 3600;
 
 export default async function HomePage({
   params,

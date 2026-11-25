@@ -30,9 +30,13 @@ import { GuideFloatingToc } from "@/components/guides/guide-floating-toc";
 import { ReadingProgress } from "@/components/guides/reading-progress";
 
 // 2026-10-18 CPU 다이어트: 레이아웃이 더 이상 요청 헤더를 읽지 않아 대부분의 페이지가
-// 정적으로 만들어진다. 이 페이지는 "요청 때마다" 결과가 달라지는 동작(블로그 예약 발행 날짜 판정)이
-// 있어 지금까지처럼 요청마다 새로 만들도록 명시한다(동작 변경 없음).
-export const dynamic = "force-dynamic";
+// 정적으로 만들어진다. 이 페이지는 블로그 예약 발행 날짜 판정(lib/blog.ts isBlogPublished) 때문에
+// 그동안 요청마다 새로 만드는 force-dynamic 이었다.
+// 2026-11-25 CPU 다이어트(Vercel 경로별 분석: 이 경로가 exiflens 함수 CPU 1위, 요청당 약 0.2초의 MDX 컴파일):
+// force-dynamic 을 빼고 6시간(21600초) 재생성(ISR)으로 바꿨다. 배포 때 공개된 글은 미리 만들어지고,
+// 예약 글은 발행일이 지난 뒤 첫 요청에서 만들어진다(블로그 목록 페이지도 이미 revalidate 3600 이라 공개 시점이 같은 수준으로 늦을 수 있음).
+// 글 내용 수정은 배포 때 새로 만들어지므로 낡은 내용이 남지 않는다. 되돌리려면 이 줄을 `export const dynamic = "force-dynamic";` 로.
+export const revalidate = 21600;
 
 export function generateStaticParams() {
   return BLOG_LOCALES.flatMap((locale) =>
