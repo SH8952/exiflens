@@ -1,3 +1,36 @@
+## 2026-11-26(작성 11-28) — 블로그 글 「특별하지 않은 거리 사진을 계속 찍는 이유」 ko/en/ja 3편(푸시 대기)
+- 방콕 거리 사진 6장(2024-12-03·04, 2025-05-25, Canon EOS R7)으로 스트릿 촬영이 남겨 주는 것(기록·노출 감각·관찰력·장비 이해), 거리 매너, GPS 제거를 다룬 글. slug: ordinary-street-photos-travel-memories-street-photography, publishedAt 2026-11-26(월·목 리듬에 맞춤), 썸네일 = 시장 노점 사진.
+- 이미지 13개(본문 6·원본 6·썸네일 1), EXIF/GPS 제거. EV100·손떨림 기준·환산 초점거리는 계산으로 검증, MDX 3개 언어 컴파일·내부 링크·이미지 존재 확인.
+- 백업: _backups/blog-street_20261128_033659. 색인 요청 목록 최상단에 3개 주소 추가.
+
+## 2026-11-27 — 랜딩 영어·일본어·스페인어 글 3편 보강(푸시 대기)
+- en/srgb-vs-adobe-rgb(색역 막대 도표·상황별 답·파일 색 공간 확인법·흔한 실수), ja/wide-vs-telephoto(10m 앞 화각 중첩 도표·거리 vs 줌·장면별 표), es/profundidad-de-campo(조리개별 초점 범위 막대 도표·초점거리별 과초점거리 표·4단계)로 각각 다른 구성으로 보강, FAQ 2개씩 추가. 수치는 파이썬으로 검증.
+- 빌드·모바일 폭 가로 넘침 없음 확인. 백업: _backups/landing-multilang-boost_*. 푸시 스크립트: 푸시_랜딩_다국어글보강.command.
+
+## 2026-11-27 — Blogger 보름달 글 본문 복구
+- 11/25 예약 게시된 보름달 글(full-moon-overexposed-looney-11)의 본문이 비어 게시된 것을 확인, 원문(10_moon-exposure-looney-11.html)을 편집기에 넣어 복구. 라이브에서 본문·표·버튼 박스 정상 표시 확인.
+- Blogger 전체 글 10편 본문 길이 점검: 모두 정상. 복구 전 원문 백업: _backups/blogger-moon-fix_*.
+
+## 2026-11-27 — 랜딩·Blogger 보강 반영 완료
+- 랜딩(landing.exifnd.com): 소개·문의·개인정보 처리방침 3페이지 추가, 한국어 글 6편 보강, 푸터 링크 정리, 신규 글 2편 푸시 완료(커밋 0ba5c24, dc26944). 라이브 200 확인.
+- 처음 시도한 푸시는 macOS bash 3.2 문법 오류로 실패 → 스크립트를 bash 3.2 호환으로 재작성 후 재실행해 성공.
+- Blogger: 개인정보 처리방침(/p/blog-page.html)·문의하기(/p/contact.html) 페이지 게시, 테마에서 잡텍스트·팔로워·프로필 위젯 제거, 푸터 링크 2개 추가.
+
+## 2026-11-27 — 랜딩 보강 준비(미푸시): 소개·문의·개인정보 처리방침 3종 + 한국어 글 6편 보강 + Blogger 정적 페이지 초안
+- 배경: 애드센스 심사 중 랜딩(landing.exifnd.com)이 같은 루트 도메인으로 묶여 평가될 수 있어, 필수 페이지와 글 두께를 미리 보강. 별도 저장소(GitHub Pages)라 메인 사이트(Vercel)에는 영향 없음(exiflens 저장소 `.git/info/exclude`로 제외, 배포 경로 분리 확인).
+- 필수 페이지 3종(한국어): `/ko/about/`·`/ko/contact/`·`/ko/privacy/`. 소스 `exiflens-landing-src/info_pages.py`(신규) + `build.py`(`info_render`, 푸터 링크, 사이트맵) + `i18n_hub.py`(허브 푸터 라벨). 문체·구성은 페이지마다 다르게(서술형 소개, 질문 안내형 문의, 번호 조항형 방침).
+- 글 보강 6편(글마다 구성·소제목·도표 형태를 다르게): depth-of-field(상황 7가지 표+구간 선 도표+직접 확인 순서), flash-guide-number(거리별 조리개 표+바운스 경로 계산+첫 컷 순서), remove-exif-gps(30초 점검 흐름도+PC 방법 표+장소 단서), shutter-count-check(정격별 사용 비율 표+막대 도표+5분 점검), srgb-vs-adobe-rgb(갈림길 도표+모니터 조건+색 공간 확인법), wide-vs-telephoto(화각 부채꼴 도표+거리 오해 바로잡기+센서 배율 표). 수치는 파이썬으로 재계산 검증.
+- 검증: 작업 사본에서 빌드, 태그 균형, 412/390px 가로 스크롤 없음, 라이트·다크 도표 렌더 확인.
+- Blogger 초안(미반영): `_backups/landing-boost_work/blogger/{privacy,contact}.html`. 템플릿 잔재(HTML1 카테고리 위젯 안의 옛 메뉴 스크립트 "sjisbmoc/WOMEN/NEWS", Followers, Profile 위젯)는 레이아웃에서 제거 예정(승인 대기). 푸터 템플릿 크레딧은 라이선스 표기라 유지.
+- 푸시: `exiflens-landing/푸시_랜딩_필수페이지_글보강.command`(11/27 랜딩 2편 푸시 이후 실행; 소스 해시 확인·변경 범위 확인·명시 파일만 add). 11/27 푸시 스크립트는 자기 자신(.command)을 예상 밖 변경으로 오인해 중단되는 문제가 있어 `.command` 제외 조건을 추가(백업 `_backups/landing-boost_*/friday-script.bak`).
+- 백업: `_backups/landing-boost_20261127_142157`(랜딩 폴더 전체), 작업 사본 `_backups/landing-boost_work/`.
+
+## 2026-11-26 — ExifLens 정기 발행 준비: 11/27(금) 랜딩 2편 + 11/28(토) Blogger 2편
+- 랜딩 2편(11/27): ① 손떨림 보정 안전 셔터스피드(`ko_image-stabilization-safe-shutter.py`, 계산 예시 3개 + 표 2개) ② 2400만 화소 사진의 최대 인쇄 크기(`ko_print-size-by-megapixel.py`, 거리별 dpi → 화소별 cm표 → 용지별 필요 픽셀표). 핵심 카드·도식·공유 이미지(`assets/og/ko-*.jpg`) 포함, `build.py`로 빌드(관련 글 카드·허브·rss·sitemap 갱신).
+- Blogger 2편(11/28 예약): ① `11_shutter-speed-freeze-subject.html`(피사체별 셔터 멈춤, 09:00) ② `12_polarizer-sky-angle.html`(편광필터 하늘 각도, 13:00). posts.json 추가, 둘 다 '예약됨' 확인.
+- 검사: 수치 재계산, CTA 200, 412/320px 가로 스크롤 없음, topic-map 중복 대조 통과.
+- 푸시: `exiflens-landing/푸시_랜딩_손떨림보정안전셔터_인쇄크기화소.command`(석한님 11/27 더블클릭, 명시 파일 목록 add). 백업 `_backups/publish-1127-1128_20261126_012352`.
+
 ## 2026-11-25 — 랜딩 홈: 오픈 그래프 제목·설명 추가 (네이버 서치어드바이저 간단체크 권고)
 - 배경: 네이버 간단체크에서 landing.exifnd.com 홈만 Open Graph 제목·설명이 없다고 표시(Blogger는 정상). 네이버 사이트 요약의 "보안 인증서 확인중"은 인증서 오류가 아니라 신규 사이트 진단 갱신 대기로 판단(HTTPS·사이트맵은 정상).
 - 변경: `exiflens-landing-src/build.py` 허브 머리말에 og:type(website)·og:site_name·og:title·og:description·og:url·og:locale 추가 → 재빌드 결과 `index.html` 1줄 추가, `sitemap.xml` 홈 lastmod 갱신. 제목·설명 문구는 기존 `<title>`/description과 동일. 글 페이지·404·다른 파일은 변경 없음(빌드 부수 변경인 ko/iso-shutter-speed-conversion은 원복).
